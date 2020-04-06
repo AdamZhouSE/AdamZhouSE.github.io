@@ -1,58 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo-Permalink简化</title>
-    <url>/posts/838443af.html</url>
-    <content><![CDATA[<h1 id="permalink简化"><a class="markdownIt-Anchor" href="#permalink简化"></a> Permalink简化</h1>
-<p>在文档名有中文的时候，因为汉字会被转义，默认的永久链接会非常复杂，具体原因可以看这一篇文章</p>
-<p><a href="http://www.ruanyifeng.com/blog/2010/02/url_encoding.html" target="_blank" rel="noopener">阮一峰 关于url编码</a></p>
-<p>有两种方法优化。</p>
-<a id="more"></a>
-<h2 id="方法一自定义"><a class="markdownIt-Anchor" href="#方法一自定义"></a> 方法一：自定义</h2>
-<p>首先，在<code>scaffolds</code>的<code>post.md</code>中，加入<code>urlname</code>元素。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">urlname:</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br></pre></td></tr></table></figure>
-<p>然后，在配置文件<code>_config.yml</code>中，将永久链接<code>permalink</code>的形式改为</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">permalink: :category/:urlname/</span><br></pre></td></tr></table></figure>
-<p>也就是类别加上自定义的url链接。</p>
-<p>每次写文章时，可以自己设计该页的<code>url</code>，使得它变得简单，同时也利于区分。</p>
-<p>但是，这种修改方法的链接会随着文件目录的改变而改变，</p>
-<p>比如一篇文章<code>HelloWorld.md</code>本来放在<code>_posts</code>目录下，链接为<code>https://xxx/_posts/HelloWorld.md</code></p>
-<p>之后归类到<code>_posts/A</code>目录下，那么链接变为<code>https://xxx/_posts/A/HelloWorld.md</code></p>
-<p>这样不太利于分享，所以推荐使用第二种方法。</p>
-<h2 id="方法二插件"><a class="markdownIt-Anchor" href="#方法二插件"></a> 方法二：插件</h2>
-<p>使用<code>hexo-abbrlink</code>这个插件</p>
-<ol>
-<li>
-<p>安装</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>设置</p>
-<p>在<code>_config.yml</code>文件中修改永久链接格式</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink.html</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc32  # 算法：crc16(default) and crc32</span><br><span class="line">  rep: hex    # 进制：dec(default) and hex</span><br></pre></td></tr></table></figure>
-<p><code>posts</code>部分是可以更改的，也可以仿照方法一添加一个关键词便于识别</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">permalink: :keywords/:abbrlink.html</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>生成</p>
-<p>在根目录创建<code>Gruntfile.js</code>文件，让插件到<code>source/_posts/</code>下读取所有的.md文件，把文件中的@@abbrlink替换成文件内容的hash值。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;</span><br><span class="line"> </span><br><span class="line">  grunt.initConfig(&#123;</span><br><span class="line"></span><br><span class="line">    rewrite: &#123;</span><br><span class="line">      abbrlink: &#123;</span><br><span class="line">        src: <span class="string">'source/_posts/**/*.md'</span>,</span><br><span class="line">        editor: <span class="function"><span class="keyword">function</span>(<span class="params">contents, filepath</span>)</span>&#123;</span><br><span class="line">          <span class="keyword">const</span> crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</span><br><span class="line">          <span class="keyword">const</span> hash = crypto.createHash(<span class="string">'sha256'</span>);</span><br><span class="line"></span><br><span class="line">          hash.update(contents);</span><br><span class="line">          <span class="keyword">var</span> hashValue = hash.digest(<span class="string">'hex'</span>);</span><br><span class="line"></span><br><span class="line">          <span class="keyword">return</span> contents.replace(<span class="regexp">/@@abbrlink/g</span>, hashValue.substring(<span class="number">0</span>, <span class="number">16</span>));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line"> </span><br><span class="line">  grunt.loadNpmTasks(<span class="string">'grunt-rewrite'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>这种方法生成的链接是不带目录的，直接就是第二步设置中<code>permalink</code>的样式，所以也没有了被改变的风险。</p>
-<p>参考</p>
-<ol>
-<li><a href="http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html" target="_blank" rel="noopener">http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Head First Pattern读书笔记(一)</title>
     <url>/posts/9883ff8.html</url>
     <content><![CDATA[<h1 id="head-first-设计模式-读书笔记"><a class="markdownIt-Anchor" href="#head-first-设计模式-读书笔记"></a> Head First 设计模式 读书笔记</h1>
@@ -162,42 +110,49 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo-melody主题扩展</title>
-    <url>/posts/6663916b.html</url>
-    <content><![CDATA[<p>在搭建博客的时候，在<code>github</code>上逛了不少主题，最符合我审美的就是我现在正在用的<code>melody</code>，不过还是有一些美中不足的地方，但我并没有大佬的水平重新写一个，所以选择在原方案上稍微改动一下，实现一些自己的想法。</p>
-<ol>
-<li>建立utterances评论系统</li>
-</ol>
-<p>持续更新</p>
+    <title>Hexo-Permalink简化</title>
+    <url>/posts/838443af.html</url>
+    <content><![CDATA[<h1 id="permalink简化"><a class="markdownIt-Anchor" href="#permalink简化"></a> Permalink简化</h1>
+<p>在文档名有中文的时候，因为汉字会被转义，默认的永久链接会非常复杂，具体原因可以看这一篇文章</p>
+<p><a href="http://www.ruanyifeng.com/blog/2010/02/url_encoding.html" target="_blank" rel="noopener">阮一峰 关于url编码</a></p>
+<p>有两种方法优化。</p>
 <a id="more"></a>
-<h3 id="1-建立utterances评论系统"><a class="markdownIt-Anchor" href="#1-建立utterances评论系统"></a> 1. 建立utterances评论系统</h3>
-<p><code>melody</code>主题一共支持5个评论系统，</p>
-<ul>
-<li><code>Disqus</code>：要翻墙，不支持<code>markdown</code></li>
-<li><code>Laibili</code>: 虽然支持的账号多，但是不太稳定，跳转到第三方的网页登录让人没有了评论的欲望</li>
-<li><code>Gitment</code>和<code>Gitalk</code> 这两者要求把GitHub 注册的 OAuth Application 的 Client ID、Client Secret 以明文形式写进前端代码里，这样别人直接查看源代码就可以得到我们的密码，而这是不能够公开的，会有很大的安全隐患，具体可以看这篇博客<a href="https://blog.wolfogre.com/posts/security-problem-of-gitment/" target="_blank" rel="noopener">Gitment 安全性争议</a></li>
-<li><code>valine</code>：不好看</li>
-</ul>
-<p>然后我发现了<a href="https://github.com/apps/utterances" target="_blank" rel="noopener">utterances</a>，也是基于<strong>issue</strong>建立的，但是控制了权限，不需要读写代码，前端没有要求你填写密码，而是填写你的仓库名，保证安全性，同时也支持<code>markdown</code>语法，而且很好看~~~</p>
-<p>不过<code>melody</code>暂时并不支持这个系统，需要自己手动添加，这个操作并不难。</p>
-<h4 id="11-安装"><a class="markdownIt-Anchor" href="#11-安装"></a> 1.1 安装</h4>
-<p>首先，进入<a href="https://github.com/apps/utterances" target="_blank" rel="noopener">utterances</a>安装该app，指定博客所在的<strong>repo</strong></p>
-<p>然后就可以得到需要添加的代码，注意这里<code>src</code>不可以改变，<code>repo</code>是<code>拥有者/仓库名</code>，<code>issue-term</code>和</p>
-<p><code>theme</code>都可以自己指定。</p>
-<p><img src="/" class="lazyload" data-src="http://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/utterances-code.png"  alt="" /></p>
-<h4 id="12-配置utterancespug"><a class="markdownIt-Anchor" href="#12-配置utterancespug"></a> 1.2 配置<code>utterances.pug</code></h4>
-<p>然后进入<code>themes\melody\layout\includes\comments</code>目录，新建一个<code>utterances.pug</code>文件，并在里面加入指定的内容，格式如下</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if theme.utterances &amp;&amp; theme.utterances.enable</span><br><span class="line">	script(src=&quot;https://utteranc.es/client.js&quot;,repo=&quot;用户名/仓库名&quot;,issue-term=&apos;title&apos;,label=&apos;utterances&apos;,theme=&apos;github-light&apos;,crossorigin=&apos;anonymous&apos;,async)</span><br></pre></td></tr></table></figure>
-<p><code>pug</code>的形式与<code>html</code>稍有不同，可以自行搜索一下，改变成上面的样式就可以了。</p>
-<p>这里有个小坑，就是<code>repo</code>里面填的是<code>own/repo</code>，也就是用户名加上仓库名，而不仅仅是仓库名，否则就检索不到了。</p>
-<h4 id="13-配置indexpug"><a class="markdownIt-Anchor" href="#13-配置indexpug"></a> 1.3 配置<code>index.pug</code></h4>
-<p>接着，就是在<code>themes\melody\layout\includes\comments</code>中，找到<code>index.pug</code>文件，会看到里面许多<code>if-else</code>的结构，把<code>utterances</code>也加上去就行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">else if theme.utterances &amp;&amp; theme.utterances.enable</span><br><span class="line">  include ./utterances.pug</span><br></pre></td></tr></table></figure>
-<h4 id="14-配置主题配置文件"><a class="markdownIt-Anchor" href="#14-配置主题配置文件"></a> 1.4 配置主题配置文件</h4>
-<p>最后一步，就是在主题配置文件里面加上<code>utterances</code>评论系统啦。</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Utterances</span></span><br><span class="line"><span class="comment"># See: https://utteranc.es/</span></span><br><span class="line"><span class="attr">utterances:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>因为是自己的小改动，所以我直接在<code>pug</code>文件里面指定了相关内容，就没有像其它评论系统里面写引用，因此这里也只要<code>enable</code>一下就可以了。</p>
-<h4 id="15-启动"><a class="markdownIt-Anchor" href="#15-启动"></a> 1.5 启动</h4>
+<h2 id="方法一自定义"><a class="markdownIt-Anchor" href="#方法一自定义"></a> 方法一：自定义</h2>
+<p>首先，在<code>scaffolds</code>的<code>post.md</code>中，加入<code>urlname</code>元素。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">urlname:</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br></pre></td></tr></table></figure>
+<p>然后，在配置文件<code>_config.yml</code>中，将永久链接<code>permalink</code>的形式改为</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">permalink: :category/:urlname/</span><br></pre></td></tr></table></figure>
+<p>也就是类别加上自定义的url链接。</p>
+<p>每次写文章时，可以自己设计该页的<code>url</code>，使得它变得简单，同时也利于区分。</p>
+<p>但是，这种修改方法的链接会随着文件目录的改变而改变，</p>
+<p>比如一篇文章<code>HelloWorld.md</code>本来放在<code>_posts</code>目录下，链接为<code>https://xxx/_posts/HelloWorld.md</code></p>
+<p>之后归类到<code>_posts/A</code>目录下，那么链接变为<code>https://xxx/_posts/A/HelloWorld.md</code></p>
+<p>这样不太利于分享，所以推荐使用第二种方法。</p>
+<h2 id="方法二插件"><a class="markdownIt-Anchor" href="#方法二插件"></a> 方法二：插件</h2>
+<p>使用<code>hexo-abbrlink</code>这个插件</p>
+<ol>
+<li>
+<p>安装</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>设置</p>
+<p>在<code>_config.yml</code>文件中修改永久链接格式</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink.html</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc32  # 算法：crc16(default) and crc32</span><br><span class="line">  rep: hex    # 进制：dec(default) and hex</span><br></pre></td></tr></table></figure>
+<p><code>posts</code>部分是可以更改的，也可以仿照方法一添加一个关键词便于识别</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">permalink: :keywords/:abbrlink.html</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>生成</p>
+<p>在根目录创建<code>Gruntfile.js</code>文件，让插件到<code>source/_posts/</code>下读取所有的.md文件，把文件中的@@abbrlink替换成文件内容的hash值。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;</span><br><span class="line"> </span><br><span class="line">  grunt.initConfig(&#123;</span><br><span class="line"></span><br><span class="line">    rewrite: &#123;</span><br><span class="line">      abbrlink: &#123;</span><br><span class="line">        src: <span class="string">'source/_posts/**/*.md'</span>,</span><br><span class="line">        editor: <span class="function"><span class="keyword">function</span>(<span class="params">contents, filepath</span>)</span>&#123;</span><br><span class="line">          <span class="keyword">const</span> crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</span><br><span class="line">          <span class="keyword">const</span> hash = crypto.createHash(<span class="string">'sha256'</span>);</span><br><span class="line"></span><br><span class="line">          hash.update(contents);</span><br><span class="line">          <span class="keyword">var</span> hashValue = hash.digest(<span class="string">'hex'</span>);</span><br><span class="line"></span><br><span class="line">          <span class="keyword">return</span> contents.replace(<span class="regexp">/@@abbrlink/g</span>, hashValue.substring(<span class="number">0</span>, <span class="number">16</span>));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line"> </span><br><span class="line">  grunt.loadNpmTasks(<span class="string">'grunt-rewrite'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这种方法生成的链接是不带目录的，直接就是第二步设置中<code>permalink</code>的样式，所以也没有了被改变的风险。</p>
+<p>参考</p>
+<ol>
+<li><a href="http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html" target="_blank" rel="noopener">http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html</a></li>
+</ol>
 ]]></content>
       <categories>
         <category>Hexo</category>
@@ -266,65 +221,42 @@
       </tags>
   </entry>
   <entry>
-    <title>使用Github pages+Hexo 搭建个人博客</title>
-    <url>/posts/ae6c038e.html</url>
-    <content><![CDATA[<h1 id="github-pages-hexo-搭建个人博客"><a class="markdownIt-Anchor" href="#github-pages-hexo-搭建个人博客"></a> Github pages + Hexo 搭建个人博客</h1>
-<p>2019年11月19日，我决定开始写<strong>博客</strong>，首先要用<em>github pages+hexo</em>搭建一个个人博客，其中的过程我就记录在这里面。</p>
-<a id="more"></a>
-<h2 id="准备工作"><a class="markdownIt-Anchor" href="#准备工作"></a> 准备工作</h2>
+    <title>Hexo-melody主题扩展</title>
+    <url>/posts/6663916b.html</url>
+    <content><![CDATA[<p>在搭建博客的时候，在<code>github</code>上逛了不少主题，最符合我审美的就是我现在正在用的<code>melody</code>，不过还是有一些美中不足的地方，但我并没有大佬的水平重新写一个，所以选择在原方案上稍微改动一下，实现一些自己的想法。</p>
 <ol>
-<li>注册一个 GitHub 账户</li>
-<li>安装 Node.js<br />
-下载链接<br />
-<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a><br />
-下面这个是中文网，对于国内用户来说下载速度非常快。<br />
-<a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a><br />
-推荐菜鸟教程关于node的安装教程以及简易的语法介绍<a href="https://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank" rel="noopener">https://www.runoob.com/nodejs/nodejs-install-setup.html</a></li>
-<li>安装git</li>
-<li>markdown语法学习<br />
-<a href="https://www.jianshu.com/p/191d1e21f7ed" target="_blank" rel="noopener">https://www.jianshu.com/p/191d1e21f7ed</a></li>
-<li>git语法学习<br />
-推荐廖雪峰的git教程<br />
-<a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/896043488029600</a></li>
+<li>建立utterances评论系统</li>
 </ol>
-<h2 id="安装"><a class="markdownIt-Anchor" href="#安装"></a> 安装</h2>
-<p>在终端检查node和npm的版本情况</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-<p>然后输入命令安装hexo</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<p>我使用的是Mac电脑，在这一步出现了问题，终端显示如下</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rollbackFailedOptional verb npm-session</span><br></pre></td></tr></table></figure>
-<p>然后我又等了一会儿，终端又报错了。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm WARN checkPermissions Missing write access to /usr/local/lib/node_modules</span><br><span class="line">npm ERR! code EACCES</span><br><span class="line">npm ERR! syscall access</span><br><span class="line">npm ERR! path /usr/local/lib/node_modules</span><br><span class="line">npm ERR! errno -13</span><br><span class="line">npm ERR! Error: EACCES: permission denied, access &apos;/usr/local/lib/node_modules&apos;</span><br><span class="line">npm ERR!  [Error: EACCES: permission denied, access &apos;/usr/local/lib/node_modules&apos;] &#123;</span><br><span class="line">npm ERR!   stack: &quot;Error: EACCES: permission denied, access &apos;/usr/local/lib/node_modules&apos;&quot;,</span><br><span class="line">npm ERR!   errno: -13,</span><br><span class="line">npm ERR!   code: &apos;EACCES&apos;,</span><br><span class="line">npm ERR!   syscall: &apos;access&apos;,</span><br><span class="line">npm ERR!   path: &apos;/usr/local/lib/node_modules&apos;</span><br><span class="line">npm ERR! &#125;</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! The operation was rejected by your operating system.</span><br><span class="line">npm ERR! It is likely you do not have the permissions to access this file as the current user</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! If you believe this might be a permissions issue, please double-check the</span><br><span class="line">npm ERR! permissions of the file and its containing directories, or try running</span><br><span class="line">npm ERR! the command again as root/Administrator.</span><br></pre></td></tr></table></figure>
-<p>根据官方文档，如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code>权限错误，要遵循由<a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#reinstall-npm-with-a-node-version-manager" target="_blank" rel="noopener">npmjs</a>发布的指导修复该问题。强烈建议不要使用 root、sudo 等方法覆盖权限。<br />
-根据要求，下载了<strong>nvm</strong>，并且在终端利用nvm下载了最新版本的node和更新了npm后，hexo下载成功了。（以下是下载和使用nvm的教程链接）<br />
-<a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">https://github.com/nvm-sh/nvm</a>.</p>
-<h2 id="建站"><a class="markdownIt-Anchor" href="#建站"></a> 建站</h2>
-<p>输入以下命令hexo就会出现在指定的文件夹中</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo init &lt;folder&gt;</span><br><span class="line">cd &lt;folder&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-<p>如果出现错误</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">-bash: syntax error near unexpected token `newline<span class="string">'</span></span><br></pre></td></tr></table></figure>
-<p>这是占位符的问题，将第一行命令的&lt;&gt;去除，再重新输入即可。</p>
-<p>到此，建站的基本操作就完成了。</p>
-<p>界面的设计等就可以由自己来操作了。放一个hexo的官方网站供大家参考。<br />
-<a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a></p>
-<h2 id="创建github远程仓库"><a class="markdownIt-Anchor" href="#创建github远程仓库"></a> 创建Github远程仓库</h2>
-<p><a href="http://xn--github-vy7ix4bc60aha9370a9hgi3dqx5cq4zcte.github.io" target="_blank" rel="noopener">注意仓库名为github的用户名.github.io</a>，勾选readme<br />
-<img src="/" class="lazyload" data-src="https://img-blog.csdnimg.cn/20191123194438458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70"  alt="" /></p>
-<p>创建之后，进入仓库，点击<strong>Settings</strong>按钮，然后翻到GitHub Pages的部分，点击网页链接，就能够看到一个简易的网页了。</p>
-<p><img src="/" class="lazyload" data-src="https://img-blog.csdnimg.cn/20191123194913735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70"  alt="" /></p>
-<h2 id="部署hexo"><a class="markdownIt-Anchor" href="#部署hexo"></a> 部署hexo</h2>
-<p>进入本地的hexo文件，找到 <strong>_config.yml</strong>，打开后翻到最后，修改成</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo:</span><br><span class="line">     gitHub: git<span class="meta">@github</span>.com:你的GitHub用户名/你的GitHub用户名.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-<p>repo后面的内容要修改成自己github仓库的SSH密匙。</p>
-<p>然后在终端中输入</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<p>开始安装hexo-deploy-git，安装完成后，开始部署，在终端中输入</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-<p>部署完成。</p>
-<h2 id="测试"><a class="markdownIt-Anchor" href="#测试"></a> 测试</h2>
-<p>这个时候，再次进入刚刚进入过的网页链接，就会看到一个船新版本的界面，也就是本地的hexo库已经部署到github上了。</p>
-<p><img src="/" class="lazyload" data-src="https://img-blog.csdnimg.cn/20191123195408260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70"  alt="" /></p>
+<p>持续更新</p>
+<a id="more"></a>
+<h3 id="1-建立utterances评论系统"><a class="markdownIt-Anchor" href="#1-建立utterances评论系统"></a> 1. 建立utterances评论系统</h3>
+<p><code>melody</code>主题一共支持5个评论系统，</p>
+<ul>
+<li><code>Disqus</code>：要翻墙，不支持<code>markdown</code></li>
+<li><code>Laibili</code>: 虽然支持的账号多，但是不太稳定，跳转到第三方的网页登录让人没有了评论的欲望</li>
+<li><code>Gitment</code>和<code>Gitalk</code> 这两者要求把GitHub 注册的 OAuth Application 的 Client ID、Client Secret 以明文形式写进前端代码里，这样别人直接查看源代码就可以得到我们的密码，而这是不能够公开的，会有很大的安全隐患，具体可以看这篇博客<a href="https://blog.wolfogre.com/posts/security-problem-of-gitment/" target="_blank" rel="noopener">Gitment 安全性争议</a></li>
+<li><code>valine</code>：不好看</li>
+</ul>
+<p>然后我发现了<a href="https://github.com/apps/utterances" target="_blank" rel="noopener">utterances</a>，也是基于<strong>issue</strong>建立的，但是控制了权限，不需要读写代码，前端没有要求你填写密码，而是填写你的仓库名，保证安全性，同时也支持<code>markdown</code>语法，而且很好看~~~</p>
+<p>不过<code>melody</code>暂时并不支持这个系统，需要自己手动添加，这个操作并不难。</p>
+<h4 id="11-安装"><a class="markdownIt-Anchor" href="#11-安装"></a> 1.1 安装</h4>
+<p>首先，进入<a href="https://github.com/apps/utterances" target="_blank" rel="noopener">utterances</a>安装该app，指定博客所在的<strong>repo</strong></p>
+<p>然后就可以得到需要添加的代码，注意这里<code>src</code>不可以改变，<code>repo</code>是<code>拥有者/仓库名</code>，<code>issue-term</code>和</p>
+<p><code>theme</code>都可以自己指定。</p>
+<p><img src="/" class="lazyload" data-src="http://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/utterances-code.png"  alt="" /></p>
+<h4 id="12-配置utterancespug"><a class="markdownIt-Anchor" href="#12-配置utterancespug"></a> 1.2 配置<code>utterances.pug</code></h4>
+<p>然后进入<code>themes\melody\layout\includes\comments</code>目录，新建一个<code>utterances.pug</code>文件，并在里面加入指定的内容，格式如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if theme.utterances &amp;&amp; theme.utterances.enable</span><br><span class="line">	script(src=&quot;https://utteranc.es/client.js&quot;,repo=&quot;用户名/仓库名&quot;,issue-term=&apos;title&apos;,label=&apos;utterances&apos;,theme=&apos;github-light&apos;,crossorigin=&apos;anonymous&apos;,async)</span><br></pre></td></tr></table></figure>
+<p><code>pug</code>的形式与<code>html</code>稍有不同，可以自行搜索一下，改变成上面的样式就可以了。</p>
+<p>这里有个小坑，就是<code>repo</code>里面填的是<code>own/repo</code>，也就是用户名加上仓库名，而不仅仅是仓库名，否则就检索不到了。</p>
+<h4 id="13-配置indexpug"><a class="markdownIt-Anchor" href="#13-配置indexpug"></a> 1.3 配置<code>index.pug</code></h4>
+<p>接着，就是在<code>themes\melody\layout\includes\comments</code>中，找到<code>index.pug</code>文件，会看到里面许多<code>if-else</code>的结构，把<code>utterances</code>也加上去就行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">else if theme.utterances &amp;&amp; theme.utterances.enable</span><br><span class="line">  include ./utterances.pug</span><br></pre></td></tr></table></figure>
+<h4 id="14-配置主题配置文件"><a class="markdownIt-Anchor" href="#14-配置主题配置文件"></a> 1.4 配置主题配置文件</h4>
+<p>最后一步，就是在主题配置文件里面加上<code>utterances</code>评论系统啦。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Utterances</span></span><br><span class="line"><span class="comment"># See: https://utteranc.es/</span></span><br><span class="line"><span class="attr">utterances:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>因为是自己的小改动，所以我直接在<code>pug</code>文件里面指定了相关内容，就没有像其它评论系统里面写引用，因此这里也只要<code>enable</code>一下就可以了。</p>
+<h4 id="15-启动"><a class="markdownIt-Anchor" href="#15-启动"></a> 1.5 启动</h4>
 ]]></content>
       <categories>
         <category>Hexo</category>
@@ -477,6 +409,74 @@
       </categories>
       <tags>
         <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Github pages+Hexo 搭建个人博客</title>
+    <url>/posts/ae6c038e.html</url>
+    <content><![CDATA[<h1 id="github-pages-hexo-搭建个人博客"><a class="markdownIt-Anchor" href="#github-pages-hexo-搭建个人博客"></a> Github pages + Hexo 搭建个人博客</h1>
+<p>2019年11月19日，我决定开始写<strong>博客</strong>，首先要用<em>github pages+hexo</em>搭建一个个人博客，其中的过程我就记录在这里面。</p>
+<a id="more"></a>
+<h2 id="准备工作"><a class="markdownIt-Anchor" href="#准备工作"></a> 准备工作</h2>
+<ol>
+<li>注册一个 GitHub 账户</li>
+<li>安装 Node.js<br />
+下载链接<br />
+<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a><br />
+下面这个是中文网，对于国内用户来说下载速度非常快。<br />
+<a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a><br />
+推荐菜鸟教程关于node的安装教程以及简易的语法介绍<a href="https://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank" rel="noopener">https://www.runoob.com/nodejs/nodejs-install-setup.html</a></li>
+<li>安装git</li>
+<li>markdown语法学习<br />
+<a href="https://www.jianshu.com/p/191d1e21f7ed" target="_blank" rel="noopener">https://www.jianshu.com/p/191d1e21f7ed</a></li>
+<li>git语法学习<br />
+推荐廖雪峰的git教程<br />
+<a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/896043488029600</a></li>
+</ol>
+<h2 id="安装"><a class="markdownIt-Anchor" href="#安装"></a> 安装</h2>
+<p>在终端检查node和npm的版本情况</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+<p>然后输入命令安装hexo</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>我使用的是Mac电脑，在这一步出现了问题，终端显示如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rollbackFailedOptional verb npm-session</span><br></pre></td></tr></table></figure>
+<p>然后我又等了一会儿，终端又报错了。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm WARN checkPermissions Missing write access to /usr/local/lib/node_modules</span><br><span class="line">npm ERR! code EACCES</span><br><span class="line">npm ERR! syscall access</span><br><span class="line">npm ERR! path /usr/local/lib/node_modules</span><br><span class="line">npm ERR! errno -13</span><br><span class="line">npm ERR! Error: EACCES: permission denied, access &apos;/usr/local/lib/node_modules&apos;</span><br><span class="line">npm ERR!  [Error: EACCES: permission denied, access &apos;/usr/local/lib/node_modules&apos;] &#123;</span><br><span class="line">npm ERR!   stack: &quot;Error: EACCES: permission denied, access &apos;/usr/local/lib/node_modules&apos;&quot;,</span><br><span class="line">npm ERR!   errno: -13,</span><br><span class="line">npm ERR!   code: &apos;EACCES&apos;,</span><br><span class="line">npm ERR!   syscall: &apos;access&apos;,</span><br><span class="line">npm ERR!   path: &apos;/usr/local/lib/node_modules&apos;</span><br><span class="line">npm ERR! &#125;</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! The operation was rejected by your operating system.</span><br><span class="line">npm ERR! It is likely you do not have the permissions to access this file as the current user</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! If you believe this might be a permissions issue, please double-check the</span><br><span class="line">npm ERR! permissions of the file and its containing directories, or try running</span><br><span class="line">npm ERR! the command again as root/Administrator.</span><br></pre></td></tr></table></figure>
+<p>根据官方文档，如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code>权限错误，要遵循由<a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#reinstall-npm-with-a-node-version-manager" target="_blank" rel="noopener">npmjs</a>发布的指导修复该问题。强烈建议不要使用 root、sudo 等方法覆盖权限。<br />
+根据要求，下载了<strong>nvm</strong>，并且在终端利用nvm下载了最新版本的node和更新了npm后，hexo下载成功了。（以下是下载和使用nvm的教程链接）<br />
+<a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">https://github.com/nvm-sh/nvm</a>.</p>
+<h2 id="建站"><a class="markdownIt-Anchor" href="#建站"></a> 建站</h2>
+<p>输入以下命令hexo就会出现在指定的文件夹中</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo init &lt;folder&gt;</span><br><span class="line">cd &lt;folder&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p>如果出现错误</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">-bash: syntax error near unexpected token `newline<span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p>这是占位符的问题，将第一行命令的&lt;&gt;去除，再重新输入即可。</p>
+<p>到此，建站的基本操作就完成了。</p>
+<p>界面的设计等就可以由自己来操作了。放一个hexo的官方网站供大家参考。<br />
+<a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a></p>
+<h2 id="创建github远程仓库"><a class="markdownIt-Anchor" href="#创建github远程仓库"></a> 创建Github远程仓库</h2>
+<p><a href="http://xn--github-vy7ix4bc60aha9370a9hgi3dqx5cq4zcte.github.io" target="_blank" rel="noopener">注意仓库名为github的用户名.github.io</a>，勾选readme<br />
+<img src="/" class="lazyload" data-src="https://img-blog.csdnimg.cn/20191123194438458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70"  alt="" /></p>
+<p>创建之后，进入仓库，点击<strong>Settings</strong>按钮，然后翻到GitHub Pages的部分，点击网页链接，就能够看到一个简易的网页了。</p>
+<p><img src="/" class="lazyload" data-src="https://img-blog.csdnimg.cn/20191123194913735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70"  alt="" /></p>
+<h2 id="部署hexo"><a class="markdownIt-Anchor" href="#部署hexo"></a> 部署hexo</h2>
+<p>进入本地的hexo文件，找到 <strong>_config.yml</strong>，打开后翻到最后，修改成</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo:</span><br><span class="line">     gitHub: git<span class="meta">@github</span>.com:你的GitHub用户名/你的GitHub用户名.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<p>repo后面的内容要修改成自己github仓库的SSH密匙。</p>
+<p>然后在终端中输入</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>开始安装hexo-deploy-git，安装完成后，开始部署，在终端中输入</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<p>部署完成。</p>
+<h2 id="测试"><a class="markdownIt-Anchor" href="#测试"></a> 测试</h2>
+<p>这个时候，再次进入刚刚进入过的网页链接，就会看到一个船新版本的界面，也就是本地的hexo库已经部署到github上了。</p>
+<p><img src="/" class="lazyload" data-src="https://img-blog.csdnimg.cn/20191123195408260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70"  alt="" /></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
