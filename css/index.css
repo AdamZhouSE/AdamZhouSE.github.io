@@ -133,7 +133,7 @@ table td {
 #site-name,
 #aside_content .author-info__name,
 #aside_content .author-info__description {
-  font-family: Linux Libertine Slanted, Arial, Helvetica, Times New Roman, American Typewriter,;
+  font-family: Linux Libertine Slanted, Segoe Print, Georgia, Times New Roman, American Typewriter, Arial, Helvetica;
 }
 .is_right {
   text-align: right;
@@ -1876,7 +1876,7 @@ blockquote footer cite:before {
   padding: 0;
   color: #eee;
   letter-spacing: 5px;
-  font-family: Linux Libertine Slanted, Arial, Helvetica, Times New Roman, American Typewriter,;
+  font-family: Linux Libertine Slanted, Segoe Print, Georgia, Times New Roman, American Typewriter, Arial, Helvetica;
 }
 #nav.error-no-found #error_info #error_title {
   font-size: 10rem;
@@ -2557,7 +2557,7 @@ figure.gallery-group .gallery-group-name:after {
   transition: all 0.5s;
 }
 #nav.full_page {
-  height: 600px;
+  height: 100vh;
 }
 #nav.full_page #site-info {
   position: absolute;
