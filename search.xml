@@ -110,51 +110,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo-melody主题扩展</title>
-    <url>/posts/6663916b.html</url>
-    <content><![CDATA[<p>在搭建博客的时候，在<code>github</code>上逛了不少主题，最符合我审美的就是我现在正在用的<code>melody</code>，不过还是有一些美中不足的地方，但我并没有大佬的水平重新写一个，所以选择在原方案上稍微改动一下，实现一些自己的想法。</p>
-<ol>
-<li>建立utterances评论系统</li>
-</ol>
-<p>持续更新</p>
-<a id="more"></a>
-<h3 id="1-建立utterances评论系统"><a class="markdownIt-Anchor" href="#1-建立utterances评论系统"></a> 1. 建立utterances评论系统</h3>
-<p><code>melody</code>主题一共支持5个评论系统，</p>
-<ul>
-<li><code>Disqus</code>：要翻墙，不支持<code>markdown</code></li>
-<li><code>Laibili</code>: 虽然支持的账号多，但是不太稳定，跳转到第三方的网页登录让人没有了评论的欲望</li>
-<li><code>Gitment</code>和<code>Gitalk</code> 这两者要求把GitHub 注册的 OAuth Application 的 Client ID、Client Secret 以明文形式写进前端代码里，这样别人直接查看源代码就可以得到我们的密码，而这是不能够公开的，会有很大的安全隐患，具体可以看这篇博客<a href="https://blog.wolfogre.com/posts/security-problem-of-gitment/" target="_blank" rel="noopener">Gitment 安全性争议</a></li>
-<li><code>valine</code>：不好看</li>
-</ul>
-<p>然后我发现了<a href="https://github.com/apps/utterances" target="_blank" rel="noopener">utterances</a>，也是基于<strong>issue</strong>建立的，但是控制了权限，不需要读写代码，前端没有要求你填写密码，而是填写你的仓库名，保证安全性，同时也支持<code>markdown</code>语法，而且很好看~~~</p>
-<p>不过<code>melody</code>暂时并不支持这个系统，需要自己手动添加，这个操作并不难。</p>
-<h4 id="11-安装"><a class="markdownIt-Anchor" href="#11-安装"></a> 1.1 安装</h4>
-<p>首先，进入<a href="https://github.com/apps/utterances" target="_blank" rel="noopener">utterances</a>安装该app，指定博客所在的<strong>repo</strong></p>
-<p>然后就可以得到需要添加的代码，注意这里<code>src</code>不可以改变，<code>repo</code>是<code>拥有者/仓库名</code>，<code>issue-term</code>和</p>
-<p><code>theme</code>都可以自己指定。</p>
-<p><img src="/" class="lazyload" data-src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/utterances-code.png"  alt="" /></p>
-<h4 id="12-配置utterancespug"><a class="markdownIt-Anchor" href="#12-配置utterancespug"></a> 1.2 配置<code>utterances.pug</code></h4>
-<p>然后进入<code>themes\melody\layout\includes\comments</code>目录，新建一个<code>utterances.pug</code>文件，并在里面加入指定的内容，格式如下</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if theme.utterances &amp;&amp; theme.utterances.enable</span><br><span class="line">	script(src=&quot;https://utteranc.es/client.js&quot;,repo=&quot;用户名/仓库名&quot;,issue-term=&apos;title&apos;,label=&apos;utterances&apos;,theme=&apos;github-light&apos;,crossorigin=&apos;anonymous&apos;,async)</span><br></pre></td></tr></table></figure>
-<p><code>pug</code>的形式与<code>html</code>稍有不同，可以自行搜索一下，改变成上面的样式就可以了。</p>
-<p>这里有个小坑，就是<code>repo</code>里面填的是<code>own/repo</code>，也就是用户名加上仓库名，而不仅仅是仓库名，否则就检索不到了。</p>
-<h4 id="13-配置indexpug"><a class="markdownIt-Anchor" href="#13-配置indexpug"></a> 1.3 配置<code>index.pug</code></h4>
-<p>接着，就是在<code>themes\melody\layout\includes\comments</code>中，找到<code>index.pug</code>文件，会看到里面许多<code>if-else</code>的结构，把<code>utterances</code>也加上去就行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">else if theme.utterances &amp;&amp; theme.utterances.enable</span><br><span class="line">  include ./utterances.pug</span><br></pre></td></tr></table></figure>
-<h4 id="14-配置主题配置文件"><a class="markdownIt-Anchor" href="#14-配置主题配置文件"></a> 1.4 配置主题配置文件</h4>
-<p>最后一步，就是在主题配置文件里面加上<code>utterances</code>评论系统啦。</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Utterances</span></span><br><span class="line"><span class="comment"># See: https://utteranc.es/</span></span><br><span class="line"><span class="attr">utterances:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>因为是自己的小改动，所以我直接在<code>pug</code>文件里面指定了相关内容，就没有像其它评论系统里面写引用，因此这里也只要<code>enable</code>一下就可以了。</p>
-<h4 id="15-启动"><a class="markdownIt-Anchor" href="#15-启动"></a> 1.5 启动</h4>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo写作</title>
     <url>/posts/c4064b2b.html</url>
     <content><![CDATA[<h1 id="hexo写作"><a class="markdownIt-Anchor" href="#hexo写作"></a> Hexo写作</h1>
@@ -214,6 +169,51 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo-melody主题扩展</title>
+    <url>/posts/6663916b.html</url>
+    <content><![CDATA[<p>在搭建博客的时候，在<code>github</code>上逛了不少主题，最符合我审美的就是我现在正在用的<code>melody</code>，不过还是有一些美中不足的地方，但我并没有大佬的水平重新写一个，所以选择在原方案上稍微改动一下，实现一些自己的想法。</p>
+<ol>
+<li>建立utterances评论系统</li>
+</ol>
+<p>持续更新</p>
+<a id="more"></a>
+<h3 id="1-建立utterances评论系统"><a class="markdownIt-Anchor" href="#1-建立utterances评论系统"></a> 1. 建立utterances评论系统</h3>
+<p><code>melody</code>主题一共支持5个评论系统，</p>
+<ul>
+<li><code>Disqus</code>：要翻墙，不支持<code>markdown</code></li>
+<li><code>Laibili</code>: 虽然支持的账号多，但是不太稳定，跳转到第三方的网页登录让人没有了评论的欲望</li>
+<li><code>Gitment</code>和<code>Gitalk</code> 这两者要求把GitHub 注册的 OAuth Application 的 Client ID、Client Secret 以明文形式写进前端代码里，这样别人直接查看源代码就可以得到我们的密码，而这是不能够公开的，会有很大的安全隐患，具体可以看这篇博客<a href="https://blog.wolfogre.com/posts/security-problem-of-gitment/" target="_blank" rel="noopener">Gitment 安全性争议</a></li>
+<li><code>valine</code>：不好看</li>
+</ul>
+<p>然后我发现了<a href="https://github.com/apps/utterances" target="_blank" rel="noopener">utterances</a>，也是基于<strong>issue</strong>建立的，但是控制了权限，不需要读写代码，前端没有要求你填写密码，而是填写你的仓库名，保证安全性，同时也支持<code>markdown</code>语法，而且很好看~~~</p>
+<p>不过<code>melody</code>暂时并不支持这个系统，需要自己手动添加，这个操作并不难。</p>
+<h4 id="11-安装"><a class="markdownIt-Anchor" href="#11-安装"></a> 1.1 安装</h4>
+<p>首先，进入<a href="https://github.com/apps/utterances" target="_blank" rel="noopener">utterances</a>安装该app，指定博客所在的<strong>repo</strong></p>
+<p>然后就可以得到需要添加的代码，注意这里<code>src</code>不可以改变，<code>repo</code>是<code>拥有者/仓库名</code>，<code>issue-term</code>和</p>
+<p><code>theme</code>都可以自己指定。</p>
+<p><img src="/" class="lazyload" data-src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/utterances-code.png"  alt="" /></p>
+<h4 id="12-配置utterancespug"><a class="markdownIt-Anchor" href="#12-配置utterancespug"></a> 1.2 配置<code>utterances.pug</code></h4>
+<p>然后进入<code>themes\melody\layout\includes\comments</code>目录，新建一个<code>utterances.pug</code>文件，并在里面加入指定的内容，格式如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if theme.utterances &amp;&amp; theme.utterances.enable</span><br><span class="line">	script(src=&quot;https://utteranc.es/client.js&quot;,repo=&quot;用户名/仓库名&quot;,issue-term=&apos;title&apos;,label=&apos;utterances&apos;,theme=&apos;github-light&apos;,crossorigin=&apos;anonymous&apos;,async)</span><br></pre></td></tr></table></figure>
+<p><code>pug</code>的形式与<code>html</code>稍有不同，可以自行搜索一下，改变成上面的样式就可以了。</p>
+<p>这里有个小坑，就是<code>repo</code>里面填的是<code>own/repo</code>，也就是用户名加上仓库名，而不仅仅是仓库名，否则就检索不到了。</p>
+<h4 id="13-配置indexpug"><a class="markdownIt-Anchor" href="#13-配置indexpug"></a> 1.3 配置<code>index.pug</code></h4>
+<p>接着，就是在<code>themes\melody\layout\includes\comments</code>中，找到<code>index.pug</code>文件，会看到里面许多<code>if-else</code>的结构，把<code>utterances</code>也加上去就行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">else if theme.utterances &amp;&amp; theme.utterances.enable</span><br><span class="line">  include ./utterances.pug</span><br></pre></td></tr></table></figure>
+<h4 id="14-配置主题配置文件"><a class="markdownIt-Anchor" href="#14-配置主题配置文件"></a> 1.4 配置主题配置文件</h4>
+<p>最后一步，就是在主题配置文件里面加上<code>utterances</code>评论系统啦。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Utterances</span></span><br><span class="line"><span class="comment"># See: https://utteranc.es/</span></span><br><span class="line"><span class="attr">utterances:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>因为是自己的小改动，所以我直接在<code>pug</code>文件里面指定了相关内容，就没有像其它评论系统里面写引用，因此这里也只要<code>enable</code>一下就可以了。</p>
+<h4 id="15-启动"><a class="markdownIt-Anchor" href="#15-启动"></a> 1.5 启动</h4>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo-Permalink简化</title>
     <url>/posts/838443af.html</url>
     <content><![CDATA[<h1 id="permalink简化"><a class="markdownIt-Anchor" href="#permalink简化"></a> Permalink简化</h1>
@@ -263,139 +263,6 @@
       </categories>
       <tags>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>字符串,向量和数组</title>
-    <url>/posts/869e4b19.html</url>
-    <content><![CDATA[<h3 id="二-字符串向量和数组"><a class="markdownIt-Anchor" href="#二-字符串向量和数组"></a> 二、字符串，向量和数组</h3>
-<p>作用域操作符<code>::</code></p>
-<p>含义：编译器应从操作符左侧的作用域中寻找右边那个名字</p>
-<p>比如<code>std::cin</code>是要使用命名空间<code>std</code>中的<code>cin</code></p>
-<p>这样做是为了避免某些名字被重复使用</p>
-<p>使用<code>using</code>声明可以更加简便的使用命名空间中的成员。</p>
-<a id="more"></a>
-<h4 id="1-string类型"><a class="markdownIt-Anchor" href="#1-string类型"></a> 1. String类型</h4>
-<p>表示可变长的字符串</p>
-<h5 id="11-定义和初始化"><a class="markdownIt-Anchor" href="#11-定义和初始化"></a> 1.1 定义和初始化</h5>
-<ol>
-<li>
-<p>使用需要头文件和命名空间</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>初始化</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s1; <span class="comment">// 空字符串</span></span><br><span class="line"><span class="built_in">string</span> s2 = s1; <span class="comment">// s2是s1的副本</span></span><br><span class="line"><span class="built_in">string</span> s3 = <span class="string">"abc"</span>;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s4</span><span class="params">(<span class="number">10</span>, <span class="string">'c'</span>)</span></span>; <span class="comment">// 十个c</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h5 id="12-string对象上的操作"><a class="markdownIt-Anchor" href="#12-string对象上的操作"></a> 1.2 string对象上的操作</h5>
-<ol>
-<li>
-<p>使用<code>getline</code>读取一整行</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> line;</span><br><span class="line">getline(<span class="built_in">cin</span>, line);</span><br></pre></td></tr></table></figure>
-<p>当读取到换行符时结束，并将读到的内容存入<code>string</code>中，但是<strong>不存换行符</strong></p>
-</li>
-<li>
-<p><code>empty</code>和<code>size</code>操作</p>
-<p><code>str.empty()</code>根据字符串是否为空返回一个布尔值</p>
-<p><code>str.size()</code>返回字符串长度</p>
-<p>使用visual studio编程的时候，碰到过一个<strong>warning</strong>，将无符号数赋值给了有符号数。</p>
-<p>这是由于<code>size</code>函数的返回值类型引起的，它是一个<code>string::size_type</code>类型的值，是无符号类型的，</p>
-<p>可以用<code>auto</code>来推断变量的值</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> len = str.size();</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>比较，赋值，相加</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">"abc"</span>;</span><br><span class="line"><span class="built_in">string</span> s2 = <span class="string">"xcvd"</span>;</span><br><span class="line"><span class="comment">// s1 &lt; s2 比较第一个不同的字符</span></span><br><span class="line"><span class="built_in">string</span> s3 = s1; <span class="comment">// 赋值</span></span><br><span class="line"><span class="built_in">string</span> s4 = s1 + s2; <span class="comment">// abcxcvd</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>处理<code>string</code>中的字符</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="built_in">isalnum</span>(c);</span><br><span class="line"><span class="built_in">isalpha</span>(c);</span><br><span class="line"><span class="built_in">islower</span>(c);</span><br><span class="line"><span class="built_in">isupper</span>(c);</span><br><span class="line"><span class="built_in">ispunct</span>(c); <span class="comment">// 是标点符号为真</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="2-vector类型"><a class="markdownIt-Anchor" href="#2-vector类型"></a> 2. Vector类型</h4>
-<p>可变长数组，类似于Java中的<code>ArrayList</code></p>
-<h5 id="21-初始化"><a class="markdownIt-Anchor" href="#21-初始化"></a> 2.1 初始化</h5>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;T&gt; v;</span><br><span class="line"><span class="built_in">vector</span>&lt;T&gt; v1 = &#123;a, b, c&#125;; <span class="comment">// 注意是花括号</span></span><br><span class="line"><span class="built_in">vector</span>&lt;T&gt; v2&#123;a, b&#125;;     <span class="comment">// 花括号，两个元素</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v3(<span class="number">10</span>, <span class="number">1</span>); <span class="comment">// 圆括号 10个元素，每个初始化为1</span></span><br></pre></td></tr></table></figure>
-<h5 id="22-操作"><a class="markdownIt-Anchor" href="#22-操作"></a> 2.2 操作</h5>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">v.push_back(<span class="number">1</span>); <span class="comment">// 添加1</span></span><br><span class="line">v.pop_back(); <span class="comment">// 去掉最后一个数据</span></span><br><span class="line">v.empty();</span><br><span class="line">v.size();</span><br><span class="line">v[n]; <span class="comment">// 注意下标只能访问，但是不能够添加元素</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-迭代器"><a class="markdownIt-Anchor" href="#3-迭代器"></a> 3. 迭代器</h4>
-<p>访问元素的作用</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s = <span class="string">"abcde"</span>;</span><br><span class="line"><span class="keyword">if</span> (s.begin() != s.end()) &#123; <span class="comment">// 确保s非空</span></span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="4-数组"><a class="markdownIt-Anchor" href="#4-数组"></a> 4. 数组</h4>
-<h5 id="41-指针和数组"><a class="markdownIt-Anchor" href="#41-指针和数组"></a> 4.1 指针和数组</h5>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ia[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">p</span><span class="params">(ia)</span></span>; <span class="comment">// 整型指针，指向ia的第一个元素</span></span><br><span class="line">p++; <span class="comment">// 指向第一个元素</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>基础</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++基本语法</title>
-    <url>/posts/6b599344.html</url>
-    <content><![CDATA[<h1 id="c学习笔记"><a class="markdownIt-Anchor" href="#c学习笔记"></a> C++学习笔记</h1>
-<p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p>
-<a id="more"></a>
-<h1 id="一-变量"><a class="markdownIt-Anchor" href="#一-变量"></a> 一、 变量</h1>
-<h2 id="1-用sizeof运算符求某一类型或变量占据的字节数"><a class="markdownIt-Anchor" href="#1-用sizeof运算符求某一类型或变量占据的字节数"></a> 1. 用sizeof运算符求某一类型或变量占据的字节数</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(a) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// sizeof运算符可以求变量占据的字节数</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 未初始化的变量，其值是不确定的</span></span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="2-数据类型的自动转换"><a class="markdownIt-Anchor" href="#2-数据类型的自动转换"></a> 2. 数据类型的自动转换</h2>
-<h3 id="1-数"><a class="markdownIt-Anchor" href="#1-数"></a> 1. 数</h3>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">11.34</span>; <span class="comment">// 11.34被自动转化为11后赋值给a</span></span><br><span class="line"><span class="keyword">int</span> b = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">double</span> d = b; <span class="comment">// d的值是30.0</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-字符类型与整型"><a class="markdownIt-Anchor" href="#2-字符类型与整型"></a> 2. 字符类型与整型</h3>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> k = <span class="string">'a'</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, k); <span class="comment">// 输出97，即a的ASCII码</span></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">98</span>;</span><br><span class="line"><span class="keyword">char</span> k = n;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%c"</span>, k); <span class="comment">// 输出b</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-输入和输出"><a class="markdownIt-Anchor" href="#3-输入和输出"></a> 3. 输入和输出</h2>
-<h4 id="1-scanf和printf"><a class="markdownIt-Anchor" href="#1-scanf和printf"></a> 1. scanf和printf</h4>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt; //使用scanf和printf时需要使用该库</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">float</span> m;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%c%f"</span>, &amp;n, &amp;c, &amp;m);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %c %f\n"</span>, n, c, m);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>用scanf可以一次读入多个不同类型的变量，输入各项用空格隔开<br />
-注意在输入<strong>字符</strong>时，不会跳过空格（空格也会被当做字符读入）<br />
-输入其它数据时，会跳过空格</p>
-<h4 id="2-cin和cout"><a class="markdownIt-Anchor" href="#2-cin和cout"></a> 2. cin和cout</h4>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">    <span class="keyword">while</span> ((c=<span class="built_in">cin</span>.get()) != EOF) &#123; </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; (<span class="keyword">char</span>) c; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用cin读入所有字符，包括空格和回车，EOF<br />
-Mac（ctrl+D停止输入，ctrl+C停止程序)<br />
-windows ctrl+Z停止</p>
-<h4 id="3-cincout-scanfprintf-比较"><a class="markdownIt-Anchor" href="#3-cincout-scanfprintf-比较"></a> 3. cin&amp;cout / scanf&amp;printf 比较</h4>
-<ul>
-<li>cin，cout速度慢，输入输出数据量大时用scanf/printf</li>
-<li>一个程序不要同时出现cin和scanf，cout和prinf</li>
-</ul>
-<h2 id="4-运算"><a class="markdownIt-Anchor" href="#4-运算"></a> 4. 运算</h2>
-<ol>
-<li>加、减、乘运算的溢出</li>
-</ol>
-<hr />
-<h1 id="二-函数"><a class="markdownIt-Anchor" href="#二-函数"></a> 二、函数</h1>
-<h3 id="1-数组作为函数的参数传递"><a class="markdownIt-Anchor" href="#1-数组作为函数的参数传递"></a> 1. 数组作为函数的参数传递</h3>
-<p>数组作为函数的参数时，是传引用的，即<strong>形参数组改变了，实参数组也会改变</strong></p>
-<p>二维数组作为函数的形参时，<strong>必须写明函数有多少列</strong>，不要写明有多少行</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintArray</span><span class="params">(<span class="keyword">int</span> a[][<span class="number">5</span>])</span> </span>&#123;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; a[<span class="number">4</span>][<span class="number">3</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>必须要写明列数，编译器才能够根据下标算出元素的地址</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$\color&#123;#F00&#125;&#123;a[i][j]的地址 = 数组首地址 + i \times N \times sizeof(a[0][0]) + j \times sizeof(a[0][0])&#125;$ (N是数组列数)</span><br></pre></td></tr></table></figure>
-<p>形参数组的首地址就是实参数组的首地址</p>
-<h1 id="三-字符串"><a class="markdownIt-Anchor" href="#三-字符串"></a> 三、字符串</h1>
-<h2 id="1-字符串的形式"><a class="markdownIt-Anchor" href="#1-字符串的形式"></a> 1. 字符串的形式</h2>
-<h3 id="1字符串常量"><a class="markdownIt-Anchor" href="#1字符串常量"></a> （1）字符串常量</h3>
-<p>用双引号括起来的，如&quot;China&quot;, “C++ program”.</p>
-<p>字符串常量占据<strong>内存</strong>的字节数等于字符中字符数目加1，结尾多出字符’\0’.</p>
-<p><font color=#F00>但是字符串的长度不包含’\0’</font></p>
-<p>&quot;&quot;也是合法的·1字符串常量，称为空串，仍然占据一个字节的内存空间，存放’\0’</p>
-<h3 id="2存放于字符数组中以0结尾"><a class="markdownIt-Anchor" href="#2存放于字符数组中以0结尾"></a> （2）存放于字符数组中，以’\0’结尾</h3>
-<p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p>
-<p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p>
-<h3 id="3string对象"><a class="markdownIt-Anchor" href="#3string对象"></a> （3）string对象。</h3>
-<p>string是C++标准模板库里的一个类，专门用于处理字符串</p>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>基础</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -534,6 +401,70 @@ windows ctrl+Z停止</p>
 <h4 id="4-自定义数据结构"><a class="markdownIt-Anchor" href="#4-自定义数据结构"></a> 4. 自定义数据结构</h4>
 <p>将一组相关的数据元素组织起来然后使用他们的策略和方法</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">  <span class="keyword">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">double</span> revenue = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Sales_data accum;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++基本语法</title>
+    <url>/posts/6b599344.html</url>
+    <content><![CDATA[<h1 id="c学习笔记"><a class="markdownIt-Anchor" href="#c学习笔记"></a> C++学习笔记</h1>
+<p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p>
+<a id="more"></a>
+<h1 id="一-变量"><a class="markdownIt-Anchor" href="#一-变量"></a> 一、 变量</h1>
+<h2 id="1-用sizeof运算符求某一类型或变量占据的字节数"><a class="markdownIt-Anchor" href="#1-用sizeof运算符求某一类型或变量占据的字节数"></a> 1. 用sizeof运算符求某一类型或变量占据的字节数</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(a) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// sizeof运算符可以求变量占据的字节数</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 未初始化的变量，其值是不确定的</span></span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-数据类型的自动转换"><a class="markdownIt-Anchor" href="#2-数据类型的自动转换"></a> 2. 数据类型的自动转换</h2>
+<h3 id="1-数"><a class="markdownIt-Anchor" href="#1-数"></a> 1. 数</h3>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">11.34</span>; <span class="comment">// 11.34被自动转化为11后赋值给a</span></span><br><span class="line"><span class="keyword">int</span> b = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">double</span> d = b; <span class="comment">// d的值是30.0</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-字符类型与整型"><a class="markdownIt-Anchor" href="#2-字符类型与整型"></a> 2. 字符类型与整型</h3>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> k = <span class="string">'a'</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, k); <span class="comment">// 输出97，即a的ASCII码</span></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">98</span>;</span><br><span class="line"><span class="keyword">char</span> k = n;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%c"</span>, k); <span class="comment">// 输出b</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-输入和输出"><a class="markdownIt-Anchor" href="#3-输入和输出"></a> 3. 输入和输出</h2>
+<h4 id="1-scanf和printf"><a class="markdownIt-Anchor" href="#1-scanf和printf"></a> 1. scanf和printf</h4>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt; //使用scanf和printf时需要使用该库</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">float</span> m;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%c%f"</span>, &amp;n, &amp;c, &amp;m);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %c %f\n"</span>, n, c, m);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用scanf可以一次读入多个不同类型的变量，输入各项用空格隔开<br />
+注意在输入<strong>字符</strong>时，不会跳过空格（空格也会被当做字符读入）<br />
+输入其它数据时，会跳过空格</p>
+<h4 id="2-cin和cout"><a class="markdownIt-Anchor" href="#2-cin和cout"></a> 2. cin和cout</h4>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">    <span class="keyword">while</span> ((c=<span class="built_in">cin</span>.get()) != EOF) &#123; </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; (<span class="keyword">char</span>) c; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用cin读入所有字符，包括空格和回车，EOF<br />
+Mac（ctrl+D停止输入，ctrl+C停止程序)<br />
+windows ctrl+Z停止</p>
+<h4 id="3-cincout-scanfprintf-比较"><a class="markdownIt-Anchor" href="#3-cincout-scanfprintf-比较"></a> 3. cin&amp;cout / scanf&amp;printf 比较</h4>
+<ul>
+<li>cin，cout速度慢，输入输出数据量大时用scanf/printf</li>
+<li>一个程序不要同时出现cin和scanf，cout和prinf</li>
+</ul>
+<h2 id="4-运算"><a class="markdownIt-Anchor" href="#4-运算"></a> 4. 运算</h2>
+<ol>
+<li>加、减、乘运算的溢出</li>
+</ol>
+<hr />
+<h1 id="二-函数"><a class="markdownIt-Anchor" href="#二-函数"></a> 二、函数</h1>
+<h3 id="1-数组作为函数的参数传递"><a class="markdownIt-Anchor" href="#1-数组作为函数的参数传递"></a> 1. 数组作为函数的参数传递</h3>
+<p>数组作为函数的参数时，是传引用的，即<strong>形参数组改变了，实参数组也会改变</strong></p>
+<p>二维数组作为函数的形参时，<strong>必须写明函数有多少列</strong>，不要写明有多少行</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintArray</span><span class="params">(<span class="keyword">int</span> a[][<span class="number">5</span>])</span> </span>&#123;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; a[<span class="number">4</span>][<span class="number">3</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>必须要写明列数，编译器才能够根据下标算出元素的地址</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$\color&#123;#F00&#125;&#123;a[i][j]的地址 = 数组首地址 + i \times N \times sizeof(a[0][0]) + j \times sizeof(a[0][0])&#125;$ (N是数组列数)</span><br></pre></td></tr></table></figure>
+<p>形参数组的首地址就是实参数组的首地址</p>
+<h1 id="三-字符串"><a class="markdownIt-Anchor" href="#三-字符串"></a> 三、字符串</h1>
+<h2 id="1-字符串的形式"><a class="markdownIt-Anchor" href="#1-字符串的形式"></a> 1. 字符串的形式</h2>
+<h3 id="1字符串常量"><a class="markdownIt-Anchor" href="#1字符串常量"></a> （1）字符串常量</h3>
+<p>用双引号括起来的，如&quot;China&quot;, “C++ program”.</p>
+<p>字符串常量占据<strong>内存</strong>的字节数等于字符中字符数目加1，结尾多出字符’\0’.</p>
+<p><font color=#F00>但是字符串的长度不包含’\0’</font></p>
+<p>&quot;&quot;也是合法的·1字符串常量，称为空串，仍然占据一个字节的内存空间，存放’\0’</p>
+<h3 id="2存放于字符数组中以0结尾"><a class="markdownIt-Anchor" href="#2存放于字符数组中以0结尾"></a> （2）存放于字符数组中，以’\0’结尾</h3>
+<p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p>
+<p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p>
+<h3 id="3string对象"><a class="markdownIt-Anchor" href="#3string对象"></a> （3）string对象。</h3>
+<p>string是C++标准模板库里的一个类，专门用于处理字符串</p>
 ]]></content>
       <categories>
         <category>C++</category>
@@ -683,6 +614,75 @@ s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class=
       </categories>
       <tags>
         <tag>概率论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>字符串,向量和数组</title>
+    <url>/posts/869e4b19.html</url>
+    <content><![CDATA[<h3 id="二-字符串向量和数组"><a class="markdownIt-Anchor" href="#二-字符串向量和数组"></a> 二、字符串，向量和数组</h3>
+<p>作用域操作符<code>::</code></p>
+<p>含义：编译器应从操作符左侧的作用域中寻找右边那个名字</p>
+<p>比如<code>std::cin</code>是要使用命名空间<code>std</code>中的<code>cin</code></p>
+<p>这样做是为了避免某些名字被重复使用</p>
+<p>使用<code>using</code>声明可以更加简便的使用命名空间中的成员。</p>
+<a id="more"></a>
+<h4 id="1-string类型"><a class="markdownIt-Anchor" href="#1-string类型"></a> 1. String类型</h4>
+<p>表示可变长的字符串</p>
+<h5 id="11-定义和初始化"><a class="markdownIt-Anchor" href="#11-定义和初始化"></a> 1.1 定义和初始化</h5>
+<ol>
+<li>
+<p>使用需要头文件和命名空间</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>初始化</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s1; <span class="comment">// 空字符串</span></span><br><span class="line"><span class="built_in">string</span> s2 = s1; <span class="comment">// s2是s1的副本</span></span><br><span class="line"><span class="built_in">string</span> s3 = <span class="string">"abc"</span>;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s4</span><span class="params">(<span class="number">10</span>, <span class="string">'c'</span>)</span></span>; <span class="comment">// 十个c</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="12-string对象上的操作"><a class="markdownIt-Anchor" href="#12-string对象上的操作"></a> 1.2 string对象上的操作</h5>
+<ol>
+<li>
+<p>使用<code>getline</code>读取一整行</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> line;</span><br><span class="line">getline(<span class="built_in">cin</span>, line);</span><br></pre></td></tr></table></figure>
+<p>当读取到换行符时结束，并将读到的内容存入<code>string</code>中，但是<strong>不存换行符</strong></p>
+</li>
+<li>
+<p><code>empty</code>和<code>size</code>操作</p>
+<p><code>str.empty()</code>根据字符串是否为空返回一个布尔值</p>
+<p><code>str.size()</code>返回字符串长度</p>
+<p>使用visual studio编程的时候，碰到过一个<strong>warning</strong>，将无符号数赋值给了有符号数。</p>
+<p>这是由于<code>size</code>函数的返回值类型引起的，它是一个<code>string::size_type</code>类型的值，是无符号类型的，</p>
+<p>可以用<code>auto</code>来推断变量的值</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> len = str.size();</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>比较，赋值，相加</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">"abc"</span>;</span><br><span class="line"><span class="built_in">string</span> s2 = <span class="string">"xcvd"</span>;</span><br><span class="line"><span class="comment">// s1 &lt; s2 比较第一个不同的字符</span></span><br><span class="line"><span class="built_in">string</span> s3 = s1; <span class="comment">// 赋值</span></span><br><span class="line"><span class="built_in">string</span> s4 = s1 + s2; <span class="comment">// abcxcvd</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>处理<code>string</code>中的字符</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="built_in">isalnum</span>(c);</span><br><span class="line"><span class="built_in">isalpha</span>(c);</span><br><span class="line"><span class="built_in">islower</span>(c);</span><br><span class="line"><span class="built_in">isupper</span>(c);</span><br><span class="line"><span class="built_in">ispunct</span>(c); <span class="comment">// 是标点符号为真</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="2-vector类型"><a class="markdownIt-Anchor" href="#2-vector类型"></a> 2. Vector类型</h4>
+<p>可变长数组，类似于Java中的<code>ArrayList</code></p>
+<h5 id="21-初始化"><a class="markdownIt-Anchor" href="#21-初始化"></a> 2.1 初始化</h5>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;T&gt; v;</span><br><span class="line"><span class="built_in">vector</span>&lt;T&gt; v1 = &#123;a, b, c&#125;; <span class="comment">// 注意是花括号</span></span><br><span class="line"><span class="built_in">vector</span>&lt;T&gt; v2&#123;a, b&#125;;     <span class="comment">// 花括号，两个元素</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v3(<span class="number">10</span>, <span class="number">1</span>); <span class="comment">// 圆括号 10个元素，每个初始化为1</span></span><br></pre></td></tr></table></figure>
+<h5 id="22-操作"><a class="markdownIt-Anchor" href="#22-操作"></a> 2.2 操作</h5>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">v.push_back(<span class="number">1</span>); <span class="comment">// 添加1</span></span><br><span class="line">v.pop_back(); <span class="comment">// 去掉最后一个数据</span></span><br><span class="line">v.empty();</span><br><span class="line">v.size();</span><br><span class="line">v[n]; <span class="comment">// 注意下标只能访问，但是不能够添加元素</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-迭代器"><a class="markdownIt-Anchor" href="#3-迭代器"></a> 3. 迭代器</h4>
+<p>访问元素的作用</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s = <span class="string">"abcde"</span>;</span><br><span class="line"><span class="keyword">if</span> (s.begin() != s.end()) &#123; <span class="comment">// 确保s非空</span></span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-数组"><a class="markdownIt-Anchor" href="#4-数组"></a> 4. 数组</h4>
+<h5 id="41-指针和数组"><a class="markdownIt-Anchor" href="#41-指针和数组"></a> 4.1 指针和数组</h5>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ia[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">p</span><span class="params">(ia)</span></span>; <span class="comment">// 整型指针，指向ia的第一个元素</span></span><br><span class="line">p++; <span class="comment">// 指向第一个元素</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
       </tags>
   </entry>
 </search>
