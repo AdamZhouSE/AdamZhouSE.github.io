@@ -147,66 +147,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo个人博客绑定域名和配置SSL证书</title>
-    <url>/posts/2cd2c226.html</url>
-    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
-<a id="more"></a>
-<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
-<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
-<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
-<p><img src="/img/loading.gif" class="lazyload" data-src="http://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/domainname1.png"  alt=""></p>
-<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
-<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>主机记录</th>
-<th>记录类型</th>
-<th>线路类型</th>
-<th>记录值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>www</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-<tr>
-<td>@</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
-<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
-<p><img src="/img/loading.gif" class="lazyload" data-src="http://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/2020-04-09domainname2.png"  alt=""></p>
-<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
-<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
-<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
-<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
-<hr>
-<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
-<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
-<p><a href="https://cloud.tencent.com/document/product/400/35244" target="_blank" rel="noopener">腾讯云Nginx服务器证书安装</a></p>
-<p><a href="https://www.jianshu.com/p/026d67cc6cb1" target="_blank" rel="noopener">Mac下nginx的使用</a></p>
-<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
-<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
-<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo-melody主题扩展</title>
     <url>/posts/6663916b.html</url>
     <content><![CDATA[<p>在搭建博客的时候，在<code>github</code>上逛了不少主题，最符合我审美的就是我现在正在用的<code>melody</code>，不过还是有一些美中不足的地方，但我并没有大佬的水平重新写一个，所以选择在原方案上稍微改动一下，实现一些自己的想法。</p>
@@ -282,6 +222,66 @@
 <p>在网页上刷新</p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo个人博客绑定域名和配置SSL证书</title>
+    <url>/posts/2cd2c226.html</url>
+    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
+<a id="more"></a>
+<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
+<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
+<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
+<p><img src="/img/loading.gif" class="lazyload" data-src="http://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/domainname1.png"  alt=""></p>
+<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
+<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>主机记录</th>
+<th>记录类型</th>
+<th>线路类型</th>
+<th>记录值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>www</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+<tr>
+<td>@</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
+<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
+<p><img src="/img/loading.gif" class="lazyload" data-src="http://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/2020-04-09domainname2.png"  alt=""></p>
+<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
+<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
+<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
+<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
+<hr>
+<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
+<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
+<p><a href="https://cloud.tencent.com/document/product/400/35244" target="_blank" rel="noopener">腾讯云Nginx服务器证书安装</a></p>
+<p><a href="https://www.jianshu.com/p/026d67cc6cb1" target="_blank" rel="noopener">Mac下nginx的使用</a></p>
+<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
+<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
+<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
 ]]></content>
       <categories>
         <category>Hexo</category>
@@ -662,8 +662,8 @@
 <h4 id="2-2-重复检测"><a href="#2-2-重复检测" class="headerlink" title="2.2 重复检测"></a>2.2 重复检测</h4><p>重复多次进行随机检测</p>
 <ul>
 <li><p>有放回抽样</p>
-<p>$k$次有放回抽样错误率为$P(E<em>1\,\bigcap\cdots\bigcap\,E_k)=\prod</em>{i=1}^kP(E_i)\leq(\frac{1}{100})^k$</p>
-<p>可以看到，错误率指数级降低</p>
+<p>$k$次有放回抽样错误率为</p>
+<script type="math/tex; mode=display">P(E_1\,\bigcap\cdots\bigcap\,E_k)=\prod_{i=1}^kP(E_i)\leq(\frac{1}{100})^k</script><p>可以看到，错误率指数级降低</p>
 </li>
 <li><p>无放回抽样</p>
 </li>
