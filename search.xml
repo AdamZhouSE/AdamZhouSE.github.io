@@ -47,6 +47,66 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo个人博客绑定域名和配置SSL证书</title>
+    <url>/posts/2cd2c226.html</url>
+    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
+<a id="more"></a>
+<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
+<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
+<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
+<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/domainname1.png" alt=""></p>
+<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
+<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>主机记录</th>
+<th>记录类型</th>
+<th>线路类型</th>
+<th>记录值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>www</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+<tr>
+<td>@</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
+<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
+<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/2020-04-09domainname2.png" alt=""></p>
+<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
+<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
+<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
+<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
+<hr>
+<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
+<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
+<p><a href="https://cloud.tencent.com/document/product/400/35244" target="_blank" rel="noopener">腾讯云Nginx服务器证书安装</a></p>
+<p><a href="https://www.jianshu.com/p/026d67cc6cb1" target="_blank" rel="noopener">Mac下nginx的使用</a></p>
+<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
+<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
+<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo写作</title>
     <url>/posts/c4064b2b.html</url>
     <content><![CDATA[<h1 id="Hexo写作"><a href="#Hexo写作" class="headerlink" title="Hexo写作"></a>Hexo写作</h1><p>本文介绍了一些基本的Hexo配置和使用hexo+GitHub写作的流程。</p>
@@ -147,6 +207,59 @@
       </tags>
   </entry>
   <entry>
+    <title>字符串,向量和数组</title>
+    <url>/posts/869e4b19.html</url>
+    <content><![CDATA[<h3 id="二、字符串，向量和数组"><a href="#二、字符串，向量和数组" class="headerlink" title="二、字符串，向量和数组"></a>二、字符串，向量和数组</h3><p>作用域操作符<code>::</code></p>
+<p>含义：编译器应从操作符左侧的作用域中寻找右边那个名字</p>
+<p>比如<code>std::cin</code>是要使用命名空间<code>std</code>中的<code>cin</code></p>
+<p>这样做是为了避免某些名字被重复使用</p>
+<p>使用<code>using</code>声明可以更加简便的使用命名空间中的成员。</p>
+<a id="more"></a>
+<h4 id="1-String类型"><a href="#1-String类型" class="headerlink" title="1. String类型"></a>1. String类型</h4><p>表示可变长的字符串</p>
+<h5 id="1-1-定义和初始化"><a href="#1-1-定义和初始化" class="headerlink" title="1.1 定义和初始化"></a>1.1 定义和初始化</h5><ol>
+<li><p>使用需要头文件和命名空间</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s1; <span class="comment">// 空字符串</span></span><br><span class="line"><span class="built_in">string</span> s2 = s1; <span class="comment">// s2是s1的副本</span></span><br><span class="line"><span class="built_in">string</span> s3 = <span class="string">"abc"</span>;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s4</span><span class="params">(<span class="number">10</span>, <span class="string">'c'</span>)</span></span>; <span class="comment">// 十个c</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="1-2-string对象上的操作"><a href="#1-2-string对象上的操作" class="headerlink" title="1.2 string对象上的操作"></a>1.2 string对象上的操作</h5><ol>
+<li><p>使用<code>getline</code>读取一整行</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> line;</span><br><span class="line">getline(<span class="built_in">cin</span>, line);</span><br></pre></td></tr></table></figure>
+<p>当读取到换行符时结束，并将读到的内容存入<code>string</code>中，但是<strong>不存换行符</strong></p>
+</li>
+<li><p><code>empty</code>和<code>size</code>操作</p>
+<p><code>str.empty()</code>根据字符串是否为空返回一个布尔值</p>
+<p><code>str.size()</code>返回字符串长度</p>
+<p>使用visual studio编程的时候，碰到过一个<strong>warning</strong>，将无符号数赋值给了有符号数。</p>
+<p>这是由于<code>size</code>函数的返回值类型引起的，它是一个<code>string::size_type</code>类型的值，是无符号类型的，</p>
+<p>可以用<code>auto</code>来推断变量的值</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> len = str.size();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>比较，赋值，相加</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">"abc"</span>;</span><br><span class="line"><span class="built_in">string</span> s2 = <span class="string">"xcvd"</span>;</span><br><span class="line"><span class="comment">// s1 &lt; s2 比较第一个不同的字符</span></span><br><span class="line"><span class="built_in">string</span> s3 = s1; <span class="comment">// 赋值</span></span><br><span class="line"><span class="built_in">string</span> s4 = s1 + s2; <span class="comment">// abcxcvd</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>处理<code>string</code>中的字符</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="built_in">isalnum</span>(c);</span><br><span class="line"><span class="built_in">isalpha</span>(c);</span><br><span class="line"><span class="built_in">islower</span>(c);</span><br><span class="line"><span class="built_in">isupper</span>(c);</span><br><span class="line"><span class="built_in">ispunct</span>(c); <span class="comment">// 是标点符号为真</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="2-Vector类型"><a href="#2-Vector类型" class="headerlink" title="2. Vector类型"></a>2. Vector类型</h4><p>可变长数组，类似于Java中的<code>ArrayList</code></p>
+<h5 id="2-1-初始化"><a href="#2-1-初始化" class="headerlink" title="2.1 初始化"></a>2.1 初始化</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;T&gt; v;</span><br><span class="line"><span class="built_in">vector</span>&lt;T&gt; v1 = &#123;a, b, c&#125;; <span class="comment">// 注意是花括号</span></span><br><span class="line"><span class="built_in">vector</span>&lt;T&gt; v2&#123;a, b&#125;;     <span class="comment">// 花括号，两个元素</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v3(<span class="number">10</span>, <span class="number">1</span>); <span class="comment">// 圆括号 10个元素，每个初始化为1</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-2-操作"><a href="#2-2-操作" class="headerlink" title="2.2 操作"></a>2.2 操作</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">v.push_back(<span class="number">1</span>); <span class="comment">// 添加1</span></span><br><span class="line">v.pop_back(); <span class="comment">// 去掉最后一个数据</span></span><br><span class="line">v.empty();</span><br><span class="line">v.size();</span><br><span class="line">v[n]; <span class="comment">// 注意下标只能访问，但是不能够添加元素</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-迭代器"><a href="#3-迭代器" class="headerlink" title="3. 迭代器"></a>3. 迭代器</h4><p>访问元素的作用</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s = <span class="string">"abcde"</span>;</span><br><span class="line"><span class="keyword">if</span> (s.begin() != s.end()) &#123; <span class="comment">// 确保s非空</span></span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-数组"><a href="#4-数组" class="headerlink" title="4. 数组"></a>4. 数组</h4><h5 id="4-1-指针和数组"><a href="#4-1-指针和数组" class="headerlink" title="4.1 指针和数组"></a>4.1 指针和数组</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ia[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">p</span><span class="params">(ia)</span></span>; <span class="comment">// 整型指针，指向ia的第一个元素</span></span><br><span class="line">p++; <span class="comment">// 指向第一个元素</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>变量和基本类型</title>
     <url>/posts/96db5496.html</url>
     <content><![CDATA[<h3 id="变量和基本类型"><a href="#变量和基本类型" class="headerlink" title="变量和基本类型"></a>变量和基本类型</h3><h4 id="1-复合类型-Compound-type"><a href="#1-复合类型-Compound-type" class="headerlink" title="1. 复合类型(Compound type)"></a>1. 复合类型(Compound type)</h4><p>基于其它类型定义的类型</p>
@@ -207,59 +320,6 @@
       </tags>
   </entry>
   <entry>
-    <title>字符串,向量和数组</title>
-    <url>/posts/869e4b19.html</url>
-    <content><![CDATA[<h3 id="二、字符串，向量和数组"><a href="#二、字符串，向量和数组" class="headerlink" title="二、字符串，向量和数组"></a>二、字符串，向量和数组</h3><p>作用域操作符<code>::</code></p>
-<p>含义：编译器应从操作符左侧的作用域中寻找右边那个名字</p>
-<p>比如<code>std::cin</code>是要使用命名空间<code>std</code>中的<code>cin</code></p>
-<p>这样做是为了避免某些名字被重复使用</p>
-<p>使用<code>using</code>声明可以更加简便的使用命名空间中的成员。</p>
-<a id="more"></a>
-<h4 id="1-String类型"><a href="#1-String类型" class="headerlink" title="1. String类型"></a>1. String类型</h4><p>表示可变长的字符串</p>
-<h5 id="1-1-定义和初始化"><a href="#1-1-定义和初始化" class="headerlink" title="1.1 定义和初始化"></a>1.1 定义和初始化</h5><ol>
-<li><p>使用需要头文件和命名空间</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>初始化</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s1; <span class="comment">// 空字符串</span></span><br><span class="line"><span class="built_in">string</span> s2 = s1; <span class="comment">// s2是s1的副本</span></span><br><span class="line"><span class="built_in">string</span> s3 = <span class="string">"abc"</span>;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s4</span><span class="params">(<span class="number">10</span>, <span class="string">'c'</span>)</span></span>; <span class="comment">// 十个c</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h5 id="1-2-string对象上的操作"><a href="#1-2-string对象上的操作" class="headerlink" title="1.2 string对象上的操作"></a>1.2 string对象上的操作</h5><ol>
-<li><p>使用<code>getline</code>读取一整行</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> line;</span><br><span class="line">getline(<span class="built_in">cin</span>, line);</span><br></pre></td></tr></table></figure>
-<p>当读取到换行符时结束，并将读到的内容存入<code>string</code>中，但是<strong>不存换行符</strong></p>
-</li>
-<li><p><code>empty</code>和<code>size</code>操作</p>
-<p><code>str.empty()</code>根据字符串是否为空返回一个布尔值</p>
-<p><code>str.size()</code>返回字符串长度</p>
-<p>使用visual studio编程的时候，碰到过一个<strong>warning</strong>，将无符号数赋值给了有符号数。</p>
-<p>这是由于<code>size</code>函数的返回值类型引起的，它是一个<code>string::size_type</code>类型的值，是无符号类型的，</p>
-<p>可以用<code>auto</code>来推断变量的值</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> len = str.size();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>比较，赋值，相加</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">"abc"</span>;</span><br><span class="line"><span class="built_in">string</span> s2 = <span class="string">"xcvd"</span>;</span><br><span class="line"><span class="comment">// s1 &lt; s2 比较第一个不同的字符</span></span><br><span class="line"><span class="built_in">string</span> s3 = s1; <span class="comment">// 赋值</span></span><br><span class="line"><span class="built_in">string</span> s4 = s1 + s2; <span class="comment">// abcxcvd</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>处理<code>string</code>中的字符</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="built_in">isalnum</span>(c);</span><br><span class="line"><span class="built_in">isalpha</span>(c);</span><br><span class="line"><span class="built_in">islower</span>(c);</span><br><span class="line"><span class="built_in">isupper</span>(c);</span><br><span class="line"><span class="built_in">ispunct</span>(c); <span class="comment">// 是标点符号为真</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="2-Vector类型"><a href="#2-Vector类型" class="headerlink" title="2. Vector类型"></a>2. Vector类型</h4><p>可变长数组，类似于Java中的<code>ArrayList</code></p>
-<h5 id="2-1-初始化"><a href="#2-1-初始化" class="headerlink" title="2.1 初始化"></a>2.1 初始化</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;T&gt; v;</span><br><span class="line"><span class="built_in">vector</span>&lt;T&gt; v1 = &#123;a, b, c&#125;; <span class="comment">// 注意是花括号</span></span><br><span class="line"><span class="built_in">vector</span>&lt;T&gt; v2&#123;a, b&#125;;     <span class="comment">// 花括号，两个元素</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v3(<span class="number">10</span>, <span class="number">1</span>); <span class="comment">// 圆括号 10个元素，每个初始化为1</span></span><br></pre></td></tr></table></figure>
-<h5 id="2-2-操作"><a href="#2-2-操作" class="headerlink" title="2.2 操作"></a>2.2 操作</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">v.push_back(<span class="number">1</span>); <span class="comment">// 添加1</span></span><br><span class="line">v.pop_back(); <span class="comment">// 去掉最后一个数据</span></span><br><span class="line">v.empty();</span><br><span class="line">v.size();</span><br><span class="line">v[n]; <span class="comment">// 注意下标只能访问，但是不能够添加元素</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-迭代器"><a href="#3-迭代器" class="headerlink" title="3. 迭代器"></a>3. 迭代器</h4><p>访问元素的作用</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s = <span class="string">"abcde"</span>;</span><br><span class="line"><span class="keyword">if</span> (s.begin() != s.end()) &#123; <span class="comment">// 确保s非空</span></span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="4-数组"><a href="#4-数组" class="headerlink" title="4. 数组"></a>4. 数组</h4><h5 id="4-1-指针和数组"><a href="#4-1-指针和数组" class="headerlink" title="4.1 指针和数组"></a>4.1 指针和数组</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ia[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">p</span><span class="params">(ia)</span></span>; <span class="comment">// 整型指针，指向ia的第一个元素</span></span><br><span class="line">p++; <span class="comment">// 指向第一个元素</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>基础</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C++基本语法</title>
     <url>/posts/6b599344.html</url>
     <content><![CDATA[<h1 id="C-学习笔记"><a href="#C-学习笔记" class="headerlink" title="C++学习笔记"></a>C++学习笔记</h1><p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p>
@@ -300,66 +360,6 @@
       </categories>
       <tags>
         <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo个人博客绑定域名和配置SSL证书</title>
-    <url>/posts/2cd2c226.html</url>
-    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
-<a id="more"></a>
-<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
-<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
-<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
-<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/domainname1.png" alt=""></p>
-<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
-<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>主机记录</th>
-<th>记录类型</th>
-<th>线路类型</th>
-<th>记录值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>www</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-<tr>
-<td>@</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
-<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
-<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/2020-04-09domainname2.png" alt=""></p>
-<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
-<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
-<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
-<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
-<hr>
-<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
-<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
-<p><a href="https://cloud.tencent.com/document/product/400/35244" target="_blank" rel="noopener">腾讯云Nginx服务器证书安装</a></p>
-<p><a href="https://www.jianshu.com/p/026d67cc6cb1" target="_blank" rel="noopener">Mac下nginx的使用</a></p>
-<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
-<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
-<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
