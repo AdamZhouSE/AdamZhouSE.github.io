@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="1.面向对象程序设计概述"><meta name="keywords" content="Java"><meta name="author" content="ZZY,zhouzhuyan@gmail.com"><meta name="copyright" content="ZZY"><title>1.面向对象程序设计概述 | Blog of Adam Zhou</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.7.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="http://ta.qq.com"><script>(function() {
+   var hm = document.createElement("script");
+   hm.src = "https://tajs.qq.com/stats?sId=66541773";
+   var s = document.getElementsByTagName("script")[0];
+   s.parentNode.insertBefore(hm, s);
+ })();</script><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、面向对象程序设计概述"><span class="toc-number">1.</span> <span class="toc-text">一、面向对象程序设计概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-类"><span class="toc-number">1.1.</span> <span class="toc-text">1. 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-对象"><span class="toc-number">1.2.</span> <span class="toc-text">2. 对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-识别类"><span class="toc-number">1.3.</span> <span class="toc-text">3. 识别类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-类之间的关系"><span class="toc-number">1.4.</span> <span class="toc-text">4. 类之间的关系</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-依赖（dependence）"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 依赖（dependence）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-聚合（aggregation）"><span class="toc-number">1.4.2.</span> <span class="toc-text">4.2 聚合（aggregation）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-继承（inheritance）"><span class="toc-number">1.4.3.</span> <span class="toc-text">4.3 继承（inheritance）</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/photo5.jpeg"></div><div class="author-info__name text-center">ZZY</div><div class="author-info__description text-center">Take notes and write articles about Software Engineering</div><div class="follow-button"><a href="https://github.com/AdamZhouSE">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">9</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">4</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">6</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/background1.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Blog of Adam Zhou</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/about">About</a></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></a></span></div><div id="post-info"><div id="post-title">1.面向对象程序设计概述</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-04-24</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Java/">Java</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Java/%E5%AF%B9%E8%B1%A1%E5%92%8C%E7%B1%BB/">对象和类</a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">756</span><span class="post-meta__separator">|</span><span>Reading time: 2 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="一、面向对象程序设计概述"><a href="#一、面向对象程序设计概述" class="headerlink" title="一、面向对象程序设计概述"></a>一、面向对象程序设计概述</h2><p>结构化程序：算法+数据结构 = 程序 </p>
+<p>（即确定如何操作数据，再决定如何组织数据的结构）</p>
+<p>面向对象程序设计(OOP)：将数据放在第一位，再考虑操作数据的算法</p>
+<h3 id="1-类"><a href="#1-类" class="headerlink" title="1. 类"></a>1. 类</h3><ol>
+<li><p><strong>类(class)</strong>是构造对象的模板或<strong>蓝图</strong>，就好像一个制作某件工艺品的模具，对象就是工艺品</p>
+</li>
+<li><p>由类构造(construct)对象的过程称为创建类的<strong>实例(instance)</strong></p>
+</li>
+<li><p><strong>封装(encapsulation)</strong>将<em>数据</em>和<em>行为</em>组合在一个包中，对对象的使用者隐藏具体的实现方式，也称为<strong>数据隐藏</strong></p>
+</li>
+<li><p>对象中的数据称为<em>实例字段(instance field)</em>，操作数据的过程称为<em>方法(method)</em></p>
+</li>
+<li><p>对象拥有的实例字段值的集合就是这个对象的当前<em>状态(state)</em></p>
+</li>
+<li>程序只能通过对象的方法和对象数据进行交互，提高了重用性和可靠性</li>
+<li>可以通过扩展一个类来构建新的类，这使得用户自定义类更加容易。在Java中，所有类都来自于一个<em>超类</em>，即<em>Object</em>。</li>
+<li>通过扩展一个类来建立一个新的类的过程就是<strong>继承(inheritance)</strong>，新类具有被扩展的类的全部属性和方法，可以自定义新的属性和方法。</li>
+</ol>
+<h3 id="2-对象"><a href="#2-对象" class="headerlink" title="2. 对象"></a>2. 对象</h3><p>对象的3个特性</p>
+<ul>
+<li><strong>行为(behavior)</strong>——可以对对象完成的操作（应用的方法）</li>
+<li><strong>状态(state)</strong>——描述当前状况的信息，状态的改变必须通过调用方法实现</li>
+<li><strong>标识(identity)</strong>——每个对象有唯一的标识来区分（如两个订单的编号肯定不相同）</li>
+</ul>
+<h3 id="3-识别类"><a href="#3-识别类" class="headerlink" title="3. 识别类"></a>3. 识别类</h3><p>编写程序从<strong>识别类</strong>开始，然后为各个类添加方法。</p>
+<p>一个简单的方法是在分析问题的过程中寻找<strong>名词——类</strong>，寻找<strong>动词——方法</strong></p>
+<p>例如我们有商品，订单，账户这样的名词作为类，即Item，Order，Account</p>
+<p>那么在账户这个类中，就可以有增加账户，修改账户等方法。</p>
+<h3 id="4-类之间的关系"><a href="#4-类之间的关系" class="headerlink" title="4. 类之间的关系"></a>4. 类之间的关系</h3><p>类之间最常见的关系有：</p>
+<ul>
+<li><strong>依赖</strong>（”<em>uses-a</em>“）</li>
+<li><strong>聚合</strong> （”<em>has-a</em>“）</li>
+<li><strong>继承</strong>（<em>“is-a”</em>)</li>
+</ul>
+<h4 id="4-1-依赖（dependence）"><a href="#4-1-依赖（dependence）" class="headerlink" title="4.1 依赖（dependence）"></a>4.1 依赖（dependence）</h4><p>如果一个类的方法使用或操纵另一个类的对象，我们就可以说一个类依赖于另一个类</p>
+<p>比如Order对象访问Account对象查看信用状态，这就是一个使用(“uses-a”)的关系。</p>
+<p>（尽可能减少相互依赖的类，做到低耦合）</p>
+<h4 id="4-2-聚合（aggregation）"><a href="#4-2-聚合（aggregation）" class="headerlink" title="4.2 聚合（aggregation）"></a>4.2 聚合（aggregation）</h4><p>类A的对象包含（”has-a”）类B的对象</p>
+<p>如一个Order对象就包含了一些Item对象</p>
+<h4 id="4-3-继承（inheritance）"><a href="#4-3-继承（inheritance）" class="headerlink" title="4.3 继承（inheritance）"></a>4.3 继承（inheritance）</h4><p>一个更特殊的类与一个更一般的类之间的关系</p>
+<p>也就是前面提到的扩展，比如现在我们定义一个加急订单RushOrder类，那么它是一个（”is-a”)Order类</p>
+<p>也就是有Order类继承而来。</p>
+<p>下图展示了上述的三种关系。</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200423LearnJava01.png" alt=""></p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:zhouzhuyan@gmail.com">ZZY</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zhouzhuyan.com/posts/ed34008.html">https://zhouzhuyan.com/posts/ed34008.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post-qr-code"><div class="post-qr-code-item"><img class="post-qr-code__img" src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/alipay.jpg"><div class="post-qr-code__desc">读后有收获可以请作者喝一杯咖啡～</div></div></div><div class="addthis_inline_share_toolbox pull-right"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e860506e3721655" async></script><nav id="pagination"><div class="next-post pull-right"><a href="/posts/36736857.html"><span>概率论的基本概念</span><i class="fa fa-chevron-right"></i></a></div></nav><div class="post-adv"><a href="https://url.cn/5XAIrHD"><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/guanggao1040.100.jpg" width="1040" height="100"></a></div><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'WwwvyoF60tAE2pbws8uYxHS1-gzGzoHsz',
+  appKey:'pO5x0TbqvLWaDPkQIGX7U65a',
+  placeholder:'Please leave your footprints',
+  avatar:'monsterid',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer class="footer-bg" style="background-image: url(https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/background1.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2020 By ZZY</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="icp"><a href="http://beian.miit.gov.cn/"><span>苏ICP备20019763号-1</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.7.0"></script><script src="/js/fancybox.js?version=1.7.0"></script><script src="/js/sidebar.js?version=1.7.0"></script><script src="/js/copy.js?version=1.7.0"></script><script src="/js/fireworks.js?version=1.7.0"></script><script src="/js/transition.js?version=1.7.0"></script><script src="/js/scroll.js?version=1.7.0"></script><script src="/js/head.js?version=1.7.0"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="/js/search/local-search.js"></script><script id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zIndex="-1" data-click="false"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

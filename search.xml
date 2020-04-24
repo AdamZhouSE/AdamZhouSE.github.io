@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>1.面向对象程序设计概述</title>
+    <url>/posts/ed34008.html</url>
+    <content><![CDATA[<h2 id="一、面向对象程序设计概述"><a href="#一、面向对象程序设计概述" class="headerlink" title="一、面向对象程序设计概述"></a>一、面向对象程序设计概述</h2><p>结构化程序：算法+数据结构 = 程序 </p>
+<p>（即确定如何操作数据，再决定如何组织数据的结构）</p>
+<p>面向对象程序设计(OOP)：将数据放在第一位，再考虑操作数据的算法</p>
+<h3 id="1-类"><a href="#1-类" class="headerlink" title="1. 类"></a>1. 类</h3><ol>
+<li><p><strong>类(class)</strong>是构造对象的模板或<strong>蓝图</strong>，就好像一个制作某件工艺品的模具，对象就是工艺品</p>
+</li>
+<li><p>由类构造(construct)对象的过程称为创建类的<strong>实例(instance)</strong></p>
+</li>
+<li><p><strong>封装(encapsulation)</strong>将<em>数据</em>和<em>行为</em>组合在一个包中，对对象的使用者隐藏具体的实现方式，也称为<strong>数据隐藏</strong></p>
+</li>
+<li><p>对象中的数据称为<em>实例字段(instance field)</em>，操作数据的过程称为<em>方法(method)</em></p>
+</li>
+<li><p>对象拥有的实例字段值的集合就是这个对象的当前<em>状态(state)</em></p>
+</li>
+<li>程序只能通过对象的方法和对象数据进行交互，提高了重用性和可靠性</li>
+<li>可以通过扩展一个类来构建新的类，这使得用户自定义类更加容易。在Java中，所有类都来自于一个<em>超类</em>，即<em>Object</em>。</li>
+<li>通过扩展一个类来建立一个新的类的过程就是<strong>继承(inheritance)</strong>，新类具有被扩展的类的全部属性和方法，可以自定义新的属性和方法。</li>
+</ol>
+<h3 id="2-对象"><a href="#2-对象" class="headerlink" title="2. 对象"></a>2. 对象</h3><p>对象的3个特性</p>
+<ul>
+<li><strong>行为(behavior)</strong>——可以对对象完成的操作（应用的方法）</li>
+<li><strong>状态(state)</strong>——描述当前状况的信息，状态的改变必须通过调用方法实现</li>
+<li><strong>标识(identity)</strong>——每个对象有唯一的标识来区分（如两个订单的编号肯定不相同）</li>
+</ul>
+<h3 id="3-识别类"><a href="#3-识别类" class="headerlink" title="3. 识别类"></a>3. 识别类</h3><p>编写程序从<strong>识别类</strong>开始，然后为各个类添加方法。</p>
+<p>一个简单的方法是在分析问题的过程中寻找<strong>名词——类</strong>，寻找<strong>动词——方法</strong></p>
+<p>例如我们有商品，订单，账户这样的名词作为类，即Item，Order，Account</p>
+<p>那么在账户这个类中，就可以有增加账户，修改账户等方法。</p>
+<h3 id="4-类之间的关系"><a href="#4-类之间的关系" class="headerlink" title="4. 类之间的关系"></a>4. 类之间的关系</h3><p>类之间最常见的关系有：</p>
+<ul>
+<li><strong>依赖</strong>（”<em>uses-a</em>“）</li>
+<li><strong>聚合</strong> （”<em>has-a</em>“）</li>
+<li><strong>继承</strong>（<em>“is-a”</em>)</li>
+</ul>
+<h4 id="4-1-依赖（dependence）"><a href="#4-1-依赖（dependence）" class="headerlink" title="4.1 依赖（dependence）"></a>4.1 依赖（dependence）</h4><p>如果一个类的方法使用或操纵另一个类的对象，我们就可以说一个类依赖于另一个类</p>
+<p>比如Order对象访问Account对象查看信用状态，这就是一个使用(“uses-a”)的关系。</p>
+<p>（尽可能减少相互依赖的类，做到低耦合）</p>
+<h4 id="4-2-聚合（aggregation）"><a href="#4-2-聚合（aggregation）" class="headerlink" title="4.2 聚合（aggregation）"></a>4.2 聚合（aggregation）</h4><p>类A的对象包含（”has-a”）类B的对象</p>
+<p>如一个Order对象就包含了一些Item对象</p>
+<h4 id="4-3-继承（inheritance）"><a href="#4-3-继承（inheritance）" class="headerlink" title="4.3 继承（inheritance）"></a>4.3 继承（inheritance）</h4><p>一个更特殊的类与一个更一般的类之间的关系</p>
+<p>也就是前面提到的扩展，比如现在我们定义一个加急订单RushOrder类，那么它是一个（”is-a”)Order类</p>
+<p>也就是有Order类继承而来。</p>
+<p>下图展示了上述的三种关系。</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200423LearnJava01.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>对象和类</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo-Permalink简化</title>
     <url>/posts/838443af.html</url>
     <content><![CDATA[<h1 id="Permalink简化"><a href="#Permalink简化" class="headerlink" title="Permalink简化"></a>Permalink简化</h1><p>在文档名有中文的时候，因为汉字会被转义，默认的永久链接会非常复杂，具体原因可以看这一篇文章</p>
@@ -267,6 +323,49 @@
       </tags>
   </entry>
   <entry>
+    <title>C++基本语法</title>
+    <url>/posts/6b599344.html</url>
+    <content><![CDATA[<h1 id="C-学习笔记"><a href="#C-学习笔记" class="headerlink" title="C++学习笔记"></a>C++学习笔记</h1><p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p>
+<a id="more"></a>
+<h1 id="一、-变量"><a href="#一、-变量" class="headerlink" title="一、 变量"></a>一、 变量</h1><h2 id="1-用sizeof运算符求某一类型或变量占据的字节数"><a href="#1-用sizeof运算符求某一类型或变量占据的字节数" class="headerlink" title="1. 用sizeof运算符求某一类型或变量占据的字节数"></a>1. 用sizeof运算符求某一类型或变量占据的字节数</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(a) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// sizeof运算符可以求变量占据的字节数</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 未初始化的变量，其值是不确定的</span></span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-数据类型的自动转换"><a href="#2-数据类型的自动转换" class="headerlink" title="2. 数据类型的自动转换"></a>2. 数据类型的自动转换</h2><h3 id="1-数"><a href="#1-数" class="headerlink" title="1. 数"></a>1. 数</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">11.34</span>; <span class="comment">// 11.34被自动转化为11后赋值给a</span></span><br><span class="line"><span class="keyword">int</span> b = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">double</span> d = b; <span class="comment">// d的值是30.0</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-字符类型与整型"><a href="#2-字符类型与整型" class="headerlink" title="2. 字符类型与整型"></a>2. 字符类型与整型</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> k = <span class="string">'a'</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, k); <span class="comment">// 输出97，即a的ASCII码</span></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">98</span>;</span><br><span class="line"><span class="keyword">char</span> k = n;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%c"</span>, k); <span class="comment">// 输出b</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-输入和输出"><a href="#3-输入和输出" class="headerlink" title="3. 输入和输出"></a>3. 输入和输出</h2><h4 id="1-scanf和printf"><a href="#1-scanf和printf" class="headerlink" title="1. scanf和printf"></a>1. scanf和printf</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt; //使用scanf和printf时需要使用该库</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">float</span> m;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%c%f"</span>, &amp;n, &amp;c, &amp;m);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %c %f\n"</span>, n, c, m);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用scanf可以一次读入多个不同类型的变量，输入各项用空格隔开<br>        注意在输入<strong>字符</strong>时，不会跳过空格（空格也会被当做字符读入）<br>        输入其它数据时，会跳过空格</p>
+<h4 id="2-cin和cout"><a href="#2-cin和cout" class="headerlink" title="2. cin和cout"></a>2. cin和cout</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">    <span class="keyword">while</span> ((c=<span class="built_in">cin</span>.get()) != EOF) &#123; </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; (<span class="keyword">char</span>) c; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用cin读入所有字符，包括空格和回车，EOF<br>        Mac（ctrl+D停止输入，ctrl+C停止程序)<br>        windows ctrl+Z停止</p>
+<h4 id="3-cin-amp-cout-scanf-amp-printf-比较"><a href="#3-cin-amp-cout-scanf-amp-printf-比较" class="headerlink" title="3. cin&amp;cout / scanf&amp;printf 比较"></a>3. cin&amp;cout / scanf&amp;printf 比较</h4><ul>
+<li>cin，cout速度慢，输入输出数据量大时用scanf/printf</li>
+<li>一个程序不要同时出现cin和scanf，cout和prinf</li>
+</ul>
+<h2 id="4-运算"><a href="#4-运算" class="headerlink" title="4. 运算"></a>4. 运算</h2><ol>
+<li>加、减、乘运算的溢出</li>
+</ol>
+<hr>
+<h1 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h1><h3 id="1-数组作为函数的参数传递"><a href="#1-数组作为函数的参数传递" class="headerlink" title="1. 数组作为函数的参数传递"></a>1. 数组作为函数的参数传递</h3><p>数组作为函数的参数时，是传引用的，即<strong>形参数组改变了，实参数组也会改变</strong></p>
+<p>二维数组作为函数的形参时，<strong>必须写明函数有多少列</strong>，不要写明有多少行</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintArray</span><span class="params">(<span class="keyword">int</span> a[][<span class="number">5</span>])</span> </span>&#123;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; a[<span class="number">4</span>][<span class="number">3</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>必须要写明列数，编译器才能够根据下标算出元素的地址</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$\color&#123;#F00&#125;&#123;a[i][j]的地址 = 数组首地址 + i \times N \times sizeof(a[0][0]) + j \times sizeof(a[0][0])&#125;$ (N是数组列数)</span><br></pre></td></tr></table></figure>
+<p>形参数组的首地址就是实参数组的首地址      </p>
+<h1 id="三、字符串"><a href="#三、字符串" class="headerlink" title="三、字符串"></a>三、字符串</h1><h2 id="1-字符串的形式"><a href="#1-字符串的形式" class="headerlink" title="1. 字符串的形式"></a>1. 字符串的形式</h2><h3 id="（1）字符串常量"><a href="#（1）字符串常量" class="headerlink" title="（1）字符串常量"></a>（1）字符串常量</h3><p>用双引号括起来的，如”China”, “C++ program”.</p>
+<p>字符串常量占据<strong>内存</strong>的字节数等于字符中字符数目加1，结尾多出字符’\0’.</p>
+<font color=#F00>但是字符串的长度不包含'\0'</font>
+
+<p>“”也是合法的·1字符串常量，称为空串，仍然占据一个字节的内存空间，存放’\0’</p>
+<h3 id="（2）存放于字符数组中，以’-0’结尾"><a href="#（2）存放于字符数组中，以’-0’结尾" class="headerlink" title="（2）存放于字符数组中，以’\0’结尾"></a>（2）存放于字符数组中，以’\0’结尾</h3><p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p>
+<p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p>
+<h3 id="（3）string对象。"><a href="#（3）string对象。" class="headerlink" title="（3）string对象。"></a>（3）string对象。</h3><p>string是C++标准模板库里的一个类，专门用于处理字符串</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>字符串,向量和数组</title>
     <url>/posts/869e4b19.html</url>
     <content><![CDATA[<h3 id="二、字符串，向量和数组"><a href="#二、字符串，向量和数组" class="headerlink" title="二、字符串，向量和数组"></a>二、字符串，向量和数组</h3><p>作用域操作符<code>::</code></p>
@@ -310,49 +409,6 @@
 <h4 id="3-迭代器"><a href="#3-迭代器" class="headerlink" title="3. 迭代器"></a>3. 迭代器</h4><p>访问元素的作用</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s = <span class="string">"abcde"</span>;</span><br><span class="line"><span class="keyword">if</span> (s.begin() != s.end()) &#123; <span class="comment">// 确保s非空</span></span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="4-数组"><a href="#4-数组" class="headerlink" title="4. 数组"></a>4. 数组</h4><h5 id="4-1-指针和数组"><a href="#4-1-指针和数组" class="headerlink" title="4.1 指针和数组"></a>4.1 指针和数组</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ia[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">p</span><span class="params">(ia)</span></span>; <span class="comment">// 整型指针，指向ia的第一个元素</span></span><br><span class="line">p++; <span class="comment">// 指向第一个元素</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>基础</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++基本语法</title>
-    <url>/posts/6b599344.html</url>
-    <content><![CDATA[<h1 id="C-学习笔记"><a href="#C-学习笔记" class="headerlink" title="C++学习笔记"></a>C++学习笔记</h1><p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p>
-<a id="more"></a>
-<h1 id="一、-变量"><a href="#一、-变量" class="headerlink" title="一、 变量"></a>一、 变量</h1><h2 id="1-用sizeof运算符求某一类型或变量占据的字节数"><a href="#1-用sizeof运算符求某一类型或变量占据的字节数" class="headerlink" title="1. 用sizeof运算符求某一类型或变量占据的字节数"></a>1. 用sizeof运算符求某一类型或变量占据的字节数</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(a) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// sizeof运算符可以求变量占据的字节数</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 未初始化的变量，其值是不确定的</span></span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="2-数据类型的自动转换"><a href="#2-数据类型的自动转换" class="headerlink" title="2. 数据类型的自动转换"></a>2. 数据类型的自动转换</h2><h3 id="1-数"><a href="#1-数" class="headerlink" title="1. 数"></a>1. 数</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">11.34</span>; <span class="comment">// 11.34被自动转化为11后赋值给a</span></span><br><span class="line"><span class="keyword">int</span> b = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">double</span> d = b; <span class="comment">// d的值是30.0</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-字符类型与整型"><a href="#2-字符类型与整型" class="headerlink" title="2. 字符类型与整型"></a>2. 字符类型与整型</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> k = <span class="string">'a'</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, k); <span class="comment">// 输出97，即a的ASCII码</span></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">98</span>;</span><br><span class="line"><span class="keyword">char</span> k = n;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%c"</span>, k); <span class="comment">// 输出b</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-输入和输出"><a href="#3-输入和输出" class="headerlink" title="3. 输入和输出"></a>3. 输入和输出</h2><h4 id="1-scanf和printf"><a href="#1-scanf和printf" class="headerlink" title="1. scanf和printf"></a>1. scanf和printf</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt; //使用scanf和printf时需要使用该库</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">float</span> m;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%c%f"</span>, &amp;n, &amp;c, &amp;m);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %c %f\n"</span>, n, c, m);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>用scanf可以一次读入多个不同类型的变量，输入各项用空格隔开<br>        注意在输入<strong>字符</strong>时，不会跳过空格（空格也会被当做字符读入）<br>        输入其它数据时，会跳过空格</p>
-<h4 id="2-cin和cout"><a href="#2-cin和cout" class="headerlink" title="2. cin和cout"></a>2. cin和cout</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">    <span class="keyword">while</span> ((c=<span class="built_in">cin</span>.get()) != EOF) &#123; </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; (<span class="keyword">char</span>) c; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用cin读入所有字符，包括空格和回车，EOF<br>        Mac（ctrl+D停止输入，ctrl+C停止程序)<br>        windows ctrl+Z停止</p>
-<h4 id="3-cin-amp-cout-scanf-amp-printf-比较"><a href="#3-cin-amp-cout-scanf-amp-printf-比较" class="headerlink" title="3. cin&amp;cout / scanf&amp;printf 比较"></a>3. cin&amp;cout / scanf&amp;printf 比较</h4><ul>
-<li>cin，cout速度慢，输入输出数据量大时用scanf/printf</li>
-<li>一个程序不要同时出现cin和scanf，cout和prinf</li>
-</ul>
-<h2 id="4-运算"><a href="#4-运算" class="headerlink" title="4. 运算"></a>4. 运算</h2><ol>
-<li>加、减、乘运算的溢出</li>
-</ol>
-<hr>
-<h1 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h1><h3 id="1-数组作为函数的参数传递"><a href="#1-数组作为函数的参数传递" class="headerlink" title="1. 数组作为函数的参数传递"></a>1. 数组作为函数的参数传递</h3><p>数组作为函数的参数时，是传引用的，即<strong>形参数组改变了，实参数组也会改变</strong></p>
-<p>二维数组作为函数的形参时，<strong>必须写明函数有多少列</strong>，不要写明有多少行</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintArray</span><span class="params">(<span class="keyword">int</span> a[][<span class="number">5</span>])</span> </span>&#123;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; a[<span class="number">4</span>][<span class="number">3</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>必须要写明列数，编译器才能够根据下标算出元素的地址</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$\color&#123;#F00&#125;&#123;a[i][j]的地址 = 数组首地址 + i \times N \times sizeof(a[0][0]) + j \times sizeof(a[0][0])&#125;$ (N是数组列数)</span><br></pre></td></tr></table></figure>
-<p>形参数组的首地址就是实参数组的首地址      </p>
-<h1 id="三、字符串"><a href="#三、字符串" class="headerlink" title="三、字符串"></a>三、字符串</h1><h2 id="1-字符串的形式"><a href="#1-字符串的形式" class="headerlink" title="1. 字符串的形式"></a>1. 字符串的形式</h2><h3 id="（1）字符串常量"><a href="#（1）字符串常量" class="headerlink" title="（1）字符串常量"></a>（1）字符串常量</h3><p>用双引号括起来的，如”China”, “C++ program”.</p>
-<p>字符串常量占据<strong>内存</strong>的字节数等于字符中字符数目加1，结尾多出字符’\0’.</p>
-<font color=#F00>但是字符串的长度不包含'\0'</font>
-
-<p>“”也是合法的·1字符串常量，称为空串，仍然占据一个字节的内存空间，存放’\0’</p>
-<h3 id="（2）存放于字符数组中，以’-0’结尾"><a href="#（2）存放于字符数组中，以’-0’结尾" class="headerlink" title="（2）存放于字符数组中，以’\0’结尾"></a>（2）存放于字符数组中，以’\0’结尾</h3><p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p>
-<p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p>
-<h3 id="（3）string对象。"><a href="#（3）string对象。" class="headerlink" title="（3）string对象。"></a>（3）string对象。</h3><p>string是C++标准模板库里的一个类，专门用于处理字符串</p>
 ]]></content>
       <categories>
         <category>C++</category>
