@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zhouzhuyan.com/about/index.html</loc>
+    
+    <lastmod>2020-09-02T08:21:05.522Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zhouzhuyan.com/posts/72e3b671.html</loc>
     
     <lastmod>2020-09-02T04:30:59.325Z</lastmod>
@@ -12,27 +19,6 @@
     <loc>https://zhouzhuyan.com/posts/ed34008.html</loc>
     
     <lastmod>2020-04-24T13:49:55.926Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zhouzhuyan.com/categories/index.html</loc>
-    
-    <lastmod>2020-04-16T16:31:30.086Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zhouzhuyan.com/about/index.html</loc>
-    
-    <lastmod>2020-04-16T16:31:19.062Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zhouzhuyan.com/tags/index.html</loc>
-    
-    <lastmod>2020-04-16T15:58:19.659Z</lastmod>
     
   </url>
   
@@ -61,13 +47,6 @@
     <loc>https://zhouzhuyan.com/posts/6b599344.html</loc>
     
     <lastmod>2020-04-06T16:40:48.049Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zhouzhuyan.com/projects/index.html</loc>
-    
-    <lastmod>2020-04-06T07:41:29.135Z</lastmod>
     
   </url>
   

@@ -131,177 +131,6 @@ categories:</code></pre></div>
       </tags>
   </entry>
   <entry>
-    <title>使用Github pages+Hexo 搭建个人博客</title>
-    <url>/posts/ae6c038e.html</url>
-    <content><![CDATA[<h1 id="Github-pages-Hexo-搭建个人博客"><a href="#Github-pages-Hexo-搭建个人博客" class="headerlink" title="Github pages + Hexo 搭建个人博客"></a>Github pages + Hexo 搭建个人博客</h1><p>2019年11月19日，我决定开始写<strong>博客</strong>，首先要用<em>github pages+hexo</em>搭建一个个人博客，其中的过程我就记录在这里面。</p>
-<a id="more"></a>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
-<li>注册一个 GitHub 账户</li>
-<li>安装 Node.js<br>下载链接<br> <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a><br> 下面这个是中文网，对于国内用户来说下载速度非常快。<br> <a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a><br> 推荐菜鸟教程关于node的安装教程以及简易的语法介绍<a href="https://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank" rel="noopener">https://www.runoob.com/nodejs/nodejs-install-setup.html</a><ol>
-<li>安装git</li>
-<li>markdown语法学习<br><a href="https://www.jianshu.com/p/191d1e21f7ed" target="_blank" rel="noopener">https://www.jianshu.com/p/191d1e21f7ed</a></li>
-<li>git语法学习<br>推荐廖雪峰的git教程<br><a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/896043488029600</a></li>
-</ol>
-</li>
-</ol>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在终端检查node和npm的版本情况</p>
-<div class="hljs"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>
-npm -v</code></pre></div>
-<p>然后输入命令安装hexo</p>
-<div class="hljs"><pre><code class="hljs avrasm">npm install -g hexo-<span class="hljs-keyword">cli</span></code></pre></div>
-<p>我使用的是Mac电脑，在这一步出现了问题，终端显示如下</p>
-<div class="hljs"><pre><code class="hljs coffeescript">rollbackFailedOptional verb <span class="hljs-built_in">npm</span>-session</code></pre></div>
-<p>然后我又等了一会儿，终端又报错了。</p>
-<div class="hljs"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> WARN checkPermissions Missing write access to /usr/local/lib/node_modules
-<span class="hljs-built_in">npm</span> ERR! code EACCES
-<span class="hljs-built_in">npm</span> ERR! syscall access
-<span class="hljs-built_in">npm</span> ERR! path /usr/local/lib/node_modules
-<span class="hljs-built_in">npm</span> ERR! errno <span class="hljs-number">-13</span>
-<span class="hljs-built_in">npm</span> ERR! Error: EACCES: permission denied, access <span class="hljs-string">'/usr/local/lib/node_modules'</span>
-<span class="hljs-built_in">npm</span> ERR!  [Error: EACCES: permission denied, access <span class="hljs-string">'/usr/local/lib/node_modules'</span>] &#123;
-<span class="hljs-built_in">npm</span> ERR!   stack: <span class="hljs-string">"Error: EACCES: permission denied, access '/usr/local/lib/node_modules'"</span>,
-<span class="hljs-built_in">npm</span> ERR!   errno: <span class="hljs-number">-13</span>,
-<span class="hljs-built_in">npm</span> ERR!   code: <span class="hljs-string">'EACCES'</span>,
-<span class="hljs-built_in">npm</span> ERR!   syscall: <span class="hljs-string">'access'</span>,
-<span class="hljs-built_in">npm</span> ERR!   path: <span class="hljs-string">'/usr/local/lib/node_modules'</span>
-<span class="hljs-built_in">npm</span> ERR! &#125;
-<span class="hljs-built_in">npm</span> ERR! 
-<span class="hljs-built_in">npm</span> ERR! The operation was rejected <span class="hljs-keyword">by</span> your operating system.
-<span class="hljs-built_in">npm</span> ERR! It <span class="hljs-keyword">is</span> likely you <span class="hljs-keyword">do</span> <span class="hljs-keyword">not</span> have the permissions to access <span class="hljs-keyword">this</span> file <span class="hljs-keyword">as</span> the current user
-<span class="hljs-built_in">npm</span> ERR! 
-<span class="hljs-built_in">npm</span> ERR! If you believe <span class="hljs-keyword">this</span> might be a permissions issue, please double-check the
-<span class="hljs-built_in">npm</span> ERR! permissions <span class="hljs-keyword">of</span> the file <span class="hljs-keyword">and</span> its containing directories, <span class="hljs-keyword">or</span> <span class="hljs-keyword">try</span> running
-<span class="hljs-built_in">npm</span> ERR! the command again <span class="hljs-keyword">as</span> root/Administrator.</code></pre></div>
-<p>根据官方文档，如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code>权限错误，要遵循由<a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#reinstall-npm-with-a-node-version-manager" target="_blank" rel="noopener">npmjs</a>发布的指导修复该问题。强烈建议不要使用 root、sudo 等方法覆盖权限。<br>根据要求，下载了<strong>nvm</strong>，并且在终端利用nvm下载了最新版本的node和更新了npm后，hexo下载成功了。（以下是下载和使用nvm的教程链接）<br><a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">https://github.com/nvm-sh/nvm</a>.        </p>
-<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><p>输入以下命令hexo就会出现在指定的文件夹中</p>
-<div class="hljs"><pre><code class="hljs properties"><span class="hljs-attr">hexo</span> <span class="hljs-string">init &lt;folder&gt;</span>
-<span class="hljs-attr">cd</span> <span class="hljs-string">&lt;folder&gt;</span>
-<span class="hljs-attr">npm</span> <span class="hljs-string">install</span></code></pre></div>
-<p>如果出现错误</p>
-<div class="hljs"><pre><code class="hljs java">-bash: syntax error near unexpected token `newline<span class="hljs-string">'</span></code></pre></div>
-<p>这是占位符的问题，将第一行命令的&lt;&gt;去除，再重新输入即可。</p>
-<p>到此，建站的基本操作就完成了。</p>
-<p>界面的设计等就可以由自己来操作了。放一个hexo的官方网站供大家参考。<br><a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a></p>
-<h2 id="创建Github远程仓库"><a href="#创建Github远程仓库" class="headerlink" title="创建Github远程仓库"></a>创建Github远程仓库</h2><p>注意仓库名为github的用户名.github.io，勾选readme<br><img src="https://img-blog.csdnimg.cn/20191123194438458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
-<p>创建之后，进入仓库，点击<strong>Settings</strong>按钮，然后翻到GitHub Pages的部分，点击网页链接，就能够看到一个简易的网页了。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191123194913735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
-<h2 id="部署hexo"><a href="#部署hexo" class="headerlink" title="部署hexo"></a>部署hexo</h2><p>进入本地的hexo文件，找到 <strong>_config.yml</strong>，打开后翻到最后，修改成</p>
-<div class="hljs"><pre><code class="hljs java">deploy:
-  type: git
-  repo:
-     gitHub: git<span class="hljs-meta">@github</span>.com:你的GitHub用户名/你的GitHub用户名.github.io.git
-  branch: master</code></pre></div>
-<p>repo后面的内容要修改成自己github仓库的SSH密匙。</p>
-<p>然后在终端中输入</p>
-<div class="hljs"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-deployer-git <span class="hljs-comment">--save</span></code></pre></div>
-<p>开始安装hexo-deploy-git，安装完成后，开始部署，在终端中输入</p>
-<div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo deploy</span></code></pre></div>
-<p>部署完成。</p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>这个时候，再次进入刚刚进入过的网页链接，就会看到一个船新版本的界面，也就是本地的hexo库已经部署到github上了。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191123195408260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>变量和基本类型</title>
-    <url>/posts/96db5496.html</url>
-    <content><![CDATA[<h3 id="变量和基本类型"><a href="#变量和基本类型" class="headerlink" title="变量和基本类型"></a>变量和基本类型</h3><h4 id="1-复合类型-Compound-type"><a href="#1-复合类型-Compound-type" class="headerlink" title="1. 复合类型(Compound type)"></a>1. 复合类型(Compound type)</h4><p>基于其它类型定义的类型</p>
-<h5 id="1-1-引用-Reference"><a href="#1-1-引用-Reference" class="headerlink" title="1.1 引用(Reference)"></a>1.1 引用(Reference)</h5><p><strong>引用</strong>为对象起了另外一个名字，引用类型引用另外一种类型。通过将声明符写成&amp;d的形式来定义引用类型，其中d是声明的变量名。</p>
-<a id="more"></a>
-<p>(在这里，引用指的是左值引用)</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">1024</span>;
-<span class="hljs-keyword">int</span> &amp;refval = ival; <span class="hljs-comment">// refval指向ival，是ival的另外一个名字</span>
-<span class="hljs-keyword">int</span> &amp;refVal2; <span class="hljs-comment">// 报错；引用必须被初始化</span></code></pre></div>
-<p>定义引用时，程序把引用和它的初始值<strong>绑定</strong>在一起，而不是将初始值拷贝给引用。（与初始化变量时不同的）</p>
-<p>无法令引用重新绑定到另一个对象，所以引用必须被<font color=red><strong>初始化</strong> </font></p>
-<ul>
-<li>引用即别名，它不是对象，而是为了一个已经存在的对象起了另外一个名字</li>
-</ul>
-<p>定义了一个引用之后，对其进行的所有操作都是在与之绑定的对象上进行的</p>
-<div class="hljs"><pre><code class="hljs cpp">refVal = <span class="hljs-number">2</span>;  <span class="hljs-comment">// 把2赋值给与refVal绑定的对象上，这里就是绑定到iVal上</span>
-<span class="hljs-keyword">int</span> ii = refVal;</code></pre></div>
-<p> 除了两种特殊情况，其它所有引用的类型都要与之绑定的对象严格匹配。不能够与字面值或表达式的计算结果绑定。</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> &amp;refVal4 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误：引用对象初始值必须是一个对象</span>
-<span class="hljs-keyword">double</span> dval = <span class="hljs-number">3.14</span>;
-<span class="hljs-keyword">int</span> &amp;refVal5 = dval; <span class="hljs-comment">// 错误：此处引用类型的初始值必须是int型对象</span></code></pre></div>
-<h5 id="1-2-指针"><a href="#1-2-指针" class="headerlink" title="1.2 指针"></a>1.2 指针</h5><p><strong>指针</strong>是指向另外一种类型的符合类型，与引用类似，指针实现了对其它对象的间接访问。</p>
-<p>不同：</p>
-<ul>
-<li>指针本身是一个对象</li>
-<li>指针无需在定义时赋初值</li>
-</ul>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *ip1; <span class="hljs-comment">// ip1是指向int对象的指针</span></code></pre></div>
-<h6 id="获取对象的地址"><a href="#获取对象的地址" class="headerlink" title="获取对象的地址"></a>获取对象的地址</h6><p>指针存放某个对象的地址。</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
-<span class="hljs-keyword">int</span> *p = &amp;ival; <span class="hljs-comment">// p是存放变量ival的地址，或者说p是指向引用的指针。</span></code></pre></div>
-<h6 id="指针值"><a href="#指针值" class="headerlink" title="指针值"></a>指针值</h6><p>指针的值（即地址）应该属于下列4中状态之一：</p>
-<ul>
-<li>指向一个对象</li>
-<li>指向紧邻对象所占空间的下一个位置</li>
-<li>空指针</li>
-<li>无效指针</li>
-</ul>
-<h6 id="利用指针访问对象"><a href="#利用指针访问对象" class="headerlink" title="利用指针访问对象"></a>利用指针访问对象</h6><p>如果指针指向了一个对象，可以使用<strong>解引用符</strong>（操作符*）来访问对象</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
-<span class="hljs-keyword">int</span> *p = &amp;ival;
-<span class="hljs-built_in">cout</span> &lt;&lt; *p <span class="hljs-comment">// 输出42</span>
-*p = <span class="hljs-number">0</span>;
-<span class="hljs-built_in">cout</span> &lt;&lt; *p <span class="hljs-comment">// 输出0，为*p赋值实际上是为p所指的对象赋值</span></code></pre></div>
-<h6 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h6><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *p1 = <span class="hljs-literal">nullptr</span>;
-<span class="hljs-keyword">int</span> *p2 = <span class="hljs-number">0</span>;
-<span class="hljs-keyword">int</span> *p3 = <span class="hljs-literal">NULL</span>; <span class="hljs-comment">// 需要头文件cstdlib</span></code></pre></div>
-<h6 id="void-指针"><a href="#void-指针" class="headerlink" title="void*指针"></a>void*指针</h6><p>用于存放任意对象的地址，不能直接操作void*指针所指的对象</p>
-<h6 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h6><h6 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h6><p>指针是对象，所以存在对指针的引用</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>;
-<span class="hljs-keyword">int</span> *p;
-<span class="hljs-keyword">int</span> *&amp;r = p;  <span class="hljs-comment">// r是一个对p的引用</span>
-r = &amp;i;  <span class="hljs-comment">// r引用了一个指针，因此给r赋值&amp;就是令p指向i</span>
-*r = <span class="hljs-number">0</span>;  <span class="hljs-comment">// 将i的值改为0</span></code></pre></div>
-<h4 id="2-const限定符"><a href="#2-const限定符" class="headerlink" title="2. const限定符"></a>2. const限定符</h4><p>值不能被改变，所以const对象必须被初始化</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> bufSize = <span class="hljs-number">512</span>; <span class="hljs-comment">// 输入缓冲区大小</span></code></pre></div>
-<p>如果要在多个文件之间共享const，必须在变量定义前加extern关键字</p>
-<h5 id="2-1-对const的引用"><a href="#2-1-对const的引用" class="headerlink" title="2.1 对const的引用"></a>2.1 对const的引用</h5><p>对常量的引用，不能够修改其绑定的对象</p>
-<p>对const的引用可以使一个并非const的对象，但是不能通过其改变值</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ci = <span class="hljs-number">1024</span>;
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r1 = ci; <span class="hljs-comment">// 正确</span>
-
-r1 = <span class="hljs-number">42</span>; <span class="hljs-comment">// 错误：r1是对常量的引用</span>
-<span class="hljs-keyword">int</span> &amp;r2 = ci; <span class="hljs-comment">// 错误：非常量引用指向一个常量对象</span>
-
-<span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>；
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r1 = i; <span class="hljs-comment">// 允许将const int&amp;绑定到一个普通的int上</span>
-r1 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误</span></code></pre></div>
-<h4 id="3-处理类型"><a href="#3-处理类型" class="headerlink" title="3. 处理类型"></a>3. 处理类型</h4><h5 id="3-1-类型别名"><a href="#3-1-类型别名" class="headerlink" title="3.1 类型别名"></a>3.1 类型别名</h5><p>某种类型的同义词，使得复杂的类型名字变得简单，易于理解和使用。</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">double</span> wages; <span class="hljs-comment">// wages是double的同义词</span>
-<span class="hljs-keyword">using</span> SI = Sales_item; <span class="hljs-comment">// SI是Sales_item的同义词</span></code></pre></div>
-<h5 id="3-2-auto类型说明符"><a href="#3-2-auto类型说明符" class="headerlink" title="3.2 auto类型说明符"></a>3.2 auto类型说明符</h5><p>让编译器分析表达式所属的类型，必须有初始值</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> item = val1 + val2; <span class="hljs-comment">// 由val1和val2相加的结果推断item的类型</span>
-<span class="hljs-comment">// auto一条声明语句只能有一个基础数据类型</span>
-<span class="hljs-keyword">auto</span> i = <span class="hljs-number">0</span>, *p = &amp;i;  <span class="hljs-comment">// 正确</span>
-<span class="hljs-keyword">auto</span> sz = <span class="hljs-number">0</span>, pi = <span class="hljs-number">3.14</span>; <span class="hljs-comment">// 错误，sz和pi的类型不一致</span></code></pre></div>
-<h4 id="4-自定义数据结构"><a href="#4-自定义数据结构" class="headerlink" title="4. 自定义数据结构"></a>4. 自定义数据结构</h4><p>将一组相关的数据元素组织起来然后使用他们的策略和方法</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Sales_data</span> &#123;</span>
-  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> bookNo;
-  <span class="hljs-keyword">unsigned</span> units_sold = <span class="hljs-number">0</span>;
-  <span class="hljs-keyword">double</span> revenue = <span class="hljs-number">0</span>;
-&#125;
-
-Sales_data accum;</code></pre></div>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>基础</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo个人博客绑定域名和配置SSL证书</title>
     <url>/posts/2cd2c226.html</url>
     <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
@@ -422,6 +251,253 @@ hexo s --debug // 在命令行生成debug信息</code></pre></div>
       </tags>
   </entry>
   <entry>
+    <title>变量和基本类型</title>
+    <url>/posts/96db5496.html</url>
+    <content><![CDATA[<h3 id="变量和基本类型"><a href="#变量和基本类型" class="headerlink" title="变量和基本类型"></a>变量和基本类型</h3><h4 id="1-复合类型-Compound-type"><a href="#1-复合类型-Compound-type" class="headerlink" title="1. 复合类型(Compound type)"></a>1. 复合类型(Compound type)</h4><p>基于其它类型定义的类型</p>
+<h5 id="1-1-引用-Reference"><a href="#1-1-引用-Reference" class="headerlink" title="1.1 引用(Reference)"></a>1.1 引用(Reference)</h5><p><strong>引用</strong>为对象起了另外一个名字，引用类型引用另外一种类型。通过将声明符写成&amp;d的形式来定义引用类型，其中d是声明的变量名。</p>
+<a id="more"></a>
+<p>(在这里，引用指的是左值引用)</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">1024</span>;
+<span class="hljs-keyword">int</span> &amp;refval = ival; <span class="hljs-comment">// refval指向ival，是ival的另外一个名字</span>
+<span class="hljs-keyword">int</span> &amp;refVal2; <span class="hljs-comment">// 报错；引用必须被初始化</span></code></pre></div>
+<p>定义引用时，程序把引用和它的初始值<strong>绑定</strong>在一起，而不是将初始值拷贝给引用。（与初始化变量时不同的）</p>
+<p>无法令引用重新绑定到另一个对象，所以引用必须被<font color=red><strong>初始化</strong> </font></p>
+<ul>
+<li>引用即别名，它不是对象，而是为了一个已经存在的对象起了另外一个名字</li>
+</ul>
+<p>定义了一个引用之后，对其进行的所有操作都是在与之绑定的对象上进行的</p>
+<div class="hljs"><pre><code class="hljs cpp">refVal = <span class="hljs-number">2</span>;  <span class="hljs-comment">// 把2赋值给与refVal绑定的对象上，这里就是绑定到iVal上</span>
+<span class="hljs-keyword">int</span> ii = refVal;</code></pre></div>
+<p> 除了两种特殊情况，其它所有引用的类型都要与之绑定的对象严格匹配。不能够与字面值或表达式的计算结果绑定。</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> &amp;refVal4 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误：引用对象初始值必须是一个对象</span>
+<span class="hljs-keyword">double</span> dval = <span class="hljs-number">3.14</span>;
+<span class="hljs-keyword">int</span> &amp;refVal5 = dval; <span class="hljs-comment">// 错误：此处引用类型的初始值必须是int型对象</span></code></pre></div>
+<h5 id="1-2-指针"><a href="#1-2-指针" class="headerlink" title="1.2 指针"></a>1.2 指针</h5><p><strong>指针</strong>是指向另外一种类型的符合类型，与引用类似，指针实现了对其它对象的间接访问。</p>
+<p>不同：</p>
+<ul>
+<li>指针本身是一个对象</li>
+<li>指针无需在定义时赋初值</li>
+</ul>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *ip1; <span class="hljs-comment">// ip1是指向int对象的指针</span></code></pre></div>
+<h6 id="获取对象的地址"><a href="#获取对象的地址" class="headerlink" title="获取对象的地址"></a>获取对象的地址</h6><p>指针存放某个对象的地址。</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
+<span class="hljs-keyword">int</span> *p = &amp;ival; <span class="hljs-comment">// p是存放变量ival的地址，或者说p是指向引用的指针。</span></code></pre></div>
+<h6 id="指针值"><a href="#指针值" class="headerlink" title="指针值"></a>指针值</h6><p>指针的值（即地址）应该属于下列4中状态之一：</p>
+<ul>
+<li>指向一个对象</li>
+<li>指向紧邻对象所占空间的下一个位置</li>
+<li>空指针</li>
+<li>无效指针</li>
+</ul>
+<h6 id="利用指针访问对象"><a href="#利用指针访问对象" class="headerlink" title="利用指针访问对象"></a>利用指针访问对象</h6><p>如果指针指向了一个对象，可以使用<strong>解引用符</strong>（操作符*）来访问对象</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
+<span class="hljs-keyword">int</span> *p = &amp;ival;
+<span class="hljs-built_in">cout</span> &lt;&lt; *p <span class="hljs-comment">// 输出42</span>
+*p = <span class="hljs-number">0</span>;
+<span class="hljs-built_in">cout</span> &lt;&lt; *p <span class="hljs-comment">// 输出0，为*p赋值实际上是为p所指的对象赋值</span></code></pre></div>
+<h6 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h6><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *p1 = <span class="hljs-literal">nullptr</span>;
+<span class="hljs-keyword">int</span> *p2 = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">int</span> *p3 = <span class="hljs-literal">NULL</span>; <span class="hljs-comment">// 需要头文件cstdlib</span></code></pre></div>
+<h6 id="void-指针"><a href="#void-指针" class="headerlink" title="void*指针"></a>void*指针</h6><p>用于存放任意对象的地址，不能直接操作void*指针所指的对象</p>
+<h6 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h6><h6 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h6><p>指针是对象，所以存在对指针的引用</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>;
+<span class="hljs-keyword">int</span> *p;
+<span class="hljs-keyword">int</span> *&amp;r = p;  <span class="hljs-comment">// r是一个对p的引用</span>
+r = &amp;i;  <span class="hljs-comment">// r引用了一个指针，因此给r赋值&amp;就是令p指向i</span>
+*r = <span class="hljs-number">0</span>;  <span class="hljs-comment">// 将i的值改为0</span></code></pre></div>
+<h4 id="2-const限定符"><a href="#2-const限定符" class="headerlink" title="2. const限定符"></a>2. const限定符</h4><p>值不能被改变，所以const对象必须被初始化</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> bufSize = <span class="hljs-number">512</span>; <span class="hljs-comment">// 输入缓冲区大小</span></code></pre></div>
+<p>如果要在多个文件之间共享const，必须在变量定义前加extern关键字</p>
+<h5 id="2-1-对const的引用"><a href="#2-1-对const的引用" class="headerlink" title="2.1 对const的引用"></a>2.1 对const的引用</h5><p>对常量的引用，不能够修改其绑定的对象</p>
+<p>对const的引用可以使一个并非const的对象，但是不能通过其改变值</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ci = <span class="hljs-number">1024</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r1 = ci; <span class="hljs-comment">// 正确</span>
+
+r1 = <span class="hljs-number">42</span>; <span class="hljs-comment">// 错误：r1是对常量的引用</span>
+<span class="hljs-keyword">int</span> &amp;r2 = ci; <span class="hljs-comment">// 错误：非常量引用指向一个常量对象</span>
+
+<span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>；
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r1 = i; <span class="hljs-comment">// 允许将const int&amp;绑定到一个普通的int上</span>
+r1 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误</span></code></pre></div>
+<h4 id="3-处理类型"><a href="#3-处理类型" class="headerlink" title="3. 处理类型"></a>3. 处理类型</h4><h5 id="3-1-类型别名"><a href="#3-1-类型别名" class="headerlink" title="3.1 类型别名"></a>3.1 类型别名</h5><p>某种类型的同义词，使得复杂的类型名字变得简单，易于理解和使用。</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">double</span> wages; <span class="hljs-comment">// wages是double的同义词</span>
+<span class="hljs-keyword">using</span> SI = Sales_item; <span class="hljs-comment">// SI是Sales_item的同义词</span></code></pre></div>
+<h5 id="3-2-auto类型说明符"><a href="#3-2-auto类型说明符" class="headerlink" title="3.2 auto类型说明符"></a>3.2 auto类型说明符</h5><p>让编译器分析表达式所属的类型，必须有初始值</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> item = val1 + val2; <span class="hljs-comment">// 由val1和val2相加的结果推断item的类型</span>
+<span class="hljs-comment">// auto一条声明语句只能有一个基础数据类型</span>
+<span class="hljs-keyword">auto</span> i = <span class="hljs-number">0</span>, *p = &amp;i;  <span class="hljs-comment">// 正确</span>
+<span class="hljs-keyword">auto</span> sz = <span class="hljs-number">0</span>, pi = <span class="hljs-number">3.14</span>; <span class="hljs-comment">// 错误，sz和pi的类型不一致</span></code></pre></div>
+<h4 id="4-自定义数据结构"><a href="#4-自定义数据结构" class="headerlink" title="4. 自定义数据结构"></a>4. 自定义数据结构</h4><p>将一组相关的数据元素组织起来然后使用他们的策略和方法</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Sales_data</span> &#123;</span>
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> bookNo;
+  <span class="hljs-keyword">unsigned</span> units_sold = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">double</span> revenue = <span class="hljs-number">0</span>;
+&#125;
+
+Sales_data accum;</code></pre></div>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Github pages+Hexo 搭建个人博客</title>
+    <url>/posts/ae6c038e.html</url>
+    <content><![CDATA[<h1 id="Github-pages-Hexo-搭建个人博客"><a href="#Github-pages-Hexo-搭建个人博客" class="headerlink" title="Github pages + Hexo 搭建个人博客"></a>Github pages + Hexo 搭建个人博客</h1><p>2019年11月19日，我决定开始写<strong>博客</strong>，首先要用<em>github pages+hexo</em>搭建一个个人博客，其中的过程我就记录在这里面。</p>
+<a id="more"></a>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>注册一个 GitHub 账户</li>
+<li>安装 Node.js<br>下载链接<br> <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a><br> 下面这个是中文网，对于国内用户来说下载速度非常快。<br> <a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a><br> 推荐菜鸟教程关于node的安装教程以及简易的语法介绍<a href="https://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank" rel="noopener">https://www.runoob.com/nodejs/nodejs-install-setup.html</a><ol>
+<li>安装git</li>
+<li>markdown语法学习<br><a href="https://www.jianshu.com/p/191d1e21f7ed" target="_blank" rel="noopener">https://www.jianshu.com/p/191d1e21f7ed</a></li>
+<li>git语法学习<br>推荐廖雪峰的git教程<br><a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/896043488029600</a></li>
+</ol>
+</li>
+</ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在终端检查node和npm的版本情况</p>
+<div class="hljs"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>
+npm -v</code></pre></div>
+<p>然后输入命令安装hexo</p>
+<div class="hljs"><pre><code class="hljs avrasm">npm install -g hexo-<span class="hljs-keyword">cli</span></code></pre></div>
+<p>我使用的是Mac电脑，在这一步出现了问题，终端显示如下</p>
+<div class="hljs"><pre><code class="hljs coffeescript">rollbackFailedOptional verb <span class="hljs-built_in">npm</span>-session</code></pre></div>
+<p>然后我又等了一会儿，终端又报错了。</p>
+<div class="hljs"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> WARN checkPermissions Missing write access to /usr/local/lib/node_modules
+<span class="hljs-built_in">npm</span> ERR! code EACCES
+<span class="hljs-built_in">npm</span> ERR! syscall access
+<span class="hljs-built_in">npm</span> ERR! path /usr/local/lib/node_modules
+<span class="hljs-built_in">npm</span> ERR! errno <span class="hljs-number">-13</span>
+<span class="hljs-built_in">npm</span> ERR! Error: EACCES: permission denied, access <span class="hljs-string">'/usr/local/lib/node_modules'</span>
+<span class="hljs-built_in">npm</span> ERR!  [Error: EACCES: permission denied, access <span class="hljs-string">'/usr/local/lib/node_modules'</span>] &#123;
+<span class="hljs-built_in">npm</span> ERR!   stack: <span class="hljs-string">"Error: EACCES: permission denied, access '/usr/local/lib/node_modules'"</span>,
+<span class="hljs-built_in">npm</span> ERR!   errno: <span class="hljs-number">-13</span>,
+<span class="hljs-built_in">npm</span> ERR!   code: <span class="hljs-string">'EACCES'</span>,
+<span class="hljs-built_in">npm</span> ERR!   syscall: <span class="hljs-string">'access'</span>,
+<span class="hljs-built_in">npm</span> ERR!   path: <span class="hljs-string">'/usr/local/lib/node_modules'</span>
+<span class="hljs-built_in">npm</span> ERR! &#125;
+<span class="hljs-built_in">npm</span> ERR! 
+<span class="hljs-built_in">npm</span> ERR! The operation was rejected <span class="hljs-keyword">by</span> your operating system.
+<span class="hljs-built_in">npm</span> ERR! It <span class="hljs-keyword">is</span> likely you <span class="hljs-keyword">do</span> <span class="hljs-keyword">not</span> have the permissions to access <span class="hljs-keyword">this</span> file <span class="hljs-keyword">as</span> the current user
+<span class="hljs-built_in">npm</span> ERR! 
+<span class="hljs-built_in">npm</span> ERR! If you believe <span class="hljs-keyword">this</span> might be a permissions issue, please double-check the
+<span class="hljs-built_in">npm</span> ERR! permissions <span class="hljs-keyword">of</span> the file <span class="hljs-keyword">and</span> its containing directories, <span class="hljs-keyword">or</span> <span class="hljs-keyword">try</span> running
+<span class="hljs-built_in">npm</span> ERR! the command again <span class="hljs-keyword">as</span> root/Administrator.</code></pre></div>
+<p>根据官方文档，如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code>权限错误，要遵循由<a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#reinstall-npm-with-a-node-version-manager" target="_blank" rel="noopener">npmjs</a>发布的指导修复该问题。强烈建议不要使用 root、sudo 等方法覆盖权限。<br>根据要求，下载了<strong>nvm</strong>，并且在终端利用nvm下载了最新版本的node和更新了npm后，hexo下载成功了。（以下是下载和使用nvm的教程链接）<br><a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">https://github.com/nvm-sh/nvm</a>.        </p>
+<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><p>输入以下命令hexo就会出现在指定的文件夹中</p>
+<div class="hljs"><pre><code class="hljs properties"><span class="hljs-attr">hexo</span> <span class="hljs-string">init &lt;folder&gt;</span>
+<span class="hljs-attr">cd</span> <span class="hljs-string">&lt;folder&gt;</span>
+<span class="hljs-attr">npm</span> <span class="hljs-string">install</span></code></pre></div>
+<p>如果出现错误</p>
+<div class="hljs"><pre><code class="hljs java">-bash: syntax error near unexpected token `newline<span class="hljs-string">'</span></code></pre></div>
+<p>这是占位符的问题，将第一行命令的&lt;&gt;去除，再重新输入即可。</p>
+<p>到此，建站的基本操作就完成了。</p>
+<p>界面的设计等就可以由自己来操作了。放一个hexo的官方网站供大家参考。<br><a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a></p>
+<h2 id="创建Github远程仓库"><a href="#创建Github远程仓库" class="headerlink" title="创建Github远程仓库"></a>创建Github远程仓库</h2><p>注意仓库名为github的用户名.github.io，勾选readme<br><img src="https://img-blog.csdnimg.cn/20191123194438458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
+<p>创建之后，进入仓库，点击<strong>Settings</strong>按钮，然后翻到GitHub Pages的部分，点击网页链接，就能够看到一个简易的网页了。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191123194913735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
+<h2 id="部署hexo"><a href="#部署hexo" class="headerlink" title="部署hexo"></a>部署hexo</h2><p>进入本地的hexo文件，找到 <strong>_config.yml</strong>，打开后翻到最后，修改成</p>
+<div class="hljs"><pre><code class="hljs java">deploy:
+  type: git
+  repo:
+     gitHub: git<span class="hljs-meta">@github</span>.com:你的GitHub用户名/你的GitHub用户名.github.io.git
+  branch: master</code></pre></div>
+<p>repo后面的内容要修改成自己github仓库的SSH密匙。</p>
+<p>然后在终端中输入</p>
+<div class="hljs"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-deployer-git <span class="hljs-comment">--save</span></code></pre></div>
+<p>开始安装hexo-deploy-git，安装完成后，开始部署，在终端中输入</p>
+<div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo deploy</span></code></pre></div>
+<p>部署完成。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>这个时候，再次进入刚刚进入过的网页链接，就会看到一个船新版本的界面，也就是本地的hexo库已经部署到github上了。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191123195408260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++基本语法</title>
+    <url>/posts/6b599344.html</url>
+    <content><![CDATA[<h1 id="C-学习笔记"><a href="#C-学习笔记" class="headerlink" title="C++学习笔记"></a>C++学习笔记</h1><p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p>
+<a id="more"></a>
+<h1 id="一、-变量"><a href="#一、-变量" class="headerlink" title="一、 变量"></a>一、 变量</h1><h2 id="1-用sizeof运算符求某一类型或变量占据的字节数"><a href="#1-用sizeof运算符求某一类型或变量占据的字节数" class="headerlink" title="1. 用sizeof运算符求某一类型或变量占据的字节数"></a>1. 用sizeof运算符求某一类型或变量占据的字节数</h2><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> a;
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(a) &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// sizeof运算符可以求变量占据的字节数</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 未初始化的变量，其值是不确定的</span>
+    <span class="hljs-keyword">int</span> b = <span class="hljs-number">1</span>;
+    <span class="hljs-built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="hljs-built_in">endl</span>;
+&#125;</code></pre></div>
+<h2 id="2-数据类型的自动转换"><a href="#2-数据类型的自动转换" class="headerlink" title="2. 数据类型的自动转换"></a>2. 数据类型的自动转换</h2><h3 id="1-数"><a href="#1-数" class="headerlink" title="1. 数"></a>1. 数</h3><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> a = <span class="hljs-number">11.34</span>; <span class="hljs-comment">// 11.34被自动转化为11后赋值给a</span>
+<span class="hljs-keyword">int</span> b = <span class="hljs-number">30</span>;
+<span class="hljs-keyword">double</span> d = b; <span class="hljs-comment">// d的值是30.0</span></code></pre></div>
+<h3 id="2-字符类型与整型"><a href="#2-字符类型与整型" class="headerlink" title="2. 字符类型与整型"></a>2. 字符类型与整型</h3><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> k = <span class="hljs-string">'a'</span>;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, k); <span class="hljs-comment">// 输出97，即a的ASCII码</span>
+<span class="hljs-keyword">int</span> n = <span class="hljs-number">98</span>;
+<span class="hljs-keyword">char</span> k = n;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>, k); <span class="hljs-comment">// 输出b</span></code></pre></div>
+<h2 id="3-输入和输出"><a href="#3-输入和输出" class="headerlink" title="3. 输入和输出"></a>3. 输入和输出</h2><h4 id="1-scanf和printf"><a href="#1-scanf和printf" class="headerlink" title="1. scanf和printf"></a>1. scanf和printf</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt; //使用scanf和printf时需要使用该库</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> n;
+    <span class="hljs-keyword">char</span> c;
+    <span class="hljs-keyword">float</span> m;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%c%f"</span>, &amp;n, &amp;c, &amp;m);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %c %f\n"</span>, n, c, m);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>用scanf可以一次读入多个不同类型的变量，输入各项用空格隔开<br>        注意在输入<strong>字符</strong>时，不会跳过空格（空格也会被当做字符读入）<br>        输入其它数据时，会跳过空格</p>
+<h4 id="2-cin和cout"><a href="#2-cin和cout" class="headerlink" title="2. cin和cout"></a>2. cin和cout</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> c;
+    <span class="hljs-keyword">while</span> ((c=<span class="hljs-built_in">cin</span>.get()) != EOF) &#123; 
+        <span class="hljs-built_in">cout</span> &lt;&lt; (<span class="hljs-keyword">char</span>) c; 
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>使用cin读入所有字符，包括空格和回车，EOF<br>        Mac（ctrl+D停止输入，ctrl+C停止程序)<br>        windows ctrl+Z停止</p>
+<h4 id="3-cin-amp-cout-scanf-amp-printf-比较"><a href="#3-cin-amp-cout-scanf-amp-printf-比较" class="headerlink" title="3. cin&amp;cout / scanf&amp;printf 比较"></a>3. cin&amp;cout / scanf&amp;printf 比较</h4><ul>
+<li>cin，cout速度慢，输入输出数据量大时用scanf/printf</li>
+<li>一个程序不要同时出现cin和scanf，cout和prinf</li>
+</ul>
+<h2 id="4-运算"><a href="#4-运算" class="headerlink" title="4. 运算"></a>4. 运算</h2><ol>
+<li>加、减、乘运算的溢出</li>
+</ol>
+<hr>
+<h1 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h1><h3 id="1-数组作为函数的参数传递"><a href="#1-数组作为函数的参数传递" class="headerlink" title="1. 数组作为函数的参数传递"></a>1. 数组作为函数的参数传递</h3><p>数组作为函数的参数时，是传引用的，即<strong>形参数组改变了，实参数组也会改变</strong></p>
+<p>二维数组作为函数的形参时，<strong>必须写明函数有多少列</strong>，不要写明有多少行</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[][<span class="hljs-number">5</span>])</span> </span>&#123;
+  <span class="hljs-built_in">cout</span> &lt;&lt; a[<span class="hljs-number">4</span>][<span class="hljs-number">3</span>];
+&#125;</code></pre></div>
+<p>必须要写明列数，编译器才能够根据下标算出元素的地址</p>
+<div class="hljs"><pre><code class="hljs markdown">$\color&#123;#F00&#125;&#123;a[<span class="hljs-string">i</span>][<span class="hljs-symbol">j</span>]的地址 = 数组首地址 + i \times N \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>]) + j \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>])&#125;$ (N是数组列数)</code></pre></div>
+<p>形参数组的首地址就是实参数组的首地址      </p>
+<h1 id="三、字符串"><a href="#三、字符串" class="headerlink" title="三、字符串"></a>三、字符串</h1><h2 id="1-字符串的形式"><a href="#1-字符串的形式" class="headerlink" title="1. 字符串的形式"></a>1. 字符串的形式</h2><h3 id="（1）字符串常量"><a href="#（1）字符串常量" class="headerlink" title="（1）字符串常量"></a>（1）字符串常量</h3><p>用双引号括起来的，如”China”, “C++ program”.</p>
+<p>字符串常量占据<strong>内存</strong>的字节数等于字符中字符数目加1，结尾多出字符’\0’.</p>
+<font color=#F00>但是字符串的长度不包含'\0'</font>
+
+<p>“”也是合法的·1字符串常量，称为空串，仍然占据一个字节的内存空间，存放’\0’</p>
+<h3 id="（2）存放于字符数组中，以’-0’结尾"><a href="#（2）存放于字符数组中，以’-0’结尾" class="headerlink" title="（2）存放于字符数组中，以’\0’结尾"></a>（2）存放于字符数组中，以’\0’结尾</h3><p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p>
+<p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p>
+<h3 id="（3）string对象。"><a href="#（3）string对象。" class="headerlink" title="（3）string对象。"></a>（3）string对象。</h3><p>string是C++标准模板库里的一个类，专门用于处理字符串</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>字符串,向量和数组</title>
     <url>/posts/869e4b19.html</url>
     <content><![CDATA[<h3 id="二、字符串，向量和数组"><a href="#二、字符串，向量和数组" class="headerlink" title="二、字符串，向量和数组"></a>二、字符串，向量和数组</h3><p>作用域操作符<code>::</code></p>
@@ -492,214 +568,6 @@ v[n]; <span class="hljs-comment">// 注意下标只能访问，但是不能够�
 <h4 id="4-数组"><a href="#4-数组" class="headerlink" title="4. 数组"></a>4. 数组</h4><h5 id="4-1-指针和数组"><a href="#4-1-指针和数组" class="headerlink" title="4.1 指针和数组"></a>4.1 指针和数组</h5><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ia[] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;
 <span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">p</span><span class="hljs-params">(ia)</span></span>; <span class="hljs-comment">// 整型指针，指向ia的第一个元素</span>
 p++; <span class="hljs-comment">// 指向第一个元素</span></code></pre></div>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>基础</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>策略模式</title>
-    <url>/posts/72e3b671.html</url>
-    <content><![CDATA[<h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><blockquote>
-<p>问题：<br>假设有一个模拟鸭子的游戏，游戏中拥有各种鸭子，我们设计了一个鸭子的超类，并且让各种鸭子，比如红头鸭，橡皮鸭等，继承它。<br>现在，我们需要更新这个游戏，使得鸭子可以飞起来，该怎么做？</p>
-</blockquote>
-<h2 id="使用继承？"><a href="#使用继承？" class="headerlink" title="使用继承？"></a>使用继承？</h2><p>如果依然使用继承，在超类中添加一个fly()方法，会出现不适合该行为的子类也具有该行为的问题，比如橡皮鸭就不会飞，但继承的做法使得它也可以飞起来。<br><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200902-01.png" srcset="/img/loading.gif" alt=""></p>
-<p>如果选择覆盖<code>fly()</code>方法，那么在后续的更新中，我们需要不断地检查可能需要覆盖的<code>fly()</code>方法。<br>所以使用继承来提供行为，会造成代码在多个子类最终重复，复用性差，难以知道鸭子的全部行为，运行时的行为不容易改变等问题。</p>
-<h2 id="使用接口？"><a href="#使用接口？" class="headerlink" title="使用接口？"></a>使用接口？</h2><p>如果抽象出一个<code>Flyable</code>接口，只有会飞的鸭子才实现这个接口呢？<br>设想一下，如果我们有上百种会飞的鸭子，那么就会造成大量的代码重复，每个子类中都要实现一次<code>fly()</code>方法，而且代码无法复用，如果我们需要修改这个方法，想象一下，这简直就是一场灾难。</p>
-<h2 id="策略模式实现"><a href="#策略模式实现" class="headerlink" title="策略模式实现"></a>策略模式实现</h2><p>软件开发过程中总是伴随着变更。<br><strong>设计原则</strong></p>
-<blockquote>
-<p>找出应用中可能需要变化之处，把它们独立出来，不要和那些不需要变化的代码放在一起。<br>也就是说我们把会变化的部分取出并封装起来，以便以后的改动和扩充。</p>
-</blockquote>
-<h3 id="分离变化与不变的部分"><a href="#分离变化与不变的部分" class="headerlink" title="分离变化与不变的部分"></a>分离变化与不变的部分</h3><p>在鸭子类中，我们可以发现<code>fly()</code>和<code>quack()</code>两个方法经常需要修改，那么我们就可以建立两组远离<code>Duck</code>类的类，一个与<code>fly</code>相关，一个与<code>quack</code>相关，每一组类实现各自的动作，比如让一个类实现“呱呱叫”，一个类实现“吱吱叫”，还有一个类实现“安静”</p>
-<h3 id="设计行为"><a href="#设计行为" class="headerlink" title="设计行为"></a>设计行为</h3><p><strong>设计原则</strong></p>
-<blockquote>
-<p>针对接口编程，而不是针对实现编程<br>用接口代表每个行为，鸭子类不会实现<code>Flying</code>的接口，而是制造一组专门的类来实现<code>FlyBahavior</code></p>
-</blockquote>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span></span>;
-&#125;</code></pre></div>
-<h3 id="实现行为"><a href="#实现行为" class="headerlink" title="实现行为"></a>实现行为</h3><p>现在有一个<code>FlyBehavior</code>接口，还有对应的类，负责实现具体的行为。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200902-02.png" srcset="/img/loading.gif" alt=""></p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyWithWings</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"I'm flying."</span>);
-    &#125;
-&#125;</code></pre></div>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyNoWay</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"I can't fly"</span>);
-    &#125;
-&#125;</code></pre></div>
-<h3 id="整合行为"><a href="#整合行为" class="headerlink" title="整合行为"></a>整合行为</h3><p>鸭子将飞行的动作<strong>委托</strong>给别人处理，而不是在鸭子类内部定义飞行方法。<br>在鸭子类中加入实例变量<code>flyBahavior</code>，声明为接口类型。</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Duck</span> </span>&#123;
-    FlyBehavior flyBehavior;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">performFly</span><span class="hljs-params">()</span> </span>&#123;
-        flyBehavior.fly();
-    &#125;
-&#125;</code></pre></div>
-<p>每个鸭子对象都会动态的设置这些变量以在运行时引用正确的类型。</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MallardDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MallardDuck</span><span class="hljs-params">()</span> </span>&#123;
-        flyBehavior = <span class="hljs-keyword">new</span> FlyWithWings(); <span class="hljs-comment">// 使用FlyWithWings作为FlyBehavior类型</span>
-    &#125;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"I'm a real Mallard duck."</span>);
-    &#125;
-&#125;</code></pre></div>
-<p>测试</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        Duck mallard = <span class="hljs-keyword">new</span> MallardDuck();
-        mallard.performFly();
-    &#125;
-&#125;
-<span class="hljs-comment">// Output: I'm flying.</span></code></pre></div>
-<h3 id="动态设定行为"><a href="#动态设定行为" class="headerlink" title="动态设定行为"></a>动态设定行为</h3><p>如果想要在运行时改变鸭子的行为，只需要调用鸭子的<code>setter</code>方法就可以了。<br>我们在鸭子类中增加设定方法</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setFlyBehavior</span><span class="hljs-params">(FlyBehavior fb)</span> </span>&#123;
-        flyBehavior = fb;
-&#125;</code></pre></div>
-<p>创造一个新的类模型鸭</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModelDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ModelDuck</span><span class="hljs-params">()</span> </span>&#123;
-        flyBehavior = <span class="hljs-keyword">new</span> FlyNoWay();
-    &#125;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"I'm a model duck."</span>);
-    &#125;
-&#125;</code></pre></div>
-<p>建立一个新的<code>FlyBehavior</code>类型</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyRocketPowered</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"I'm flying with a rocket."</span>);
-    &#125;
-&#125;</code></pre></div>
-<p>测试<br>调用<code>setter</code>方法，改变了模型鸭的飞行行为</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        Duck model = <span class="hljs-keyword">new</span> ModelDuck();
-        model.performFly();;
-        model.setFlyBehavior(<span class="hljs-keyword">new</span> FlyRocketPowered());
-        model.performFly();
-    &#125;
-&#125;
-<span class="hljs-comment">/* Output:
-I can't fly;
-I'm flying with a rocket.
-*/</span></code></pre></div>
-<p>每一个鸭子都<strong>有一个(HAS-A)</strong><code>FlyBahavior</code>，将飞行委托给它处理。<br><strong>设计原则</strong></p>
-<blockquote>
-<p>多用组合，少用继承<br>使用组合建立系统具有很大的弹性，可以将算法族封装成类，还可以在运行时动态地改变行为。</p>
-</blockquote>
-<h2 id="策略模式小结"><a href="#策略模式小结" class="headerlink" title="策略模式小结"></a>策略模式小结</h2><h3 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h3><p>定义一系列算法，把它们一个个<strong>封装</strong>起来，并且使它们可以相互替换。使得算法可以<strong>独立</strong>于它的客户变化。</p>
-<h3 id="适用"><a href="#适用" class="headerlink" title="适用"></a>适用</h3><ol>
-<li>许多相关的类仅仅只是行为有差别，比如鸭子类中的飞行</li>
-<li>需要使用一个算法的不同变体</li>
-<li>算法使用客户不应该知道的数据</li>
-<li>一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现（switch或if）</li>
-</ol>
-<h3 id="结构与参与者"><a href="#结构与参与者" class="headerlink" title="结构与参与者"></a>结构与参与者</h3><p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200902-04.png" srcset="/img/loading.gif" alt=""></p>
-<p><strong>Strategy</strong> (策略)<br>定义所有支持的算法的公共接口，Context使用这个接口来调用ConcreteStrategy定义的算法，比如<code>FlyBehavior</code>就是一个策略<br><strong>ConcreteStrategy</strong>(具体策略)<br>以Strategy接口实现某具体的算法，比如<code>FlyWithWings</code>,<code>FlyNoWay</code>等<br><strong>Context</strong> (上下文)</p>
-<ul>
-<li>用一个ConcreteStrategy对象来配置</li>
-<li>维护一个对Strategy对象的引用</li>
-<li>可定义一个接口让Strategy来访问它的数据<br>比如<code>Duck</code>类</li>
-</ul>
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ol>
-<li><strong>相关算法系列</strong> Strategy类层次为Context定义了一系列可供复用的算法或行为</li>
-<li><strong>替代继承的方法</strong> 使用继承可以直接生成一个Context的子类，给它不同的行为，但这样会使得Context难以理解，维护和扩展，不能动态改变算法。而将算法封装在独立的Strategy类中使得我们可以独立于Context改变它，易于理解，修改和扩展。</li>
-<li><strong>消除可一些条件语句</strong> 含有许多条件语句的代码通常需要使用策略模式</li>
-<li><strong>实现的选择</strong> 策略模式可以提供相同行为的不同实现供客户选择</li>
-</ol>
-<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ol>
-<li><strong>客户必须了解不同的策略</strong> 需要向客户暴露具体问题，所以只有当不同行为的变体与客户有关时，才使用策略模式</li>
-<li><strong>Strategy和Context之间的通信开销</strong></li>
-<li>增加了对象的数目</li>
-</ol>
-]]></content>
-      <categories>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>策略模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++基本语法</title>
-    <url>/posts/6b599344.html</url>
-    <content><![CDATA[<h1 id="C-学习笔记"><a href="#C-学习笔记" class="headerlink" title="C++学习笔记"></a>C++学习笔记</h1><p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p>
-<a id="more"></a>
-<h1 id="一、-变量"><a href="#一、-变量" class="headerlink" title="一、 变量"></a>一、 变量</h1><h2 id="1-用sizeof运算符求某一类型或变量占据的字节数"><a href="#1-用sizeof运算符求某一类型或变量占据的字节数" class="headerlink" title="1. 用sizeof运算符求某一类型或变量占据的字节数"></a>1. 用sizeof运算符求某一类型或变量占据的字节数</h2><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> a;
-    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(a) &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// sizeof运算符可以求变量占据的字节数</span>
-    <span class="hljs-built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 未初始化的变量，其值是不确定的</span>
-    <span class="hljs-keyword">int</span> b = <span class="hljs-number">1</span>;
-    <span class="hljs-built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="hljs-built_in">endl</span>;
-&#125;</code></pre></div>
-<h2 id="2-数据类型的自动转换"><a href="#2-数据类型的自动转换" class="headerlink" title="2. 数据类型的自动转换"></a>2. 数据类型的自动转换</h2><h3 id="1-数"><a href="#1-数" class="headerlink" title="1. 数"></a>1. 数</h3><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> a = <span class="hljs-number">11.34</span>; <span class="hljs-comment">// 11.34被自动转化为11后赋值给a</span>
-<span class="hljs-keyword">int</span> b = <span class="hljs-number">30</span>;
-<span class="hljs-keyword">double</span> d = b; <span class="hljs-comment">// d的值是30.0</span></code></pre></div>
-<h3 id="2-字符类型与整型"><a href="#2-字符类型与整型" class="headerlink" title="2. 字符类型与整型"></a>2. 字符类型与整型</h3><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> k = <span class="hljs-string">'a'</span>;
-<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, k); <span class="hljs-comment">// 输出97，即a的ASCII码</span>
-<span class="hljs-keyword">int</span> n = <span class="hljs-number">98</span>;
-<span class="hljs-keyword">char</span> k = n;
-<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>, k); <span class="hljs-comment">// 输出b</span></code></pre></div>
-<h2 id="3-输入和输出"><a href="#3-输入和输出" class="headerlink" title="3. 输入和输出"></a>3. 输入和输出</h2><h4 id="1-scanf和printf"><a href="#1-scanf和printf" class="headerlink" title="1. scanf和printf"></a>1. scanf和printf</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt; //使用scanf和printf时需要使用该库</span></span>
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> n;
-    <span class="hljs-keyword">char</span> c;
-    <span class="hljs-keyword">float</span> m;
-    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%c%f"</span>, &amp;n, &amp;c, &amp;m);
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %c %f\n"</span>, n, c, m);
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
-<p>用scanf可以一次读入多个不同类型的变量，输入各项用空格隔开<br>        注意在输入<strong>字符</strong>时，不会跳过空格（空格也会被当做字符读入）<br>        输入其它数据时，会跳过空格</p>
-<h4 id="2-cin和cout"><a href="#2-cin和cout" class="headerlink" title="2. cin和cout"></a>2. cin和cout</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> c;
-    <span class="hljs-keyword">while</span> ((c=<span class="hljs-built_in">cin</span>.get()) != EOF) &#123; 
-        <span class="hljs-built_in">cout</span> &lt;&lt; (<span class="hljs-keyword">char</span>) c; 
-    &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
-<p>使用cin读入所有字符，包括空格和回车，EOF<br>        Mac（ctrl+D停止输入，ctrl+C停止程序)<br>        windows ctrl+Z停止</p>
-<h4 id="3-cin-amp-cout-scanf-amp-printf-比较"><a href="#3-cin-amp-cout-scanf-amp-printf-比较" class="headerlink" title="3. cin&amp;cout / scanf&amp;printf 比较"></a>3. cin&amp;cout / scanf&amp;printf 比较</h4><ul>
-<li>cin，cout速度慢，输入输出数据量大时用scanf/printf</li>
-<li>一个程序不要同时出现cin和scanf，cout和prinf</li>
-</ul>
-<h2 id="4-运算"><a href="#4-运算" class="headerlink" title="4. 运算"></a>4. 运算</h2><ol>
-<li>加、减、乘运算的溢出</li>
-</ol>
-<hr>
-<h1 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h1><h3 id="1-数组作为函数的参数传递"><a href="#1-数组作为函数的参数传递" class="headerlink" title="1. 数组作为函数的参数传递"></a>1. 数组作为函数的参数传递</h3><p>数组作为函数的参数时，是传引用的，即<strong>形参数组改变了，实参数组也会改变</strong></p>
-<p>二维数组作为函数的形参时，<strong>必须写明函数有多少列</strong>，不要写明有多少行</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[][<span class="hljs-number">5</span>])</span> </span>&#123;
-  <span class="hljs-built_in">cout</span> &lt;&lt; a[<span class="hljs-number">4</span>][<span class="hljs-number">3</span>];
-&#125;</code></pre></div>
-<p>必须要写明列数，编译器才能够根据下标算出元素的地址</p>
-<div class="hljs"><pre><code class="hljs markdown">$\color&#123;#F00&#125;&#123;a[<span class="hljs-string">i</span>][<span class="hljs-symbol">j</span>]的地址 = 数组首地址 + i \times N \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>]) + j \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>])&#125;$ (N是数组列数)</code></pre></div>
-<p>形参数组的首地址就是实参数组的首地址      </p>
-<h1 id="三、字符串"><a href="#三、字符串" class="headerlink" title="三、字符串"></a>三、字符串</h1><h2 id="1-字符串的形式"><a href="#1-字符串的形式" class="headerlink" title="1. 字符串的形式"></a>1. 字符串的形式</h2><h3 id="（1）字符串常量"><a href="#（1）字符串常量" class="headerlink" title="（1）字符串常量"></a>（1）字符串常量</h3><p>用双引号括起来的，如”China”, “C++ program”.</p>
-<p>字符串常量占据<strong>内存</strong>的字节数等于字符中字符数目加1，结尾多出字符’\0’.</p>
-<font color=#F00>但是字符串的长度不包含'\0'</font>
-
-<p>“”也是合法的·1字符串常量，称为空串，仍然占据一个字节的内存空间，存放’\0’</p>
-<h3 id="（2）存放于字符数组中，以’-0’结尾"><a href="#（2）存放于字符数组中，以’-0’结尾" class="headerlink" title="（2）存放于字符数组中，以’\0’结尾"></a>（2）存放于字符数组中，以’\0’结尾</h3><p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p>
-<p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p>
-<h3 id="（3）string对象。"><a href="#（3）string对象。" class="headerlink" title="（3）string对象。"></a>（3）string对象。</h3><p>string是C++标准模板库里的一个类，专门用于处理字符串</p>
 ]]></content>
       <categories>
         <category>C++</category>
@@ -896,6 +764,138 @@ I'm flying with a rocket.
       </categories>
       <tags>
         <tag>概率论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>策略模式</title>
+    <url>/posts/72e3b671.html</url>
+    <content><![CDATA[<h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><blockquote>
+<p>问题：<br>假设有一个模拟鸭子的游戏，游戏中拥有各种鸭子，我们设计了一个鸭子的超类，并且让各种鸭子，比如红头鸭，橡皮鸭等，继承它。<br>现在，我们需要更新这个游戏，使得鸭子可以飞起来，该怎么做？</p>
+</blockquote>
+<h2 id="使用继承？"><a href="#使用继承？" class="headerlink" title="使用继承？"></a>使用继承？</h2><p>如果依然使用继承，在超类中添加一个fly()方法，会出现不适合该行为的子类也具有该行为的问题，比如橡皮鸭就不会飞，但继承的做法使得它也可以飞起来。<br><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200902-01.png" srcset="/img/loading.gif" alt=""></p>
+<p>如果选择覆盖<code>fly()</code>方法，那么在后续的更新中，我们需要不断地检查可能需要覆盖的<code>fly()</code>方法。<br>所以使用继承来提供行为，会造成代码在多个子类最终重复，复用性差，难以知道鸭子的全部行为，运行时的行为不容易改变等问题。</p>
+<h2 id="使用接口？"><a href="#使用接口？" class="headerlink" title="使用接口？"></a>使用接口？</h2><p>如果抽象出一个<code>Flyable</code>接口，只有会飞的鸭子才实现这个接口呢？<br>设想一下，如果我们有上百种会飞的鸭子，那么就会造成大量的代码重复，每个子类中都要实现一次<code>fly()</code>方法，而且代码无法复用，如果我们需要修改这个方法，想象一下，这简直就是一场灾难。</p>
+<h2 id="策略模式实现"><a href="#策略模式实现" class="headerlink" title="策略模式实现"></a>策略模式实现</h2><p>软件开发过程中总是伴随着变更。<br><strong>设计原则</strong></p>
+<blockquote>
+<p>找出应用中可能需要变化之处，把它们独立出来，不要和那些不需要变化的代码放在一起。<br>也就是说我们把会变化的部分取出并封装起来，以便以后的改动和扩充。</p>
+</blockquote>
+<h3 id="分离变化与不变的部分"><a href="#分离变化与不变的部分" class="headerlink" title="分离变化与不变的部分"></a>分离变化与不变的部分</h3><p>在鸭子类中，我们可以发现<code>fly()</code>和<code>quack()</code>两个方法经常需要修改，那么我们就可以建立两组远离<code>Duck</code>类的类，一个与<code>fly</code>相关，一个与<code>quack</code>相关，每一组类实现各自的动作，比如让一个类实现“呱呱叫”，一个类实现“吱吱叫”，还有一个类实现“安静”</p>
+<h3 id="设计行为"><a href="#设计行为" class="headerlink" title="设计行为"></a>设计行为</h3><p><strong>设计原则</strong></p>
+<blockquote>
+<p>针对接口编程，而不是针对实现编程<br>用接口代表每个行为，鸭子类不会实现<code>Flying</code>的接口，而是制造一组专门的类来实现<code>FlyBahavior</code></p>
+</blockquote>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre></div>
+<h3 id="实现行为"><a href="#实现行为" class="headerlink" title="实现行为"></a>实现行为</h3><p>现在有一个<code>FlyBehavior</code>接口，还有对应的类，负责实现具体的行为。</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200902-02.png" srcset="/img/loading.gif" alt=""></p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyWithWings</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">"I'm flying."</span>);
+    &#125;
+&#125;</code></pre></div>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyNoWay</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">"I can't fly"</span>);
+    &#125;
+&#125;</code></pre></div>
+<h3 id="整合行为"><a href="#整合行为" class="headerlink" title="整合行为"></a>整合行为</h3><p>鸭子将飞行的动作<strong>委托</strong>给别人处理，而不是在鸭子类内部定义飞行方法。<br>在鸭子类中加入实例变量<code>flyBahavior</code>，声明为接口类型。</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Duck</span> </span>&#123;
+    FlyBehavior flyBehavior;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">performFly</span><span class="hljs-params">()</span> </span>&#123;
+        flyBehavior.fly();
+    &#125;
+&#125;</code></pre></div>
+<p>每个鸭子对象都会动态的设置这些变量以在运行时引用正确的类型。</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MallardDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MallardDuck</span><span class="hljs-params">()</span> </span>&#123;
+        flyBehavior = <span class="hljs-keyword">new</span> FlyWithWings(); <span class="hljs-comment">// 使用FlyWithWings作为FlyBehavior类型</span>
+    &#125;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">"I'm a real Mallard duck."</span>);
+    &#125;
+&#125;</code></pre></div>
+<p>测试</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        Duck mallard = <span class="hljs-keyword">new</span> MallardDuck();
+        mallard.performFly();
+    &#125;
+&#125;
+<span class="hljs-comment">// Output: I'm flying.</span></code></pre></div>
+<h3 id="动态设定行为"><a href="#动态设定行为" class="headerlink" title="动态设定行为"></a>动态设定行为</h3><p>如果想要在运行时改变鸭子的行为，只需要调用鸭子的<code>setter</code>方法就可以了。<br>我们在鸭子类中增加设定方法</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setFlyBehavior</span><span class="hljs-params">(FlyBehavior fb)</span> </span>&#123;
+        flyBehavior = fb;
+&#125;</code></pre></div>
+<p>创造一个新的类模型鸭</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModelDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ModelDuck</span><span class="hljs-params">()</span> </span>&#123;
+        flyBehavior = <span class="hljs-keyword">new</span> FlyNoWay();
+    &#125;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">"I'm a model duck."</span>);
+    &#125;
+&#125;</code></pre></div>
+<p>建立一个新的<code>FlyBehavior</code>类型</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyRocketPowered</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">"I'm flying with a rocket."</span>);
+    &#125;
+&#125;</code></pre></div>
+<p>测试<br>调用<code>setter</code>方法，改变了模型鸭的飞行行为</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        Duck model = <span class="hljs-keyword">new</span> ModelDuck();
+        model.performFly();;
+        model.setFlyBehavior(<span class="hljs-keyword">new</span> FlyRocketPowered());
+        model.performFly();
+    &#125;
+&#125;
+<span class="hljs-comment">/* Output:
+I can't fly;
+I'm flying with a rocket.
+*/</span></code></pre></div>
+<p>每一个鸭子都<strong>有一个(HAS-A)</strong><code>FlyBahavior</code>，将飞行委托给它处理。<br><strong>设计原则</strong></p>
+<blockquote>
+<p>多用组合，少用继承<br>使用组合建立系统具有很大的弹性，可以将算法族封装成类，还可以在运行时动态地改变行为。</p>
+</blockquote>
+<h2 id="策略模式小结"><a href="#策略模式小结" class="headerlink" title="策略模式小结"></a>策略模式小结</h2><h3 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h3><p>定义一系列算法，把它们一个个<strong>封装</strong>起来，并且使它们可以相互替换。使得算法可以<strong>独立</strong>于它的客户变化。</p>
+<h3 id="适用"><a href="#适用" class="headerlink" title="适用"></a>适用</h3><ol>
+<li>许多相关的类仅仅只是行为有差别，比如鸭子类中的飞行</li>
+<li>需要使用一个算法的不同变体</li>
+<li>算法使用客户不应该知道的数据</li>
+<li>一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现（switch或if）</li>
+</ol>
+<h3 id="结构与参与者"><a href="#结构与参与者" class="headerlink" title="结构与参与者"></a>结构与参与者</h3><p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200902-04.png" srcset="/img/loading.gif" alt=""></p>
+<p><strong>Strategy</strong> (策略)<br>定义所有支持的算法的公共接口，Context使用这个接口来调用ConcreteStrategy定义的算法，比如<code>FlyBehavior</code>就是一个策略<br><strong>ConcreteStrategy</strong>(具体策略)<br>以Strategy接口实现某具体的算法，比如<code>FlyWithWings</code>,<code>FlyNoWay</code>等<br><strong>Context</strong> (上下文)</p>
+<ul>
+<li>用一个ConcreteStrategy对象来配置</li>
+<li>维护一个对Strategy对象的引用</li>
+<li>可定义一个接口让Strategy来访问它的数据<br>比如<code>Duck</code>类</li>
+</ul>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ol>
+<li><strong>相关算法系列</strong> Strategy类层次为Context定义了一系列可供复用的算法或行为</li>
+<li><strong>替代继承的方法</strong> 使用继承可以直接生成一个Context的子类，给它不同的行为，但这样会使得Context难以理解，维护和扩展，不能动态改变算法。而将算法封装在独立的Strategy类中使得我们可以独立于Context改变它，易于理解，修改和扩展。</li>
+<li><strong>消除可一些条件语句</strong> 含有许多条件语句的代码通常需要使用策略模式</li>
+<li><strong>实现的选择</strong> 策略模式可以提供相同行为的不同实现供客户选择</li>
+</ol>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ol>
+<li><strong>客户必须了解不同的策略</strong> 需要向客户暴露具体问题，所以只有当不同行为的变体与客户有关时，才使用策略模式</li>
+<li><strong>Strategy和Context之间的通信开销</strong></li>
+<li>增加了对象的数目</li>
+</ol>
+]]></content>
+      <categories>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>策略模式</tag>
       </tags>
   </entry>
 </search>
