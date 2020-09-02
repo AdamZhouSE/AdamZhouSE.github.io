@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>1.面向对象程序设计概述</title>
+    <url>/posts/ed34008.html</url>
+    <content><![CDATA[<h2 id="一、面向对象程序设计概述"><a href="#一、面向对象程序设计概述" class="headerlink" title="一、面向对象程序设计概述"></a>一、面向对象程序设计概述</h2><p>结构化程序：算法+数据结构 = 程序 </p>
+<p>（即确定如何操作数据，再决定如何组织数据的结构）</p>
+<p>面向对象程序设计(OOP)：将数据放在第一位，再考虑操作数据的算法</p>
+<h3 id="1-类"><a href="#1-类" class="headerlink" title="1. 类"></a>1. 类</h3><ol>
+<li><p><strong>类(class)</strong>是构造对象的模板或<strong>蓝图</strong>，就好像一个制作某件工艺品的模具，对象就是工艺品</p>
+</li>
+<li><p>由类构造(construct)对象的过程称为创建类的<strong>实例(instance)</strong></p>
+</li>
+<li><p><strong>封装(encapsulation)</strong>将<em>数据</em>和<em>行为</em>组合在一个包中，对对象的使用者隐藏具体的实现方式，也称为<strong>数据隐藏</strong></p>
+</li>
+<li><p>对象中的数据称为<em>实例字段(instance field)</em>，操作数据的过程称为<em>方法(method)</em></p>
+</li>
+<li><p>对象拥有的实例字段值的集合就是这个对象的当前<em>状态(state)</em></p>
+</li>
+<li>程序只能通过对象的方法和对象数据进行交互，提高了重用性和可靠性</li>
+<li>可以通过扩展一个类来构建新的类，这使得用户自定义类更加容易。在Java中，所有类都来自于一个<em>超类</em>，即<em>Object</em>。</li>
+<li>通过扩展一个类来建立一个新的类的过程就是<strong>继承(inheritance)</strong>，新类具有被扩展的类的全部属性和方法，可以自定义新的属性和方法。</li>
+</ol>
+<h3 id="2-对象"><a href="#2-对象" class="headerlink" title="2. 对象"></a>2. 对象</h3><p>对象的3个特性</p>
+<ul>
+<li><strong>行为(behavior)</strong>——可以对对象完成的操作（应用的方法）</li>
+<li><strong>状态(state)</strong>——描述当前状况的信息，状态的改变必须通过调用方法实现</li>
+<li><strong>标识(identity)</strong>——每个对象有唯一的标识来区分（如两个订单的编号肯定不相同）</li>
+</ul>
+<h3 id="3-识别类"><a href="#3-识别类" class="headerlink" title="3. 识别类"></a>3. 识别类</h3><p>编写程序从<strong>识别类</strong>开始，然后为各个类添加方法。</p>
+<p>一个简单的方法是在分析问题的过程中寻找<strong>名词——类</strong>，寻找<strong>动词——方法</strong></p>
+<p>例如我们有商品，订单，账户这样的名词作为类，即Item，Order，Account</p>
+<p>那么在账户这个类中，就可以有增加账户，修改账户等方法。</p>
+<h3 id="4-类之间的关系"><a href="#4-类之间的关系" class="headerlink" title="4. 类之间的关系"></a>4. 类之间的关系</h3><p>类之间最常见的关系有：</p>
+<ul>
+<li><strong>依赖</strong>（”<em>uses-a</em>“）</li>
+<li><strong>聚合</strong> （”<em>has-a</em>“）</li>
+<li><strong>继承</strong>（<em>“is-a”</em>)</li>
+</ul>
+<h4 id="4-1-依赖（dependence）"><a href="#4-1-依赖（dependence）" class="headerlink" title="4.1 依赖（dependence）"></a>4.1 依赖（dependence）</h4><p>如果一个类的方法使用或操纵另一个类的对象，我们就可以说一个类依赖于另一个类</p>
+<p>比如Order对象访问Account对象查看信用状态，这就是一个使用(“uses-a”)的关系。</p>
+<p>（尽可能减少相互依赖的类，做到低耦合）</p>
+<h4 id="4-2-聚合（aggregation）"><a href="#4-2-聚合（aggregation）" class="headerlink" title="4.2 聚合（aggregation）"></a>4.2 聚合（aggregation）</h4><p>类A的对象包含（”has-a”）类B的对象</p>
+<p>如一个Order对象就包含了一些Item对象</p>
+<h4 id="4-3-继承（inheritance）"><a href="#4-3-继承（inheritance）" class="headerlink" title="4.3 继承（inheritance）"></a>4.3 继承（inheritance）</h4><p>一个更特殊的类与一个更一般的类之间的关系</p>
+<p>也就是前面提到的扩展，比如现在我们定义一个加急订单RushOrder类，那么它是一个（”is-a”)Order类</p>
+<p>也就是有Order类继承而来。</p>
+<p>下图展示了上述的三种关系。</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200423LearnJava01.png" srcset="/img/loading.gif" alt=""></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>对象和类</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo-Permalink简化</title>
     <url>/posts/838443af.html</url>
     <content><![CDATA[<h1 id="Permalink简化"><a href="#Permalink简化" class="headerlink" title="Permalink简化"></a>Permalink简化</h1><p>在文档名有中文的时候，因为汉字会被转义，默认的永久链接会非常复杂，具体原因可以看这一篇文章</p>
@@ -75,113 +131,57 @@ categories:</code></pre></div>
       </tags>
   </entry>
   <entry>
-    <title>1.面向对象程序设计概述</title>
-    <url>/posts/ed34008.html</url>
-    <content><![CDATA[<h2 id="一、面向对象程序设计概述"><a href="#一、面向对象程序设计概述" class="headerlink" title="一、面向对象程序设计概述"></a>一、面向对象程序设计概述</h2><p>结构化程序：算法+数据结构 = 程序 </p>
-<p>（即确定如何操作数据，再决定如何组织数据的结构）</p>
-<p>面向对象程序设计(OOP)：将数据放在第一位，再考虑操作数据的算法</p>
-<h3 id="1-类"><a href="#1-类" class="headerlink" title="1. 类"></a>1. 类</h3><ol>
-<li><p><strong>类(class)</strong>是构造对象的模板或<strong>蓝图</strong>，就好像一个制作某件工艺品的模具，对象就是工艺品</p>
-</li>
-<li><p>由类构造(construct)对象的过程称为创建类的<strong>实例(instance)</strong></p>
-</li>
-<li><p><strong>封装(encapsulation)</strong>将<em>数据</em>和<em>行为</em>组合在一个包中，对对象的使用者隐藏具体的实现方式，也称为<strong>数据隐藏</strong></p>
-</li>
-<li><p>对象中的数据称为<em>实例字段(instance field)</em>，操作数据的过程称为<em>方法(method)</em></p>
-</li>
-<li><p>对象拥有的实例字段值的集合就是这个对象的当前<em>状态(state)</em></p>
-</li>
-<li>程序只能通过对象的方法和对象数据进行交互，提高了重用性和可靠性</li>
-<li>可以通过扩展一个类来构建新的类，这使得用户自定义类更加容易。在Java中，所有类都来自于一个<em>超类</em>，即<em>Object</em>。</li>
-<li>通过扩展一个类来建立一个新的类的过程就是<strong>继承(inheritance)</strong>，新类具有被扩展的类的全部属性和方法，可以自定义新的属性和方法。</li>
-</ol>
-<h3 id="2-对象"><a href="#2-对象" class="headerlink" title="2. 对象"></a>2. 对象</h3><p>对象的3个特性</p>
-<ul>
-<li><strong>行为(behavior)</strong>——可以对对象完成的操作（应用的方法）</li>
-<li><strong>状态(state)</strong>——描述当前状况的信息，状态的改变必须通过调用方法实现</li>
-<li><strong>标识(identity)</strong>——每个对象有唯一的标识来区分（如两个订单的编号肯定不相同）</li>
-</ul>
-<h3 id="3-识别类"><a href="#3-识别类" class="headerlink" title="3. 识别类"></a>3. 识别类</h3><p>编写程序从<strong>识别类</strong>开始，然后为各个类添加方法。</p>
-<p>一个简单的方法是在分析问题的过程中寻找<strong>名词——类</strong>，寻找<strong>动词——方法</strong></p>
-<p>例如我们有商品，订单，账户这样的名词作为类，即Item，Order，Account</p>
-<p>那么在账户这个类中，就可以有增加账户，修改账户等方法。</p>
-<h3 id="4-类之间的关系"><a href="#4-类之间的关系" class="headerlink" title="4. 类之间的关系"></a>4. 类之间的关系</h3><p>类之间最常见的关系有：</p>
-<ul>
-<li><strong>依赖</strong>（”<em>uses-a</em>“）</li>
-<li><strong>聚合</strong> （”<em>has-a</em>“）</li>
-<li><strong>继承</strong>（<em>“is-a”</em>)</li>
-</ul>
-<h4 id="4-1-依赖（dependence）"><a href="#4-1-依赖（dependence）" class="headerlink" title="4.1 依赖（dependence）"></a>4.1 依赖（dependence）</h4><p>如果一个类的方法使用或操纵另一个类的对象，我们就可以说一个类依赖于另一个类</p>
-<p>比如Order对象访问Account对象查看信用状态，这就是一个使用(“uses-a”)的关系。</p>
-<p>（尽可能减少相互依赖的类，做到低耦合）</p>
-<h4 id="4-2-聚合（aggregation）"><a href="#4-2-聚合（aggregation）" class="headerlink" title="4.2 聚合（aggregation）"></a>4.2 聚合（aggregation）</h4><p>类A的对象包含（”has-a”）类B的对象</p>
-<p>如一个Order对象就包含了一些Item对象</p>
-<h4 id="4-3-继承（inheritance）"><a href="#4-3-继承（inheritance）" class="headerlink" title="4.3 继承（inheritance）"></a>4.3 继承（inheritance）</h4><p>一个更特殊的类与一个更一般的类之间的关系</p>
-<p>也就是前面提到的扩展，比如现在我们定义一个加急订单RushOrder类，那么它是一个（”is-a”)Order类</p>
-<p>也就是有Order类继承而来。</p>
-<p>下图展示了上述的三种关系。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200423LearnJava01.png" srcset="/img/loading.gif" alt=""></p>
-]]></content>
-      <categories>
-        <category>Java</category>
-        <category>对象和类</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo个人博客绑定域名和配置SSL证书</title>
-    <url>/posts/2cd2c226.html</url>
-    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
+    <title>Hexo写作</title>
+    <url>/posts/c4064b2b.html</url>
+    <content><![CDATA[<h1 id="Hexo写作"><a href="#Hexo写作" class="headerlink" title="Hexo写作"></a>Hexo写作</h1><p>本文介绍了一些基本的Hexo配置和使用hexo+GitHub写作的流程。</p>
 <a id="more"></a>
-<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
-<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
-<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
-<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/domainname1.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
-<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>主机记录</th>
-<th>记录类型</th>
-<th>线路类型</th>
-<th>记录值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>www</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-<tr>
-<td>@</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
-<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
-<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/2020-04-09domainname2.png" srcset="/img/loading.gif" alt=""></p>
-<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
-<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
-<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
-<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
-<hr>
-<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
-<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
-<p><a href="https://cloud.tencent.com/document/product/400/35244" target="_blank" rel="noopener">腾讯云Nginx服务器证书安装</a></p>
-<p><a href="https://www.jianshu.com/p/026d67cc6cb1" target="_blank" rel="noopener">Mac下nginx的使用</a></p>
-<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
-<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
-<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
+<h3 id="1-Hexo基本命令"><a href="#1-Hexo基本命令" class="headerlink" title="1. Hexo基本命令"></a>1. Hexo基本命令</h3><div class="hljs"><pre><code class="hljs shell">hexo g = hexo generate  #生成
+hexo s = hexo server  #启动本地预览
+hexo d = hexo deploy  #远程部署
+hexo n "文章标题" = hexo new "文章标题"  #新建一篇博文</code></pre></div>
+<h3 id="2-整体配置"><a href="#2-整体配置" class="headerlink" title="2. 整体配置"></a>2. 整体配置</h3><p><code>\hexo\_config.yml</code></p>
+<div class="hljs"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> Site</span>
+title:  # 网站名，标签页显示
+subtitle:  # 副标题，网站名下显示
+description:  # 网站描述，便于搜索
+keywords:
+author: # 作者
+language: zh-CN # 中文
+timezone: Asia/Shanghai # 时区</code></pre></div>
+<h3 id="3-更换主题"><a href="#3-更换主题" class="headerlink" title="3. 更换主题"></a>3. 更换主题</h3><p>推荐使用<code>melody</code></p>
+<p><a href="[https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#%E5%AE%89%E8%A3%85](https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#安装">hexo-theme-melody快速开始</a>)</p>
+<p>这个主题就是我现在网站使用的主题，它有完整的中文教程，功能齐全。按照教程配置就可以了。</p>
+<h3 id="4-写作步骤"><a href="#4-写作步骤" class="headerlink" title="4. 写作步骤"></a>4. 写作步骤</h3><ol>
+<li><p>新建文章</p>
+<div class="hljs"><pre><code class="hljs shell">hexo new "title"</code></pre></div>
+</li>
+<li><p>写作</p>
+<p><code>\hexo\source\_post</code>中找到<code>title.md</code>，使用<code>typora</code>打开</p>
+<p>注意文章的<code>tags</code>格式是<code>[]</code></p>
+<p>在信息栏填写<code>top_img</code>信息可以自定义该页图片情况，如<code>false</code>表示不显示</p>
+<p><code>文章中&lt;!-- more --&gt;</code>之前的部分会显示在主页上，并出现<code>Read more</code>按钮，点击阅读更多内容</p>
+</li>
+</ol>
+<ol>
+<li><p>预览</p>
+<div class="hljs"><pre><code class="hljs shell">hexo s
+hexo s --debug // 在命令行生成debug信息</code></pre></div>
+</li>
+<li><p>同步到远程</p>
+<div class="hljs"><pre><code class="hljs shell">hexo d -g</code></pre></div>
+</li>
+</ol>
+<h3 id="5-问题"><a href="#5-问题" class="headerlink" title="5.  问题"></a>5.  问题</h3><ol>
+<li><p>Template render error: (unknown path)</p>
+<p>在命令行输入<code>hexo -g</code>后报错，原因在于文章内容中有<strong>{}</strong>时，如果它没有被代码块包括，解析会出现错误，所以需要写成</p>
+<div class="hljs"><pre><code class="hljs routeros">&#123;%<span class="hljs-built_in"> raw </span>%&#125;</code></pre></div>
+</li>
+<li><p>本地预览与远程显示不一致</p>
+<p>删除缓存</p>
+<div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo clean</span></code></pre></div>
+<p>在网页上刷新</p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>Hexo</category>
@@ -362,57 +362,213 @@ Sales_data accum;</code></pre></div>
       </tags>
   </entry>
   <entry>
-    <title>Hexo写作</title>
-    <url>/posts/c4064b2b.html</url>
-    <content><![CDATA[<h1 id="Hexo写作"><a href="#Hexo写作" class="headerlink" title="Hexo写作"></a>Hexo写作</h1><p>本文介绍了一些基本的Hexo配置和使用hexo+GitHub写作的流程。</p>
+    <title>字符串,向量和数组</title>
+    <url>/posts/869e4b19.html</url>
+    <content><![CDATA[<h3 id="二、字符串，向量和数组"><a href="#二、字符串，向量和数组" class="headerlink" title="二、字符串，向量和数组"></a>二、字符串，向量和数组</h3><p>作用域操作符<code>::</code></p>
+<p>含义：编译器应从操作符左侧的作用域中寻找右边那个名字</p>
+<p>比如<code>std::cin</code>是要使用命名空间<code>std</code>中的<code>cin</code></p>
+<p>这样做是为了避免某些名字被重复使用</p>
+<p>使用<code>using</code>声明可以更加简便的使用命名空间中的成员。</p>
 <a id="more"></a>
-<h3 id="1-Hexo基本命令"><a href="#1-Hexo基本命令" class="headerlink" title="1. Hexo基本命令"></a>1. Hexo基本命令</h3><div class="hljs"><pre><code class="hljs shell">hexo g = hexo generate  #生成
-hexo s = hexo server  #启动本地预览
-hexo d = hexo deploy  #远程部署
-hexo n "文章标题" = hexo new "文章标题"  #新建一篇博文</code></pre></div>
-<h3 id="2-整体配置"><a href="#2-整体配置" class="headerlink" title="2. 整体配置"></a>2. 整体配置</h3><p><code>\hexo\_config.yml</code></p>
-<div class="hljs"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> Site</span>
-title:  # 网站名，标签页显示
-subtitle:  # 副标题，网站名下显示
-description:  # 网站描述，便于搜索
-keywords:
-author: # 作者
-language: zh-CN # 中文
-timezone: Asia/Shanghai # 时区</code></pre></div>
-<h3 id="3-更换主题"><a href="#3-更换主题" class="headerlink" title="3. 更换主题"></a>3. 更换主题</h3><p>推荐使用<code>melody</code></p>
-<p><a href="[https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#%E5%AE%89%E8%A3%85](https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#安装">hexo-theme-melody快速开始</a>)</p>
-<p>这个主题就是我现在网站使用的主题，它有完整的中文教程，功能齐全。按照教程配置就可以了。</p>
-<h3 id="4-写作步骤"><a href="#4-写作步骤" class="headerlink" title="4. 写作步骤"></a>4. 写作步骤</h3><ol>
-<li><p>新建文章</p>
-<div class="hljs"><pre><code class="hljs shell">hexo new "title"</code></pre></div>
+<h4 id="1-String类型"><a href="#1-String类型" class="headerlink" title="1. String类型"></a>1. String类型</h4><p>表示可变长的字符串</p>
+<h5 id="1-1-定义和初始化"><a href="#1-1-定义和初始化" class="headerlink" title="1.1 定义和初始化"></a>1.1 定义和初始化</h5><ol>
+<li><p>使用需要头文件和命名空间</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>;</code></pre></div>
 </li>
-<li><p>写作</p>
-<p><code>\hexo\source\_post</code>中找到<code>title.md</code>，使用<code>typora</code>打开</p>
-<p>注意文章的<code>tags</code>格式是<code>[]</code></p>
-<p>在信息栏填写<code>top_img</code>信息可以自定义该页图片情况，如<code>false</code>表示不显示</p>
-<p><code>文章中&lt;!-- more --&gt;</code>之前的部分会显示在主页上，并出现<code>Read more</code>按钮，点击阅读更多内容</p>
+<li><p>初始化</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s1; <span class="hljs-comment">// 空字符串</span>
+<span class="hljs-built_in">string</span> s2 = s1; <span class="hljs-comment">// s2是s1的副本</span>
+<span class="hljs-built_in">string</span> s3 = <span class="hljs-string">"abc"</span>;
+<span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s4</span><span class="hljs-params">(<span class="hljs-number">10</span>, <span class="hljs-string">'c'</span>)</span></span>; <span class="hljs-comment">// 十个c</span></code></pre></div>
 </li>
 </ol>
-<ol>
-<li><p>预览</p>
-<div class="hljs"><pre><code class="hljs shell">hexo s
-hexo s --debug // 在命令行生成debug信息</code></pre></div>
+<h5 id="1-2-string对象上的操作"><a href="#1-2-string对象上的操作" class="headerlink" title="1.2 string对象上的操作"></a>1.2 string对象上的操作</h5><ol>
+<li><p>使用<code>getline</code>读取一整行</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">string</span> line;
+getline(<span class="hljs-built_in">cin</span>, line);</code></pre></div>
+<p>当读取到换行符时结束，并将读到的内容存入<code>string</code>中，但是<strong>不存换行符</strong></p>
 </li>
-<li><p>同步到远程</p>
-<div class="hljs"><pre><code class="hljs shell">hexo d -g</code></pre></div>
+<li><p><code>empty</code>和<code>size</code>操作</p>
+<p><code>str.empty()</code>根据字符串是否为空返回一个布尔值</p>
+<p><code>str.size()</code>返回字符串长度</p>
+<p>使用visual studio编程的时候，碰到过一个<strong>warning</strong>，将无符号数赋值给了有符号数。</p>
+<p>这是由于<code>size</code>函数的返回值类型引起的，它是一个<code>string::size_type</code>类型的值，是无符号类型的，</p>
+<p>可以用<code>auto</code>来推断变量的值</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> len = str.size();</code></pre></div>
+</li>
+<li><p>比较，赋值，相加</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s1 = <span class="hljs-string">"abc"</span>;
+<span class="hljs-built_in">string</span> s2 = <span class="hljs-string">"xcvd"</span>;
+<span class="hljs-comment">// s1 &lt; s2 比较第一个不同的字符</span>
+<span class="hljs-built_in">string</span> s3 = s1; <span class="hljs-comment">// 赋值</span>
+<span class="hljs-built_in">string</span> s4 = s1 + s2; <span class="hljs-comment">// abcxcvd</span></code></pre></div>
+</li>
+<li><p>处理<code>string</code>中的字符</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cctype&gt;</span></span>
+<span class="hljs-built_in">isalnum</span>(c);
+<span class="hljs-built_in">isalpha</span>(c);
+<span class="hljs-built_in">islower</span>(c);
+<span class="hljs-built_in">isupper</span>(c);
+<span class="hljs-built_in">ispunct</span>(c); <span class="hljs-comment">// 是标点符号为真</span></code></pre></div>
 </li>
 </ol>
-<h3 id="5-问题"><a href="#5-问题" class="headerlink" title="5.  问题"></a>5.  问题</h3><ol>
-<li><p>Template render error: (unknown path)</p>
-<p>在命令行输入<code>hexo -g</code>后报错，原因在于文章内容中有<strong>{}</strong>时，如果它没有被代码块包括，解析会出现错误，所以需要写成</p>
-<div class="hljs"><pre><code class="hljs routeros">&#123;%<span class="hljs-built_in"> raw </span>%&#125;</code></pre></div>
-</li>
-<li><p>本地预览与远程显示不一致</p>
-<p>删除缓存</p>
-<div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo clean</span></code></pre></div>
-<p>在网页上刷新</p>
-</li>
+<h4 id="2-Vector类型"><a href="#2-Vector类型" class="headerlink" title="2. Vector类型"></a>2. Vector类型</h4><p>可变长数组，类似于Java中的<code>ArrayList</code></p>
+<h5 id="2-1-初始化"><a href="#2-1-初始化" class="headerlink" title="2.1 初始化"></a>2.1 初始化</h5><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">vector</span>&lt;T&gt; v;
+<span class="hljs-built_in">vector</span>&lt;T&gt; v1 = &#123;a, b, c&#125;; <span class="hljs-comment">// 注意是花括号</span>
+<span class="hljs-built_in">vector</span>&lt;T&gt; v2&#123;a, b&#125;;     <span class="hljs-comment">// 花括号，两个元素</span>
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v3(<span class="hljs-number">10</span>, <span class="hljs-number">1</span>); <span class="hljs-comment">// 圆括号 10个元素，每个初始化为1</span></code></pre></div>
+<h5 id="2-2-操作"><a href="#2-2-操作" class="headerlink" title="2.2 操作"></a>2.2 操作</h5><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v;
+v.push_back(<span class="hljs-number">1</span>); <span class="hljs-comment">// 添加1</span>
+v.pop_back(); <span class="hljs-comment">// 去掉最后一个数据</span>
+v.empty();
+v.size();
+v[n]; <span class="hljs-comment">// 注意下标只能访问，但是不能够添加元素</span></code></pre></div>
+<h4 id="3-迭代器"><a href="#3-迭代器" class="headerlink" title="3. 迭代器"></a>3. 迭代器</h4><p>访问元素的作用</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s = <span class="hljs-string">"abcde"</span>;
+<span class="hljs-keyword">if</span> (s.begin() != s.end()) &#123; <span class="hljs-comment">// 确保s非空</span>
+  
+&#125;</code></pre></div>
+<h4 id="4-数组"><a href="#4-数组" class="headerlink" title="4. 数组"></a>4. 数组</h4><h5 id="4-1-指针和数组"><a href="#4-1-指针和数组" class="headerlink" title="4.1 指针和数组"></a>4.1 指针和数组</h5><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ia[] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;
+<span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">p</span><span class="hljs-params">(ia)</span></span>; <span class="hljs-comment">// 整型指针，指向ia的第一个元素</span>
+p++; <span class="hljs-comment">// 指向第一个元素</span></code></pre></div>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++基本语法</title>
+    <url>/posts/6b599344.html</url>
+    <content><![CDATA[<h1 id="C-学习笔记"><a href="#C-学习笔记" class="headerlink" title="C++学习笔记"></a>C++学习笔记</h1><p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p>
+<a id="more"></a>
+<h1 id="一、-变量"><a href="#一、-变量" class="headerlink" title="一、 变量"></a>一、 变量</h1><h2 id="1-用sizeof运算符求某一类型或变量占据的字节数"><a href="#1-用sizeof运算符求某一类型或变量占据的字节数" class="headerlink" title="1. 用sizeof运算符求某一类型或变量占据的字节数"></a>1. 用sizeof运算符求某一类型或变量占据的字节数</h2><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> a;
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(a) &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// sizeof运算符可以求变量占据的字节数</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 未初始化的变量，其值是不确定的</span>
+    <span class="hljs-keyword">int</span> b = <span class="hljs-number">1</span>;
+    <span class="hljs-built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="hljs-built_in">endl</span>;
+&#125;</code></pre></div>
+<h2 id="2-数据类型的自动转换"><a href="#2-数据类型的自动转换" class="headerlink" title="2. 数据类型的自动转换"></a>2. 数据类型的自动转换</h2><h3 id="1-数"><a href="#1-数" class="headerlink" title="1. 数"></a>1. 数</h3><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> a = <span class="hljs-number">11.34</span>; <span class="hljs-comment">// 11.34被自动转化为11后赋值给a</span>
+<span class="hljs-keyword">int</span> b = <span class="hljs-number">30</span>;
+<span class="hljs-keyword">double</span> d = b; <span class="hljs-comment">// d的值是30.0</span></code></pre></div>
+<h3 id="2-字符类型与整型"><a href="#2-字符类型与整型" class="headerlink" title="2. 字符类型与整型"></a>2. 字符类型与整型</h3><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> k = <span class="hljs-string">'a'</span>;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, k); <span class="hljs-comment">// 输出97，即a的ASCII码</span>
+<span class="hljs-keyword">int</span> n = <span class="hljs-number">98</span>;
+<span class="hljs-keyword">char</span> k = n;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>, k); <span class="hljs-comment">// 输出b</span></code></pre></div>
+<h2 id="3-输入和输出"><a href="#3-输入和输出" class="headerlink" title="3. 输入和输出"></a>3. 输入和输出</h2><h4 id="1-scanf和printf"><a href="#1-scanf和printf" class="headerlink" title="1. scanf和printf"></a>1. scanf和printf</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt; //使用scanf和printf时需要使用该库</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> n;
+    <span class="hljs-keyword">char</span> c;
+    <span class="hljs-keyword">float</span> m;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%c%f"</span>, &amp;n, &amp;c, &amp;m);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %c %f\n"</span>, n, c, m);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>用scanf可以一次读入多个不同类型的变量，输入各项用空格隔开<br>        注意在输入<strong>字符</strong>时，不会跳过空格（空格也会被当做字符读入）<br>        输入其它数据时，会跳过空格</p>
+<h4 id="2-cin和cout"><a href="#2-cin和cout" class="headerlink" title="2. cin和cout"></a>2. cin和cout</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> c;
+    <span class="hljs-keyword">while</span> ((c=<span class="hljs-built_in">cin</span>.get()) != EOF) &#123; 
+        <span class="hljs-built_in">cout</span> &lt;&lt; (<span class="hljs-keyword">char</span>) c; 
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>使用cin读入所有字符，包括空格和回车，EOF<br>        Mac（ctrl+D停止输入，ctrl+C停止程序)<br>        windows ctrl+Z停止</p>
+<h4 id="3-cin-amp-cout-scanf-amp-printf-比较"><a href="#3-cin-amp-cout-scanf-amp-printf-比较" class="headerlink" title="3. cin&amp;cout / scanf&amp;printf 比较"></a>3. cin&amp;cout / scanf&amp;printf 比较</h4><ul>
+<li>cin，cout速度慢，输入输出数据量大时用scanf/printf</li>
+<li>一个程序不要同时出现cin和scanf，cout和prinf</li>
+</ul>
+<h2 id="4-运算"><a href="#4-运算" class="headerlink" title="4. 运算"></a>4. 运算</h2><ol>
+<li>加、减、乘运算的溢出</li>
 </ol>
+<hr>
+<h1 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h1><h3 id="1-数组作为函数的参数传递"><a href="#1-数组作为函数的参数传递" class="headerlink" title="1. 数组作为函数的参数传递"></a>1. 数组作为函数的参数传递</h3><p>数组作为函数的参数时，是传引用的，即<strong>形参数组改变了，实参数组也会改变</strong></p>
+<p>二维数组作为函数的形参时，<strong>必须写明函数有多少列</strong>，不要写明有多少行</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[][<span class="hljs-number">5</span>])</span> </span>&#123;
+  <span class="hljs-built_in">cout</span> &lt;&lt; a[<span class="hljs-number">4</span>][<span class="hljs-number">3</span>];
+&#125;</code></pre></div>
+<p>必须要写明列数，编译器才能够根据下标算出元素的地址</p>
+<div class="hljs"><pre><code class="hljs markdown">$\color&#123;#F00&#125;&#123;a[<span class="hljs-string">i</span>][<span class="hljs-symbol">j</span>]的地址 = 数组首地址 + i \times N \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>]) + j \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>])&#125;$ (N是数组列数)</code></pre></div>
+<p>形参数组的首地址就是实参数组的首地址      </p>
+<h1 id="三、字符串"><a href="#三、字符串" class="headerlink" title="三、字符串"></a>三、字符串</h1><h2 id="1-字符串的形式"><a href="#1-字符串的形式" class="headerlink" title="1. 字符串的形式"></a>1. 字符串的形式</h2><h3 id="（1）字符串常量"><a href="#（1）字符串常量" class="headerlink" title="（1）字符串常量"></a>（1）字符串常量</h3><p>用双引号括起来的，如”China”, “C++ program”.</p>
+<p>字符串常量占据<strong>内存</strong>的字节数等于字符中字符数目加1，结尾多出字符’\0’.</p>
+<font color=#F00>但是字符串的长度不包含'\0'</font>
+
+<p>“”也是合法的·1字符串常量，称为空串，仍然占据一个字节的内存空间，存放’\0’</p>
+<h3 id="（2）存放于字符数组中，以’-0’结尾"><a href="#（2）存放于字符数组中，以’-0’结尾" class="headerlink" title="（2）存放于字符数组中，以’\0’结尾"></a>（2）存放于字符数组中，以’\0’结尾</h3><p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p>
+<p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p>
+<h3 id="（3）string对象。"><a href="#（3）string对象。" class="headerlink" title="（3）string对象。"></a>（3）string对象。</h3><p>string是C++标准模板库里的一个类，专门用于处理字符串</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo个人博客绑定域名和配置SSL证书</title>
+    <url>/posts/2cd2c226.html</url>
+    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
+<a id="more"></a>
+<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
+<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
+<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
+<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/domainname1.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
+<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>主机记录</th>
+<th>记录类型</th>
+<th>线路类型</th>
+<th>记录值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>www</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+<tr>
+<td>@</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
+<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
+<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/2020-04-09domainname2.png" srcset="/img/loading.gif" alt=""></p>
+<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
+<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
+<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
+<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
+<hr>
+<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
+<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
+<p><a href="https://cloud.tencent.com/document/product/400/35244" target="_blank" rel="noopener">腾讯云Nginx服务器证书安装</a></p>
+<p><a href="https://www.jianshu.com/p/026d67cc6cb1" target="_blank" rel="noopener">Mac下nginx的使用</a></p>
+<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
+<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
+<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
 ]]></content>
       <categories>
         <category>Hexo</category>
@@ -420,6 +576,12 @@ hexo s --debug // 在命令行生成debug信息</code></pre></div>
       <tags>
         <tag>hexo</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>测试</title>
+    <url>/posts/9daba997.html</url>
+    <content><![CDATA[<p>blablablablablabla</p>
+]]></content>
   </entry>
   <entry>
     <title>概率论的基本概念</title>
@@ -608,168 +770,6 @@ hexo s --debug // 在命令行生成debug信息</code></pre></div>
       </categories>
       <tags>
         <tag>概率论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>测试</title>
-    <url>/posts/9daba997.html</url>
-    <content><![CDATA[<p>blablablablablabla</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>C++基本语法</title>
-    <url>/posts/6b599344.html</url>
-    <content><![CDATA[<h1 id="C-学习笔记"><a href="#C-学习笔记" class="headerlink" title="C++学习笔记"></a>C++学习笔记</h1><p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p>
-<a id="more"></a>
-<h1 id="一、-变量"><a href="#一、-变量" class="headerlink" title="一、 变量"></a>一、 变量</h1><h2 id="1-用sizeof运算符求某一类型或变量占据的字节数"><a href="#1-用sizeof运算符求某一类型或变量占据的字节数" class="headerlink" title="1. 用sizeof运算符求某一类型或变量占据的字节数"></a>1. 用sizeof运算符求某一类型或变量占据的字节数</h2><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> a;
-    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(a) &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// sizeof运算符可以求变量占据的字节数</span>
-    <span class="hljs-built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 未初始化的变量，其值是不确定的</span>
-    <span class="hljs-keyword">int</span> b = <span class="hljs-number">1</span>;
-    <span class="hljs-built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="hljs-built_in">endl</span>;
-&#125;</code></pre></div>
-<h2 id="2-数据类型的自动转换"><a href="#2-数据类型的自动转换" class="headerlink" title="2. 数据类型的自动转换"></a>2. 数据类型的自动转换</h2><h3 id="1-数"><a href="#1-数" class="headerlink" title="1. 数"></a>1. 数</h3><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> a = <span class="hljs-number">11.34</span>; <span class="hljs-comment">// 11.34被自动转化为11后赋值给a</span>
-<span class="hljs-keyword">int</span> b = <span class="hljs-number">30</span>;
-<span class="hljs-keyword">double</span> d = b; <span class="hljs-comment">// d的值是30.0</span></code></pre></div>
-<h3 id="2-字符类型与整型"><a href="#2-字符类型与整型" class="headerlink" title="2. 字符类型与整型"></a>2. 字符类型与整型</h3><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> k = <span class="hljs-string">'a'</span>;
-<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, k); <span class="hljs-comment">// 输出97，即a的ASCII码</span>
-<span class="hljs-keyword">int</span> n = <span class="hljs-number">98</span>;
-<span class="hljs-keyword">char</span> k = n;
-<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>, k); <span class="hljs-comment">// 输出b</span></code></pre></div>
-<h2 id="3-输入和输出"><a href="#3-输入和输出" class="headerlink" title="3. 输入和输出"></a>3. 输入和输出</h2><h4 id="1-scanf和printf"><a href="#1-scanf和printf" class="headerlink" title="1. scanf和printf"></a>1. scanf和printf</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt; //使用scanf和printf时需要使用该库</span></span>
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> n;
-    <span class="hljs-keyword">char</span> c;
-    <span class="hljs-keyword">float</span> m;
-    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%c%f"</span>, &amp;n, &amp;c, &amp;m);
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %c %f\n"</span>, n, c, m);
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
-<p>用scanf可以一次读入多个不同类型的变量，输入各项用空格隔开<br>        注意在输入<strong>字符</strong>时，不会跳过空格（空格也会被当做字符读入）<br>        输入其它数据时，会跳过空格</p>
-<h4 id="2-cin和cout"><a href="#2-cin和cout" class="headerlink" title="2. cin和cout"></a>2. cin和cout</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> c;
-    <span class="hljs-keyword">while</span> ((c=<span class="hljs-built_in">cin</span>.get()) != EOF) &#123; 
-        <span class="hljs-built_in">cout</span> &lt;&lt; (<span class="hljs-keyword">char</span>) c; 
-    &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
-<p>使用cin读入所有字符，包括空格和回车，EOF<br>        Mac（ctrl+D停止输入，ctrl+C停止程序)<br>        windows ctrl+Z停止</p>
-<h4 id="3-cin-amp-cout-scanf-amp-printf-比较"><a href="#3-cin-amp-cout-scanf-amp-printf-比较" class="headerlink" title="3. cin&amp;cout / scanf&amp;printf 比较"></a>3. cin&amp;cout / scanf&amp;printf 比较</h4><ul>
-<li>cin，cout速度慢，输入输出数据量大时用scanf/printf</li>
-<li>一个程序不要同时出现cin和scanf，cout和prinf</li>
-</ul>
-<h2 id="4-运算"><a href="#4-运算" class="headerlink" title="4. 运算"></a>4. 运算</h2><ol>
-<li>加、减、乘运算的溢出</li>
-</ol>
-<hr>
-<h1 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h1><h3 id="1-数组作为函数的参数传递"><a href="#1-数组作为函数的参数传递" class="headerlink" title="1. 数组作为函数的参数传递"></a>1. 数组作为函数的参数传递</h3><p>数组作为函数的参数时，是传引用的，即<strong>形参数组改变了，实参数组也会改变</strong></p>
-<p>二维数组作为函数的形参时，<strong>必须写明函数有多少列</strong>，不要写明有多少行</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[][<span class="hljs-number">5</span>])</span> </span>&#123;
-  <span class="hljs-built_in">cout</span> &lt;&lt; a[<span class="hljs-number">4</span>][<span class="hljs-number">3</span>];
-&#125;</code></pre></div>
-<p>必须要写明列数，编译器才能够根据下标算出元素的地址</p>
-<div class="hljs"><pre><code class="hljs markdown">$\color&#123;#F00&#125;&#123;a[<span class="hljs-string">i</span>][<span class="hljs-symbol">j</span>]的地址 = 数组首地址 + i \times N \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>]) + j \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>])&#125;$ (N是数组列数)</code></pre></div>
-<p>形参数组的首地址就是实参数组的首地址      </p>
-<h1 id="三、字符串"><a href="#三、字符串" class="headerlink" title="三、字符串"></a>三、字符串</h1><h2 id="1-字符串的形式"><a href="#1-字符串的形式" class="headerlink" title="1. 字符串的形式"></a>1. 字符串的形式</h2><h3 id="（1）字符串常量"><a href="#（1）字符串常量" class="headerlink" title="（1）字符串常量"></a>（1）字符串常量</h3><p>用双引号括起来的，如”China”, “C++ program”.</p>
-<p>字符串常量占据<strong>内存</strong>的字节数等于字符中字符数目加1，结尾多出字符’\0’.</p>
-<font color=#F00>但是字符串的长度不包含'\0'</font>
-
-<p>“”也是合法的·1字符串常量，称为空串，仍然占据一个字节的内存空间，存放’\0’</p>
-<h3 id="（2）存放于字符数组中，以’-0’结尾"><a href="#（2）存放于字符数组中，以’-0’结尾" class="headerlink" title="（2）存放于字符数组中，以’\0’结尾"></a>（2）存放于字符数组中，以’\0’结尾</h3><p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p>
-<p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p>
-<h3 id="（3）string对象。"><a href="#（3）string对象。" class="headerlink" title="（3）string对象。"></a>（3）string对象。</h3><p>string是C++标准模板库里的一个类，专门用于处理字符串</p>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>基础</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>字符串,向量和数组</title>
-    <url>/posts/869e4b19.html</url>
-    <content><![CDATA[<h3 id="二、字符串，向量和数组"><a href="#二、字符串，向量和数组" class="headerlink" title="二、字符串，向量和数组"></a>二、字符串，向量和数组</h3><p>作用域操作符<code>::</code></p>
-<p>含义：编译器应从操作符左侧的作用域中寻找右边那个名字</p>
-<p>比如<code>std::cin</code>是要使用命名空间<code>std</code>中的<code>cin</code></p>
-<p>这样做是为了避免某些名字被重复使用</p>
-<p>使用<code>using</code>声明可以更加简便的使用命名空间中的成员。</p>
-<a id="more"></a>
-<h4 id="1-String类型"><a href="#1-String类型" class="headerlink" title="1. String类型"></a>1. String类型</h4><p>表示可变长的字符串</p>
-<h5 id="1-1-定义和初始化"><a href="#1-1-定义和初始化" class="headerlink" title="1.1 定义和初始化"></a>1.1 定义和初始化</h5><ol>
-<li><p>使用需要头文件和命名空间</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>;</code></pre></div>
-</li>
-<li><p>初始化</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s1; <span class="hljs-comment">// 空字符串</span>
-<span class="hljs-built_in">string</span> s2 = s1; <span class="hljs-comment">// s2是s1的副本</span>
-<span class="hljs-built_in">string</span> s3 = <span class="hljs-string">"abc"</span>;
-<span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s4</span><span class="hljs-params">(<span class="hljs-number">10</span>, <span class="hljs-string">'c'</span>)</span></span>; <span class="hljs-comment">// 十个c</span></code></pre></div>
-</li>
-</ol>
-<h5 id="1-2-string对象上的操作"><a href="#1-2-string对象上的操作" class="headerlink" title="1.2 string对象上的操作"></a>1.2 string对象上的操作</h5><ol>
-<li><p>使用<code>getline</code>读取一整行</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">string</span> line;
-getline(<span class="hljs-built_in">cin</span>, line);</code></pre></div>
-<p>当读取到换行符时结束，并将读到的内容存入<code>string</code>中，但是<strong>不存换行符</strong></p>
-</li>
-<li><p><code>empty</code>和<code>size</code>操作</p>
-<p><code>str.empty()</code>根据字符串是否为空返回一个布尔值</p>
-<p><code>str.size()</code>返回字符串长度</p>
-<p>使用visual studio编程的时候，碰到过一个<strong>warning</strong>，将无符号数赋值给了有符号数。</p>
-<p>这是由于<code>size</code>函数的返回值类型引起的，它是一个<code>string::size_type</code>类型的值，是无符号类型的，</p>
-<p>可以用<code>auto</code>来推断变量的值</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> len = str.size();</code></pre></div>
-</li>
-<li><p>比较，赋值，相加</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s1 = <span class="hljs-string">"abc"</span>;
-<span class="hljs-built_in">string</span> s2 = <span class="hljs-string">"xcvd"</span>;
-<span class="hljs-comment">// s1 &lt; s2 比较第一个不同的字符</span>
-<span class="hljs-built_in">string</span> s3 = s1; <span class="hljs-comment">// 赋值</span>
-<span class="hljs-built_in">string</span> s4 = s1 + s2; <span class="hljs-comment">// abcxcvd</span></code></pre></div>
-</li>
-<li><p>处理<code>string</code>中的字符</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cctype&gt;</span></span>
-<span class="hljs-built_in">isalnum</span>(c);
-<span class="hljs-built_in">isalpha</span>(c);
-<span class="hljs-built_in">islower</span>(c);
-<span class="hljs-built_in">isupper</span>(c);
-<span class="hljs-built_in">ispunct</span>(c); <span class="hljs-comment">// 是标点符号为真</span></code></pre></div>
-</li>
-</ol>
-<h4 id="2-Vector类型"><a href="#2-Vector类型" class="headerlink" title="2. Vector类型"></a>2. Vector类型</h4><p>可变长数组，类似于Java中的<code>ArrayList</code></p>
-<h5 id="2-1-初始化"><a href="#2-1-初始化" class="headerlink" title="2.1 初始化"></a>2.1 初始化</h5><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">vector</span>&lt;T&gt; v;
-<span class="hljs-built_in">vector</span>&lt;T&gt; v1 = &#123;a, b, c&#125;; <span class="hljs-comment">// 注意是花括号</span>
-<span class="hljs-built_in">vector</span>&lt;T&gt; v2&#123;a, b&#125;;     <span class="hljs-comment">// 花括号，两个元素</span>
-<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v3(<span class="hljs-number">10</span>, <span class="hljs-number">1</span>); <span class="hljs-comment">// 圆括号 10个元素，每个初始化为1</span></code></pre></div>
-<h5 id="2-2-操作"><a href="#2-2-操作" class="headerlink" title="2.2 操作"></a>2.2 操作</h5><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v;
-v.push_back(<span class="hljs-number">1</span>); <span class="hljs-comment">// 添加1</span>
-v.pop_back(); <span class="hljs-comment">// 去掉最后一个数据</span>
-v.empty();
-v.size();
-v[n]; <span class="hljs-comment">// 注意下标只能访问，但是不能够添加元素</span></code></pre></div>
-<h4 id="3-迭代器"><a href="#3-迭代器" class="headerlink" title="3. 迭代器"></a>3. 迭代器</h4><p>访问元素的作用</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s = <span class="hljs-string">"abcde"</span>;
-<span class="hljs-keyword">if</span> (s.begin() != s.end()) &#123; <span class="hljs-comment">// 确保s非空</span>
-  
-&#125;</code></pre></div>
-<h4 id="4-数组"><a href="#4-数组" class="headerlink" title="4. 数组"></a>4. 数组</h4><h5 id="4-1-指针和数组"><a href="#4-1-指针和数组" class="headerlink" title="4.1 指针和数组"></a>4.1 指针和数组</h5><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ia[] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;
-<span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">p</span><span class="hljs-params">(ia)</span></span>; <span class="hljs-comment">// 整型指针，指向ia的第一个元素</span>
-p++; <span class="hljs-comment">// 指向第一个元素</span></code></pre></div>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>基础</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
