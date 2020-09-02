@@ -1,610 +1,240 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>1.面向对象程序设计概述</title>
-    <url>/posts/ed34008.html</url>
-    <content><![CDATA[<h2 id="一、面向对象程序设计概述"><a href="#一、面向对象程序设计概述" class="headerlink" title="一、面向对象程序设计概述"></a>一、面向对象程序设计概述</h2><p>结构化程序：算法+数据结构 = 程序 </p>
-<p>（即确定如何操作数据，再决定如何组织数据的结构）</p>
-<p>面向对象程序设计(OOP)：将数据放在第一位，再考虑操作数据的算法</p>
-<h3 id="1-类"><a href="#1-类" class="headerlink" title="1. 类"></a>1. 类</h3><ol>
-<li><p><strong>类(class)</strong>是构造对象的模板或<strong>蓝图</strong>，就好像一个制作某件工艺品的模具，对象就是工艺品</p>
-</li>
-<li><p>由类构造(construct)对象的过程称为创建类的<strong>实例(instance)</strong></p>
-</li>
-<li><p><strong>封装(encapsulation)</strong>将<em>数据</em>和<em>行为</em>组合在一个包中，对对象的使用者隐藏具体的实现方式，也称为<strong>数据隐藏</strong></p>
-</li>
-<li><p>对象中的数据称为<em>实例字段(instance field)</em>，操作数据的过程称为<em>方法(method)</em></p>
-</li>
-<li><p>对象拥有的实例字段值的集合就是这个对象的当前<em>状态(state)</em></p>
-</li>
-<li>程序只能通过对象的方法和对象数据进行交互，提高了重用性和可靠性</li>
-<li>可以通过扩展一个类来构建新的类，这使得用户自定义类更加容易。在Java中，所有类都来自于一个<em>超类</em>，即<em>Object</em>。</li>
-<li>通过扩展一个类来建立一个新的类的过程就是<strong>继承(inheritance)</strong>，新类具有被扩展的类的全部属性和方法，可以自定义新的属性和方法。</li>
-</ol>
-<h3 id="2-对象"><a href="#2-对象" class="headerlink" title="2. 对象"></a>2. 对象</h3><p>对象的3个特性</p>
-<ul>
-<li><strong>行为(behavior)</strong>——可以对对象完成的操作（应用的方法）</li>
-<li><strong>状态(state)</strong>——描述当前状况的信息，状态的改变必须通过调用方法实现</li>
-<li><strong>标识(identity)</strong>——每个对象有唯一的标识来区分（如两个订单的编号肯定不相同）</li>
-</ul>
-<h3 id="3-识别类"><a href="#3-识别类" class="headerlink" title="3. 识别类"></a>3. 识别类</h3><p>编写程序从<strong>识别类</strong>开始，然后为各个类添加方法。</p>
-<p>一个简单的方法是在分析问题的过程中寻找<strong>名词——类</strong>，寻找<strong>动词——方法</strong></p>
-<p>例如我们有商品，订单，账户这样的名词作为类，即Item，Order，Account</p>
-<p>那么在账户这个类中，就可以有增加账户，修改账户等方法。</p>
-<h3 id="4-类之间的关系"><a href="#4-类之间的关系" class="headerlink" title="4. 类之间的关系"></a>4. 类之间的关系</h3><p>类之间最常见的关系有：</p>
-<ul>
-<li><strong>依赖</strong>（”<em>uses-a</em>“）</li>
-<li><strong>聚合</strong> （”<em>has-a</em>“）</li>
-<li><strong>继承</strong>（<em>“is-a”</em>)</li>
-</ul>
-<h4 id="4-1-依赖（dependence）"><a href="#4-1-依赖（dependence）" class="headerlink" title="4.1 依赖（dependence）"></a>4.1 依赖（dependence）</h4><p>如果一个类的方法使用或操纵另一个类的对象，我们就可以说一个类依赖于另一个类</p>
-<p>比如Order对象访问Account对象查看信用状态，这就是一个使用(“uses-a”)的关系。</p>
-<p>（尽可能减少相互依赖的类，做到低耦合）</p>
-<h4 id="4-2-聚合（aggregation）"><a href="#4-2-聚合（aggregation）" class="headerlink" title="4.2 聚合（aggregation）"></a>4.2 聚合（aggregation）</h4><p>类A的对象包含（”has-a”）类B的对象</p>
-<p>如一个Order对象就包含了一些Item对象</p>
-<h4 id="4-3-继承（inheritance）"><a href="#4-3-继承（inheritance）" class="headerlink" title="4.3 继承（inheritance）"></a>4.3 继承（inheritance）</h4><p>一个更特殊的类与一个更一般的类之间的关系</p>
-<p>也就是前面提到的扩展，比如现在我们定义一个加急订单RushOrder类，那么它是一个（”is-a”)Order类</p>
-<p>也就是有Order类继承而来。</p>
-<p>下图展示了上述的三种关系。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200423LearnJava01.png" alt=""></p>
-]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>1.面向对象程序设计概述</title>
+      <link href="/posts/ed34008.html"/>
+      <url>/posts/ed34008.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、面向对象程序设计概述"><a href="#一、面向对象程序设计概述" class="headerlink" title="一、面向对象程序设计概述"></a>一、面向对象程序设计概述</h2><p>结构化程序：算法+数据结构 = 程序 </p><p>（即确定如何操作数据，再决定如何组织数据的结构）</p><p>面向对象程序设计(OOP)：将数据放在第一位，再考虑操作数据的算法</p><h3 id="1-类"><a href="#1-类" class="headerlink" title="1. 类"></a>1. 类</h3><ol><li><p><strong>类(class)</strong>是构造对象的模板或<strong>蓝图</strong>，就好像一个制作某件工艺品的模具，对象就是工艺品</p></li><li><p>由类构造(construct)对象的过程称为创建类的<strong>实例(instance)</strong></p></li><li><p><strong>封装(encapsulation)</strong>将<em>数据</em>和<em>行为</em>组合在一个包中，对对象的使用者隐藏具体的实现方式，也称为<strong>数据隐藏</strong></p></li><li><p>对象中的数据称为<em>实例字段(instance field)</em>，操作数据的过程称为<em>方法(method)</em></p></li><li><p>对象拥有的实例字段值的集合就是这个对象的当前<em>状态(state)</em></p></li><li>程序只能通过对象的方法和对象数据进行交互，提高了重用性和可靠性</li><li>可以通过扩展一个类来构建新的类，这使得用户自定义类更加容易。在Java中，所有类都来自于一个<em>超类</em>，即<em>Object</em>。</li><li>通过扩展一个类来建立一个新的类的过程就是<strong>继承(inheritance)</strong>，新类具有被扩展的类的全部属性和方法，可以自定义新的属性和方法。</li></ol><h3 id="2-对象"><a href="#2-对象" class="headerlink" title="2. 对象"></a>2. 对象</h3><p>对象的3个特性</p><ul><li><strong>行为(behavior)</strong>——可以对对象完成的操作（应用的方法）</li><li><strong>状态(state)</strong>——描述当前状况的信息，状态的改变必须通过调用方法实现</li><li><strong>标识(identity)</strong>——每个对象有唯一的标识来区分（如两个订单的编号肯定不相同）</li></ul><h3 id="3-识别类"><a href="#3-识别类" class="headerlink" title="3. 识别类"></a>3. 识别类</h3><p>编写程序从<strong>识别类</strong>开始，然后为各个类添加方法。</p><p>一个简单的方法是在分析问题的过程中寻找<strong>名词——类</strong>，寻找<strong>动词——方法</strong></p><p>例如我们有商品，订单，账户这样的名词作为类，即Item，Order，Account</p><p>那么在账户这个类中，就可以有增加账户，修改账户等方法。</p><h3 id="4-类之间的关系"><a href="#4-类之间的关系" class="headerlink" title="4. 类之间的关系"></a>4. 类之间的关系</h3><p>类之间最常见的关系有：</p><ul><li><strong>依赖</strong>（”<em>uses-a</em>“）</li><li><strong>聚合</strong> （”<em>has-a</em>“）</li><li><strong>继承</strong>（<em>“is-a”</em>)</li></ul><h4 id="4-1-依赖（dependence）"><a href="#4-1-依赖（dependence）" class="headerlink" title="4.1 依赖（dependence）"></a>4.1 依赖（dependence）</h4><p>如果一个类的方法使用或操纵另一个类的对象，我们就可以说一个类依赖于另一个类</p><p>比如Order对象访问Account对象查看信用状态，这就是一个使用(“uses-a”)的关系。</p><p>（尽可能减少相互依赖的类，做到低耦合）</p><h4 id="4-2-聚合（aggregation）"><a href="#4-2-聚合（aggregation）" class="headerlink" title="4.2 聚合（aggregation）"></a>4.2 聚合（aggregation）</h4><p>类A的对象包含（”has-a”）类B的对象</p><p>如一个Order对象就包含了一些Item对象</p><h4 id="4-3-继承（inheritance）"><a href="#4-3-继承（inheritance）" class="headerlink" title="4.3 继承（inheritance）"></a>4.3 继承（inheritance）</h4><p>一个更特殊的类与一个更一般的类之间的关系</p><p>也就是前面提到的扩展，比如现在我们定义一个加急订单RushOrder类，那么它是一个（”is-a”)Order类</p><p>也就是有Order类继承而来。</p><p>下图展示了上述的三种关系。</p><p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200423LearnJava01.png" alt=""></p>]]></content>
+      
+      
       <categories>
-        <category>Java</category>
-        <category>对象和类</category>
+          
+          <category> Java </category>
+          
+          <category> 对象和类 </category>
+          
       </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo-Permalink简化</title>
-    <url>/posts/838443af.html</url>
-    <content><![CDATA[<h1 id="Permalink简化"><a href="#Permalink简化" class="headerlink" title="Permalink简化"></a>Permalink简化</h1><p>在文档名有中文的时候，因为汉字会被转义，默认的永久链接会非常复杂，具体原因可以看这一篇文章</p>
-<p><a href="http://www.ruanyifeng.com/blog/2010/02/url_encoding.html" target="_blank" rel="noopener">阮一峰 关于url编码</a></p>
-<p>有两种方法优化。</p>
-<a id="more"></a>
-<h2 id="方法一：自定义"><a href="#方法一：自定义" class="headerlink" title="方法一：自定义"></a>方法一：自定义</h2><p>首先，在<code>scaffolds</code>的<code>post.md</code>中，加入<code>urlname</code>元素。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">urlname:</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br></pre></td></tr></table></figure>
-<p>然后，在配置文件<code>_config.yml</code>中，将永久链接<code>permalink</code>的形式改为</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">permalink: :category/:urlname/</span><br></pre></td></tr></table></figure>
-<p>也就是类别加上自定义的url链接。</p>
-<p>每次写文章时，可以自己设计该页的<code>url</code>，使得它变得简单，同时也利于区分。</p>
-<p>但是，这种修改方法的链接会随着文件目录的改变而改变，</p>
-<p>比如一篇文章<code>HelloWorld.md</code>本来放在<code>_posts</code>目录下，链接为<code>https://xxx/_posts/HelloWorld.md</code></p>
-<p>之后归类到<code>_posts/A</code>目录下，那么链接变为<code>https://xxx/_posts/A/HelloWorld.md</code></p>
-<p>这样不太利于分享，所以推荐使用第二种方法。</p>
-<h2 id="方法二：插件"><a href="#方法二：插件" class="headerlink" title="方法二：插件"></a>方法二：插件</h2><p>使用<code>hexo-abbrlink</code>这个插件</p>
-<ol>
-<li><p>安装</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置</p>
-<p>在<code>_config.yml</code>文件中修改永久链接格式</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink.html</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc32  # 算法：crc16(default) and crc32</span><br><span class="line">  rep: hex    # 进制：dec(default) and hex</span><br></pre></td></tr></table></figure>
-<p><code>posts</code>部分是可以更改的，也可以仿照方法一添加一个关键词便于识别</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">permalink: :keywords/:abbrlink.html</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>生成</p>
-<p>在根目录创建<code>Gruntfile.js</code>文件，让插件到<code>source/_posts/</code>下读取所有的.md文件，把文件中的@@abbrlink替换成文件内容的hash值。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;</span><br><span class="line"> </span><br><span class="line">  grunt.initConfig(&#123;</span><br><span class="line"></span><br><span class="line">    rewrite: &#123;</span><br><span class="line">      abbrlink: &#123;</span><br><span class="line">        src: <span class="string">'source/_posts/**/*.md'</span>,</span><br><span class="line">        editor: <span class="function"><span class="keyword">function</span>(<span class="params">contents, filepath</span>)</span>&#123;</span><br><span class="line">          <span class="keyword">const</span> crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</span><br><span class="line">          <span class="keyword">const</span> hash = crypto.createHash(<span class="string">'sha256'</span>);</span><br><span class="line"></span><br><span class="line">          hash.update(contents);</span><br><span class="line">          <span class="keyword">var</span> hashValue = hash.digest(<span class="string">'hex'</span>);</span><br><span class="line"></span><br><span class="line">          <span class="keyword">return</span> contents.replace(<span class="regexp">/@@abbrlink/g</span>, hashValue.substring(<span class="number">0</span>, <span class="number">16</span>));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line"> </span><br><span class="line">  grunt.loadNpmTasks(<span class="string">'grunt-rewrite'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>这种方法生成的链接是不带目录的，直接就是第二步设置中<code>permalink</code>的样式，所以也没有了被改变的风险。</p>
-<p>参考</p>
-<ol>
-<li><a href="http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html" target="_blank" rel="noopener">http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html</a></li>
-</ol>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>概率论的基本概念</title>
+      <link href="/posts/36736857.html"/>
+      <url>/posts/36736857.html</url>
+      
+        <content type="html"><![CDATA[<p>本文介绍了概率论的基本概念，包括概率的定义，概率的计算，同时还有随机测试的简单介绍。</p><p><strong>重点</strong></p><ul><li>概率的定义</li><li>条件概率</li><li>乘法公式</li><li>全概率公式</li><li>贝叶斯公式</li></ul><a id="more"></a><h2 id="一、概率的定义"><a href="#一、概率的定义" class="headerlink" title="一、概率的定义"></a>一、概率的定义</h2><p>当我们还不能用数学符号描述一件事情，那么说明我们还没有想清楚这件事。</p><p>所以，我们需要建立元素到数据的<strong>映射</strong></p><h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h3><h4 id="1-1-随机实验"><a href="#1-1-随机实验" class="headerlink" title="1.1 随机实验"></a>1.1 随机实验</h4><ul><li>可以在相同的条件下重复进行</li><li>每次实验结果不止一个，并且事先明确实验的所有可能结果</li><li>进行一次实验前不能够确定那一个结果会出现</li></ul><p>例：抛一枚硬币，观察正面H与反面T出现的情况</p><h4 id="1-2-样本空间"><a href="#1-2-样本空间" class="headerlink" title="1.2 样本空间"></a>1.2 样本空间</h4><p>随机试验$E$的所有可能结果组成的集合称为$E$的<strong>样本空间</strong>，记为$\Omega$</p><p>样本空间中的每个元素，即$E$的每个结果，称为<strong>样本点</strong>，记为$e$</p><h4 id="1-3-随机事件"><a href="#1-3-随机事件" class="headerlink" title="1.3 随机事件"></a>1.3 随机事件</h4><p>样本空间$\Omega$的任意子集$A$称为<strong>随机事件</strong></p><p>观察到样本点$e$，若$e\in A$，则称这一事件发生。</p><ul><li>基本事件：由一个样本点组成的单点集</li><li>复合事件：由两个或两个以上样本点组成的集合</li><li>必然事件：全集$\Omega$</li><li>不可能事件：空集$\emptyset$</li></ul><h3 id="2-事件的集合运算"><a href="#2-事件的集合运算" class="headerlink" title="2. 事件的集合运算"></a>2. 事件的集合运算</h3><ul><li>包含：$A\subset B$，事件B包含事件A，则事件A发生必然导致事件B发生</li><li>相等：$A=B$，即$A\subset B$且$B\subset A$</li><li>和：$A\bigcup B$，即A和B至少有一个发生</li><li>差：$A-B$，即事件A发生且事件B不发生</li><li>积：$A\bigcup B$，记作$AB$，即事件A和事件B都发生</li><li>互不相容：$AB = \emptyset$，即A和B不能同时发生</li><li>互逆：$A\bigcup B=\Omega$ 且$AB = \emptyset$，A和B互逆，通常B记为$\overline{A}$</li></ul><h4 id="2-1-复杂事件的集合运算"><a href="#2-1-复杂事件的集合运算" class="headerlink" title="2.1 复杂事件的集合运算"></a>2.1 复杂事件的集合运算</h4><ul><li>A发生而B和C都不发生：$A\overline{B} \overline{C}=A-B-C=A-(B\bigcup C)$</li><li>A与B都发生而C不发生：$AB\overline{C}=AB-C=AB-ABC$</li><li>三个事件都发生：$ABC$</li><li>三个事件恰好有一个发生：$A\overline{B}\overline{C}+\overline{A}B\overline{C}+\overline{A}\overline{B}C$</li><li>三个事件至少发生一个：$A\bigcup B\bigcup C$</li></ul><h4 id="2-2-常用定律"><a href="#2-2-常用定律" class="headerlink" title="2.2 常用定律"></a>2.2 常用定律</h4><ul><li>交换律</li><li>结合律</li><li>分配率：$A\, \bigcup \,(B\bigcap C)=(A\bigcup B)\bigcap (A\bigcup C)$    $A\, \bigcap \,(B\bigcup C)=(A\bigcap B)\,\bigcup \,(A\bigcap C)$</li><li>德摩根定律：$\overline{A\bigcup B}=\overline{A}\bigcap\overline{B}$    $\overline{A\bigcap B}=\overline{A}\bigcup\overline{B}$</li></ul><h3 id="3-频率"><a href="#3-频率" class="headerlink" title="3. 频率"></a>3. 频率</h3><p>描述了事件发生的频繁程度</p><p><strong>定义</strong></p><ul><li>重复观察n次事件A发生的次数$n_A$称为A的<em>频数</em></li><li>比值$\frac{n_A}{n}$称为事件A发生的<strong>频率</strong>，并记为$f_n(A)$</li></ul><p><strong>性质</strong></p><ol><li><p>$0\,\leq\, f_n(A)\, \leq\, 1$ </p></li><li><p>$f_n(\Omega)=1$</p></li><li><p>若$A_1,\cdots,A_k$两两互不相容，则</p><script type="math/tex; mode=display">f_n(A_1\,\bigcup\,\cdots\bigcup\,A_k)=f_n(A_1)+\cdots+f_n(A_k)</script></li></ol><p><strong>收敛性</strong></p><ul><li>当n足够大，$f_n(A)$收敛于某个常数，这个常数就是<strong>概率</strong>（证明见后续）</li></ul><p><strong>我们应该都听说过德摩根抛硬币的故事，对一个事件进行大量的实验可以得到频率，但是我们不可能对所有事件都做类似的事情，所以就有了概率</strong></p><h3 id="4-概率"><a href="#4-概率" class="headerlink" title="4. 概率"></a>4. 概率</h3><p>表征事件发生的可能性大小</p><p><strong>定义</strong></p><p>$\Omega$为样本空间，对于每一事件A赋予一实数$P(A)$，若P(A)满足下列条件则被称为概率：</p><ul><li>非负性：$0\leq P(A)\leq 1$</li><li>规范性：$P(\Omega)=1$</li><li>可列可加性：$A_1,\cdots,A_n$互不相容，则$P(A_1\,\bigcup\,\cdots\bigcup\,A_k)=P(A_1)+\cdots+P(A_k)$</li></ul><p><strong>性质</strong></p><ol><li>$P(\emptyset)=0$</li><li>$P(\overline{A})=1-P(A)$</li><li>若$A\subset B$，则有$P(A)\leq P(B),\quad P(B-A)=P(B)-P(A)$</li><li>对于任意两个事件A和B，$P(A\bigcup B)=P(A)+P(B)-P(A+B)$</li></ol><h4 id="4-1-古典概型-等可能概型"><a href="#4-1-古典概型-等可能概型" class="headerlink" title="4.1 古典概型(等可能概型)"></a>4.1 古典概型(等可能概型)</h4><p><strong>定义</strong></p><p>若$\Omega$是**有限样本空间，其样本点为$e_1,\cdots e_n$，在有限样本空间中引进概率。</p><p><strong>1/n</strong>称为事件${e_i}$的概率，记为$P({e_i})$</p><script type="math/tex; mode=display">P(\{e_1\})+\cdots +P(\{e_n\})=P(\Omega)=1</script><p>从定义中不难发现古典概型的两个特点：</p><ul><li>样本空间包含<strong>有限</strong>个元素</li><li>试验中每个基本事件发生的可能性相同</li></ul><p>注：<strong>基本事件是两两不相容的</strong></p><p>若事件A包含k个基本事件，则有</p><script type="math/tex; mode=display">P(A)=\sum_{i=1}^kP(\{e_{i_k}\})=\frac{k}{n}</script><h4 id="4-2-几何概型"><a href="#4-2-几何概型" class="headerlink" title="4.2 几何概型"></a>4.2 几何概型</h4><p>数据从有限集合推广到无限集合</p><p>例：约会问题</p><p>两人约定7点到8点在某地会面，先到者等候另一人20分钟，过时就离去，试求这两人会面的概率。</p><p>解：以$x,y$分别表示两人到达的时刻，则会面的充要条件为$|x-y|\leq20$，这就是一个几何概率的问题，可能的结果全体是边长60的正方形里面的点，结果为</p><script type="math/tex; mode=display">P(A)=\frac{60^2-40^2}{60^2}</script><p>从上面的例子不难看出，样本空间从原来的有限的个数，变成了无限的点。</p><p>如果要在半径为1的圆内随机地取一条弦，问弦长超过$\sqrt{3}$的概率是多少？</p><p>3种思路有3种不同的答案</p><p><strong>在数据映射中，我们需要遵循物理世界到数据集合的某种结构保持</strong></p><hr><h2 id="二、概率的计算"><a href="#二、概率的计算" class="headerlink" title="二、概率的计算"></a>二、概率的计算</h2><h3 id="1-条件概率"><a href="#1-条件概率" class="headerlink" title="1. 条件概率"></a>1. 条件概率</h3><p>事件A发生的条件下事件B发生的概率</p><h4 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h4><p>设A，B是两事件，且$P(A)&gt;0$，称</p><script type="math/tex; mode=display">P(B|A)=\frac{P(AB)}{P(A)}</script><p>为在事件A发生的条件下事件B发生的<strong>条件概率</strong></p><p>条件概率符合概率定义中的3个条件</p><p>非负性</p><p>规范性</p><p>可列可加性：$B_1,\cdots,B_n$两两互不相容</p><script type="math/tex; mode=display">P(\bigcup_{i=1}^\infty B_i\,\mid\,A)=\sum_{i=1}^\infty P(B_i\mid A)</script><p>同时也可以使用概率的性质</p><script type="math/tex; mode=display">P(B_1\bigcup B_2)=P(B_1\mid A)+P(B_2\mid A)-P(B_1B_2\mid A)</script><p>注意这里是对任意事件$B_1,B_2$，两者不一定互不相容，如果互不相容，那么$P(B_1B_2)=\emptyset$，与可列可加性不矛盾。</p><h4 id="1-2-乘法公式"><a href="#1-2-乘法公式" class="headerlink" title="1.2 乘法公式"></a>1.2 乘法公式</h4><script type="math/tex; mode=display">P(AB)=P(A)P(B|A)</script><p>推广：一般地，我们有：</p><script type="math/tex; mode=display">P(A_1A_2\cdots A_n)=P(A_1)P(A_2\mid A_1)\cdots P(A_n\mid A_1A_2\cdots A_{n-1})</script><p>大多数应用中，我们会直接获取条件概率，通过它进行计算</p><h4 id="1-3-完备事件组"><a href="#1-3-完备事件组" class="headerlink" title="1.3  完备事件组"></a>1.3  完备事件组</h4><p>设$B_1,\cdots,B_n$是样本空间$\Omega$的一个事件组，若满足</p><ul><li>$B_i\bigcap B_j=\emptyset$ ，对于任意$i\neq j$</li><li>$\bigcup_iB_i=\Omega$</li></ul><p>则$B_1,\cdots,B_n$称为一个完备事件组</p><h4 id="1-4-全概率公式"><a href="#1-4-全概率公式" class="headerlink" title="1.4 全概率公式"></a>1.4 全概率公式</h4><p>设$B_1,\cdots,B_n$是样本空间$\Omega$的一个完备事件组，且$P(B_i)&gt;0(i=1,2,\cdots,n)$，则对于任一随机事件A，有</p><script type="math/tex; mode=display">P(A)=\sum_{i=1}^nP(B_i)P(A\mid B_i)</script><p>当$P(A)$不易求得时，利用此公式</p><h4 id="1-5-贝叶斯公式"><a href="#1-5-贝叶斯公式" class="headerlink" title="1.5 贝叶斯公式"></a>1.5 贝叶斯公式</h4><p>设实验E的样本空间为$\Omega$，$A$为$\Omega$的事件，$B_1,\cdots,B_n$为$S$的一个划分，且$P(A)&gt;0,P(B_i)&gt;0$，则</p><script type="math/tex; mode=display">P(B_i\mid A)=\frac{P(A\mid B_i)P(B_i)}{\sum_{j=1}^nP(A\mid B_j)P(B_j)},i=1,2,\cdots,n</script><p>如：设$A,B$为两事件，$P(B)&gt;0$，则</p><script type="math/tex; mode=display">P(A\mid B)=\frac{P(B\mid A)\times P(A)}{P(B)}</script><p>贝叶斯定理往往与全概率公式同时使用。全概率公式用于”由因求果“的问题，而贝叶斯定理用于”执果寻因“问题。</p><p><strong>常用</strong>：令$n=2$，那么全概率公式和贝叶斯公式分别为：</p><script type="math/tex; mode=display">P(A)=P(A\mid B)P(B)+P(A\mid \overline{B})P(\overline{B})</script><script type="math/tex; mode=display">P(B\mid A)=\frac{P(AB)}{P(A)}=\frac{P(A\mid B)P(B)}{P(A\mid B)P(B)+P(A\mid \overline{B})P(\overline{B})}</script><h4 id="1-6-独立性"><a href="#1-6-独立性" class="headerlink" title="1.6 独立性"></a>1.6 独立性</h4><p><strong>定义</strong>：设$A,B$是两事件，如果满足等式</p><script type="math/tex; mode=display">P(AB)=P(A)P(B)</script><p>则称事件$A$和事件$B$相互独立</p><p><strong>定理</strong>：设$A,B$是两事件，且$P(A)&gt;0$，若$A,B$相互独立，则$P(B\mid A)=P(B)$，反之亦然</p><p><strong>定理</strong>：若事件$A,B$相互独立，则下列各对事件也相互独立，$A\&amp;\overline{B},B\&amp;\overline{A},\overline{A}\&amp;\overline{B}$</p><p><strong>定义</strong>：设$A,B,C$是三个事件，如果满足等式</p><script type="math/tex; mode=display">P(AB)=P(A)P(B),\\ P(BC)=P(B)P(C)\\P(AC)=P(A)P(C)\\P(ABC)=P(A)P(B)P(C)</script><p>则称事件$A,B,C$相互独立</p><hr><h2 id="三、随机测试示例"><a href="#三、随机测试示例" class="headerlink" title="三、随机测试示例"></a>三、随机测试示例</h2><p>实际应用中使用概率论</p><h3 id="1-随机测试初步"><a href="#1-随机测试初步" class="headerlink" title="1.  随机测试初步"></a>1.  随机测试初步</h3><p>假设有一个计算多项式乘法的程序。</p><p>程序可能采用左右两边的某一方式实现：</p><script type="math/tex; mode=display">(x+1)(x-2)(x+3)(x-4)(x+5)(x-6)=x^6-7x^3+25</script><p>思考：</p><ul><li>如何验证左右两边的多项式相等</li><li>假设有一个超大规模的多项式呢？</li></ul><script type="math/tex; mode=display">F(X)?\equiv G(x)</script><h4 id="1-1-规范化"><a href="#1-1-规范化" class="headerlink" title="1.1 规范化"></a>1.1 规范化</h4><p>两个多项式相等当且仅当他们的规范式中所有的对应系数相等，</p><p>那么把$F(x)$变换为规范式，有$O(d^2)$的复杂度</p><h4 id="1-2-随机测试-初步"><a href="#1-2-随机测试-初步" class="headerlink" title="1.2 随机测试-初步"></a>1.2 随机测试-初步</h4><p>设$F(X),G(x)$的最高阶为的$d$，随机算法首先是从${1,\cdots,100d}$中均匀随机（等可能）地选择一个整数$r$，然后计算两个式子的值，进行判断。有$O(d)$的复杂度，大大提高了速度。</p><p>当然，这种算法可能会给出<strong>错误</strong>的答案。</p><p>$F(x)\neq G(x), F(r)=G(r)$，算法检测结果错误</p><p>错误的概率是多少？可以接受吗？</p><p>当$r$是方程$F(x)-G(x)=0$的根时，必然会出现错误结果。</p><p>$F(x)-G(x)$的次数不高于$d$，由代数的基本定理可知，$F(x)-G(x)=0$不可能多于$d$个根。</p><p>那么在${1,\cdots,100d}$中，给出错误答案的概率不会高于$\frac{1}{100}$</p><h3 id="2-随机测试改进"><a href="#2-随机测试改进" class="headerlink" title="2. 随机测试改进"></a>2. 随机测试改进</h3><p>如何改进算法正确率？</p><p>很容易想到两个方向，扩大检测范围，重复多次检测</p><h4 id="2-1-扩大范围"><a href="#2-1-扩大范围" class="headerlink" title="2.1 扩大范围"></a>2.1 扩大范围</h4><p>在更大的范围进行取值，比如在${1,\cdots,1000d}$中进行检测，那么错误答案概率不会超过$\frac{1}{1000}$</p><h4 id="2-2-重复检测"><a href="#2-2-重复检测" class="headerlink" title="2.2 重复检测"></a>2.2 重复检测</h4><p>重复多次进行随机检测</p><ul><li><p>有放回抽样</p><p>$k$次有放回抽样错误率为</p><script type="math/tex; mode=display">P(E_1\,\bigcap\cdots\bigcap\,E_k)=\prod_{i=1}^kP(E_i)\leq(\frac{1}{100})^k</script><p>可以看到，错误率指数级降低</p></li><li><p>无放回抽样</p></li></ul><p>总结：</p><p>无放回比有放回准确率高</p><p>有放回实现比无放回简单</p><p>当$d+1$次无放回抽样后，能够确保准确性，但是算法复杂度提升到$O(d^2)$</p><h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><h3 id="1-概率的定义"><a href="#1-概率的定义" class="headerlink" title="1. 概率的定义"></a>1. 概率的定义</h3><p>$\Omega$为样本空间，对于每一事件A赋予一实数$P(A)$，若P(A)满足下列条件则被称为概率：</p><ul><li>非负性：$0\leq P(A)\leq 1$</li><li>规范性：$P(\Omega)=1$</li><li>可列可加性：$A_1,\cdots,A_n$互不相容，则$P(A_1\,\bigcup\,\cdots\bigcup\,A_k)=P(A_1)+\cdots+P(A_k)$</li></ul><h3 id="2-条件概率"><a href="#2-条件概率" class="headerlink" title="2. 条件概率"></a>2. 条件概率</h3><script type="math/tex; mode=display">P(B|A)=\frac{P(AB)}{P(A)}</script><h3 id="3-乘法公式"><a href="#3-乘法公式" class="headerlink" title="3. 乘法公式"></a>3. 乘法公式</h3><script type="math/tex; mode=display">P(A_1A_2\cdots A_n)=P(A_1)P(A_2\mid A_1)\cdots P(A_n\mid A_1A_2\cdots A_{n-1})</script><h3 id="4-全概率公式"><a href="#4-全概率公式" class="headerlink" title="4. 全概率公式"></a>4. 全概率公式</h3><script type="math/tex; mode=display">P(A)=P(A\mid B_1)P(B_1)+\cdots+P(A\mid B_n)P(B_n)</script><h3 id="5-贝叶斯公式"><a href="#5-贝叶斯公式" class="headerlink" title="5. 贝叶斯公式"></a>5. 贝叶斯公式</h3><script type="math/tex; mode=display">P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)}</script><p>参考：</p><ol><li><a href="https://www.icourse163.org/learn/NJU-1450307351?tid=1450738603#/learn/announce" target="_blank" rel="noopener">中国大学MOOC-南京大学-数据科学基础</a></li><li>《概率论与数理统计》浙江大学第四版</li></ol>]]></content>
+      
+      
       <categories>
-        <category>Hexo</category>
+          
+          <category> 数据科学 </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo写作</title>
-    <url>/posts/c4064b2b.html</url>
-    <content><![CDATA[<h1 id="Hexo写作"><a href="#Hexo写作" class="headerlink" title="Hexo写作"></a>Hexo写作</h1><p>本文介绍了一些基本的Hexo配置和使用hexo+GitHub写作的流程。</p>
-<a id="more"></a>
-<h3 id="1-Hexo基本命令"><a href="#1-Hexo基本命令" class="headerlink" title="1. Hexo基本命令"></a>1. Hexo基本命令</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo g = hexo generate  #生成</span><br><span class="line">hexo s = hexo server  #启动本地预览</span><br><span class="line">hexo d = hexo deploy  #远程部署</span><br><span class="line">hexo n "文章标题" = hexo new "文章标题"  #新建一篇博文</span><br></pre></td></tr></table></figure>
-<h3 id="2-整体配置"><a href="#2-整体配置" class="headerlink" title="2. 整体配置"></a>2. 整体配置</h3><p><code>\hexo\_config.yml</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Site</span></span><br><span class="line">title:  # 网站名，标签页显示</span><br><span class="line">subtitle:  # 副标题，网站名下显示</span><br><span class="line">description:  # 网站描述，便于搜索</span><br><span class="line">keywords:</span><br><span class="line">author: # 作者</span><br><span class="line">language: zh-CN # 中文</span><br><span class="line">timezone: Asia/Shanghai # 时区</span><br></pre></td></tr></table></figure>
-<h3 id="3-更换主题"><a href="#3-更换主题" class="headerlink" title="3. 更换主题"></a>3. 更换主题</h3><p>推荐使用<code>melody</code></p>
-<p><a href="[https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#%E5%AE%89%E8%A3%85](https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#安装">hexo-theme-melody快速开始</a>)</p>
-<p>这个主题就是我现在网站使用的主题，它有完整的中文教程，功能齐全。按照教程配置就可以了。</p>
-<h3 id="4-写作步骤"><a href="#4-写作步骤" class="headerlink" title="4. 写作步骤"></a>4. 写作步骤</h3><ol>
-<li><p>新建文章</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo new "title"</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>写作</p>
-<p><code>\hexo\source\_post</code>中找到<code>title.md</code>，使用<code>typora</code>打开</p>
-<p>注意文章的<code>tags</code>格式是<code>[]</code></p>
-<p>在信息栏填写<code>top_img</code>信息可以自定义该页图片情况，如<code>false</code>表示不显示</p>
-<p><code>文章中&lt;!-- more --&gt;</code>之前的部分会显示在主页上，并出现<code>Read more</code>按钮，点击阅读更多内容</p>
-</li>
-</ol>
-<ol>
-<li><p>预览</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo s</span><br><span class="line">hexo s --debug // 在命令行生成debug信息</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>同步到远程</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="5-问题"><a href="#5-问题" class="headerlink" title="5.  问题"></a>5.  问题</h3><ol>
-<li><p>Template render error: (unknown path)</p>
-<p>在命令行输入<code>hexo -g</code>后报错，原因在于文章内容中有<strong>{}</strong>时，如果它没有被代码块包括，解析会出现错误，所以需要写成</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>本地预览与远程显示不一致</p>
-<p>删除缓存</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
-<p>在网页上刷新</p>
-</li>
-</ol>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> 概率论 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hexo个人博客绑定域名和配置SSL证书</title>
+      <link href="/posts/2cd2c226.html"/>
+      <url>/posts/2cd2c226.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p><a id="more"></a><h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p><p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p><p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p><p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/domainname1.png" alt=""></p><h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p><p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p><div class="table-container"><table><thead><tr><th>主机记录</th><th>记录类型</th><th>线路类型</th><th>记录值</th></tr></thead><tbody><tr><td>www</td><td>CNAME</td><td>默认</td><td>你的Github项目仓库名</td></tr><tr><td>@</td><td>CNAME</td><td>默认</td><td>你的Github项目仓库名</td></tr></tbody></table></div><p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p><h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p><p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/2020-04-09domainname2.png" alt=""></p><p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p><h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p><p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p><p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p><hr><h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p><p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p><p><a href="https://cloud.tencent.com/document/product/400/35244" target="_blank" rel="noopener">腾讯云Nginx服务器证书安装</a></p><p><a href="https://www.jianshu.com/p/026d67cc6cb1" target="_blank" rel="noopener">Mac下nginx的使用</a></p><p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p><p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p><p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>]]></content>
+      
+      
       <categories>
-        <category>Hexo</category>
+          
+          <category> Hexo </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo个人博客绑定域名和配置SSL证书</title>
-    <url>/posts/2cd2c226.html</url>
-    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
-<a id="more"></a>
-<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
-<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
-<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
-<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/domainname1.png" alt=""></p>
-<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
-<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>主机记录</th>
-<th>记录类型</th>
-<th>线路类型</th>
-<th>记录值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>www</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-<tr>
-<td>@</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
-<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
-<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/2020-04-09domainname2.png" alt=""></p>
-<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
-<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
-<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
-<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
-<hr>
-<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
-<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
-<p><a href="https://cloud.tencent.com/document/product/400/35244" target="_blank" rel="noopener">腾讯云Nginx服务器证书安装</a></p>
-<p><a href="https://www.jianshu.com/p/026d67cc6cb1" target="_blank" rel="noopener">Mac下nginx的使用</a></p>
-<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
-<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
-<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>字符串,向量和数组</title>
+      <link href="/posts/869e4b19.html"/>
+      <url>/posts/869e4b19.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="二、字符串，向量和数组"><a href="#二、字符串，向量和数组" class="headerlink" title="二、字符串，向量和数组"></a>二、字符串，向量和数组</h3><p>作用域操作符<code>::</code></p><p>含义：编译器应从操作符左侧的作用域中寻找右边那个名字</p><p>比如<code>std::cin</code>是要使用命名空间<code>std</code>中的<code>cin</code></p><p>这样做是为了避免某些名字被重复使用</p><p>使用<code>using</code>声明可以更加简便的使用命名空间中的成员。</p><a id="more"></a><h4 id="1-String类型"><a href="#1-String类型" class="headerlink" title="1. String类型"></a>1. String类型</h4><p>表示可变长的字符串</p><h5 id="1-1-定义和初始化"><a href="#1-1-定义和初始化" class="headerlink" title="1.1 定义和初始化"></a>1.1 定义和初始化</h5><ol><li><p>使用需要头文件和命名空间</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br></pre></td></tr></table></figure></li><li><p>初始化</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s1; <span class="comment">// 空字符串</span></span><br><span class="line"><span class="built_in">string</span> s2 = s1; <span class="comment">// s2是s1的副本</span></span><br><span class="line"><span class="built_in">string</span> s3 = <span class="string">"abc"</span>;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s4</span><span class="params">(<span class="number">10</span>, <span class="string">'c'</span>)</span></span>; <span class="comment">// 十个c</span></span><br></pre></td></tr></table></figure></li></ol><h5 id="1-2-string对象上的操作"><a href="#1-2-string对象上的操作" class="headerlink" title="1.2 string对象上的操作"></a>1.2 string对象上的操作</h5><ol><li><p>使用<code>getline</code>读取一整行</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> line;</span><br><span class="line">getline(<span class="built_in">cin</span>, line);</span><br></pre></td></tr></table></figure><p>当读取到换行符时结束，并将读到的内容存入<code>string</code>中，但是<strong>不存换行符</strong></p></li><li><p><code>empty</code>和<code>size</code>操作</p><p><code>str.empty()</code>根据字符串是否为空返回一个布尔值</p><p><code>str.size()</code>返回字符串长度</p><p>使用visual studio编程的时候，碰到过一个<strong>warning</strong>，将无符号数赋值给了有符号数。</p><p>这是由于<code>size</code>函数的返回值类型引起的，它是一个<code>string::size_type</code>类型的值，是无符号类型的，</p><p>可以用<code>auto</code>来推断变量的值</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> len = str.size();</span><br></pre></td></tr></table></figure></li><li><p>比较，赋值，相加</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">"abc"</span>;</span><br><span class="line"><span class="built_in">string</span> s2 = <span class="string">"xcvd"</span>;</span><br><span class="line"><span class="comment">// s1 &lt; s2 比较第一个不同的字符</span></span><br><span class="line"><span class="built_in">string</span> s3 = s1; <span class="comment">// 赋值</span></span><br><span class="line"><span class="built_in">string</span> s4 = s1 + s2; <span class="comment">// abcxcvd</span></span><br></pre></td></tr></table></figure></li><li><p>处理<code>string</code>中的字符</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="built_in">isalnum</span>(c);</span><br><span class="line"><span class="built_in">isalpha</span>(c);</span><br><span class="line"><span class="built_in">islower</span>(c);</span><br><span class="line"><span class="built_in">isupper</span>(c);</span><br><span class="line"><span class="built_in">ispunct</span>(c); <span class="comment">// 是标点符号为真</span></span><br></pre></td></tr></table></figure></li></ol><h4 id="2-Vector类型"><a href="#2-Vector类型" class="headerlink" title="2. Vector类型"></a>2. Vector类型</h4><p>可变长数组，类似于Java中的<code>ArrayList</code></p><h5 id="2-1-初始化"><a href="#2-1-初始化" class="headerlink" title="2.1 初始化"></a>2.1 初始化</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;T&gt; v;</span><br><span class="line"><span class="built_in">vector</span>&lt;T&gt; v1 = &#123;a, b, c&#125;; <span class="comment">// 注意是花括号</span></span><br><span class="line"><span class="built_in">vector</span>&lt;T&gt; v2&#123;a, b&#125;;     <span class="comment">// 花括号，两个元素</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v3(<span class="number">10</span>, <span class="number">1</span>); <span class="comment">// 圆括号 10个元素，每个初始化为1</span></span><br></pre></td></tr></table></figure><h5 id="2-2-操作"><a href="#2-2-操作" class="headerlink" title="2.2 操作"></a>2.2 操作</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">v.push_back(<span class="number">1</span>); <span class="comment">// 添加1</span></span><br><span class="line">v.pop_back(); <span class="comment">// 去掉最后一个数据</span></span><br><span class="line">v.empty();</span><br><span class="line">v.size();</span><br><span class="line">v[n]; <span class="comment">// 注意下标只能访问，但是不能够添加元素</span></span><br></pre></td></tr></table></figure><h4 id="3-迭代器"><a href="#3-迭代器" class="headerlink" title="3. 迭代器"></a>3. 迭代器</h4><p>访问元素的作用</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s = <span class="string">"abcde"</span>;</span><br><span class="line"><span class="keyword">if</span> (s.begin() != s.end()) &#123; <span class="comment">// 确保s非空</span></span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="4-数组"><a href="#4-数组" class="headerlink" title="4. 数组"></a>4. 数组</h4><h5 id="4-1-指针和数组"><a href="#4-1-指针和数组" class="headerlink" title="4.1 指针和数组"></a>4.1 指针和数组</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ia[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">p</span><span class="params">(ia)</span></span>; <span class="comment">// 整型指针，指向ia的第一个元素</span></span><br><span class="line">p++; <span class="comment">// 指向第一个元素</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>Hexo</category>
+          
+          <category> C++ </category>
+          
+          <category> 基础 </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>字符串,向量和数组</title>
-    <url>/posts/869e4b19.html</url>
-    <content><![CDATA[<h3 id="二、字符串，向量和数组"><a href="#二、字符串，向量和数组" class="headerlink" title="二、字符串，向量和数组"></a>二、字符串，向量和数组</h3><p>作用域操作符<code>::</code></p>
-<p>含义：编译器应从操作符左侧的作用域中寻找右边那个名字</p>
-<p>比如<code>std::cin</code>是要使用命名空间<code>std</code>中的<code>cin</code></p>
-<p>这样做是为了避免某些名字被重复使用</p>
-<p>使用<code>using</code>声明可以更加简便的使用命名空间中的成员。</p>
-<a id="more"></a>
-<h4 id="1-String类型"><a href="#1-String类型" class="headerlink" title="1. String类型"></a>1. String类型</h4><p>表示可变长的字符串</p>
-<h5 id="1-1-定义和初始化"><a href="#1-1-定义和初始化" class="headerlink" title="1.1 定义和初始化"></a>1.1 定义和初始化</h5><ol>
-<li><p>使用需要头文件和命名空间</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>初始化</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s1; <span class="comment">// 空字符串</span></span><br><span class="line"><span class="built_in">string</span> s2 = s1; <span class="comment">// s2是s1的副本</span></span><br><span class="line"><span class="built_in">string</span> s3 = <span class="string">"abc"</span>;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s4</span><span class="params">(<span class="number">10</span>, <span class="string">'c'</span>)</span></span>; <span class="comment">// 十个c</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h5 id="1-2-string对象上的操作"><a href="#1-2-string对象上的操作" class="headerlink" title="1.2 string对象上的操作"></a>1.2 string对象上的操作</h5><ol>
-<li><p>使用<code>getline</code>读取一整行</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> line;</span><br><span class="line">getline(<span class="built_in">cin</span>, line);</span><br></pre></td></tr></table></figure>
-<p>当读取到换行符时结束，并将读到的内容存入<code>string</code>中，但是<strong>不存换行符</strong></p>
-</li>
-<li><p><code>empty</code>和<code>size</code>操作</p>
-<p><code>str.empty()</code>根据字符串是否为空返回一个布尔值</p>
-<p><code>str.size()</code>返回字符串长度</p>
-<p>使用visual studio编程的时候，碰到过一个<strong>warning</strong>，将无符号数赋值给了有符号数。</p>
-<p>这是由于<code>size</code>函数的返回值类型引起的，它是一个<code>string::size_type</code>类型的值，是无符号类型的，</p>
-<p>可以用<code>auto</code>来推断变量的值</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> len = str.size();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>比较，赋值，相加</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">"abc"</span>;</span><br><span class="line"><span class="built_in">string</span> s2 = <span class="string">"xcvd"</span>;</span><br><span class="line"><span class="comment">// s1 &lt; s2 比较第一个不同的字符</span></span><br><span class="line"><span class="built_in">string</span> s3 = s1; <span class="comment">// 赋值</span></span><br><span class="line"><span class="built_in">string</span> s4 = s1 + s2; <span class="comment">// abcxcvd</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>处理<code>string</code>中的字符</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="built_in">isalnum</span>(c);</span><br><span class="line"><span class="built_in">isalpha</span>(c);</span><br><span class="line"><span class="built_in">islower</span>(c);</span><br><span class="line"><span class="built_in">isupper</span>(c);</span><br><span class="line"><span class="built_in">ispunct</span>(c); <span class="comment">// 是标点符号为真</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="2-Vector类型"><a href="#2-Vector类型" class="headerlink" title="2. Vector类型"></a>2. Vector类型</h4><p>可变长数组，类似于Java中的<code>ArrayList</code></p>
-<h5 id="2-1-初始化"><a href="#2-1-初始化" class="headerlink" title="2.1 初始化"></a>2.1 初始化</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;T&gt; v;</span><br><span class="line"><span class="built_in">vector</span>&lt;T&gt; v1 = &#123;a, b, c&#125;; <span class="comment">// 注意是花括号</span></span><br><span class="line"><span class="built_in">vector</span>&lt;T&gt; v2&#123;a, b&#125;;     <span class="comment">// 花括号，两个元素</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v3(<span class="number">10</span>, <span class="number">1</span>); <span class="comment">// 圆括号 10个元素，每个初始化为1</span></span><br></pre></td></tr></table></figure>
-<h5 id="2-2-操作"><a href="#2-2-操作" class="headerlink" title="2.2 操作"></a>2.2 操作</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">v.push_back(<span class="number">1</span>); <span class="comment">// 添加1</span></span><br><span class="line">v.pop_back(); <span class="comment">// 去掉最后一个数据</span></span><br><span class="line">v.empty();</span><br><span class="line">v.size();</span><br><span class="line">v[n]; <span class="comment">// 注意下标只能访问，但是不能够添加元素</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-迭代器"><a href="#3-迭代器" class="headerlink" title="3. 迭代器"></a>3. 迭代器</h4><p>访问元素的作用</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> s = <span class="string">"abcde"</span>;</span><br><span class="line"><span class="keyword">if</span> (s.begin() != s.end()) &#123; <span class="comment">// 确保s非空</span></span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="4-数组"><a href="#4-数组" class="headerlink" title="4. 数组"></a>4. 数组</h4><h5 id="4-1-指针和数组"><a href="#4-1-指针和数组" class="headerlink" title="4.1 指针和数组"></a>4.1 指针和数组</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ia[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">p</span><span class="params">(ia)</span></span>; <span class="comment">// 整型指针，指向ia的第一个元素</span></span><br><span class="line">p++; <span class="comment">// 指向第一个元素</span></span><br></pre></td></tr></table></figure>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hexo-Permalink简化</title>
+      <link href="/posts/838443af.html"/>
+      <url>/posts/838443af.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="Permalink简化"><a href="#Permalink简化" class="headerlink" title="Permalink简化"></a>Permalink简化</h1><p>在文档名有中文的时候，因为汉字会被转义，默认的永久链接会非常复杂，具体原因可以看这一篇文章</p><p><a href="http://www.ruanyifeng.com/blog/2010/02/url_encoding.html" target="_blank" rel="noopener">阮一峰 关于url编码</a></p><p>有两种方法优化。</p><a id="more"></a><h2 id="方法一：自定义"><a href="#方法一：自定义" class="headerlink" title="方法一：自定义"></a>方法一：自定义</h2><p>首先，在<code>scaffolds</code>的<code>post.md</code>中，加入<code>urlname</code>元素。</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">urlname:</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br></pre></td></tr></table></figure><p>然后，在配置文件<code>_config.yml</code>中，将永久链接<code>permalink</code>的形式改为</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">permalink: :category/:urlname/</span><br></pre></td></tr></table></figure><p>也就是类别加上自定义的url链接。</p><p>每次写文章时，可以自己设计该页的<code>url</code>，使得它变得简单，同时也利于区分。</p><p>但是，这种修改方法的链接会随着文件目录的改变而改变，</p><p>比如一篇文章<code>HelloWorld.md</code>本来放在<code>_posts</code>目录下，链接为<code>https://xxx/_posts/HelloWorld.md</code></p><p>之后归类到<code>_posts/A</code>目录下，那么链接变为<code>https://xxx/_posts/A/HelloWorld.md</code></p><p>这样不太利于分享，所以推荐使用第二种方法。</p><h2 id="方法二：插件"><a href="#方法二：插件" class="headerlink" title="方法二：插件"></a>方法二：插件</h2><p>使用<code>hexo-abbrlink</code>这个插件</p><ol><li><p>安装</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure></li><li><p>设置</p><p>在<code>_config.yml</code>文件中修改永久链接格式</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink.html</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc32  # 算法：crc16(default) and crc32</span><br><span class="line">  rep: hex    # 进制：dec(default) and hex</span><br></pre></td></tr></table></figure><p><code>posts</code>部分是可以更改的，也可以仿照方法一添加一个关键词便于识别</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">permalink: :keywords/:abbrlink.html</span><br></pre></td></tr></table></figure></li><li><p>生成</p><p>在根目录创建<code>Gruntfile.js</code>文件，让插件到<code>source/_posts/</code>下读取所有的.md文件，把文件中的@@abbrlink替换成文件内容的hash值。</p><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;</span><br><span class="line"> </span><br><span class="line">  grunt.initConfig(&#123;</span><br><span class="line"></span><br><span class="line">    rewrite: &#123;</span><br><span class="line">      abbrlink: &#123;</span><br><span class="line">        src: <span class="string">'source/_posts/**/*.md'</span>,</span><br><span class="line">        editor: <span class="function"><span class="keyword">function</span>(<span class="params">contents, filepath</span>)</span>&#123;</span><br><span class="line">          <span class="keyword">const</span> crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</span><br><span class="line">          <span class="keyword">const</span> hash = crypto.createHash(<span class="string">'sha256'</span>);</span><br><span class="line"></span><br><span class="line">          hash.update(contents);</span><br><span class="line">          <span class="keyword">var</span> hashValue = hash.digest(<span class="string">'hex'</span>);</span><br><span class="line"></span><br><span class="line">          <span class="keyword">return</span> contents.replace(<span class="regexp">/@@abbrlink/g</span>, hashValue.substring(<span class="number">0</span>, <span class="number">16</span>));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line"> </span><br><span class="line">  grunt.loadNpmTasks(<span class="string">'grunt-rewrite'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li></ol><p>这种方法生成的链接是不带目录的，直接就是第二步设置中<code>permalink</code>的样式，所以也没有了被改变的风险。</p><p>参考</p><ol><li><a href="http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html" target="_blank" rel="noopener">http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html</a></li></ol>]]></content>
+      
+      
       <categories>
-        <category>C++</category>
-        <category>基础</category>
+          
+          <category> Hexo </category>
+          
       </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Github pages+Hexo 搭建个人博客</title>
-    <url>/posts/ae6c038e.html</url>
-    <content><![CDATA[<h1 id="Github-pages-Hexo-搭建个人博客"><a href="#Github-pages-Hexo-搭建个人博客" class="headerlink" title="Github pages + Hexo 搭建个人博客"></a>Github pages + Hexo 搭建个人博客</h1><p>2019年11月19日，我决定开始写<strong>博客</strong>，首先要用<em>github pages+hexo</em>搭建一个个人博客，其中的过程我就记录在这里面。</p>
-<a id="more"></a>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
-<li>注册一个 GitHub 账户</li>
-<li>安装 Node.js<br>下载链接<br> <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a><br> 下面这个是中文网，对于国内用户来说下载速度非常快。<br> <a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a><br> 推荐菜鸟教程关于node的安装教程以及简易的语法介绍<a href="https://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank" rel="noopener">https://www.runoob.com/nodejs/nodejs-install-setup.html</a><ol>
-<li>安装git</li>
-<li>markdown语法学习<br><a href="https://www.jianshu.com/p/191d1e21f7ed" target="_blank" rel="noopener">https://www.jianshu.com/p/191d1e21f7ed</a></li>
-<li>git语法学习<br>推荐廖雪峰的git教程<br><a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/896043488029600</a></li>
-</ol>
-</li>
-</ol>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在终端检查node和npm的版本情况</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-<p>然后输入命令安装hexo</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<p>我使用的是Mac电脑，在这一步出现了问题，终端显示如下</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rollbackFailedOptional verb npm-session</span><br></pre></td></tr></table></figure>
-<p>然后我又等了一会儿，终端又报错了。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm WARN checkPermissions Missing write access to /usr/local/lib/node_modules</span><br><span class="line">npm ERR! code EACCES</span><br><span class="line">npm ERR! syscall access</span><br><span class="line">npm ERR! path /usr/local/lib/node_modules</span><br><span class="line">npm ERR! errno -13</span><br><span class="line">npm ERR! Error: EACCES: permission denied, access &apos;/usr/local/lib/node_modules&apos;</span><br><span class="line">npm ERR!  [Error: EACCES: permission denied, access &apos;/usr/local/lib/node_modules&apos;] &#123;</span><br><span class="line">npm ERR!   stack: &quot;Error: EACCES: permission denied, access &apos;/usr/local/lib/node_modules&apos;&quot;,</span><br><span class="line">npm ERR!   errno: -13,</span><br><span class="line">npm ERR!   code: &apos;EACCES&apos;,</span><br><span class="line">npm ERR!   syscall: &apos;access&apos;,</span><br><span class="line">npm ERR!   path: &apos;/usr/local/lib/node_modules&apos;</span><br><span class="line">npm ERR! &#125;</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! The operation was rejected by your operating system.</span><br><span class="line">npm ERR! It is likely you do not have the permissions to access this file as the current user</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! If you believe this might be a permissions issue, please double-check the</span><br><span class="line">npm ERR! permissions of the file and its containing directories, or try running</span><br><span class="line">npm ERR! the command again as root/Administrator.</span><br></pre></td></tr></table></figure>
-<p>根据官方文档，如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code>权限错误，要遵循由<a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#reinstall-npm-with-a-node-version-manager" target="_blank" rel="noopener">npmjs</a>发布的指导修复该问题。强烈建议不要使用 root、sudo 等方法覆盖权限。<br>根据要求，下载了<strong>nvm</strong>，并且在终端利用nvm下载了最新版本的node和更新了npm后，hexo下载成功了。（以下是下载和使用nvm的教程链接）<br><a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">https://github.com/nvm-sh/nvm</a>.        </p>
-<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><p>输入以下命令hexo就会出现在指定的文件夹中</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo init &lt;folder&gt;</span><br><span class="line">cd &lt;folder&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-<p>如果出现错误</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">-bash: syntax error near unexpected token `newline<span class="string">'</span></span><br></pre></td></tr></table></figure>
-<p>这是占位符的问题，将第一行命令的&lt;&gt;去除，再重新输入即可。</p>
-<p>到此，建站的基本操作就完成了。</p>
-<p>界面的设计等就可以由自己来操作了。放一个hexo的官方网站供大家参考。<br><a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a></p>
-<h2 id="创建Github远程仓库"><a href="#创建Github远程仓库" class="headerlink" title="创建Github远程仓库"></a>创建Github远程仓库</h2><p>注意仓库名为github的用户名.github.io，勾选readme<br><img src="https://img-blog.csdnimg.cn/20191123194438458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" alt=""></p>
-<p>创建之后，进入仓库，点击<strong>Settings</strong>按钮，然后翻到GitHub Pages的部分，点击网页链接，就能够看到一个简易的网页了。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191123194913735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" alt=""></p>
-<h2 id="部署hexo"><a href="#部署hexo" class="headerlink" title="部署hexo"></a>部署hexo</h2><p>进入本地的hexo文件，找到 <strong>_config.yml</strong>，打开后翻到最后，修改成</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo:</span><br><span class="line">     gitHub: git<span class="meta">@github</span>.com:你的GitHub用户名/你的GitHub用户名.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-<p>repo后面的内容要修改成自己github仓库的SSH密匙。</p>
-<p>然后在终端中输入</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<p>开始安装hexo-deploy-git，安装完成后，开始部署，在终端中输入</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-<p>部署完成。</p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>这个时候，再次进入刚刚进入过的网页链接，就会看到一个船新版本的界面，也就是本地的hexo库已经部署到github上了。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191123195408260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" alt=""></p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>变量和基本类型</title>
+      <link href="/posts/96db5496.html"/>
+      <url>/posts/96db5496.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="变量和基本类型"><a href="#变量和基本类型" class="headerlink" title="变量和基本类型"></a>变量和基本类型</h3><h4 id="1-复合类型-Compound-type"><a href="#1-复合类型-Compound-type" class="headerlink" title="1. 复合类型(Compound type)"></a>1. 复合类型(Compound type)</h4><p>基于其它类型定义的类型</p><h5 id="1-1-引用-Reference"><a href="#1-1-引用-Reference" class="headerlink" title="1.1 引用(Reference)"></a>1.1 引用(Reference)</h5><p><strong>引用</strong>为对象起了另外一个名字，引用类型引用另外一种类型。通过将声明符写成&amp;d的形式来定义引用类型，其中d是声明的变量名。</p><a id="more"></a><p>(在这里，引用指的是左值引用)</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">1024</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;refval = ival; <span class="comment">// refval指向ival，是ival的另外一个名字</span></span><br><span class="line"><span class="keyword">int</span> &amp;refVal2; <span class="comment">// 报错；引用必须被初始化</span></span><br></pre></td></tr></table></figure><p>定义引用时，程序把引用和它的初始值<strong>绑定</strong>在一起，而不是将初始值拷贝给引用。（与初始化变量时不同的）</p><p>无法令引用重新绑定到另一个对象，所以引用必须被<font color=red><strong>初始化</strong> </font></p><ul><li>引用即别名，它不是对象，而是为了一个已经存在的对象起了另外一个名字</li></ul><p>定义了一个引用之后，对其进行的所有操作都是在与之绑定的对象上进行的</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">refVal = <span class="number">2</span>;  <span class="comment">// 把2赋值给与refVal绑定的对象上，这里就是绑定到iVal上</span></span><br><span class="line"><span class="keyword">int</span> ii = refVal;</span><br></pre></td></tr></table></figure><p> 除了两种特殊情况，其它所有引用的类型都要与之绑定的对象严格匹配。不能够与字面值或表达式的计算结果绑定。</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> &amp;refVal4 = <span class="number">10</span>; <span class="comment">// 错误：引用对象初始值必须是一个对象</span></span><br><span class="line"><span class="keyword">double</span> dval = <span class="number">3.14</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;refVal5 = dval; <span class="comment">// 错误：此处引用类型的初始值必须是int型对象</span></span><br></pre></td></tr></table></figure><h5 id="1-2-指针"><a href="#1-2-指针" class="headerlink" title="1.2 指针"></a>1.2 指针</h5><p><strong>指针</strong>是指向另外一种类型的符合类型，与引用类似，指针实现了对其它对象的间接访问。</p><p>不同：</p><ul><li>指针本身是一个对象</li><li>指针无需在定义时赋初值</li></ul><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *ip1; <span class="comment">// ip1是指向int对象的指针</span></span><br></pre></td></tr></table></figure><h6 id="获取对象的地址"><a href="#获取对象的地址" class="headerlink" title="获取对象的地址"></a>获取对象的地址</h6><p>指针存放某个对象的地址。</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;ival; <span class="comment">// p是存放变量ival的地址，或者说p是指向引用的指针。</span></span><br></pre></td></tr></table></figure><h6 id="指针值"><a href="#指针值" class="headerlink" title="指针值"></a>指针值</h6><p>指针的值（即地址）应该属于下列4中状态之一：</p><ul><li>指向一个对象</li><li>指向紧邻对象所占空间的下一个位置</li><li>空指针</li><li>无效指针</li></ul><h6 id="利用指针访问对象"><a href="#利用指针访问对象" class="headerlink" title="利用指针访问对象"></a>利用指针访问对象</h6><p>如果指针指向了一个对象，可以使用<strong>解引用符</strong>（操作符*）来访问对象</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;ival;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *p <span class="comment">// 输出42</span></span><br><span class="line">*p = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *p <span class="comment">// 输出0，为*p赋值实际上是为p所指的对象赋值</span></span><br></pre></td></tr></table></figure><h6 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h6><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *p1 = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">int</span> *p2 = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> *p3 = <span class="literal">NULL</span>; <span class="comment">// 需要头文件cstdlib</span></span><br></pre></td></tr></table></figure><h6 id="void-指针"><a href="#void-指针" class="headerlink" title="void*指针"></a>void*指针</h6><p>用于存放任意对象的地址，不能直接操作void*指针所指的对象</p><h6 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h6><h6 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h6><p>指针是对象，所以存在对指针的引用</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p;</span><br><span class="line"><span class="keyword">int</span> *&amp;r = p;  <span class="comment">// r是一个对p的引用</span></span><br><span class="line">r = &amp;i;  <span class="comment">// r引用了一个指针，因此给r赋值&amp;就是令p指向i</span></span><br><span class="line">*r = <span class="number">0</span>;  <span class="comment">// 将i的值改为0</span></span><br></pre></td></tr></table></figure><h4 id="2-const限定符"><a href="#2-const限定符" class="headerlink" title="2. const限定符"></a>2. const限定符</h4><p>值不能被改变，所以const对象必须被初始化</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> bufSize = <span class="number">512</span>; <span class="comment">// 输入缓冲区大小</span></span><br></pre></td></tr></table></figure><p>如果要在多个文件之间共享const，必须在变量定义前加extern关键字</p><h5 id="2-1-对const的引用"><a href="#2-1-对const的引用" class="headerlink" title="2.1 对const的引用"></a>2.1 对const的引用</h5><p>对常量的引用，不能够修改其绑定的对象</p><p>对const的引用可以使一个并非const的对象，但是不能通过其改变值</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ci = <span class="number">1024</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r1 = ci; <span class="comment">// 正确</span></span><br><span class="line"></span><br><span class="line">r1 = <span class="number">42</span>; <span class="comment">// 错误：r1是对常量的引用</span></span><br><span class="line"><span class="keyword">int</span> &amp;r2 = ci; <span class="comment">// 错误：非常量引用指向一个常量对象</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>；</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r1 = i; <span class="comment">// 允许将const int&amp;绑定到一个普通的int上</span></span><br><span class="line">r1 = <span class="number">10</span>; <span class="comment">// 错误</span></span><br></pre></td></tr></table></figure><h4 id="3-处理类型"><a href="#3-处理类型" class="headerlink" title="3. 处理类型"></a>3. 处理类型</h4><h5 id="3-1-类型别名"><a href="#3-1-类型别名" class="headerlink" title="3.1 类型别名"></a>3.1 类型别名</h5><p>某种类型的同义词，使得复杂的类型名字变得简单，易于理解和使用。</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> wages; <span class="comment">// wages是double的同义词</span></span><br><span class="line"><span class="keyword">using</span> SI = Sales_item; <span class="comment">// SI是Sales_item的同义词</span></span><br></pre></td></tr></table></figure><h5 id="3-2-auto类型说明符"><a href="#3-2-auto类型说明符" class="headerlink" title="3.2 auto类型说明符"></a>3.2 auto类型说明符</h5><p>让编译器分析表达式所属的类型，必须有初始值</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> item = val1 + val2; <span class="comment">// 由val1和val2相加的结果推断item的类型</span></span><br><span class="line"><span class="comment">// auto一条声明语句只能有一个基础数据类型</span></span><br><span class="line"><span class="keyword">auto</span> i = <span class="number">0</span>, *p = &amp;i;  <span class="comment">// 正确</span></span><br><span class="line"><span class="keyword">auto</span> sz = <span class="number">0</span>, pi = <span class="number">3.14</span>; <span class="comment">// 错误，sz和pi的类型不一致</span></span><br></pre></td></tr></table></figure><h4 id="4-自定义数据结构"><a href="#4-自定义数据结构" class="headerlink" title="4. 自定义数据结构"></a>4. 自定义数据结构</h4><p>将一组相关的数据元素组织起来然后使用他们的策略和方法</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">  <span class="keyword">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">double</span> revenue = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Sales_data accum;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>Hexo</category>
+          
+          <category> C++ </category>
+          
+          <category> 基础 </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>变量和基本类型</title>
-    <url>/posts/96db5496.html</url>
-    <content><![CDATA[<h3 id="变量和基本类型"><a href="#变量和基本类型" class="headerlink" title="变量和基本类型"></a>变量和基本类型</h3><h4 id="1-复合类型-Compound-type"><a href="#1-复合类型-Compound-type" class="headerlink" title="1. 复合类型(Compound type)"></a>1. 复合类型(Compound type)</h4><p>基于其它类型定义的类型</p>
-<h5 id="1-1-引用-Reference"><a href="#1-1-引用-Reference" class="headerlink" title="1.1 引用(Reference)"></a>1.1 引用(Reference)</h5><p><strong>引用</strong>为对象起了另外一个名字，引用类型引用另外一种类型。通过将声明符写成&amp;d的形式来定义引用类型，其中d是声明的变量名。</p>
-<a id="more"></a>
-<p>(在这里，引用指的是左值引用)</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">1024</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;refval = ival; <span class="comment">// refval指向ival，是ival的另外一个名字</span></span><br><span class="line"><span class="keyword">int</span> &amp;refVal2; <span class="comment">// 报错；引用必须被初始化</span></span><br></pre></td></tr></table></figure>
-<p>定义引用时，程序把引用和它的初始值<strong>绑定</strong>在一起，而不是将初始值拷贝给引用。（与初始化变量时不同的）</p>
-<p>无法令引用重新绑定到另一个对象，所以引用必须被<font color=red><strong>初始化</strong> </font></p>
-<ul>
-<li>引用即别名，它不是对象，而是为了一个已经存在的对象起了另外一个名字</li>
-</ul>
-<p>定义了一个引用之后，对其进行的所有操作都是在与之绑定的对象上进行的</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">refVal = <span class="number">2</span>;  <span class="comment">// 把2赋值给与refVal绑定的对象上，这里就是绑定到iVal上</span></span><br><span class="line"><span class="keyword">int</span> ii = refVal;</span><br></pre></td></tr></table></figure>
-<p> 除了两种特殊情况，其它所有引用的类型都要与之绑定的对象严格匹配。不能够与字面值或表达式的计算结果绑定。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> &amp;refVal4 = <span class="number">10</span>; <span class="comment">// 错误：引用对象初始值必须是一个对象</span></span><br><span class="line"><span class="keyword">double</span> dval = <span class="number">3.14</span>;</span><br><span class="line"><span class="keyword">int</span> &amp;refVal5 = dval; <span class="comment">// 错误：此处引用类型的初始值必须是int型对象</span></span><br></pre></td></tr></table></figure>
-<h5 id="1-2-指针"><a href="#1-2-指针" class="headerlink" title="1.2 指针"></a>1.2 指针</h5><p><strong>指针</strong>是指向另外一种类型的符合类型，与引用类似，指针实现了对其它对象的间接访问。</p>
-<p>不同：</p>
-<ul>
-<li>指针本身是一个对象</li>
-<li>指针无需在定义时赋初值</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *ip1; <span class="comment">// ip1是指向int对象的指针</span></span><br></pre></td></tr></table></figure>
-<h6 id="获取对象的地址"><a href="#获取对象的地址" class="headerlink" title="获取对象的地址"></a>获取对象的地址</h6><p>指针存放某个对象的地址。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;ival; <span class="comment">// p是存放变量ival的地址，或者说p是指向引用的指针。</span></span><br></pre></td></tr></table></figure>
-<h6 id="指针值"><a href="#指针值" class="headerlink" title="指针值"></a>指针值</h6><p>指针的值（即地址）应该属于下列4中状态之一：</p>
-<ul>
-<li>指向一个对象</li>
-<li>指向紧邻对象所占空间的下一个位置</li>
-<li>空指针</li>
-<li>无效指针</li>
-</ul>
-<h6 id="利用指针访问对象"><a href="#利用指针访问对象" class="headerlink" title="利用指针访问对象"></a>利用指针访问对象</h6><p>如果指针指向了一个对象，可以使用<strong>解引用符</strong>（操作符*）来访问对象</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> ival = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;ival;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *p <span class="comment">// 输出42</span></span><br><span class="line">*p = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *p <span class="comment">// 输出0，为*p赋值实际上是为p所指的对象赋值</span></span><br></pre></td></tr></table></figure>
-<h6 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h6><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> *p1 = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">int</span> *p2 = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> *p3 = <span class="literal">NULL</span>; <span class="comment">// 需要头文件cstdlib</span></span><br></pre></td></tr></table></figure>
-<h6 id="void-指针"><a href="#void-指针" class="headerlink" title="void*指针"></a>void*指针</h6><p>用于存放任意对象的地址，不能直接操作void*指针所指的对象</p>
-<h6 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h6><h6 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h6><p>指针是对象，所以存在对指针的引用</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">int</span> *p;</span><br><span class="line"><span class="keyword">int</span> *&amp;r = p;  <span class="comment">// r是一个对p的引用</span></span><br><span class="line">r = &amp;i;  <span class="comment">// r引用了一个指针，因此给r赋值&amp;就是令p指向i</span></span><br><span class="line">*r = <span class="number">0</span>;  <span class="comment">// 将i的值改为0</span></span><br></pre></td></tr></table></figure>
-<h4 id="2-const限定符"><a href="#2-const限定符" class="headerlink" title="2. const限定符"></a>2. const限定符</h4><p>值不能被改变，所以const对象必须被初始化</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> bufSize = <span class="number">512</span>; <span class="comment">// 输入缓冲区大小</span></span><br></pre></td></tr></table></figure>
-<p>如果要在多个文件之间共享const，必须在变量定义前加extern关键字</p>
-<h5 id="2-1-对const的引用"><a href="#2-1-对const的引用" class="headerlink" title="2.1 对const的引用"></a>2.1 对const的引用</h5><p>对常量的引用，不能够修改其绑定的对象</p>
-<p>对const的引用可以使一个并非const的对象，但是不能通过其改变值</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ci = <span class="number">1024</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r1 = ci; <span class="comment">// 正确</span></span><br><span class="line"></span><br><span class="line">r1 = <span class="number">42</span>; <span class="comment">// 错误：r1是对常量的引用</span></span><br><span class="line"><span class="keyword">int</span> &amp;r2 = ci; <span class="comment">// 错误：非常量引用指向一个常量对象</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>；</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> &amp;r1 = i; <span class="comment">// 允许将const int&amp;绑定到一个普通的int上</span></span><br><span class="line">r1 = <span class="number">10</span>; <span class="comment">// 错误</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-处理类型"><a href="#3-处理类型" class="headerlink" title="3. 处理类型"></a>3. 处理类型</h4><h5 id="3-1-类型别名"><a href="#3-1-类型别名" class="headerlink" title="3.1 类型别名"></a>3.1 类型别名</h5><p>某种类型的同义词，使得复杂的类型名字变得简单，易于理解和使用。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> wages; <span class="comment">// wages是double的同义词</span></span><br><span class="line"><span class="keyword">using</span> SI = Sales_item; <span class="comment">// SI是Sales_item的同义词</span></span><br></pre></td></tr></table></figure>
-<h5 id="3-2-auto类型说明符"><a href="#3-2-auto类型说明符" class="headerlink" title="3.2 auto类型说明符"></a>3.2 auto类型说明符</h5><p>让编译器分析表达式所属的类型，必须有初始值</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> item = val1 + val2; <span class="comment">// 由val1和val2相加的结果推断item的类型</span></span><br><span class="line"><span class="comment">// auto一条声明语句只能有一个基础数据类型</span></span><br><span class="line"><span class="keyword">auto</span> i = <span class="number">0</span>, *p = &amp;i;  <span class="comment">// 正确</span></span><br><span class="line"><span class="keyword">auto</span> sz = <span class="number">0</span>, pi = <span class="number">3.14</span>; <span class="comment">// 错误，sz和pi的类型不一致</span></span><br></pre></td></tr></table></figure>
-<h4 id="4-自定义数据结构"><a href="#4-自定义数据结构" class="headerlink" title="4. 自定义数据结构"></a>4. 自定义数据结构</h4><p>将一组相关的数据元素组织起来然后使用他们的策略和方法</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span> &#123;</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> bookNo;</span><br><span class="line">  <span class="keyword">unsigned</span> units_sold = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">double</span> revenue = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Sales_data accum;</span><br></pre></td></tr></table></figure>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用Github pages+Hexo 搭建个人博客</title>
+      <link href="/posts/ae6c038e.html"/>
+      <url>/posts/ae6c038e.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="Github-pages-Hexo-搭建个人博客"><a href="#Github-pages-Hexo-搭建个人博客" class="headerlink" title="Github pages + Hexo 搭建个人博客"></a>Github pages + Hexo 搭建个人博客</h1><p>2019年11月19日，我决定开始写<strong>博客</strong>，首先要用<em>github pages+hexo</em>搭建一个个人博客，其中的过程我就记录在这里面。</p><a id="more"></a><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol><li>注册一个 GitHub 账户</li><li>安装 Node.js<br>下载链接<br> <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a><br> 下面这个是中文网，对于国内用户来说下载速度非常快。<br> <a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a><br> 推荐菜鸟教程关于node的安装教程以及简易的语法介绍<a href="https://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank" rel="noopener">https://www.runoob.com/nodejs/nodejs-install-setup.html</a><ol><li>安装git</li><li>markdown语法学习<br><a href="https://www.jianshu.com/p/191d1e21f7ed" target="_blank" rel="noopener">https://www.jianshu.com/p/191d1e21f7ed</a></li><li>git语法学习<br>推荐廖雪峰的git教程<br><a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/896043488029600</a></li></ol></li></ol><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在终端检查node和npm的版本情况</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure><p>然后输入命令安装hexo</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure><p>我使用的是Mac电脑，在这一步出现了问题，终端显示如下</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rollbackFailedOptional verb npm-session</span><br></pre></td></tr></table></figure><p>然后我又等了一会儿，终端又报错了。</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm WARN checkPermissions Missing write access to /usr/local/lib/node_modules</span><br><span class="line">npm ERR! code EACCES</span><br><span class="line">npm ERR! syscall access</span><br><span class="line">npm ERR! path /usr/local/lib/node_modules</span><br><span class="line">npm ERR! errno -13</span><br><span class="line">npm ERR! Error: EACCES: permission denied, access &apos;/usr/local/lib/node_modules&apos;</span><br><span class="line">npm ERR!  [Error: EACCES: permission denied, access &apos;/usr/local/lib/node_modules&apos;] &#123;</span><br><span class="line">npm ERR!   stack: &quot;Error: EACCES: permission denied, access &apos;/usr/local/lib/node_modules&apos;&quot;,</span><br><span class="line">npm ERR!   errno: -13,</span><br><span class="line">npm ERR!   code: &apos;EACCES&apos;,</span><br><span class="line">npm ERR!   syscall: &apos;access&apos;,</span><br><span class="line">npm ERR!   path: &apos;/usr/local/lib/node_modules&apos;</span><br><span class="line">npm ERR! &#125;</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! The operation was rejected by your operating system.</span><br><span class="line">npm ERR! It is likely you do not have the permissions to access this file as the current user</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! If you believe this might be a permissions issue, please double-check the</span><br><span class="line">npm ERR! permissions of the file and its containing directories, or try running</span><br><span class="line">npm ERR! the command again as root/Administrator.</span><br></pre></td></tr></table></figure><p>根据官方文档，如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code>权限错误，要遵循由<a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#reinstall-npm-with-a-node-version-manager" target="_blank" rel="noopener">npmjs</a>发布的指导修复该问题。强烈建议不要使用 root、sudo 等方法覆盖权限。<br>根据要求，下载了<strong>nvm</strong>，并且在终端利用nvm下载了最新版本的node和更新了npm后，hexo下载成功了。（以下是下载和使用nvm的教程链接）<br><a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">https://github.com/nvm-sh/nvm</a>.        </p><h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><p>输入以下命令hexo就会出现在指定的文件夹中</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo init &lt;folder&gt;</span><br><span class="line">cd &lt;folder&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure><p>如果出现错误</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">-bash: syntax error near unexpected token `newline<span class="string">'</span></span><br></pre></td></tr></table></figure><p>这是占位符的问题，将第一行命令的&lt;&gt;去除，再重新输入即可。</p><p>到此，建站的基本操作就完成了。</p><p>界面的设计等就可以由自己来操作了。放一个hexo的官方网站供大家参考。<br><a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a></p><h2 id="创建Github远程仓库"><a href="#创建Github远程仓库" class="headerlink" title="创建Github远程仓库"></a>创建Github远程仓库</h2><p>注意仓库名为github的用户名.github.io，勾选readme<br><img src="https://img-blog.csdnimg.cn/20191123194438458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" alt=""></p><p>创建之后，进入仓库，点击<strong>Settings</strong>按钮，然后翻到GitHub Pages的部分，点击网页链接，就能够看到一个简易的网页了。</p><p><img src="https://img-blog.csdnimg.cn/20191123194913735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" alt=""></p><h2 id="部署hexo"><a href="#部署hexo" class="headerlink" title="部署hexo"></a>部署hexo</h2><p>进入本地的hexo文件，找到 <strong>_config.yml</strong>，打开后翻到最后，修改成</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo:</span><br><span class="line">     gitHub: git<span class="meta">@github</span>.com:你的GitHub用户名/你的GitHub用户名.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure><p>repo后面的内容要修改成自己github仓库的SSH密匙。</p><p>然后在终端中输入</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><p>开始安装hexo-deploy-git，安装完成后，开始部署，在终端中输入</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure><p>部署完成。</p><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>这个时候，再次进入刚刚进入过的网页链接，就会看到一个船新版本的界面，也就是本地的hexo库已经部署到github上了。</p><p><img src="https://img-blog.csdnimg.cn/20191123195408260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" alt=""></p>]]></content>
+      
+      
       <categories>
-        <category>C++</category>
-        <category>基础</category>
+          
+          <category> Hexo </category>
+          
       </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++基本语法</title>
-    <url>/posts/6b599344.html</url>
-    <content><![CDATA[<h1 id="C-学习笔记"><a href="#C-学习笔记" class="headerlink" title="C++学习笔记"></a>C++学习笔记</h1><p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p>
-<a id="more"></a>
-<h1 id="一、-变量"><a href="#一、-变量" class="headerlink" title="一、 变量"></a>一、 变量</h1><h2 id="1-用sizeof运算符求某一类型或变量占据的字节数"><a href="#1-用sizeof运算符求某一类型或变量占据的字节数" class="headerlink" title="1. 用sizeof运算符求某一类型或变量占据的字节数"></a>1. 用sizeof运算符求某一类型或变量占据的字节数</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(a) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// sizeof运算符可以求变量占据的字节数</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 未初始化的变量，其值是不确定的</span></span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="2-数据类型的自动转换"><a href="#2-数据类型的自动转换" class="headerlink" title="2. 数据类型的自动转换"></a>2. 数据类型的自动转换</h2><h3 id="1-数"><a href="#1-数" class="headerlink" title="1. 数"></a>1. 数</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">11.34</span>; <span class="comment">// 11.34被自动转化为11后赋值给a</span></span><br><span class="line"><span class="keyword">int</span> b = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">double</span> d = b; <span class="comment">// d的值是30.0</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-字符类型与整型"><a href="#2-字符类型与整型" class="headerlink" title="2. 字符类型与整型"></a>2. 字符类型与整型</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> k = <span class="string">'a'</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, k); <span class="comment">// 输出97，即a的ASCII码</span></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">98</span>;</span><br><span class="line"><span class="keyword">char</span> k = n;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%c"</span>, k); <span class="comment">// 输出b</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-输入和输出"><a href="#3-输入和输出" class="headerlink" title="3. 输入和输出"></a>3. 输入和输出</h2><h4 id="1-scanf和printf"><a href="#1-scanf和printf" class="headerlink" title="1. scanf和printf"></a>1. scanf和printf</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt; //使用scanf和printf时需要使用该库</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">float</span> m;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%c%f"</span>, &amp;n, &amp;c, &amp;m);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %c %f\n"</span>, n, c, m);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>用scanf可以一次读入多个不同类型的变量，输入各项用空格隔开<br>        注意在输入<strong>字符</strong>时，不会跳过空格（空格也会被当做字符读入）<br>        输入其它数据时，会跳过空格</p>
-<h4 id="2-cin和cout"><a href="#2-cin和cout" class="headerlink" title="2. cin和cout"></a>2. cin和cout</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">    <span class="keyword">while</span> ((c=<span class="built_in">cin</span>.get()) != EOF) &#123; </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; (<span class="keyword">char</span>) c; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用cin读入所有字符，包括空格和回车，EOF<br>        Mac（ctrl+D停止输入，ctrl+C停止程序)<br>        windows ctrl+Z停止</p>
-<h4 id="3-cin-amp-cout-scanf-amp-printf-比较"><a href="#3-cin-amp-cout-scanf-amp-printf-比较" class="headerlink" title="3. cin&amp;cout / scanf&amp;printf 比较"></a>3. cin&amp;cout / scanf&amp;printf 比较</h4><ul>
-<li>cin，cout速度慢，输入输出数据量大时用scanf/printf</li>
-<li>一个程序不要同时出现cin和scanf，cout和prinf</li>
-</ul>
-<h2 id="4-运算"><a href="#4-运算" class="headerlink" title="4. 运算"></a>4. 运算</h2><ol>
-<li>加、减、乘运算的溢出</li>
-</ol>
-<hr>
-<h1 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h1><h3 id="1-数组作为函数的参数传递"><a href="#1-数组作为函数的参数传递" class="headerlink" title="1. 数组作为函数的参数传递"></a>1. 数组作为函数的参数传递</h3><p>数组作为函数的参数时，是传引用的，即<strong>形参数组改变了，实参数组也会改变</strong></p>
-<p>二维数组作为函数的形参时，<strong>必须写明函数有多少列</strong>，不要写明有多少行</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintArray</span><span class="params">(<span class="keyword">int</span> a[][<span class="number">5</span>])</span> </span>&#123;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; a[<span class="number">4</span>][<span class="number">3</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>必须要写明列数，编译器才能够根据下标算出元素的地址</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$\color&#123;#F00&#125;&#123;a[i][j]的地址 = 数组首地址 + i \times N \times sizeof(a[0][0]) + j \times sizeof(a[0][0])&#125;$ (N是数组列数)</span><br></pre></td></tr></table></figure>
-<p>形参数组的首地址就是实参数组的首地址      </p>
-<h1 id="三、字符串"><a href="#三、字符串" class="headerlink" title="三、字符串"></a>三、字符串</h1><h2 id="1-字符串的形式"><a href="#1-字符串的形式" class="headerlink" title="1. 字符串的形式"></a>1. 字符串的形式</h2><h3 id="（1）字符串常量"><a href="#（1）字符串常量" class="headerlink" title="（1）字符串常量"></a>（1）字符串常量</h3><p>用双引号括起来的，如”China”, “C++ program”.</p>
-<p>字符串常量占据<strong>内存</strong>的字节数等于字符中字符数目加1，结尾多出字符’\0’.</p>
-<font color=#F00>但是字符串的长度不包含'\0'</font>
-
-<p>“”也是合法的·1字符串常量，称为空串，仍然占据一个字节的内存空间，存放’\0’</p>
-<h3 id="（2）存放于字符数组中，以’-0’结尾"><a href="#（2）存放于字符数组中，以’-0’结尾" class="headerlink" title="（2）存放于字符数组中，以’\0’结尾"></a>（2）存放于字符数组中，以’\0’结尾</h3><p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p>
-<p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p>
-<h3 id="（3）string对象。"><a href="#（3）string对象。" class="headerlink" title="（3）string对象。"></a>（3）string对象。</h3><p>string是C++标准模板库里的一个类，专门用于处理字符串</p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hexo写作</title>
+      <link href="/posts/c4064b2b.html"/>
+      <url>/posts/c4064b2b.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="Hexo写作"><a href="#Hexo写作" class="headerlink" title="Hexo写作"></a>Hexo写作</h1><p>本文介绍了一些基本的Hexo配置和使用hexo+GitHub写作的流程。</p><a id="more"></a><h3 id="1-Hexo基本命令"><a href="#1-Hexo基本命令" class="headerlink" title="1. Hexo基本命令"></a>1. Hexo基本命令</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo g = hexo generate  #生成</span><br><span class="line">hexo s = hexo server  #启动本地预览</span><br><span class="line">hexo d = hexo deploy  #远程部署</span><br><span class="line">hexo n "文章标题" = hexo new "文章标题"  #新建一篇博文</span><br></pre></td></tr></table></figure><h3 id="2-整体配置"><a href="#2-整体配置" class="headerlink" title="2. 整体配置"></a>2. 整体配置</h3><p><code>\hexo\_config.yml</code></p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Site</span></span><br><span class="line">title:  # 网站名，标签页显示</span><br><span class="line">subtitle:  # 副标题，网站名下显示</span><br><span class="line">description:  # 网站描述，便于搜索</span><br><span class="line">keywords:</span><br><span class="line">author: # 作者</span><br><span class="line">language: zh-CN # 中文</span><br><span class="line">timezone: Asia/Shanghai # 时区</span><br></pre></td></tr></table></figure><h3 id="3-更换主题"><a href="#3-更换主题" class="headerlink" title="3. 更换主题"></a>3. 更换主题</h3><p>推荐使用<code>melody</code></p><p><a href="[https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#%E5%AE%89%E8%A3%85](https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#安装">hexo-theme-melody快速开始</a>)</p><p>这个主题就是我现在网站使用的主题，它有完整的中文教程，功能齐全。按照教程配置就可以了。</p><h3 id="4-写作步骤"><a href="#4-写作步骤" class="headerlink" title="4. 写作步骤"></a>4. 写作步骤</h3><ol><li><p>新建文章</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo new "title"</span><br></pre></td></tr></table></figure></li><li><p>写作</p><p><code>\hexo\source\_post</code>中找到<code>title.md</code>，使用<code>typora</code>打开</p><p>注意文章的<code>tags</code>格式是<code>[]</code></p><p>在信息栏填写<code>top_img</code>信息可以自定义该页图片情况，如<code>false</code>表示不显示</p><p><code>文章中&lt;!-- more --&gt;</code>之前的部分会显示在主页上，并出现<code>Read more</code>按钮，点击阅读更多内容</p></li></ol><ol><li><p>预览</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo s</span><br><span class="line">hexo s --debug // 在命令行生成debug信息</span><br></pre></td></tr></table></figure></li><li><p>同步到远程</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure></li></ol><h3 id="5-问题"><a href="#5-问题" class="headerlink" title="5.  问题"></a>5.  问题</h3><ol><li><p>Template render error: (unknown path)</p><p>在命令行输入<code>hexo -g</code>后报错，原因在于文章内容中有<strong>{}</strong>时，如果它没有被代码块包括，解析会出现错误，所以需要写成</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br></pre></td></tr></table></figure></li><li><p>本地预览与远程显示不一致</p><p>删除缓存</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure><p>在网页上刷新</p></li></ol>]]></content>
+      
+      
       <categories>
-        <category>C++</category>
-        <category>基础</category>
+          
+          <category> Hexo </category>
+          
       </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>概率论的基本概念</title>
-    <url>/posts/36736857.html</url>
-    <content><![CDATA[<p>本文介绍了概率论的基本概念，包括概率的定义，概率的计算，同时还有随机测试的简单介绍。</p>
-<p><strong>重点</strong></p>
-<ul>
-<li>概率的定义</li>
-<li>条件概率</li>
-<li>乘法公式</li>
-<li>全概率公式</li>
-<li>贝叶斯公式</li>
-</ul>
-<a id="more"></a>
-<h2 id="一、概率的定义"><a href="#一、概率的定义" class="headerlink" title="一、概率的定义"></a>一、概率的定义</h2><p>当我们还不能用数学符号描述一件事情，那么说明我们还没有想清楚这件事。</p>
-<p>所以，我们需要建立元素到数据的<strong>映射</strong></p>
-<h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h3><h4 id="1-1-随机实验"><a href="#1-1-随机实验" class="headerlink" title="1.1 随机实验"></a>1.1 随机实验</h4><ul>
-<li>可以在相同的条件下重复进行</li>
-<li>每次实验结果不止一个，并且事先明确实验的所有可能结果</li>
-<li>进行一次实验前不能够确定那一个结果会出现</li>
-</ul>
-<p>例：抛一枚硬币，观察正面H与反面T出现的情况</p>
-<h4 id="1-2-样本空间"><a href="#1-2-样本空间" class="headerlink" title="1.2 样本空间"></a>1.2 样本空间</h4><p>随机试验$E$的所有可能结果组成的集合称为$E$的<strong>样本空间</strong>，记为$\Omega$</p>
-<p>样本空间中的每个元素，即$E$的每个结果，称为<strong>样本点</strong>，记为$e$</p>
-<h4 id="1-3-随机事件"><a href="#1-3-随机事件" class="headerlink" title="1.3 随机事件"></a>1.3 随机事件</h4><p>样本空间$\Omega$的任意子集$A$称为<strong>随机事件</strong></p>
-<p>观察到样本点$e$，若$e\in A$，则称这一事件发生。</p>
-<ul>
-<li>基本事件：由一个样本点组成的单点集</li>
-<li>复合事件：由两个或两个以上样本点组成的集合</li>
-<li>必然事件：全集$\Omega$</li>
-<li>不可能事件：空集$\emptyset$</li>
-</ul>
-<h3 id="2-事件的集合运算"><a href="#2-事件的集合运算" class="headerlink" title="2. 事件的集合运算"></a>2. 事件的集合运算</h3><ul>
-<li>包含：$A\subset B$，事件B包含事件A，则事件A发生必然导致事件B发生</li>
-<li>相等：$A=B$，即$A\subset B$且$B\subset A$</li>
-<li>和：$A\bigcup B$，即A和B至少有一个发生</li>
-<li>差：$A-B$，即事件A发生且事件B不发生</li>
-<li>积：$A\bigcup B$，记作$AB$，即事件A和事件B都发生</li>
-<li>互不相容：$AB = \emptyset$，即A和B不能同时发生</li>
-<li>互逆：$A\bigcup B=\Omega$ 且$AB = \emptyset$，A和B互逆，通常B记为$\overline{A}$</li>
-</ul>
-<h4 id="2-1-复杂事件的集合运算"><a href="#2-1-复杂事件的集合运算" class="headerlink" title="2.1 复杂事件的集合运算"></a>2.1 复杂事件的集合运算</h4><ul>
-<li>A发生而B和C都不发生：$A\overline{B} \overline{C}=A-B-C=A-(B\bigcup C)$</li>
-<li>A与B都发生而C不发生：$AB\overline{C}=AB-C=AB-ABC$</li>
-<li>三个事件都发生：$ABC$</li>
-<li>三个事件恰好有一个发生：$A\overline{B}\overline{C}+\overline{A}B\overline{C}+\overline{A}\overline{B}C$</li>
-<li>三个事件至少发生一个：$A\bigcup B\bigcup C$</li>
-</ul>
-<h4 id="2-2-常用定律"><a href="#2-2-常用定律" class="headerlink" title="2.2 常用定律"></a>2.2 常用定律</h4><ul>
-<li>交换律</li>
-<li>结合律</li>
-<li>分配率：$A\, \bigcup \,(B\bigcap C)=(A\bigcup B)\bigcap (A\bigcup C)$    $A\, \bigcap \,(B\bigcup C)=(A\bigcap B)\,\bigcup \,(A\bigcap C)$</li>
-<li>德摩根定律：$\overline{A\bigcup B}=\overline{A}\bigcap\overline{B}$    $\overline{A\bigcap B}=\overline{A}\bigcup\overline{B}$</li>
-</ul>
-<h3 id="3-频率"><a href="#3-频率" class="headerlink" title="3. 频率"></a>3. 频率</h3><p>描述了事件发生的频繁程度</p>
-<p><strong>定义</strong></p>
-<ul>
-<li>重复观察n次事件A发生的次数$n_A$称为A的<em>频数</em></li>
-<li>比值$\frac{n_A}{n}$称为事件A发生的<strong>频率</strong>，并记为$f_n(A)$</li>
-</ul>
-<p><strong>性质</strong></p>
-<ol>
-<li><p>$0\,\leq\, f_n(A)\, \leq\, 1$ </p>
-</li>
-<li><p>$f_n(\Omega)=1$</p>
-</li>
-<li><p>若$A_1,\cdots,A_k$两两互不相容，则</p>
-<script type="math/tex; mode=display">f_n(A_1\,\bigcup\,\cdots\bigcup\,A_k)=f_n(A_1)+\cdots+f_n(A_k)</script></li>
-</ol>
-<p><strong>收敛性</strong></p>
-<ul>
-<li>当n足够大，$f_n(A)$收敛于某个常数，这个常数就是<strong>概率</strong>（证明见后续）</li>
-</ul>
-<p><strong>我们应该都听说过德摩根抛硬币的故事，对一个事件进行大量的实验可以得到频率，但是我们不可能对所有事件都做类似的事情，所以就有了概率</strong></p>
-<h3 id="4-概率"><a href="#4-概率" class="headerlink" title="4. 概率"></a>4. 概率</h3><p>表征事件发生的可能性大小</p>
-<p><strong>定义</strong></p>
-<p>$\Omega$为样本空间，对于每一事件A赋予一实数$P(A)$，若P(A)满足下列条件则被称为概率：</p>
-<ul>
-<li>非负性：$0\leq P(A)\leq 1$</li>
-<li>规范性：$P(\Omega)=1$</li>
-<li>可列可加性：$A_1,\cdots,A_n$互不相容，则$P(A_1\,\bigcup\,\cdots\bigcup\,A_k)=P(A_1)+\cdots+P(A_k)$</li>
-</ul>
-<p><strong>性质</strong></p>
-<ol>
-<li>$P(\emptyset)=0$</li>
-<li>$P(\overline{A})=1-P(A)$</li>
-<li>若$A\subset B$，则有$P(A)\leq P(B),\quad P(B-A)=P(B)-P(A)$</li>
-<li>对于任意两个事件A和B，$P(A\bigcup B)=P(A)+P(B)-P(A+B)$</li>
-</ol>
-<h4 id="4-1-古典概型-等可能概型"><a href="#4-1-古典概型-等可能概型" class="headerlink" title="4.1 古典概型(等可能概型)"></a>4.1 古典概型(等可能概型)</h4><p><strong>定义</strong></p>
-<p>若$\Omega$是**有限样本空间，其样本点为$e_1,\cdots e_n$，在有限样本空间中引进概率。</p>
-<p><strong>1/n</strong>称为事件${e_i}$的概率，记为$P({e_i})$</p>
-<script type="math/tex; mode=display">P(\{e_1\})+\cdots +P(\{e_n\})=P(\Omega)=1</script><p>从定义中不难发现古典概型的两个特点：</p>
-<ul>
-<li>样本空间包含<strong>有限</strong>个元素</li>
-<li>试验中每个基本事件发生的可能性相同</li>
-</ul>
-<p>注：<strong>基本事件是两两不相容的</strong></p>
-<p>若事件A包含k个基本事件，则有</p>
-<script type="math/tex; mode=display">P(A)=\sum_{i=1}^kP(\{e_{i_k}\})=\frac{k}{n}</script><h4 id="4-2-几何概型"><a href="#4-2-几何概型" class="headerlink" title="4.2 几何概型"></a>4.2 几何概型</h4><p>数据从有限集合推广到无限集合</p>
-<p>例：约会问题</p>
-<p>两人约定7点到8点在某地会面，先到者等候另一人20分钟，过时就离去，试求这两人会面的概率。</p>
-<p>解：以$x,y$分别表示两人到达的时刻，则会面的充要条件为$|x-y|\leq20$，这就是一个几何概率的问题，可能的结果全体是边长60的正方形里面的点，结果为</p>
-<script type="math/tex; mode=display">P(A)=\frac{60^2-40^2}{60^2}</script><p>从上面的例子不难看出，样本空间从原来的有限的个数，变成了无限的点。</p>
-<p>如果要在半径为1的圆内随机地取一条弦，问弦长超过$\sqrt{3}$的概率是多少？</p>
-<p>3种思路有3种不同的答案</p>
-<p><strong>在数据映射中，我们需要遵循物理世界到数据集合的某种结构保持</strong></p>
-<hr>
-<h2 id="二、概率的计算"><a href="#二、概率的计算" class="headerlink" title="二、概率的计算"></a>二、概率的计算</h2><h3 id="1-条件概率"><a href="#1-条件概率" class="headerlink" title="1. 条件概率"></a>1. 条件概率</h3><p>事件A发生的条件下事件B发生的概率</p>
-<h4 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h4><p>设A，B是两事件，且$P(A)&gt;0$，称</p>
-<script type="math/tex; mode=display">P(B|A)=\frac{P(AB)}{P(A)}</script><p>为在事件A发生的条件下事件B发生的<strong>条件概率</strong></p>
-<p>条件概率符合概率定义中的3个条件</p>
-<p>非负性</p>
-<p>规范性</p>
-<p>可列可加性：$B_1,\cdots,B_n$两两互不相容</p>
-<script type="math/tex; mode=display">P(\bigcup_{i=1}^\infty B_i\,\mid\,A)=\sum_{i=1}^\infty P(B_i\mid A)</script><p>同时也可以使用概率的性质</p>
-<script type="math/tex; mode=display">P(B_1\bigcup B_2)=P(B_1\mid A)+P(B_2\mid A)-P(B_1B_2\mid A)</script><p>注意这里是对任意事件$B_1,B_2$，两者不一定互不相容，如果互不相容，那么$P(B_1B_2)=\emptyset$，与可列可加性不矛盾。</p>
-<h4 id="1-2-乘法公式"><a href="#1-2-乘法公式" class="headerlink" title="1.2 乘法公式"></a>1.2 乘法公式</h4><script type="math/tex; mode=display">P(AB)=P(A)P(B|A)</script><p>推广：一般地，我们有：</p>
-<script type="math/tex; mode=display">P(A_1A_2\cdots A_n)=P(A_1)P(A_2\mid A_1)\cdots P(A_n\mid A_1A_2\cdots A_{n-1})</script><p>大多数应用中，我们会直接获取条件概率，通过它进行计算</p>
-<h4 id="1-3-完备事件组"><a href="#1-3-完备事件组" class="headerlink" title="1.3  完备事件组"></a>1.3  完备事件组</h4><p>设$B_1,\cdots,B_n$是样本空间$\Omega$的一个事件组，若满足</p>
-<ul>
-<li>$B_i\bigcap B_j=\emptyset$ ，对于任意$i\neq j$</li>
-<li>$\bigcup_iB_i=\Omega$</li>
-</ul>
-<p>则$B_1,\cdots,B_n$称为一个完备事件组</p>
-<h4 id="1-4-全概率公式"><a href="#1-4-全概率公式" class="headerlink" title="1.4 全概率公式"></a>1.4 全概率公式</h4><p>设$B_1,\cdots,B_n$是样本空间$\Omega$的一个完备事件组，且$P(B_i)&gt;0(i=1,2,\cdots,n)$，则对于任一随机事件A，有</p>
-<script type="math/tex; mode=display">P(A)=\sum_{i=1}^nP(B_i)P(A\mid B_i)</script><p>当$P(A)$不易求得时，利用此公式</p>
-<h4 id="1-5-贝叶斯公式"><a href="#1-5-贝叶斯公式" class="headerlink" title="1.5 贝叶斯公式"></a>1.5 贝叶斯公式</h4><p>设实验E的样本空间为$\Omega$，$A$为$\Omega$的事件，$B_1,\cdots,B_n$为$S$的一个划分，且$P(A)&gt;0,P(B_i)&gt;0$，则</p>
-<script type="math/tex; mode=display">P(B_i\mid A)=\frac{P(A\mid B_i)P(B_i)}{\sum_{j=1}^nP(A\mid B_j)P(B_j)},i=1,2,\cdots,n</script><p>如：设$A,B$为两事件，$P(B)&gt;0$，则</p>
-<script type="math/tex; mode=display">P(A\mid B)=\frac{P(B\mid A)\times P(A)}{P(B)}</script><p>贝叶斯定理往往与全概率公式同时使用。全概率公式用于”由因求果“的问题，而贝叶斯定理用于”执果寻因“问题。</p>
-<p><strong>常用</strong>：令$n=2$，那么全概率公式和贝叶斯公式分别为：</p>
-<script type="math/tex; mode=display">P(A)=P(A\mid B)P(B)+P(A\mid \overline{B})P(\overline{B})</script><script type="math/tex; mode=display">P(B\mid A)=\frac{P(AB)}{P(A)}=\frac{P(A\mid B)P(B)}{P(A\mid B)P(B)+P(A\mid \overline{B})P(\overline{B})}</script><h4 id="1-6-独立性"><a href="#1-6-独立性" class="headerlink" title="1.6 独立性"></a>1.6 独立性</h4><p><strong>定义</strong>：设$A,B$是两事件，如果满足等式</p>
-<script type="math/tex; mode=display">P(AB)=P(A)P(B)</script><p>则称事件$A$和事件$B$相互独立</p>
-<p><strong>定理</strong>：设$A,B$是两事件，且$P(A)&gt;0$，若$A,B$相互独立，则$P(B\mid A)=P(B)$，反之亦然</p>
-<p><strong>定理</strong>：若事件$A,B$相互独立，则下列各对事件也相互独立，$A\&amp;\overline{B},B\&amp;\overline{A},\overline{A}\&amp;\overline{B}$</p>
-<p><strong>定义</strong>：设$A,B,C$是三个事件，如果满足等式</p>
-<script type="math/tex; mode=display">P(AB)=P(A)P(B),\\ P(BC)=P(B)P(C)\\P(AC)=P(A)P(C)\\P(ABC)=P(A)P(B)P(C)</script><p>则称事件$A,B,C$相互独立</p>
-<hr>
-<h2 id="三、随机测试示例"><a href="#三、随机测试示例" class="headerlink" title="三、随机测试示例"></a>三、随机测试示例</h2><p>实际应用中使用概率论</p>
-<h3 id="1-随机测试初步"><a href="#1-随机测试初步" class="headerlink" title="1.  随机测试初步"></a>1.  随机测试初步</h3><p>假设有一个计算多项式乘法的程序。</p>
-<p>程序可能采用左右两边的某一方式实现：</p>
-<script type="math/tex; mode=display">(x+1)(x-2)(x+3)(x-4)(x+5)(x-6)=x^6-7x^3+25</script><p>思考：</p>
-<ul>
-<li>如何验证左右两边的多项式相等</li>
-<li>假设有一个超大规模的多项式呢？</li>
-</ul>
-<script type="math/tex; mode=display">F(X)?\equiv G(x)</script><h4 id="1-1-规范化"><a href="#1-1-规范化" class="headerlink" title="1.1 规范化"></a>1.1 规范化</h4><p>两个多项式相等当且仅当他们的规范式中所有的对应系数相等，</p>
-<p>那么把$F(x)$变换为规范式，有$O(d^2)$的复杂度</p>
-<h4 id="1-2-随机测试-初步"><a href="#1-2-随机测试-初步" class="headerlink" title="1.2 随机测试-初步"></a>1.2 随机测试-初步</h4><p>设$F(X),G(x)$的最高阶为的$d$，随机算法首先是从${1,\cdots,100d}$中均匀随机（等可能）地选择一个整数$r$，然后计算两个式子的值，进行判断。有$O(d)$的复杂度，大大提高了速度。</p>
-<p>当然，这种算法可能会给出<strong>错误</strong>的答案。</p>
-<p>$F(x)\neq G(x), F(r)=G(r)$，算法检测结果错误</p>
-<p>错误的概率是多少？可以接受吗？</p>
-<p>当$r$是方程$F(x)-G(x)=0$的根时，必然会出现错误结果。</p>
-<p>$F(x)-G(x)$的次数不高于$d$，由代数的基本定理可知，$F(x)-G(x)=0$不可能多于$d$个根。</p>
-<p>那么在${1,\cdots,100d}$中，给出错误答案的概率不会高于$\frac{1}{100}$</p>
-<h3 id="2-随机测试改进"><a href="#2-随机测试改进" class="headerlink" title="2. 随机测试改进"></a>2. 随机测试改进</h3><p>如何改进算法正确率？</p>
-<p>很容易想到两个方向，扩大检测范围，重复多次检测</p>
-<h4 id="2-1-扩大范围"><a href="#2-1-扩大范围" class="headerlink" title="2.1 扩大范围"></a>2.1 扩大范围</h4><p>在更大的范围进行取值，比如在${1,\cdots,1000d}$中进行检测，那么错误答案概率不会超过$\frac{1}{1000}$</p>
-<h4 id="2-2-重复检测"><a href="#2-2-重复检测" class="headerlink" title="2.2 重复检测"></a>2.2 重复检测</h4><p>重复多次进行随机检测</p>
-<ul>
-<li><p>有放回抽样</p>
-<p>$k$次有放回抽样错误率为</p>
-<script type="math/tex; mode=display">P(E_1\,\bigcap\cdots\bigcap\,E_k)=\prod_{i=1}^kP(E_i)\leq(\frac{1}{100})^k</script><p>可以看到，错误率指数级降低</p>
-</li>
-<li><p>无放回抽样</p>
-</li>
-</ul>
-<p>总结：</p>
-<p>无放回比有放回准确率高</p>
-<p>有放回实现比无放回简单</p>
-<p>当$d+1$次无放回抽样后，能够确保准确性，但是算法复杂度提升到$O(d^2)$</p>
-<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><h3 id="1-概率的定义"><a href="#1-概率的定义" class="headerlink" title="1. 概率的定义"></a>1. 概率的定义</h3><p>$\Omega$为样本空间，对于每一事件A赋予一实数$P(A)$，若P(A)满足下列条件则被称为概率：</p>
-<ul>
-<li>非负性：$0\leq P(A)\leq 1$</li>
-<li>规范性：$P(\Omega)=1$</li>
-<li>可列可加性：$A_1,\cdots,A_n$互不相容，则$P(A_1\,\bigcup\,\cdots\bigcup\,A_k)=P(A_1)+\cdots+P(A_k)$</li>
-</ul>
-<h3 id="2-条件概率"><a href="#2-条件概率" class="headerlink" title="2. 条件概率"></a>2. 条件概率</h3><script type="math/tex; mode=display">P(B|A)=\frac{P(AB)}{P(A)}</script><h3 id="3-乘法公式"><a href="#3-乘法公式" class="headerlink" title="3. 乘法公式"></a>3. 乘法公式</h3><script type="math/tex; mode=display">P(A_1A_2\cdots A_n)=P(A_1)P(A_2\mid A_1)\cdots P(A_n\mid A_1A_2\cdots A_{n-1})</script><h3 id="4-全概率公式"><a href="#4-全概率公式" class="headerlink" title="4. 全概率公式"></a>4. 全概率公式</h3><script type="math/tex; mode=display">P(A)=P(A\mid B_1)P(B_1)+\cdots+P(A\mid B_n)P(B_n)</script><h3 id="5-贝叶斯公式"><a href="#5-贝叶斯公式" class="headerlink" title="5. 贝叶斯公式"></a>5. 贝叶斯公式</h3><script type="math/tex; mode=display">P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)}</script><p>参考：</p>
-<ol>
-<li><a href="https://www.icourse163.org/learn/NJU-1450307351?tid=1450738603#/learn/announce" target="_blank" rel="noopener">中国大学MOOC-南京大学-数据科学基础</a></li>
-<li>《概率论与数理统计》浙江大学第四版</li>
-</ol>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>C++基本语法</title>
+      <link href="/posts/6b599344.html"/>
+      <url>/posts/6b599344.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="C-学习笔记"><a href="#C-学习笔记" class="headerlink" title="C++学习笔记"></a>C++学习笔记</h1><p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p><a id="more"></a><h1 id="一、-变量"><a href="#一、-变量" class="headerlink" title="一、 变量"></a>一、 变量</h1><h2 id="1-用sizeof运算符求某一类型或变量占据的字节数"><a href="#1-用sizeof运算符求某一类型或变量占据的字节数" class="headerlink" title="1. 用sizeof运算符求某一类型或变量占据的字节数"></a>1. 用sizeof运算符求某一类型或变量占据的字节数</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(a) &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// sizeof运算符可以求变量占据的字节数</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 未初始化的变量，其值是不确定的</span></span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="2-数据类型的自动转换"><a href="#2-数据类型的自动转换" class="headerlink" title="2. 数据类型的自动转换"></a>2. 数据类型的自动转换</h2><h3 id="1-数"><a href="#1-数" class="headerlink" title="1. 数"></a>1. 数</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">11.34</span>; <span class="comment">// 11.34被自动转化为11后赋值给a</span></span><br><span class="line"><span class="keyword">int</span> b = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">double</span> d = b; <span class="comment">// d的值是30.0</span></span><br></pre></td></tr></table></figure><h3 id="2-字符类型与整型"><a href="#2-字符类型与整型" class="headerlink" title="2. 字符类型与整型"></a>2. 字符类型与整型</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> k = <span class="string">'a'</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, k); <span class="comment">// 输出97，即a的ASCII码</span></span><br><span class="line"><span class="keyword">int</span> n = <span class="number">98</span>;</span><br><span class="line"><span class="keyword">char</span> k = n;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%c"</span>, k); <span class="comment">// 输出b</span></span><br></pre></td></tr></table></figure><h2 id="3-输入和输出"><a href="#3-输入和输出" class="headerlink" title="3. 输入和输出"></a>3. 输入和输出</h2><h4 id="1-scanf和printf"><a href="#1-scanf和printf" class="headerlink" title="1. scanf和printf"></a>1. scanf和printf</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt; //使用scanf和printf时需要使用该库</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">float</span> m;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%c%f"</span>, &amp;n, &amp;c, &amp;m);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %c %f\n"</span>, n, c, m);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>用scanf可以一次读入多个不同类型的变量，输入各项用空格隔开<br>        注意在输入<strong>字符</strong>时，不会跳过空格（空格也会被当做字符读入）<br>        输入其它数据时，会跳过空格</p><h4 id="2-cin和cout"><a href="#2-cin和cout" class="headerlink" title="2. cin和cout"></a>2. cin和cout</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">    <span class="keyword">while</span> ((c=<span class="built_in">cin</span>.get()) != EOF) &#123; </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; (<span class="keyword">char</span>) c; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>使用cin读入所有字符，包括空格和回车，EOF<br>        Mac（ctrl+D停止输入，ctrl+C停止程序)<br>        windows ctrl+Z停止</p><h4 id="3-cin-amp-cout-scanf-amp-printf-比较"><a href="#3-cin-amp-cout-scanf-amp-printf-比较" class="headerlink" title="3. cin&amp;cout / scanf&amp;printf 比较"></a>3. cin&amp;cout / scanf&amp;printf 比较</h4><ul><li>cin，cout速度慢，输入输出数据量大时用scanf/printf</li><li>一个程序不要同时出现cin和scanf，cout和prinf</li></ul><h2 id="4-运算"><a href="#4-运算" class="headerlink" title="4. 运算"></a>4. 运算</h2><ol><li>加、减、乘运算的溢出</li></ol><hr><h1 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h1><h3 id="1-数组作为函数的参数传递"><a href="#1-数组作为函数的参数传递" class="headerlink" title="1. 数组作为函数的参数传递"></a>1. 数组作为函数的参数传递</h3><p>数组作为函数的参数时，是传引用的，即<strong>形参数组改变了，实参数组也会改变</strong></p><p>二维数组作为函数的形参时，<strong>必须写明函数有多少列</strong>，不要写明有多少行</p><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintArray</span><span class="params">(<span class="keyword">int</span> a[][<span class="number">5</span>])</span> </span>&#123;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; a[<span class="number">4</span>][<span class="number">3</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>必须要写明列数，编译器才能够根据下标算出元素的地址</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$\color&#123;#F00&#125;&#123;a[i][j]的地址 = 数组首地址 + i \times N \times sizeof(a[0][0]) + j \times sizeof(a[0][0])&#125;$ (N是数组列数)</span><br></pre></td></tr></table></figure><p>形参数组的首地址就是实参数组的首地址      </p><h1 id="三、字符串"><a href="#三、字符串" class="headerlink" title="三、字符串"></a>三、字符串</h1><h2 id="1-字符串的形式"><a href="#1-字符串的形式" class="headerlink" title="1. 字符串的形式"></a>1. 字符串的形式</h2><h3 id="（1）字符串常量"><a href="#（1）字符串常量" class="headerlink" title="（1）字符串常量"></a>（1）字符串常量</h3><p>用双引号括起来的，如”China”, “C++ program”.</p><p>字符串常量占据<strong>内存</strong>的字节数等于字符中字符数目加1，结尾多出字符’\0’.</p><font color=#F00>但是字符串的长度不包含'\0'</font><p>“”也是合法的·1字符串常量，称为空串，仍然占据一个字节的内存空间，存放’\0’</p><h3 id="（2）存放于字符数组中，以’-0’结尾"><a href="#（2）存放于字符数组中，以’-0’结尾" class="headerlink" title="（2）存放于字符数组中，以’\0’结尾"></a>（2）存放于字符数组中，以’\0’结尾</h3><p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p><p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p><h3 id="（3）string对象。"><a href="#（3）string对象。" class="headerlink" title="（3）string对象。"></a>（3）string对象。</h3><p>string是C++标准模板库里的一个类，专门用于处理字符串</p>]]></content>
+      
+      
       <categories>
-        <category>数据科学</category>
+          
+          <category> C++ </category>
+          
+          <category> 基础 </category>
+          
       </categories>
-      <tags>
-        <tag>概率论</tag>
-      </tags>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
 </search>
