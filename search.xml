@@ -1,62 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>1.面向对象程序设计概述</title>
-    <url>/posts/ed34008.html</url>
-    <content><![CDATA[<h2 id="一、面向对象程序设计概述"><a href="#一、面向对象程序设计概述" class="headerlink" title="一、面向对象程序设计概述"></a>一、面向对象程序设计概述</h2><p>结构化程序：算法+数据结构 = 程序 </p>
-<p>（即确定如何操作数据，再决定如何组织数据的结构）</p>
-<p>面向对象程序设计(OOP)：将数据放在第一位，再考虑操作数据的算法</p>
-<h3 id="1-类"><a href="#1-类" class="headerlink" title="1. 类"></a>1. 类</h3><ol>
-<li><p><strong>类(class)</strong>是构造对象的模板或<strong>蓝图</strong>，就好像一个制作某件工艺品的模具，对象就是工艺品</p>
-</li>
-<li><p>由类构造(construct)对象的过程称为创建类的<strong>实例(instance)</strong></p>
-</li>
-<li><p><strong>封装(encapsulation)</strong>将<em>数据</em>和<em>行为</em>组合在一个包中，对对象的使用者隐藏具体的实现方式，也称为<strong>数据隐藏</strong></p>
-</li>
-<li><p>对象中的数据称为<em>实例字段(instance field)</em>，操作数据的过程称为<em>方法(method)</em></p>
-</li>
-<li><p>对象拥有的实例字段值的集合就是这个对象的当前<em>状态(state)</em></p>
-</li>
-<li>程序只能通过对象的方法和对象数据进行交互，提高了重用性和可靠性</li>
-<li>可以通过扩展一个类来构建新的类，这使得用户自定义类更加容易。在Java中，所有类都来自于一个<em>超类</em>，即<em>Object</em>。</li>
-<li>通过扩展一个类来建立一个新的类的过程就是<strong>继承(inheritance)</strong>，新类具有被扩展的类的全部属性和方法，可以自定义新的属性和方法。</li>
-</ol>
-<h3 id="2-对象"><a href="#2-对象" class="headerlink" title="2. 对象"></a>2. 对象</h3><p>对象的3个特性</p>
-<ul>
-<li><strong>行为(behavior)</strong>——可以对对象完成的操作（应用的方法）</li>
-<li><strong>状态(state)</strong>——描述当前状况的信息，状态的改变必须通过调用方法实现</li>
-<li><strong>标识(identity)</strong>——每个对象有唯一的标识来区分（如两个订单的编号肯定不相同）</li>
-</ul>
-<h3 id="3-识别类"><a href="#3-识别类" class="headerlink" title="3. 识别类"></a>3. 识别类</h3><p>编写程序从<strong>识别类</strong>开始，然后为各个类添加方法。</p>
-<p>一个简单的方法是在分析问题的过程中寻找<strong>名词——类</strong>，寻找<strong>动词——方法</strong></p>
-<p>例如我们有商品，订单，账户这样的名词作为类，即Item，Order，Account</p>
-<p>那么在账户这个类中，就可以有增加账户，修改账户等方法。</p>
-<h3 id="4-类之间的关系"><a href="#4-类之间的关系" class="headerlink" title="4. 类之间的关系"></a>4. 类之间的关系</h3><p>类之间最常见的关系有：</p>
-<ul>
-<li><strong>依赖</strong>（”<em>uses-a</em>“）</li>
-<li><strong>聚合</strong> （”<em>has-a</em>“）</li>
-<li><strong>继承</strong>（<em>“is-a”</em>)</li>
-</ul>
-<h4 id="4-1-依赖（dependence）"><a href="#4-1-依赖（dependence）" class="headerlink" title="4.1 依赖（dependence）"></a>4.1 依赖（dependence）</h4><p>如果一个类的方法使用或操纵另一个类的对象，我们就可以说一个类依赖于另一个类</p>
-<p>比如Order对象访问Account对象查看信用状态，这就是一个使用(“uses-a”)的关系。</p>
-<p>（尽可能减少相互依赖的类，做到低耦合）</p>
-<h4 id="4-2-聚合（aggregation）"><a href="#4-2-聚合（aggregation）" class="headerlink" title="4.2 聚合（aggregation）"></a>4.2 聚合（aggregation）</h4><p>类A的对象包含（”has-a”）类B的对象</p>
-<p>如一个Order对象就包含了一些Item对象</p>
-<h4 id="4-3-继承（inheritance）"><a href="#4-3-继承（inheritance）" class="headerlink" title="4.3 继承（inheritance）"></a>4.3 继承（inheritance）</h4><p>一个更特殊的类与一个更一般的类之间的关系</p>
-<p>也就是前面提到的扩展，比如现在我们定义一个加急订单RushOrder类，那么它是一个（”is-a”)Order类</p>
-<p>也就是有Order类继承而来。</p>
-<p>下图展示了上述的三种关系。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200423LearnJava01.png" srcset="/img/loading.gif" alt=""></p>
-]]></content>
-      <categories>
-        <category>Java</category>
-        <category>对象和类</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo-Permalink简化</title>
     <url>/posts/838443af.html</url>
     <content><![CDATA[<h1 id="Permalink简化"><a href="#Permalink简化" class="headerlink" title="Permalink简化"></a>Permalink简化</h1><p>在文档名有中文的时候，因为汉字会被转义，默认的永久链接会非常复杂，具体原因可以看这一篇文章</p>
@@ -251,6 +195,102 @@ hexo s --debug // 在命令行生成debug信息</code></pre></div>
       </tags>
   </entry>
   <entry>
+    <title>Hexo部署到云服务器</title>
+    <url>/posts/e80e623c.html</url>
+    <content><![CDATA[<h3 id="0-准备工作"><a href="#0-准备工作" class="headerlink" title="0. 准备工作"></a>0. 准备工作</h3><p>博客的搭建和域名的绑定可以参考我以前的博客。<br><a href="https://zhouzhuyan.com/posts/ae6c038e.html">使用Github pages + Hexo搭建个人博客</a><br><a href="https://zhouzhuyan.com/posts/2cd2c226.html">Hexo个人博客绑定域名</a></p>
+<p>由于博客是基于Github pages搭建的，所以在国内的访问速度比较慢，可以部署到云服务器上加快访问的速度，我使用的是<a href="https://cloud.tencent.com/act/campus" target="_blank" rel="noopener">腾讯云学生机</a>。注意在国内使用云服务器部署网站需要对网站进行备案，详细步骤可以参考腾讯的<a href="https://cloud.tencent.com/document/product/243" target="_blank" rel="noopener">官方文档</a>。在备案完成后，就可以进行网站的部署了。</p>
+<h3 id="1-配置git"><a href="#1-配置git" class="headerlink" title="1.  配置git"></a>1.  配置git</h3><p><strong>Tip</strong><br>我的服务器型号是<code>CentOS 7.5</code></p>
+<h4 id="1-1-安装git"><a href="#1-1-安装git" class="headerlink" title="1.1 安装git"></a>1.1 安装git</h4><div class="hljs"><pre><code class="hljs shell">yum install -y git</code></pre></div>
+<p>看到complete字样说明安装完成了，可以通过如下命令验证</p>
+<div class="hljs"><pre><code class="hljs shell">git --version</code></pre></div>
+<p>出现版本则说明安装成功。</p>
+<h4 id="1-2-创建git账户"><a href="#1-2-创建git账户" class="headerlink" title="1.2 创建git账户"></a>1.2 创建git账户</h4><div class="hljs"><pre><code class="hljs shell">adduser git
+passwd git</code></pre></div>
+<p>注意一定要有第二步<code>passwd git</code>，这是给git账户设置密码，否则账户不会使用。</p>
+<h4 id="1-3-设置免密登录git"><a href="#1-3-设置免密登录git" class="headerlink" title="1.3 设置免密登录git"></a>1.3 设置免密登录git</h4><p>使用<code>su</code>命令切换至git用户，并进入用户git的根目录</p>
+<div class="hljs"><pre><code class="hljs shell">su git
+cd</code></pre></div>
+<p>创建<code>~/.ssh</code>文件夹和<code>~/.ssh/authorized_keys</code>文件</p>
+<div class="hljs"><pre><code class="hljs shell">mkdir ~/.ssh
+touch ~/.ssh/authorized_keys</code></pre></div>
+<p>将本地的<code>id_rsa.pub</code>文件中的公匙复制到<code>authorized_keys</code>文件中，在mac中，该文件的地址是<code>/Users/你的用户名/.ssh/id_rsa.pub</code>，可以在终端中使用如下命令打开<code>.ssh</code>文件夹，然后使用vs code打开该文件</p>
+<div class="hljs"><pre><code class="hljs shell">open /Users/galahad/.ssh</code></pre></div>
+<p>复制其中的内容，然后打开<code>authorized_keys</code>文件</p>
+<div class="hljs"><pre><code class="hljs shell">vi ~/.ssh/authorized_keys</code></pre></div>
+<p>按<code>i</code>进入插入模式，复制内容<br>按<code>esc</code>键进入命令模式，输入<code>:wq</code>保存并退出<br>最后对文件赋予对应的权限</p>
+<div class="hljs"><pre><code class="hljs shell">chmod 600 /home/git/.ssh/authorized_keys
+chmod 700 /home/git/.ssh</code></pre></div>
+<p>这样就可以使得本地终端可以免密登录git用户，可以在本地终端使用ssh远程连接测试</p>
+<div class="hljs"><pre><code class="hljs shell">ssh git@你的IP</code></pre></div>
+<p>如果仍需输入密码，那说明配置有问题，可以重新按照1.3的步骤再配置一遍，当然，1.3的部分不是必须的，这只是为了在本地提交文件到服务器的时候不用输入密码，省点儿力气。</p>
+<h4 id="1-4-配置git仓库"><a href="#1-4-配置git仓库" class="headerlink" title="1.4 配置git仓库"></a>1.4 配置git仓库</h4><p>在git用户的根目录下创建hexo存储的目录</p>
+<div class="hljs"><pre><code class="hljs shell">mkdir -p projects/blog</code></pre></div>
+<p>再创建一个git仓库，并初始化一个仓库</p>
+<div class="hljs"><pre><code class="hljs shell">mkdir repos
+cd repos
+git init --bare blog.git</code></pre></div>
+<p>之后，在<code>blog.git</code>文件夹下会产生一个<code>hooks</code>文件夹，在其中创建一个文件<code>post-receive</code>，在其中配置一个钩子</p>
+<div class="hljs"><pre><code class="hljs shell">cd blog.git/hooks
+vi post-receive</code></pre></div>
+<p>将如下内容复制到其中</p>
+<div class="hljs"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh</span>
+git --work-tree=/home/git/projects/blog --git-dir=/home/git/repos/blog.git checkout -f</code></pre></div>
+<p>保存退出之后，赋予文件可执行权限</p>
+<div class="hljs"><pre><code class="hljs shell">chmod +x post-receive</code></pre></div>
+<p>然后输入<code>exit</code>回到<code>root</code>用户下，输入如下命令</p>
+<div class="hljs"><pre><code class="hljs shell">chown -R git:git /home/git/repos/blog.git</code></pre></div>
+<p>配置完仓库后，可以在本地使用<code>git clone</code>命令测试是否能够成功克隆仓库</p>
+<div class="hljs"><pre><code class="hljs shell">git clone git@server_ip:/home/git/repos/blog.git</code></pre></div>
+<h3 id="2-配置Nginx"><a href="#2-配置Nginx" class="headerlink" title="2 配置Nginx"></a>2 配置Nginx</h3><h4 id="2-1-安装Nginx"><a href="#2-1-安装Nginx" class="headerlink" title="2.1 安装Nginx"></a>2.1 安装Nginx</h4><div class="hljs"><pre><code class="hljs shell">yum install -y nginx</code></pre></div>
+<p>启动nginx</p>
+<div class="hljs"><pre><code class="hljs shell">nginx</code></pre></div>
+<h4 id="2-2-配置文件"><a href="#2-2-配置文件" class="headerlink" title="2.2 配置文件"></a>2.2 配置文件</h4><p>先暂停服务</p>
+<div class="hljs"><pre><code class="hljs shell">nginx -s stop</code></pre></div>
+<p>进入nginx目录，编辑配置文件</p>
+<div class="hljs"><pre><code class="hljs shell">cd /etc/nginx
+vi nginx.conf</code></pre></div>
+<p>注意要修改两个地方，一个是将<code>user nginx</code>改为<code>user root</code><br>第二个就是在server的位置，添加root解析路径<code>/home/git/projects/blog/</code>，如果你已经有了域名，那么在server_name后面添加上你的域名。其它保持不变。</p>
+<div class="hljs"><pre><code class="hljs shell">server &#123;
+        listen       80 default_server;
+        listen       [::]:80 default_server;
+        server_name  zhouzhuyan.com www.zhouzhuyan.com;
+        root         /home/git/projects/blog/;
+        index index.html index.htm;
+    &#125;</code></pre></div>
+<p>保存退出<br>重新启动nginx</p>
+<div class="hljs"><pre><code class="hljs shell">systemctl restart nginx</code></pre></div>
+<h4 id="2-3-检查"><a href="#2-3-检查" class="headerlink" title="2.3 检查"></a>2.3 检查</h4><p>检查nginx状态</p>
+<div class="hljs"><pre><code class="hljs shell">systemctl status nginx</code></pre></div>
+<p>如果看到绿色的<code>active</code>就表示配置成功了。我在这里遇到了一个问题，它的状态显示红色的<code>failed</code>,，错误是<code>98: Address already in use</code>，80端口已经被占用，这个时候可以用如下命令检查一下是谁占用了80端口</p>
+<div class="hljs"><pre><code class="hljs shell">netstat -ntpl</code></pre></div>
+<p>如果就是nginx的话，应该是由于之前的配置文件中，<code>listen       80 default_server;</code>监听ipv4的80端口，而<code>listen       [::]:80 default_server;</code>监听的是ipv6的80端口，于是就重复占用了。可以在配置文件中这样更改</p>
+<div class="hljs"><pre><code class="hljs shell">listen       [::]:80 ipv6only=on  default_server;</code></pre></div>
+<p>然后重启nginx应该就可以了。</p>
+<h3 id="3-Hexo本地配置"><a href="#3-Hexo本地配置" class="headerlink" title="3. Hexo本地配置"></a>3. Hexo本地配置</h3><p>hexo的站点配置文件<code>_config.yml</code></p>
+<div class="hljs"><pre><code class="hljs shell">deploy:
+  type: git
+  repo: git@你的IP:/home/git/repos/blog.git
+  branch: master</code></pre></div>
+<p>然后进行部署</p>
+<div class="hljs"><pre><code class="hljs shell">hexo clean
+hexo g -d</code></pre></div>
+<h3 id="4-启用https"><a href="#4-启用https" class="headerlink" title="4. 启用https"></a>4. 启用https</h3><p>由于nginx默认使用的是http，所以在网站访问的时候，会显示不安全，可以通过配置来开启https</p>
+<h4 id="4-1-申请SSL证书"><a href="#4-1-申请SSL证书" class="headerlink" title="4.1 申请SSL证书"></a>4.1 申请SSL证书</h4><p>阿里云和腾讯云都提供免费的SSL证书下载，因为我的域名是在腾讯云云购买的，所以我就从腾讯云上下载了<a href="https://cloud.tencent.com/product/ssl" target="_blank" rel="noopener">SSL证书</a></p>
+<h4 id="4-2-传输文件到服务器"><a href="#4-2-传输文件到服务器" class="headerlink" title="4.2 传输文件到服务器"></a>4.2 传输文件到服务器</h4><p>从腾讯云上下载证书到本地，会得到一个自己域名命名的文件夹，里面有<code>Apache</code>，<code>Nginx</code>，<code>Tomcat</code>，<code>IIS</code>的证书，由于我们使用的是nginx服务，所以只需要Nginx文件夹内的<code>xxx.crt</code>和<code>xxx.key</code>两个文件。<br>在服务端创建文件夹存储证书</p>
+<div class="hljs"><pre><code class="hljs shell">mkdir /home/git/SSL</code></pre></div>
+<p>我们可以使用scp命令将本地的文件传输到服务器</p>
+<div class="hljs"><pre><code class="hljs shell">scp -r xxx/Nginx git@你的IP /home/git/SSL</code></pre></div>
+<h4 id="4-3-配置nginx"><a href="#4-3-配置nginx" class="headerlink" title="4.3 配置nginx"></a>4.3 配置nginx</h4><p>然后再次编辑<code>nginx.conf</code>文件，这里可以参考官方文档<a href="https://cloud.tencent.com/document/product/400/35244" target="_blank" rel="noopener">Nginx 服务器证书安装</a>，文档写的很清晰，按照其中的步骤配置一下就可以完成了。<br>之后我们就可以通过https访问网页，在网址旁边会出现一把锁。</p>
+<p>参考：<br>[1]HJX.将Hexo部署到阿里云轻量级服务器(保姆级教程)<br>[EB/OL].<a href="https://hjxlog.com/posts/20191130a1.html,2019-11-30." target="_blank" rel="noopener">https://hjxlog.com/posts/20191130a1.html,2019-11-30.</a><br>[2]Dreamy.TZK.将Hexo部署到云服务器<br>[EB/OL].<a href="https://cloud.tencent.com/developer/article/1632020,2020-05-25." target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1632020,2020-05-25.</a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用Github pages+Hexo 搭建个人博客</title>
     <url>/posts/ae6c038e.html</url>
     <content><![CDATA[<h1 id="Github-pages-Hexo-搭建个人博客"><a href="#Github-pages-Hexo-搭建个人博客" class="headerlink" title="Github pages + Hexo 搭建个人博客"></a>Github pages + Hexo 搭建个人博客</h1><p>2019年11月19日，我决定开始写<strong>博客</strong>，首先要用<em>github pages+hexo</em>搭建一个个人博客，其中的过程我就记录在这里面。</p>
@@ -328,7 +368,7 @@ npm -v</code></pre></div>
       </tags>
   </entry>
   <entry>
-    <title>变量和基本类型</title>
+    <title>C++变量和基本类型</title>
     <url>/posts/96db5496.html</url>
     <content><![CDATA[<h3 id="变量和基本类型"><a href="#变量和基本类型" class="headerlink" title="变量和基本类型"></a>变量和基本类型</h3><h4 id="1-复合类型-Compound-type"><a href="#1-复合类型-Compound-type" class="headerlink" title="1. 复合类型(Compound type)"></a>1. 复合类型(Compound type)</h4><p>基于其它类型定义的类型</p>
 <h5 id="1-1-引用-Reference"><a href="#1-1-引用-Reference" class="headerlink" title="1.1 引用(Reference)"></a>1.1 引用(Reference)</h5><p><strong>引用</strong>为对象起了另外一个名字，引用类型引用另外一种类型。通过将声明符写成&amp;d的形式来定义引用类型，其中d是声明的变量名。</p>
@@ -415,14 +455,13 @@ Sales_data accum;</code></pre></div>
 ]]></content>
       <categories>
         <category>C++</category>
-        <category>基础</category>
       </categories>
       <tags>
         <tag>C++</tag>
       </tags>
   </entry>
   <entry>
-    <title>字符串,向量和数组</title>
+    <title>C++字符串,向量和数组</title>
     <url>/posts/869e4b19.html</url>
     <content><![CDATA[<h3 id="二、字符串，向量和数组"><a href="#二、字符串，向量和数组" class="headerlink" title="二、字符串，向量和数组"></a>二、字符串，向量和数组</h3><p>作用域操作符<code>::</code></p>
 <p>含义：编译器应从操作符左侧的作用域中寻找右边那个名字</p>
@@ -495,7 +534,6 @@ p++; <span class="hljs-comment">// 指向第一个元素</span></code></pre></di
 ]]></content>
       <categories>
         <category>C++</category>
-        <category>基础</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -767,12 +805,6 @@ p++; <span class="hljs-comment">// 指向第一个元素</span></code></pre></di
       </tags>
   </entry>
   <entry>
-    <title>测试</title>
-    <url>/posts/9daba997.html</url>
-    <content><![CDATA[<p>blablablablablabla</p>
-]]></content>
-  </entry>
-  <entry>
     <title>策略模式</title>
     <url>/posts/72e3b671.html</url>
     <content><![CDATA[<h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><blockquote>
@@ -896,6 +928,8 @@ I'm flying with a rocket.
 <li><strong>Strategy和Context之间的通信开销</strong></li>
 <li>增加了对象的数目</li>
 </ol>
+<p>参考：</p>
+<p>1.</p>
 ]]></content>
       <categories>
         <category>设计模式</category>
