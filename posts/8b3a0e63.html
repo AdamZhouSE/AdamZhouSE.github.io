@@ -17,7 +17,7 @@
   <meta name="description" content="Take notes and write articles about Software Engineering">
   <meta name="author" content="ZZY">
   <meta name="keywords" content="">
-  <title>C++基本语法 - Blog of Adam</title>
+  <title>Java 继承 - Blog of Adam</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -168,8 +168,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-01-27 11:49" pubdate>
-      January 27, 2020 am
+    <time datetime="2020-09-08 16:09" pubdate>
+      September 8, 2020 pm
     </time>
   </div>
 
@@ -179,7 +179,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      807 字
+      1.2k 字
     </span>
   
 
@@ -189,7 +189,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      14
        分钟
     </span>
   
@@ -219,73 +219,78 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">C++基本语法</h1>
+            <h1 style="display: none">Java 继承</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="C-学习笔记"><a href="#C-学习笔记" class="headerlink" title="C++学习笔记"></a>C++学习笔记</h1><p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p>
-<a id="more"></a>
-<h1 id="一、-变量"><a href="#一、-变量" class="headerlink" title="一、 变量"></a>一、 变量</h1><h2 id="1-用sizeof运算符求某一类型或变量占据的字节数"><a href="#1-用sizeof运算符求某一类型或变量占据的字节数" class="headerlink" title="1. 用sizeof运算符求某一类型或变量占据的字节数"></a>1. 用sizeof运算符求某一类型或变量占据的字节数</h2><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> a;
-    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(a) &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// sizeof运算符可以求变量占据的字节数</span>
-    <span class="hljs-built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 未初始化的变量，其值是不确定的</span>
-    <span class="hljs-keyword">int</span> b = <span class="hljs-number">1</span>;
-    <span class="hljs-built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="hljs-built_in">endl</span>;
+              <h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>继承(inheritance)的基本思想是基于已经有的类创建新的类，复用这些类的方法。</p>
+<h2 id="一、类，超类和子类"><a href="#一、类，超类和子类" class="headerlink" title="一、类，超类和子类"></a>一、类，超类和子类</h2><p>在前面的文章中我们实现了一个<code>Employee</code>类，假设你在某个公司工作，这个公司的经理和员工的待遇不一样，普通员工在完成任务后仅领取薪水，而经理还拥有奖金。<br>这个时候，我们可以定义一个新类<code>Manager</code>，使用继承重用<code>Employee</code>中的代码，同时定义新的方法来增加奖金这一功能。</p>
+<p><strong>Tip</strong><br><code>Manager</code> <strong>is-a</strong> <code>Employee</code><br><strong>is-a</strong>关系是继承的一个明显特征</p>
+<h3 id="1-定义子类"><a href="#1-定义子类" class="headerlink" title="1. 定义子类"></a>1. 定义子类</h3><p>使用<code>extends</code>关键字来表示继承</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
+    <span class="hljs-comment">// blablabla</span>
 &#125;</code></pre></div>
-<h2 id="2-数据类型的自动转换"><a href="#2-数据类型的自动转换" class="headerlink" title="2. 数据类型的自动转换"></a>2. 数据类型的自动转换</h2><h3 id="1-数"><a href="#1-数" class="headerlink" title="1. 数"></a>1. 数</h3><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> a = <span class="hljs-number">11.34</span>; <span class="hljs-comment">// 11.34被自动转化为11后赋值给a</span>
-<span class="hljs-keyword">int</span> b = <span class="hljs-number">30</span>;
-<span class="hljs-keyword">double</span> d = b; <span class="hljs-comment">// d的值是30.0</span></code></pre></div>
-<h3 id="2-字符类型与整型"><a href="#2-字符类型与整型" class="headerlink" title="2. 字符类型与整型"></a>2. 字符类型与整型</h3><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> k = <span class="hljs-string">'a'</span>;
-<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, k); <span class="hljs-comment">// 输出97，即a的ASCII码</span>
-<span class="hljs-keyword">int</span> n = <span class="hljs-number">98</span>;
-<span class="hljs-keyword">char</span> k = n;
-<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>, k); <span class="hljs-comment">// 输出b</span></code></pre></div>
-<h2 id="3-输入和输出"><a href="#3-输入和输出" class="headerlink" title="3. 输入和输出"></a>3. 输入和输出</h2><h4 id="1-scanf和printf"><a href="#1-scanf和printf" class="headerlink" title="1. scanf和printf"></a>1. scanf和printf</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt; //使用scanf和printf时需要使用该库</span></span>
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> n;
-    <span class="hljs-keyword">char</span> c;
-    <span class="hljs-keyword">float</span> m;
-    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%c%f"</span>, &amp;n, &amp;c, &amp;m);
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %c %f\n"</span>, n, c, m);
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
-<p>用scanf可以一次读入多个不同类型的变量，输入各项用空格隔开<br>        注意在输入<strong>字符</strong>时，不会跳过空格（空格也会被当做字符读入）<br>        输入其它数据时，会跳过空格</p>
-<h4 id="2-cin和cout"><a href="#2-cin和cout" class="headerlink" title="2. cin和cout"></a>2. cin和cout</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> c;
-    <span class="hljs-keyword">while</span> ((c=<span class="hljs-built_in">cin</span>.get()) != EOF) &#123; 
-        <span class="hljs-built_in">cout</span> &lt;&lt; (<span class="hljs-keyword">char</span>) c; 
+<p>关键字<code>extends</code>表明正在构造的新类派生于一个已经存在的类。这个类被称为<strong>超类</strong>(<em>superclass</em>) 或<strong>父类</strong>(<em>parent class</em>)，新类称为<strong>子类</strong>(<em>subclass</em>)<br>在设计类时，应该将一般方法放在超类中，将更特殊的方法放在子类中<br>比如我们在<code>Manager</code>类中应该实现一个设置奖金金额的方法。</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> bonus;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBonus</span><span class="hljs-params">(<span class="hljs-keyword">double</span> bonus)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.bonus = bonus;
     &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre></div>
-<p>使用cin读入所有字符，包括空格和回车，EOF<br>        Mac（ctrl+D停止输入，ctrl+C停止程序)<br>        windows ctrl+Z停止</p>
-<h4 id="3-cin-amp-cout-scanf-amp-printf-比较"><a href="#3-cin-amp-cout-scanf-amp-printf-比较" class="headerlink" title="3. cin&amp;cout / scanf&amp;printf 比较"></a>3. cin&amp;cout / scanf&amp;printf 比较</h4><ul>
-<li>cin，cout速度慢，输入输出数据量大时用scanf/printf</li>
-<li>一个程序不要同时出现cin和scanf，cout和prinf</li>
-</ul>
-<h2 id="4-运算"><a href="#4-运算" class="headerlink" title="4. 运算"></a>4. 运算</h2><ol>
-<li>加、减、乘运算的溢出</li>
+<h3 id="2-覆盖方法"><a href="#2-覆盖方法" class="headerlink" title="2. 覆盖方法"></a>2. 覆盖方法</h3><p>超类中的某些方法对子类不一定适用，比如<code>Manager</code>类中的<code>getSalary</code>方法应该返回薪水和奖金的总和，所以要提供一个新的方法来<strong>覆盖</strong>(<em>override</em>)超类中的某个方法。<br>要注意的是，<code>Manager</code>类的<code>getSalary</code>方法不能够直接访问<code>salary</code>字段，因为其实<code>Employee</code>类的私有字段，所以需要使用<code>super</code>关键字</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSalary</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> baseSalary = <span class="hljs-keyword">super</span>.getSalary();
+    <span class="hljs-keyword">return</span> baseSalary + bonus;
+&#125;</code></pre></div>
+<h3 id="3-子类构造器"><a href="#3-子类构造器" class="headerlink" title="3. 子类构造器"></a>3. 子类构造器</h3><div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Manager</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
+    <span class="hljs-keyword">super</span>(id, name, salary);
+    bonus = <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>语句<code>super(id, name, salary);</code>实现了对<code>Employee</code>中私有字段的调用</p>
+<h3 id="4-多态"><a href="#4-多态" class="headerlink" title="4. 多态"></a>4. 多态</h3><p>我们可以通过<code>is-a</code>来判断是否将数据设计为继承关系，它的另外一种表述是<strong>替换原则</strong>，即程序中出现超类对象的任何地方都可以使用子类对象替换。</p>
+<p>在Java中，对象变量时<strong>多态</strong>(<em>polymophic</em>)的。<br>一个<code>Employee</code>类型的变量既可以引用一个<code>Employee</code>类型的对象,也可以引用<code>Employee</code>类的任何一个子类的对象(比如<code>Manager</code>)</p>
+<div class="hljs"><pre><code class="hljs java">Employee e;
+e = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">"A"</span>, <span class="hljs-number">10000</span>);
+e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</span>, <span class="hljs-string">"B"</span>, <span class="hljs-number">20000</span>);</code></pre></div>
+<p>虽然这里的<code>e</code>引用了<code>Manager</code>类型的对象，但是编译器只将<code>e</code>看成是一个<code>Employee</code>对象，所以如下的调用是错误的。</p>
+<div class="hljs"><pre><code class="hljs java">e.setBonus(<span class="hljs-number">10000</span>); <span class="hljs-comment">// ERROR</span></code></pre></div>
+<h3 id="5-阻止继承-final类和方法"><a href="#5-阻止继承-final类和方法" class="headerlink" title="5. 阻止继承: final类和方法"></a>5. 阻止继承: final类和方法</h3><p>如果我们需要阻止某个类被继承，可以使用<code>final</code>关键字</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Father</span> </span>&#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125;</code></pre></div>
+<p>类中的某个特定的方法也可以声明为<code>final</code>，这样子类就不能够覆盖这个方法。</p>
+<p><strong>Tip</strong><br>为什么要将类或方法声明为<code>final</code>？<br>确保它们不会在子类中改变语义。比如<code>String</code>类是<code>final</code>类，所以一个<code>String</code>引用引用的一定是<code>String</code>对象，而不是其它。</p>
+<h3 id="6-抽象类"><a href="#6-抽象类" class="headerlink" title="6. 抽象类"></a>6. 抽象类</h3><p>在继承层次结构中，位于上层的类更具有一般性<br>比如我们加入<code>Person</code>类和<code>Student</code>类，下图是这三个类之间的继承关系</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200908-02.png" srcset="/img/loading.gif" alt=""></p>
+<p>每个人都有一些属性，比如姓名，年龄，引入一个公共的超类，就可以把<code>getName</code>方法放在继承层次结构中的更高一层，使用<code>abstract</code>关键字来定义抽象类</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Person</span> <span class="hljs-params">(String name)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+&#125;</code></pre></div>
+<p>抽象类不能够实例化，如下的表达式是错误的</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">new</span> Person(); <span class="hljs-comment">// ERROR</span></code></pre></div>
+<h2 id="二、对象包装器与自动装箱"><a href="#二、对象包装器与自动装箱" class="headerlink" title="二、对象包装器与自动装箱"></a>二、对象包装器与自动装箱</h2><p>所有的基本类型都有一个与之对应的类，这些类被称为<strong>包装器</strong>(<em>wrapper</em>)，分别是<code>Integer, Long, Float, Double, Short, Byte, Character, Boolean</code>。<br>包装器类是不可变的，一旦构造了包装器，就不允许更改包装在其中的值，同时，包装器还是<code>final</code>，不能够派生它们的子类。</p>
+<p><strong>Tip</strong><br>为什么需要包装类？<br>因为Java是一种面向对象程序设计语言，很多地方需要使用对象而不是基本类型。比如在<code>ArrayList</code>中，我们不能够写成<code>ArrayList&lt;int&gt;</code>，而要写成<code>ArrayList&lt;Integer&gt;</code>。</p>
+<h3 id="2-自动拆箱与装箱"><a href="#2-自动拆箱与装箱" class="headerlink" title="2. 自动拆箱与装箱"></a>2. 自动拆箱与装箱</h3><p>自动装箱: 就是将基本数据类型自动转换成对应的包装类。<br>自动拆箱：就是将包装类自动转换成对应的基本数据类型。</p>
+<div class="hljs"><pre><code class="hljs java">Integer n = <span class="hljs-number">3</span>; <span class="hljs-comment">// 自动装箱</span>
+<span class="hljs-keyword">int</span> m = n; <span class="hljs-comment">// 自动拆箱</span></code></pre></div>
+<h2 id="三、继承的设计技巧"><a href="#三、继承的设计技巧" class="headerlink" title="三、继承的设计技巧"></a>三、继承的设计技巧</h2><ol>
+<li>将公共操作和字段放在超类中</li>
+<li>使用继承实现<strong>is-a</strong>关系</li>
+<li>除非所有继承的方法都有意义，否则不要使用继承</li>
+<li>在覆盖方法时，不要改变预期的行为</li>
+<li>使用多态，而不要使用类型信息</li>
 </ol>
-<hr>
-<h1 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h1><h3 id="1-数组作为函数的参数传递"><a href="#1-数组作为函数的参数传递" class="headerlink" title="1. 数组作为函数的参数传递"></a>1. 数组作为函数的参数传递</h3><p>数组作为函数的参数时，是传引用的，即<strong>形参数组改变了，实参数组也会改变</strong></p>
-<p>二维数组作为函数的形参时，<strong>必须写明函数有多少列</strong>，不要写明有多少行</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[][<span class="hljs-number">5</span>])</span> </span>&#123;
-  <span class="hljs-built_in">cout</span> &lt;&lt; a[<span class="hljs-number">4</span>][<span class="hljs-number">3</span>];
-&#125;</code></pre></div>
-<p>必须要写明列数，编译器才能够根据下标算出元素的地址</p>
-<div class="hljs"><pre><code class="hljs markdown">$\color&#123;#F00&#125;&#123;a[<span class="hljs-string">i</span>][<span class="hljs-symbol">j</span>]的地址 = 数组首地址 + i \times N \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>]) + j \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>])&#125;$ (N是数组列数)</code></pre></div>
-<p>形参数组的首地址就是实参数组的首地址      </p>
-<h1 id="三、字符串"><a href="#三、字符串" class="headerlink" title="三、字符串"></a>三、字符串</h1><h2 id="1-字符串的形式"><a href="#1-字符串的形式" class="headerlink" title="1. 字符串的形式"></a>1. 字符串的形式</h2><h3 id="（1）字符串常量"><a href="#（1）字符串常量" class="headerlink" title="（1）字符串常量"></a>（1）字符串常量</h3><p>用双引号括起来的，如”China”, “C++ program”.</p>
-<p>字符串常量占据<strong>内存</strong>的字节数等于字符中字符数目加1，结尾多出字符’\0’.</p>
-<font color=#F00>但是字符串的长度不包含'\0'</font>
-
-<p>“”也是合法的·1字符串常量，称为空串，仍然占据一个字节的内存空间，存放’\0’</p>
-<h3 id="（2）存放于字符数组中，以’-0’结尾"><a href="#（2）存放于字符数组中，以’-0’结尾" class="headerlink" title="（2）存放于字符数组中，以’\0’结尾"></a>（2）存放于字符数组中，以’\0’结尾</h3><p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p>
-<p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p>
-<h3 id="（3）string对象。"><a href="#（3）string对象。" class="headerlink" title="（3）string对象。"></a>（3）string对象。</h3><p>string是C++标准模板库里的一个类，专门用于处理字符串</p>
+<p>参考：</p>
+<ol>
+<li><a href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/boxing-unboxing" target="_blank" rel="noopener">Java工程师成神之路</a></li>
+<li>《Java核心技术 卷I》</li>
+</ol>
 
             </div>
             <hr>
@@ -295,7 +300,9 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/C/">C++</a>
+                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">面向对象</a>
                     
                   </div>
                 
@@ -303,7 +310,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/C/">C++</a>
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
                     
                   </div>
                 
@@ -316,15 +323,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/c4064b2b.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Hexo写作</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/posts/e27767b2.html">
+                        <span class="hidden-mobile">Java 面向对象概述</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
@@ -527,7 +534,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "C++基本语法&nbsp;",
+        "Java 继承&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
