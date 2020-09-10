@@ -1,66 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo个人博客绑定域名和配置SSL证书</title>
-    <url>/posts/2cd2c226.html</url>
-    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
-<a id="more"></a>
-<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
-<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
-<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
-<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/domainname1.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
-<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>主机记录</th>
-<th>记录类型</th>
-<th>线路类型</th>
-<th>记录值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>www</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-<tr>
-<td>@</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
-<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
-<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/2020-04-09domainname2.png" srcset="/img/loading.gif" alt=""></p>
-<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
-<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
-<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
-<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
-<hr>
-<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
-<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
-<p><a href="https://cloud.tencent.com/document/product/400/35244" target="_blank" rel="noopener">腾讯云Nginx服务器证书安装</a></p>
-<p><a href="https://www.jianshu.com/p/026d67cc6cb1" target="_blank" rel="noopener">Mac下nginx的使用</a></p>
-<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
-<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
-<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo-Permalink简化</title>
     <url>/posts/838443af.html</url>
     <content><![CDATA[<h1 id="Permalink简化"><a href="#Permalink简化" class="headerlink" title="Permalink简化"></a>Permalink简化</h1><p>在文档名有中文的时候，因为汉字会被转义，默认的永久链接会非常复杂，具体原因可以看这一篇文章</p>
@@ -126,6 +66,66 @@ categories:</code></pre></div>
 <ol>
 <li><a href="http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html" target="_blank" rel="noopener">http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html</a></li>
 </ol>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo个人博客绑定域名和配置SSL证书</title>
+    <url>/posts/2cd2c226.html</url>
+    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
+<a id="more"></a>
+<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
+<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
+<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
+<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/domainname1.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
+<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>主机记录</th>
+<th>记录类型</th>
+<th>线路类型</th>
+<th>记录值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>www</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+<tr>
+<td>@</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
+<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
+<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/2020-04-09domainname2.png" srcset="/img/loading.gif" alt=""></p>
+<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
+<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
+<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
+<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
+<hr>
+<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
+<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
+<p><a href="https://cloud.tencent.com/document/product/400/35244" target="_blank" rel="noopener">腾讯云Nginx服务器证书安装</a></p>
+<p><a href="https://www.jianshu.com/p/026d67cc6cb1" target="_blank" rel="noopener">Mac下nginx的使用</a></p>
+<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
+<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
+<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
 ]]></content>
       <categories>
         <category>Hexo</category>
@@ -291,6 +291,164 @@ hexo g -d</code></pre></div>
       </tags>
   </entry>
   <entry>
+    <title>使用Github pages+Hexo 搭建个人博客</title>
+    <url>/posts/ae6c038e.html</url>
+    <content><![CDATA[<h1 id="Github-pages-Hexo-搭建个人博客"><a href="#Github-pages-Hexo-搭建个人博客" class="headerlink" title="Github pages + Hexo 搭建个人博客"></a>Github pages + Hexo 搭建个人博客</h1><p>2019年11月19日，我决定开始写<strong>博客</strong>，首先要用<em>github pages+hexo</em>搭建一个个人博客，其中的过程我就记录在这里面。</p>
+<a id="more"></a>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>注册一个 GitHub 账户</li>
+<li>安装 Node.js<br>下载链接<br> <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a><br> 下面这个是中文网，对于国内用户来说下载速度非常快。<br> <a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a><br> 推荐菜鸟教程关于node的安装教程以及简易的语法介绍<a href="https://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank" rel="noopener">https://www.runoob.com/nodejs/nodejs-install-setup.html</a><ol>
+<li>安装git</li>
+<li>markdown语法学习<br><a href="https://www.jianshu.com/p/191d1e21f7ed" target="_blank" rel="noopener">https://www.jianshu.com/p/191d1e21f7ed</a></li>
+<li>git语法学习<br>推荐廖雪峰的git教程<br><a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/896043488029600</a></li>
+</ol>
+</li>
+</ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在终端检查node和npm的版本情况</p>
+<div class="hljs"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>
+npm -v</code></pre></div>
+<p>然后输入命令安装hexo</p>
+<div class="hljs"><pre><code class="hljs avrasm">npm install -g hexo-<span class="hljs-keyword">cli</span></code></pre></div>
+<p>我使用的是Mac电脑，在这一步出现了问题，终端显示如下</p>
+<div class="hljs"><pre><code class="hljs coffeescript">rollbackFailedOptional verb <span class="hljs-built_in">npm</span>-session</code></pre></div>
+<p>然后我又等了一会儿，终端又报错了。</p>
+<div class="hljs"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> WARN checkPermissions Missing write access to /usr/local/lib/node_modules
+<span class="hljs-built_in">npm</span> ERR! code EACCES
+<span class="hljs-built_in">npm</span> ERR! syscall access
+<span class="hljs-built_in">npm</span> ERR! path /usr/local/lib/node_modules
+<span class="hljs-built_in">npm</span> ERR! errno <span class="hljs-number">-13</span>
+<span class="hljs-built_in">npm</span> ERR! Error: EACCES: permission denied, access <span class="hljs-string">'/usr/local/lib/node_modules'</span>
+<span class="hljs-built_in">npm</span> ERR!  [Error: EACCES: permission denied, access <span class="hljs-string">'/usr/local/lib/node_modules'</span>] &#123;
+<span class="hljs-built_in">npm</span> ERR!   stack: <span class="hljs-string">"Error: EACCES: permission denied, access '/usr/local/lib/node_modules'"</span>,
+<span class="hljs-built_in">npm</span> ERR!   errno: <span class="hljs-number">-13</span>,
+<span class="hljs-built_in">npm</span> ERR!   code: <span class="hljs-string">'EACCES'</span>,
+<span class="hljs-built_in">npm</span> ERR!   syscall: <span class="hljs-string">'access'</span>,
+<span class="hljs-built_in">npm</span> ERR!   path: <span class="hljs-string">'/usr/local/lib/node_modules'</span>
+<span class="hljs-built_in">npm</span> ERR! &#125;
+<span class="hljs-built_in">npm</span> ERR! 
+<span class="hljs-built_in">npm</span> ERR! The operation was rejected <span class="hljs-keyword">by</span> your operating system.
+<span class="hljs-built_in">npm</span> ERR! It <span class="hljs-keyword">is</span> likely you <span class="hljs-keyword">do</span> <span class="hljs-keyword">not</span> have the permissions to access <span class="hljs-keyword">this</span> file <span class="hljs-keyword">as</span> the current user
+<span class="hljs-built_in">npm</span> ERR! 
+<span class="hljs-built_in">npm</span> ERR! If you believe <span class="hljs-keyword">this</span> might be a permissions issue, please double-check the
+<span class="hljs-built_in">npm</span> ERR! permissions <span class="hljs-keyword">of</span> the file <span class="hljs-keyword">and</span> its containing directories, <span class="hljs-keyword">or</span> <span class="hljs-keyword">try</span> running
+<span class="hljs-built_in">npm</span> ERR! the command again <span class="hljs-keyword">as</span> root/Administrator.</code></pre></div>
+<p>根据官方文档，如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code>权限错误，要遵循由<a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#reinstall-npm-with-a-node-version-manager" target="_blank" rel="noopener">npmjs</a>发布的指导修复该问题。强烈建议不要使用 root、sudo 等方法覆盖权限。<br>根据要求，下载了<strong>nvm</strong>，并且在终端利用nvm下载了最新版本的node和更新了npm后，hexo下载成功了。（以下是下载和使用nvm的教程链接）<br><a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">https://github.com/nvm-sh/nvm</a>.        </p>
+<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><p>输入以下命令hexo就会出现在指定的文件夹中</p>
+<div class="hljs"><pre><code class="hljs properties"><span class="hljs-attr">hexo</span> <span class="hljs-string">init &lt;folder&gt;</span>
+<span class="hljs-attr">cd</span> <span class="hljs-string">&lt;folder&gt;</span>
+<span class="hljs-attr">npm</span> <span class="hljs-string">install</span></code></pre></div>
+<p>如果出现错误</p>
+<div class="hljs"><pre><code class="hljs java">-bash: syntax error near unexpected token `newline<span class="hljs-string">'</span></code></pre></div>
+<p>这是占位符的问题，将第一行命令的&lt;&gt;去除，再重新输入即可。</p>
+<p>到此，建站的基本操作就完成了。</p>
+<p>界面的设计等就可以由自己来操作了。放一个hexo的官方网站供大家参考。<br><a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a></p>
+<h2 id="创建Github远程仓库"><a href="#创建Github远程仓库" class="headerlink" title="创建Github远程仓库"></a>创建Github远程仓库</h2><p>注意仓库名为github的用户名.github.io，勾选readme<br><img src="https://img-blog.csdnimg.cn/20191123194438458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
+<p>创建之后，进入仓库，点击<strong>Settings</strong>按钮，然后翻到GitHub Pages的部分，点击网页链接，就能够看到一个简易的网页了。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191123194913735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
+<h2 id="部署hexo"><a href="#部署hexo" class="headerlink" title="部署hexo"></a>部署hexo</h2><p>进入本地的hexo文件，找到 <strong>_config.yml</strong>，打开后翻到最后，修改成</p>
+<div class="hljs"><pre><code class="hljs java">deploy:
+  type: git
+  repo:
+     gitHub: git<span class="hljs-meta">@github</span>.com:你的GitHub用户名/你的GitHub用户名.github.io.git
+  branch: master</code></pre></div>
+<p>repo后面的内容要修改成自己github仓库的SSH密匙。</p>
+<p>然后在终端中输入</p>
+<div class="hljs"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-deployer-git <span class="hljs-comment">--save</span></code></pre></div>
+<p>开始安装hexo-deploy-git，安装完成后，开始部署，在终端中输入</p>
+<div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo deploy</span></code></pre></div>
+<p>部署完成。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>这个时候，再次进入刚刚进入过的网页链接，就会看到一个船新版本的界面，也就是本地的hexo库已经部署到github上了。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191123195408260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java 继承</title>
+    <url>/posts/8b3a0e63.html</url>
+    <content><![CDATA[<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>继承(inheritance)的基本思想是基于已经有的类创建新的类，复用这些类的方法。</p>
+<h2 id="一、类，超类和子类"><a href="#一、类，超类和子类" class="headerlink" title="一、类，超类和子类"></a>一、类，超类和子类</h2><p>在前面的文章中我们实现了一个<code>Employee</code>类，假设你在某个公司工作，这个公司的经理和员工的待遇不一样，普通员工在完成任务后仅领取薪水，而经理还拥有奖金。<br>这个时候，我们可以定义一个新类<code>Manager</code>，使用继承重用<code>Employee</code>中的代码，同时定义新的方法来增加奖金这一功能。</p>
+<p><strong>Tip</strong><br><code>Manager</code> <strong>is-a</strong> <code>Employee</code><br><strong>is-a</strong>关系是继承的一个明显特征</p>
+<h3 id="1-定义子类"><a href="#1-定义子类" class="headerlink" title="1. 定义子类"></a>1. 定义子类</h3><p>使用<code>extends</code>关键字来表示继承</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125;</code></pre></div>
+<p>关键字<code>extends</code>表明正在构造的新类派生于一个已经存在的类。这个类被称为<strong>超类</strong>(<em>superclass</em>) 或<strong>父类</strong>(<em>parent class</em>)，新类称为<strong>子类</strong>(<em>subclass</em>)<br>在设计类时，应该将一般方法放在超类中，将更特殊的方法放在子类中<br>比如我们在<code>Manager</code>类中应该实现一个设置奖金金额的方法。</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> bonus;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBonus</span><span class="hljs-params">(<span class="hljs-keyword">double</span> bonus)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.bonus = bonus;
+    &#125;
+&#125;</code></pre></div>
+<h3 id="2-覆盖方法"><a href="#2-覆盖方法" class="headerlink" title="2. 覆盖方法"></a>2. 覆盖方法</h3><p>超类中的某些方法对子类不一定适用，比如<code>Manager</code>类中的<code>getSalary</code>方法应该返回薪水和奖金的总和，所以要提供一个新的方法来<strong>覆盖</strong>(<em>override</em>)超类中的某个方法。<br>要注意的是，<code>Manager</code>类的<code>getSalary</code>方法不能够直接访问<code>salary</code>字段，因为其实<code>Employee</code>类的私有字段，所以需要使用<code>super</code>关键字</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSalary</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> baseSalary = <span class="hljs-keyword">super</span>.getSalary();
+    <span class="hljs-keyword">return</span> baseSalary + bonus;
+&#125;</code></pre></div>
+<h3 id="3-子类构造器"><a href="#3-子类构造器" class="headerlink" title="3. 子类构造器"></a>3. 子类构造器</h3><div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Manager</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
+    <span class="hljs-keyword">super</span>(id, name, salary);
+    bonus = <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>语句<code>super(id, name, salary);</code>实现了对<code>Employee</code>中私有字段的调用</p>
+<h3 id="4-多态"><a href="#4-多态" class="headerlink" title="4. 多态"></a>4. 多态</h3><p>我们可以通过<code>is-a</code>来判断是否将数据设计为继承关系，它的另外一种表述是<strong>替换原则</strong>，即程序中出现超类对象的任何地方都可以使用子类对象替换。</p>
+<p>在Java中，对象变量时<strong>多态</strong>(<em>polymophic</em>)的。<br>一个<code>Employee</code>类型的变量既可以引用一个<code>Employee</code>类型的对象,也可以引用<code>Employee</code>类的任何一个子类的对象(比如<code>Manager</code>)</p>
+<div class="hljs"><pre><code class="hljs java">Employee e;
+e = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">"A"</span>, <span class="hljs-number">10000</span>);
+e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</span>, <span class="hljs-string">"B"</span>, <span class="hljs-number">20000</span>);</code></pre></div>
+<p>虽然这里的<code>e</code>引用了<code>Manager</code>类型的对象，但是编译器只将<code>e</code>看成是一个<code>Employee</code>对象，所以如下的调用是错误的。</p>
+<div class="hljs"><pre><code class="hljs java">e.setBonus(<span class="hljs-number">10000</span>); <span class="hljs-comment">// ERROR</span></code></pre></div>
+<h3 id="5-阻止继承-final类和方法"><a href="#5-阻止继承-final类和方法" class="headerlink" title="5. 阻止继承: final类和方法"></a>5. 阻止继承: final类和方法</h3><p>如果我们需要阻止某个类被继承，可以使用<code>final</code>关键字</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Father</span> </span>&#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125;</code></pre></div>
+<p>类中的某个特定的方法也可以声明为<code>final</code>，这样子类就不能够覆盖这个方法。</p>
+<p><strong>Tip</strong><br>为什么要将类或方法声明为<code>final</code>？<br>确保它们不会在子类中改变语义。比如<code>String</code>类是<code>final</code>类，所以一个<code>String</code>引用引用的一定是<code>String</code>对象，而不是其它。</p>
+<h3 id="6-抽象类"><a href="#6-抽象类" class="headerlink" title="6. 抽象类"></a>6. 抽象类</h3><p>在继承层次结构中，位于上层的类更具有一般性<br>比如我们加入<code>Person</code>类和<code>Student</code>类，下图是这三个类之间的继承关系</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200908-02.png" srcset="/img/loading.gif" alt=""></p>
+<p>每个人都有一些属性，比如姓名，年龄，引入一个公共的超类，就可以把<code>getName</code>方法放在继承层次结构中的更高一层，使用<code>abstract</code>关键字来定义抽象类</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Person</span> <span class="hljs-params">(String name)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+&#125;</code></pre></div>
+<p>抽象类不能够实例化，如下的表达式是错误的</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">new</span> Person(); <span class="hljs-comment">// ERROR</span></code></pre></div>
+<h2 id="二、对象包装器与自动装箱"><a href="#二、对象包装器与自动装箱" class="headerlink" title="二、对象包装器与自动装箱"></a>二、对象包装器与自动装箱</h2><p>所有的基本类型都有一个与之对应的类，这些类被称为<strong>包装器</strong>(<em>wrapper</em>)，分别是<code>Integer, Long, Float, Double, Short, Byte, Character, Boolean</code>。<br>包装器类是不可变的，一旦构造了包装器，就不允许更改包装在其中的值，同时，包装器还是<code>final</code>，不能够派生它们的子类。</p>
+<p><strong>Tip</strong><br>为什么需要包装类？<br>因为Java是一种面向对象程序设计语言，很多地方需要使用对象而不是基本类型。比如在<code>ArrayList</code>中，我们不能够写成<code>ArrayList&lt;int&gt;</code>，而要写成<code>ArrayList&lt;Integer&gt;</code>。</p>
+<h3 id="2-自动拆箱与装箱"><a href="#2-自动拆箱与装箱" class="headerlink" title="2. 自动拆箱与装箱"></a>2. 自动拆箱与装箱</h3><p>自动装箱: 就是将基本数据类型自动转换成对应的包装类。<br>自动拆箱：就是将包装类自动转换成对应的基本数据类型。</p>
+<div class="hljs"><pre><code class="hljs java">Integer n = <span class="hljs-number">3</span>; <span class="hljs-comment">// 自动装箱</span>
+<span class="hljs-keyword">int</span> m = n; <span class="hljs-comment">// 自动拆箱</span></code></pre></div>
+<h2 id="三、继承的设计技巧"><a href="#三、继承的设计技巧" class="headerlink" title="三、继承的设计技巧"></a>三、继承的设计技巧</h2><ol>
+<li>将公共操作和字段放在超类中</li>
+<li>使用继承实现<strong>is-a</strong>关系</li>
+<li>除非所有继承的方法都有意义，否则不要使用继承</li>
+<li>在覆盖方法时，不要改变预期的行为</li>
+<li>使用多态，而不要使用类型信息</li>
+</ol>
+<p>参考：</p>
+<ol>
+<li><a href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/boxing-unboxing" target="_blank" rel="noopener">Java工程师成神之路</a></li>
+<li>《Java核心技术 卷I》</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>面向对象</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java 接口</title>
     <url>/posts/d993c7e9.html</url>
     <content><![CDATA[<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p><strong>接口</strong>(<em>interface</em>)用来描述类应该做什么，而不指定它们具体该如何做。一个类可以<strong>实现</strong>(<em>implement</em>)一个或多个接口。</p>
@@ -365,87 +523,6 @@ hexo g -d</code></pre></div>
 &#125;</code></pre></div>
 <p>参考：</p>
 <ol>
-<li>《Java核心技术 卷I》</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Java</category>
-        <category>面向对象</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java 继承</title>
-    <url>/posts/8b3a0e63.html</url>
-    <content><![CDATA[<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>继承(inheritance)的基本思想是基于已经有的类创建新的类，复用这些类的方法。</p>
-<h2 id="一、类，超类和子类"><a href="#一、类，超类和子类" class="headerlink" title="一、类，超类和子类"></a>一、类，超类和子类</h2><p>在前面的文章中我们实现了一个<code>Employee</code>类，假设你在某个公司工作，这个公司的经理和员工的待遇不一样，普通员工在完成任务后仅领取薪水，而经理还拥有奖金。<br>这个时候，我们可以定义一个新类<code>Manager</code>，使用继承重用<code>Employee</code>中的代码，同时定义新的方法来增加奖金这一功能。</p>
-<p><strong>Tip</strong><br><code>Manager</code> <strong>is-a</strong> <code>Employee</code><br><strong>is-a</strong>关系是继承的一个明显特征</p>
-<h3 id="1-定义子类"><a href="#1-定义子类" class="headerlink" title="1. 定义子类"></a>1. 定义子类</h3><p>使用<code>extends</code>关键字来表示继承</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
-    <span class="hljs-comment">// blablabla</span>
-&#125;</code></pre></div>
-<p>关键字<code>extends</code>表明正在构造的新类派生于一个已经存在的类。这个类被称为<strong>超类</strong>(<em>superclass</em>) 或<strong>父类</strong>(<em>parent class</em>)，新类称为<strong>子类</strong>(<em>subclass</em>)<br>在设计类时，应该将一般方法放在超类中，将更特殊的方法放在子类中<br>比如我们在<code>Manager</code>类中应该实现一个设置奖金金额的方法。</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> bonus;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBonus</span><span class="hljs-params">(<span class="hljs-keyword">double</span> bonus)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.bonus = bonus;
-    &#125;
-&#125;</code></pre></div>
-<h3 id="2-覆盖方法"><a href="#2-覆盖方法" class="headerlink" title="2. 覆盖方法"></a>2. 覆盖方法</h3><p>超类中的某些方法对子类不一定适用，比如<code>Manager</code>类中的<code>getSalary</code>方法应该返回薪水和奖金的总和，所以要提供一个新的方法来<strong>覆盖</strong>(<em>override</em>)超类中的某个方法。<br>要注意的是，<code>Manager</code>类的<code>getSalary</code>方法不能够直接访问<code>salary</code>字段，因为其实<code>Employee</code>类的私有字段，所以需要使用<code>super</code>关键字</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSalary</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> baseSalary = <span class="hljs-keyword">super</span>.getSalary();
-    <span class="hljs-keyword">return</span> baseSalary + bonus;
-&#125;</code></pre></div>
-<h3 id="3-子类构造器"><a href="#3-子类构造器" class="headerlink" title="3. 子类构造器"></a>3. 子类构造器</h3><div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Manager</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
-    <span class="hljs-keyword">super</span>(id, name, salary);
-    bonus = <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
-<p>语句<code>super(id, name, salary);</code>实现了对<code>Employee</code>中私有字段的调用</p>
-<h3 id="4-多态"><a href="#4-多态" class="headerlink" title="4. 多态"></a>4. 多态</h3><p>我们可以通过<code>is-a</code>来判断是否将数据设计为继承关系，它的另外一种表述是<strong>替换原则</strong>，即程序中出现超类对象的任何地方都可以使用子类对象替换。</p>
-<p>在Java中，对象变量时<strong>多态</strong>(<em>polymophic</em>)的。<br>一个<code>Employee</code>类型的变量既可以引用一个<code>Employee</code>类型的对象,也可以引用<code>Employee</code>类的任何一个子类的对象(比如<code>Manager</code>)</p>
-<div class="hljs"><pre><code class="hljs java">Employee e;
-e = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">"A"</span>, <span class="hljs-number">10000</span>);
-e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</span>, <span class="hljs-string">"B"</span>, <span class="hljs-number">20000</span>);</code></pre></div>
-<p>虽然这里的<code>e</code>引用了<code>Manager</code>类型的对象，但是编译器只将<code>e</code>看成是一个<code>Employee</code>对象，所以如下的调用是错误的。</p>
-<div class="hljs"><pre><code class="hljs java">e.setBonus(<span class="hljs-number">10000</span>); <span class="hljs-comment">// ERROR</span></code></pre></div>
-<h3 id="5-阻止继承-final类和方法"><a href="#5-阻止继承-final类和方法" class="headerlink" title="5. 阻止继承: final类和方法"></a>5. 阻止继承: final类和方法</h3><p>如果我们需要阻止某个类被继承，可以使用<code>final</code>关键字</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Father</span> </span>&#123;
-    <span class="hljs-comment">// blablabla</span>
-&#125;</code></pre></div>
-<p>类中的某个特定的方法也可以声明为<code>final</code>，这样子类就不能够覆盖这个方法。</p>
-<p><strong>Tip</strong><br>为什么要将类或方法声明为<code>final</code>？<br>确保它们不会在子类中改变语义。比如<code>String</code>类是<code>final</code>类，所以一个<code>String</code>引用引用的一定是<code>String</code>对象，而不是其它。</p>
-<h3 id="6-抽象类"><a href="#6-抽象类" class="headerlink" title="6. 抽象类"></a>6. 抽象类</h3><p>在继承层次结构中，位于上层的类更具有一般性<br>比如我们加入<code>Person</code>类和<code>Student</code>类，下图是这三个类之间的继承关系</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200908-02.png" srcset="/img/loading.gif" alt=""></p>
-<p>每个人都有一些属性，比如姓名，年龄，引入一个公共的超类，就可以把<code>getName</code>方法放在继承层次结构中的更高一层，使用<code>abstract</code>关键字来定义抽象类</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;
-    <span class="hljs-keyword">private</span> String name;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Person</span> <span class="hljs-params">(String name)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.name = name;
-    &#125;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> name;
-    &#125;
-&#125;</code></pre></div>
-<p>抽象类不能够实例化，如下的表达式是错误的</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">new</span> Person(); <span class="hljs-comment">// ERROR</span></code></pre></div>
-<h2 id="二、对象包装器与自动装箱"><a href="#二、对象包装器与自动装箱" class="headerlink" title="二、对象包装器与自动装箱"></a>二、对象包装器与自动装箱</h2><p>所有的基本类型都有一个与之对应的类，这些类被称为<strong>包装器</strong>(<em>wrapper</em>)，分别是<code>Integer, Long, Float, Double, Short, Byte, Character, Boolean</code>。<br>包装器类是不可变的，一旦构造了包装器，就不允许更改包装在其中的值，同时，包装器还是<code>final</code>，不能够派生它们的子类。</p>
-<p><strong>Tip</strong><br>为什么需要包装类？<br>因为Java是一种面向对象程序设计语言，很多地方需要使用对象而不是基本类型。比如在<code>ArrayList</code>中，我们不能够写成<code>ArrayList&lt;int&gt;</code>，而要写成<code>ArrayList&lt;Integer&gt;</code>。</p>
-<h3 id="2-自动拆箱与装箱"><a href="#2-自动拆箱与装箱" class="headerlink" title="2. 自动拆箱与装箱"></a>2. 自动拆箱与装箱</h3><p>自动装箱: 就是将基本数据类型自动转换成对应的包装类。<br>自动拆箱：就是将包装类自动转换成对应的基本数据类型。</p>
-<div class="hljs"><pre><code class="hljs java">Integer n = <span class="hljs-number">3</span>; <span class="hljs-comment">// 自动装箱</span>
-<span class="hljs-keyword">int</span> m = n; <span class="hljs-comment">// 自动拆箱</span></code></pre></div>
-<h2 id="三、继承的设计技巧"><a href="#三、继承的设计技巧" class="headerlink" title="三、继承的设计技巧"></a>三、继承的设计技巧</h2><ol>
-<li>将公共操作和字段放在超类中</li>
-<li>使用继承实现<strong>is-a</strong>关系</li>
-<li>除非所有继承的方法都有意义，否则不要使用继承</li>
-<li>在覆盖方法时，不要改变预期的行为</li>
-<li>使用多态，而不要使用类型信息</li>
-</ol>
-<p>参考：</p>
-<ol>
-<li><a href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/boxing-unboxing" target="_blank" rel="noopener">Java工程师成神之路</a></li>
 <li>《Java核心技术 卷I》</li>
 </ol>
 ]]></content>
@@ -702,80 +779,78 @@ Sales_data accum;</code></pre></div>
       </tags>
   </entry>
   <entry>
-    <title>使用Github pages+Hexo 搭建个人博客</title>
-    <url>/posts/ae6c038e.html</url>
-    <content><![CDATA[<h1 id="Github-pages-Hexo-搭建个人博客"><a href="#Github-pages-Hexo-搭建个人博客" class="headerlink" title="Github pages + Hexo 搭建个人博客"></a>Github pages + Hexo 搭建个人博客</h1><p>2019年11月19日，我决定开始写<strong>博客</strong>，首先要用<em>github pages+hexo</em>搭建一个个人博客，其中的过程我就记录在这里面。</p>
+    <title>C++基本语法</title>
+    <url>/posts/6b599344.html</url>
+    <content><![CDATA[<h1 id="C-学习笔记"><a href="#C-学习笔记" class="headerlink" title="C++学习笔记"></a>C++学习笔记</h1><p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p>
 <a id="more"></a>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
-<li>注册一个 GitHub 账户</li>
-<li>安装 Node.js<br>下载链接<br> <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a><br> 下面这个是中文网，对于国内用户来说下载速度非常快。<br> <a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a><br> 推荐菜鸟教程关于node的安装教程以及简易的语法介绍<a href="https://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank" rel="noopener">https://www.runoob.com/nodejs/nodejs-install-setup.html</a><ol>
-<li>安装git</li>
-<li>markdown语法学习<br><a href="https://www.jianshu.com/p/191d1e21f7ed" target="_blank" rel="noopener">https://www.jianshu.com/p/191d1e21f7ed</a></li>
-<li>git语法学习<br>推荐廖雪峰的git教程<br><a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/896043488029600</a></li>
+<h1 id="一、-变量"><a href="#一、-变量" class="headerlink" title="一、 变量"></a>一、 变量</h1><h2 id="1-用sizeof运算符求某一类型或变量占据的字节数"><a href="#1-用sizeof运算符求某一类型或变量占据的字节数" class="headerlink" title="1. 用sizeof运算符求某一类型或变量占据的字节数"></a>1. 用sizeof运算符求某一类型或变量占据的字节数</h2><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> a;
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(a) &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// sizeof运算符可以求变量占据的字节数</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 未初始化的变量，其值是不确定的</span>
+    <span class="hljs-keyword">int</span> b = <span class="hljs-number">1</span>;
+    <span class="hljs-built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="hljs-built_in">endl</span>;
+&#125;</code></pre></div>
+<h2 id="2-数据类型的自动转换"><a href="#2-数据类型的自动转换" class="headerlink" title="2. 数据类型的自动转换"></a>2. 数据类型的自动转换</h2><h3 id="1-数"><a href="#1-数" class="headerlink" title="1. 数"></a>1. 数</h3><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> a = <span class="hljs-number">11.34</span>; <span class="hljs-comment">// 11.34被自动转化为11后赋值给a</span>
+<span class="hljs-keyword">int</span> b = <span class="hljs-number">30</span>;
+<span class="hljs-keyword">double</span> d = b; <span class="hljs-comment">// d的值是30.0</span></code></pre></div>
+<h3 id="2-字符类型与整型"><a href="#2-字符类型与整型" class="headerlink" title="2. 字符类型与整型"></a>2. 字符类型与整型</h3><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> k = <span class="hljs-string">'a'</span>;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, k); <span class="hljs-comment">// 输出97，即a的ASCII码</span>
+<span class="hljs-keyword">int</span> n = <span class="hljs-number">98</span>;
+<span class="hljs-keyword">char</span> k = n;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>, k); <span class="hljs-comment">// 输出b</span></code></pre></div>
+<h2 id="3-输入和输出"><a href="#3-输入和输出" class="headerlink" title="3. 输入和输出"></a>3. 输入和输出</h2><h4 id="1-scanf和printf"><a href="#1-scanf和printf" class="headerlink" title="1. scanf和printf"></a>1. scanf和printf</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt; //使用scanf和printf时需要使用该库</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> n;
+    <span class="hljs-keyword">char</span> c;
+    <span class="hljs-keyword">float</span> m;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%c%f"</span>, &amp;n, &amp;c, &amp;m);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %c %f\n"</span>, n, c, m);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>用scanf可以一次读入多个不同类型的变量，输入各项用空格隔开<br>        注意在输入<strong>字符</strong>时，不会跳过空格（空格也会被当做字符读入）<br>        输入其它数据时，会跳过空格</p>
+<h4 id="2-cin和cout"><a href="#2-cin和cout" class="headerlink" title="2. cin和cout"></a>2. cin和cout</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> c;
+    <span class="hljs-keyword">while</span> ((c=<span class="hljs-built_in">cin</span>.get()) != EOF) &#123; 
+        <span class="hljs-built_in">cout</span> &lt;&lt; (<span class="hljs-keyword">char</span>) c; 
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>使用cin读入所有字符，包括空格和回车，EOF<br>        Mac（ctrl+D停止输入，ctrl+C停止程序)<br>        windows ctrl+Z停止</p>
+<h4 id="3-cin-amp-cout-scanf-amp-printf-比较"><a href="#3-cin-amp-cout-scanf-amp-printf-比较" class="headerlink" title="3. cin&amp;cout / scanf&amp;printf 比较"></a>3. cin&amp;cout / scanf&amp;printf 比较</h4><ul>
+<li>cin，cout速度慢，输入输出数据量大时用scanf/printf</li>
+<li>一个程序不要同时出现cin和scanf，cout和prinf</li>
+</ul>
+<h2 id="4-运算"><a href="#4-运算" class="headerlink" title="4. 运算"></a>4. 运算</h2><ol>
+<li>加、减、乘运算的溢出</li>
 </ol>
-</li>
-</ol>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在终端检查node和npm的版本情况</p>
-<div class="hljs"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>
-npm -v</code></pre></div>
-<p>然后输入命令安装hexo</p>
-<div class="hljs"><pre><code class="hljs avrasm">npm install -g hexo-<span class="hljs-keyword">cli</span></code></pre></div>
-<p>我使用的是Mac电脑，在这一步出现了问题，终端显示如下</p>
-<div class="hljs"><pre><code class="hljs coffeescript">rollbackFailedOptional verb <span class="hljs-built_in">npm</span>-session</code></pre></div>
-<p>然后我又等了一会儿，终端又报错了。</p>
-<div class="hljs"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> WARN checkPermissions Missing write access to /usr/local/lib/node_modules
-<span class="hljs-built_in">npm</span> ERR! code EACCES
-<span class="hljs-built_in">npm</span> ERR! syscall access
-<span class="hljs-built_in">npm</span> ERR! path /usr/local/lib/node_modules
-<span class="hljs-built_in">npm</span> ERR! errno <span class="hljs-number">-13</span>
-<span class="hljs-built_in">npm</span> ERR! Error: EACCES: permission denied, access <span class="hljs-string">'/usr/local/lib/node_modules'</span>
-<span class="hljs-built_in">npm</span> ERR!  [Error: EACCES: permission denied, access <span class="hljs-string">'/usr/local/lib/node_modules'</span>] &#123;
-<span class="hljs-built_in">npm</span> ERR!   stack: <span class="hljs-string">"Error: EACCES: permission denied, access '/usr/local/lib/node_modules'"</span>,
-<span class="hljs-built_in">npm</span> ERR!   errno: <span class="hljs-number">-13</span>,
-<span class="hljs-built_in">npm</span> ERR!   code: <span class="hljs-string">'EACCES'</span>,
-<span class="hljs-built_in">npm</span> ERR!   syscall: <span class="hljs-string">'access'</span>,
-<span class="hljs-built_in">npm</span> ERR!   path: <span class="hljs-string">'/usr/local/lib/node_modules'</span>
-<span class="hljs-built_in">npm</span> ERR! &#125;
-<span class="hljs-built_in">npm</span> ERR! 
-<span class="hljs-built_in">npm</span> ERR! The operation was rejected <span class="hljs-keyword">by</span> your operating system.
-<span class="hljs-built_in">npm</span> ERR! It <span class="hljs-keyword">is</span> likely you <span class="hljs-keyword">do</span> <span class="hljs-keyword">not</span> have the permissions to access <span class="hljs-keyword">this</span> file <span class="hljs-keyword">as</span> the current user
-<span class="hljs-built_in">npm</span> ERR! 
-<span class="hljs-built_in">npm</span> ERR! If you believe <span class="hljs-keyword">this</span> might be a permissions issue, please double-check the
-<span class="hljs-built_in">npm</span> ERR! permissions <span class="hljs-keyword">of</span> the file <span class="hljs-keyword">and</span> its containing directories, <span class="hljs-keyword">or</span> <span class="hljs-keyword">try</span> running
-<span class="hljs-built_in">npm</span> ERR! the command again <span class="hljs-keyword">as</span> root/Administrator.</code></pre></div>
-<p>根据官方文档，如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code>权限错误，要遵循由<a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#reinstall-npm-with-a-node-version-manager" target="_blank" rel="noopener">npmjs</a>发布的指导修复该问题。强烈建议不要使用 root、sudo 等方法覆盖权限。<br>根据要求，下载了<strong>nvm</strong>，并且在终端利用nvm下载了最新版本的node和更新了npm后，hexo下载成功了。（以下是下载和使用nvm的教程链接）<br><a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">https://github.com/nvm-sh/nvm</a>.        </p>
-<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><p>输入以下命令hexo就会出现在指定的文件夹中</p>
-<div class="hljs"><pre><code class="hljs properties"><span class="hljs-attr">hexo</span> <span class="hljs-string">init &lt;folder&gt;</span>
-<span class="hljs-attr">cd</span> <span class="hljs-string">&lt;folder&gt;</span>
-<span class="hljs-attr">npm</span> <span class="hljs-string">install</span></code></pre></div>
-<p>如果出现错误</p>
-<div class="hljs"><pre><code class="hljs java">-bash: syntax error near unexpected token `newline<span class="hljs-string">'</span></code></pre></div>
-<p>这是占位符的问题，将第一行命令的&lt;&gt;去除，再重新输入即可。</p>
-<p>到此，建站的基本操作就完成了。</p>
-<p>界面的设计等就可以由自己来操作了。放一个hexo的官方网站供大家参考。<br><a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a></p>
-<h2 id="创建Github远程仓库"><a href="#创建Github远程仓库" class="headerlink" title="创建Github远程仓库"></a>创建Github远程仓库</h2><p>注意仓库名为github的用户名.github.io，勾选readme<br><img src="https://img-blog.csdnimg.cn/20191123194438458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
-<p>创建之后，进入仓库，点击<strong>Settings</strong>按钮，然后翻到GitHub Pages的部分，点击网页链接，就能够看到一个简易的网页了。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191123194913735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
-<h2 id="部署hexo"><a href="#部署hexo" class="headerlink" title="部署hexo"></a>部署hexo</h2><p>进入本地的hexo文件，找到 <strong>_config.yml</strong>，打开后翻到最后，修改成</p>
-<div class="hljs"><pre><code class="hljs java">deploy:
-  type: git
-  repo:
-     gitHub: git<span class="hljs-meta">@github</span>.com:你的GitHub用户名/你的GitHub用户名.github.io.git
-  branch: master</code></pre></div>
-<p>repo后面的内容要修改成自己github仓库的SSH密匙。</p>
-<p>然后在终端中输入</p>
-<div class="hljs"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-deployer-git <span class="hljs-comment">--save</span></code></pre></div>
-<p>开始安装hexo-deploy-git，安装完成后，开始部署，在终端中输入</p>
-<div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo deploy</span></code></pre></div>
-<p>部署完成。</p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>这个时候，再次进入刚刚进入过的网页链接，就会看到一个船新版本的界面，也就是本地的hexo库已经部署到github上了。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191123195408260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
+<hr>
+<h1 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h1><h3 id="1-数组作为函数的参数传递"><a href="#1-数组作为函数的参数传递" class="headerlink" title="1. 数组作为函数的参数传递"></a>1. 数组作为函数的参数传递</h3><p>数组作为函数的参数时，是传引用的，即<strong>形参数组改变了，实参数组也会改变</strong></p>
+<p>二维数组作为函数的形参时，<strong>必须写明函数有多少列</strong>，不要写明有多少行</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[][<span class="hljs-number">5</span>])</span> </span>&#123;
+  <span class="hljs-built_in">cout</span> &lt;&lt; a[<span class="hljs-number">4</span>][<span class="hljs-number">3</span>];
+&#125;</code></pre></div>
+<p>必须要写明列数，编译器才能够根据下标算出元素的地址</p>
+<div class="hljs"><pre><code class="hljs markdown">$\color&#123;#F00&#125;&#123;a[<span class="hljs-string">i</span>][<span class="hljs-symbol">j</span>]的地址 = 数组首地址 + i \times N \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>]) + j \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>])&#125;$ (N是数组列数)</code></pre></div>
+<p>形参数组的首地址就是实参数组的首地址      </p>
+<h1 id="三、字符串"><a href="#三、字符串" class="headerlink" title="三、字符串"></a>三、字符串</h1><h2 id="1-字符串的形式"><a href="#1-字符串的形式" class="headerlink" title="1. 字符串的形式"></a>1. 字符串的形式</h2><h3 id="（1）字符串常量"><a href="#（1）字符串常量" class="headerlink" title="（1）字符串常量"></a>（1）字符串常量</h3><p>用双引号括起来的，如”China”, “C++ program”.</p>
+<p>字符串常量占据<strong>内存</strong>的字节数等于字符中字符数目加1，结尾多出字符’\0’.</p>
+<font color=#F00>但是字符串的长度不包含'\0'</font>
+
+<p>“”也是合法的·1字符串常量，称为空串，仍然占据一个字节的内存空间，存放’\0’</p>
+<h3 id="（2）存放于字符数组中，以’-0’结尾"><a href="#（2）存放于字符数组中，以’-0’结尾" class="headerlink" title="（2）存放于字符数组中，以’\0’结尾"></a>（2）存放于字符数组中，以’\0’结尾</h3><p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p>
+<p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p>
+<h3 id="（3）string对象。"><a href="#（3）string对象。" class="headerlink" title="（3）string对象。"></a>（3）string对象。</h3><p>string是C++标准模板库里的一个类，专门用于处理字符串</p>
 ]]></content>
       <categories>
-        <category>Hexo</category>
+        <category>C++</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -849,81 +924,6 @@ v[n]; <span class="hljs-comment">// 注意下标只能访问，但是不能够�
 <h4 id="4-数组"><a href="#4-数组" class="headerlink" title="4. 数组"></a>4. 数组</h4><h5 id="4-1-指针和数组"><a href="#4-1-指针和数组" class="headerlink" title="4.1 指针和数组"></a>4.1 指针和数组</h5><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ia[] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;
 <span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">p</span><span class="hljs-params">(ia)</span></span>; <span class="hljs-comment">// 整型指针，指向ia的第一个元素</span>
 p++; <span class="hljs-comment">// 指向第一个元素</span></code></pre></div>
-]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++基本语法</title>
-    <url>/posts/6b599344.html</url>
-    <content><![CDATA[<h1 id="C-学习笔记"><a href="#C-学习笔记" class="headerlink" title="C++学习笔记"></a>C++学习笔记</h1><p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p>
-<a id="more"></a>
-<h1 id="一、-变量"><a href="#一、-变量" class="headerlink" title="一、 变量"></a>一、 变量</h1><h2 id="1-用sizeof运算符求某一类型或变量占据的字节数"><a href="#1-用sizeof运算符求某一类型或变量占据的字节数" class="headerlink" title="1. 用sizeof运算符求某一类型或变量占据的字节数"></a>1. 用sizeof运算符求某一类型或变量占据的字节数</h2><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> a;
-    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(a) &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// sizeof运算符可以求变量占据的字节数</span>
-    <span class="hljs-built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 未初始化的变量，其值是不确定的</span>
-    <span class="hljs-keyword">int</span> b = <span class="hljs-number">1</span>;
-    <span class="hljs-built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="hljs-built_in">endl</span>;
-&#125;</code></pre></div>
-<h2 id="2-数据类型的自动转换"><a href="#2-数据类型的自动转换" class="headerlink" title="2. 数据类型的自动转换"></a>2. 数据类型的自动转换</h2><h3 id="1-数"><a href="#1-数" class="headerlink" title="1. 数"></a>1. 数</h3><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> a = <span class="hljs-number">11.34</span>; <span class="hljs-comment">// 11.34被自动转化为11后赋值给a</span>
-<span class="hljs-keyword">int</span> b = <span class="hljs-number">30</span>;
-<span class="hljs-keyword">double</span> d = b; <span class="hljs-comment">// d的值是30.0</span></code></pre></div>
-<h3 id="2-字符类型与整型"><a href="#2-字符类型与整型" class="headerlink" title="2. 字符类型与整型"></a>2. 字符类型与整型</h3><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> k = <span class="hljs-string">'a'</span>;
-<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, k); <span class="hljs-comment">// 输出97，即a的ASCII码</span>
-<span class="hljs-keyword">int</span> n = <span class="hljs-number">98</span>;
-<span class="hljs-keyword">char</span> k = n;
-<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c"</span>, k); <span class="hljs-comment">// 输出b</span></code></pre></div>
-<h2 id="3-输入和输出"><a href="#3-输入和输出" class="headerlink" title="3. 输入和输出"></a>3. 输入和输出</h2><h4 id="1-scanf和printf"><a href="#1-scanf和printf" class="headerlink" title="1. scanf和printf"></a>1. scanf和printf</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt; //使用scanf和printf时需要使用该库</span></span>
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> n;
-    <span class="hljs-keyword">char</span> c;
-    <span class="hljs-keyword">float</span> m;
-    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%c%f"</span>, &amp;n, &amp;c, &amp;m);
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %c %f\n"</span>, n, c, m);
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
-<p>用scanf可以一次读入多个不同类型的变量，输入各项用空格隔开<br>        注意在输入<strong>字符</strong>时，不会跳过空格（空格也会被当做字符读入）<br>        输入其它数据时，会跳过空格</p>
-<h4 id="2-cin和cout"><a href="#2-cin和cout" class="headerlink" title="2. cin和cout"></a>2. cin和cout</h4><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> c;
-    <span class="hljs-keyword">while</span> ((c=<span class="hljs-built_in">cin</span>.get()) != EOF) &#123; 
-        <span class="hljs-built_in">cout</span> &lt;&lt; (<span class="hljs-keyword">char</span>) c; 
-    &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
-<p>使用cin读入所有字符，包括空格和回车，EOF<br>        Mac（ctrl+D停止输入，ctrl+C停止程序)<br>        windows ctrl+Z停止</p>
-<h4 id="3-cin-amp-cout-scanf-amp-printf-比较"><a href="#3-cin-amp-cout-scanf-amp-printf-比较" class="headerlink" title="3. cin&amp;cout / scanf&amp;printf 比较"></a>3. cin&amp;cout / scanf&amp;printf 比较</h4><ul>
-<li>cin，cout速度慢，输入输出数据量大时用scanf/printf</li>
-<li>一个程序不要同时出现cin和scanf，cout和prinf</li>
-</ul>
-<h2 id="4-运算"><a href="#4-运算" class="headerlink" title="4. 运算"></a>4. 运算</h2><ol>
-<li>加、减、乘运算的溢出</li>
-</ol>
-<hr>
-<h1 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h1><h3 id="1-数组作为函数的参数传递"><a href="#1-数组作为函数的参数传递" class="headerlink" title="1. 数组作为函数的参数传递"></a>1. 数组作为函数的参数传递</h3><p>数组作为函数的参数时，是传引用的，即<strong>形参数组改变了，实参数组也会改变</strong></p>
-<p>二维数组作为函数的形参时，<strong>必须写明函数有多少列</strong>，不要写明有多少行</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[][<span class="hljs-number">5</span>])</span> </span>&#123;
-  <span class="hljs-built_in">cout</span> &lt;&lt; a[<span class="hljs-number">4</span>][<span class="hljs-number">3</span>];
-&#125;</code></pre></div>
-<p>必须要写明列数，编译器才能够根据下标算出元素的地址</p>
-<div class="hljs"><pre><code class="hljs markdown">$\color&#123;#F00&#125;&#123;a[<span class="hljs-string">i</span>][<span class="hljs-symbol">j</span>]的地址 = 数组首地址 + i \times N \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>]) + j \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>])&#125;$ (N是数组列数)</code></pre></div>
-<p>形参数组的首地址就是实参数组的首地址      </p>
-<h1 id="三、字符串"><a href="#三、字符串" class="headerlink" title="三、字符串"></a>三、字符串</h1><h2 id="1-字符串的形式"><a href="#1-字符串的形式" class="headerlink" title="1. 字符串的形式"></a>1. 字符串的形式</h2><h3 id="（1）字符串常量"><a href="#（1）字符串常量" class="headerlink" title="（1）字符串常量"></a>（1）字符串常量</h3><p>用双引号括起来的，如”China”, “C++ program”.</p>
-<p>字符串常量占据<strong>内存</strong>的字节数等于字符中字符数目加1，结尾多出字符’\0’.</p>
-<font color=#F00>但是字符串的长度不包含'\0'</font>
-
-<p>“”也是合法的·1字符串常量，称为空串，仍然占据一个字节的内存空间，存放’\0’</p>
-<h3 id="（2）存放于字符数组中，以’-0’结尾"><a href="#（2）存放于字符数组中，以’-0’结尾" class="headerlink" title="（2）存放于字符数组中，以’\0’结尾"></a>（2）存放于字符数组中，以’\0’结尾</h3><p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p>
-<p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p>
-<h3 id="（3）string对象。"><a href="#（3）string对象。" class="headerlink" title="（3）string对象。"></a>（3）string对象。</h3><p>string是C++标准模板库里的一个类，专门用于处理字符串</p>
 ]]></content>
       <categories>
         <category>C++</category>
@@ -1119,6 +1119,110 @@ p++; <span class="hljs-comment">// 指向第一个元素</span></code></pre></di
       </categories>
       <tags>
         <tag>概率论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构与算法概述</title>
+    <url>/posts/ddb07891.html</url>
+    <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="1-什么是数据结构？"><a href="#1-什么是数据结构？" class="headerlink" title="1. 什么是数据结构？"></a>1. 什么是数据结构？</h2><p>我们把这个词分解开来，首先回答什么是数据。<br><strong>数据</strong>是信息的载体，是数字，字符或其它符号的集合。<br><strong>数据结构</strong>是数据对象和组成对象的数据成员之间的关系。</p>
+<p><code>Data_Structure = {D, R}</code><br><em>D</em>是数据对象<br><em>R</em>是<em>D</em>中所有数据成员的关系</p>
+<p>数据结构涉及3个方面：<br><strong>逻辑结构</strong>：从用户视图看，是面向问题的<br><strong>物理结构</strong>：从具体实现视图看，是面向计算机的<br><strong>操作及其实现</strong><br>我们以一个学生表为例，它的逻辑结构式线性表，物理结构是数组，而操作是增删改查</p>
+<h2 id="2-递归简论"><a href="#2-递归简论" class="headerlink" title="2. 递归简论"></a>2. 递归简论</h2><h3 id="2-1-如何设计递归"><a href="#2-1-如何设计递归" class="headerlink" title="2.1 如何设计递归"></a>2.1 如何设计递归</h3><p>我们通过递归来引入数据结构与算法的学习。<br>当一个函数用它自己来定义时，我们就称它是<strong>递归</strong>(<em>recursive</em>)的。我们可以看下面这个简单的例子</p>
+<script type="math/tex; mode=display">f(x) = \begin{cases} 0, & x=0 \\\\ 2f(x-1)+x^2, & x > 0\end{cases}</script><p>我们用代码来实现它</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">f</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">2</span> * f(x - <span class="hljs-number">1</span>) + x * x;
+&#125;</code></pre></div>
+<p>观察这段代码，函数体内首先有一个<code>if</code>结构，这是递归的<strong>基准情况</strong>(<em>base case</em>)，即此时函数的值可以直接算出而不用进行递归。<br>再往下的<code>return</code>语句则进入了递归，要注意的是，递归调用将反复进行直到出现基准情况为止。比如我们计算<code>f(3)</code>，那么会调用<code>f(2), f(1)</code>直到出现基准情况<code>f(0)</code>，它的计算实际上是这样的</p>
+<script type="math/tex; mode=display">(2\times(2\times(2\times f(0)+1\times1) + 2\times2)+3\times3)</script><p>下面我们再来看一种糟糕的递归设计</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">bad</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;    
+    &#125;
+    <span class="hljs-keyword">return</span> bad(n / <span class="hljs-number">3</span> + <span class="hljs-number">1</span>) + n - <span class="hljs-number">1</span>;
+&#125;</code></pre></div>
+<p>我们会发现，在上述的代码中，<code>bad(1)</code>被定义为<code>bad(1)</code>，而不知道具体是多少，计算机会反复调用它，程序无法停止，也求不出解。</p>
+<p>通过上面的两个例子，可以得出递归的设计准则</p>
+<ol>
+<li><strong>基准情形</strong>(<em>base case</em>)。必须有某些基准的情形，不用递归就能够求解。</li>
+<li><strong>不断推进</strong>(<em>make progress</em>) 递归调用必须能够朝着一个基准情形推进。</li>
+</ol>
+<h3 id="2-2-递归实践"><a href="#2-2-递归实践" class="headerlink" title="2.2 递归实践"></a>2.2 递归实践</h3><p>我们通过几个经典的例子来加深对递归的理解。</p>
+<h4 id="2-2-1-菲波那切数列"><a href="#2-2-1-菲波那切数列" class="headerlink" title="2.2.1 菲波那切数列"></a>2.2.1 菲波那切数列</h4><p>我们知道它的函数是<br>$fib(0)=0,\ fib(1)=1,\ fib(n)=fib(n-1)+fib(n-2); n&gt;=2$<br>可以很容易地将其用代码表示</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-keyword">long</span> n)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span> || n == <span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// base case</span>
+        <span class="hljs-keyword">return</span> n;
+    &#125;
+    <span class="hljs-keyword">return</span> fib(n - <span class="hljs-number">1</span>) + fib(n - <span class="hljs-number">2</span>);
+&#125;</code></pre></div>
+<h4 id="2-2-2-排列"><a href="#2-2-2-排列" class="headerlink" title="2.2.2 排列"></a>2.2.2 排列</h4><p>现在有一个数组<code>{a, b, c}</code>，要求对它进行全排列，即排列结果是<code>abc,acb,bac,bca,cab,cba</code></p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Permutation</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">permutation</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[] list, <span class="hljs-keyword">int</span> k, <span class="hljs-keyword">int</span> m)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> i;
+        <span class="hljs-keyword">if</span> (k == m) &#123;
+            <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt;= m; i++) &#123;
+                System.out.print(list[i]);
+            &#125;
+            System.out.println();
+        &#125;
+        <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-keyword">for</span> (i = k; i &lt;= m; i++) &#123;
+                <span class="hljs-keyword">char</span> temp = list[k];
+                list[k] = list[i];
+                list[i] = temp;
+                permutation(list, k + <span class="hljs-number">1</span>, m);
+                temp = list[k];
+                list[k] = list[i];
+                list[i] = temp;
+            &#125;
+        &#125;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        <span class="hljs-keyword">char</span>[] list = &#123;<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>&#125;;
+        permutation(list, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>);
+    &#125;
+&#125;</code></pre></div>
+<h4 id="2-2-3-汉诺塔问题"><a href="#2-2-3-汉诺塔问题" class="headerlink" title="2.2.3 汉诺塔问题"></a>2.2.3 汉诺塔问题</h4><p>汉诺塔问题是一个经典的问题。<strong>汉诺塔</strong>(<em>Hanoi Tower</em>)，源于印度一个古老传说。大梵天创造世界的时候做了三根金刚石柱子，在一根柱子上从下往上按照大小顺序摞着64片黄金圆盘。大梵天命令婆罗门把圆盘从下面开始按大小顺序重新摆放在另一根柱子上。并且规定，任何时候，在小圆盘上都不能放大圆盘，且在三根柱子之间一次只能移动一个圆盘。问应该如何操作？<br>64个圆盘对于当前的计算机，可能需要几百上千年才能算出，但是我们可以简化这个问题，使用3个圆盘来看一下如何用递归来实现。</p>
+<p>根据我们的递归设计准则，首先要明确基准条件，也就是只有一个圆盘，那很简单，就是把它从第一根柱子移动到第三根柱子，<br>然后设计不断推进的过程，有3根柱子，起点(<em>fromTower</em>)，终点(<em>toTower</em>)，中转(<em>auxTower</em>)。有一个非常易于理解的方式，我们首先将盘从起点移到中转点，这个时候的中转点实际上是终点，再从中转点移到终点，这个时候的中转点实际上是起点，所以设计的两个递归是这样的。</p>
+<div class="hljs"><pre><code class="hljs java">moveDisks(n - <span class="hljs-number">1</span>, fromTower, auxTower, toTower);
+moveDisks(n - <span class="hljs-number">1</span>, auxTower, toTower, fromTower);</code></pre></div>
+<p>下面是完整的代码实现。</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HanoiTower</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">moveDisks</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">char</span> fromTower, <span class="hljs-keyword">char</span> toTower, <span class="hljs-keyword">char</span> auxTower)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) &#123;
+            System.out.println(<span class="hljs-string">"move disk "</span> + n + <span class="hljs-string">" from "</span> + fromTower + <span class="hljs-string">" to "</span> + toTower);
+        &#125;
+        <span class="hljs-keyword">else</span> &#123;
+            moveDisks(n - <span class="hljs-number">1</span>, fromTower, auxTower, toTower);
+            System.out.println(<span class="hljs-string">"move disk "</span> + n + <span class="hljs-string">" from "</span> + fromTower + <span class="hljs-string">" to "</span> + toTower);
+            moveDisks(n - <span class="hljs-number">1</span>, auxTower, toTower, fromTower);
+        &#125;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        moveDisks(<span class="hljs-number">3</span>, <span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>, <span class="hljs-string">'C'</span>);
+    &#125;
+&#125;</code></pre></div>
+<p>打印结果</p>
+<div class="hljs"><pre><code class="hljs shell">move disk 1 from A to C
+move disk 2 from A to B
+move disk 1 from C to B
+move disk 3 from A to C
+move disk 1 from B to A
+move disk 2 from B to C
+move disk 1 from A to C</code></pre></div>
+<p>参考：</p>
+<ol>
+<li>《数据结构与算法 Java语言描述》</li>
+</ol>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>

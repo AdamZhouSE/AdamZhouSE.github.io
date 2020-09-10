@@ -17,7 +17,7 @@
   <meta name="description" content="Take notes and write articles about Software Engineering">
   <meta name="author" content="ZZY">
   <meta name="keywords" content="">
-  <title>Java 接口 - Blog of Adam</title>
+  <title>数据结构与算法概述 - Blog of Adam</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -168,8 +168,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-09-09 09:06" pubdate>
-      September 9, 2020 am
+    <time datetime="2020-09-10 20:23" pubdate>
+      September 10, 2020 pm
     </time>
   </div>
 
@@ -179,7 +179,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      679 字
+      1.3k 字
     </span>
   
 
@@ -189,7 +189,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      17
        分钟
     </span>
   
@@ -219,82 +219,101 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Java 接口</h1>
+            <h1 style="display: none">数据结构与算法概述</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p><strong>接口</strong>(<em>interface</em>)用来描述类应该做什么，而不指定它们具体该如何做。一个类可以<strong>实现</strong>(<em>implement</em>)一个或多个接口。</p>
-<h2 id="1-接口的概念"><a href="#1-接口的概念" class="headerlink" title="1. 接口的概念"></a>1. 接口的概念</h2><p>接口不是类，而是对希望符合这个接口的类的一组<strong>需求</strong></p>
-<p><strong>Tip</strong></p>
-<ul>
-<li>接口中的所有方法都自动是<code>public</code>，因此在接口中声明方法时，不必提供关键字<code>public</code></li>
-<li>接口绝不会有实例字段</li>
-</ul>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> <span class="hljs-title">implement</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">Employee</span>&gt; </span>&#123;
-    <span class="hljs-comment">// blablabla</span>
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(Employee other)</span> </span>&#123;
-        <span class="hljs-keyword">return</span> Integer.compare(salary, other.salary);
+              <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="1-什么是数据结构？"><a href="#1-什么是数据结构？" class="headerlink" title="1. 什么是数据结构？"></a>1. 什么是数据结构？</h2><p>我们把这个词分解开来，首先回答什么是数据。<br><strong>数据</strong>是信息的载体，是数字，字符或其它符号的集合。<br><strong>数据结构</strong>是数据对象和组成对象的数据成员之间的关系。</p>
+<p><code>Data_Structure = {D, R}</code><br><em>D</em>是数据对象<br><em>R</em>是<em>D</em>中所有数据成员的关系</p>
+<p>数据结构涉及3个方面：<br><strong>逻辑结构</strong>：从用户视图看，是面向问题的<br><strong>物理结构</strong>：从具体实现视图看，是面向计算机的<br><strong>操作及其实现</strong><br>我们以一个学生表为例，它的逻辑结构式线性表，物理结构是数组，而操作是增删改查</p>
+<h2 id="2-递归简论"><a href="#2-递归简论" class="headerlink" title="2. 递归简论"></a>2. 递归简论</h2><h3 id="2-1-如何设计递归"><a href="#2-1-如何设计递归" class="headerlink" title="2.1 如何设计递归"></a>2.1 如何设计递归</h3><p>我们通过递归来引入数据结构与算法的学习。<br>当一个函数用它自己来定义时，我们就称它是<strong>递归</strong>(<em>recursive</em>)的。我们可以看下面这个简单的例子</p>
+<script type="math/tex; mode=display">f(x) = \begin{cases} 0, & x=0 \\\\ 2f(x-1)+x^2, & x > 0\end{cases}</script><p>我们用代码来实现它</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">f</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">2</span> * f(x - <span class="hljs-number">1</span>) + x * x;
 &#125;</code></pre></div>
-<h2 id="2-接口的属性"><a href="#2-接口的属性" class="headerlink" title="2. 接口的属性"></a>2. 接口的属性</h2><p>接口不是类，不能够使用<code>new</code>实例化一个接口，但是可以声明接口的变量，接口变量必须引用实现这个接口的类对象</p>
-<div class="hljs"><pre><code class="hljs java">Comparable x = <span class="hljs-keyword">new</span> Employee(. . .);</code></pre></div>
-<p><strong>Tip</strong><br>为什么需要接口，而不是直接使用抽象类？<br>因为Java不支持多继承，所以每个类只能扩展一个类。<br>而接口提供了多继承的好处，而避免了多重继承的复杂性和低效性。</p>
-<h2 id="3-接口与回调"><a href="#3-接口与回调" class="headerlink" title="3. 接口与回调"></a>3. 接口与回调</h2><p><strong>回调</strong>(<em>callback</em>)是一种常见的程序设计模式。在这种模式中，可以指定某个特定事件发生时应该采取的动作。比如我们设计了一个时钟，可以请求每秒更新一次，以便更新时钟的表盘。</p>
-<p>下面是一个定时器和动作监听的具体使用的例子，定时器启动之后，程序将弹出一个消息对话框，并等待用户点击OK来终止程序的运行，在程序等待用户操作的同时，每隔1秒显示一次当前时间</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.awt.*;
-<span class="hljs-keyword">import</span> java.awt.event.*;
-<span class="hljs-keyword">import</span> java.time.*;
-<span class="hljs-keyword">import</span> javax.swing.*;
-
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimerTest</span>
-</span>&#123;  
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span>
-   </span>&#123;  
-      TimePrinter listener = <span class="hljs-keyword">new</span> TimePrinter();
-
-      <span class="hljs-comment">// construct a timer that calls the listener</span>
-      <span class="hljs-comment">// once every second</span>
-      Timer timer = <span class="hljs-keyword">new</span> Timer(<span class="hljs-number">1000</span>, listener);
-      timer.start();
-
-      <span class="hljs-comment">// keep program running until the user selects "OK"</span>
-      JOptionPane.showMessageDialog(<span class="hljs-keyword">null</span>, <span class="hljs-string">"Quit program?"</span>);
-      System.exit(<span class="hljs-number">0</span>);
-   &#125;
-&#125;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimePrinter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ActionListener</span>
-</span>&#123;  
-   <span class="hljs-meta">@Override</span>
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">actionPerformed</span><span class="hljs-params">(ActionEvent event)</span>
-   </span>&#123;  
-      System.out.println(<span class="hljs-string">"At the tone, the time is "</span> 
-         + Instant.ofEpochMilli(event.getWhen()));
-      Toolkit.getDefaultToolkit().beep();
-   &#125;
+<p>观察这段代码，函数体内首先有一个<code>if</code>结构，这是递归的<strong>基准情况</strong>(<em>base case</em>)，即此时函数的值可以直接算出而不用进行递归。<br>再往下的<code>return</code>语句则进入了递归，要注意的是，递归调用将反复进行直到出现基准情况为止。比如我们计算<code>f(3)</code>，那么会调用<code>f(2), f(1)</code>直到出现基准情况<code>f(0)</code>，它的计算实际上是这样的</p>
+<script type="math/tex; mode=display">(2\times(2\times(2\times f(0)+1\times1) + 2\times2)+3\times3)</script><p>下面我们再来看一种糟糕的递归设计</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">bad</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;    
+    &#125;
+    <span class="hljs-keyword">return</span> bad(n / <span class="hljs-number">3</span> + <span class="hljs-number">1</span>) + n - <span class="hljs-number">1</span>;
 &#125;</code></pre></div>
-<h2 id="4-Comparator接口"><a href="#4-Comparator接口" class="headerlink" title="4. Comparator接口"></a>4. Comparator接口</h2><p>如果我们想要对字符串数组进行排序，可以直接使用<code>String.compareTo</code>方法按字典顺序比较字符串。<br>如果我们希望按照字符串长度来进行比较，可以自己实现一个<strong>比较器</strong>(<em>comparator</em>)，如下面的例子中，将比较器作为参数传入<code>Arrays.sort</code>方法中。</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Arrays;
-<span class="hljs-keyword">import</span> java.util.Comparator;
-
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthCompare</span> </span>&#123;
+<p>我们会发现，在上述的代码中，<code>bad(1)</code>被定义为<code>bad(1)</code>，而不知道具体是多少，计算机会反复调用它，程序无法停止，也求不出解。</p>
+<p>通过上面的两个例子，可以得出递归的设计准则</p>
+<ol>
+<li><strong>基准情形</strong>(<em>base case</em>)。必须有某些基准的情形，不用递归就能够求解。</li>
+<li><strong>不断推进</strong>(<em>make progress</em>) 递归调用必须能够朝着一个基准情形推进。</li>
+</ol>
+<h3 id="2-2-递归实践"><a href="#2-2-递归实践" class="headerlink" title="2.2 递归实践"></a>2.2 递归实践</h3><p>我们通过几个经典的例子来加深对递归的理解。</p>
+<h4 id="2-2-1-菲波那切数列"><a href="#2-2-1-菲波那切数列" class="headerlink" title="2.2.1 菲波那切数列"></a>2.2.1 菲波那切数列</h4><p>我们知道它的函数是<br>$fib(0)=0,\ fib(1)=1,\ fib(n)=fib(n-1)+fib(n-2); n&gt;=2$<br>可以很容易地将其用代码表示</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-keyword">long</span> n)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span> || n == <span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// base case</span>
+        <span class="hljs-keyword">return</span> n;
+    &#125;
+    <span class="hljs-keyword">return</span> fib(n - <span class="hljs-number">1</span>) + fib(n - <span class="hljs-number">2</span>);
+&#125;</code></pre></div>
+<h4 id="2-2-2-排列"><a href="#2-2-2-排列" class="headerlink" title="2.2.2 排列"></a>2.2.2 排列</h4><p>现在有一个数组<code>{a, b, c}</code>，要求对它进行全排列，即排列结果是<code>abc,acb,bac,bca,cab,cba</code></p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Permutation</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">permutation</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[] list, <span class="hljs-keyword">int</span> k, <span class="hljs-keyword">int</span> m)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> i;
+        <span class="hljs-keyword">if</span> (k == m) &#123;
+            <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt;= m; i++) &#123;
+                System.out.print(list[i]);
+            &#125;
+            System.out.println();
+        &#125;
+        <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-keyword">for</span> (i = k; i &lt;= m; i++) &#123;
+                <span class="hljs-keyword">char</span> temp = list[k];
+                list[k] = list[i];
+                list[i] = temp;
+                permutation(list, k + <span class="hljs-number">1</span>, m);
+                temp = list[k];
+                list[k] = list[i];
+                list[i] = temp;
+            &#125;
+        &#125;
+    &#125;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        String[] friends = &#123;<span class="hljs-string">"Adam"</span>, <span class="hljs-string">"Ben"</span>, <span class="hljs-string">"Peter"</span>, <span class="hljs-string">"Noah"</span>&#125;;
-        Arrays.sort(friends, <span class="hljs-keyword">new</span> LengthComparator());
-        System.out.println(Arrays.toString(friends));
-    &#125;
-&#125;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthComparator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparator</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;
-
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(String o1, String o2)</span> </span>&#123;
-        <span class="hljs-keyword">return</span> o1.length() - o2.length();
+        <span class="hljs-keyword">char</span>[] list = &#123;<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>&#125;;
+        permutation(list, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>);
     &#125;
 &#125;</code></pre></div>
+<h4 id="2-2-3-汉诺塔问题"><a href="#2-2-3-汉诺塔问题" class="headerlink" title="2.2.3 汉诺塔问题"></a>2.2.3 汉诺塔问题</h4><p>汉诺塔问题是一个经典的问题。<strong>汉诺塔</strong>(<em>Hanoi Tower</em>)，源于印度一个古老传说。大梵天创造世界的时候做了三根金刚石柱子，在一根柱子上从下往上按照大小顺序摞着64片黄金圆盘。大梵天命令婆罗门把圆盘从下面开始按大小顺序重新摆放在另一根柱子上。并且规定，任何时候，在小圆盘上都不能放大圆盘，且在三根柱子之间一次只能移动一个圆盘。问应该如何操作？<br>64个圆盘对于当前的计算机，可能需要几百上千年才能算出，但是我们可以简化这个问题，使用3个圆盘来看一下如何用递归来实现。</p>
+<p>根据我们的递归设计准则，首先要明确基准条件，也就是只有一个圆盘，那很简单，就是把它从第一根柱子移动到第三根柱子，<br>然后设计不断推进的过程，有3根柱子，起点(<em>fromTower</em>)，终点(<em>toTower</em>)，中转(<em>auxTower</em>)。有一个非常易于理解的方式，我们首先将盘从起点移到中转点，这个时候的中转点实际上是终点，再从中转点移到终点，这个时候的中转点实际上是起点，所以设计的两个递归是这样的。</p>
+<div class="hljs"><pre><code class="hljs java">moveDisks(n - <span class="hljs-number">1</span>, fromTower, auxTower, toTower);
+moveDisks(n - <span class="hljs-number">1</span>, auxTower, toTower, fromTower);</code></pre></div>
+<p>下面是完整的代码实现。</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HanoiTower</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">moveDisks</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">char</span> fromTower, <span class="hljs-keyword">char</span> toTower, <span class="hljs-keyword">char</span> auxTower)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) &#123;
+            System.out.println(<span class="hljs-string">"move disk "</span> + n + <span class="hljs-string">" from "</span> + fromTower + <span class="hljs-string">" to "</span> + toTower);
+        &#125;
+        <span class="hljs-keyword">else</span> &#123;
+            moveDisks(n - <span class="hljs-number">1</span>, fromTower, auxTower, toTower);
+            System.out.println(<span class="hljs-string">"move disk "</span> + n + <span class="hljs-string">" from "</span> + fromTower + <span class="hljs-string">" to "</span> + toTower);
+            moveDisks(n - <span class="hljs-number">1</span>, auxTower, toTower, fromTower);
+        &#125;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        moveDisks(<span class="hljs-number">3</span>, <span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>, <span class="hljs-string">'C'</span>);
+    &#125;
+&#125;</code></pre></div>
+<p>打印结果</p>
+<div class="hljs"><pre><code class="hljs shell">move disk 1 from A to C
+move disk 2 from A to B
+move disk 1 from C to B
+move disk 3 from A to C
+move disk 1 from B to A
+move disk 2 from B to C
+move disk 1 from A to C</code></pre></div>
 <p>参考：</p>
 <ol>
-<li>《Java核心技术 卷I》</li>
+<li>《数据结构与算法 Java语言描述》</li>
 </ol>
 
             </div>
@@ -305,9 +324,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
-                    
-                      <a class="hover-with-bg" href="/categories/Java/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">面向对象</a>
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
                     
                   </div>
                 
@@ -315,7 +332,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                      <a class="hover-with-bg" href="/tags/%E9%80%92%E5%BD%92/">递归</a>
                     
                   </div>
                 
@@ -328,18 +345,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/ddb07891.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">数据结构与算法概述</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/8b3a0e63.html">
-                        <span class="hidden-mobile">Java 继承</span>
+                      <a href="/posts/d993c7e9.html">
+                        <span class="hidden-mobile">Java 接口</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -545,7 +556,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Java 接口&nbsp;",
+        "数据结构与算法概述&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
