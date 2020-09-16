@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hexo个人博客绑定域名和配置SSL证书</title>
+    <url>/posts/2cd2c226.html</url>
+    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
+<a id="more"></a>
+<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
+<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
+<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
+<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/domainname1.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
+<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>主机记录</th>
+<th>记录类型</th>
+<th>线路类型</th>
+<th>记录值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>www</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+<tr>
+<td>@</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
+<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
+<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/2020-04-09domainname2.png" srcset="/img/loading.gif" alt=""></p>
+<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
+<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
+<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
+<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
+<hr>
+<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
+<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
+<p><a href="https://cloud.tencent.com/document/product/400/35244" target="_blank" rel="noopener">腾讯云Nginx服务器证书安装</a></p>
+<p><a href="https://www.jianshu.com/p/026d67cc6cb1" target="_blank" rel="noopener">Mac下nginx的使用</a></p>
+<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
+<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
+<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo-Permalink简化</title>
     <url>/posts/838443af.html</url>
     <content><![CDATA[<h1 id="Permalink简化"><a href="#Permalink简化" class="headerlink" title="Permalink简化"></a>Permalink简化</h1><p>在文档名有中文的时候，因为汉字会被转义，默认的永久链接会非常复杂，具体原因可以看这一篇文章</p>
@@ -75,66 +135,6 @@ categories:</code></pre></div>
       </tags>
   </entry>
   <entry>
-    <title>Hexo个人博客绑定域名和配置SSL证书</title>
-    <url>/posts/2cd2c226.html</url>
-    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
-<a id="more"></a>
-<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
-<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
-<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
-<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/domainname1.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
-<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>主机记录</th>
-<th>记录类型</th>
-<th>线路类型</th>
-<th>记录值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>www</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-<tr>
-<td>@</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
-<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
-<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/2020-04-09domainname2.png" srcset="/img/loading.gif" alt=""></p>
-<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
-<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
-<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
-<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
-<hr>
-<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
-<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
-<p><a href="https://cloud.tencent.com/document/product/400/35244" target="_blank" rel="noopener">腾讯云Nginx服务器证书安装</a></p>
-<p><a href="https://www.jianshu.com/p/026d67cc6cb1" target="_blank" rel="noopener">Mac下nginx的使用</a></p>
-<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
-<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
-<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo写作</title>
     <url>/posts/c4064b2b.html</url>
     <content><![CDATA[<h1 id="Hexo写作"><a href="#Hexo写作" class="headerlink" title="Hexo写作"></a>Hexo写作</h1><p>本文介绍了一些基本的Hexo配置和使用hexo+GitHub写作的流程。</p>
@@ -192,6 +192,92 @@ hexo s --debug // 在命令行生成debug信息</code></pre></div>
       </categories>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java 接口</title>
+    <url>/posts/d993c7e9.html</url>
+    <content><![CDATA[<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p><strong>接口</strong>(<em>interface</em>)用来描述类应该做什么，而不指定它们具体该如何做。一个类可以<strong>实现</strong>(<em>implement</em>)一个或多个接口。</p>
+<h2 id="1-接口的概念"><a href="#1-接口的概念" class="headerlink" title="1. 接口的概念"></a>1. 接口的概念</h2><p>接口不是类，而是对希望符合这个接口的类的一组<strong>需求</strong></p>
+<p><strong>Tip</strong></p>
+<ul>
+<li>接口中的所有方法都自动是<code>public</code>，因此在接口中声明方法时，不必提供关键字<code>public</code></li>
+<li>接口绝不会有实例字段</li>
+</ul>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> <span class="hljs-title">implement</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">Employee</span>&gt; </span>&#123;
+    <span class="hljs-comment">// blablabla</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(Employee other)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> Integer.compare(salary, other.salary);
+    &#125;
+&#125;</code></pre></div>
+<h2 id="2-接口的属性"><a href="#2-接口的属性" class="headerlink" title="2. 接口的属性"></a>2. 接口的属性</h2><p>接口不是类，不能够使用<code>new</code>实例化一个接口，但是可以声明接口的变量，接口变量必须引用实现这个接口的类对象</p>
+<div class="hljs"><pre><code class="hljs java">Comparable x = <span class="hljs-keyword">new</span> Employee(. . .);</code></pre></div>
+<p><strong>Tip</strong><br>为什么需要接口，而不是直接使用抽象类？<br>因为Java不支持多继承，所以每个类只能扩展一个类。<br>而接口提供了多继承的好处，而避免了多重继承的复杂性和低效性。</p>
+<h2 id="3-接口与回调"><a href="#3-接口与回调" class="headerlink" title="3. 接口与回调"></a>3. 接口与回调</h2><p><strong>回调</strong>(<em>callback</em>)是一种常见的程序设计模式。在这种模式中，可以指定某个特定事件发生时应该采取的动作。比如我们设计了一个时钟，可以请求每秒更新一次，以便更新时钟的表盘。</p>
+<p>下面是一个定时器和动作监听的具体使用的例子，定时器启动之后，程序将弹出一个消息对话框，并等待用户点击OK来终止程序的运行，在程序等待用户操作的同时，每隔1秒显示一次当前时间</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.awt.*;
+<span class="hljs-keyword">import</span> java.awt.event.*;
+<span class="hljs-keyword">import</span> java.time.*;
+<span class="hljs-keyword">import</span> javax.swing.*;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimerTest</span>
+</span>&#123;  
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span>
+   </span>&#123;  
+      TimePrinter listener = <span class="hljs-keyword">new</span> TimePrinter();
+
+      <span class="hljs-comment">// construct a timer that calls the listener</span>
+      <span class="hljs-comment">// once every second</span>
+      Timer timer = <span class="hljs-keyword">new</span> Timer(<span class="hljs-number">1000</span>, listener);
+      timer.start();
+
+      <span class="hljs-comment">// keep program running until the user selects "OK"</span>
+      JOptionPane.showMessageDialog(<span class="hljs-keyword">null</span>, <span class="hljs-string">"Quit program?"</span>);
+      System.exit(<span class="hljs-number">0</span>);
+   &#125;
+&#125;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimePrinter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ActionListener</span>
+</span>&#123;  
+   <span class="hljs-meta">@Override</span>
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">actionPerformed</span><span class="hljs-params">(ActionEvent event)</span>
+   </span>&#123;  
+      System.out.println(<span class="hljs-string">"At the tone, the time is "</span> 
+         + Instant.ofEpochMilli(event.getWhen()));
+      Toolkit.getDefaultToolkit().beep();
+   &#125;
+&#125;</code></pre></div>
+<h2 id="4-Comparator接口"><a href="#4-Comparator接口" class="headerlink" title="4. Comparator接口"></a>4. Comparator接口</h2><p>如果我们想要对字符串数组进行排序，可以直接使用<code>String.compareTo</code>方法按字典顺序比较字符串。<br>如果我们希望按照字符串长度来进行比较，可以自己实现一个<strong>比较器</strong>(<em>comparator</em>)，如下面的例子中，将比较器作为参数传入<code>Arrays.sort</code>方法中。</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Comparator;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthCompare</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        String[] friends = &#123;<span class="hljs-string">"Adam"</span>, <span class="hljs-string">"Ben"</span>, <span class="hljs-string">"Peter"</span>, <span class="hljs-string">"Noah"</span>&#125;;
+        Arrays.sort(friends, <span class="hljs-keyword">new</span> LengthComparator());
+        System.out.println(Arrays.toString(friends));
+    &#125;
+&#125;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthComparator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparator</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(String o1, String o2)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> o1.length() - o2.length();
+    &#125;
+&#125;</code></pre></div>
+<p>参考：</p>
+<ol>
+<li>《Java核心技术 卷I》</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>面向对象</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -291,92 +377,6 @@ hexo g -d</code></pre></div>
       </tags>
   </entry>
   <entry>
-    <title>Java 接口</title>
-    <url>/posts/d993c7e9.html</url>
-    <content><![CDATA[<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p><strong>接口</strong>(<em>interface</em>)用来描述类应该做什么，而不指定它们具体该如何做。一个类可以<strong>实现</strong>(<em>implement</em>)一个或多个接口。</p>
-<h2 id="1-接口的概念"><a href="#1-接口的概念" class="headerlink" title="1. 接口的概念"></a>1. 接口的概念</h2><p>接口不是类，而是对希望符合这个接口的类的一组<strong>需求</strong></p>
-<p><strong>Tip</strong></p>
-<ul>
-<li>接口中的所有方法都自动是<code>public</code>，因此在接口中声明方法时，不必提供关键字<code>public</code></li>
-<li>接口绝不会有实例字段</li>
-</ul>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> <span class="hljs-title">implement</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">Employee</span>&gt; </span>&#123;
-    <span class="hljs-comment">// blablabla</span>
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(Employee other)</span> </span>&#123;
-        <span class="hljs-keyword">return</span> Integer.compare(salary, other.salary);
-    &#125;
-&#125;</code></pre></div>
-<h2 id="2-接口的属性"><a href="#2-接口的属性" class="headerlink" title="2. 接口的属性"></a>2. 接口的属性</h2><p>接口不是类，不能够使用<code>new</code>实例化一个接口，但是可以声明接口的变量，接口变量必须引用实现这个接口的类对象</p>
-<div class="hljs"><pre><code class="hljs java">Comparable x = <span class="hljs-keyword">new</span> Employee(. . .);</code></pre></div>
-<p><strong>Tip</strong><br>为什么需要接口，而不是直接使用抽象类？<br>因为Java不支持多继承，所以每个类只能扩展一个类。<br>而接口提供了多继承的好处，而避免了多重继承的复杂性和低效性。</p>
-<h2 id="3-接口与回调"><a href="#3-接口与回调" class="headerlink" title="3. 接口与回调"></a>3. 接口与回调</h2><p><strong>回调</strong>(<em>callback</em>)是一种常见的程序设计模式。在这种模式中，可以指定某个特定事件发生时应该采取的动作。比如我们设计了一个时钟，可以请求每秒更新一次，以便更新时钟的表盘。</p>
-<p>下面是一个定时器和动作监听的具体使用的例子，定时器启动之后，程序将弹出一个消息对话框，并等待用户点击OK来终止程序的运行，在程序等待用户操作的同时，每隔1秒显示一次当前时间</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.awt.*;
-<span class="hljs-keyword">import</span> java.awt.event.*;
-<span class="hljs-keyword">import</span> java.time.*;
-<span class="hljs-keyword">import</span> javax.swing.*;
-
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimerTest</span>
-</span>&#123;  
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span>
-   </span>&#123;  
-      TimePrinter listener = <span class="hljs-keyword">new</span> TimePrinter();
-
-      <span class="hljs-comment">// construct a timer that calls the listener</span>
-      <span class="hljs-comment">// once every second</span>
-      Timer timer = <span class="hljs-keyword">new</span> Timer(<span class="hljs-number">1000</span>, listener);
-      timer.start();
-
-      <span class="hljs-comment">// keep program running until the user selects "OK"</span>
-      JOptionPane.showMessageDialog(<span class="hljs-keyword">null</span>, <span class="hljs-string">"Quit program?"</span>);
-      System.exit(<span class="hljs-number">0</span>);
-   &#125;
-&#125;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimePrinter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ActionListener</span>
-</span>&#123;  
-   <span class="hljs-meta">@Override</span>
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">actionPerformed</span><span class="hljs-params">(ActionEvent event)</span>
-   </span>&#123;  
-      System.out.println(<span class="hljs-string">"At the tone, the time is "</span> 
-         + Instant.ofEpochMilli(event.getWhen()));
-      Toolkit.getDefaultToolkit().beep();
-   &#125;
-&#125;</code></pre></div>
-<h2 id="4-Comparator接口"><a href="#4-Comparator接口" class="headerlink" title="4. Comparator接口"></a>4. Comparator接口</h2><p>如果我们想要对字符串数组进行排序，可以直接使用<code>String.compareTo</code>方法按字典顺序比较字符串。<br>如果我们希望按照字符串长度来进行比较，可以自己实现一个<strong>比较器</strong>(<em>comparator</em>)，如下面的例子中，将比较器作为参数传入<code>Arrays.sort</code>方法中。</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Arrays;
-<span class="hljs-keyword">import</span> java.util.Comparator;
-
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthCompare</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        String[] friends = &#123;<span class="hljs-string">"Adam"</span>, <span class="hljs-string">"Ben"</span>, <span class="hljs-string">"Peter"</span>, <span class="hljs-string">"Noah"</span>&#125;;
-        Arrays.sort(friends, <span class="hljs-keyword">new</span> LengthComparator());
-        System.out.println(Arrays.toString(friends));
-    &#125;
-&#125;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthComparator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparator</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;
-
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(String o1, String o2)</span> </span>&#123;
-        <span class="hljs-keyword">return</span> o1.length() - o2.length();
-    &#125;
-&#125;</code></pre></div>
-<p>参考：</p>
-<ol>
-<li>《Java核心技术 卷I》</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Java</category>
-        <category>面向对象</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java 继承</title>
     <url>/posts/8b3a0e63.html</url>
     <content><![CDATA[<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>继承(inheritance)的基本思想是基于已经有的类创建新的类，复用这些类的方法。</p>
@@ -455,83 +455,6 @@ e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</s
       </categories>
       <tags>
         <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Github pages+Hexo 搭建个人博客</title>
-    <url>/posts/ae6c038e.html</url>
-    <content><![CDATA[<h1 id="Github-pages-Hexo-搭建个人博客"><a href="#Github-pages-Hexo-搭建个人博客" class="headerlink" title="Github pages + Hexo 搭建个人博客"></a>Github pages + Hexo 搭建个人博客</h1><p>2019年11月19日，我决定开始写<strong>博客</strong>，首先要用<em>github pages+hexo</em>搭建一个个人博客，其中的过程我就记录在这里面。</p>
-<a id="more"></a>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
-<li>注册一个 GitHub 账户</li>
-<li>安装 Node.js<br>下载链接<br> <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a><br> 下面这个是中文网，对于国内用户来说下载速度非常快。<br> <a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a><br> 推荐菜鸟教程关于node的安装教程以及简易的语法介绍<a href="https://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank" rel="noopener">https://www.runoob.com/nodejs/nodejs-install-setup.html</a><ol>
-<li>安装git</li>
-<li>markdown语法学习<br><a href="https://www.jianshu.com/p/191d1e21f7ed" target="_blank" rel="noopener">https://www.jianshu.com/p/191d1e21f7ed</a></li>
-<li>git语法学习<br>推荐廖雪峰的git教程<br><a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/896043488029600</a></li>
-</ol>
-</li>
-</ol>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在终端检查node和npm的版本情况</p>
-<div class="hljs"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>
-npm -v</code></pre></div>
-<p>然后输入命令安装hexo</p>
-<div class="hljs"><pre><code class="hljs avrasm">npm install -g hexo-<span class="hljs-keyword">cli</span></code></pre></div>
-<p>我使用的是Mac电脑，在这一步出现了问题，终端显示如下</p>
-<div class="hljs"><pre><code class="hljs coffeescript">rollbackFailedOptional verb <span class="hljs-built_in">npm</span>-session</code></pre></div>
-<p>然后我又等了一会儿，终端又报错了。</p>
-<div class="hljs"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> WARN checkPermissions Missing write access to /usr/local/lib/node_modules
-<span class="hljs-built_in">npm</span> ERR! code EACCES
-<span class="hljs-built_in">npm</span> ERR! syscall access
-<span class="hljs-built_in">npm</span> ERR! path /usr/local/lib/node_modules
-<span class="hljs-built_in">npm</span> ERR! errno <span class="hljs-number">-13</span>
-<span class="hljs-built_in">npm</span> ERR! Error: EACCES: permission denied, access <span class="hljs-string">'/usr/local/lib/node_modules'</span>
-<span class="hljs-built_in">npm</span> ERR!  [Error: EACCES: permission denied, access <span class="hljs-string">'/usr/local/lib/node_modules'</span>] &#123;
-<span class="hljs-built_in">npm</span> ERR!   stack: <span class="hljs-string">"Error: EACCES: permission denied, access '/usr/local/lib/node_modules'"</span>,
-<span class="hljs-built_in">npm</span> ERR!   errno: <span class="hljs-number">-13</span>,
-<span class="hljs-built_in">npm</span> ERR!   code: <span class="hljs-string">'EACCES'</span>,
-<span class="hljs-built_in">npm</span> ERR!   syscall: <span class="hljs-string">'access'</span>,
-<span class="hljs-built_in">npm</span> ERR!   path: <span class="hljs-string">'/usr/local/lib/node_modules'</span>
-<span class="hljs-built_in">npm</span> ERR! &#125;
-<span class="hljs-built_in">npm</span> ERR! 
-<span class="hljs-built_in">npm</span> ERR! The operation was rejected <span class="hljs-keyword">by</span> your operating system.
-<span class="hljs-built_in">npm</span> ERR! It <span class="hljs-keyword">is</span> likely you <span class="hljs-keyword">do</span> <span class="hljs-keyword">not</span> have the permissions to access <span class="hljs-keyword">this</span> file <span class="hljs-keyword">as</span> the current user
-<span class="hljs-built_in">npm</span> ERR! 
-<span class="hljs-built_in">npm</span> ERR! If you believe <span class="hljs-keyword">this</span> might be a permissions issue, please double-check the
-<span class="hljs-built_in">npm</span> ERR! permissions <span class="hljs-keyword">of</span> the file <span class="hljs-keyword">and</span> its containing directories, <span class="hljs-keyword">or</span> <span class="hljs-keyword">try</span> running
-<span class="hljs-built_in">npm</span> ERR! the command again <span class="hljs-keyword">as</span> root/Administrator.</code></pre></div>
-<p>根据官方文档，如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code>权限错误，要遵循由<a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#reinstall-npm-with-a-node-version-manager" target="_blank" rel="noopener">npmjs</a>发布的指导修复该问题。强烈建议不要使用 root、sudo 等方法覆盖权限。<br>根据要求，下载了<strong>nvm</strong>，并且在终端利用nvm下载了最新版本的node和更新了npm后，hexo下载成功了。（以下是下载和使用nvm的教程链接）<br><a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">https://github.com/nvm-sh/nvm</a>.        </p>
-<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><p>输入以下命令hexo就会出现在指定的文件夹中</p>
-<div class="hljs"><pre><code class="hljs properties"><span class="hljs-attr">hexo</span> <span class="hljs-string">init &lt;folder&gt;</span>
-<span class="hljs-attr">cd</span> <span class="hljs-string">&lt;folder&gt;</span>
-<span class="hljs-attr">npm</span> <span class="hljs-string">install</span></code></pre></div>
-<p>如果出现错误</p>
-<div class="hljs"><pre><code class="hljs java">-bash: syntax error near unexpected token `newline<span class="hljs-string">'</span></code></pre></div>
-<p>这是占位符的问题，将第一行命令的&lt;&gt;去除，再重新输入即可。</p>
-<p>到此，建站的基本操作就完成了。</p>
-<p>界面的设计等就可以由自己来操作了。放一个hexo的官方网站供大家参考。<br><a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a></p>
-<h2 id="创建Github远程仓库"><a href="#创建Github远程仓库" class="headerlink" title="创建Github远程仓库"></a>创建Github远程仓库</h2><p>注意仓库名为github的用户名.github.io，勾选readme<br><img src="https://img-blog.csdnimg.cn/20191123194438458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
-<p>创建之后，进入仓库，点击<strong>Settings</strong>按钮，然后翻到GitHub Pages的部分，点击网页链接，就能够看到一个简易的网页了。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191123194913735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
-<h2 id="部署hexo"><a href="#部署hexo" class="headerlink" title="部署hexo"></a>部署hexo</h2><p>进入本地的hexo文件，找到 <strong>_config.yml</strong>，打开后翻到最后，修改成</p>
-<div class="hljs"><pre><code class="hljs java">deploy:
-  type: git
-  repo:
-     gitHub: git<span class="hljs-meta">@github</span>.com:你的GitHub用户名/你的GitHub用户名.github.io.git
-  branch: master</code></pre></div>
-<p>repo后面的内容要修改成自己github仓库的SSH密匙。</p>
-<p>然后在终端中输入</p>
-<div class="hljs"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-deployer-git <span class="hljs-comment">--save</span></code></pre></div>
-<p>开始安装hexo-deploy-git，安装完成后，开始部署，在终端中输入</p>
-<div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo deploy</span></code></pre></div>
-<p>部署完成。</p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>这个时候，再次进入刚刚进入过的网页链接，就会看到一个船新版本的界面，也就是本地的hexo库已经部署到github上了。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191123195408260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -683,6 +606,275 @@ id=3,name=David,salary=15000
       </categories>
       <tags>
         <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Github pages+Hexo 搭建个人博客</title>
+    <url>/posts/ae6c038e.html</url>
+    <content><![CDATA[<h1 id="Github-pages-Hexo-搭建个人博客"><a href="#Github-pages-Hexo-搭建个人博客" class="headerlink" title="Github pages + Hexo 搭建个人博客"></a>Github pages + Hexo 搭建个人博客</h1><p>2019年11月19日，我决定开始写<strong>博客</strong>，首先要用<em>github pages+hexo</em>搭建一个个人博客，其中的过程我就记录在这里面。</p>
+<a id="more"></a>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>注册一个 GitHub 账户</li>
+<li>安装 Node.js<br>下载链接<br> <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a><br> 下面这个是中文网，对于国内用户来说下载速度非常快。<br> <a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a><br> 推荐菜鸟教程关于node的安装教程以及简易的语法介绍<a href="https://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank" rel="noopener">https://www.runoob.com/nodejs/nodejs-install-setup.html</a><ol>
+<li>安装git</li>
+<li>markdown语法学习<br><a href="https://www.jianshu.com/p/191d1e21f7ed" target="_blank" rel="noopener">https://www.jianshu.com/p/191d1e21f7ed</a></li>
+<li>git语法学习<br>推荐廖雪峰的git教程<br><a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/896043488029600</a></li>
+</ol>
+</li>
+</ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在终端检查node和npm的版本情况</p>
+<div class="hljs"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>
+npm -v</code></pre></div>
+<p>然后输入命令安装hexo</p>
+<div class="hljs"><pre><code class="hljs avrasm">npm install -g hexo-<span class="hljs-keyword">cli</span></code></pre></div>
+<p>我使用的是Mac电脑，在这一步出现了问题，终端显示如下</p>
+<div class="hljs"><pre><code class="hljs coffeescript">rollbackFailedOptional verb <span class="hljs-built_in">npm</span>-session</code></pre></div>
+<p>然后我又等了一会儿，终端又报错了。</p>
+<div class="hljs"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> WARN checkPermissions Missing write access to /usr/local/lib/node_modules
+<span class="hljs-built_in">npm</span> ERR! code EACCES
+<span class="hljs-built_in">npm</span> ERR! syscall access
+<span class="hljs-built_in">npm</span> ERR! path /usr/local/lib/node_modules
+<span class="hljs-built_in">npm</span> ERR! errno <span class="hljs-number">-13</span>
+<span class="hljs-built_in">npm</span> ERR! Error: EACCES: permission denied, access <span class="hljs-string">'/usr/local/lib/node_modules'</span>
+<span class="hljs-built_in">npm</span> ERR!  [Error: EACCES: permission denied, access <span class="hljs-string">'/usr/local/lib/node_modules'</span>] &#123;
+<span class="hljs-built_in">npm</span> ERR!   stack: <span class="hljs-string">"Error: EACCES: permission denied, access '/usr/local/lib/node_modules'"</span>,
+<span class="hljs-built_in">npm</span> ERR!   errno: <span class="hljs-number">-13</span>,
+<span class="hljs-built_in">npm</span> ERR!   code: <span class="hljs-string">'EACCES'</span>,
+<span class="hljs-built_in">npm</span> ERR!   syscall: <span class="hljs-string">'access'</span>,
+<span class="hljs-built_in">npm</span> ERR!   path: <span class="hljs-string">'/usr/local/lib/node_modules'</span>
+<span class="hljs-built_in">npm</span> ERR! &#125;
+<span class="hljs-built_in">npm</span> ERR! 
+<span class="hljs-built_in">npm</span> ERR! The operation was rejected <span class="hljs-keyword">by</span> your operating system.
+<span class="hljs-built_in">npm</span> ERR! It <span class="hljs-keyword">is</span> likely you <span class="hljs-keyword">do</span> <span class="hljs-keyword">not</span> have the permissions to access <span class="hljs-keyword">this</span> file <span class="hljs-keyword">as</span> the current user
+<span class="hljs-built_in">npm</span> ERR! 
+<span class="hljs-built_in">npm</span> ERR! If you believe <span class="hljs-keyword">this</span> might be a permissions issue, please double-check the
+<span class="hljs-built_in">npm</span> ERR! permissions <span class="hljs-keyword">of</span> the file <span class="hljs-keyword">and</span> its containing directories, <span class="hljs-keyword">or</span> <span class="hljs-keyword">try</span> running
+<span class="hljs-built_in">npm</span> ERR! the command again <span class="hljs-keyword">as</span> root/Administrator.</code></pre></div>
+<p>根据官方文档，如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code>权限错误，要遵循由<a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#reinstall-npm-with-a-node-version-manager" target="_blank" rel="noopener">npmjs</a>发布的指导修复该问题。强烈建议不要使用 root、sudo 等方法覆盖权限。<br>根据要求，下载了<strong>nvm</strong>，并且在终端利用nvm下载了最新版本的node和更新了npm后，hexo下载成功了。（以下是下载和使用nvm的教程链接）<br><a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">https://github.com/nvm-sh/nvm</a>.        </p>
+<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><p>输入以下命令hexo就会出现在指定的文件夹中</p>
+<div class="hljs"><pre><code class="hljs properties"><span class="hljs-attr">hexo</span> <span class="hljs-string">init &lt;folder&gt;</span>
+<span class="hljs-attr">cd</span> <span class="hljs-string">&lt;folder&gt;</span>
+<span class="hljs-attr">npm</span> <span class="hljs-string">install</span></code></pre></div>
+<p>如果出现错误</p>
+<div class="hljs"><pre><code class="hljs java">-bash: syntax error near unexpected token `newline<span class="hljs-string">'</span></code></pre></div>
+<p>这是占位符的问题，将第一行命令的&lt;&gt;去除，再重新输入即可。</p>
+<p>到此，建站的基本操作就完成了。</p>
+<p>界面的设计等就可以由自己来操作了。放一个hexo的官方网站供大家参考。<br><a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a></p>
+<h2 id="创建Github远程仓库"><a href="#创建Github远程仓库" class="headerlink" title="创建Github远程仓库"></a>创建Github远程仓库</h2><p>注意仓库名为github的用户名.github.io，勾选readme<br><img src="https://img-blog.csdnimg.cn/20191123194438458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
+<p>创建之后，进入仓库，点击<strong>Settings</strong>按钮，然后翻到GitHub Pages的部分，点击网页链接，就能够看到一个简易的网页了。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191123194913735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
+<h2 id="部署hexo"><a href="#部署hexo" class="headerlink" title="部署hexo"></a>部署hexo</h2><p>进入本地的hexo文件，找到 <strong>_config.yml</strong>，打开后翻到最后，修改成</p>
+<div class="hljs"><pre><code class="hljs java">deploy:
+  type: git
+  repo:
+     gitHub: git<span class="hljs-meta">@github</span>.com:你的GitHub用户名/你的GitHub用户名.github.io.git
+  branch: master</code></pre></div>
+<p>repo后面的内容要修改成自己github仓库的SSH密匙。</p>
+<p>然后在终端中输入</p>
+<div class="hljs"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-deployer-git <span class="hljs-comment">--save</span></code></pre></div>
+<p>开始安装hexo-deploy-git，安装完成后，开始部署，在终端中输入</p>
+<div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo deploy</span></code></pre></div>
+<p>部署完成。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>这个时候，再次进入刚刚进入过的网页链接，就会看到一个船新版本的界面，也就是本地的hexo库已经部署到github上了。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191123195408260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>云计算概述</title>
+    <url>/posts/756f403a.html</url>
+    <content><![CDATA[<h1 id="云计算概述"><a href="#云计算概述" class="headerlink" title="云计算概述"></a>云计算概述</h1><h2 id="1-起源"><a href="#1-起源" class="headerlink" title="1. 起源"></a>1. 起源</h2><p>自计算机诞生之日起，人类就从未停止对更高计算性能的追求。</p>
+<p>那么如何提高计算性能呢？</p>
+<p><strong>思路1</strong></p>
+<p>把一台计算机做的足够强大</p>
+<p>计算范式：<strong>集中式计算</strong></p>
+<p>将所有计算资源集中在一个物理系统之内，所有资源（处理器，内存，存储器）是共享的，并且紧耦合在一个集成式操作系统中。</p>
+<p>计算范式：<strong>并行计算</strong></p>
+<p>提高效率，同一时间执行多个计算</p>
+<p>所有处理器紧耦合于中心共享内存或松耦合于分布式内存，处理器通信通过共享内存或通过消息传递完成。</p>
+<p><strong>问题</strong>：单台计算机价格高昂，并行计算有瓶颈</p>
+<p><strong>思路2</strong></p>
+<p>人多力量大，机多计算强</p>
+<p>由众多自治计算机组成，各自拥有私有内存，通过计算机网络通信，信息交换通过信息传递完成。</p>
+<p>多个物理系统：分布式系统，分布式程序，分布式编程</p>
+<h3 id="1-1-传统分布式计算系统"><a href="#1-1-传统分布式计算系统" class="headerlink" title="1.1 传统分布式计算系统"></a>1.1 传统分布式计算系统</h3><p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200915-01.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="1-1-1-计算集群"><a href="#1-1-1-计算集群" class="headerlink" title="1.1.1 计算集群"></a>1.1.1 计算集群</h4><p>实现<strong>计算抽象</strong></p>
+<p><strong>特点</strong></p>
+<ul>
+<li>基本组件为计算节点、通信软件、网络接口卡<br>以单独身份接入互联网</li>
+</ul>
+<h4 id="1-1-2-P2P系统"><a href="#1-1-2-P2P系统" class="headerlink" title="1.1.2  P2P系统"></a>1.1.2  P2P系统</h4><p>实现了<strong>存储抽象</strong></p>
+<p><strong>特点</strong></p>
+<ul>
+<li>节点是简单接入互联网的客户机，自治，自由加入和退出<br><strong>问题</strong></li>
+<li>无中心协作或中心数据库，有专用的物理互联网络，不稳定，不可靠，不安全</li>
+</ul>
+<h4 id="1-1-3-计算网络"><a href="#1-1-3-计算网络" class="headerlink" title="1.1.3 计算网络"></a>1.1.3 计算网络</h4><p><strong>接近”云“</strong></p>
+<p><strong>特点</strong></p>
+<ul>
+<li>计算资源整合，一个集成的资源池，提供基础设施</li>
+<li>节点包括：工作站，服务器，集群，超级计算机<br>问题：</li>
+<li>异构、用户管理、耗资源的协议、安全性、应用受限</li>
+</ul>
+<h3 id="1-2-云计算"><a href="#1-2-云计算" class="headerlink" title="1.2 云计算"></a>1.2 云计算</h3><h4 id="1-2-1-定义"><a href="#1-2-1-定义" class="headerlink" title="1.2.1 定义"></a>1.2.1 定义</h4><p><strong>云计算</strong>是相对与1.1中的3个系统更好的解决方案，它对网格进行优化，可以完美解决分布式计算。</p>
+<ul>
+<li>大量计算节点，同构可控</li>
+<li>专用内部网络</li>
+<li>通过互联网对外服务（公有云）</li>
+<li>全面虚拟化（计算、存储、网络、桌面）</li>
+<li>集中管理 安全高效</li>
+</ul>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200925-02.png" srcset="/img/loading.gif" alt=""></p>
+<p>云计算的定义基本可以总结为：</p>
+<p>云计算是一种<strong>商业计算模型</strong>，通过网络<strong>按需</strong>提供可以<strong>动态伸缩</strong>的廉价计算<strong>服务</strong>。</p>
+<p><strong>云</strong>是一些可以自我维护和管理的虚拟计算资源，通常是一些大型服务器集群，包括计算服务器，存储服务器和宽带资源等。</p>
+<p>之所以称为云，是因为其具有现实中云的特征——云一般都较大，云的规模可以动态伸缩，它的边界是模糊的，位置是不确定的，</p>
+<h4 id="1-2-2-概念模型"><a href="#1-2-2-概念模型" class="headerlink" title="1.2.2 概念模型"></a>1.2.2 概念模型</h4><p>PPT p11</p>
+<h4 id="1-2-3-云计算-vs-网格计算"><a href="#1-2-3-云计算-vs-网格计算" class="headerlink" title="1.2.3 云计算 vs 网格计算"></a>1.2.3 云计算 vs 网格计算</h4><table>
+<tr>
+<th>网格计算</th>
+<th>云计算</th>
+</tr>
+<tr>
+    <td colspan="2">共同：
+            <ul>
+                        <li>提升计算能力，完成数据处理</li>
+                        <li>构建虚拟资源池且动态可伸缩</li>
+                        <li>支持多承租任务</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td>聚合分布的资源，恰好有</td>
+    <td>使用专有的资源，专门做</td>
+</tr>
+<tr>
+    <td>强调虚拟组织，立足特定任务</td>
+    <td>不强调虚拟组织，重视通用性</td>
+</tr>
+<tr>
+    <td>利用中间件来屏蔽异构系统</td>
+    <td>不强调异构性</td>
+</tr>
+<tr>
+    <td>面向科研，商业模式不清晰</td>
+    <td>针对企业应用，商业模式清晰</td>
+</tr>
+</table>
+
+
+<h2 id="2-初探"><a href="#2-初探" class="headerlink" title="2. 初探"></a>2. 初探</h2><h3 id="2-1-时代背景"><a href="#2-1-时代背景" class="headerlink" title="2.1 时代背景"></a>2.1 时代背景</h3><p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200925-03.png" srcset="/img/loading.gif" alt=""></p>
+<p>今天是<strong>大数据</strong>的时代，一切皆为大数据，一切皆为大数据。我们先来简单的介绍一下大数据。</p>
+<p>什么是大数据？</p>
+<p>海量数据或巨量数据，其规模巨大到无法通过目前主流的计算机系统在合理时间内获取、存储、管理、处理并提炼以帮助使用者决策。  （刘鹏，《云计算》第三版）</p>
+<p>为什么会产生大数据？</p>
+<ul>
+<li>数据产生方式的改变，越来越自动化</li>
+<li>人类活动越来越依赖数据</li>
+<li>互联网+物联网<br>大数据有怎样的特征？</li>
+<li>3V: Volume(量大), Variety(多样), Velocity(快速)</li>
+<li>4V+1C: Value(低价值密度), Complexity(复杂:处理和分析难度大)</li>
+<li>5V: Volume, Variety, Velocity, Value, Veracity(真实)</li>
+</ul>
+<p>云计算是处理大数据的手段。大数据促进了云计算的产生，激发了云计算的潜力。云计算为大数据的收集，存储，加工和应用提供了更好的支持。</p>
+<h3 id="2-2-云的服务模型"><a href="#2-2-云的服务模型" class="headerlink" title="2.2 云的服务模型"></a>2.2 云的服务模型</h3><p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200925-04.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="2-2-1-IssS"><a href="#2-2-1-IssS" class="headerlink" title="2.2.1 IssS"></a>2.2.1 IssS</h4><p>将硬件设备等基础资源封装成服务服务提供给用户。用户相当于在使用裸机和磁盘，比如亚马逊云计算AWS的弹性计算云EC2</p>
+<p>通过虚拟机的方式对外提供计算和存储能力</p>
+<p>机器享有公网IP，多个虚拟机之间通过网络进行通信</p>
+<p>类似租用独立的计算机</p>
+<p>用户自行解决多台机器之间的协同问题</p>
+<p><strong>优势</strong></p>
+<ul>
+<li>允许用户动态申请和释放资源</li>
+<li>按使用量计费</li>
+<li>由公众共享，具有更高的资源使用效率（节能环保）</li>
+</ul>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200925-05.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="2-2-2-PaaS"><a href="#2-2-2-PaaS" class="headerlink" title="2.2.2 PaaS"></a>2.2.2 PaaS</h4><p>抽象层次更进一步，提供用户应用程序的运行环境</p>
+<p>自身负责资源的动态扩展和容错管理</p>
+<p><strong>优势</strong></p>
+<p>用户无需考虑节点间的配合问题</p>
+<p><strong>缺陷</strong></p>
+<p>用户自主权降低，需按照给定的编程环境和编程模型构建应用</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200925-06.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="2-2-3-SaaS"><a href="#2-2-3-SaaS" class="headerlink" title="2.2.3 SaaS"></a>2.2.3 SaaS</h4><p>针对性更强，将某些特定应用软件功能封装成服务。只提供某些专门用途的服务供应用调用</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200925-07.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="2-2-4-实现机制"><a href="#2-2-4-实现机制" class="headerlink" title="2.2.4 实现机制"></a>2.2.4 实现机制</h4><p>不同的供应商提供了不同的解决方案，没有同意的技术体系结构。下图是云计算体系结构参考模型</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200925-08.png" srcset="/img/loading.gif" alt=""></p>
+<p><strong>SOA构建层</strong></p>
+<p>封装云计算能力成标准的Web Service服务，并纳入SOA体系</p>
+<p>其中，SOA是面向服务的体系结构(<em>Service-oriented Architecture</em>)</p>
+<p><strong>管理中间件层</strong></p>
+<p>云计算的资源管理，并对众多应用任务进行调度，使资源能够高效、安全的为应用提供服务</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200916-01.png" srcset="/img/loading.gif" alt=""></p>
+<p><strong>资源池层</strong></p>
+<p>将大量相同类型的资源构成同构或接近同构的资源池</p>
+<p><strong>物理资源层</strong></p>
+<p>计算机、存储器、网路设施、数据库和软件等</p>
+<p><strong>Tip</strong></p>
+<p><strong>管理中间件层</strong>和<strong>资源池层</strong>是云计算技术最关键的部分，SOA构建层的功能更多依靠外部设施提供。</p>
+<p>下面以IssA为例，简述云计算的实现机制。<br><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200916-02.png" srcset="/img/loading.gif" alt=""></p>
+<ul>
+<li>用户交互接口向应用以<em>Web Services</em>方式提供访问接口，获取用户需求。</li>
+<li>服务目录是用户可以访问的服务清单。</li>
+<li>系统管理模块负责管理和分配所有可用的资源，其核心是负载均衡。</li>
+<li>配置工具负责在分配的节点上准备任务运行环境。</li>
+<li>监视统计模块负责监视节点的运行状 态，并完成用户使用节点情况的统计</li>
+</ul>
+<h3 id="2-3-风险和挑战"><a href="#2-3-风险和挑战" class="headerlink" title="2.3 风险和挑战"></a>2.3 风险和挑战</h3><h4 id="2-3-1-云计算压倒性的成本优势"><a href="#2-3-1-云计算压倒性的成本优势" class="headerlink" title="2.3.1 云计算压倒性的成本优势"></a>2.3.1 云计算压倒性的成本优势</h4><p>云计算之所以拥有划时代的优势，就是因为它的技术特征和规模效应所带来的的压倒性的性能价格比优势。</p>
+<p>全球企业的IT开销分为三部分：硬件开销、能耗和管理成本。调查显示，在硬件开销持平的同时，能耗和管理成本上升非常迅速。而云计算的经济性主要体现在以下两个方面：</p>
+<p>一方面，如果使用云计算，可以获得更低的硬件和网络成本，更低管理成本和电力成本。比如Google的数据中心就建立在人烟稀少，气候寒冷，水电资源丰富的地区，这样使得电价、场地、人力都远远比在城市建立要低，今天的中小企业直接租用相关的云服务也比自己去租用场地，搭建服务器要便宜的多。</p>
+<p>另一方面，云计算与传统的互联网数据中心(<em>IDC</em>)的资源利用率有很大不同。在以前，每个租用<em>IDC</em>的网站所获得的带宽，处理能力和存储空间都是固定的，但是网站的访问量并不均衡，比如有的网站白天没啥人看，晚上流量很多。为了应对这些情况，网站拥有者需要按照峰值要求来配置服务器和网络资源，这就造成了资源的浪费。而云计算平台提供弹性服务，动态分配和释放资源，大大提高了资源的利用效率。</p>
+<h4 id="2-3-2-其它优势"><a href="#2-3-2-其它优势" class="headerlink" title="2.3.2 其它优势"></a>2.3.2 其它优势</h4><ul>
+<li>可扩展性和可伸缩性</li>
+<li>虚拟化 模拟符合用户需求的任何计算环境</li>
+<li>高可靠 多副本容错 计算节点同构可互换等保障措施</li>
+<li>管理简单</li>
+<li>安全</li>
+</ul>
+<h4 id="2-3-3-云计算技术难点"><a href="#2-3-3-云计算技术难点" class="headerlink" title="2.3.3 云计算技术难点"></a>2.3.3 云计算技术难点</h4><p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200916-03.png" srcset="/img/loading.gif" alt=""></p>
+<h4 id="2-3-4-风险与挑战"><a href="#2-3-4-风险与挑战" class="headerlink" title="2.3.4 风险与挑战"></a>2.3.4 风险与挑战</h4><p><strong>增加了安全漏洞</strong></p>
+<ul>
+<li>运程使用IT资源需要云用户将信任边界扩展到外部的云，建立这样的安全架构同时又不引入安全漏洞是非常困难的</li>
+<li>重叠的信任边界和不断增加的数据曝光为恶意的云用户提供了更多的攻击IT资源、窃 取或破坏企业数据的机会</li>
+</ul>
+<p><strong>降低了运营管理控制</strong></p>
+<ul>
+<li>云用户对云资源的管理控制低于对企业内部IT资源的管理控制</li>
+<li><ul>
+<li>云提供者可能不遵守它发布的云服务保证</li>
+</ul>
+</li>
+<li><ul>
+<li>云用户和云提供者之间较长的地理距离可能需要更多的网络跳数，会带来延迟波 动和带宽受限</li>
+</ul>
+</li>
+</ul>
+<p><strong>云提供者之间有限的可移植性</strong></p>
+<ul>
+<li>由于缺乏行业标准，不同的云提供者提供的服务存在较大差异</li>
+<li>出于商业原因，云平台也不希望用户更换平台</li>
+</ul>
+<p><strong>多地区法规和法律问题</strong></p>
+<ul>
+<li>第三方云提供者通常选择造价较低、方便的地理位置建立数据中心，而云用户通常不会意识到所使用IT资源和自身数据所存放的位置 </li>
+<li>潜在的数据获得和公开，比如某些国家的法律规定，某些类型的数据必须向某些政府机构或数据主体公开</li>
+</ul>
+<p>参考：</p>
+<ol>
+<li>《云计算 （第三版）》 刘鹏</li>
+</ol>
+]]></content>
+      <categories>
+        <category>云计算</category>
+      </categories>
+      <tags>
+        <tag>云计算</tag>
       </tags>
   </entry>
   <entry>
@@ -1124,138 +1316,6 @@ move disk 1 from A to C</code></pre></div>
       </tags>
   </entry>
   <entry>
-    <title>策略模式</title>
-    <url>/posts/72e3b671.html</url>
-    <content><![CDATA[<h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><blockquote>
-<p>问题：<br>假设有一个模拟鸭子的游戏，游戏中拥有各种鸭子，我们设计了一个鸭子的超类，并且让各种鸭子，比如红头鸭，橡皮鸭等，继承它。<br>现在，我们需要更新这个游戏，使得鸭子可以飞起来，该怎么做？</p>
-</blockquote>
-<h2 id="使用继承？"><a href="#使用继承？" class="headerlink" title="使用继承？"></a>使用继承？</h2><p>如果依然使用继承，在超类中添加一个fly()方法，会出现不适合该行为的子类也具有该行为的问题，比如橡皮鸭就不会飞，但继承的做法使得它也可以飞起来。<br><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200902-01.png" srcset="/img/loading.gif" alt=""></p>
-<p>如果选择覆盖<code>fly()</code>方法，那么在后续的更新中，我们需要不断地检查可能需要覆盖的<code>fly()</code>方法。<br>所以使用继承来提供行为，会造成代码在多个子类最终重复，复用性差，难以知道鸭子的全部行为，运行时的行为不容易改变等问题。</p>
-<h2 id="使用接口？"><a href="#使用接口？" class="headerlink" title="使用接口？"></a>使用接口？</h2><p>如果抽象出一个<code>Flyable</code>接口，只有会飞的鸭子才实现这个接口呢？<br>设想一下，如果我们有上百种会飞的鸭子，那么就会造成大量的代码重复，每个子类中都要实现一次<code>fly()</code>方法，而且代码无法复用，如果我们需要修改这个方法，想象一下，这简直就是一场灾难。</p>
-<h2 id="策略模式实现"><a href="#策略模式实现" class="headerlink" title="策略模式实现"></a>策略模式实现</h2><p>软件开发过程中总是伴随着变更。<br><strong>设计原则</strong></p>
-<blockquote>
-<p>找出应用中可能需要变化之处，把它们独立出来，不要和那些不需要变化的代码放在一起。<br>也就是说我们把会变化的部分取出并封装起来，以便以后的改动和扩充。</p>
-</blockquote>
-<h3 id="分离变化与不变的部分"><a href="#分离变化与不变的部分" class="headerlink" title="分离变化与不变的部分"></a>分离变化与不变的部分</h3><p>在鸭子类中，我们可以发现<code>fly()</code>和<code>quack()</code>两个方法经常需要修改，那么我们就可以建立两组远离<code>Duck</code>类的类，一个与<code>fly</code>相关，一个与<code>quack</code>相关，每一组类实现各自的动作，比如让一个类实现“呱呱叫”，一个类实现“吱吱叫”，还有一个类实现“安静”</p>
-<h3 id="设计行为"><a href="#设计行为" class="headerlink" title="设计行为"></a>设计行为</h3><p><strong>设计原则</strong></p>
-<blockquote>
-<p>针对接口编程，而不是针对实现编程<br>用接口代表每个行为，鸭子类不会实现<code>Flying</code>的接口，而是制造一组专门的类来实现<code>FlyBahavior</code></p>
-</blockquote>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span></span>;
-&#125;</code></pre></div>
-<h3 id="实现行为"><a href="#实现行为" class="headerlink" title="实现行为"></a>实现行为</h3><p>现在有一个<code>FlyBehavior</code>接口，还有对应的类，负责实现具体的行为。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200902-02.png" srcset="/img/loading.gif" alt=""></p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyWithWings</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"I'm flying."</span>);
-    &#125;
-&#125;</code></pre></div>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyNoWay</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"I can't fly"</span>);
-    &#125;
-&#125;</code></pre></div>
-<h3 id="整合行为"><a href="#整合行为" class="headerlink" title="整合行为"></a>整合行为</h3><p>鸭子将飞行的动作<strong>委托</strong>给别人处理，而不是在鸭子类内部定义飞行方法。<br>在鸭子类中加入实例变量<code>flyBahavior</code>，声明为接口类型。</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Duck</span> </span>&#123;
-    FlyBehavior flyBehavior;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">performFly</span><span class="hljs-params">()</span> </span>&#123;
-        flyBehavior.fly();
-    &#125;
-&#125;</code></pre></div>
-<p>每个鸭子对象都会动态的设置这些变量以在运行时引用正确的类型。</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MallardDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MallardDuck</span><span class="hljs-params">()</span> </span>&#123;
-        flyBehavior = <span class="hljs-keyword">new</span> FlyWithWings(); <span class="hljs-comment">// 使用FlyWithWings作为FlyBehavior类型</span>
-    &#125;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"I'm a real Mallard duck."</span>);
-    &#125;
-&#125;</code></pre></div>
-<p>测试</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        Duck mallard = <span class="hljs-keyword">new</span> MallardDuck();
-        mallard.performFly();
-    &#125;
-&#125;
-<span class="hljs-comment">// Output: I'm flying.</span></code></pre></div>
-<h3 id="动态设定行为"><a href="#动态设定行为" class="headerlink" title="动态设定行为"></a>动态设定行为</h3><p>如果想要在运行时改变鸭子的行为，只需要调用鸭子的<code>setter</code>方法就可以了。<br>我们在鸭子类中增加设定方法</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setFlyBehavior</span><span class="hljs-params">(FlyBehavior fb)</span> </span>&#123;
-        flyBehavior = fb;
-&#125;</code></pre></div>
-<p>创造一个新的类模型鸭</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModelDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ModelDuck</span><span class="hljs-params">()</span> </span>&#123;
-        flyBehavior = <span class="hljs-keyword">new</span> FlyNoWay();
-    &#125;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"I'm a model duck."</span>);
-    &#125;
-&#125;</code></pre></div>
-<p>建立一个新的<code>FlyBehavior</code>类型</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyRocketPowered</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"I'm flying with a rocket."</span>);
-    &#125;
-&#125;</code></pre></div>
-<p>测试<br>调用<code>setter</code>方法，改变了模型鸭的飞行行为</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        Duck model = <span class="hljs-keyword">new</span> ModelDuck();
-        model.performFly();;
-        model.setFlyBehavior(<span class="hljs-keyword">new</span> FlyRocketPowered());
-        model.performFly();
-    &#125;
-&#125;
-<span class="hljs-comment">/* Output:
-I can't fly;
-I'm flying with a rocket.
-*/</span></code></pre></div>
-<p>每一个鸭子都<strong>有一个(HAS-A)</strong><code>FlyBahavior</code>，将飞行委托给它处理。<br><strong>设计原则</strong></p>
-<blockquote>
-<p>多用组合，少用继承<br>使用组合建立系统具有很大的弹性，可以将算法族封装成类，还可以在运行时动态地改变行为。</p>
-</blockquote>
-<h2 id="策略模式小结"><a href="#策略模式小结" class="headerlink" title="策略模式小结"></a>策略模式小结</h2><h3 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h3><p>定义一系列算法，把它们一个个<strong>封装</strong>起来，并且使它们可以相互替换。使得算法可以<strong>独立</strong>于它的客户变化。</p>
-<h3 id="适用"><a href="#适用" class="headerlink" title="适用"></a>适用</h3><ol>
-<li>许多相关的类仅仅只是行为有差别，比如鸭子类中的飞行</li>
-<li>需要使用一个算法的不同变体</li>
-<li>算法使用客户不应该知道的数据</li>
-<li>一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现（switch或if）</li>
-</ol>
-<h3 id="结构与参与者"><a href="#结构与参与者" class="headerlink" title="结构与参与者"></a>结构与参与者</h3><p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200902-04.png" srcset="/img/loading.gif" alt=""></p>
-<p><strong>Strategy</strong> (策略)<br>定义所有支持的算法的公共接口，Context使用这个接口来调用ConcreteStrategy定义的算法，比如<code>FlyBehavior</code>就是一个策略<br><strong>ConcreteStrategy</strong>(具体策略)<br>以Strategy接口实现某具体的算法，比如<code>FlyWithWings</code>,<code>FlyNoWay</code>等<br><strong>Context</strong> (上下文)</p>
-<ul>
-<li>用一个ConcreteStrategy对象来配置</li>
-<li>维护一个对Strategy对象的引用</li>
-<li>可定义一个接口让Strategy来访问它的数据<br>比如<code>Duck</code>类</li>
-</ul>
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ol>
-<li><strong>相关算法系列</strong> Strategy类层次为Context定义了一系列可供复用的算法或行为</li>
-<li><strong>替代继承的方法</strong> 使用继承可以直接生成一个Context的子类，给它不同的行为，但这样会使得Context难以理解，维护和扩展，不能动态改变算法。而将算法封装在独立的Strategy类中使得我们可以独立于Context改变它，易于理解，修改和扩展。</li>
-<li><strong>消除可一些条件语句</strong> 含有许多条件语句的代码通常需要使用策略模式</li>
-<li><strong>实现的选择</strong> 策略模式可以提供相同行为的不同实现供客户选择</li>
-</ol>
-<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ol>
-<li><strong>客户必须了解不同的策略</strong> 需要向客户暴露具体问题，所以只有当不同行为的变体与客户有关时，才使用策略模式</li>
-<li><strong>Strategy和Context之间的通信开销</strong></li>
-<li>增加了对象的数目</li>
-</ol>
-]]></content>
-      <categories>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>策略模式</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>概率论的基本概念</title>
     <url>/posts/36736857.html</url>
     <content><![CDATA[<p>本文介绍了概率论的基本概念，包括概率的定义，概率的计算，同时还有随机测试的简单介绍。</p>
@@ -1442,6 +1502,138 @@ I'm flying with a rocket.
       </categories>
       <tags>
         <tag>概率论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>策略模式</title>
+    <url>/posts/72e3b671.html</url>
+    <content><![CDATA[<h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><blockquote>
+<p>问题：<br>假设有一个模拟鸭子的游戏，游戏中拥有各种鸭子，我们设计了一个鸭子的超类，并且让各种鸭子，比如红头鸭，橡皮鸭等，继承它。<br>现在，我们需要更新这个游戏，使得鸭子可以飞起来，该怎么做？</p>
+</blockquote>
+<h2 id="使用继承？"><a href="#使用继承？" class="headerlink" title="使用继承？"></a>使用继承？</h2><p>如果依然使用继承，在超类中添加一个fly()方法，会出现不适合该行为的子类也具有该行为的问题，比如橡皮鸭就不会飞，但继承的做法使得它也可以飞起来。<br><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200902-01.png" srcset="/img/loading.gif" alt=""></p>
+<p>如果选择覆盖<code>fly()</code>方法，那么在后续的更新中，我们需要不断地检查可能需要覆盖的<code>fly()</code>方法。<br>所以使用继承来提供行为，会造成代码在多个子类最终重复，复用性差，难以知道鸭子的全部行为，运行时的行为不容易改变等问题。</p>
+<h2 id="使用接口？"><a href="#使用接口？" class="headerlink" title="使用接口？"></a>使用接口？</h2><p>如果抽象出一个<code>Flyable</code>接口，只有会飞的鸭子才实现这个接口呢？<br>设想一下，如果我们有上百种会飞的鸭子，那么就会造成大量的代码重复，每个子类中都要实现一次<code>fly()</code>方法，而且代码无法复用，如果我们需要修改这个方法，想象一下，这简直就是一场灾难。</p>
+<h2 id="策略模式实现"><a href="#策略模式实现" class="headerlink" title="策略模式实现"></a>策略模式实现</h2><p>软件开发过程中总是伴随着变更。<br><strong>设计原则</strong></p>
+<blockquote>
+<p>找出应用中可能需要变化之处，把它们独立出来，不要和那些不需要变化的代码放在一起。<br>也就是说我们把会变化的部分取出并封装起来，以便以后的改动和扩充。</p>
+</blockquote>
+<h3 id="分离变化与不变的部分"><a href="#分离变化与不变的部分" class="headerlink" title="分离变化与不变的部分"></a>分离变化与不变的部分</h3><p>在鸭子类中，我们可以发现<code>fly()</code>和<code>quack()</code>两个方法经常需要修改，那么我们就可以建立两组远离<code>Duck</code>类的类，一个与<code>fly</code>相关，一个与<code>quack</code>相关，每一组类实现各自的动作，比如让一个类实现“呱呱叫”，一个类实现“吱吱叫”，还有一个类实现“安静”</p>
+<h3 id="设计行为"><a href="#设计行为" class="headerlink" title="设计行为"></a>设计行为</h3><p><strong>设计原则</strong></p>
+<blockquote>
+<p>针对接口编程，而不是针对实现编程<br>用接口代表每个行为，鸭子类不会实现<code>Flying</code>的接口，而是制造一组专门的类来实现<code>FlyBahavior</code></p>
+</blockquote>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre></div>
+<h3 id="实现行为"><a href="#实现行为" class="headerlink" title="实现行为"></a>实现行为</h3><p>现在有一个<code>FlyBehavior</code>接口，还有对应的类，负责实现具体的行为。</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200902-02.png" srcset="/img/loading.gif" alt=""></p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyWithWings</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">"I'm flying."</span>);
+    &#125;
+&#125;</code></pre></div>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyNoWay</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">"I can't fly"</span>);
+    &#125;
+&#125;</code></pre></div>
+<h3 id="整合行为"><a href="#整合行为" class="headerlink" title="整合行为"></a>整合行为</h3><p>鸭子将飞行的动作<strong>委托</strong>给别人处理，而不是在鸭子类内部定义飞行方法。<br>在鸭子类中加入实例变量<code>flyBahavior</code>，声明为接口类型。</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Duck</span> </span>&#123;
+    FlyBehavior flyBehavior;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">performFly</span><span class="hljs-params">()</span> </span>&#123;
+        flyBehavior.fly();
+    &#125;
+&#125;</code></pre></div>
+<p>每个鸭子对象都会动态的设置这些变量以在运行时引用正确的类型。</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MallardDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MallardDuck</span><span class="hljs-params">()</span> </span>&#123;
+        flyBehavior = <span class="hljs-keyword">new</span> FlyWithWings(); <span class="hljs-comment">// 使用FlyWithWings作为FlyBehavior类型</span>
+    &#125;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">"I'm a real Mallard duck."</span>);
+    &#125;
+&#125;</code></pre></div>
+<p>测试</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        Duck mallard = <span class="hljs-keyword">new</span> MallardDuck();
+        mallard.performFly();
+    &#125;
+&#125;
+<span class="hljs-comment">// Output: I'm flying.</span></code></pre></div>
+<h3 id="动态设定行为"><a href="#动态设定行为" class="headerlink" title="动态设定行为"></a>动态设定行为</h3><p>如果想要在运行时改变鸭子的行为，只需要调用鸭子的<code>setter</code>方法就可以了。<br>我们在鸭子类中增加设定方法</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setFlyBehavior</span><span class="hljs-params">(FlyBehavior fb)</span> </span>&#123;
+        flyBehavior = fb;
+&#125;</code></pre></div>
+<p>创造一个新的类模型鸭</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModelDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ModelDuck</span><span class="hljs-params">()</span> </span>&#123;
+        flyBehavior = <span class="hljs-keyword">new</span> FlyNoWay();
+    &#125;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">"I'm a model duck."</span>);
+    &#125;
+&#125;</code></pre></div>
+<p>建立一个新的<code>FlyBehavior</code>类型</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyRocketPowered</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">"I'm flying with a rocket."</span>);
+    &#125;
+&#125;</code></pre></div>
+<p>测试<br>调用<code>setter</code>方法，改变了模型鸭的飞行行为</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        Duck model = <span class="hljs-keyword">new</span> ModelDuck();
+        model.performFly();;
+        model.setFlyBehavior(<span class="hljs-keyword">new</span> FlyRocketPowered());
+        model.performFly();
+    &#125;
+&#125;
+<span class="hljs-comment">/* Output:
+I can't fly;
+I'm flying with a rocket.
+*/</span></code></pre></div>
+<p>每一个鸭子都<strong>有一个(HAS-A)</strong><code>FlyBahavior</code>，将飞行委托给它处理。<br><strong>设计原则</strong></p>
+<blockquote>
+<p>多用组合，少用继承<br>使用组合建立系统具有很大的弹性，可以将算法族封装成类，还可以在运行时动态地改变行为。</p>
+</blockquote>
+<h2 id="策略模式小结"><a href="#策略模式小结" class="headerlink" title="策略模式小结"></a>策略模式小结</h2><h3 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h3><p>定义一系列算法，把它们一个个<strong>封装</strong>起来，并且使它们可以相互替换。使得算法可以<strong>独立</strong>于它的客户变化。</p>
+<h3 id="适用"><a href="#适用" class="headerlink" title="适用"></a>适用</h3><ol>
+<li>许多相关的类仅仅只是行为有差别，比如鸭子类中的飞行</li>
+<li>需要使用一个算法的不同变体</li>
+<li>算法使用客户不应该知道的数据</li>
+<li>一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现（switch或if）</li>
+</ol>
+<h3 id="结构与参与者"><a href="#结构与参与者" class="headerlink" title="结构与参与者"></a>结构与参与者</h3><p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200902-04.png" srcset="/img/loading.gif" alt=""></p>
+<p><strong>Strategy</strong> (策略)<br>定义所有支持的算法的公共接口，Context使用这个接口来调用ConcreteStrategy定义的算法，比如<code>FlyBehavior</code>就是一个策略<br><strong>ConcreteStrategy</strong>(具体策略)<br>以Strategy接口实现某具体的算法，比如<code>FlyWithWings</code>,<code>FlyNoWay</code>等<br><strong>Context</strong> (上下文)</p>
+<ul>
+<li>用一个ConcreteStrategy对象来配置</li>
+<li>维护一个对Strategy对象的引用</li>
+<li>可定义一个接口让Strategy来访问它的数据<br>比如<code>Duck</code>类</li>
+</ul>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ol>
+<li><strong>相关算法系列</strong> Strategy类层次为Context定义了一系列可供复用的算法或行为</li>
+<li><strong>替代继承的方法</strong> 使用继承可以直接生成一个Context的子类，给它不同的行为，但这样会使得Context难以理解，维护和扩展，不能动态改变算法。而将算法封装在独立的Strategy类中使得我们可以独立于Context改变它，易于理解，修改和扩展。</li>
+<li><strong>消除可一些条件语句</strong> 含有许多条件语句的代码通常需要使用策略模式</li>
+<li><strong>实现的选择</strong> 策略模式可以提供相同行为的不同实现供客户选择</li>
+</ol>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ol>
+<li><strong>客户必须了解不同的策略</strong> 需要向客户暴露具体问题，所以只有当不同行为的变体与客户有关时，才使用策略模式</li>
+<li><strong>Strategy和Context之间的通信开销</strong></li>
+<li>增加了对象的数目</li>
+</ol>
+]]></content>
+      <categories>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>策略模式</tag>
       </tags>
   </entry>
 </search>
