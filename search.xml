@@ -1,66 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo个人博客绑定域名和配置SSL证书</title>
-    <url>/posts/2cd2c226.html</url>
-    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
-<a id="more"></a>
-<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
-<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
-<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
-<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/domainname1.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
-<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>主机记录</th>
-<th>记录类型</th>
-<th>线路类型</th>
-<th>记录值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>www</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-<tr>
-<td>@</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
-<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
-<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/2020-04-09domainname2.png" srcset="/img/loading.gif" alt=""></p>
-<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
-<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
-<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
-<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
-<hr>
-<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
-<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
-<p><a href="https://cloud.tencent.com/document/product/400/35244" target="_blank" rel="noopener">腾讯云Nginx服务器证书安装</a></p>
-<p><a href="https://www.jianshu.com/p/026d67cc6cb1" target="_blank" rel="noopener">Mac下nginx的使用</a></p>
-<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
-<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
-<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo-Permalink简化</title>
     <url>/posts/838443af.html</url>
     <content><![CDATA[<h1 id="Permalink简化"><a href="#Permalink简化" class="headerlink" title="Permalink简化"></a>Permalink简化</h1><p>在文档名有中文的时候，因为汉字会被转义，默认的永久链接会非常复杂，具体原因可以看这一篇文章</p>
@@ -195,89 +135,63 @@ hexo s --debug // 在命令行生成debug信息</code></pre></div>
       </tags>
   </entry>
   <entry>
-    <title>Java 接口</title>
-    <url>/posts/d993c7e9.html</url>
-    <content><![CDATA[<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p><strong>接口</strong>(<em>interface</em>)用来描述类应该做什么，而不指定它们具体该如何做。一个类可以<strong>实现</strong>(<em>implement</em>)一个或多个接口。</p>
-<h2 id="1-接口的概念"><a href="#1-接口的概念" class="headerlink" title="1. 接口的概念"></a>1. 接口的概念</h2><p>接口不是类，而是对希望符合这个接口的类的一组<strong>需求</strong></p>
-<p><strong>Tip</strong></p>
-<ul>
-<li>接口中的所有方法都自动是<code>public</code>，因此在接口中声明方法时，不必提供关键字<code>public</code></li>
-<li>接口绝不会有实例字段</li>
-</ul>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> <span class="hljs-title">implement</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">Employee</span>&gt; </span>&#123;
-    <span class="hljs-comment">// blablabla</span>
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(Employee other)</span> </span>&#123;
-        <span class="hljs-keyword">return</span> Integer.compare(salary, other.salary);
-    &#125;
-&#125;</code></pre></div>
-<h2 id="2-接口的属性"><a href="#2-接口的属性" class="headerlink" title="2. 接口的属性"></a>2. 接口的属性</h2><p>接口不是类，不能够使用<code>new</code>实例化一个接口，但是可以声明接口的变量，接口变量必须引用实现这个接口的类对象</p>
-<div class="hljs"><pre><code class="hljs java">Comparable x = <span class="hljs-keyword">new</span> Employee(. . .);</code></pre></div>
-<p><strong>Tip</strong><br>为什么需要接口，而不是直接使用抽象类？<br>因为Java不支持多继承，所以每个类只能扩展一个类。<br>而接口提供了多继承的好处，而避免了多重继承的复杂性和低效性。</p>
-<h2 id="3-接口与回调"><a href="#3-接口与回调" class="headerlink" title="3. 接口与回调"></a>3. 接口与回调</h2><p><strong>回调</strong>(<em>callback</em>)是一种常见的程序设计模式。在这种模式中，可以指定某个特定事件发生时应该采取的动作。比如我们设计了一个时钟，可以请求每秒更新一次，以便更新时钟的表盘。</p>
-<p>下面是一个定时器和动作监听的具体使用的例子，定时器启动之后，程序将弹出一个消息对话框，并等待用户点击OK来终止程序的运行，在程序等待用户操作的同时，每隔1秒显示一次当前时间</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.awt.*;
-<span class="hljs-keyword">import</span> java.awt.event.*;
-<span class="hljs-keyword">import</span> java.time.*;
-<span class="hljs-keyword">import</span> javax.swing.*;
-
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimerTest</span>
-</span>&#123;  
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span>
-   </span>&#123;  
-      TimePrinter listener = <span class="hljs-keyword">new</span> TimePrinter();
-
-      <span class="hljs-comment">// construct a timer that calls the listener</span>
-      <span class="hljs-comment">// once every second</span>
-      Timer timer = <span class="hljs-keyword">new</span> Timer(<span class="hljs-number">1000</span>, listener);
-      timer.start();
-
-      <span class="hljs-comment">// keep program running until the user selects "OK"</span>
-      JOptionPane.showMessageDialog(<span class="hljs-keyword">null</span>, <span class="hljs-string">"Quit program?"</span>);
-      System.exit(<span class="hljs-number">0</span>);
-   &#125;
-&#125;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimePrinter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ActionListener</span>
-</span>&#123;  
-   <span class="hljs-meta">@Override</span>
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">actionPerformed</span><span class="hljs-params">(ActionEvent event)</span>
-   </span>&#123;  
-      System.out.println(<span class="hljs-string">"At the tone, the time is "</span> 
-         + Instant.ofEpochMilli(event.getWhen()));
-      Toolkit.getDefaultToolkit().beep();
-   &#125;
-&#125;</code></pre></div>
-<h2 id="4-Comparator接口"><a href="#4-Comparator接口" class="headerlink" title="4. Comparator接口"></a>4. Comparator接口</h2><p>如果我们想要对字符串数组进行排序，可以直接使用<code>String.compareTo</code>方法按字典顺序比较字符串。<br>如果我们希望按照字符串长度来进行比较，可以自己实现一个<strong>比较器</strong>(<em>comparator</em>)，如下面的例子中，将比较器作为参数传入<code>Arrays.sort</code>方法中。</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Arrays;
-<span class="hljs-keyword">import</span> java.util.Comparator;
-
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthCompare</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        String[] friends = &#123;<span class="hljs-string">"Adam"</span>, <span class="hljs-string">"Ben"</span>, <span class="hljs-string">"Peter"</span>, <span class="hljs-string">"Noah"</span>&#125;;
-        Arrays.sort(friends, <span class="hljs-keyword">new</span> LengthComparator());
-        System.out.println(Arrays.toString(friends));
-    &#125;
-&#125;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthComparator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparator</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;
-
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(String o1, String o2)</span> </span>&#123;
-        <span class="hljs-keyword">return</span> o1.length() - o2.length();
-    &#125;
-&#125;</code></pre></div>
-<p>参考：</p>
-<ol>
-<li>《Java核心技术 卷I》</li>
-</ol>
+    <title>Hexo个人博客绑定域名和配置SSL证书</title>
+    <url>/posts/2cd2c226.html</url>
+    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
+<a id="more"></a>
+<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
+<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
+<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
+<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/domainname1.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
+<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>主机记录</th>
+<th>记录类型</th>
+<th>线路类型</th>
+<th>记录值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>www</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+<tr>
+<td>@</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
+<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
+<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/2020-04-09domainname2.png" srcset="/img/loading.gif" alt=""></p>
+<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
+<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
+<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
+<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
+<hr>
+<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
+<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
+<p><a href="https://cloud.tencent.com/document/product/400/35244" target="_blank" rel="noopener">腾讯云Nginx服务器证书安装</a></p>
+<p><a href="https://www.jianshu.com/p/026d67cc6cb1" target="_blank" rel="noopener">Mac下nginx的使用</a></p>
+<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
+<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
+<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
 ]]></content>
       <categories>
-        <category>Java</category>
-        <category>面向对象</category>
+        <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Java</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -374,6 +288,92 @@ hexo g -d</code></pre></div>
       </categories>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java 接口</title>
+    <url>/posts/d993c7e9.html</url>
+    <content><![CDATA[<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p><strong>接口</strong>(<em>interface</em>)用来描述类应该做什么，而不指定它们具体该如何做。一个类可以<strong>实现</strong>(<em>implement</em>)一个或多个接口。</p>
+<h2 id="1-接口的概念"><a href="#1-接口的概念" class="headerlink" title="1. 接口的概念"></a>1. 接口的概念</h2><p>接口不是类，而是对希望符合这个接口的类的一组<strong>需求</strong></p>
+<p><strong>Tip</strong></p>
+<ul>
+<li>接口中的所有方法都自动是<code>public</code>，因此在接口中声明方法时，不必提供关键字<code>public</code></li>
+<li>接口绝不会有实例字段</li>
+</ul>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> <span class="hljs-title">implement</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">Employee</span>&gt; </span>&#123;
+    <span class="hljs-comment">// blablabla</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(Employee other)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> Integer.compare(salary, other.salary);
+    &#125;
+&#125;</code></pre></div>
+<h2 id="2-接口的属性"><a href="#2-接口的属性" class="headerlink" title="2. 接口的属性"></a>2. 接口的属性</h2><p>接口不是类，不能够使用<code>new</code>实例化一个接口，但是可以声明接口的变量，接口变量必须引用实现这个接口的类对象</p>
+<div class="hljs"><pre><code class="hljs java">Comparable x = <span class="hljs-keyword">new</span> Employee(. . .);</code></pre></div>
+<p><strong>Tip</strong><br>为什么需要接口，而不是直接使用抽象类？<br>因为Java不支持多继承，所以每个类只能扩展一个类。<br>而接口提供了多继承的好处，而避免了多重继承的复杂性和低效性。</p>
+<h2 id="3-接口与回调"><a href="#3-接口与回调" class="headerlink" title="3. 接口与回调"></a>3. 接口与回调</h2><p><strong>回调</strong>(<em>callback</em>)是一种常见的程序设计模式。在这种模式中，可以指定某个特定事件发生时应该采取的动作。比如我们设计了一个时钟，可以请求每秒更新一次，以便更新时钟的表盘。</p>
+<p>下面是一个定时器和动作监听的具体使用的例子，定时器启动之后，程序将弹出一个消息对话框，并等待用户点击OK来终止程序的运行，在程序等待用户操作的同时，每隔1秒显示一次当前时间</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.awt.*;
+<span class="hljs-keyword">import</span> java.awt.event.*;
+<span class="hljs-keyword">import</span> java.time.*;
+<span class="hljs-keyword">import</span> javax.swing.*;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimerTest</span>
+</span>&#123;  
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span>
+   </span>&#123;  
+      TimePrinter listener = <span class="hljs-keyword">new</span> TimePrinter();
+
+      <span class="hljs-comment">// construct a timer that calls the listener</span>
+      <span class="hljs-comment">// once every second</span>
+      Timer timer = <span class="hljs-keyword">new</span> Timer(<span class="hljs-number">1000</span>, listener);
+      timer.start();
+
+      <span class="hljs-comment">// keep program running until the user selects "OK"</span>
+      JOptionPane.showMessageDialog(<span class="hljs-keyword">null</span>, <span class="hljs-string">"Quit program?"</span>);
+      System.exit(<span class="hljs-number">0</span>);
+   &#125;
+&#125;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimePrinter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ActionListener</span>
+</span>&#123;  
+   <span class="hljs-meta">@Override</span>
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">actionPerformed</span><span class="hljs-params">(ActionEvent event)</span>
+   </span>&#123;  
+      System.out.println(<span class="hljs-string">"At the tone, the time is "</span> 
+         + Instant.ofEpochMilli(event.getWhen()));
+      Toolkit.getDefaultToolkit().beep();
+   &#125;
+&#125;</code></pre></div>
+<h2 id="4-Comparator接口"><a href="#4-Comparator接口" class="headerlink" title="4. Comparator接口"></a>4. Comparator接口</h2><p>如果我们想要对字符串数组进行排序，可以直接使用<code>String.compareTo</code>方法按字典顺序比较字符串。<br>如果我们希望按照字符串长度来进行比较，可以自己实现一个<strong>比较器</strong>(<em>comparator</em>)，如下面的例子中，将比较器作为参数传入<code>Arrays.sort</code>方法中。</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Comparator;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthCompare</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        String[] friends = &#123;<span class="hljs-string">"Adam"</span>, <span class="hljs-string">"Ben"</span>, <span class="hljs-string">"Peter"</span>, <span class="hljs-string">"Noah"</span>&#125;;
+        Arrays.sort(friends, <span class="hljs-keyword">new</span> LengthComparator());
+        System.out.println(Arrays.toString(friends));
+    &#125;
+&#125;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthComparator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparator</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(String o1, String o2)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> o1.length() - o2.length();
+    &#125;
+&#125;</code></pre></div>
+<p>参考：</p>
+<ol>
+<li>《Java核心技术 卷I》</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>面向对象</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -878,99 +878,6 @@ npm -v</code></pre></div>
       </tags>
   </entry>
   <entry>
-    <title>C++变量和基本类型</title>
-    <url>/posts/96db5496.html</url>
-    <content><![CDATA[<h3 id="变量和基本类型"><a href="#变量和基本类型" class="headerlink" title="变量和基本类型"></a>变量和基本类型</h3><h4 id="1-复合类型-Compound-type"><a href="#1-复合类型-Compound-type" class="headerlink" title="1. 复合类型(Compound type)"></a>1. 复合类型(Compound type)</h4><p>基于其它类型定义的类型</p>
-<h5 id="1-1-引用-Reference"><a href="#1-1-引用-Reference" class="headerlink" title="1.1 引用(Reference)"></a>1.1 引用(Reference)</h5><p><strong>引用</strong>为对象起了另外一个名字，引用类型引用另外一种类型。通过将声明符写成&amp;d的形式来定义引用类型，其中d是声明的变量名。</p>
-<a id="more"></a>
-<p>(在这里，引用指的是左值引用)</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">1024</span>;
-<span class="hljs-keyword">int</span> &amp;refval = ival; <span class="hljs-comment">// refval指向ival，是ival的另外一个名字</span>
-<span class="hljs-keyword">int</span> &amp;refVal2; <span class="hljs-comment">// 报错；引用必须被初始化</span></code></pre></div>
-<p>定义引用时，程序把引用和它的初始值<strong>绑定</strong>在一起，而不是将初始值拷贝给引用。（与初始化变量时不同的）</p>
-<p>无法令引用重新绑定到另一个对象，所以引用必须被<font color=red><strong>初始化</strong> </font></p>
-<ul>
-<li>引用即别名，它不是对象，而是为了一个已经存在的对象起了另外一个名字</li>
-</ul>
-<p>定义了一个引用之后，对其进行的所有操作都是在与之绑定的对象上进行的</p>
-<div class="hljs"><pre><code class="hljs cpp">refVal = <span class="hljs-number">2</span>;  <span class="hljs-comment">// 把2赋值给与refVal绑定的对象上，这里就是绑定到iVal上</span>
-<span class="hljs-keyword">int</span> ii = refVal;</code></pre></div>
-<p> 除了两种特殊情况，其它所有引用的类型都要与之绑定的对象严格匹配。不能够与字面值或表达式的计算结果绑定。</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> &amp;refVal4 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误：引用对象初始值必须是一个对象</span>
-<span class="hljs-keyword">double</span> dval = <span class="hljs-number">3.14</span>;
-<span class="hljs-keyword">int</span> &amp;refVal5 = dval; <span class="hljs-comment">// 错误：此处引用类型的初始值必须是int型对象</span></code></pre></div>
-<h5 id="1-2-指针"><a href="#1-2-指针" class="headerlink" title="1.2 指针"></a>1.2 指针</h5><p><strong>指针</strong>是指向另外一种类型的符合类型，与引用类似，指针实现了对其它对象的间接访问。</p>
-<p>不同：</p>
-<ul>
-<li>指针本身是一个对象</li>
-<li>指针无需在定义时赋初值</li>
-</ul>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *ip1; <span class="hljs-comment">// ip1是指向int对象的指针</span></code></pre></div>
-<h6 id="获取对象的地址"><a href="#获取对象的地址" class="headerlink" title="获取对象的地址"></a>获取对象的地址</h6><p>指针存放某个对象的地址。</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
-<span class="hljs-keyword">int</span> *p = &amp;ival; <span class="hljs-comment">// p是存放变量ival的地址，或者说p是指向引用的指针。</span></code></pre></div>
-<h6 id="指针值"><a href="#指针值" class="headerlink" title="指针值"></a>指针值</h6><p>指针的值（即地址）应该属于下列4中状态之一：</p>
-<ul>
-<li>指向一个对象</li>
-<li>指向紧邻对象所占空间的下一个位置</li>
-<li>空指针</li>
-<li>无效指针</li>
-</ul>
-<h6 id="利用指针访问对象"><a href="#利用指针访问对象" class="headerlink" title="利用指针访问对象"></a>利用指针访问对象</h6><p>如果指针指向了一个对象，可以使用<strong>解引用符</strong>（操作符*）来访问对象</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
-<span class="hljs-keyword">int</span> *p = &amp;ival;
-<span class="hljs-built_in">cout</span> &lt;&lt; *p <span class="hljs-comment">// 输出42</span>
-*p = <span class="hljs-number">0</span>;
-<span class="hljs-built_in">cout</span> &lt;&lt; *p <span class="hljs-comment">// 输出0，为*p赋值实际上是为p所指的对象赋值</span></code></pre></div>
-<h6 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h6><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *p1 = <span class="hljs-literal">nullptr</span>;
-<span class="hljs-keyword">int</span> *p2 = <span class="hljs-number">0</span>;
-<span class="hljs-keyword">int</span> *p3 = <span class="hljs-literal">NULL</span>; <span class="hljs-comment">// 需要头文件cstdlib</span></code></pre></div>
-<h6 id="void-指针"><a href="#void-指针" class="headerlink" title="void*指针"></a>void*指针</h6><p>用于存放任意对象的地址，不能直接操作void*指针所指的对象</p>
-<h6 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h6><h6 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h6><p>指针是对象，所以存在对指针的引用</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>;
-<span class="hljs-keyword">int</span> *p;
-<span class="hljs-keyword">int</span> *&amp;r = p;  <span class="hljs-comment">// r是一个对p的引用</span>
-r = &amp;i;  <span class="hljs-comment">// r引用了一个指针，因此给r赋值&amp;就是令p指向i</span>
-*r = <span class="hljs-number">0</span>;  <span class="hljs-comment">// 将i的值改为0</span></code></pre></div>
-<h4 id="2-const限定符"><a href="#2-const限定符" class="headerlink" title="2. const限定符"></a>2. const限定符</h4><p>值不能被改变，所以const对象必须被初始化</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> bufSize = <span class="hljs-number">512</span>; <span class="hljs-comment">// 输入缓冲区大小</span></code></pre></div>
-<p>如果要在多个文件之间共享const，必须在变量定义前加extern关键字</p>
-<h5 id="2-1-对const的引用"><a href="#2-1-对const的引用" class="headerlink" title="2.1 对const的引用"></a>2.1 对const的引用</h5><p>对常量的引用，不能够修改其绑定的对象</p>
-<p>对const的引用可以使一个并非const的对象，但是不能通过其改变值</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ci = <span class="hljs-number">1024</span>;
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r1 = ci; <span class="hljs-comment">// 正确</span>
-
-r1 = <span class="hljs-number">42</span>; <span class="hljs-comment">// 错误：r1是对常量的引用</span>
-<span class="hljs-keyword">int</span> &amp;r2 = ci; <span class="hljs-comment">// 错误：非常量引用指向一个常量对象</span>
-
-<span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>；
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r1 = i; <span class="hljs-comment">// 允许将const int&amp;绑定到一个普通的int上</span>
-r1 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误</span></code></pre></div>
-<h4 id="3-处理类型"><a href="#3-处理类型" class="headerlink" title="3. 处理类型"></a>3. 处理类型</h4><h5 id="3-1-类型别名"><a href="#3-1-类型别名" class="headerlink" title="3.1 类型别名"></a>3.1 类型别名</h5><p>某种类型的同义词，使得复杂的类型名字变得简单，易于理解和使用。</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">double</span> wages; <span class="hljs-comment">// wages是double的同义词</span>
-<span class="hljs-keyword">using</span> SI = Sales_item; <span class="hljs-comment">// SI是Sales_item的同义词</span></code></pre></div>
-<h5 id="3-2-auto类型说明符"><a href="#3-2-auto类型说明符" class="headerlink" title="3.2 auto类型说明符"></a>3.2 auto类型说明符</h5><p>让编译器分析表达式所属的类型，必须有初始值</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> item = val1 + val2; <span class="hljs-comment">// 由val1和val2相加的结果推断item的类型</span>
-<span class="hljs-comment">// auto一条声明语句只能有一个基础数据类型</span>
-<span class="hljs-keyword">auto</span> i = <span class="hljs-number">0</span>, *p = &amp;i;  <span class="hljs-comment">// 正确</span>
-<span class="hljs-keyword">auto</span> sz = <span class="hljs-number">0</span>, pi = <span class="hljs-number">3.14</span>; <span class="hljs-comment">// 错误，sz和pi的类型不一致</span></code></pre></div>
-<h4 id="4-自定义数据结构"><a href="#4-自定义数据结构" class="headerlink" title="4. 自定义数据结构"></a>4. 自定义数据结构</h4><p>将一组相关的数据元素组织起来然后使用他们的策略和方法</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Sales_data</span> &#123;</span>
-  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> bookNo;
-  <span class="hljs-keyword">unsigned</span> units_sold = <span class="hljs-number">0</span>;
-  <span class="hljs-keyword">double</span> revenue = <span class="hljs-number">0</span>;
-&#125;
-
-Sales_data accum;</code></pre></div>
-]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C++字符串,向量和数组</title>
     <url>/posts/869e4b19.html</url>
     <content><![CDATA[<h3 id="二、字符串，向量和数组"><a href="#二、字符串，向量和数组" class="headerlink" title="二、字符串，向量和数组"></a>二、字符串，向量和数组</h3><p>作用域操作符<code>::</code></p>
@@ -1116,6 +1023,99 @@ p++; <span class="hljs-comment">// 指向第一个元素</span></code></pre></di
 <h3 id="（2）存放于字符数组中，以’-0’结尾"><a href="#（2）存放于字符数组中，以’-0’结尾" class="headerlink" title="（2）存放于字符数组中，以’\0’结尾"></a>（2）存放于字符数组中，以’\0’结尾</h3><p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p>
 <p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p>
 <h3 id="（3）string对象。"><a href="#（3）string对象。" class="headerlink" title="（3）string对象。"></a>（3）string对象。</h3><p>string是C++标准模板库里的一个类，专门用于处理字符串</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++变量和基本类型</title>
+    <url>/posts/96db5496.html</url>
+    <content><![CDATA[<h3 id="变量和基本类型"><a href="#变量和基本类型" class="headerlink" title="变量和基本类型"></a>变量和基本类型</h3><h4 id="1-复合类型-Compound-type"><a href="#1-复合类型-Compound-type" class="headerlink" title="1. 复合类型(Compound type)"></a>1. 复合类型(Compound type)</h4><p>基于其它类型定义的类型</p>
+<h5 id="1-1-引用-Reference"><a href="#1-1-引用-Reference" class="headerlink" title="1.1 引用(Reference)"></a>1.1 引用(Reference)</h5><p><strong>引用</strong>为对象起了另外一个名字，引用类型引用另外一种类型。通过将声明符写成&amp;d的形式来定义引用类型，其中d是声明的变量名。</p>
+<a id="more"></a>
+<p>(在这里，引用指的是左值引用)</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">1024</span>;
+<span class="hljs-keyword">int</span> &amp;refval = ival; <span class="hljs-comment">// refval指向ival，是ival的另外一个名字</span>
+<span class="hljs-keyword">int</span> &amp;refVal2; <span class="hljs-comment">// 报错；引用必须被初始化</span></code></pre></div>
+<p>定义引用时，程序把引用和它的初始值<strong>绑定</strong>在一起，而不是将初始值拷贝给引用。（与初始化变量时不同的）</p>
+<p>无法令引用重新绑定到另一个对象，所以引用必须被<font color=red><strong>初始化</strong> </font></p>
+<ul>
+<li>引用即别名，它不是对象，而是为了一个已经存在的对象起了另外一个名字</li>
+</ul>
+<p>定义了一个引用之后，对其进行的所有操作都是在与之绑定的对象上进行的</p>
+<div class="hljs"><pre><code class="hljs cpp">refVal = <span class="hljs-number">2</span>;  <span class="hljs-comment">// 把2赋值给与refVal绑定的对象上，这里就是绑定到iVal上</span>
+<span class="hljs-keyword">int</span> ii = refVal;</code></pre></div>
+<p> 除了两种特殊情况，其它所有引用的类型都要与之绑定的对象严格匹配。不能够与字面值或表达式的计算结果绑定。</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> &amp;refVal4 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误：引用对象初始值必须是一个对象</span>
+<span class="hljs-keyword">double</span> dval = <span class="hljs-number">3.14</span>;
+<span class="hljs-keyword">int</span> &amp;refVal5 = dval; <span class="hljs-comment">// 错误：此处引用类型的初始值必须是int型对象</span></code></pre></div>
+<h5 id="1-2-指针"><a href="#1-2-指针" class="headerlink" title="1.2 指针"></a>1.2 指针</h5><p><strong>指针</strong>是指向另外一种类型的符合类型，与引用类似，指针实现了对其它对象的间接访问。</p>
+<p>不同：</p>
+<ul>
+<li>指针本身是一个对象</li>
+<li>指针无需在定义时赋初值</li>
+</ul>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *ip1; <span class="hljs-comment">// ip1是指向int对象的指针</span></code></pre></div>
+<h6 id="获取对象的地址"><a href="#获取对象的地址" class="headerlink" title="获取对象的地址"></a>获取对象的地址</h6><p>指针存放某个对象的地址。</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
+<span class="hljs-keyword">int</span> *p = &amp;ival; <span class="hljs-comment">// p是存放变量ival的地址，或者说p是指向引用的指针。</span></code></pre></div>
+<h6 id="指针值"><a href="#指针值" class="headerlink" title="指针值"></a>指针值</h6><p>指针的值（即地址）应该属于下列4中状态之一：</p>
+<ul>
+<li>指向一个对象</li>
+<li>指向紧邻对象所占空间的下一个位置</li>
+<li>空指针</li>
+<li>无效指针</li>
+</ul>
+<h6 id="利用指针访问对象"><a href="#利用指针访问对象" class="headerlink" title="利用指针访问对象"></a>利用指针访问对象</h6><p>如果指针指向了一个对象，可以使用<strong>解引用符</strong>（操作符*）来访问对象</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
+<span class="hljs-keyword">int</span> *p = &amp;ival;
+<span class="hljs-built_in">cout</span> &lt;&lt; *p <span class="hljs-comment">// 输出42</span>
+*p = <span class="hljs-number">0</span>;
+<span class="hljs-built_in">cout</span> &lt;&lt; *p <span class="hljs-comment">// 输出0，为*p赋值实际上是为p所指的对象赋值</span></code></pre></div>
+<h6 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h6><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *p1 = <span class="hljs-literal">nullptr</span>;
+<span class="hljs-keyword">int</span> *p2 = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">int</span> *p3 = <span class="hljs-literal">NULL</span>; <span class="hljs-comment">// 需要头文件cstdlib</span></code></pre></div>
+<h6 id="void-指针"><a href="#void-指针" class="headerlink" title="void*指针"></a>void*指针</h6><p>用于存放任意对象的地址，不能直接操作void*指针所指的对象</p>
+<h6 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h6><h6 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h6><p>指针是对象，所以存在对指针的引用</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>;
+<span class="hljs-keyword">int</span> *p;
+<span class="hljs-keyword">int</span> *&amp;r = p;  <span class="hljs-comment">// r是一个对p的引用</span>
+r = &amp;i;  <span class="hljs-comment">// r引用了一个指针，因此给r赋值&amp;就是令p指向i</span>
+*r = <span class="hljs-number">0</span>;  <span class="hljs-comment">// 将i的值改为0</span></code></pre></div>
+<h4 id="2-const限定符"><a href="#2-const限定符" class="headerlink" title="2. const限定符"></a>2. const限定符</h4><p>值不能被改变，所以const对象必须被初始化</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> bufSize = <span class="hljs-number">512</span>; <span class="hljs-comment">// 输入缓冲区大小</span></code></pre></div>
+<p>如果要在多个文件之间共享const，必须在变量定义前加extern关键字</p>
+<h5 id="2-1-对const的引用"><a href="#2-1-对const的引用" class="headerlink" title="2.1 对const的引用"></a>2.1 对const的引用</h5><p>对常量的引用，不能够修改其绑定的对象</p>
+<p>对const的引用可以使一个并非const的对象，但是不能通过其改变值</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ci = <span class="hljs-number">1024</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r1 = ci; <span class="hljs-comment">// 正确</span>
+
+r1 = <span class="hljs-number">42</span>; <span class="hljs-comment">// 错误：r1是对常量的引用</span>
+<span class="hljs-keyword">int</span> &amp;r2 = ci; <span class="hljs-comment">// 错误：非常量引用指向一个常量对象</span>
+
+<span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>；
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r1 = i; <span class="hljs-comment">// 允许将const int&amp;绑定到一个普通的int上</span>
+r1 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误</span></code></pre></div>
+<h4 id="3-处理类型"><a href="#3-处理类型" class="headerlink" title="3. 处理类型"></a>3. 处理类型</h4><h5 id="3-1-类型别名"><a href="#3-1-类型别名" class="headerlink" title="3.1 类型别名"></a>3.1 类型别名</h5><p>某种类型的同义词，使得复杂的类型名字变得简单，易于理解和使用。</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">double</span> wages; <span class="hljs-comment">// wages是double的同义词</span>
+<span class="hljs-keyword">using</span> SI = Sales_item; <span class="hljs-comment">// SI是Sales_item的同义词</span></code></pre></div>
+<h5 id="3-2-auto类型说明符"><a href="#3-2-auto类型说明符" class="headerlink" title="3.2 auto类型说明符"></a>3.2 auto类型说明符</h5><p>让编译器分析表达式所属的类型，必须有初始值</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> item = val1 + val2; <span class="hljs-comment">// 由val1和val2相加的结果推断item的类型</span>
+<span class="hljs-comment">// auto一条声明语句只能有一个基础数据类型</span>
+<span class="hljs-keyword">auto</span> i = <span class="hljs-number">0</span>, *p = &amp;i;  <span class="hljs-comment">// 正确</span>
+<span class="hljs-keyword">auto</span> sz = <span class="hljs-number">0</span>, pi = <span class="hljs-number">3.14</span>; <span class="hljs-comment">// 错误，sz和pi的类型不一致</span></code></pre></div>
+<h4 id="4-自定义数据结构"><a href="#4-自定义数据结构" class="headerlink" title="4. 自定义数据结构"></a>4. 自定义数据结构</h4><p>将一组相关的数据元素组织起来然后使用他们的策略和方法</p>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Sales_data</span> &#123;</span>
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> bookNo;
+  <span class="hljs-keyword">unsigned</span> units_sold = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">double</span> revenue = <span class="hljs-number">0</span>;
+&#125;
+
+Sales_data accum;</code></pre></div>
 ]]></content>
       <categories>
         <category>C++</category>
