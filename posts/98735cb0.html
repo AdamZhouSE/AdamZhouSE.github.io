@@ -17,7 +17,7 @@
   <meta name="description" content="Take notes and write articles about Software Engineering">
   <meta name="author" content="ZZY">
   <meta name="keywords" content="">
-  <title>Java 继承 - Blog of Adam</title>
+  <title>泛型程序设计 - Blog of Adam</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -168,8 +168,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-09-08 16:09" pubdate>
-      September 8, 2020 pm
+    <time datetime="2020-09-18 18:25" pubdate>
+      September 18, 2020 pm
     </time>
   </div>
 
@@ -179,7 +179,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      1.5k 字
     </span>
   
 
@@ -189,7 +189,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14
+      19
        分钟
     </span>
   
@@ -219,77 +219,118 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Java 继承</h1>
+            <h1 style="display: none">泛型程序设计</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>继承(inheritance)的基本思想是基于已经有的类创建新的类，复用这些类的方法。</p>
-<h2 id="一、类，超类和子类"><a href="#一、类，超类和子类" class="headerlink" title="一、类，超类和子类"></a>一、类，超类和子类</h2><p>在前面的文章中我们实现了一个<code>Employee</code>类，假设你在某个公司工作，这个公司的经理和员工的待遇不一样，普通员工在完成任务后仅领取薪水，而经理还拥有奖金。<br>这个时候，我们可以定义一个新类<code>Manager</code>，使用继承重用<code>Employee</code>中的代码，同时定义新的方法来增加奖金这一功能。</p>
-<p><strong>Tip</strong><br><code>Manager</code> <strong>is-a</strong> <code>Employee</code><br><strong>is-a</strong>关系是继承的一个明显特征</p>
-<h3 id="1-定义子类"><a href="#1-定义子类" class="headerlink" title="1. 定义子类"></a>1. 定义子类</h3><p>使用<code>extends</code>关键字来表示继承</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
-    <span class="hljs-comment">// blablabla</span>
+              <h1 id="泛型程序设计"><a href="#泛型程序设计" class="headerlink" title="泛型程序设计"></a>泛型程序设计</h1><h2 id="1-为什么要使用泛型程序设计？"><a href="#1-为什么要使用泛型程序设计？" class="headerlink" title="1. 为什么要使用泛型程序设计？"></a>1. 为什么要使用泛型程序设计？</h2><p><strong>泛型程序设计</strong>(<em>generic programming</em>)意味着编写的代码可以对多种不同类型的对象重用。能够提高代码的复用性，比如<code>ArrayList</code>就可以收集任何类的对象，比如<code>String</code>，<code>Integer</code>等，而不用为这些对象去编写不同的类。</p>
+<h3 id="1-1-类型参数"><a href="#1-1-类型参数" class="headerlink" title="1.1 类型参数"></a>1.1 类型参数</h3><p>泛型允许在定义类和接口的时候使用<strong>类型参数</strong>(<em>type parameter</em>)，声明的类型参数在使用时使用具体的类来替换，比如下面这个例子</p>
+<div class="hljs"><pre><code class="hljs java">List&lt;String&gt; files = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</code></pre></div>
+<p>可以很明显的看出数组中包含的是<code>String</code>对象，类型参数使得程序更易读，也更安全。</p>
+<h2 id="2-定义简单泛型类"><a href="#2-定义简单泛型类" class="headerlink" title="2. 定义简单泛型类"></a>2. 定义简单泛型类</h2><p><strong>泛型类</strong>(<em>generic class</em>)就是有一个或多个类型变量的类。下面定义了一个简单的泛型类<code>Pair</code></p>
+<p><code>Pair</code>类引入了一个类型变量<code>T</code>，用于指定方法的返回类型，字段和局部变量的类型</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pair</span>&lt;<span class="hljs-title">T</span>&gt; 
+</span>&#123;
+   <span class="hljs-keyword">private</span> T first;
+   <span class="hljs-keyword">private</span> T second;
+
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Pair</span><span class="hljs-params">()</span> </span>&#123; first = <span class="hljs-keyword">null</span>; second = <span class="hljs-keyword">null</span>; &#125;
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Pair</span><span class="hljs-params">(T first, T second)</span> </span>&#123; <span class="hljs-keyword">this</span>.first = first;  <span class="hljs-keyword">this</span>.second = second; &#125;
+
+   <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getFirst</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-keyword">return</span> first; &#125;
+   <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getSecond</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-keyword">return</span> second; &#125;
+
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setFirst</span><span class="hljs-params">(T newValue)</span> </span>&#123; first = newValue; &#125;
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setSecond</span><span class="hljs-params">(T newValue)</span> </span>&#123; second = newValue; &#125;
 &#125;</code></pre></div>
-<p>关键字<code>extends</code>表明正在构造的新类派生于一个已经存在的类。这个类被称为<strong>超类</strong>(<em>superclass</em>) 或<strong>父类</strong>(<em>parent class</em>)，新类称为<strong>子类</strong>(<em>subclass</em>)<br>在设计类时，应该将一般方法放在超类中，将更特殊的方法放在子类中<br>比如我们在<code>Manager</code>类中应该实现一个设置奖金金额的方法。</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> bonus;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBonus</span><span class="hljs-params">(<span class="hljs-keyword">double</span> bonus)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.bonus = bonus;
-    &#125;
+<h2 id="3-泛型方法与类型变量的限定"><a href="#3-泛型方法与类型变量的限定" class="headerlink" title="3. 泛型方法与类型变量的限定"></a>3. 泛型方法与类型变量的限定</h2><p>我们再定义了泛型类之后，就可以设计带有类型参数的方法，比如我们想要寻找数组中元素的最大最小值，就可以这样定义</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span> </span>&#123;
+	<span class="hljs-comment">// blablabla</span>
 &#125;</code></pre></div>
-<h3 id="2-覆盖方法"><a href="#2-覆盖方法" class="headerlink" title="2. 覆盖方法"></a>2. 覆盖方法</h3><p>超类中的某些方法对子类不一定适用，比如<code>Manager</code>类中的<code>getSalary</code>方法应该返回薪水和奖金的总和，所以要提供一个新的方法来<strong>覆盖</strong>(<em>override</em>)超类中的某个方法。<br>要注意的是，<code>Manager</code>类的<code>getSalary</code>方法不能够直接访问<code>salary</code>字段，因为其实<code>Employee</code>类的私有字段，所以需要使用<code>super</code>关键字</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSalary</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> baseSalary = <span class="hljs-keyword">super</span>.getSalary();
-    <span class="hljs-keyword">return</span> baseSalary + bonus;
+<p>但是这样的设计有一个问题，在方法内部对元素进行比较时，需要使用<code>compareTo</code>方法，这就要求类型<code>T</code>实现<code>Comparable</code>接口，所以需要对其进行<strong>限定</strong>(<em>bound</em>)</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&gt; <span class="hljs-function">T <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span> </span>&#123;
+  <span class="hljs-comment">// blablabla</span>
 &#125;</code></pre></div>
-<h3 id="3-子类构造器"><a href="#3-子类构造器" class="headerlink" title="3. 子类构造器"></a>3. 子类构造器</h3><div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Manager</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
-    <span class="hljs-keyword">super</span>(id, name, salary);
-    bonus = <span class="hljs-number">0</span>;
+<p>之所以使用<code>extends</code>而不是使用<code>implements</code>是因为<code>T</code>是限定类型的子类型，而继承关系更接近于这种概念，一个类型变量也可以有多个限定</p>
+<div class="hljs"><pre><code class="hljs java">T extends Comparable &amp; Serializable</code></pre></div>
+<p>下面使用我们定义的泛型类实现了一个寻找数组元素最大和最小值的方法。</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.time.*;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PairTest2</span>
+</span>&#123;
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span>
+   </span>&#123;
+      LocalDate[] birthdays = 
+         &#123; 
+            LocalDate.of(<span class="hljs-number">1906</span>, <span class="hljs-number">12</span>, <span class="hljs-number">9</span>), <span class="hljs-comment">// G. Hopper</span>
+            LocalDate.of(<span class="hljs-number">1815</span>, <span class="hljs-number">12</span>, <span class="hljs-number">10</span>), <span class="hljs-comment">// A. Lovelace</span>
+            LocalDate.of(<span class="hljs-number">1903</span>, <span class="hljs-number">12</span>, <span class="hljs-number">3</span>), <span class="hljs-comment">// J. von Neumann</span>
+            LocalDate.of(<span class="hljs-number">1910</span>, <span class="hljs-number">6</span>, <span class="hljs-number">22</span>), <span class="hljs-comment">// K. Zuse</span>
+         &#125;;
+      Pair&lt;LocalDate&gt; mm = ArrayAlg.minmax(birthdays);
+      System.out.println(<span class="hljs-string">"min = "</span> + mm.getFirst());
+      System.out.println(<span class="hljs-string">"max = "</span> + mm.getSecond());
+   &#125;
+&#125;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArrayAlg</span>
+</span>&#123;
+   <span class="hljs-comment">/**
+      Gets the minimum and maximum of an array of objects of type T.
+      <span class="hljs-doctag">@param</span> a an array of objects of type T
+      <span class="hljs-doctag">@return</span> a pair with the min and max values, or null if a is null or empty
+   */</span>
+   <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&gt; <span class="hljs-function">Pair&lt;T&gt; <span class="hljs-title">minmax</span><span class="hljs-params">(T[] a)</span> 
+   </span>&#123;
+      <span class="hljs-keyword">if</span> (a == <span class="hljs-keyword">null</span> || a.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+      T min = a[<span class="hljs-number">0</span>];
+      T max = a[<span class="hljs-number">0</span>];
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; a.length; i++)
+      &#123;
+         <span class="hljs-keyword">if</span> (min.compareTo(a[i]) &gt; <span class="hljs-number">0</span>) min = a[i];
+         <span class="hljs-keyword">if</span> (max.compareTo(a[i]) &lt; <span class="hljs-number">0</span>) max = a[i];
+      &#125;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Pair&lt;&gt;(min, max);
+   &#125;
 &#125;</code></pre></div>
-<p>语句<code>super(id, name, salary);</code>实现了对<code>Employee</code>中私有字段的调用</p>
-<h3 id="4-多态"><a href="#4-多态" class="headerlink" title="4. 多态"></a>4. 多态</h3><p>我们可以通过<code>is-a</code>来判断是否将数据设计为继承关系，它的另外一种表述是<strong>替换原则</strong>，即程序中出现超类对象的任何地方都可以使用子类对象替换。</p>
-<p>在Java中，对象变量时<strong>多态</strong>(<em>polymophic</em>)的。<br>一个<code>Employee</code>类型的变量既可以引用一个<code>Employee</code>类型的对象,也可以引用<code>Employee</code>类的任何一个子类的对象(比如<code>Manager</code>)</p>
-<div class="hljs"><pre><code class="hljs java">Employee e;
-e = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">"A"</span>, <span class="hljs-number">10000</span>);
-e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</span>, <span class="hljs-string">"B"</span>, <span class="hljs-number">20000</span>);</code></pre></div>
-<p>虽然这里的<code>e</code>引用了<code>Manager</code>类型的对象，但是编译器只将<code>e</code>看成是一个<code>Employee</code>对象，所以如下的调用是错误的。</p>
-<div class="hljs"><pre><code class="hljs java">e.setBonus(<span class="hljs-number">10000</span>); <span class="hljs-comment">// ERROR</span></code></pre></div>
-<h3 id="5-阻止继承-final类和方法"><a href="#5-阻止继承-final类和方法" class="headerlink" title="5. 阻止继承: final类和方法"></a>5. 阻止继承: final类和方法</h3><p>如果我们需要阻止某个类被继承，可以使用<code>final</code>关键字</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Father</span> </span>&#123;
-    <span class="hljs-comment">// blablabla</span>
+<h2 id="4-泛型代码和虚拟机"><a href="#4-泛型代码和虚拟机" class="headerlink" title="4. 泛型代码和虚拟机"></a>4. 泛型代码和虚拟机</h2><p>虚拟机没有泛型类型对象，所有对象都属于普通类。</p>
+<h3 id="4-1-类型擦除"><a href="#4-1-类型擦除" class="headerlink" title="4.1 类型擦除"></a>4.1 类型擦除</h3><p>无论何时定义一个泛型类型，都会自动提供一个相应的<strong>原始类型</strong>(<em>raw type</em>)，这个原始类型的名字就是去掉类型参数后的泛型类型名。同时，类型变量会被<strong>擦除</strong>(<em>erased</em>)，并替换为其限定类型。</p>
+<blockquote>
+<p>类型擦除指的是通过类型参数合并，将泛型类型实例关联到同一份字节码上。编译器只为泛型类型生成一份字节码，并将其实例关联到这份字节码上。类型擦除的关键在于从泛型类型中清除类型参数的相关信息，并且再必要的时候添加类型检查和类型转换的方法。 类型擦除可以简单的理解为将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码。 类型擦除的主要过程如下： 1.将所有的泛型参数用其最左边界（最顶级的父类型）类型替换  2.移除所有的类型参数。</p>
+</blockquote>
+<p>比如3中的例子，原始类型就会变成下面的样子</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pair</span> </span>&#123;
+  <span class="hljs-keyword">private</span> Object first;
+  <span class="hljs-keyword">private</span> Object second;
 &#125;</code></pre></div>
-<p>类中的某个特定的方法也可以声明为<code>final</code>，这样子类就不能够覆盖这个方法。</p>
-<p><strong>Tip</strong><br>为什么要将类或方法声明为<code>final</code>？<br>确保它们不会在子类中改变语义。比如<code>String</code>类是<code>final</code>类，所以一个<code>String</code>引用引用的一定是<code>String</code>对象，而不是其它。</p>
-<h3 id="6-抽象类"><a href="#6-抽象类" class="headerlink" title="6. 抽象类"></a>6. 抽象类</h3><p>在继承层次结构中，位于上层的类更具有一般性<br>比如我们加入<code>Person</code>类和<code>Student</code>类，下图是这三个类之间的继承关系</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200908-02.png" srcset="/img/loading.gif" alt=""></p>
-<p>每个人都有一些属性，比如姓名，年龄，引入一个公共的超类，就可以把<code>getName</code>方法放在继承层次结构中的更高一层，使用<code>abstract</code>关键字来定义抽象类</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;
-    <span class="hljs-keyword">private</span> String name;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Person</span> <span class="hljs-params">(String name)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.name = name;
-    &#125;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> name;
-    &#125;
+<p>由于<code>T</code>是一个无限定的变量，所以直接用<code>Object</code>替换。</p>
+<h3 id="4-2-转换泛型表达式"><a href="#4-2-转换泛型表达式" class="headerlink" title="4.2 转换泛型表达式"></a>4.2 转换泛型表达式</h3><p>调用一个泛型方法时，如果擦除了返回类型，编译器会插入强制类型转换</p>
+<div class="hljs"><pre><code class="hljs java">Pair&lt;Employee&gt; buddies = ...;
+Employee buddy = buddies.getFirst();</code></pre></div>
+<p><code>getFirst</code>方法擦除类型后的返回类型是<code>Object</code>，编译器自动插入转换到<code>Employee</code>的强制类型转换。</p>
+<h3 id="4-3-转换泛型方法"><a href="#4-3-转换泛型方法" class="headerlink" title="4.3 转换泛型方法"></a>4.3 转换泛型方法</h3><p>类型擦除还会出现在泛型方法中，比如</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&gt; <span class="hljs-function">T <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span></span></code></pre></div>
+<p>在擦除类型之后，就会变成</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Comparable <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span></span></code></pre></div>
+<h2 id="5-限制与局限性"><a href="#5-限制与局限性" class="headerlink" title="5. 限制与局限性"></a>5. 限制与局限性</h2><h3 id="5-1-泛型遇到重载"><a href="#5-1-泛型遇到重载" class="headerlink" title="5.1 泛型遇到重载"></a>5.1 泛型遇到重载</h3><div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> </span>&#123;
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span><span class="hljs-params">(List&lt;Integer&gt; list)</span> </span>&#123;
+    
+  &#125;
+  
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span><span class="hljs-params">(List&lt;String&gt; list)</span>
+&#125;</span></code></pre></div>
+<p>上述代码编译器会报错，提示两个方法冲突，因为它们被擦除之后都变为<code>List</code></p>
+<h3 id="5-2-泛型类中静态变量无效"><a href="#5-2-泛型类中静态变量无效" class="headerlink" title="5.2 泛型类中静态变量无效"></a>5.2 泛型类中静态变量无效</h3><div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> T singleInstance;
+  
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> 
 &#125;</code></pre></div>
-<p>抽象类不能够实例化，如下的表达式是错误的</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">new</span> Person(); <span class="hljs-comment">// ERROR</span></code></pre></div>
-<h2 id="二、对象包装器与自动装箱"><a href="#二、对象包装器与自动装箱" class="headerlink" title="二、对象包装器与自动装箱"></a>二、对象包装器与自动装箱</h2><p>所有的基本类型都有一个与之对应的类，这些类被称为<strong>包装器</strong>(<em>wrapper</em>)，分别是<code>Integer, Long, Float, Double, Short, Byte, Character, Boolean</code>。<br>包装器类是不可变的，一旦构造了包装器，就不允许更改包装在其中的值，同时，包装器还是<code>final</code>，不能够派生它们的子类。</p>
-<p><strong>Tip</strong><br>为什么需要包装类？<br>因为Java是一种面向对象程序设计语言，很多地方需要使用对象而不是基本类型。比如在<code>ArrayList</code>中，我们不能够写成<code>ArrayList&lt;int&gt;</code>，而要写成<code>ArrayList&lt;Integer&gt;</code>。</p>
-<h3 id="2-自动拆箱与装箱"><a href="#2-自动拆箱与装箱" class="headerlink" title="2. 自动拆箱与装箱"></a>2. 自动拆箱与装箱</h3><p>自动装箱: 就是将基本数据类型自动转换成对应的包装类。<br>自动拆箱：就是将包装类自动转换成对应的基本数据类型。</p>
-<div class="hljs"><pre><code class="hljs java">Integer n = <span class="hljs-number">3</span>; <span class="hljs-comment">// 自动装箱</span>
-<span class="hljs-keyword">int</span> m = n; <span class="hljs-comment">// 自动拆箱</span></code></pre></div>
-<h2 id="三、继承的设计技巧"><a href="#三、继承的设计技巧" class="headerlink" title="三、继承的设计技巧"></a>三、继承的设计技巧</h2><ol>
-<li>将公共操作和字段放在超类中</li>
-<li>使用继承实现<strong>is-a</strong>关系</li>
-<li>除非所有继承的方法都有意义，否则不要使用继承</li>
-<li>在覆盖方法时，不要改变预期的行为</li>
-<li>使用多态，而不要使用类型信息</li>
-</ol>
+<p>静态变量被泛型类的所有实例对象所共享。</p>
+<h3 id="5-3-不能抛出或捕获泛型类的实例"><a href="#5-3-不能抛出或捕获泛型类的实例" class="headerlink" title="5.3 不能抛出或捕获泛型类的实例"></a>5.3 不能抛出或捕获泛型类的实例</h3><p>既不能抛出也不能捕获泛型类的对象，泛型类扩展<code>Throwable</code>不合法。</p>
+<h2 id="6-泛型类的继承规则"><a href="#6-泛型类的继承规则" class="headerlink" title="6. 泛型类的继承规则"></a>6. 泛型类的继承规则</h2><p>考虑一个父类和子类，比如<code>Employee</code>和<code>Manager</code>，需要注意的是，<code>Pair&lt;Manager&gt;</code><strong>不是</strong><code>Pair&lt;Employee&gt;</code>的子类。</p>
+<p>也就是说，无论<code>S</code>和<code>T</code>又怎样的关系，<code>Pair&lt;T&gt;</code>和<code>Pair&lt;S&gt;</code><strong>没有任何关系</strong>，这对于类型安全非常重要。</p>
 <p>参考：</p>
 <ol>
-<li><a href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/boxing-unboxing" target="_blank" rel="noopener">Java工程师成神之路</a></li>
 <li>《Java核心技术 卷I》</li>
+<li><a href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/generics" target="_blank" rel="noopener">Java成神之路</a></li>
 </ol>
 
             </div>
@@ -321,18 +362,12 @@ e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</s
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/d993c7e9.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java 接口</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/e27767b2.html">
-                        <span class="hidden-mobile">Java 面向对象概述</span>
+                      <a href="/posts/756f403a.html">
+                        <span class="hidden-mobile">云计算概述</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -538,7 +573,7 @@ e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</s
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Java 继承&nbsp;",
+        "泛型程序设计&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
