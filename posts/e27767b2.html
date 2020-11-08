@@ -7,11 +7,13 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/panda.png">
-  <link rel="icon" type="image/png" href="/img/panda.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="Take notes and write articles about Software Engineering">
@@ -19,7 +21,7 @@
   <meta name="keywords" content="">
   <title>Java 面向对象概述 - Blog of Adam</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
@@ -27,25 +29,39 @@
 
   
     
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"zhouzhuyan.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-</head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -118,18 +134,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/">
-                <i class="iconfont icon-link-fill"></i>
-                Links
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
                 About
@@ -154,25 +158,28 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" false
-         style="background: url('https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/background00.jpg') no-repeat center center;
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java 面向对象概述">
               
             </span>
 
             
-              
-  <div class="mt-3 post-meta">
-    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-09-04 16:08" pubdate>
-      September 4, 2020 pm
-    </time>
-  </div>
-
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-09-04 16:08" pubdate>
+        September 4, 2020 pm
+      </time>
+    </span>
+  
+</div>
 
 <div class="mt-1">
   
@@ -189,7 +196,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21
+      22
        分钟
     </span>
   
@@ -217,11 +224,11 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">Java 面向对象概述</h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <h1 id="对象与类概述"><a href="#对象与类概述" class="headerlink" title="对象与类概述"></a>对象与类概述</h1><h2 id="一、面向对象程序设计概述"><a href="#一、面向对象程序设计概述" class="headerlink" title="一、面向对象程序设计概述"></a>一、面向对象程序设计概述</h2><p>结构化程序：算法+数据结构 = 程序 </p>
 <p>（即确定如何操作数据，再决定如何组织数据的结构）</p>
 <p>面向对象程序设计(OOP)：将数据放在第一位，再考虑操作数据的算法</p>
@@ -266,22 +273,22 @@
 <p>也就是有Order类继承而来。</p>
 <p>下图展示了上述的三种关系。<br><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200423LearnJava01.png" srcset="/img/loading.gif" alt=""></p>
 <h2 id="二、使用预定义类"><a href="#二、使用预定义类" class="headerlink" title="二、使用预定义类"></a>二、使用预定义类</h2><p>我们通过可以Java中的预定于类来了解如何构造对象，以及如何使用类的方法。<br>如下的例子：</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Date;
+<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Date;
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateTest</span> </span>&#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
         Date birthday = <span class="hljs-keyword">new</span> Date();
         System.out.println(birthday.toString());
     &#125;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <p>在Java中，要使用构造器(constructor)来构造新的实例，比如上面的代码中<code>new Date()</code>就构造了一个新的对象，这个对象被初始化为当前的日期和时间。</p>
 <p><strong>Tip</strong><br>需要注意的是，单独的定义<code>Date birthday</code>中的<code>birthday</code>并不是对象，对它进行操作编译器会报错。一定要<strong>初始化</strong>变量<code>birthday</code>。<br>对象变量本身并不包含一个对象，而是<strong>引用</strong>一个对象，<code>new</code>操作符的返回值也是一个引用。</p>
 <h2 id="三、自定义类"><a href="#三、自定义类" class="headerlink" title="三、自定义类"></a>三、自定义类</h2><h3 id="1-对象与对象变量"><a href="#1-对象与对象变量" class="headerlink" title="1. 对象与对象变量"></a>1. 对象与对象变量</h3><p>要想使用对象，就需要先构造对象，并指定其初始状态。在Java中，使用构造器（构造函数）来构造。</p>
 <p>比如某公司有一个职员管理系统，其中有一个关于职员信息的类<em>Employee</em></p>
 <p>那么我们可以通过下面这个表达式构造一个新对象</p>
-<div class="hljs"><pre><code class="hljs java">Employee employee = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">"Allen"</span>, <span class="hljs-number">10000</span>);</code></pre></div>
+<pre><code class="hljs java">Employee employee = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;Allen&quot;</span>, <span class="hljs-number">10000</span>);</code></pre>
 <p>其中<code>employee</code>是一个<strong>对象变量</strong>，我们用<code>new Employee(int id, String name, int salary)</code>构造了一个新对象，初始化该对象变量，要注意的是对象变量并没有包含一个对象，而是<strong>引用</strong>一个对象。</p>
 <p>在Java中，任何对象变量的值都是对存储在另外一个地方的某个对象的引用。</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> </span>&#123;
 
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> id;
     <span class="hljs-keyword">private</span> String name;
@@ -308,54 +315,54 @@
 
         Employee[] staff = <span class="hljs-keyword">new</span> Employee[<span class="hljs-number">3</span>];
 
-        staff[<span class="hljs-number">0</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">"Allen"</span>, <span class="hljs-number">10000</span>);
-        staff[<span class="hljs-number">1</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">2</span>, <span class="hljs-string">"Ben"</span>, <span class="hljs-number">12000</span>);
-        staff[<span class="hljs-number">2</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">3</span>, <span class="hljs-string">"David"</span>, <span class="hljs-number">15000</span>);
+        staff[<span class="hljs-number">0</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;Allen&quot;</span>, <span class="hljs-number">10000</span>);
+        staff[<span class="hljs-number">1</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;Ben&quot;</span>, <span class="hljs-number">12000</span>);
+        staff[<span class="hljs-number">2</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">3</span>, <span class="hljs-string">&quot;David&quot;</span>, <span class="hljs-number">15000</span>);
 
         <span class="hljs-keyword">for</span> (Employee e : staff) &#123;
-            System.out.println(<span class="hljs-string">"id="</span> + e.getId() + <span class="hljs-string">",name="</span> + e.getName() + <span class="hljs-string">",salary="</span> + e.getSalary());
+            System.out.println(<span class="hljs-string">&quot;id=&quot;</span> + e.getId() + <span class="hljs-string">&quot;,name=&quot;</span> + e.getName() + <span class="hljs-string">&quot;,salary=&quot;</span> + e.getSalary());
         &#125;
     &#125;
 &#125;
 
-<span class="hljs-comment">/**
-Output:
-id=1,name=Allen,salary=10000
-id=2,name=Ben,salary=12000
-id=3,name=David,salary=15000
-*/</span></code></pre></div>
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment">Output:</span>
+<span class="hljs-comment">id=1,name=Allen,salary=10000</span>
+<span class="hljs-comment">id=2,name=Ben,salary=12000</span>
+<span class="hljs-comment">id=3,name=David,salary=15000</span>
+<span class="hljs-comment">*/</span></code></pre>
 <h3 id="2-构造函数"><a href="#2-构造函数" class="headerlink" title="2. 构造函数"></a>2. 构造函数</h3><p>构造函数，与类同名，将实例初始化为指定的初始状态</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Employee</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Employee</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
         <span class="hljs-keyword">this</span>.id = id;
         <span class="hljs-keyword">this</span>.name = name;
         <span class="hljs-keyword">this</span>.salary = salary;
-    &#125;</code></pre></div>
+    &#125;</code></pre>
 <p><strong>Tip</strong></p>
 <ul>
 <li>构造函数根据参数的不同可以有多个，</li>
 <li>构造函数没有返回值。</li>
 </ul>
 <h3 id="4-封装的优点"><a href="#4-封装的优点" class="headerlink" title="4. 封装的优点"></a>4. 封装的优点</h3><p>如下是一个访问器方法，又称为<strong>字段访问器</strong></p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getId</span><span class="hljs-params">()</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getId</span><span class="hljs-params">()</span> </span>&#123;
         <span class="hljs-keyword">return</span> id;
-    &#125;</code></pre></div>
+    &#125;</code></pre>
 <p><strong>Tip</strong><br>为什么不直接将这些变量设为public公共访问呢？<br>因为这样的话这些变量就可以轻易的被外界修改，受到破坏<br>比如这里的职员id应该是只读的，不能够设置为public被外界随意更改。</p>
 <h3 id="4-final"><a href="#4-final" class="headerlink" title="4. final"></a>4. final</h3><p>定义为final的实例字段必须在构造对象时<strong>初始化</strong>，否则编辑器会报错，顾名思义，<code>final</code>表示最终的，在初始化之后不能够再修改这个值。</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String name = <span class="hljs-string">"John"</span>;</code></pre></div>
+<pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String name = <span class="hljs-string">&quot;John&quot;</span>;</code></pre>
 <p><strong>Tip</strong><br><code>final</code>修饰符对于基本类型和不可变类，如String类适用，但是对于可变的类，如<code>StringBuilder</code>就会出现问题，因为它仅仅保证了引用不会指向另外一个对象，但是这个对象是可以更改的。</p>
 <h2 id="四、静态字段和静态方法"><a href="#四、静态字段和静态方法" class="headerlink" title="四、静态字段和静态方法"></a>四、静态字段和静态方法</h2><h3 id="1-静态字段"><a href="#1-静态字段" class="headerlink" title="1. 静态字段"></a>1. 静态字段</h3><p>回到我们之前的<code>Employee</code>类中，如果我们需要一个变量来记录公司有多少雇员，就可以使用<code>static</code>修饰符，定义一个静态变量</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> count;</code></pre></div>
+<pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> count;</code></pre>
 <p>静态变量是属于类的变量，而不属于单个对象，对于<code>Employee</code>类的所有实例，共享一个<code>count</code>。<br>而对非静态的变量，每个对象都有一个自己的副本</p>
 <h3 id="2-静态常量"><a href="#2-静态常量" class="headerlink" title="2. 静态常量"></a>2. 静态常量</h3><p><code>Math</code>类中定义了一个静态常量<code>PI</code></p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Math</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Math</span> </span>&#123;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span> PI = <span class="hljs-number">3.1415926535897932846</span>;
-&#125;</code></pre></div>
+&#125;</code></pre>
 <p>我们可以通过<code>Math.PI</code>来直接访问它，如果没有<code>static</code>，那么就需要创建<code>Math</code>类的对象来访问它，效率比较低。</p>
 <h3 id="3-静态方法"><a href="#3-静态方法" class="headerlink" title="3. 静态方法"></a>3. 静态方法</h3><p>如果我们想要知道公司的雇员人数，就可以使用静态方法</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getCount</span><span class="hljs-params">()</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getCount</span><span class="hljs-params">()</span> </span>&#123;
     <span class="hljs-comment">// 返回静态变量</span>
     <span class="hljs-keyword">return</span> count; 
-&#125;</code></pre></div>
+&#125;</code></pre>
 <p>使用静态方法的两种情况：</p>
 <ul>
 <li>方法不需要访问对象状态</li>
@@ -413,27 +420,6 @@ id=3,name=David,salary=15000
             </div>
 
             
-              <!-- Comments -->
-              <article class="comments" id="comments">
-                
-                
-  <script type="text/javascript">
-    function loadUtterances() {
-      var s = document.createElement('script');
-      s.setAttribute('src', 'https://utteranc.es/client.js');
-      s.setAttribute('repo', 'AdamZhouSE/AdamZhouSE.github.io');
-      s.setAttribute('issue-term', 'title');
-      
-      s.setAttribute('theme', 'github-dark');
-      s.setAttribute('crossorigin', 'anonymous');
-      document.getElementById('comments').appendChild(s);
-    }
-    waitElementVisible('comments', loadUtterances)
-  </script>
-
-
-              </article>
-            
           </article>
         </div>
       </div>
@@ -442,7 +428,7 @@ id=3,name=David,salary=15000
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -454,16 +440,15 @@ id=3,name=David,salary=15000
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -484,77 +469,66 @@ id=3,name=David,salary=15000
     </div>
   </div>
 </div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
-    
-  <div class="statistics">
-    
     
 
     
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  
 
-
-    
+  
   <!-- 备案信息 -->
   <div class="beian">
     <a href="http://beian.miit.gov.cn/" target="_blank"
        rel="nofollow noopener">苏ICP备20019763号-1</a>
     
-      <a
-        href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32021102001010"
-        rel="nofollow noopener"
-        class="beian-police"
-        target="_blank"
-      >
-        <span class="beian-police-sep">&nbsp;|&nbsp;</span>
-        
-          <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon" />
-        
-        <span>苏公网安备 32021102001010号</span>
-      </a>
-     
-  </div>
-
-
+      
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32021102001010"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+          
+          <span>苏公网安备 32021102001010号</span>
+        </a>
+      
     
   </div>
+
+
+  
 </footer>
 
 <!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -565,105 +539,51 @@ id=3,name=David,salary=15000
 
 
 
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
   <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "Java 面向对象概述&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+      typing(title)
+      
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -705,7 +625,7 @@ id=3,name=David,salary=15000
       };
     </script>
 
-    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
 
   
 
@@ -713,6 +633,12 @@ id=3,name=David,salary=15000
 
 
 
+  <script  src="https://cdn.staticfile.org/mermaid/8.8.2/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
 
 
 
@@ -720,7 +646,8 @@ id=3,name=David,salary=15000
 
 
 
-
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

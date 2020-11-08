@@ -7,11 +7,13 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/panda.png">
-  <link rel="icon" type="image/png" href="/img/panda.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="Take notes and write articles about Software Engineering">
@@ -19,7 +21,7 @@
   <meta name="keywords" content="">
   <title>C++变量和基本类型 - Blog of Adam</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
@@ -27,25 +29,39 @@
 
   
     
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/darcula.min.css" />
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+    
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
 
 <link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"zhouzhuyan.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-</head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -118,18 +134,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/">
-                <i class="iconfont icon-link-fill"></i>
-                Links
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
                 About
@@ -154,25 +158,28 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" false
-         style="background: url('https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/background00.jpg') no-repeat center center;
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="C++变量和基本类型">
               
             </span>
 
             
-              
-  <div class="mt-3 post-meta">
-    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-04-03 20:44" pubdate>
-      April 3, 2020 pm
-    </time>
-  </div>
-
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-03 20:44" pubdate>
+        April 3, 2020 pm
+      </time>
+    </span>
+  
+</div>
 
 <div class="mt-1">
   
@@ -217,40 +224,40 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">C++变量和基本类型</h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <h3 id="变量和基本类型"><a href="#变量和基本类型" class="headerlink" title="变量和基本类型"></a>变量和基本类型</h3><h4 id="1-复合类型-Compound-type"><a href="#1-复合类型-Compound-type" class="headerlink" title="1. 复合类型(Compound type)"></a>1. 复合类型(Compound type)</h4><p>基于其它类型定义的类型</p>
 <h5 id="1-1-引用-Reference"><a href="#1-1-引用-Reference" class="headerlink" title="1.1 引用(Reference)"></a>1.1 引用(Reference)</h5><p><strong>引用</strong>为对象起了另外一个名字，引用类型引用另外一种类型。通过将声明符写成&amp;d的形式来定义引用类型，其中d是声明的变量名。</p>
 <a id="more"></a>
 <p>(在这里，引用指的是左值引用)</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">1024</span>;
+<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">1024</span>;
 <span class="hljs-keyword">int</span> &amp;refval = ival; <span class="hljs-comment">// refval指向ival，是ival的另外一个名字</span>
-<span class="hljs-keyword">int</span> &amp;refVal2; <span class="hljs-comment">// 报错；引用必须被初始化</span></code></pre></div>
+<span class="hljs-keyword">int</span> &amp;refVal2; <span class="hljs-comment">// 报错；引用必须被初始化</span></code></pre>
 <p>定义引用时，程序把引用和它的初始值<strong>绑定</strong>在一起，而不是将初始值拷贝给引用。（与初始化变量时不同的）</p>
 <p>无法令引用重新绑定到另一个对象，所以引用必须被<font color=red><strong>初始化</strong> </font></p>
 <ul>
 <li>引用即别名，它不是对象，而是为了一个已经存在的对象起了另外一个名字</li>
 </ul>
 <p>定义了一个引用之后，对其进行的所有操作都是在与之绑定的对象上进行的</p>
-<div class="hljs"><pre><code class="hljs cpp">refVal = <span class="hljs-number">2</span>;  <span class="hljs-comment">// 把2赋值给与refVal绑定的对象上，这里就是绑定到iVal上</span>
-<span class="hljs-keyword">int</span> ii = refVal;</code></pre></div>
+<pre><code class="hljs cpp">refVal = <span class="hljs-number">2</span>;  <span class="hljs-comment">// 把2赋值给与refVal绑定的对象上，这里就是绑定到iVal上</span>
+<span class="hljs-keyword">int</span> ii = refVal;</code></pre>
 <p> 除了两种特殊情况，其它所有引用的类型都要与之绑定的对象严格匹配。不能够与字面值或表达式的计算结果绑定。</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> &amp;refVal4 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误：引用对象初始值必须是一个对象</span>
+<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> &amp;refVal4 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误：引用对象初始值必须是一个对象</span>
 <span class="hljs-keyword">double</span> dval = <span class="hljs-number">3.14</span>;
-<span class="hljs-keyword">int</span> &amp;refVal5 = dval; <span class="hljs-comment">// 错误：此处引用类型的初始值必须是int型对象</span></code></pre></div>
+<span class="hljs-keyword">int</span> &amp;refVal5 = dval; <span class="hljs-comment">// 错误：此处引用类型的初始值必须是int型对象</span></code></pre>
 <h5 id="1-2-指针"><a href="#1-2-指针" class="headerlink" title="1.2 指针"></a>1.2 指针</h5><p><strong>指针</strong>是指向另外一种类型的符合类型，与引用类似，指针实现了对其它对象的间接访问。</p>
 <p>不同：</p>
 <ul>
 <li>指针本身是一个对象</li>
 <li>指针无需在定义时赋初值</li>
 </ul>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *ip1; <span class="hljs-comment">// ip1是指向int对象的指针</span></code></pre></div>
+<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *ip1; <span class="hljs-comment">// ip1是指向int对象的指针</span></code></pre>
 <h6 id="获取对象的地址"><a href="#获取对象的地址" class="headerlink" title="获取对象的地址"></a>获取对象的地址</h6><p>指针存放某个对象的地址。</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
-<span class="hljs-keyword">int</span> *p = &amp;ival; <span class="hljs-comment">// p是存放变量ival的地址，或者说p是指向引用的指针。</span></code></pre></div>
+<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
+<span class="hljs-keyword">int</span> *p = &amp;ival; <span class="hljs-comment">// p是存放变量ival的地址，或者说p是指向引用的指针。</span></code></pre>
 <h6 id="指针值"><a href="#指针值" class="headerlink" title="指针值"></a>指针值</h6><p>指针的值（即地址）应该属于下列4中状态之一：</p>
 <ul>
 <li>指向一个对象</li>
@@ -259,27 +266,27 @@
 <li>无效指针</li>
 </ul>
 <h6 id="利用指针访问对象"><a href="#利用指针访问对象" class="headerlink" title="利用指针访问对象"></a>利用指针访问对象</h6><p>如果指针指向了一个对象，可以使用<strong>解引用符</strong>（操作符*）来访问对象</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
+<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
 <span class="hljs-keyword">int</span> *p = &amp;ival;
 <span class="hljs-built_in">cout</span> &lt;&lt; *p <span class="hljs-comment">// 输出42</span>
 *p = <span class="hljs-number">0</span>;
-<span class="hljs-built_in">cout</span> &lt;&lt; *p <span class="hljs-comment">// 输出0，为*p赋值实际上是为p所指的对象赋值</span></code></pre></div>
-<h6 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h6><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *p1 = <span class="hljs-literal">nullptr</span>;
+<span class="hljs-built_in">cout</span> &lt;&lt; *p <span class="hljs-comment">// 输出0，为*p赋值实际上是为p所指的对象赋值</span></code></pre>
+<h6 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h6><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *p1 = <span class="hljs-literal">nullptr</span>;
 <span class="hljs-keyword">int</span> *p2 = <span class="hljs-number">0</span>;
-<span class="hljs-keyword">int</span> *p3 = <span class="hljs-literal">NULL</span>; <span class="hljs-comment">// 需要头文件cstdlib</span></code></pre></div>
+<span class="hljs-keyword">int</span> *p3 = <span class="hljs-literal">NULL</span>; <span class="hljs-comment">// 需要头文件cstdlib</span></code></pre>
 <h6 id="void-指针"><a href="#void-指针" class="headerlink" title="void*指针"></a>void*指针</h6><p>用于存放任意对象的地址，不能直接操作void*指针所指的对象</p>
 <h6 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h6><h6 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h6><p>指针是对象，所以存在对指针的引用</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>;
+<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>;
 <span class="hljs-keyword">int</span> *p;
 <span class="hljs-keyword">int</span> *&amp;r = p;  <span class="hljs-comment">// r是一个对p的引用</span>
 r = &amp;i;  <span class="hljs-comment">// r引用了一个指针，因此给r赋值&amp;就是令p指向i</span>
-*r = <span class="hljs-number">0</span>;  <span class="hljs-comment">// 将i的值改为0</span></code></pre></div>
+*r = <span class="hljs-number">0</span>;  <span class="hljs-comment">// 将i的值改为0</span></code></pre>
 <h4 id="2-const限定符"><a href="#2-const限定符" class="headerlink" title="2. const限定符"></a>2. const限定符</h4><p>值不能被改变，所以const对象必须被初始化</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> bufSize = <span class="hljs-number">512</span>; <span class="hljs-comment">// 输入缓冲区大小</span></code></pre></div>
+<pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> bufSize = <span class="hljs-number">512</span>; <span class="hljs-comment">// 输入缓冲区大小</span></code></pre>
 <p>如果要在多个文件之间共享const，必须在变量定义前加extern关键字</p>
 <h5 id="2-1-对const的引用"><a href="#2-1-对const的引用" class="headerlink" title="2.1 对const的引用"></a>2.1 对const的引用</h5><p>对常量的引用，不能够修改其绑定的对象</p>
 <p>对const的引用可以使一个并非const的对象，但是不能通过其改变值</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ci = <span class="hljs-number">1024</span>;
+<pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ci = <span class="hljs-number">1024</span>;
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r1 = ci; <span class="hljs-comment">// 正确</span>
 
 r1 = <span class="hljs-number">42</span>; <span class="hljs-comment">// 错误：r1是对常量的引用</span>
@@ -287,23 +294,23 @@ r1 = <span class="hljs-number">42</span>; <span class="hljs-comment">// 错误�
 
 <span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>；
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r1 = i; <span class="hljs-comment">// 允许将const int&amp;绑定到一个普通的int上</span>
-r1 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误</span></code></pre></div>
+r1 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误</span></code></pre>
 <h4 id="3-处理类型"><a href="#3-处理类型" class="headerlink" title="3. 处理类型"></a>3. 处理类型</h4><h5 id="3-1-类型别名"><a href="#3-1-类型别名" class="headerlink" title="3.1 类型别名"></a>3.1 类型别名</h5><p>某种类型的同义词，使得复杂的类型名字变得简单，易于理解和使用。</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">double</span> wages; <span class="hljs-comment">// wages是double的同义词</span>
-<span class="hljs-keyword">using</span> SI = Sales_item; <span class="hljs-comment">// SI是Sales_item的同义词</span></code></pre></div>
+<pre><code class="hljs cpp"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">double</span> wages; <span class="hljs-comment">// wages是double的同义词</span>
+<span class="hljs-keyword">using</span> SI = Sales_item; <span class="hljs-comment">// SI是Sales_item的同义词</span></code></pre>
 <h5 id="3-2-auto类型说明符"><a href="#3-2-auto类型说明符" class="headerlink" title="3.2 auto类型说明符"></a>3.2 auto类型说明符</h5><p>让编译器分析表达式所属的类型，必须有初始值</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> item = val1 + val2; <span class="hljs-comment">// 由val1和val2相加的结果推断item的类型</span>
+<pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> item = val1 + val2; <span class="hljs-comment">// 由val1和val2相加的结果推断item的类型</span>
 <span class="hljs-comment">// auto一条声明语句只能有一个基础数据类型</span>
 <span class="hljs-keyword">auto</span> i = <span class="hljs-number">0</span>, *p = &amp;i;  <span class="hljs-comment">// 正确</span>
-<span class="hljs-keyword">auto</span> sz = <span class="hljs-number">0</span>, pi = <span class="hljs-number">3.14</span>; <span class="hljs-comment">// 错误，sz和pi的类型不一致</span></code></pre></div>
+<span class="hljs-keyword">auto</span> sz = <span class="hljs-number">0</span>, pi = <span class="hljs-number">3.14</span>; <span class="hljs-comment">// 错误，sz和pi的类型不一致</span></code></pre>
 <h4 id="4-自定义数据结构"><a href="#4-自定义数据结构" class="headerlink" title="4. 自定义数据结构"></a>4. 自定义数据结构</h4><p>将一组相关的数据元素组织起来然后使用他们的策略和方法</p>
-<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Sales_data</span> &#123;</span>
+<pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Sales_data</span> &#123;</span>
   <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> bookNo;
   <span class="hljs-keyword">unsigned</span> units_sold = <span class="hljs-number">0</span>;
   <span class="hljs-keyword">double</span> revenue = <span class="hljs-number">0</span>;
 &#125;
 
-Sales_data accum;</code></pre></div>
+Sales_data accum;</code></pre>
 
             </div>
             <hr>
@@ -356,27 +363,6 @@ Sales_data accum;</code></pre></div>
             </div>
 
             
-              <!-- Comments -->
-              <article class="comments" id="comments">
-                
-                
-  <script type="text/javascript">
-    function loadUtterances() {
-      var s = document.createElement('script');
-      s.setAttribute('src', 'https://utteranc.es/client.js');
-      s.setAttribute('repo', 'AdamZhouSE/AdamZhouSE.github.io');
-      s.setAttribute('issue-term', 'title');
-      
-      s.setAttribute('theme', 'github-dark');
-      s.setAttribute('crossorigin', 'anonymous');
-      document.getElementById('comments').appendChild(s);
-    }
-    waitElementVisible('comments', loadUtterances)
-  </script>
-
-
-              </article>
-            
           </article>
         </div>
       </div>
@@ -385,7 +371,7 @@ Sales_data accum;</code></pre></div>
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -397,16 +383,15 @@ Sales_data accum;</code></pre></div>
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -427,77 +412,66 @@ Sales_data accum;</code></pre></div>
     </div>
   </div>
 </div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
-    
-  <div class="statistics">
-    
     
 
     
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  
 
-
-    
+  
   <!-- 备案信息 -->
   <div class="beian">
     <a href="http://beian.miit.gov.cn/" target="_blank"
        rel="nofollow noopener">苏ICP备20019763号-1</a>
     
-      <a
-        href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32021102001010"
-        rel="nofollow noopener"
-        class="beian-police"
-        target="_blank"
-      >
-        <span class="beian-police-sep">&nbsp;|&nbsp;</span>
-        
-          <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon" />
-        
-        <span>苏公网安备 32021102001010号</span>
-      </a>
-     
-  </div>
-
-
+      
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32021102001010"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+          
+          <span>苏公网安备 32021102001010号</span>
+        </a>
+      
     
   </div>
+
+
+  
 </footer>
 
 <!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -508,105 +482,51 @@ Sales_data accum;</code></pre></div>
 
 
 
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
   <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
 
 
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "C++变量和基本类型&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+      typing(title)
+      
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -648,7 +568,7 @@ Sales_data accum;</code></pre></div>
       };
     </script>
 
-    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
 
   
 
@@ -656,6 +576,12 @@ Sales_data accum;</code></pre></div>
 
 
 
+  <script  src="https://cdn.staticfile.org/mermaid/8.8.2/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
 
 
 
@@ -663,7 +589,8 @@ Sales_data accum;</code></pre></div>
 
 
 
-
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 
