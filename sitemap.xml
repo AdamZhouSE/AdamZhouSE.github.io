@@ -2,20 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://zhouzhuyan.com/posts/f47639cf.html</loc>
-    
-    <lastmod>2020-11-13</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zhouzhuyan.com/posts/dc6b170d.html</loc>
-    
-    <lastmod>2020-11-13</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://zhouzhuyan.com/posts/aa435277.html</loc>
     
     <lastmod>2020-10-29</lastmod>
@@ -186,6 +172,13 @@
   </url>
   
   <url>
+    <loc>https://zhouzhuyan.com/tags/hexo/</loc>
+    <lastmod>2020-11-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://zhouzhuyan.com/tags/Java/</loc>
     <lastmod>2020-11-13</lastmod>
     <changefreq>daily</changefreq>
@@ -194,13 +187,6 @@
   
   <url>
     <loc>https://zhouzhuyan.com/tags/%E7%BA%BF%E7%A8%8B/</loc>
-    <lastmod>2020-11-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zhouzhuyan.com/tags/hexo/</loc>
     <lastmod>2020-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -265,14 +251,14 @@
   </url>
   
   <url>
-    <loc>https://zhouzhuyan.com/categories/Java/</loc>
+    <loc>https://zhouzhuyan.com/categories/Hexo/</loc>
     <lastmod>2020-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://zhouzhuyan.com/categories/Hexo/</loc>
+    <loc>https://zhouzhuyan.com/categories/Java/</loc>
     <lastmod>2020-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
