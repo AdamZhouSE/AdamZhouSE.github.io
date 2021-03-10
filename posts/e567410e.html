@@ -338,8 +338,7 @@ slave2</code></pre>
 <p>然后将配置内容分发给两台<code>slave</code>机器</p>
 <pre><code class="hljs shell">cd /usr/local/hadoop/etc
 scp -r hadoop/ hadoop@slave1:/usr/local/hadoop/etc
-scp -r hadoop/ hadoop@slave2:/usr/local/hadoop/etc
-scp -r hadoop/ hadoop@slave3:/usr/local/hadoop/etc</code></pre>
+scp -r hadoop/ hadoop@slave2:/usr/local/hadoop/etc</code></pre>
 <h3 id="2-4-启动"><a href="#2-4-启动" class="headerlink" title="2.4 启动"></a>2.4 启动</h3><p>在<code>master</code>机器上输入命令启动集群</p>
 <pre><code class="hljs shell">start-all.sh</code></pre>
 <p>会输出如下内容</p>
