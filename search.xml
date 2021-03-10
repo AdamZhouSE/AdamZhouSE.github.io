@@ -1,78 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>C++基本语法</title>
-    <url>/posts/6b599344.html</url>
-    <content><![CDATA[<h1 id="C-学习笔记"><a href="#C-学习笔记" class="headerlink" title="C++学习笔记"></a>C++学习笔记</h1><p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p>
-<a id="more"></a>
-<h1 id="一、-变量"><a href="#一、-变量" class="headerlink" title="一、 变量"></a>一、 变量</h1><h2 id="1-用sizeof运算符求某一类型或变量占据的字节数"><a href="#1-用sizeof运算符求某一类型或变量占据的字节数" class="headerlink" title="1. 用sizeof运算符求某一类型或变量占据的字节数"></a>1. 用sizeof运算符求某一类型或变量占据的字节数</h2><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> a;
-    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(a) &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// sizeof运算符可以求变量占据的字节数</span>
-    <span class="hljs-built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 未初始化的变量，其值是不确定的</span>
-    <span class="hljs-keyword">int</span> b = <span class="hljs-number">1</span>;
-    <span class="hljs-built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="hljs-built_in">endl</span>;
-&#125;</code></pre>
-<h2 id="2-数据类型的自动转换"><a href="#2-数据类型的自动转换" class="headerlink" title="2. 数据类型的自动转换"></a>2. 数据类型的自动转换</h2><h3 id="1-数"><a href="#1-数" class="headerlink" title="1. 数"></a>1. 数</h3><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> a = <span class="hljs-number">11.34</span>; <span class="hljs-comment">// 11.34被自动转化为11后赋值给a</span>
-<span class="hljs-keyword">int</span> b = <span class="hljs-number">30</span>;
-<span class="hljs-keyword">double</span> d = b; <span class="hljs-comment">// d的值是30.0</span></code></pre>
-<h3 id="2-字符类型与整型"><a href="#2-字符类型与整型" class="headerlink" title="2. 字符类型与整型"></a>2. 字符类型与整型</h3><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> k = <span class="hljs-string">&#x27;a&#x27;</span>;
-<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, k); <span class="hljs-comment">// 输出97，即a的ASCII码</span>
-<span class="hljs-keyword">int</span> n = <span class="hljs-number">98</span>;
-<span class="hljs-keyword">char</span> k = n;
-<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>, k); <span class="hljs-comment">// 输出b</span></code></pre>
-<h2 id="3-输入和输出"><a href="#3-输入和输出" class="headerlink" title="3. 输入和输出"></a>3. 输入和输出</h2><h4 id="1-scanf和printf"><a href="#1-scanf和printf" class="headerlink" title="1. scanf和printf"></a>1. scanf和printf</h4><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt; //使用scanf和printf时需要使用该库</span></span>
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> n;
-    <span class="hljs-keyword">char</span> c;
-    <span class="hljs-keyword">float</span> m;
-    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%c%f&quot;</span>, &amp;n, &amp;c, &amp;m);
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d %c %f\n&quot;</span>, n, c, m);
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre>
-<p>用scanf可以一次读入多个不同类型的变量，输入各项用空格隔开<br>        注意在输入<strong>字符</strong>时，不会跳过空格（空格也会被当做字符读入）<br>        输入其它数据时，会跳过空格</p>
-<h4 id="2-cin和cout"><a href="#2-cin和cout" class="headerlink" title="2. cin和cout"></a>2. cin和cout</h4><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
-<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> c;
-    <span class="hljs-keyword">while</span> ((c=<span class="hljs-built_in">cin</span>.get()) != EOF) &#123; 
-        <span class="hljs-built_in">cout</span> &lt;&lt; (<span class="hljs-keyword">char</span>) c; 
-    &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre>
-<p>使用cin读入所有字符，包括空格和回车，EOF<br>        Mac（ctrl+D停止输入，ctrl+C停止程序)<br>        windows ctrl+Z停止</p>
-<h4 id="3-cin-amp-cout-scanf-amp-printf-比较"><a href="#3-cin-amp-cout-scanf-amp-printf-比较" class="headerlink" title="3. cin&amp;cout / scanf&amp;printf 比较"></a>3. cin&amp;cout / scanf&amp;printf 比较</h4><ul>
-<li>cin，cout速度慢，输入输出数据量大时用scanf/printf</li>
-<li>一个程序不要同时出现cin和scanf，cout和prinf</li>
-</ul>
-<h2 id="4-运算"><a href="#4-运算" class="headerlink" title="4. 运算"></a>4. 运算</h2><ol>
-<li>加、减、乘运算的溢出</li>
+    <title>Neo4j_CQL语法简介</title>
+    <url>/posts/55958cb4.html</url>
+    <content><![CDATA[<h1 id="Neo4j-CQL语法简介"><a href="#Neo4j-CQL语法简介" class="headerlink" title="Neo4j CQL语法简介"></a>Neo4j CQL语法简介</h1><p>注：本文中的示例来自于Neo4j的<code>Example Graphs</code>中的<code>Movies</code></p>
+<h2 id="1-MATCH-amp-RETURN"><a href="#1-MATCH-amp-RETURN" class="headerlink" title="1. MATCH &amp; RETURN"></a>1. MATCH &amp; RETURN</h2><pre><code class="hljs CQL">MATCH (p:Person) RETURN p LIMIT 10</code></pre>
+<p><code>match</code>查询节点，关系，标签，属性等。类似于SQL中的<code>SELECT</code></p>
+<p>匹配10个<code>Person</code>并返回，注意如果需要使用<code>RETURN</code>就需要一个像<code>p</code>这样的变量来存储返回内容</p>
+<pre><code class="hljs CQL">MATCH (p:Person &#123;name: &quot;Al Pacino&quot;&#125;) RETURN p</code></pre>
+<p>查询姓名为<code>Al Pacino</code>的<code>Person</code>节点并返回</p>
+<pre><code class="hljs CQL">MATCH (:Person &#123;name: &#39;Tom Hanks&#39;&#125;)-[:DIRECTED]-&gt;(movie:Movie)
+RETURN movie.title</code></pre>
+<p>查询Tom Hanks导演的电影，并返回电影的标题</p>
+<pre><code class="hljs CQL">MATCH (tom:Person &#123;name:&#39;Tom Hanks&#39;&#125;)-[rel:DIRECTED]-(movie:Movie)
+RETURN tom.name AS name</code></pre>
+<p>使用<code>AS</code>关键字设置别名</p>
+<h2 id="2-CREATE"><a href="#2-CREATE" class="headerlink" title="2. CREATE"></a>2. CREATE</h2><pre><code class="hljs CQL">CREATE (friend:Person &#123;name: &#39;Mark&#39;, born: 36&#125;)
+RETURN friend</code></pre>
+<p>创建一个<code>Person</code>界面，设置两个属性的值，返回创建的节点（这一步不是必须的，但在实际开发中可以作为测试）</p>
+<pre><code class="hljs CQL">MATCH (jennifer:Person &#123;name: &#39;jennifer&#39;&#125;)
+MATCH (mark:Person &#123;name: &#39;Mark&#39;&#125;)
+CREATE (jennifer)-[rel:IS_FRIENDS_WITH]-&gt;(mark)</code></pre>
+<p><strong>注意</strong>：<code>CREATE</code>不会判断节点在数据库中是否已经存在，为了避免重复插入，这里先使用<code>MATCH</code>查询节点是否已经存在，再在两者间建立关系</p>
+<p>但是如果节点不存在，就不会执行？？？</p>
+<h2 id="3-UPDATE"><a href="#3-UPDATE" class="headerlink" title="3. UPDATE"></a>3. UPDATE</h2><pre><code class="hljs CQL">MATCH (p:Person &#123;name: &#39;Keanu Reeves&#39;&#125;) set p.born &#x3D; 1962 RETURN p</code></pre>
+<p>使用<code>set</code>关键字执行更新操作</p>
+<ol>
+<li>使用<code>MATCH</code>查找节点</li>
+<li>使用<code>set</code>设置节点的属性值</li>
+<li>返回节点确保更新正确</li>
 </ol>
-<hr>
-<h1 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h1><h3 id="1-数组作为函数的参数传递"><a href="#1-数组作为函数的参数传递" class="headerlink" title="1. 数组作为函数的参数传递"></a>1. 数组作为函数的参数传递</h3><p>数组作为函数的参数时，是传引用的，即<strong>形参数组改变了，实参数组也会改变</strong></p>
-<p>二维数组作为函数的形参时，<strong>必须写明函数有多少列</strong>，不要写明有多少行</p>
-<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[][<span class="hljs-number">5</span>])</span> </span>&#123;
-  <span class="hljs-built_in">cout</span> &lt;&lt; a[<span class="hljs-number">4</span>][<span class="hljs-number">3</span>];
-&#125;</code></pre>
-<p>必须要写明列数，编译器才能够根据下标算出元素的地址</p>
-<pre><code class="hljs markdown">$\color&#123;#F00&#125;&#123;a[<span class="hljs-string">i</span>][<span class="hljs-symbol">j</span>]的地址 = 数组首地址 + i \times N \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>]) + j \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>])&#125;$ (N是数组列数)</code></pre>
-<p>形参数组的首地址就是实参数组的首地址      </p>
-<h1 id="三、字符串"><a href="#三、字符串" class="headerlink" title="三、字符串"></a>三、字符串</h1><h2 id="1-字符串的形式"><a href="#1-字符串的形式" class="headerlink" title="1. 字符串的形式"></a>1. 字符串的形式</h2><h3 id="（1）字符串常量"><a href="#（1）字符串常量" class="headerlink" title="（1）字符串常量"></a>（1）字符串常量</h3><p>用双引号括起来的，如”China”, “C++ program”.</p>
-<p>字符串常量占据<strong>内存</strong>的字节数等于字符中字符数目加1，结尾多出字符’\0’.</p>
-<font color=#F00>但是字符串的长度不包含'\0'</font>
-
-<p>“”也是合法的·1字符串常量，称为空串，仍然占据一个字节的内存空间，存放’\0’</p>
-<h3 id="（2）存放于字符数组中，以’-0’结尾"><a href="#（2）存放于字符数组中，以’-0’结尾" class="headerlink" title="（2）存放于字符数组中，以’\0’结尾"></a>（2）存放于字符数组中，以’\0’结尾</h3><p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p>
-<p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p>
-<h3 id="（3）string对象。"><a href="#（3）string对象。" class="headerlink" title="（3）string对象。"></a>（3）string对象。</h3><p>string是C++标准模板库里的一个类，专门用于处理字符串</p>
+<pre><code class="hljs CQL">MATCH (:Person &#123;name: &#39;Keanu Reeves&#39;&#125;)-[rel:ACTED_IN]-&gt;(:Movie &#123;title: &#39;Something\&#39;s Gotta Give&#39;&#125;) 
+set rel.roles &#x3D; &#39;阿巴阿巴&#39; 
+RETURN rel</code></pre>
+<p>也可以更新关系的属性，比如这里更新了演员在某部电影中饰演的角色</p>
+<h2 id="4-DELETE-amp-REMOVE"><a href="#4-DELETE-amp-REMOVE" class="headerlink" title="4. DELETE &amp; REMOVE"></a>4. DELETE &amp; REMOVE</h2><p>由于Neo4j数据库具备原子性，一致性，隔离性和持久性，所以无法在一个节点仍然有关系的情况下删除它。</p>
+<h3 id="4-1-删除关系"><a href="#4-1-删除关系" class="headerlink" title="4.1 删除关系"></a>4.1 删除关系</h3><pre><code class="hljs CQL">MATCH (j:Person &#123;name: &#39;Jennifer&#39;&#125;)-[r:IS_FRIENDS_WITH]-&gt;(m:Person &#123;name: &#39;Mark&#39;&#125;)
+DELETE r</code></pre>
+<p>要想删除一个关系，需要找到关系的起始节点和关系的终止节点，然后使用<code>`DELETE</code>关键字删除节点之间的关系</p>
+<h3 id="4-2-删除节点"><a href="#4-2-删除节点" class="headerlink" title="4.2 删除节点"></a>4.2 删除节点</h3><pre><code class="hljs CQL">MATCH (m:Person &#123;name: &#39;Mark&#39;&#125;)
+DELETE m</code></pre>
+<p>如果一个节点没有任何的关系，那么可以直接删除它。</p>
+<h3 id="4-3-同时删除节点和关系"><a href="#4-3-同时删除节点和关系" class="headerlink" title="4.3 同时删除节点和关系"></a>4.3 同时删除节点和关系</h3><pre><code class="hljs CQL">MATCH (m:Person &#123;name: &#39;Mark&#39;&#125;)
+DETACH DELETE m</code></pre>
+<p><code>DETACH DELETE</code>可以删除节点的所有关系，同时删除节点。</p>
+<h3 id="4-4-删除属性"><a href="#4-4-删除属性" class="headerlink" title="4.4 删除属性"></a>4.4 删除属性</h3><pre><code class="hljs CQL">MATCH (n:Person &#123;name: &#39;Jennifer&#39;&#125;)
+REMOVE n.birthdate</code></pre>
+<p>第一种删除属性的方式是<code>REMOVE</code>关键字</p>
+<pre><code class="hljs CQL">MATCH (n:Person &#123;name: &#39;Jennifer&#39;&#125;)
+SET n.birthdate &#x3D; null</code></pre>
+<p>第二种删除属性的方式是使用<code>set</code>关键字将属性的值设为<code>null</code>。因为neo4j数据库不会存储<code>null</code>值，所以它也会被删除。</p>
+<h2 id="5-Merge"><a href="#5-Merge" class="headerlink" title="5. Merge"></a>5. Merge</h2><pre><code class="hljs CQL">MERGE (mark:Person &#123;name: &#39;Mark&#39;, born: 1999&#125;)
+RETURN mark</code></pre>
+<p>可以使用<code>merge</code>关键字来避免重复插入节点，它会事先检查节点是否已经存在在数据库中，执行的是<code>select-or-insert</code>的操作。</p>
+<p>参考：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://neo4j.com/developer/cypher/">Neo4j官方文档</a></li>
+</ol>
 ]]></content>
       <categories>
-        <category>C++</category>
+        <category>数据库</category>
       </categories>
       <tags>
-        <tag>C++</tag>
+        <tag>数据库</tag>
+        <tag>Neo4j</tag>
       </tags>
   </entry>
   <entry>
@@ -160,6 +151,160 @@ r1 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误</
 &#125;
 
 Sales_data accum;</code></pre>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++字符串,向量和数组</title>
+    <url>/posts/869e4b19.html</url>
+    <content><![CDATA[<h3 id="二、字符串，向量和数组"><a href="#二、字符串，向量和数组" class="headerlink" title="二、字符串，向量和数组"></a>二、字符串，向量和数组</h3><p>作用域操作符<code>::</code></p>
+<p>含义：编译器应从操作符左侧的作用域中寻找右边那个名字</p>
+<p>比如<code>std::cin</code>是要使用命名空间<code>std</code>中的<code>cin</code></p>
+<p>这样做是为了避免某些名字被重复使用</p>
+<p>使用<code>using</code>声明可以更加简便的使用命名空间中的成员。</p>
+<a id="more"></a>
+<h4 id="1-String类型"><a href="#1-String类型" class="headerlink" title="1. String类型"></a>1. String类型</h4><p>表示可变长的字符串</p>
+<h5 id="1-1-定义和初始化"><a href="#1-1-定义和初始化" class="headerlink" title="1.1 定义和初始化"></a>1.1 定义和初始化</h5><ol>
+<li><p>使用需要头文件和命名空间</p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>;</code></pre>
+</li>
+<li><p>初始化</p>
+<pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s1; <span class="hljs-comment">// 空字符串</span>
+<span class="hljs-built_in">string</span> s2 = s1; <span class="hljs-comment">// s2是s1的副本</span>
+<span class="hljs-built_in">string</span> s3 = <span class="hljs-string">&quot;abc&quot;</span>;
+<span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s4</span><span class="hljs-params">(<span class="hljs-number">10</span>, <span class="hljs-string">&#x27;c&#x27;</span>)</span></span>; <span class="hljs-comment">// 十个c</span></code></pre>
+</li>
+</ol>
+<h5 id="1-2-string对象上的操作"><a href="#1-2-string对象上的操作" class="headerlink" title="1.2 string对象上的操作"></a>1.2 string对象上的操作</h5><ol>
+<li><p>使用<code>getline</code>读取一整行</p>
+<pre><code class="hljs cpp"><span class="hljs-built_in">string</span> line;
+getline(<span class="hljs-built_in">cin</span>, line);</code></pre>
+<p>当读取到换行符时结束，并将读到的内容存入<code>string</code>中，但是<strong>不存换行符</strong></p>
+</li>
+<li><p><code>empty</code>和<code>size</code>操作</p>
+<p><code>str.empty()</code>根据字符串是否为空返回一个布尔值</p>
+<p><code>str.size()</code>返回字符串长度</p>
+<p>使用visual studio编程的时候，碰到过一个<strong>warning</strong>，将无符号数赋值给了有符号数。</p>
+<p>这是由于<code>size</code>函数的返回值类型引起的，它是一个<code>string::size_type</code>类型的值，是无符号类型的，</p>
+<p>可以用<code>auto</code>来推断变量的值</p>
+<pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> len = str.size();</code></pre>
+</li>
+<li><p>比较，赋值，相加</p>
+<pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s1 = <span class="hljs-string">&quot;abc&quot;</span>;
+<span class="hljs-built_in">string</span> s2 = <span class="hljs-string">&quot;xcvd&quot;</span>;
+<span class="hljs-comment">// s1 &lt; s2 比较第一个不同的字符</span>
+<span class="hljs-built_in">string</span> s3 = s1; <span class="hljs-comment">// 赋值</span>
+<span class="hljs-built_in">string</span> s4 = s1 + s2; <span class="hljs-comment">// abcxcvd</span></code></pre>
+</li>
+<li><p>处理<code>string</code>中的字符</p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cctype&gt;</span></span>
+<span class="hljs-built_in">isalnum</span>(c);
+<span class="hljs-built_in">isalpha</span>(c);
+<span class="hljs-built_in">islower</span>(c);
+<span class="hljs-built_in">isupper</span>(c);
+<span class="hljs-built_in">ispunct</span>(c); <span class="hljs-comment">// 是标点符号为真</span></code></pre>
+</li>
+</ol>
+<h4 id="2-Vector类型"><a href="#2-Vector类型" class="headerlink" title="2. Vector类型"></a>2. Vector类型</h4><p>可变长数组，类似于Java中的<code>ArrayList</code></p>
+<h5 id="2-1-初始化"><a href="#2-1-初始化" class="headerlink" title="2.1 初始化"></a>2.1 初始化</h5><pre><code class="hljs cpp"><span class="hljs-built_in">vector</span>&lt;T&gt; v;
+<span class="hljs-built_in">vector</span>&lt;T&gt; v1 = &#123;a, b, c&#125;; <span class="hljs-comment">// 注意是花括号</span>
+<span class="hljs-built_in">vector</span>&lt;T&gt; v2&#123;a, b&#125;;     <span class="hljs-comment">// 花括号，两个元素</span>
+<span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">v3</span><span class="hljs-params">(<span class="hljs-number">10</span>, <span class="hljs-number">1</span>)</span></span>; <span class="hljs-comment">// 圆括号 10个元素，每个初始化为1</span></code></pre>
+<h5 id="2-2-操作"><a href="#2-2-操作" class="headerlink" title="2.2 操作"></a>2.2 操作</h5><pre><code class="hljs cpp"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v;
+v.push_back(<span class="hljs-number">1</span>); <span class="hljs-comment">// 添加1</span>
+v.pop_back(); <span class="hljs-comment">// 去掉最后一个数据</span>
+v.empty();
+v.size();
+v[n]; <span class="hljs-comment">// 注意下标只能访问，但是不能够添加元素</span></code></pre>
+<h4 id="3-迭代器"><a href="#3-迭代器" class="headerlink" title="3. 迭代器"></a>3. 迭代器</h4><p>访问元素的作用</p>
+<pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s = <span class="hljs-string">&quot;abcde&quot;</span>;
+<span class="hljs-keyword">if</span> (s.begin() != s.end()) &#123; <span class="hljs-comment">// 确保s非空</span>
+  
+&#125;</code></pre>
+<h4 id="4-数组"><a href="#4-数组" class="headerlink" title="4. 数组"></a>4. 数组</h4><h5 id="4-1-指针和数组"><a href="#4-1-指针和数组" class="headerlink" title="4.1 指针和数组"></a>4.1 指针和数组</h5><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ia[] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;
+<span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">p</span><span class="hljs-params">(ia)</span></span>; <span class="hljs-comment">// 整型指针，指向ia的第一个元素</span>
+p++; <span class="hljs-comment">// 指向第一个元素</span></code></pre>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++基本语法</title>
+    <url>/posts/6b599344.html</url>
+    <content><![CDATA[<h1 id="C-学习笔记"><a href="#C-学习笔记" class="headerlink" title="C++学习笔记"></a>C++学习笔记</h1><p>本文记录了C++的学习笔记，主要内容来自于MOOC北京大学课程程序设计与算法。</p>
+<a id="more"></a>
+<h1 id="一、-变量"><a href="#一、-变量" class="headerlink" title="一、 变量"></a>一、 变量</h1><h2 id="1-用sizeof运算符求某一类型或变量占据的字节数"><a href="#1-用sizeof运算符求某一类型或变量占据的字节数" class="headerlink" title="1. 用sizeof运算符求某一类型或变量占据的字节数"></a>1. 用sizeof运算符求某一类型或变量占据的字节数</h2><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> a;
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-keyword">sizeof</span>(a) &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// sizeof运算符可以求变量占据的字节数</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 未初始化的变量，其值是不确定的</span>
+    <span class="hljs-keyword">int</span> b = <span class="hljs-number">1</span>;
+    <span class="hljs-built_in">cout</span> &lt;&lt; b &lt;&lt; <span class="hljs-built_in">endl</span>;
+&#125;</code></pre>
+<h2 id="2-数据类型的自动转换"><a href="#2-数据类型的自动转换" class="headerlink" title="2. 数据类型的自动转换"></a>2. 数据类型的自动转换</h2><h3 id="1-数"><a href="#1-数" class="headerlink" title="1. 数"></a>1. 数</h3><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> a = <span class="hljs-number">11.34</span>; <span class="hljs-comment">// 11.34被自动转化为11后赋值给a</span>
+<span class="hljs-keyword">int</span> b = <span class="hljs-number">30</span>;
+<span class="hljs-keyword">double</span> d = b; <span class="hljs-comment">// d的值是30.0</span></code></pre>
+<h3 id="2-字符类型与整型"><a href="#2-字符类型与整型" class="headerlink" title="2. 字符类型与整型"></a>2. 字符类型与整型</h3><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> k = <span class="hljs-string">&#x27;a&#x27;</span>;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, k); <span class="hljs-comment">// 输出97，即a的ASCII码</span>
+<span class="hljs-keyword">int</span> n = <span class="hljs-number">98</span>;
+<span class="hljs-keyword">char</span> k = n;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>, k); <span class="hljs-comment">// 输出b</span></code></pre>
+<h2 id="3-输入和输出"><a href="#3-输入和输出" class="headerlink" title="3. 输入和输出"></a>3. 输入和输出</h2><h4 id="1-scanf和printf"><a href="#1-scanf和printf" class="headerlink" title="1. scanf和printf"></a>1. scanf和printf</h4><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cstdio&gt; //使用scanf和printf时需要使用该库</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> n;
+    <span class="hljs-keyword">char</span> c;
+    <span class="hljs-keyword">float</span> m;
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%c%f&quot;</span>, &amp;n, &amp;c, &amp;m);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d %c %f\n&quot;</span>, n, c, m);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+<p>用scanf可以一次读入多个不同类型的变量，输入各项用空格隔开<br>        注意在输入<strong>字符</strong>时，不会跳过空格（空格也会被当做字符读入）<br>        输入其它数据时，会跳过空格</p>
+<h4 id="2-cin和cout"><a href="#2-cin和cout" class="headerlink" title="2. cin和cout"></a>2. cin和cout</h4><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> c;
+    <span class="hljs-keyword">while</span> ((c=<span class="hljs-built_in">cin</span>.get()) != EOF) &#123; 
+        <span class="hljs-built_in">cout</span> &lt;&lt; (<span class="hljs-keyword">char</span>) c; 
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+<p>使用cin读入所有字符，包括空格和回车，EOF<br>        Mac（ctrl+D停止输入，ctrl+C停止程序)<br>        windows ctrl+Z停止</p>
+<h4 id="3-cin-amp-cout-scanf-amp-printf-比较"><a href="#3-cin-amp-cout-scanf-amp-printf-比较" class="headerlink" title="3. cin&amp;cout / scanf&amp;printf 比较"></a>3. cin&amp;cout / scanf&amp;printf 比较</h4><ul>
+<li>cin，cout速度慢，输入输出数据量大时用scanf/printf</li>
+<li>一个程序不要同时出现cin和scanf，cout和prinf</li>
+</ul>
+<h2 id="4-运算"><a href="#4-运算" class="headerlink" title="4. 运算"></a>4. 运算</h2><ol>
+<li>加、减、乘运算的溢出</li>
+</ol>
+<hr>
+<h1 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h1><h3 id="1-数组作为函数的参数传递"><a href="#1-数组作为函数的参数传递" class="headerlink" title="1. 数组作为函数的参数传递"></a>1. 数组作为函数的参数传递</h3><p>数组作为函数的参数时，是传引用的，即<strong>形参数组改变了，实参数组也会改变</strong></p>
+<p>二维数组作为函数的形参时，<strong>必须写明函数有多少列</strong>，不要写明有多少行</p>
+<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[][<span class="hljs-number">5</span>])</span> </span>&#123;
+  <span class="hljs-built_in">cout</span> &lt;&lt; a[<span class="hljs-number">4</span>][<span class="hljs-number">3</span>];
+&#125;</code></pre>
+<p>必须要写明列数，编译器才能够根据下标算出元素的地址</p>
+<pre><code class="hljs markdown">$\color&#123;#F00&#125;&#123;a[<span class="hljs-string">i</span>][<span class="hljs-symbol">j</span>]的地址 = 数组首地址 + i \times N \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>]) + j \times sizeof(a[<span class="hljs-string">0</span>][<span class="hljs-symbol">0</span>])&#125;$ (N是数组列数)</code></pre>
+<p>形参数组的首地址就是实参数组的首地址      </p>
+<h1 id="三、字符串"><a href="#三、字符串" class="headerlink" title="三、字符串"></a>三、字符串</h1><h2 id="1-字符串的形式"><a href="#1-字符串的形式" class="headerlink" title="1. 字符串的形式"></a>1. 字符串的形式</h2><h3 id="（1）字符串常量"><a href="#（1）字符串常量" class="headerlink" title="（1）字符串常量"></a>（1）字符串常量</h3><p>用双引号括起来的，如”China”, “C++ program”.</p>
+<p>字符串常量占据<strong>内存</strong>的字节数等于字符中字符数目加1，结尾多出字符’\0’.</p>
+<font color=#F00>但是字符串的长度不包含'\0'</font>
+
+<p>“”也是合法的·1字符串常量，称为空串，仍然占据一个字节的内存空间，存放’\0’</p>
+<h3 id="（2）存放于字符数组中，以’-0’结尾"><a href="#（2）存放于字符数组中，以’-0’结尾" class="headerlink" title="（2）存放于字符数组中，以’\0’结尾"></a>（2）存放于字符数组中，以’\0’结尾</h3><p>用一维char数组存放字符串，结尾是’\0’，数组元素个数至少为<font color=#F00>字符串长度+1</font>。</p>
+<p>用cin、scanf将字符串读入字符数组时，会自动在字符数组中字符串的末尾加上’\0’。</p>
+<h3 id="（3）string对象。"><a href="#（3）string对象。" class="headerlink" title="（3）string对象。"></a>（3）string对象。</h3><p>string是C++标准模板库里的一个类，专门用于处理字符串</p>
 ]]></content>
       <categories>
         <category>C++</category>
@@ -300,85 +445,6 @@ categories:</code></pre>
       </categories>
       <tags>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++字符串,向量和数组</title>
-    <url>/posts/869e4b19.html</url>
-    <content><![CDATA[<h3 id="二、字符串，向量和数组"><a href="#二、字符串，向量和数组" class="headerlink" title="二、字符串，向量和数组"></a>二、字符串，向量和数组</h3><p>作用域操作符<code>::</code></p>
-<p>含义：编译器应从操作符左侧的作用域中寻找右边那个名字</p>
-<p>比如<code>std::cin</code>是要使用命名空间<code>std</code>中的<code>cin</code></p>
-<p>这样做是为了避免某些名字被重复使用</p>
-<p>使用<code>using</code>声明可以更加简便的使用命名空间中的成员。</p>
-<a id="more"></a>
-<h4 id="1-String类型"><a href="#1-String类型" class="headerlink" title="1. String类型"></a>1. String类型</h4><p>表示可变长的字符串</p>
-<h5 id="1-1-定义和初始化"><a href="#1-1-定义和初始化" class="headerlink" title="1.1 定义和初始化"></a>1.1 定义和初始化</h5><ol>
-<li><p>使用需要头文件和命名空间</p>
-<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>;</code></pre>
-</li>
-<li><p>初始化</p>
-<pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s1; <span class="hljs-comment">// 空字符串</span>
-<span class="hljs-built_in">string</span> s2 = s1; <span class="hljs-comment">// s2是s1的副本</span>
-<span class="hljs-built_in">string</span> s3 = <span class="hljs-string">&quot;abc&quot;</span>;
-<span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s4</span><span class="hljs-params">(<span class="hljs-number">10</span>, <span class="hljs-string">&#x27;c&#x27;</span>)</span></span>; <span class="hljs-comment">// 十个c</span></code></pre>
-</li>
-</ol>
-<h5 id="1-2-string对象上的操作"><a href="#1-2-string对象上的操作" class="headerlink" title="1.2 string对象上的操作"></a>1.2 string对象上的操作</h5><ol>
-<li><p>使用<code>getline</code>读取一整行</p>
-<pre><code class="hljs cpp"><span class="hljs-built_in">string</span> line;
-getline(<span class="hljs-built_in">cin</span>, line);</code></pre>
-<p>当读取到换行符时结束，并将读到的内容存入<code>string</code>中，但是<strong>不存换行符</strong></p>
-</li>
-<li><p><code>empty</code>和<code>size</code>操作</p>
-<p><code>str.empty()</code>根据字符串是否为空返回一个布尔值</p>
-<p><code>str.size()</code>返回字符串长度</p>
-<p>使用visual studio编程的时候，碰到过一个<strong>warning</strong>，将无符号数赋值给了有符号数。</p>
-<p>这是由于<code>size</code>函数的返回值类型引起的，它是一个<code>string::size_type</code>类型的值，是无符号类型的，</p>
-<p>可以用<code>auto</code>来推断变量的值</p>
-<pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> len = str.size();</code></pre>
-</li>
-<li><p>比较，赋值，相加</p>
-<pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s1 = <span class="hljs-string">&quot;abc&quot;</span>;
-<span class="hljs-built_in">string</span> s2 = <span class="hljs-string">&quot;xcvd&quot;</span>;
-<span class="hljs-comment">// s1 &lt; s2 比较第一个不同的字符</span>
-<span class="hljs-built_in">string</span> s3 = s1; <span class="hljs-comment">// 赋值</span>
-<span class="hljs-built_in">string</span> s4 = s1 + s2; <span class="hljs-comment">// abcxcvd</span></code></pre>
-</li>
-<li><p>处理<code>string</code>中的字符</p>
-<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cctype&gt;</span></span>
-<span class="hljs-built_in">isalnum</span>(c);
-<span class="hljs-built_in">isalpha</span>(c);
-<span class="hljs-built_in">islower</span>(c);
-<span class="hljs-built_in">isupper</span>(c);
-<span class="hljs-built_in">ispunct</span>(c); <span class="hljs-comment">// 是标点符号为真</span></code></pre>
-</li>
-</ol>
-<h4 id="2-Vector类型"><a href="#2-Vector类型" class="headerlink" title="2. Vector类型"></a>2. Vector类型</h4><p>可变长数组，类似于Java中的<code>ArrayList</code></p>
-<h5 id="2-1-初始化"><a href="#2-1-初始化" class="headerlink" title="2.1 初始化"></a>2.1 初始化</h5><pre><code class="hljs cpp"><span class="hljs-built_in">vector</span>&lt;T&gt; v;
-<span class="hljs-built_in">vector</span>&lt;T&gt; v1 = &#123;a, b, c&#125;; <span class="hljs-comment">// 注意是花括号</span>
-<span class="hljs-built_in">vector</span>&lt;T&gt; v2&#123;a, b&#125;;     <span class="hljs-comment">// 花括号，两个元素</span>
-<span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">v3</span><span class="hljs-params">(<span class="hljs-number">10</span>, <span class="hljs-number">1</span>)</span></span>; <span class="hljs-comment">// 圆括号 10个元素，每个初始化为1</span></code></pre>
-<h5 id="2-2-操作"><a href="#2-2-操作" class="headerlink" title="2.2 操作"></a>2.2 操作</h5><pre><code class="hljs cpp"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v;
-v.push_back(<span class="hljs-number">1</span>); <span class="hljs-comment">// 添加1</span>
-v.pop_back(); <span class="hljs-comment">// 去掉最后一个数据</span>
-v.empty();
-v.size();
-v[n]; <span class="hljs-comment">// 注意下标只能访问，但是不能够添加元素</span></code></pre>
-<h4 id="3-迭代器"><a href="#3-迭代器" class="headerlink" title="3. 迭代器"></a>3. 迭代器</h4><p>访问元素的作用</p>
-<pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s = <span class="hljs-string">&quot;abcde&quot;</span>;
-<span class="hljs-keyword">if</span> (s.begin() != s.end()) &#123; <span class="hljs-comment">// 确保s非空</span>
-  
-&#125;</code></pre>
-<h4 id="4-数组"><a href="#4-数组" class="headerlink" title="4. 数组"></a>4. 数组</h4><h5 id="4-1-指针和数组"><a href="#4-1-指针和数组" class="headerlink" title="4.1 指针和数组"></a>4.1 指针和数组</h5><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ia[] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;
-<span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">p</span><span class="hljs-params">(ia)</span></span>; <span class="hljs-comment">// 整型指针，指向ia的第一个元素</span>
-p++; <span class="hljs-comment">// 指向第一个元素</span></code></pre>
-]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -821,6 +887,92 @@ task3 ends</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>Java 接口</title>
+    <url>/posts/d993c7e9.html</url>
+    <content><![CDATA[<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p><strong>接口</strong>(<em>interface</em>)用来描述类应该做什么，而不指定它们具体该如何做。一个类可以<strong>实现</strong>(<em>implement</em>)一个或多个接口。</p>
+<h2 id="1-接口的概念"><a href="#1-接口的概念" class="headerlink" title="1. 接口的概念"></a>1. 接口的概念</h2><p>接口不是类，而是对希望符合这个接口的类的一组<strong>需求</strong></p>
+<p><strong>Tip</strong></p>
+<ul>
+<li>接口中的所有方法都自动是<code>public</code>，因此在接口中声明方法时，不必提供关键字<code>public</code></li>
+<li>接口绝不会有实例字段</li>
+</ul>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> <span class="hljs-title">implement</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">Employee</span>&gt; </span>&#123;
+    <span class="hljs-comment">// blablabla</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(Employee other)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> Integer.compare(salary, other.salary);
+    &#125;
+&#125;</code></pre>
+<h2 id="2-接口的属性"><a href="#2-接口的属性" class="headerlink" title="2. 接口的属性"></a>2. 接口的属性</h2><p>接口不是类，不能够使用<code>new</code>实例化一个接口，但是可以声明接口的变量，接口变量必须引用实现这个接口的类对象</p>
+<pre><code class="hljs java">Comparable x = <span class="hljs-keyword">new</span> Employee(. . .);</code></pre>
+<p><strong>Tip</strong><br>为什么需要接口，而不是直接使用抽象类？<br>因为Java不支持多继承，所以每个类只能扩展一个类。<br>而接口提供了多继承的好处，而避免了多重继承的复杂性和低效性。</p>
+<h2 id="3-接口与回调"><a href="#3-接口与回调" class="headerlink" title="3. 接口与回调"></a>3. 接口与回调</h2><p><strong>回调</strong>(<em>callback</em>)是一种常见的程序设计模式。在这种模式中，可以指定某个特定事件发生时应该采取的动作。比如我们设计了一个时钟，可以请求每秒更新一次，以便更新时钟的表盘。</p>
+<p>下面是一个定时器和动作监听的具体使用的例子，定时器启动之后，程序将弹出一个消息对话框，并等待用户点击OK来终止程序的运行，在程序等待用户操作的同时，每隔1秒显示一次当前时间</p>
+<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.awt.*;
+<span class="hljs-keyword">import</span> java.awt.event.*;
+<span class="hljs-keyword">import</span> java.time.*;
+<span class="hljs-keyword">import</span> javax.swing.*;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimerTest</span></span>
+<span class="hljs-class"></span>&#123;  
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>
+<span class="hljs-function">   </span>&#123;  
+      TimePrinter listener = <span class="hljs-keyword">new</span> TimePrinter();
+
+      <span class="hljs-comment">// construct a timer that calls the listener</span>
+      <span class="hljs-comment">// once every second</span>
+      Timer timer = <span class="hljs-keyword">new</span> Timer(<span class="hljs-number">1000</span>, listener);
+      timer.start();
+
+      <span class="hljs-comment">// keep program running until the user selects &quot;OK&quot;</span>
+      JOptionPane.showMessageDialog(<span class="hljs-keyword">null</span>, <span class="hljs-string">&quot;Quit program?&quot;</span>);
+      System.exit(<span class="hljs-number">0</span>);
+   &#125;
+&#125;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimePrinter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ActionListener</span></span>
+<span class="hljs-class"></span>&#123;  
+   <span class="hljs-meta">@Override</span>
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">actionPerformed</span><span class="hljs-params">(ActionEvent event)</span></span>
+<span class="hljs-function">   </span>&#123;  
+      System.out.println(<span class="hljs-string">&quot;At the tone, the time is &quot;</span> 
+         + Instant.ofEpochMilli(event.getWhen()));
+      Toolkit.getDefaultToolkit().beep();
+   &#125;
+&#125;
+</code></pre>
+<h2 id="4-Comparator接口"><a href="#4-Comparator接口" class="headerlink" title="4. Comparator接口"></a>4. Comparator接口</h2><p>如果我们想要对字符串数组进行排序，可以直接使用<code>String.compareTo</code>方法按字典顺序比较字符串。<br>如果我们希望按照字符串长度来进行比较，可以自己实现一个<strong>比较器</strong>(<em>comparator</em>)，如下面的例子中，将比较器作为参数传入<code>Arrays.sort</code>方法中。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Comparator;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthCompare</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        String[] friends = &#123;<span class="hljs-string">&quot;Adam&quot;</span>, <span class="hljs-string">&quot;Ben&quot;</span>, <span class="hljs-string">&quot;Peter&quot;</span>, <span class="hljs-string">&quot;Noah&quot;</span>&#125;;
+        Arrays.sort(friends, <span class="hljs-keyword">new</span> LengthComparator());
+        System.out.println(Arrays.toString(friends));
+    &#125;
+&#125;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthComparator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparator</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(String o1, String o2)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> o1.length() - o2.length();
+    &#125;
+&#125;</code></pre>
+<p>参考：</p>
+<ol>
+<li>《Java核心技术 卷I》</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java 继承</title>
     <url>/posts/8b3a0e63.html</url>
     <content><![CDATA[<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>继承(inheritance)的基本思想是基于已经有的类创建新的类，复用这些类的方法。</p>
@@ -893,6 +1045,156 @@ e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</s
 <li>《Java核心技术 卷I》</li>
 </ol>
 ]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java 面向对象概述</title>
+    <url>/posts/e27767b2.html</url>
+    <content><![CDATA[<h1 id="对象与类概述"><a href="#对象与类概述" class="headerlink" title="对象与类概述"></a>对象与类概述</h1><h2 id="一、面向对象程序设计概述"><a href="#一、面向对象程序设计概述" class="headerlink" title="一、面向对象程序设计概述"></a>一、面向对象程序设计概述</h2><p>结构化程序：算法+数据结构 = 程序 </p>
+<p>（即确定如何操作数据，再决定如何组织数据的结构）</p>
+<p>面向对象程序设计(OOP)：将数据放在第一位，再考虑操作数据的算法</p>
+<h3 id="1-类"><a href="#1-类" class="headerlink" title="1. 类"></a>1. 类</h3><ol>
+<li><p><strong>类(class)</strong>是构造对象的模板或<strong>蓝图</strong>，就好像一个制作某件工艺品的模具，对象就是工艺品</p>
+</li>
+<li><p>由类构造(construct)对象的过程称为创建类的<strong>实例(instance)</strong></p>
+</li>
+<li><p><strong>封装(encapsulation)</strong>将<strong>数据</strong>和<strong>行为</strong>组合在一个包中，对对象的使用者隐藏具体的实现方式，也称为<strong>数据隐藏</strong></p>
+</li>
+<li><p>对象中的数据称为<strong>实例字段(instance field)</strong>，操作数据的过程称为<strong>方法(method)</strong></p>
+</li>
+<li><p>对象拥有的实例字段值的集合就是这个对象的当前<strong>状态(state)</strong></p>
+</li>
+<li>程序只能通过对象的方法和对象数据进行交互，对象被赋予了“黑盒”的特征，提高了重用性和可靠性</li>
+<li>可以通过扩展一个类来构建新的类，这使得用户自定义类更加容易。在Java中，所有类都来自于一个<strong>超类</strong>，即<code>Object</code>。</li>
+<li>通过扩展一个类来建立一个新的类的过程就是<strong>继承(inheritance)</strong>，新类具有被扩展的类的全部属性和方法，可以自定义新的属性和方法。</li>
+</ol>
+<h3 id="2-对象"><a href="#2-对象" class="headerlink" title="2. 对象"></a>2. 对象</h3><p>对象的3个特性：</p>
+<ul>
+<li><strong>行为(behavior)</strong>——可以对对象完成的操作（应用的方法）</li>
+<li><strong>状态(state)</strong>——描述当前状况的信息，状态的改变必须通过调用方法实现</li>
+<li><strong>标识(identity)</strong>——每个对象有唯一的标识来区分（如两个订单的编号肯定不相同）</li>
+</ul>
+<h3 id="3-识别类"><a href="#3-识别类" class="headerlink" title="3. 识别类"></a>3. 识别类</h3><p>编写程序从<strong>识别类</strong>开始，然后为各个类添加方法。</p>
+<p>一个简单的方法是在分析问题的过程中寻找<strong>名词——类</strong>，寻找<strong>动词——方法</strong></p>
+<p>例如我们有商品，订单，账户这样的名词作为类，即Item，Order，Account</p>
+<p>那么在账户这个类中，就可以有增加账户，修改账户等方法。</p>
+<h3 id="4-类之间的关系"><a href="#4-类之间的关系" class="headerlink" title="4. 类之间的关系"></a>4. 类之间的关系</h3><p>类之间最常见的关系有：</p>
+<ul>
+<li><strong>依赖</strong>（”<em>uses-a</em>“）</li>
+<li><strong>聚合</strong> （”<em>has-a</em>“）</li>
+<li><strong>继承</strong>（<em>“is-a”</em>)</li>
+</ul>
+<h4 id="4-1-依赖（dependence）"><a href="#4-1-依赖（dependence）" class="headerlink" title="4.1 依赖（dependence）"></a>4.1 依赖（dependence）</h4><p>如果一个类的方法使用或操纵另一个类的对象，我们就可以说一个类依赖于另一个类</p>
+<p>比如Order对象访问Account对象查看信用状态，这就是一个使用(“uses-a”)的关系。</p>
+<p>（尽可能减少相互依赖的类，做到低耦合）</p>
+<h4 id="4-2-聚合（aggregation）"><a href="#4-2-聚合（aggregation）" class="headerlink" title="4.2 聚合（aggregation）"></a>4.2 聚合（aggregation）</h4><p>类A的对象包含（”has-a”）类B的对象</p>
+<p>如一个Order对象就包含了一些Item对象</p>
+<h4 id="4-3-继承（inheritance）"><a href="#4-3-继承（inheritance）" class="headerlink" title="4.3 继承（inheritance）"></a>4.3 继承（inheritance）</h4><p>一个更特殊的类与一个更一般的类之间的关系</p>
+<p>也就是前面提到的扩展，比如现在我们定义一个加急订单RushOrder类，那么它是一个（”is-a”)Order类</p>
+<p>也就是有Order类继承而来。</p>
+<p>下图展示了上述的三种关系。<br><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200423LearnJava01.png" alt=""></p>
+<h2 id="二、使用预定义类"><a href="#二、使用预定义类" class="headerlink" title="二、使用预定义类"></a>二、使用预定义类</h2><p>我们通过可以Java中的预定于类来了解如何构造对象，以及如何使用类的方法。<br>如下的例子：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Date;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateTest</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        Date birthday = <span class="hljs-keyword">new</span> Date();
+        System.out.println(birthday.toString());
+    &#125;
+&#125;</code></pre>
+<p>在Java中，要使用构造器(constructor)来构造新的实例，比如上面的代码中<code>new Date()</code>就构造了一个新的对象，这个对象被初始化为当前的日期和时间。</p>
+<p><strong>Tip</strong><br>需要注意的是，单独的定义<code>Date birthday</code>中的<code>birthday</code>并不是对象，对它进行操作编译器会报错。一定要<strong>初始化</strong>变量<code>birthday</code>。<br>对象变量本身并不包含一个对象，而是<strong>引用</strong>一个对象，<code>new</code>操作符的返回值也是一个引用。</p>
+<h2 id="三、自定义类"><a href="#三、自定义类" class="headerlink" title="三、自定义类"></a>三、自定义类</h2><h3 id="1-对象与对象变量"><a href="#1-对象与对象变量" class="headerlink" title="1. 对象与对象变量"></a>1. 对象与对象变量</h3><p>要想使用对象，就需要先构造对象，并指定其初始状态。在Java中，使用构造器（构造函数）来构造。</p>
+<p>比如某公司有一个职员管理系统，其中有一个关于职员信息的类<em>Employee</em></p>
+<p>那么我们可以通过下面这个表达式构造一个新对象</p>
+<pre><code class="hljs java">Employee employee = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;Allen&quot;</span>, <span class="hljs-number">10000</span>);</code></pre>
+<p>其中<code>employee</code>是一个<strong>对象变量</strong>，我们用<code>new Employee(int id, String name, int salary)</code>构造了一个新对象，初始化该对象变量，要注意的是对象变量并没有包含一个对象，而是<strong>引用</strong>一个对象。</p>
+<p>在Java中，任何对象变量的值都是对存储在另外一个地方的某个对象的引用。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> </span>&#123;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> salary;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Employee</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.id = id;
+        <span class="hljs-keyword">this</span>.name = name;
+        <span class="hljs-keyword">this</span>.salary = salary;
+    &#125;
+		
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getId</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> id;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSalary</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> salary;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+
+        Employee[] staff = <span class="hljs-keyword">new</span> Employee[<span class="hljs-number">3</span>];
+
+        staff[<span class="hljs-number">0</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;Allen&quot;</span>, <span class="hljs-number">10000</span>);
+        staff[<span class="hljs-number">1</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;Ben&quot;</span>, <span class="hljs-number">12000</span>);
+        staff[<span class="hljs-number">2</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">3</span>, <span class="hljs-string">&quot;David&quot;</span>, <span class="hljs-number">15000</span>);
+
+        <span class="hljs-keyword">for</span> (Employee e : staff) &#123;
+            System.out.println(<span class="hljs-string">&quot;id=&quot;</span> + e.getId() + <span class="hljs-string">&quot;,name=&quot;</span> + e.getName() + <span class="hljs-string">&quot;,salary=&quot;</span> + e.getSalary());
+        &#125;
+    &#125;
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment">Output:</span>
+<span class="hljs-comment">id=1,name=Allen,salary=10000</span>
+<span class="hljs-comment">id=2,name=Ben,salary=12000</span>
+<span class="hljs-comment">id=3,name=David,salary=15000</span>
+<span class="hljs-comment">*/</span></code></pre>
+<h3 id="2-构造函数"><a href="#2-构造函数" class="headerlink" title="2. 构造函数"></a>2. 构造函数</h3><p>构造函数，与类同名，将实例初始化为指定的初始状态</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Employee</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.id = id;
+        <span class="hljs-keyword">this</span>.name = name;
+        <span class="hljs-keyword">this</span>.salary = salary;
+    &#125;</code></pre>
+<p><strong>Tip</strong></p>
+<ul>
+<li>构造函数根据参数的不同可以有多个，</li>
+<li>构造函数没有返回值。</li>
+</ul>
+<h3 id="4-封装的优点"><a href="#4-封装的优点" class="headerlink" title="4. 封装的优点"></a>4. 封装的优点</h3><p>如下是一个访问器方法，又称为<strong>字段访问器</strong></p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getId</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> id;
+    &#125;</code></pre>
+<p><strong>Tip</strong><br>为什么不直接将这些变量设为public公共访问呢？<br>因为这样的话这些变量就可以轻易的被外界修改，受到破坏<br>比如这里的职员id应该是只读的，不能够设置为public被外界随意更改。</p>
+<h3 id="4-final"><a href="#4-final" class="headerlink" title="4. final"></a>4. final</h3><p>定义为final的实例字段必须在构造对象时<strong>初始化</strong>，否则编辑器会报错，顾名思义，<code>final</code>表示最终的，在初始化之后不能够再修改这个值。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String name = <span class="hljs-string">&quot;John&quot;</span>;</code></pre>
+<p><strong>Tip</strong><br><code>final</code>修饰符对于基本类型和不可变类，如String类适用，但是对于可变的类，如<code>StringBuilder</code>就会出现问题，因为它仅仅保证了引用不会指向另外一个对象，但是这个对象是可以更改的。</p>
+<h2 id="四、静态字段和静态方法"><a href="#四、静态字段和静态方法" class="headerlink" title="四、静态字段和静态方法"></a>四、静态字段和静态方法</h2><h3 id="1-静态字段"><a href="#1-静态字段" class="headerlink" title="1. 静态字段"></a>1. 静态字段</h3><p>回到我们之前的<code>Employee</code>类中，如果我们需要一个变量来记录公司有多少雇员，就可以使用<code>static</code>修饰符，定义一个静态变量</p>
+<pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> count;</code></pre>
+<p>静态变量是属于类的变量，而不属于单个对象，对于<code>Employee</code>类的所有实例，共享一个<code>count</code>。<br>而对非静态的变量，每个对象都有一个自己的副本</p>
+<h3 id="2-静态常量"><a href="#2-静态常量" class="headerlink" title="2. 静态常量"></a>2. 静态常量</h3><p><code>Math</code>类中定义了一个静态常量<code>PI</code></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Math</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span> PI = <span class="hljs-number">3.1415926535897932846</span>;
+&#125;</code></pre>
+<p>我们可以通过<code>Math.PI</code>来直接访问它，如果没有<code>static</code>，那么就需要创建<code>Math</code>类的对象来访问它，效率比较低。</p>
+<h3 id="3-静态方法"><a href="#3-静态方法" class="headerlink" title="3. 静态方法"></a>3. 静态方法</h3><p>如果我们想要知道公司的雇员人数，就可以使用静态方法</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getCount</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">// 返回静态变量</span>
+    <span class="hljs-keyword">return</span> count; 
+&#125;</code></pre>
+<p>使用静态方法的两种情况：</p>
+<ul>
+<li>方法不需要访问对象状态</li>
+<li>方法只需要访问类的静态字段（比如上面的例子）</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2>]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -1100,242 +1402,6 @@ Employee buddy = buddies.getFirst();</code></pre>
 <li><a target="_blank" rel="noopener" href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/generics">Java成神之路</a></li>
 </ol>
 ]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java 接口</title>
-    <url>/posts/d993c7e9.html</url>
-    <content><![CDATA[<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p><strong>接口</strong>(<em>interface</em>)用来描述类应该做什么，而不指定它们具体该如何做。一个类可以<strong>实现</strong>(<em>implement</em>)一个或多个接口。</p>
-<h2 id="1-接口的概念"><a href="#1-接口的概念" class="headerlink" title="1. 接口的概念"></a>1. 接口的概念</h2><p>接口不是类，而是对希望符合这个接口的类的一组<strong>需求</strong></p>
-<p><strong>Tip</strong></p>
-<ul>
-<li>接口中的所有方法都自动是<code>public</code>，因此在接口中声明方法时，不必提供关键字<code>public</code></li>
-<li>接口绝不会有实例字段</li>
-</ul>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> <span class="hljs-title">implement</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">Employee</span>&gt; </span>&#123;
-    <span class="hljs-comment">// blablabla</span>
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(Employee other)</span> </span>&#123;
-        <span class="hljs-keyword">return</span> Integer.compare(salary, other.salary);
-    &#125;
-&#125;</code></pre>
-<h2 id="2-接口的属性"><a href="#2-接口的属性" class="headerlink" title="2. 接口的属性"></a>2. 接口的属性</h2><p>接口不是类，不能够使用<code>new</code>实例化一个接口，但是可以声明接口的变量，接口变量必须引用实现这个接口的类对象</p>
-<pre><code class="hljs java">Comparable x = <span class="hljs-keyword">new</span> Employee(. . .);</code></pre>
-<p><strong>Tip</strong><br>为什么需要接口，而不是直接使用抽象类？<br>因为Java不支持多继承，所以每个类只能扩展一个类。<br>而接口提供了多继承的好处，而避免了多重继承的复杂性和低效性。</p>
-<h2 id="3-接口与回调"><a href="#3-接口与回调" class="headerlink" title="3. 接口与回调"></a>3. 接口与回调</h2><p><strong>回调</strong>(<em>callback</em>)是一种常见的程序设计模式。在这种模式中，可以指定某个特定事件发生时应该采取的动作。比如我们设计了一个时钟，可以请求每秒更新一次，以便更新时钟的表盘。</p>
-<p>下面是一个定时器和动作监听的具体使用的例子，定时器启动之后，程序将弹出一个消息对话框，并等待用户点击OK来终止程序的运行，在程序等待用户操作的同时，每隔1秒显示一次当前时间</p>
-<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.awt.*;
-<span class="hljs-keyword">import</span> java.awt.event.*;
-<span class="hljs-keyword">import</span> java.time.*;
-<span class="hljs-keyword">import</span> javax.swing.*;
-
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimerTest</span></span>
-<span class="hljs-class"></span>&#123;  
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>
-<span class="hljs-function">   </span>&#123;  
-      TimePrinter listener = <span class="hljs-keyword">new</span> TimePrinter();
-
-      <span class="hljs-comment">// construct a timer that calls the listener</span>
-      <span class="hljs-comment">// once every second</span>
-      Timer timer = <span class="hljs-keyword">new</span> Timer(<span class="hljs-number">1000</span>, listener);
-      timer.start();
-
-      <span class="hljs-comment">// keep program running until the user selects &quot;OK&quot;</span>
-      JOptionPane.showMessageDialog(<span class="hljs-keyword">null</span>, <span class="hljs-string">&quot;Quit program?&quot;</span>);
-      System.exit(<span class="hljs-number">0</span>);
-   &#125;
-&#125;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimePrinter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ActionListener</span></span>
-<span class="hljs-class"></span>&#123;  
-   <span class="hljs-meta">@Override</span>
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">actionPerformed</span><span class="hljs-params">(ActionEvent event)</span></span>
-<span class="hljs-function">   </span>&#123;  
-      System.out.println(<span class="hljs-string">&quot;At the tone, the time is &quot;</span> 
-         + Instant.ofEpochMilli(event.getWhen()));
-      Toolkit.getDefaultToolkit().beep();
-   &#125;
-&#125;
-</code></pre>
-<h2 id="4-Comparator接口"><a href="#4-Comparator接口" class="headerlink" title="4. Comparator接口"></a>4. Comparator接口</h2><p>如果我们想要对字符串数组进行排序，可以直接使用<code>String.compareTo</code>方法按字典顺序比较字符串。<br>如果我们希望按照字符串长度来进行比较，可以自己实现一个<strong>比较器</strong>(<em>comparator</em>)，如下面的例子中，将比较器作为参数传入<code>Arrays.sort</code>方法中。</p>
-<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Arrays;
-<span class="hljs-keyword">import</span> java.util.Comparator;
-
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthCompare</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        String[] friends = &#123;<span class="hljs-string">&quot;Adam&quot;</span>, <span class="hljs-string">&quot;Ben&quot;</span>, <span class="hljs-string">&quot;Peter&quot;</span>, <span class="hljs-string">&quot;Noah&quot;</span>&#125;;
-        Arrays.sort(friends, <span class="hljs-keyword">new</span> LengthComparator());
-        System.out.println(Arrays.toString(friends));
-    &#125;
-&#125;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthComparator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparator</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;
-
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(String o1, String o2)</span> </span>&#123;
-        <span class="hljs-keyword">return</span> o1.length() - o2.length();
-    &#125;
-&#125;</code></pre>
-<p>参考：</p>
-<ol>
-<li>《Java核心技术 卷I》</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java 面向对象概述</title>
-    <url>/posts/e27767b2.html</url>
-    <content><![CDATA[<h1 id="对象与类概述"><a href="#对象与类概述" class="headerlink" title="对象与类概述"></a>对象与类概述</h1><h2 id="一、面向对象程序设计概述"><a href="#一、面向对象程序设计概述" class="headerlink" title="一、面向对象程序设计概述"></a>一、面向对象程序设计概述</h2><p>结构化程序：算法+数据结构 = 程序 </p>
-<p>（即确定如何操作数据，再决定如何组织数据的结构）</p>
-<p>面向对象程序设计(OOP)：将数据放在第一位，再考虑操作数据的算法</p>
-<h3 id="1-类"><a href="#1-类" class="headerlink" title="1. 类"></a>1. 类</h3><ol>
-<li><p><strong>类(class)</strong>是构造对象的模板或<strong>蓝图</strong>，就好像一个制作某件工艺品的模具，对象就是工艺品</p>
-</li>
-<li><p>由类构造(construct)对象的过程称为创建类的<strong>实例(instance)</strong></p>
-</li>
-<li><p><strong>封装(encapsulation)</strong>将<strong>数据</strong>和<strong>行为</strong>组合在一个包中，对对象的使用者隐藏具体的实现方式，也称为<strong>数据隐藏</strong></p>
-</li>
-<li><p>对象中的数据称为<strong>实例字段(instance field)</strong>，操作数据的过程称为<strong>方法(method)</strong></p>
-</li>
-<li><p>对象拥有的实例字段值的集合就是这个对象的当前<strong>状态(state)</strong></p>
-</li>
-<li>程序只能通过对象的方法和对象数据进行交互，对象被赋予了“黑盒”的特征，提高了重用性和可靠性</li>
-<li>可以通过扩展一个类来构建新的类，这使得用户自定义类更加容易。在Java中，所有类都来自于一个<strong>超类</strong>，即<code>Object</code>。</li>
-<li>通过扩展一个类来建立一个新的类的过程就是<strong>继承(inheritance)</strong>，新类具有被扩展的类的全部属性和方法，可以自定义新的属性和方法。</li>
-</ol>
-<h3 id="2-对象"><a href="#2-对象" class="headerlink" title="2. 对象"></a>2. 对象</h3><p>对象的3个特性：</p>
-<ul>
-<li><strong>行为(behavior)</strong>——可以对对象完成的操作（应用的方法）</li>
-<li><strong>状态(state)</strong>——描述当前状况的信息，状态的改变必须通过调用方法实现</li>
-<li><strong>标识(identity)</strong>——每个对象有唯一的标识来区分（如两个订单的编号肯定不相同）</li>
-</ul>
-<h3 id="3-识别类"><a href="#3-识别类" class="headerlink" title="3. 识别类"></a>3. 识别类</h3><p>编写程序从<strong>识别类</strong>开始，然后为各个类添加方法。</p>
-<p>一个简单的方法是在分析问题的过程中寻找<strong>名词——类</strong>，寻找<strong>动词——方法</strong></p>
-<p>例如我们有商品，订单，账户这样的名词作为类，即Item，Order，Account</p>
-<p>那么在账户这个类中，就可以有增加账户，修改账户等方法。</p>
-<h3 id="4-类之间的关系"><a href="#4-类之间的关系" class="headerlink" title="4. 类之间的关系"></a>4. 类之间的关系</h3><p>类之间最常见的关系有：</p>
-<ul>
-<li><strong>依赖</strong>（”<em>uses-a</em>“）</li>
-<li><strong>聚合</strong> （”<em>has-a</em>“）</li>
-<li><strong>继承</strong>（<em>“is-a”</em>)</li>
-</ul>
-<h4 id="4-1-依赖（dependence）"><a href="#4-1-依赖（dependence）" class="headerlink" title="4.1 依赖（dependence）"></a>4.1 依赖（dependence）</h4><p>如果一个类的方法使用或操纵另一个类的对象，我们就可以说一个类依赖于另一个类</p>
-<p>比如Order对象访问Account对象查看信用状态，这就是一个使用(“uses-a”)的关系。</p>
-<p>（尽可能减少相互依赖的类，做到低耦合）</p>
-<h4 id="4-2-聚合（aggregation）"><a href="#4-2-聚合（aggregation）" class="headerlink" title="4.2 聚合（aggregation）"></a>4.2 聚合（aggregation）</h4><p>类A的对象包含（”has-a”）类B的对象</p>
-<p>如一个Order对象就包含了一些Item对象</p>
-<h4 id="4-3-继承（inheritance）"><a href="#4-3-继承（inheritance）" class="headerlink" title="4.3 继承（inheritance）"></a>4.3 继承（inheritance）</h4><p>一个更特殊的类与一个更一般的类之间的关系</p>
-<p>也就是前面提到的扩展，比如现在我们定义一个加急订单RushOrder类，那么它是一个（”is-a”)Order类</p>
-<p>也就是有Order类继承而来。</p>
-<p>下图展示了上述的三种关系。<br><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200423LearnJava01.png" alt=""></p>
-<h2 id="二、使用预定义类"><a href="#二、使用预定义类" class="headerlink" title="二、使用预定义类"></a>二、使用预定义类</h2><p>我们通过可以Java中的预定于类来了解如何构造对象，以及如何使用类的方法。<br>如下的例子：</p>
-<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Date;
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateTest</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        Date birthday = <span class="hljs-keyword">new</span> Date();
-        System.out.println(birthday.toString());
-    &#125;
-&#125;</code></pre>
-<p>在Java中，要使用构造器(constructor)来构造新的实例，比如上面的代码中<code>new Date()</code>就构造了一个新的对象，这个对象被初始化为当前的日期和时间。</p>
-<p><strong>Tip</strong><br>需要注意的是，单独的定义<code>Date birthday</code>中的<code>birthday</code>并不是对象，对它进行操作编译器会报错。一定要<strong>初始化</strong>变量<code>birthday</code>。<br>对象变量本身并不包含一个对象，而是<strong>引用</strong>一个对象，<code>new</code>操作符的返回值也是一个引用。</p>
-<h2 id="三、自定义类"><a href="#三、自定义类" class="headerlink" title="三、自定义类"></a>三、自定义类</h2><h3 id="1-对象与对象变量"><a href="#1-对象与对象变量" class="headerlink" title="1. 对象与对象变量"></a>1. 对象与对象变量</h3><p>要想使用对象，就需要先构造对象，并指定其初始状态。在Java中，使用构造器（构造函数）来构造。</p>
-<p>比如某公司有一个职员管理系统，其中有一个关于职员信息的类<em>Employee</em></p>
-<p>那么我们可以通过下面这个表达式构造一个新对象</p>
-<pre><code class="hljs java">Employee employee = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;Allen&quot;</span>, <span class="hljs-number">10000</span>);</code></pre>
-<p>其中<code>employee</code>是一个<strong>对象变量</strong>，我们用<code>new Employee(int id, String name, int salary)</code>构造了一个新对象，初始化该对象变量，要注意的是对象变量并没有包含一个对象，而是<strong>引用</strong>一个对象。</p>
-<p>在Java中，任何对象变量的值都是对存储在另外一个地方的某个对象的引用。</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> </span>&#123;
-
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> id;
-    <span class="hljs-keyword">private</span> String name;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> salary;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Employee</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.id = id;
-        <span class="hljs-keyword">this</span>.name = name;
-        <span class="hljs-keyword">this</span>.salary = salary;
-    &#125;
-		
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getId</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> id;
-    &#125;
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> name;
-    &#125;
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSalary</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> salary;
-    &#125;
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-
-        Employee[] staff = <span class="hljs-keyword">new</span> Employee[<span class="hljs-number">3</span>];
-
-        staff[<span class="hljs-number">0</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;Allen&quot;</span>, <span class="hljs-number">10000</span>);
-        staff[<span class="hljs-number">1</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;Ben&quot;</span>, <span class="hljs-number">12000</span>);
-        staff[<span class="hljs-number">2</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">3</span>, <span class="hljs-string">&quot;David&quot;</span>, <span class="hljs-number">15000</span>);
-
-        <span class="hljs-keyword">for</span> (Employee e : staff) &#123;
-            System.out.println(<span class="hljs-string">&quot;id=&quot;</span> + e.getId() + <span class="hljs-string">&quot;,name=&quot;</span> + e.getName() + <span class="hljs-string">&quot;,salary=&quot;</span> + e.getSalary());
-        &#125;
-    &#125;
-&#125;
-
-<span class="hljs-comment">/**</span>
-<span class="hljs-comment">Output:</span>
-<span class="hljs-comment">id=1,name=Allen,salary=10000</span>
-<span class="hljs-comment">id=2,name=Ben,salary=12000</span>
-<span class="hljs-comment">id=3,name=David,salary=15000</span>
-<span class="hljs-comment">*/</span></code></pre>
-<h3 id="2-构造函数"><a href="#2-构造函数" class="headerlink" title="2. 构造函数"></a>2. 构造函数</h3><p>构造函数，与类同名，将实例初始化为指定的初始状态</p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Employee</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.id = id;
-        <span class="hljs-keyword">this</span>.name = name;
-        <span class="hljs-keyword">this</span>.salary = salary;
-    &#125;</code></pre>
-<p><strong>Tip</strong></p>
-<ul>
-<li>构造函数根据参数的不同可以有多个，</li>
-<li>构造函数没有返回值。</li>
-</ul>
-<h3 id="4-封装的优点"><a href="#4-封装的优点" class="headerlink" title="4. 封装的优点"></a>4. 封装的优点</h3><p>如下是一个访问器方法，又称为<strong>字段访问器</strong></p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getId</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> id;
-    &#125;</code></pre>
-<p><strong>Tip</strong><br>为什么不直接将这些变量设为public公共访问呢？<br>因为这样的话这些变量就可以轻易的被外界修改，受到破坏<br>比如这里的职员id应该是只读的，不能够设置为public被外界随意更改。</p>
-<h3 id="4-final"><a href="#4-final" class="headerlink" title="4. final"></a>4. final</h3><p>定义为final的实例字段必须在构造对象时<strong>初始化</strong>，否则编辑器会报错，顾名思义，<code>final</code>表示最终的，在初始化之后不能够再修改这个值。</p>
-<pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String name = <span class="hljs-string">&quot;John&quot;</span>;</code></pre>
-<p><strong>Tip</strong><br><code>final</code>修饰符对于基本类型和不可变类，如String类适用，但是对于可变的类，如<code>StringBuilder</code>就会出现问题，因为它仅仅保证了引用不会指向另外一个对象，但是这个对象是可以更改的。</p>
-<h2 id="四、静态字段和静态方法"><a href="#四、静态字段和静态方法" class="headerlink" title="四、静态字段和静态方法"></a>四、静态字段和静态方法</h2><h3 id="1-静态字段"><a href="#1-静态字段" class="headerlink" title="1. 静态字段"></a>1. 静态字段</h3><p>回到我们之前的<code>Employee</code>类中，如果我们需要一个变量来记录公司有多少雇员，就可以使用<code>static</code>修饰符，定义一个静态变量</p>
-<pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> count;</code></pre>
-<p>静态变量是属于类的变量，而不属于单个对象，对于<code>Employee</code>类的所有实例，共享一个<code>count</code>。<br>而对非静态的变量，每个对象都有一个自己的副本</p>
-<h3 id="2-静态常量"><a href="#2-静态常量" class="headerlink" title="2. 静态常量"></a>2. 静态常量</h3><p><code>Math</code>类中定义了一个静态常量<code>PI</code></p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Math</span> </span>&#123;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span> PI = <span class="hljs-number">3.1415926535897932846</span>;
-&#125;</code></pre>
-<p>我们可以通过<code>Math.PI</code>来直接访问它，如果没有<code>static</code>，那么就需要创建<code>Math</code>类的对象来访问它，效率比较低。</p>
-<h3 id="3-静态方法"><a href="#3-静态方法" class="headerlink" title="3. 静态方法"></a>3. 静态方法</h3><p>如果我们想要知道公司的雇员人数，就可以使用静态方法</p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getCount</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-comment">// 返回静态变量</span>
-    <span class="hljs-keyword">return</span> count; 
-&#125;</code></pre>
-<p>使用静态方法的两种情况：</p>
-<ul>
-<li>方法不需要访问对象状态</li>
-<li>方法只需要访问类的静态字段（比如上面的例子）</li>
-</ul>
-<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2>]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -1718,6 +1784,414 @@ sudo ./start-all.sh</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>虚拟化技术</title>
+    <url>/posts/aa435277.html</url>
+    <content><![CDATA[<h1 id="虚拟化技术"><a href="#虚拟化技术" class="headerlink" title="虚拟化技术"></a>虚拟化技术</h1><p>虚拟化意味着对计算机资源的抽象。在云计算中，虚拟化技术可以用来对<strong>数据中心</strong>的各种资源进行虚拟化和管理，是实现云计算的关键技术。可以实现<strong>服务器虚拟化、存储虚拟化、网络虚拟化和桌面虚拟化。</strong></p>
+<h2 id="1-虚拟化技术简介"><a href="#1-虚拟化技术简介" class="headerlink" title="1. 虚拟化技术简介"></a>1. 虚拟化技术简介</h2><h3 id="1-1-核心思想"><a href="#1-1-核心思想" class="headerlink" title="1.1 核心思想"></a>1.1 核心思想</h3><p>虚拟化技术的<strong>核心思想</strong>是利用软件或固件管理程序构成虚拟化层，<strong>把物理资源映射为虚拟资源</strong>。在虚拟资源上可以<strong>安装和部署多个虚拟机</strong>，实现<strong>多用户共享物理资源</strong>。</p>
+<h3 id="1-2-虚拟化的实现"><a href="#1-2-虚拟化的实现" class="headerlink" title="1.2 虚拟化的实现"></a>1.2 虚拟化的实现</h3><p>添加一个称为虚拟化层的软件，管理客户操作系统，使其能够独立于主机操作系统同时运行在同一个硬件上。</p>
+<h2 id="2-数据中心虚拟化"><a href="#2-数据中心虚拟化" class="headerlink" title="2. 数据中心虚拟化"></a>2. 数据中心虚拟化</h2><p>云计算中运用虚拟化技术主要体现在对<strong>数据中心</strong>的虚拟化上。</p>
+<p>数据中心是云计算技术的核心，由于数据中心的规模不断增大，成本上升，管理日趋复杂，传统的数据中心网络采用的多种技术，业务之间的孤立性，使得其结构复杂，导致服务器之间存在操作系统和上层软件异构、接口和数据格式不统一等问题。</p>
+<p>随着云计算的发展，传统数据中心逐渐过渡到虚拟化数据中心，即采用虚拟化技术将原来数据中心的物理资源进行抽象整合。满足虚拟数据中心网络高速、扁平、虚拟化的要求。它的<strong>作用</strong>如下：</p>
+<ul>
+<li>实现资源的动态分配和调度，提高现有资源的利用率和服务可靠性</li>
+<li>提供自动化的服务开通能力，降低运维成本</li>
+<li>具有有效的安全机制和可靠性机制，满足公众客户和企业客户的安全需求</li>
+<li>方便系统升级、迁移和改造</li>
+</ul>
+<p>数据中心的虚拟化是通过服务器虚拟化、存储虚拟化和网络虚拟化实现的。服务器虚拟化在云计算中是最重要和最关键的。</p>
+<ul>
+<li><strong>服务器虚拟化</strong>：将一个或多个物理服务器虚拟成多个逻辑上的服务器，集中管理</li>
+<li><strong>存储虚拟化</strong>：把分布的异构存储设备统一为一个或几个大的存储池，方便用户使用和管理</li>
+<li><strong>网络虚拟化</strong>：在底层物理网络和网络用户之间增加一个抽象层，其向下对物理网络资源进行分割，向上提供虚拟网络</li>
+</ul>
+<h3 id="2-1-服务器虚拟化"><a href="#2-1-服务器虚拟化" class="headerlink" title="2.1 服务器虚拟化"></a>2.1 服务器虚拟化</h3><h4 id="2-2-1-服务器虚拟化的层次"><a href="#2-2-1-服务器虚拟化的层次" class="headerlink" title="2.2.1 服务器虚拟化的层次"></a>2.2.1 服务器虚拟化的层次</h4><h5 id="1-寄居虚拟化"><a href="#1-寄居虚拟化" class="headerlink" title="1. 寄居虚拟化"></a>1. 寄居虚拟化</h5><p>寄居虚拟化层一般称为<strong>虚拟机监控器（VMM）</strong>。VMM安装在已有的主机操作系统上。损耗大，没有独立的<em>Hypervisor</em>层。</p>
+<h5 id="2-裸机虚拟化"><a href="#2-裸机虚拟化" class="headerlink" title="2. 裸机虚拟化"></a>2. 裸机虚拟化</h5><p>直接将VMM安装在服务器硬件设备中，也可以认为该架构中的VMM是一个操作系统，一般称为<code>Hypervisor</code>，实现从虚拟资源到物理资源的映射。</p>
+<p>x86体系结构的处理器并不是完全支持虚拟化，因为某些x86特权指令在地特权级上下文执行时，不能产生自陷，导致VMM无法直接捕获特权指令。解决方案是基于动态指令转换或硬件辅助的完全虚拟化技术和半虚拟化技术。</p>
+<h4 id="2-2-2-服务器虚拟化的底层实现"><a href="#2-2-2-服务器虚拟化的底层实现" class="headerlink" title="2.2.2 服务器虚拟化的底层实现"></a>2.2.2 服务器虚拟化的底层实现</h4><h5 id="1-CPU的虚拟化"><a href="#1-CPU的虚拟化" class="headerlink" title="1. CPU的虚拟化"></a>1. CPU的虚拟化</h5><ul>
+<li>任意时刻一个物理CPU只能运行一个虚拟CPU</li>
+<li>每个客户操作系统可以使用一个或多个虚拟CPU</li>
+<li>在各个操作系统之间，虚拟CPU运行相互隔离，互不影响</li>
+</ul>
+<p>CPU虚拟化需要解决<strong>正确运行</strong>和<strong>调度</strong>两个关键问题。</p>
+<p>虚拟CPU的<strong>正确运行</strong>是要保证虚拟机指令正确运行，而且各个虚拟机之间不能相互影响。现有的实现技术包括模拟执行和监控执行。</p>
+<p><strong>调度</strong>问题是指VMM决定当前哪个虚拟CPU在物理CPU上运行，要保证隔离性、公平性和性能。</p>
+<h5 id="2-内存虚拟化"><a href="#2-内存虚拟化" class="headerlink" title="2. 内存虚拟化"></a>2. 内存虚拟化</h5><p>内存虚拟化技术把物理内存统一管理，包装成多个虚拟的物理内 存提供给若干虚拟机使用，每个虚拟机拥有各自独立的内存空间。</p>
+<p>内存虚拟化的思路主要是分块共享，内存共享的核心是内存页面的写时复刻（Copy on Write）</p>
+<p>虚拟内存的管理包括3种地址：机器地址、物理地址和虚拟地址。</p>
+<h5 id="3-I-O设备虚拟化"><a href="#3-I-O设备虚拟化" class="headerlink" title="3. I/O设备虚拟化"></a>3. I/O设备虚拟化</h5><p>把真实的设备统一管理起来，包装成多个虚拟设备给虚拟机使用。</p>
+<p>I/O设备虚拟化同样是由VMM进行管理的，主要有全虚拟化、半虚拟化和软件模拟3种思路。其中软件模拟是主流。</p>
+<h4 id="2-2-3-虚拟机迁移"><a href="#2-2-3-虚拟机迁移" class="headerlink" title="2.2.3 虚拟机迁移"></a>2.2.3 虚拟机迁移</h4><p>将虚拟机实例从源宿主机迁移到目标宿主机，并且在目标宿主机上能够将虚拟机运行状态恢复到其在迁移之前的状态。从虚拟机迁移的源于目的的角度看，虚拟机迁移包括3类：</p>
+<ul>
+<li>物理机到虚拟机 P2V （Physical-to-Virtual）</li>
+<li>虚拟机到虚拟机 V2V</li>
+<li>虚拟机到物理机 V2P</li>
+</ul>
+<p>其中<strong>虚拟机到虚拟机</strong>的迁移是云计算关注的<strong>重点</strong>。</p>
+<h5 id="1-虚拟机动态迁移"><a href="#1-虚拟机动态迁移" class="headerlink" title="1. 虚拟机动态迁移"></a>1. 虚拟机动态迁移</h5><p><strong>实时迁移</strong>（Live Migration），就是保持虚拟机运行的同时，把它从一台计算机迁移到另一台计算机，并在目的计算机恢复运行的技术。<strong>动态实时迁移</strong>对云计算至关重要。</p>
+<ul>
+<li>云计算中心物理服务器负载处于动态变化中，当无法提供额外的物理资源时，可以将占用热门物理资源的虚拟机迁移到其它物理服务器，以达到负载均衡</li>
+<li>物理服务器定期升级的需要，升级前将虚拟机迁移到其他物理服务器，等升级完成再迁移回来</li>
+</ul>
+<h5 id="2-迁移的步骤"><a href="#2-迁移的步骤" class="headerlink" title="2. 迁移的步骤"></a>2. 迁移的步骤</h5><ol>
+<li>预迁移：主机A选定一个目的计算机作为VM的新主机</li>
+<li>预定资源：主机向主机B发送迁移请求，确认B是否有必须资源，有就预定这些资源</li>
+<li>预复制：主机A以迭代的方式将VM的内存页复制到主机B上，第一轮迭代传送所有的页，后面的迭代只复制前一轮传送过程中被修改过的页面。</li>
+<li>停机复制：停止主机A的VM，把它的网络连接重定向到B。传送CPU状态和前一轮传送过程中被修改过的页。此时，主机A与B有一致的VM映像</li>
+<li>提交：主机B通知A成功收到VM映像，主机A确认消息，抛弃或销毁其上的VM</li>
+<li>启动：启动B上的VM，迁移后使用B上的设备驱动，广播新的IP地址</li>
+</ol>
+<h5 id="3-迁移的内容"><a href="#3-迁移的内容" class="headerlink" title="3. 迁移的内容"></a>3. 迁移的内容</h5><h6 id="内存迁移"><a href="#内存迁移" class="headerlink" title="内存迁移"></a>内存迁移</h6><p>是虚拟机迁移最困难的部分。</p>
+<p>一个完整的内存迁移可以分为3个阶段：</p>
+<ol>
+<li>Push：在VM运行的同时，将它的一些内存页面通过网络复制到目的机器上，过程中被修改的页面需要重传，以保证内容的一致性。</li>
+<li>Stop-and-Copy：VM停止工作，把剩下的页面复制到计算机上，然后在目的计算机启动新的VM</li>
+<li>Pull：新的虚拟机运行过程中，如果访问到未被复制的页面，就会出现页错误并从原来的VM处把该页复制过来</li>
+</ol>
+<p>实际操作中没有必要同时包含上述3个阶段。下面是3种迁移策略的优劣比较：</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20201031-01.png" alt=""></p>
+<h6 id="网络资源的迁移"><a href="#网络资源的迁移" class="headerlink" title="网络资源的迁移"></a>网络资源的迁移</h6><ul>
+<li>虚拟机这种系统级别的封装方式意味着迁移时VM的所有网络设备，包括协议状态(如TCP连接状态)以及IP地址都要随之一起迁移。</li>
+<li>在局域网内，可以通过发送ARP重定向包，将VM的IP地址与目的机器的MAC地址相绑定， 之后的所有包就可以发送到目的机器上。</li>
+</ul>
+<h6 id="存储设备的迁移"><a href="#存储设备的迁移" class="headerlink" title="存储设备的迁移"></a>存储设备的迁移</h6><ul>
+<li>迁移存储设备的最大障碍在于需要占用大量时间和网络带宽，通常的解决办法是以共享的方式共享数据和文件系统，而非真正迁移。</li>
+<li>目前大多数集群使用NAS(Network Attached Storage，网络连接存储)作为存储设备共 享数据。</li>
+</ul>
+<h4 id="2-2-4-隔离技术"><a href="#2-2-4-隔离技术" class="headerlink" title="2.2.4 隔离技术"></a>2.2.4 隔离技术</h4><p>虚拟机隔离是指虚拟机之间在没有授权许可的情况下，互相之间不可通信，不可联系的一种技术。</p>
+<ul>
+<li>软件角度：互相隔离的虚拟机之间保持独立，如同一个完整的计算机</li>
+<li>硬件角度：被隔离的虚拟机相当于一台物理机，有自己的CPU、内存、硬盘、I/O等，它与宿主机之间保持互相独立的状态</li>
+<li>网络角度：被隔离的虚拟机如同物理机一样，既可以对外提供网络服务，也一样可以从外界接受网络服务</li>
+</ul>
+<p>现有虚拟机隔离机制主要包括：</p>
+<ul>
+<li>网络隔离</li>
+<li>构建虚拟安全文件防护网</li>
+<li>基于访问控制的逻辑隔离机制</li>
+<li>通过硬件虚拟让每一个虚拟机无法突破虚拟机管理器给出的资源限制</li>
+<li>硬件提供的内存保护机制</li>
+<li>进程地址空间的保护机制，IP地址隔离</li>
+</ul>
+<p><strong>确保虚拟机之间的安全与可靠性</strong></p>
+<h5 id="1-内存隔离"><a href="#1-内存隔离" class="headerlink" title="1. 内存隔离"></a>1. 内存隔离</h5><p><strong>内存管理单元</strong>（MMU Memory Management Unit）</p>
+<ul>
+<li>管理虚拟存储器、物理存储器的控制路线</li>
+<li>负责将虚拟地址映射为物理地址</li>
+<li>提供硬件机制的内存访问授权</li>
+</ul>
+<p>以Xen为例，它在虚拟内存到机器内存之间引入了一层中间地址，Guest OS看到的是这层中间地址，而不是机器的实际地址。Guest OS感觉自己的物理地址从0开始，是连续的，但Xen将这层中间地址真正地映射到机器地址上却可以是不连续的，这样保证了所有的物理内存可被任意分配给不同的Guest OS。</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20201031-02.png" alt=""></p>
+<p>虚拟机监控器使用分段和分页机制对自身的物理内存进行保护。x86体系结构提供了支 持分段机制的虚拟内存，这能够提供另一种形式的特权级分离。</p>
+<p>每个段包括基址、段限和一些属性位。</p>
+<h5 id="2-网络隔离"><a href="#2-网络隔离" class="headerlink" title="2. 网络隔离"></a>2. 网络隔离</h5><p><strong>目标</strong>：确保把有害的攻击隔离，在可信网络之外和保证可信网络内部信息不外泄的前提下，完成网间数据的安全交换。</p>
+<p><strong>关键</strong>：系统对通信数据的控制，即通过不可路由的协议完成网间数据交换</p>
+<p><strong>问题</strong>：通信硬件工作在网络最下层（物理层），不能感知交换数据的机密性、完整性、可用性、可控性、抗抵赖等安全要素。</p>
+<p><strong>解决方案</strong>：通过访问控制、身份认证、加密签名等安全机制来实现，这些机制都是通过软件实现的。</p>
+<p><strong>实现原理</strong>：通过专用通信设备、专有安全协议和加密验证机制及应用数据提取和鉴别认证技术，进行不同安全级别网络之间的数据交换。</p>
+<p><strong>效果</strong>：</p>
+<ul>
+<li>彻底阻断了网络间的直接TCP/IP连接</li>
+<li>保证了网间数据交 换的安全、可控</li>
+<li>杜绝了由于操作系统和网络协议自身漏洞带来的安全风险 </li>
+</ul>
+<h3 id="2-2-存储虚拟化"><a href="#2-2-存储虚拟化" class="headerlink" title="2.2 存储虚拟化"></a>2.2 存储虚拟化</h3><p>存储虚拟化将系统中分散的存储资源整合起来。</p>
+<ul>
+<li>提高了存储资源利用率</li>
+<li>降低单位存储空间成本</li>
+<li>降低存储管理的负担和复杂性</li>
+</ul>
+<p><strong>技术与效果</strong></p>
+<p>在虚拟层通过适用数据镜像、数据校验和多路径等技术，提高了数据的可靠性及系统的可用性</p>
+<p>利用负载均衡、数据迁移、数据块重组等技术，提升系统的潜在性能</p>
+<p>整合和重组底层物理资源，得到多种不同性能和可靠性的 新的虚拟设备，满足多种存储应用的需求</p>
+<h4 id="2-2-1-存储虚拟化的一般模型"><a href="#2-2-1-存储虚拟化的一般模型" class="headerlink" title="2.2.1 存储虚拟化的一般模型"></a>2.2.1 存储虚拟化的一般模型</h4><p>虚拟化存储系统在原有存储系统结构上增加了虚拟化层，将多个存储单元抽象成一个虚拟存储池。</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20201101-01.png" alt=""></p>
+<p>它的优势如下：</p>
+<ul>
+<li>减少存储系统的管理开销</li>
+<li>实现存储系统数据共享</li>
+<li>提供透明的高可靠性和可扩展性</li>
+</ul>
+<h4 id="2-2-2-存储虚拟化的实现方式"><a href="#2-2-2-存储虚拟化的实现方式" class="headerlink" title="2.2.2 存储虚拟化的实现方式"></a>2.2.2 存储虚拟化的实现方式</h4><h5 id="1-基于主机的存储虚拟化"><a href="#1-基于主机的存储虚拟化" class="headerlink" title="1. 基于主机的存储虚拟化"></a>1. 基于主机的存储虚拟化</h5><p>也称基于服务器的存储虚拟化或者基于系统卷管理器的存储虚拟化，其一般是通过逻辑卷管理来实现的。虚拟机为物理卷映射到逻辑卷提供了一个虚拟层。</p>
+<p>虚拟机的主要功能如下：</p>
+<ul>
+<li>数据存储共享</li>
+<li>存储资源管理</li>
+<li>数据复制及迁移 </li>
+<li>集群系统</li>
+<li>远程备份</li>
+<li>灾难恢复</li>
+</ul>
+<h5 id="2-基于存储设备的存储虚拟化"><a href="#2-基于存储设备的存储虚拟化" class="headerlink" title="2. 基于存储设备的存储虚拟化"></a>2. 基于存储设备的存储虚拟化</h5><p>也称基于存储控制器的存储虚拟化。主要是在存储设备的磁盘、 适配器或者控制器上实现虚拟化功能。</p>
+<p>有很多的存储设备的内部都有功能比较强的处理器，带有专门的嵌入式 统，可以在存储子系统的内部进行存储虚拟化，对外提供虚拟化磁盘。</p>
+<h5 id="3-基于网络的存储虚拟化"><a href="#3-基于网络的存储虚拟化" class="headerlink" title="3. 基于网络的存储虚拟化"></a>3. 基于网络的存储虚拟化</h5><p>在网络设备上实现存 储虚拟化功能，包括基于<strong>互连设备</strong>和基于<strong>路由器</strong>两种方式。</p>
+<h5 id="4-优劣比较"><a href="#4-优劣比较" class="headerlink" title="4. 优劣比较"></a>4. 优劣比较</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>优势</th>
+<th>劣势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主机</td>
+<td>性价比较高</td>
+<td>性能较差、可扩展性差、不支持异构平台</td>
+</tr>
+<tr>
+<td>存储设备</td>
+<td>存储子系统与主机无关，对系统性能的影响比较小，较容易管理</td>
+<td>对于包含异构存储设备的SAN存储系统，虚拟化方法的效果不好，设备规模有限并不能进行级联，可扩展性差</td>
+</tr>
+<tr>
+<td>网络</td>
+<td>在<strong>性能、效果和安全</strong>都要好一些</td>
+<td>连接主机到存储网络的<strong>路由器出现故障</strong>导致与故障路由器连接在一起的主机受到影响，数据无法访问</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="2-3-网络虚拟化"><a href="#2-3-网络虚拟化" class="headerlink" title="2.3 网络虚拟化"></a>2.3 网络虚拟化</h3><p>传统数据中心由于服务器之间操作系统和上层软件异构、接口于数据格式不统一，数据中心内网络传输效率低。使用云计算后，数据同步传送的大流量、备份的大流量、虚拟机迁移的大流量，采用统一的交换网络减少布线、维护工作量和扩容成本。引入虚拟化技术后，数据中心网络虚拟化分为核心层、接入层和虚拟机网络虚拟化三个层面</p>
+<h3 id="2-4-桌面虚拟化"><a href="#2-4-桌面虚拟化" class="headerlink" title="2.4 桌面虚拟化"></a>2.4 桌面虚拟化</h3><p>每个桌面镜像就是一个带有应用程序的操作系统，终端用户通过一个虚拟显示协议来访问他们的桌面系统。这样做 的目的就是使用户的使用体验同他们使用桌面上的PC一样。</p>
+<p>引用：</p>
+<p>[1]刘鹏.云计算[M].电子工业出版社:北京,2015:250-268.</p>
+]]></content>
+      <categories>
+        <category>云计算</category>
+      </categories>
+      <tags>
+        <tag>虚拟化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mosh优化ssh</title>
+    <url>/posts/38412875.html</url>
+    <content><![CDATA[<p>最近使用ssh连接云服务器时，卡顿的现象很严重，输入一段内容要等一会儿才会显示完全，在网上找了半天，看到了一个ssh的替代品——<a target="_blank" rel="noopener" href="https://mosh.org/">mosh</a></p>
+<a id="more"></a>
+<h1 id="1-什么是mosh"><a href="#1-什么是mosh" class="headerlink" title="1. 什么是mosh"></a>1. 什么是mosh</h1><p>Mosh最大的特点是基于<strong>UDP</strong>方式传输，支持在服务端创建一个临时的Key供客户端一次性连接，退出后失效；也支持通过SSH的配置进行认证，但数据传输本身还是自身的UDP方式。</p>
+<p>另外，Mosh还有两个我觉得非常有用的功能</p>
+<ul>
+<li>会话的中断不会导致当前正在前端执行的命令中断，相当于你所有的操作都是在screen命令中一样在后台执行。</li>
+<li>会话在中断过后，不会立刻退出，而是启用一个计时器，当网络恢复后会自动重新连接，同时会延续之前的会话，不会重新开启一个。</li>
+</ul>
+<h1 id="2-服务端配置"><a href="#2-服务端配置" class="headerlink" title="2. 服务端配置"></a>2. 服务端配置</h1><p>我的Linux服务器版本是Ubuntu18.04</p>
+<p>输入如下命令安装mosh</p>
+<pre><code class="hljs shell">sudo apt-get update
+sudo apt-get install mosh</code></pre>
+<p>Mosh使用UDP协议连接，端口从60000到61000，网上有教程使用ufw开启端口，但是经过测试是无效的，有一个比较方便的方法时直接在云服务器管理控制台的安全组中添加。</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200926-03.png" alt=""></p>
+<h1 id="3-客户端配置"><a href="#3-客户端配置" class="headerlink" title="3. 客户端配置"></a>3. 客户端配置</h1><p>本地机器是Mac，输入命令安装mosh，注意客户端和服务端都需要安装mosh</p>
+<pre><code class="hljs shell">brew install mosh</code></pre>
+<p>安装完成后需要进入本地shell脚本文件中</p>
+<p>如果安装了zsh，就使用命令<code>vi ~/.zshrc</code></p>
+<p>如果是bash，就使用命令<code>vi ~/.bash_profile</code></p>
+<p>添加如下两行</p>
+<pre><code class="hljs shell">export LC_CTYPE=en_US.UTF-8  
+export LC_ALL=en_US.UTF-8</code></pre>
+<p>保存退出后，使用<code>source ~/.zshrc</code>或者<code>source ~/.bash_profile</code>使得更改生效。</p>
+<p>使用如下命令连接</p>
+<pre><code class="hljs shell">mosh root@IP -p 60001</code></pre>
+<p>输入瞬间变得丝滑起来。</p>
+]]></content>
+      <categories>
+        <category>折腾</category>
+      </categories>
+      <tags>
+        <tag>mosh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>概率论的基本概念</title>
+    <url>/posts/36736857.html</url>
+    <content><![CDATA[<p>本文介绍了概率论的基本概念，包括概率的定义，概率的计算，同时还有随机测试的简单介绍。</p>
+<p><strong>重点</strong></p>
+<ul>
+<li>概率的定义</li>
+<li>条件概率</li>
+<li>乘法公式</li>
+<li>全概率公式</li>
+<li>贝叶斯公式</li>
+</ul>
+<a id="more"></a>
+<h2 id="一、概率的定义"><a href="#一、概率的定义" class="headerlink" title="一、概率的定义"></a>一、概率的定义</h2><p>当我们还不能用数学符号描述一件事情，那么说明我们还没有想清楚这件事。</p>
+<p>所以，我们需要建立元素到数据的<strong>映射</strong></p>
+<h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h3><h4 id="1-1-随机实验"><a href="#1-1-随机实验" class="headerlink" title="1.1 随机实验"></a>1.1 随机实验</h4><ul>
+<li>可以在相同的条件下重复进行</li>
+<li>每次实验结果不止一个，并且事先明确实验的所有可能结果</li>
+<li>进行一次实验前不能够确定那一个结果会出现</li>
+</ul>
+<p>例：抛一枚硬币，观察正面H与反面T出现的情况</p>
+<h4 id="1-2-样本空间"><a href="#1-2-样本空间" class="headerlink" title="1.2 样本空间"></a>1.2 样本空间</h4><p>随机试验$E$的所有可能结果组成的集合称为$E$的<strong>样本空间</strong>，记为$\Omega$</p>
+<p>样本空间中的每个元素，即$E$的每个结果，称为<strong>样本点</strong>，记为$e$</p>
+<h4 id="1-3-随机事件"><a href="#1-3-随机事件" class="headerlink" title="1.3 随机事件"></a>1.3 随机事件</h4><p>样本空间$\Omega$的任意子集$A$称为<strong>随机事件</strong></p>
+<p>观察到样本点$e$，若$e\in A$，则称这一事件发生。</p>
+<ul>
+<li>基本事件：由一个样本点组成的单点集</li>
+<li>复合事件：由两个或两个以上样本点组成的集合</li>
+<li>必然事件：全集$\Omega$</li>
+<li>不可能事件：空集$\emptyset$</li>
+</ul>
+<h3 id="2-事件的集合运算"><a href="#2-事件的集合运算" class="headerlink" title="2. 事件的集合运算"></a>2. 事件的集合运算</h3><ul>
+<li>包含：$A\subset B$，事件B包含事件A，则事件A发生必然导致事件B发生</li>
+<li>相等：$A=B$，即$A\subset B$且$B\subset A$</li>
+<li>和：$A\bigcup B$，即A和B至少有一个发生</li>
+<li>差：$A-B$，即事件A发生且事件B不发生</li>
+<li>积：$A\bigcup B$，记作$AB$，即事件A和事件B都发生</li>
+<li>互不相容：$AB = \emptyset$，即A和B不能同时发生</li>
+<li>互逆：$A\bigcup B=\Omega$ 且$AB = \emptyset$，A和B互逆，通常B记为$\overline{A}$</li>
+</ul>
+<h4 id="2-1-复杂事件的集合运算"><a href="#2-1-复杂事件的集合运算" class="headerlink" title="2.1 复杂事件的集合运算"></a>2.1 复杂事件的集合运算</h4><ul>
+<li>A发生而B和C都不发生：$A\overline{B} \overline{C}=A-B-C=A-(B\bigcup C)$</li>
+<li>A与B都发生而C不发生：$AB\overline{C}=AB-C=AB-ABC$</li>
+<li>三个事件都发生：$ABC$</li>
+<li>三个事件恰好有一个发生：$A\overline{B}\overline{C}+\overline{A}B\overline{C}+\overline{A}\overline{B}C$</li>
+<li>三个事件至少发生一个：$A\bigcup B\bigcup C$</li>
+</ul>
+<h4 id="2-2-常用定律"><a href="#2-2-常用定律" class="headerlink" title="2.2 常用定律"></a>2.2 常用定律</h4><ul>
+<li>交换律</li>
+<li>结合律</li>
+<li>分配率：$A\, \bigcup \,(B\bigcap C)=(A\bigcup B)\bigcap (A\bigcup C)$    $A\, \bigcap \,(B\bigcup C)=(A\bigcap B)\,\bigcup \,(A\bigcap C)$</li>
+<li>德摩根定律：$\overline{A\bigcup B}=\overline{A}\bigcap\overline{B}$    $\overline{A\bigcap B}=\overline{A}\bigcup\overline{B}$</li>
+</ul>
+<h3 id="3-频率"><a href="#3-频率" class="headerlink" title="3. 频率"></a>3. 频率</h3><p>描述了事件发生的频繁程度</p>
+<p><strong>定义</strong></p>
+<ul>
+<li>重复观察n次事件A发生的次数$n_A$称为A的<em>频数</em></li>
+<li>比值$\frac{n_A}{n}$称为事件A发生的<strong>频率</strong>，并记为$f_n(A)$</li>
+</ul>
+<p><strong>性质</strong></p>
+<ol>
+<li><p>$0\,\leq\, f_n(A)\, \leq\, 1$ </p>
+</li>
+<li><p>$f_n(\Omega)=1$</p>
+</li>
+<li><p>若$A_1,\cdots,A_k$两两互不相容，则</p>
+<script type="math/tex; mode=display">f_n(A_1\,\bigcup\,\cdots\bigcup\,A_k)=f_n(A_1)+\cdots+f_n(A_k)</script></li>
+</ol>
+<p><strong>收敛性</strong></p>
+<ul>
+<li>当n足够大，$f_n(A)$收敛于某个常数，这个常数就是<strong>概率</strong>（证明见后续）</li>
+</ul>
+<p><strong>我们应该都听说过德摩根抛硬币的故事，对一个事件进行大量的实验可以得到频率，但是我们不可能对所有事件都做类似的事情，所以就有了概率</strong></p>
+<h3 id="4-概率"><a href="#4-概率" class="headerlink" title="4. 概率"></a>4. 概率</h3><p>表征事件发生的可能性大小</p>
+<p><strong>定义</strong></p>
+<p>$\Omega$为样本空间，对于每一事件A赋予一实数$P(A)$，若P(A)满足下列条件则被称为概率：</p>
+<ul>
+<li>非负性：$0\leq P(A)\leq 1$</li>
+<li>规范性：$P(\Omega)=1$</li>
+<li>可列可加性：$A_1,\cdots,A_n$互不相容，则$P(A_1\,\bigcup\,\cdots\bigcup\,A_k)=P(A_1)+\cdots+P(A_k)$</li>
+</ul>
+<p><strong>性质</strong></p>
+<ol>
+<li>$P(\emptyset)=0$</li>
+<li>$P(\overline{A})=1-P(A)$</li>
+<li>若$A\subset B$，则有$P(A)\leq P(B),\quad P(B-A)=P(B)-P(A)$</li>
+<li>对于任意两个事件A和B，$P(A\bigcup B)=P(A)+P(B)-P(A+B)$</li>
+</ol>
+<h4 id="4-1-古典概型-等可能概型"><a href="#4-1-古典概型-等可能概型" class="headerlink" title="4.1 古典概型(等可能概型)"></a>4.1 古典概型(等可能概型)</h4><p><strong>定义</strong></p>
+<p>若$\Omega$是**有限样本空间，其样本点为$e_1,\cdots e_n$，在有限样本空间中引进概率。</p>
+<p><strong>1/n</strong>称为事件${e_i}$的概率，记为$P({e_i})$</p>
+<script type="math/tex; mode=display">P(\{e_1\})+\cdots +P(\{e_n\})=P(\Omega)=1</script><p>从定义中不难发现古典概型的两个特点：</p>
+<ul>
+<li>样本空间包含<strong>有限</strong>个元素</li>
+<li>试验中每个基本事件发生的可能性相同</li>
+</ul>
+<p>注：<strong>基本事件是两两不相容的</strong></p>
+<p>若事件A包含k个基本事件，则有</p>
+<script type="math/tex; mode=display">P(A)=\sum_{i=1}^kP(\{e_{i_k}\})=\frac{k}{n}</script><h4 id="4-2-几何概型"><a href="#4-2-几何概型" class="headerlink" title="4.2 几何概型"></a>4.2 几何概型</h4><p>数据从有限集合推广到无限集合</p>
+<p>例：约会问题</p>
+<p>两人约定7点到8点在某地会面，先到者等候另一人20分钟，过时就离去，试求这两人会面的概率。</p>
+<p>解：以$x,y$分别表示两人到达的时刻，则会面的充要条件为$|x-y|\leq20$，这就是一个几何概率的问题，可能的结果全体是边长60的正方形里面的点，结果为</p>
+<script type="math/tex; mode=display">P(A)=\frac{60^2-40^2}{60^2}</script><p>从上面的例子不难看出，样本空间从原来的有限的个数，变成了无限的点。</p>
+<p>如果要在半径为1的圆内随机地取一条弦，问弦长超过$\sqrt{3}$的概率是多少？</p>
+<p>3种思路有3种不同的答案</p>
+<p><strong>在数据映射中，我们需要遵循物理世界到数据集合的某种结构保持</strong></p>
+<hr>
+<h2 id="二、概率的计算"><a href="#二、概率的计算" class="headerlink" title="二、概率的计算"></a>二、概率的计算</h2><h3 id="1-条件概率"><a href="#1-条件概率" class="headerlink" title="1. 条件概率"></a>1. 条件概率</h3><p>事件A发生的条件下事件B发生的概率</p>
+<h4 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h4><p>设A，B是两事件，且$P(A)&gt;0$，称</p>
+<script type="math/tex; mode=display">P(B|A)=\frac{P(AB)}{P(A)}</script><p>为在事件A发生的条件下事件B发生的<strong>条件概率</strong></p>
+<p>条件概率符合概率定义中的3个条件</p>
+<p>非负性</p>
+<p>规范性</p>
+<p>可列可加性：$B_1,\cdots,B_n$两两互不相容</p>
+<script type="math/tex; mode=display">P(\bigcup_{i=1}^\infty B_i\,\mid\,A)=\sum_{i=1}^\infty P(B_i\mid A)</script><p>同时也可以使用概率的性质</p>
+<script type="math/tex; mode=display">P(B_1\bigcup B_2)=P(B_1\mid A)+P(B_2\mid A)-P(B_1B_2\mid A)</script><p>注意这里是对任意事件$B_1,B_2$，两者不一定互不相容，如果互不相容，那么$P(B_1B_2)=\emptyset$，与可列可加性不矛盾。</p>
+<h4 id="1-2-乘法公式"><a href="#1-2-乘法公式" class="headerlink" title="1.2 乘法公式"></a>1.2 乘法公式</h4><script type="math/tex; mode=display">P(AB)=P(A)P(B|A)</script><p>推广：一般地，我们有：</p>
+<script type="math/tex; mode=display">P(A_1A_2\cdots A_n)=P(A_1)P(A_2\mid A_1)\cdots P(A_n\mid A_1A_2\cdots A_{n-1})</script><p>大多数应用中，我们会直接获取条件概率，通过它进行计算</p>
+<h4 id="1-3-完备事件组"><a href="#1-3-完备事件组" class="headerlink" title="1.3  完备事件组"></a>1.3  完备事件组</h4><p>设$B_1,\cdots,B_n$是样本空间$\Omega$的一个事件组，若满足</p>
+<ul>
+<li>$B_i\bigcap B_j=\emptyset$ ，对于任意$i\neq j$</li>
+<li>$\bigcup_iB_i=\Omega$</li>
+</ul>
+<p>则$B_1,\cdots,B_n$称为一个完备事件组</p>
+<h4 id="1-4-全概率公式"><a href="#1-4-全概率公式" class="headerlink" title="1.4 全概率公式"></a>1.4 全概率公式</h4><p>设$B_1,\cdots,B_n$是样本空间$\Omega$的一个完备事件组，且$P(B_i)&gt;0(i=1,2,\cdots,n)$，则对于任一随机事件A，有</p>
+<script type="math/tex; mode=display">P(A)=\sum_{i=1}^nP(B_i)P(A\mid B_i)</script><p>当$P(A)$不易求得时，利用此公式</p>
+<h4 id="1-5-贝叶斯公式"><a href="#1-5-贝叶斯公式" class="headerlink" title="1.5 贝叶斯公式"></a>1.5 贝叶斯公式</h4><p>设实验E的样本空间为$\Omega$，$A$为$\Omega$的事件，$B_1,\cdots,B_n$为$S$的一个划分，且$P(A)&gt;0,P(B_i)&gt;0$，则</p>
+<script type="math/tex; mode=display">P(B_i\mid A)=\frac{P(A\mid B_i)P(B_i)}{\sum_{j=1}^nP(A\mid B_j)P(B_j)},i=1,2,\cdots,n</script><p>如：设$A,B$为两事件，$P(B)&gt;0$，则</p>
+<script type="math/tex; mode=display">P(A\mid B)=\frac{P(B\mid A)\times P(A)}{P(B)}</script><p>贝叶斯定理往往与全概率公式同时使用。全概率公式用于”由因求果“的问题，而贝叶斯定理用于”执果寻因“问题。</p>
+<p><strong>常用</strong>：令$n=2$，那么全概率公式和贝叶斯公式分别为：</p>
+<script type="math/tex; mode=display">P(A)=P(A\mid B)P(B)+P(A\mid \overline{B})P(\overline{B})</script><script type="math/tex; mode=display">P(B\mid A)=\frac{P(AB)}{P(A)}=\frac{P(A\mid B)P(B)}{P(A\mid B)P(B)+P(A\mid \overline{B})P(\overline{B})}</script><h4 id="1-6-独立性"><a href="#1-6-独立性" class="headerlink" title="1.6 独立性"></a>1.6 独立性</h4><p><strong>定义</strong>：设$A,B$是两事件，如果满足等式</p>
+<script type="math/tex; mode=display">P(AB)=P(A)P(B)</script><p>则称事件$A$和事件$B$相互独立</p>
+<p><strong>定理</strong>：设$A,B$是两事件，且$P(A)&gt;0$，若$A,B$相互独立，则$P(B\mid A)=P(B)$，反之亦然</p>
+<p><strong>定理</strong>：若事件$A,B$相互独立，则下列各对事件也相互独立，$A\&amp;\overline{B},B\&amp;\overline{A},\overline{A}\&amp;\overline{B}$</p>
+<p><strong>定义</strong>：设$A,B,C$是三个事件，如果满足等式</p>
+<script type="math/tex; mode=display">P(AB)=P(A)P(B),\\ P(BC)=P(B)P(C)\\P(AC)=P(A)P(C)\\P(ABC)=P(A)P(B)P(C)</script><p>则称事件$A,B,C$相互独立</p>
+<hr>
+<h2 id="三、随机测试示例"><a href="#三、随机测试示例" class="headerlink" title="三、随机测试示例"></a>三、随机测试示例</h2><p>实际应用中使用概率论</p>
+<h3 id="1-随机测试初步"><a href="#1-随机测试初步" class="headerlink" title="1.  随机测试初步"></a>1.  随机测试初步</h3><p>假设有一个计算多项式乘法的程序。</p>
+<p>程序可能采用左右两边的某一方式实现：</p>
+<script type="math/tex; mode=display">(x+1)(x-2)(x+3)(x-4)(x+5)(x-6)=x^6-7x^3+25</script><p>思考：</p>
+<ul>
+<li>如何验证左右两边的多项式相等</li>
+<li>假设有一个超大规模的多项式呢？</li>
+</ul>
+<script type="math/tex; mode=display">F(X)?\equiv G(x)</script><h4 id="1-1-规范化"><a href="#1-1-规范化" class="headerlink" title="1.1 规范化"></a>1.1 规范化</h4><p>两个多项式相等当且仅当他们的规范式中所有的对应系数相等，</p>
+<p>那么把$F(x)$变换为规范式，有$O(d^2)$的复杂度</p>
+<h4 id="1-2-随机测试-初步"><a href="#1-2-随机测试-初步" class="headerlink" title="1.2 随机测试-初步"></a>1.2 随机测试-初步</h4><p>设$F(X),G(x)$的最高阶为的$d$，随机算法首先是从${1,\cdots,100d}$中均匀随机（等可能）地选择一个整数$r$，然后计算两个式子的值，进行判断。有$O(d)$的复杂度，大大提高了速度。</p>
+<p>当然，这种算法可能会给出<strong>错误</strong>的答案。</p>
+<p>$F(x)\neq G(x), F(r)=G(r)$，算法检测结果错误</p>
+<p>错误的概率是多少？可以接受吗？</p>
+<p>当$r$是方程$F(x)-G(x)=0$的根时，必然会出现错误结果。</p>
+<p>$F(x)-G(x)$的次数不高于$d$，由代数的基本定理可知，$F(x)-G(x)=0$不可能多于$d$个根。</p>
+<p>那么在${1,\cdots,100d}$中，给出错误答案的概率不会高于$\frac{1}{100}$</p>
+<h3 id="2-随机测试改进"><a href="#2-随机测试改进" class="headerlink" title="2. 随机测试改进"></a>2. 随机测试改进</h3><p>如何改进算法正确率？</p>
+<p>很容易想到两个方向，扩大检测范围，重复多次检测</p>
+<h4 id="2-1-扩大范围"><a href="#2-1-扩大范围" class="headerlink" title="2.1 扩大范围"></a>2.1 扩大范围</h4><p>在更大的范围进行取值，比如在${1,\cdots,1000d}$中进行检测，那么错误答案概率不会超过$\frac{1}{1000}$</p>
+<h4 id="2-2-重复检测"><a href="#2-2-重复检测" class="headerlink" title="2.2 重复检测"></a>2.2 重复检测</h4><p>重复多次进行随机检测</p>
+<ul>
+<li><p>有放回抽样</p>
+<p>$k$次有放回抽样错误率为</p>
+<script type="math/tex; mode=display">P(E_1\,\bigcap\cdots\bigcap\,E_k)=\prod_{i=1}^kP(E_i)\leq(\frac{1}{100})^k</script><p>可以看到，错误率指数级降低</p>
+</li>
+<li><p>无放回抽样</p>
+</li>
+</ul>
+<p>总结：</p>
+<p>无放回比有放回准确率高</p>
+<p>有放回实现比无放回简单</p>
+<p>当$d+1$次无放回抽样后，能够确保准确性，但是算法复杂度提升到$O(d^2)$</p>
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><h3 id="1-概率的定义"><a href="#1-概率的定义" class="headerlink" title="1. 概率的定义"></a>1. 概率的定义</h3><p>$\Omega$为样本空间，对于每一事件A赋予一实数$P(A)$，若P(A)满足下列条件则被称为概率：</p>
+<ul>
+<li>非负性：$0\leq P(A)\leq 1$</li>
+<li>规范性：$P(\Omega)=1$</li>
+<li>可列可加性：$A_1,\cdots,A_n$互不相容，则$P(A_1\,\bigcup\,\cdots\bigcup\,A_k)=P(A_1)+\cdots+P(A_k)$</li>
+</ul>
+<h3 id="2-条件概率"><a href="#2-条件概率" class="headerlink" title="2. 条件概率"></a>2. 条件概率</h3><script type="math/tex; mode=display">P(B|A)=\frac{P(AB)}{P(A)}</script><h3 id="3-乘法公式"><a href="#3-乘法公式" class="headerlink" title="3. 乘法公式"></a>3. 乘法公式</h3><script type="math/tex; mode=display">P(A_1A_2\cdots A_n)=P(A_1)P(A_2\mid A_1)\cdots P(A_n\mid A_1A_2\cdots A_{n-1})</script><h3 id="4-全概率公式"><a href="#4-全概率公式" class="headerlink" title="4. 全概率公式"></a>4. 全概率公式</h3><script type="math/tex; mode=display">P(A)=P(A\mid B_1)P(B_1)+\cdots+P(A\mid B_n)P(B_n)</script><h3 id="5-贝叶斯公式"><a href="#5-贝叶斯公式" class="headerlink" title="5. 贝叶斯公式"></a>5. 贝叶斯公式</h3><script type="math/tex; mode=display">P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)}</script><p>参考：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.icourse163.org/learn/NJU-1450307351?tid=1450738603#/learn/announce">中国大学MOOC-南京大学-数据科学基础</a></li>
+<li>《概率论与数理统计》浙江大学第四版</li>
+</ol>
+]]></content>
+      <categories>
+        <category>数据科学</category>
+      </categories>
+      <tags>
+        <tag>概率论</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>概述与递归简论</title>
     <url>/posts/ddb07891.html</url>
     <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="1-什么是数据结构？"><a href="#1-什么是数据结构？" class="headerlink" title="1. 什么是数据结构？"></a>1. 什么是数据结构？</h2><p>我们把这个词分解开来，首先回答什么是数据。<br><strong>数据</strong>是信息的载体，是数字，字符或其它符号的集合。<br><strong>数据结构</strong>是数据对象和组成对象的数据成员之间的关系。</p>
@@ -1951,609 +2425,6 @@ move disk 1 from A to C</code></pre>
       </categories>
       <tags>
         <tag>策略模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>概率论的基本概念</title>
-    <url>/posts/36736857.html</url>
-    <content><![CDATA[<p>本文介绍了概率论的基本概念，包括概率的定义，概率的计算，同时还有随机测试的简单介绍。</p>
-<p><strong>重点</strong></p>
-<ul>
-<li>概率的定义</li>
-<li>条件概率</li>
-<li>乘法公式</li>
-<li>全概率公式</li>
-<li>贝叶斯公式</li>
-</ul>
-<a id="more"></a>
-<h2 id="一、概率的定义"><a href="#一、概率的定义" class="headerlink" title="一、概率的定义"></a>一、概率的定义</h2><p>当我们还不能用数学符号描述一件事情，那么说明我们还没有想清楚这件事。</p>
-<p>所以，我们需要建立元素到数据的<strong>映射</strong></p>
-<h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h3><h4 id="1-1-随机实验"><a href="#1-1-随机实验" class="headerlink" title="1.1 随机实验"></a>1.1 随机实验</h4><ul>
-<li>可以在相同的条件下重复进行</li>
-<li>每次实验结果不止一个，并且事先明确实验的所有可能结果</li>
-<li>进行一次实验前不能够确定那一个结果会出现</li>
-</ul>
-<p>例：抛一枚硬币，观察正面H与反面T出现的情况</p>
-<h4 id="1-2-样本空间"><a href="#1-2-样本空间" class="headerlink" title="1.2 样本空间"></a>1.2 样本空间</h4><p>随机试验$E$的所有可能结果组成的集合称为$E$的<strong>样本空间</strong>，记为$\Omega$</p>
-<p>样本空间中的每个元素，即$E$的每个结果，称为<strong>样本点</strong>，记为$e$</p>
-<h4 id="1-3-随机事件"><a href="#1-3-随机事件" class="headerlink" title="1.3 随机事件"></a>1.3 随机事件</h4><p>样本空间$\Omega$的任意子集$A$称为<strong>随机事件</strong></p>
-<p>观察到样本点$e$，若$e\in A$，则称这一事件发生。</p>
-<ul>
-<li>基本事件：由一个样本点组成的单点集</li>
-<li>复合事件：由两个或两个以上样本点组成的集合</li>
-<li>必然事件：全集$\Omega$</li>
-<li>不可能事件：空集$\emptyset$</li>
-</ul>
-<h3 id="2-事件的集合运算"><a href="#2-事件的集合运算" class="headerlink" title="2. 事件的集合运算"></a>2. 事件的集合运算</h3><ul>
-<li>包含：$A\subset B$，事件B包含事件A，则事件A发生必然导致事件B发生</li>
-<li>相等：$A=B$，即$A\subset B$且$B\subset A$</li>
-<li>和：$A\bigcup B$，即A和B至少有一个发生</li>
-<li>差：$A-B$，即事件A发生且事件B不发生</li>
-<li>积：$A\bigcup B$，记作$AB$，即事件A和事件B都发生</li>
-<li>互不相容：$AB = \emptyset$，即A和B不能同时发生</li>
-<li>互逆：$A\bigcup B=\Omega$ 且$AB = \emptyset$，A和B互逆，通常B记为$\overline{A}$</li>
-</ul>
-<h4 id="2-1-复杂事件的集合运算"><a href="#2-1-复杂事件的集合运算" class="headerlink" title="2.1 复杂事件的集合运算"></a>2.1 复杂事件的集合运算</h4><ul>
-<li>A发生而B和C都不发生：$A\overline{B} \overline{C}=A-B-C=A-(B\bigcup C)$</li>
-<li>A与B都发生而C不发生：$AB\overline{C}=AB-C=AB-ABC$</li>
-<li>三个事件都发生：$ABC$</li>
-<li>三个事件恰好有一个发生：$A\overline{B}\overline{C}+\overline{A}B\overline{C}+\overline{A}\overline{B}C$</li>
-<li>三个事件至少发生一个：$A\bigcup B\bigcup C$</li>
-</ul>
-<h4 id="2-2-常用定律"><a href="#2-2-常用定律" class="headerlink" title="2.2 常用定律"></a>2.2 常用定律</h4><ul>
-<li>交换律</li>
-<li>结合律</li>
-<li>分配率：$A\, \bigcup \,(B\bigcap C)=(A\bigcup B)\bigcap (A\bigcup C)$    $A\, \bigcap \,(B\bigcup C)=(A\bigcap B)\,\bigcup \,(A\bigcap C)$</li>
-<li>德摩根定律：$\overline{A\bigcup B}=\overline{A}\bigcap\overline{B}$    $\overline{A\bigcap B}=\overline{A}\bigcup\overline{B}$</li>
-</ul>
-<h3 id="3-频率"><a href="#3-频率" class="headerlink" title="3. 频率"></a>3. 频率</h3><p>描述了事件发生的频繁程度</p>
-<p><strong>定义</strong></p>
-<ul>
-<li>重复观察n次事件A发生的次数$n_A$称为A的<em>频数</em></li>
-<li>比值$\frac{n_A}{n}$称为事件A发生的<strong>频率</strong>，并记为$f_n(A)$</li>
-</ul>
-<p><strong>性质</strong></p>
-<ol>
-<li><p>$0\,\leq\, f_n(A)\, \leq\, 1$ </p>
-</li>
-<li><p>$f_n(\Omega)=1$</p>
-</li>
-<li><p>若$A_1,\cdots,A_k$两两互不相容，则</p>
-<script type="math/tex; mode=display">f_n(A_1\,\bigcup\,\cdots\bigcup\,A_k)=f_n(A_1)+\cdots+f_n(A_k)</script></li>
-</ol>
-<p><strong>收敛性</strong></p>
-<ul>
-<li>当n足够大，$f_n(A)$收敛于某个常数，这个常数就是<strong>概率</strong>（证明见后续）</li>
-</ul>
-<p><strong>我们应该都听说过德摩根抛硬币的故事，对一个事件进行大量的实验可以得到频率，但是我们不可能对所有事件都做类似的事情，所以就有了概率</strong></p>
-<h3 id="4-概率"><a href="#4-概率" class="headerlink" title="4. 概率"></a>4. 概率</h3><p>表征事件发生的可能性大小</p>
-<p><strong>定义</strong></p>
-<p>$\Omega$为样本空间，对于每一事件A赋予一实数$P(A)$，若P(A)满足下列条件则被称为概率：</p>
-<ul>
-<li>非负性：$0\leq P(A)\leq 1$</li>
-<li>规范性：$P(\Omega)=1$</li>
-<li>可列可加性：$A_1,\cdots,A_n$互不相容，则$P(A_1\,\bigcup\,\cdots\bigcup\,A_k)=P(A_1)+\cdots+P(A_k)$</li>
-</ul>
-<p><strong>性质</strong></p>
-<ol>
-<li>$P(\emptyset)=0$</li>
-<li>$P(\overline{A})=1-P(A)$</li>
-<li>若$A\subset B$，则有$P(A)\leq P(B),\quad P(B-A)=P(B)-P(A)$</li>
-<li>对于任意两个事件A和B，$P(A\bigcup B)=P(A)+P(B)-P(A+B)$</li>
-</ol>
-<h4 id="4-1-古典概型-等可能概型"><a href="#4-1-古典概型-等可能概型" class="headerlink" title="4.1 古典概型(等可能概型)"></a>4.1 古典概型(等可能概型)</h4><p><strong>定义</strong></p>
-<p>若$\Omega$是**有限样本空间，其样本点为$e_1,\cdots e_n$，在有限样本空间中引进概率。</p>
-<p><strong>1/n</strong>称为事件${e_i}$的概率，记为$P({e_i})$</p>
-<script type="math/tex; mode=display">P(\{e_1\})+\cdots +P(\{e_n\})=P(\Omega)=1</script><p>从定义中不难发现古典概型的两个特点：</p>
-<ul>
-<li>样本空间包含<strong>有限</strong>个元素</li>
-<li>试验中每个基本事件发生的可能性相同</li>
-</ul>
-<p>注：<strong>基本事件是两两不相容的</strong></p>
-<p>若事件A包含k个基本事件，则有</p>
-<script type="math/tex; mode=display">P(A)=\sum_{i=1}^kP(\{e_{i_k}\})=\frac{k}{n}</script><h4 id="4-2-几何概型"><a href="#4-2-几何概型" class="headerlink" title="4.2 几何概型"></a>4.2 几何概型</h4><p>数据从有限集合推广到无限集合</p>
-<p>例：约会问题</p>
-<p>两人约定7点到8点在某地会面，先到者等候另一人20分钟，过时就离去，试求这两人会面的概率。</p>
-<p>解：以$x,y$分别表示两人到达的时刻，则会面的充要条件为$|x-y|\leq20$，这就是一个几何概率的问题，可能的结果全体是边长60的正方形里面的点，结果为</p>
-<script type="math/tex; mode=display">P(A)=\frac{60^2-40^2}{60^2}</script><p>从上面的例子不难看出，样本空间从原来的有限的个数，变成了无限的点。</p>
-<p>如果要在半径为1的圆内随机地取一条弦，问弦长超过$\sqrt{3}$的概率是多少？</p>
-<p>3种思路有3种不同的答案</p>
-<p><strong>在数据映射中，我们需要遵循物理世界到数据集合的某种结构保持</strong></p>
-<hr>
-<h2 id="二、概率的计算"><a href="#二、概率的计算" class="headerlink" title="二、概率的计算"></a>二、概率的计算</h2><h3 id="1-条件概率"><a href="#1-条件概率" class="headerlink" title="1. 条件概率"></a>1. 条件概率</h3><p>事件A发生的条件下事件B发生的概率</p>
-<h4 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h4><p>设A，B是两事件，且$P(A)&gt;0$，称</p>
-<script type="math/tex; mode=display">P(B|A)=\frac{P(AB)}{P(A)}</script><p>为在事件A发生的条件下事件B发生的<strong>条件概率</strong></p>
-<p>条件概率符合概率定义中的3个条件</p>
-<p>非负性</p>
-<p>规范性</p>
-<p>可列可加性：$B_1,\cdots,B_n$两两互不相容</p>
-<script type="math/tex; mode=display">P(\bigcup_{i=1}^\infty B_i\,\mid\,A)=\sum_{i=1}^\infty P(B_i\mid A)</script><p>同时也可以使用概率的性质</p>
-<script type="math/tex; mode=display">P(B_1\bigcup B_2)=P(B_1\mid A)+P(B_2\mid A)-P(B_1B_2\mid A)</script><p>注意这里是对任意事件$B_1,B_2$，两者不一定互不相容，如果互不相容，那么$P(B_1B_2)=\emptyset$，与可列可加性不矛盾。</p>
-<h4 id="1-2-乘法公式"><a href="#1-2-乘法公式" class="headerlink" title="1.2 乘法公式"></a>1.2 乘法公式</h4><script type="math/tex; mode=display">P(AB)=P(A)P(B|A)</script><p>推广：一般地，我们有：</p>
-<script type="math/tex; mode=display">P(A_1A_2\cdots A_n)=P(A_1)P(A_2\mid A_1)\cdots P(A_n\mid A_1A_2\cdots A_{n-1})</script><p>大多数应用中，我们会直接获取条件概率，通过它进行计算</p>
-<h4 id="1-3-完备事件组"><a href="#1-3-完备事件组" class="headerlink" title="1.3  完备事件组"></a>1.3  完备事件组</h4><p>设$B_1,\cdots,B_n$是样本空间$\Omega$的一个事件组，若满足</p>
-<ul>
-<li>$B_i\bigcap B_j=\emptyset$ ，对于任意$i\neq j$</li>
-<li>$\bigcup_iB_i=\Omega$</li>
-</ul>
-<p>则$B_1,\cdots,B_n$称为一个完备事件组</p>
-<h4 id="1-4-全概率公式"><a href="#1-4-全概率公式" class="headerlink" title="1.4 全概率公式"></a>1.4 全概率公式</h4><p>设$B_1,\cdots,B_n$是样本空间$\Omega$的一个完备事件组，且$P(B_i)&gt;0(i=1,2,\cdots,n)$，则对于任一随机事件A，有</p>
-<script type="math/tex; mode=display">P(A)=\sum_{i=1}^nP(B_i)P(A\mid B_i)</script><p>当$P(A)$不易求得时，利用此公式</p>
-<h4 id="1-5-贝叶斯公式"><a href="#1-5-贝叶斯公式" class="headerlink" title="1.5 贝叶斯公式"></a>1.5 贝叶斯公式</h4><p>设实验E的样本空间为$\Omega$，$A$为$\Omega$的事件，$B_1,\cdots,B_n$为$S$的一个划分，且$P(A)&gt;0,P(B_i)&gt;0$，则</p>
-<script type="math/tex; mode=display">P(B_i\mid A)=\frac{P(A\mid B_i)P(B_i)}{\sum_{j=1}^nP(A\mid B_j)P(B_j)},i=1,2,\cdots,n</script><p>如：设$A,B$为两事件，$P(B)&gt;0$，则</p>
-<script type="math/tex; mode=display">P(A\mid B)=\frac{P(B\mid A)\times P(A)}{P(B)}</script><p>贝叶斯定理往往与全概率公式同时使用。全概率公式用于”由因求果“的问题，而贝叶斯定理用于”执果寻因“问题。</p>
-<p><strong>常用</strong>：令$n=2$，那么全概率公式和贝叶斯公式分别为：</p>
-<script type="math/tex; mode=display">P(A)=P(A\mid B)P(B)+P(A\mid \overline{B})P(\overline{B})</script><script type="math/tex; mode=display">P(B\mid A)=\frac{P(AB)}{P(A)}=\frac{P(A\mid B)P(B)}{P(A\mid B)P(B)+P(A\mid \overline{B})P(\overline{B})}</script><h4 id="1-6-独立性"><a href="#1-6-独立性" class="headerlink" title="1.6 独立性"></a>1.6 独立性</h4><p><strong>定义</strong>：设$A,B$是两事件，如果满足等式</p>
-<script type="math/tex; mode=display">P(AB)=P(A)P(B)</script><p>则称事件$A$和事件$B$相互独立</p>
-<p><strong>定理</strong>：设$A,B$是两事件，且$P(A)&gt;0$，若$A,B$相互独立，则$P(B\mid A)=P(B)$，反之亦然</p>
-<p><strong>定理</strong>：若事件$A,B$相互独立，则下列各对事件也相互独立，$A\&amp;\overline{B},B\&amp;\overline{A},\overline{A}\&amp;\overline{B}$</p>
-<p><strong>定义</strong>：设$A,B,C$是三个事件，如果满足等式</p>
-<script type="math/tex; mode=display">P(AB)=P(A)P(B),\\ P(BC)=P(B)P(C)\\P(AC)=P(A)P(C)\\P(ABC)=P(A)P(B)P(C)</script><p>则称事件$A,B,C$相互独立</p>
-<hr>
-<h2 id="三、随机测试示例"><a href="#三、随机测试示例" class="headerlink" title="三、随机测试示例"></a>三、随机测试示例</h2><p>实际应用中使用概率论</p>
-<h3 id="1-随机测试初步"><a href="#1-随机测试初步" class="headerlink" title="1.  随机测试初步"></a>1.  随机测试初步</h3><p>假设有一个计算多项式乘法的程序。</p>
-<p>程序可能采用左右两边的某一方式实现：</p>
-<script type="math/tex; mode=display">(x+1)(x-2)(x+3)(x-4)(x+5)(x-6)=x^6-7x^3+25</script><p>思考：</p>
-<ul>
-<li>如何验证左右两边的多项式相等</li>
-<li>假设有一个超大规模的多项式呢？</li>
-</ul>
-<script type="math/tex; mode=display">F(X)?\equiv G(x)</script><h4 id="1-1-规范化"><a href="#1-1-规范化" class="headerlink" title="1.1 规范化"></a>1.1 规范化</h4><p>两个多项式相等当且仅当他们的规范式中所有的对应系数相等，</p>
-<p>那么把$F(x)$变换为规范式，有$O(d^2)$的复杂度</p>
-<h4 id="1-2-随机测试-初步"><a href="#1-2-随机测试-初步" class="headerlink" title="1.2 随机测试-初步"></a>1.2 随机测试-初步</h4><p>设$F(X),G(x)$的最高阶为的$d$，随机算法首先是从${1,\cdots,100d}$中均匀随机（等可能）地选择一个整数$r$，然后计算两个式子的值，进行判断。有$O(d)$的复杂度，大大提高了速度。</p>
-<p>当然，这种算法可能会给出<strong>错误</strong>的答案。</p>
-<p>$F(x)\neq G(x), F(r)=G(r)$，算法检测结果错误</p>
-<p>错误的概率是多少？可以接受吗？</p>
-<p>当$r$是方程$F(x)-G(x)=0$的根时，必然会出现错误结果。</p>
-<p>$F(x)-G(x)$的次数不高于$d$，由代数的基本定理可知，$F(x)-G(x)=0$不可能多于$d$个根。</p>
-<p>那么在${1,\cdots,100d}$中，给出错误答案的概率不会高于$\frac{1}{100}$</p>
-<h3 id="2-随机测试改进"><a href="#2-随机测试改进" class="headerlink" title="2. 随机测试改进"></a>2. 随机测试改进</h3><p>如何改进算法正确率？</p>
-<p>很容易想到两个方向，扩大检测范围，重复多次检测</p>
-<h4 id="2-1-扩大范围"><a href="#2-1-扩大范围" class="headerlink" title="2.1 扩大范围"></a>2.1 扩大范围</h4><p>在更大的范围进行取值，比如在${1,\cdots,1000d}$中进行检测，那么错误答案概率不会超过$\frac{1}{1000}$</p>
-<h4 id="2-2-重复检测"><a href="#2-2-重复检测" class="headerlink" title="2.2 重复检测"></a>2.2 重复检测</h4><p>重复多次进行随机检测</p>
-<ul>
-<li><p>有放回抽样</p>
-<p>$k$次有放回抽样错误率为</p>
-<script type="math/tex; mode=display">P(E_1\,\bigcap\cdots\bigcap\,E_k)=\prod_{i=1}^kP(E_i)\leq(\frac{1}{100})^k</script><p>可以看到，错误率指数级降低</p>
-</li>
-<li><p>无放回抽样</p>
-</li>
-</ul>
-<p>总结：</p>
-<p>无放回比有放回准确率高</p>
-<p>有放回实现比无放回简单</p>
-<p>当$d+1$次无放回抽样后，能够确保准确性，但是算法复杂度提升到$O(d^2)$</p>
-<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><h3 id="1-概率的定义"><a href="#1-概率的定义" class="headerlink" title="1. 概率的定义"></a>1. 概率的定义</h3><p>$\Omega$为样本空间，对于每一事件A赋予一实数$P(A)$，若P(A)满足下列条件则被称为概率：</p>
-<ul>
-<li>非负性：$0\leq P(A)\leq 1$</li>
-<li>规范性：$P(\Omega)=1$</li>
-<li>可列可加性：$A_1,\cdots,A_n$互不相容，则$P(A_1\,\bigcup\,\cdots\bigcup\,A_k)=P(A_1)+\cdots+P(A_k)$</li>
-</ul>
-<h3 id="2-条件概率"><a href="#2-条件概率" class="headerlink" title="2. 条件概率"></a>2. 条件概率</h3><script type="math/tex; mode=display">P(B|A)=\frac{P(AB)}{P(A)}</script><h3 id="3-乘法公式"><a href="#3-乘法公式" class="headerlink" title="3. 乘法公式"></a>3. 乘法公式</h3><script type="math/tex; mode=display">P(A_1A_2\cdots A_n)=P(A_1)P(A_2\mid A_1)\cdots P(A_n\mid A_1A_2\cdots A_{n-1})</script><h3 id="4-全概率公式"><a href="#4-全概率公式" class="headerlink" title="4. 全概率公式"></a>4. 全概率公式</h3><script type="math/tex; mode=display">P(A)=P(A\mid B_1)P(B_1)+\cdots+P(A\mid B_n)P(B_n)</script><h3 id="5-贝叶斯公式"><a href="#5-贝叶斯公式" class="headerlink" title="5. 贝叶斯公式"></a>5. 贝叶斯公式</h3><script type="math/tex; mode=display">P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)}</script><p>参考：</p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://www.icourse163.org/learn/NJU-1450307351?tid=1450738603#/learn/announce">中国大学MOOC-南京大学-数据科学基础</a></li>
-<li>《概率论与数理统计》浙江大学第四版</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据科学</category>
-      </categories>
-      <tags>
-        <tag>概率论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>虚拟化技术</title>
-    <url>/posts/aa435277.html</url>
-    <content><![CDATA[<h1 id="虚拟化技术"><a href="#虚拟化技术" class="headerlink" title="虚拟化技术"></a>虚拟化技术</h1><p>虚拟化意味着对计算机资源的抽象。在云计算中，虚拟化技术可以用来对<strong>数据中心</strong>的各种资源进行虚拟化和管理，是实现云计算的关键技术。可以实现<strong>服务器虚拟化、存储虚拟化、网络虚拟化和桌面虚拟化。</strong></p>
-<h2 id="1-虚拟化技术简介"><a href="#1-虚拟化技术简介" class="headerlink" title="1. 虚拟化技术简介"></a>1. 虚拟化技术简介</h2><h3 id="1-1-核心思想"><a href="#1-1-核心思想" class="headerlink" title="1.1 核心思想"></a>1.1 核心思想</h3><p>虚拟化技术的<strong>核心思想</strong>是利用软件或固件管理程序构成虚拟化层，<strong>把物理资源映射为虚拟资源</strong>。在虚拟资源上可以<strong>安装和部署多个虚拟机</strong>，实现<strong>多用户共享物理资源</strong>。</p>
-<h3 id="1-2-虚拟化的实现"><a href="#1-2-虚拟化的实现" class="headerlink" title="1.2 虚拟化的实现"></a>1.2 虚拟化的实现</h3><p>添加一个称为虚拟化层的软件，管理客户操作系统，使其能够独立于主机操作系统同时运行在同一个硬件上。</p>
-<h2 id="2-数据中心虚拟化"><a href="#2-数据中心虚拟化" class="headerlink" title="2. 数据中心虚拟化"></a>2. 数据中心虚拟化</h2><p>云计算中运用虚拟化技术主要体现在对<strong>数据中心</strong>的虚拟化上。</p>
-<p>数据中心是云计算技术的核心，由于数据中心的规模不断增大，成本上升，管理日趋复杂，传统的数据中心网络采用的多种技术，业务之间的孤立性，使得其结构复杂，导致服务器之间存在操作系统和上层软件异构、接口和数据格式不统一等问题。</p>
-<p>随着云计算的发展，传统数据中心逐渐过渡到虚拟化数据中心，即采用虚拟化技术将原来数据中心的物理资源进行抽象整合。满足虚拟数据中心网络高速、扁平、虚拟化的要求。它的<strong>作用</strong>如下：</p>
-<ul>
-<li>实现资源的动态分配和调度，提高现有资源的利用率和服务可靠性</li>
-<li>提供自动化的服务开通能力，降低运维成本</li>
-<li>具有有效的安全机制和可靠性机制，满足公众客户和企业客户的安全需求</li>
-<li>方便系统升级、迁移和改造</li>
-</ul>
-<p>数据中心的虚拟化是通过服务器虚拟化、存储虚拟化和网络虚拟化实现的。服务器虚拟化在云计算中是最重要和最关键的。</p>
-<ul>
-<li><strong>服务器虚拟化</strong>：将一个或多个物理服务器虚拟成多个逻辑上的服务器，集中管理</li>
-<li><strong>存储虚拟化</strong>：把分布的异构存储设备统一为一个或几个大的存储池，方便用户使用和管理</li>
-<li><strong>网络虚拟化</strong>：在底层物理网络和网络用户之间增加一个抽象层，其向下对物理网络资源进行分割，向上提供虚拟网络</li>
-</ul>
-<h3 id="2-1-服务器虚拟化"><a href="#2-1-服务器虚拟化" class="headerlink" title="2.1 服务器虚拟化"></a>2.1 服务器虚拟化</h3><h4 id="2-2-1-服务器虚拟化的层次"><a href="#2-2-1-服务器虚拟化的层次" class="headerlink" title="2.2.1 服务器虚拟化的层次"></a>2.2.1 服务器虚拟化的层次</h4><h5 id="1-寄居虚拟化"><a href="#1-寄居虚拟化" class="headerlink" title="1. 寄居虚拟化"></a>1. 寄居虚拟化</h5><p>寄居虚拟化层一般称为<strong>虚拟机监控器（VMM）</strong>。VMM安装在已有的主机操作系统上。损耗大，没有独立的<em>Hypervisor</em>层。</p>
-<h5 id="2-裸机虚拟化"><a href="#2-裸机虚拟化" class="headerlink" title="2. 裸机虚拟化"></a>2. 裸机虚拟化</h5><p>直接将VMM安装在服务器硬件设备中，也可以认为该架构中的VMM是一个操作系统，一般称为<code>Hypervisor</code>，实现从虚拟资源到物理资源的映射。</p>
-<p>x86体系结构的处理器并不是完全支持虚拟化，因为某些x86特权指令在地特权级上下文执行时，不能产生自陷，导致VMM无法直接捕获特权指令。解决方案是基于动态指令转换或硬件辅助的完全虚拟化技术和半虚拟化技术。</p>
-<h4 id="2-2-2-服务器虚拟化的底层实现"><a href="#2-2-2-服务器虚拟化的底层实现" class="headerlink" title="2.2.2 服务器虚拟化的底层实现"></a>2.2.2 服务器虚拟化的底层实现</h4><h5 id="1-CPU的虚拟化"><a href="#1-CPU的虚拟化" class="headerlink" title="1. CPU的虚拟化"></a>1. CPU的虚拟化</h5><ul>
-<li>任意时刻一个物理CPU只能运行一个虚拟CPU</li>
-<li>每个客户操作系统可以使用一个或多个虚拟CPU</li>
-<li>在各个操作系统之间，虚拟CPU运行相互隔离，互不影响</li>
-</ul>
-<p>CPU虚拟化需要解决<strong>正确运行</strong>和<strong>调度</strong>两个关键问题。</p>
-<p>虚拟CPU的<strong>正确运行</strong>是要保证虚拟机指令正确运行，而且各个虚拟机之间不能相互影响。现有的实现技术包括模拟执行和监控执行。</p>
-<p><strong>调度</strong>问题是指VMM决定当前哪个虚拟CPU在物理CPU上运行，要保证隔离性、公平性和性能。</p>
-<h5 id="2-内存虚拟化"><a href="#2-内存虚拟化" class="headerlink" title="2. 内存虚拟化"></a>2. 内存虚拟化</h5><p>内存虚拟化技术把物理内存统一管理，包装成多个虚拟的物理内 存提供给若干虚拟机使用，每个虚拟机拥有各自独立的内存空间。</p>
-<p>内存虚拟化的思路主要是分块共享，内存共享的核心是内存页面的写时复刻（Copy on Write）</p>
-<p>虚拟内存的管理包括3种地址：机器地址、物理地址和虚拟地址。</p>
-<h5 id="3-I-O设备虚拟化"><a href="#3-I-O设备虚拟化" class="headerlink" title="3. I/O设备虚拟化"></a>3. I/O设备虚拟化</h5><p>把真实的设备统一管理起来，包装成多个虚拟设备给虚拟机使用。</p>
-<p>I/O设备虚拟化同样是由VMM进行管理的，主要有全虚拟化、半虚拟化和软件模拟3种思路。其中软件模拟是主流。</p>
-<h4 id="2-2-3-虚拟机迁移"><a href="#2-2-3-虚拟机迁移" class="headerlink" title="2.2.3 虚拟机迁移"></a>2.2.3 虚拟机迁移</h4><p>将虚拟机实例从源宿主机迁移到目标宿主机，并且在目标宿主机上能够将虚拟机运行状态恢复到其在迁移之前的状态。从虚拟机迁移的源于目的的角度看，虚拟机迁移包括3类：</p>
-<ul>
-<li>物理机到虚拟机 P2V （Physical-to-Virtual）</li>
-<li>虚拟机到虚拟机 V2V</li>
-<li>虚拟机到物理机 V2P</li>
-</ul>
-<p>其中<strong>虚拟机到虚拟机</strong>的迁移是云计算关注的<strong>重点</strong>。</p>
-<h5 id="1-虚拟机动态迁移"><a href="#1-虚拟机动态迁移" class="headerlink" title="1. 虚拟机动态迁移"></a>1. 虚拟机动态迁移</h5><p><strong>实时迁移</strong>（Live Migration），就是保持虚拟机运行的同时，把它从一台计算机迁移到另一台计算机，并在目的计算机恢复运行的技术。<strong>动态实时迁移</strong>对云计算至关重要。</p>
-<ul>
-<li>云计算中心物理服务器负载处于动态变化中，当无法提供额外的物理资源时，可以将占用热门物理资源的虚拟机迁移到其它物理服务器，以达到负载均衡</li>
-<li>物理服务器定期升级的需要，升级前将虚拟机迁移到其他物理服务器，等升级完成再迁移回来</li>
-</ul>
-<h5 id="2-迁移的步骤"><a href="#2-迁移的步骤" class="headerlink" title="2. 迁移的步骤"></a>2. 迁移的步骤</h5><ol>
-<li>预迁移：主机A选定一个目的计算机作为VM的新主机</li>
-<li>预定资源：主机向主机B发送迁移请求，确认B是否有必须资源，有就预定这些资源</li>
-<li>预复制：主机A以迭代的方式将VM的内存页复制到主机B上，第一轮迭代传送所有的页，后面的迭代只复制前一轮传送过程中被修改过的页面。</li>
-<li>停机复制：停止主机A的VM，把它的网络连接重定向到B。传送CPU状态和前一轮传送过程中被修改过的页。此时，主机A与B有一致的VM映像</li>
-<li>提交：主机B通知A成功收到VM映像，主机A确认消息，抛弃或销毁其上的VM</li>
-<li>启动：启动B上的VM，迁移后使用B上的设备驱动，广播新的IP地址</li>
-</ol>
-<h5 id="3-迁移的内容"><a href="#3-迁移的内容" class="headerlink" title="3. 迁移的内容"></a>3. 迁移的内容</h5><h6 id="内存迁移"><a href="#内存迁移" class="headerlink" title="内存迁移"></a>内存迁移</h6><p>是虚拟机迁移最困难的部分。</p>
-<p>一个完整的内存迁移可以分为3个阶段：</p>
-<ol>
-<li>Push：在VM运行的同时，将它的一些内存页面通过网络复制到目的机器上，过程中被修改的页面需要重传，以保证内容的一致性。</li>
-<li>Stop-and-Copy：VM停止工作，把剩下的页面复制到计算机上，然后在目的计算机启动新的VM</li>
-<li>Pull：新的虚拟机运行过程中，如果访问到未被复制的页面，就会出现页错误并从原来的VM处把该页复制过来</li>
-</ol>
-<p>实际操作中没有必要同时包含上述3个阶段。下面是3种迁移策略的优劣比较：</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20201031-01.png" alt=""></p>
-<h6 id="网络资源的迁移"><a href="#网络资源的迁移" class="headerlink" title="网络资源的迁移"></a>网络资源的迁移</h6><ul>
-<li>虚拟机这种系统级别的封装方式意味着迁移时VM的所有网络设备，包括协议状态(如TCP连接状态)以及IP地址都要随之一起迁移。</li>
-<li>在局域网内，可以通过发送ARP重定向包，将VM的IP地址与目的机器的MAC地址相绑定， 之后的所有包就可以发送到目的机器上。</li>
-</ul>
-<h6 id="存储设备的迁移"><a href="#存储设备的迁移" class="headerlink" title="存储设备的迁移"></a>存储设备的迁移</h6><ul>
-<li>迁移存储设备的最大障碍在于需要占用大量时间和网络带宽，通常的解决办法是以共享的方式共享数据和文件系统，而非真正迁移。</li>
-<li>目前大多数集群使用NAS(Network Attached Storage，网络连接存储)作为存储设备共 享数据。</li>
-</ul>
-<h4 id="2-2-4-隔离技术"><a href="#2-2-4-隔离技术" class="headerlink" title="2.2.4 隔离技术"></a>2.2.4 隔离技术</h4><p>虚拟机隔离是指虚拟机之间在没有授权许可的情况下，互相之间不可通信，不可联系的一种技术。</p>
-<ul>
-<li>软件角度：互相隔离的虚拟机之间保持独立，如同一个完整的计算机</li>
-<li>硬件角度：被隔离的虚拟机相当于一台物理机，有自己的CPU、内存、硬盘、I/O等，它与宿主机之间保持互相独立的状态</li>
-<li>网络角度：被隔离的虚拟机如同物理机一样，既可以对外提供网络服务，也一样可以从外界接受网络服务</li>
-</ul>
-<p>现有虚拟机隔离机制主要包括：</p>
-<ul>
-<li>网络隔离</li>
-<li>构建虚拟安全文件防护网</li>
-<li>基于访问控制的逻辑隔离机制</li>
-<li>通过硬件虚拟让每一个虚拟机无法突破虚拟机管理器给出的资源限制</li>
-<li>硬件提供的内存保护机制</li>
-<li>进程地址空间的保护机制，IP地址隔离</li>
-</ul>
-<p><strong>确保虚拟机之间的安全与可靠性</strong></p>
-<h5 id="1-内存隔离"><a href="#1-内存隔离" class="headerlink" title="1. 内存隔离"></a>1. 内存隔离</h5><p><strong>内存管理单元</strong>（MMU Memory Management Unit）</p>
-<ul>
-<li>管理虚拟存储器、物理存储器的控制路线</li>
-<li>负责将虚拟地址映射为物理地址</li>
-<li>提供硬件机制的内存访问授权</li>
-</ul>
-<p>以Xen为例，它在虚拟内存到机器内存之间引入了一层中间地址，Guest OS看到的是这层中间地址，而不是机器的实际地址。Guest OS感觉自己的物理地址从0开始，是连续的，但Xen将这层中间地址真正地映射到机器地址上却可以是不连续的，这样保证了所有的物理内存可被任意分配给不同的Guest OS。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20201031-02.png" alt=""></p>
-<p>虚拟机监控器使用分段和分页机制对自身的物理内存进行保护。x86体系结构提供了支 持分段机制的虚拟内存，这能够提供另一种形式的特权级分离。</p>
-<p>每个段包括基址、段限和一些属性位。</p>
-<h5 id="2-网络隔离"><a href="#2-网络隔离" class="headerlink" title="2. 网络隔离"></a>2. 网络隔离</h5><p><strong>目标</strong>：确保把有害的攻击隔离，在可信网络之外和保证可信网络内部信息不外泄的前提下，完成网间数据的安全交换。</p>
-<p><strong>关键</strong>：系统对通信数据的控制，即通过不可路由的协议完成网间数据交换</p>
-<p><strong>问题</strong>：通信硬件工作在网络最下层（物理层），不能感知交换数据的机密性、完整性、可用性、可控性、抗抵赖等安全要素。</p>
-<p><strong>解决方案</strong>：通过访问控制、身份认证、加密签名等安全机制来实现，这些机制都是通过软件实现的。</p>
-<p><strong>实现原理</strong>：通过专用通信设备、专有安全协议和加密验证机制及应用数据提取和鉴别认证技术，进行不同安全级别网络之间的数据交换。</p>
-<p><strong>效果</strong>：</p>
-<ul>
-<li>彻底阻断了网络间的直接TCP/IP连接</li>
-<li>保证了网间数据交 换的安全、可控</li>
-<li>杜绝了由于操作系统和网络协议自身漏洞带来的安全风险 </li>
-</ul>
-<h3 id="2-2-存储虚拟化"><a href="#2-2-存储虚拟化" class="headerlink" title="2.2 存储虚拟化"></a>2.2 存储虚拟化</h3><p>存储虚拟化将系统中分散的存储资源整合起来。</p>
-<ul>
-<li>提高了存储资源利用率</li>
-<li>降低单位存储空间成本</li>
-<li>降低存储管理的负担和复杂性</li>
-</ul>
-<p><strong>技术与效果</strong></p>
-<p>在虚拟层通过适用数据镜像、数据校验和多路径等技术，提高了数据的可靠性及系统的可用性</p>
-<p>利用负载均衡、数据迁移、数据块重组等技术，提升系统的潜在性能</p>
-<p>整合和重组底层物理资源，得到多种不同性能和可靠性的 新的虚拟设备，满足多种存储应用的需求</p>
-<h4 id="2-2-1-存储虚拟化的一般模型"><a href="#2-2-1-存储虚拟化的一般模型" class="headerlink" title="2.2.1 存储虚拟化的一般模型"></a>2.2.1 存储虚拟化的一般模型</h4><p>虚拟化存储系统在原有存储系统结构上增加了虚拟化层，将多个存储单元抽象成一个虚拟存储池。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20201101-01.png" alt=""></p>
-<p>它的优势如下：</p>
-<ul>
-<li>减少存储系统的管理开销</li>
-<li>实现存储系统数据共享</li>
-<li>提供透明的高可靠性和可扩展性</li>
-</ul>
-<h4 id="2-2-2-存储虚拟化的实现方式"><a href="#2-2-2-存储虚拟化的实现方式" class="headerlink" title="2.2.2 存储虚拟化的实现方式"></a>2.2.2 存储虚拟化的实现方式</h4><h5 id="1-基于主机的存储虚拟化"><a href="#1-基于主机的存储虚拟化" class="headerlink" title="1. 基于主机的存储虚拟化"></a>1. 基于主机的存储虚拟化</h5><p>也称基于服务器的存储虚拟化或者基于系统卷管理器的存储虚拟化，其一般是通过逻辑卷管理来实现的。虚拟机为物理卷映射到逻辑卷提供了一个虚拟层。</p>
-<p>虚拟机的主要功能如下：</p>
-<ul>
-<li>数据存储共享</li>
-<li>存储资源管理</li>
-<li>数据复制及迁移 </li>
-<li>集群系统</li>
-<li>远程备份</li>
-<li>灾难恢复</li>
-</ul>
-<h5 id="2-基于存储设备的存储虚拟化"><a href="#2-基于存储设备的存储虚拟化" class="headerlink" title="2. 基于存储设备的存储虚拟化"></a>2. 基于存储设备的存储虚拟化</h5><p>也称基于存储控制器的存储虚拟化。主要是在存储设备的磁盘、 适配器或者控制器上实现虚拟化功能。</p>
-<p>有很多的存储设备的内部都有功能比较强的处理器，带有专门的嵌入式 统，可以在存储子系统的内部进行存储虚拟化，对外提供虚拟化磁盘。</p>
-<h5 id="3-基于网络的存储虚拟化"><a href="#3-基于网络的存储虚拟化" class="headerlink" title="3. 基于网络的存储虚拟化"></a>3. 基于网络的存储虚拟化</h5><p>在网络设备上实现存 储虚拟化功能，包括基于<strong>互连设备</strong>和基于<strong>路由器</strong>两种方式。</p>
-<h5 id="4-优劣比较"><a href="#4-优劣比较" class="headerlink" title="4. 优劣比较"></a>4. 优劣比较</h5><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>方式</th>
-<th>优势</th>
-<th>劣势</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>主机</td>
-<td>性价比较高</td>
-<td>性能较差、可扩展性差、不支持异构平台</td>
-</tr>
-<tr>
-<td>存储设备</td>
-<td>存储子系统与主机无关，对系统性能的影响比较小，较容易管理</td>
-<td>对于包含异构存储设备的SAN存储系统，虚拟化方法的效果不好，设备规模有限并不能进行级联，可扩展性差</td>
-</tr>
-<tr>
-<td>网络</td>
-<td>在<strong>性能、效果和安全</strong>都要好一些</td>
-<td>连接主机到存储网络的<strong>路由器出现故障</strong>导致与故障路由器连接在一起的主机受到影响，数据无法访问</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="2-3-网络虚拟化"><a href="#2-3-网络虚拟化" class="headerlink" title="2.3 网络虚拟化"></a>2.3 网络虚拟化</h3><p>传统数据中心由于服务器之间操作系统和上层软件异构、接口于数据格式不统一，数据中心内网络传输效率低。使用云计算后，数据同步传送的大流量、备份的大流量、虚拟机迁移的大流量，采用统一的交换网络减少布线、维护工作量和扩容成本。引入虚拟化技术后，数据中心网络虚拟化分为核心层、接入层和虚拟机网络虚拟化三个层面</p>
-<h3 id="2-4-桌面虚拟化"><a href="#2-4-桌面虚拟化" class="headerlink" title="2.4 桌面虚拟化"></a>2.4 桌面虚拟化</h3><p>每个桌面镜像就是一个带有应用程序的操作系统，终端用户通过一个虚拟显示协议来访问他们的桌面系统。这样做 的目的就是使用户的使用体验同他们使用桌面上的PC一样。</p>
-<p>引用：</p>
-<p>[1]刘鹏.云计算[M].电子工业出版社:北京,2015:250-268.</p>
-]]></content>
-      <categories>
-        <category>云计算</category>
-      </categories>
-      <tags>
-        <tag>虚拟化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>商业模式类型</title>
-    <url>/posts/dc6b170d.html</url>
-    <content><![CDATA[<h1 id="商业模式类型"><a href="#商业模式类型" class="headerlink" title="商业模式类型"></a>商业模式类型</h1><p>本文将介绍5种商业模式类型</p>
-<ul>
-<li>分拆商业模式</li>
-<li>长尾商业模式</li>
-<li>开放式的商业模式</li>
-<li>多边商业模式</li>
-<li>免费商业模式</li>
-</ul>
-<h2 id="1-分拆商业模式"><a href="#1-分拆商业模式" class="headerlink" title="1. 分拆商业模式"></a>1. 分拆商业模式</h2><p>对于分拆商业模式，首先需要了解一些基本概念。</p>
-<p>我们认为企业内部有3类<strong>规则</strong>：</p>
-<ul>
-<li>经济</li>
-<li>竞争</li>
-<li>文化</li>
-</ul>
-<p>存在3种不同的基本<strong>业务类型</strong>以及它们对应的<strong>价值信条</strong>：</p>
-<ul>
-<li>客户关系型业务——亲近顾客</li>
-<li>产品创新型业务——产品领先</li>
-<li>基础设施型业务——运营卓越</li>
-</ul>
-<p>每种类型的业务都有不同的驱动因素，虽然它们可能同时存在于一家公司，但是由于彼此之间的冲突，需要进行分拆。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th></th>
-<th>新产品开发</th>
-<th>客户关系管理</th>
-<th>基础设施管理</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>经济</td>
-<td>速度是关键，越早获得的溢价越高</td>
-<td>获取成本高，提高客单价，范围经济</td>
-<td>大规模生产降低单位成本，规模是关键</td>
-</tr>
-<tr>
-<td>竞争</td>
-<td>针对人才，门槛低，小玩家多</td>
-<td>针对范围竞争，寡头占领市场(7:3:1)</td>
-<td>针对规模竞争，寡头占领市场(8:2)</td>
-</tr>
-<tr>
-<td>文化</td>
-<td>以员工为核心，鼓励创新人才</td>
-<td>高度面向服务，客户至上心态</td>
-<td>关注成本，统一标准，可预测性和有效性</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>分拆商业模式的一个典型的例子是可口可乐。</p>
-<ul>
-<li><p>新产品</p>
-<p>追求健康化：适应无糖的趋势</p>
-<p>Costa咖啡，运动饮料，不再局限于可乐</p>
-</li>
-<li><p>客户关系</p>
-<p>本地品牌收购</p>
-<p>产品运营：diet coke到zero零度，摆脱女性专属的形象</p>
-<p>外包装营销：小瓶，时尚罐和小罐</p>
-</li>
-<li><p>基础运营</p>
-<p>调整灌装线：外包灌装</p>
-</li>
-</ul>
-<h2 id="2-多边平台商业模式"><a href="#2-多边平台商业模式" class="headerlink" title="2. 多边平台商业模式"></a>2. 多边平台商业模式</h2><p>多边平台将两个或更多独立但相互依存的客户群体连接在一起。</p>
-<p>只有相关客户群体同时存在的时候，平台才具有价值。平台通过促进不同群体之间的互动而创造价值。比如信用卡连接商家和持卡人，计算机操作系统连接硬件厂商，应用开发商和用户。</p>
-<p>单个用户群体的价值本质上取决于平台中另一群体的用户数量，这就产生了一个难题：“先有鸡还是先有蛋“。需要弄清楚哪一“边”能够更好的吸引其它“边”，从而提供免费服务甚至补贴，比如B站：观众免费，补贴Up主。</p>
-<p>多边平台的价值提升在于它所吸引的用户数量的增加，这一现象也叫做网络效应。</p>
-<h2 id="3-免费商业模式"><a href="#3-免费商业模式" class="headerlink" title="3. 免费商业模式"></a>3. 免费商业模式</h2><p>在免费商业模式中，至少有一个关键的客户群体可以持续免费地享受服务。</p>
-<p><strong>三种可行的免费商业模式</strong>：（至少一个群体将得到免费的商品）</p>
-<ul>
-<li>广告模式：基于多边平台的免费商品</li>
-<li>免费增值：免费的基本服务，可选的增值服务</li>
-<li>诱饵&amp;陷阱：以免费或很便宜的初始价格吸引客户，并引导其重复购买</li>
-</ul>
-<p>好的产品和服务以及高流量会吸引广告商，进而补贴产品和服务。但是要考虑广告费能否支撑起产品服务质量，现在的情况是巨头吞噬广告费的产品太多，流量红利已见底。</p>
-<h2 id="4-诱饵-amp-陷阱模式"><a href="#4-诱饵-amp-陷阱模式" class="headerlink" title="4. 诱饵&amp;陷阱模式"></a>4. 诱饵&amp;陷阱模式</h2><p>通过廉价的，有吸引力的初始产品或服务，来促进相关产品未来的重复购买。</p>
-<p>典型的例子有吉列剃须刀，刀柄加上频繁替换的刀片。</p>
-<p>产品与后续产品之间要有紧密连接，从而使得极小收益的初始购买为后续高收益产品或服务的重复购买创造可能。关注后续产品交付，需要强大品牌支撑</p>
-<h2 id="5-长尾商业模式"><a href="#5-长尾商业模式" class="headerlink" title="5. 长尾商业模式"></a>5. 长尾商业模式</h2><p>核心是多样少量，进行极致的客户细分。</p>
-<p>专注满足非主流市场需要以获得媲美主流产品的收益</p>
-<p>信息技术与运营管理方法的改善使得定制化价值主张可以面向大量新客户，并且成本低廉。</p>
-<p>参考：</p>
-<ol>
-<li>《商业模式新生代》</li>
-</ol>
-]]></content>
-      <categories>
-        <category>需求与商业模式分析</category>
-      </categories>
-      <tags>
-        <tag>商业模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>商业模式设计</title>
-    <url>/posts/f47639cf.html</url>
-    <content><![CDATA[<h1 id="商业模式设计"><a href="#商业模式设计" class="headerlink" title="商业模式设计"></a>商业模式设计</h1><p>作为一名设计师，<strong>必须</strong>执着地探究所有可能性，直到创造出崭新的设计，开拓从未被人开发的领域，最终实现想要的功能（<strong>所有创新类工作的本质</strong>）</p>
-<p>设计师的工作：挑战思维边界、创造新选择、最终为用户创造价值</p>
-<p>设计的三个相互重叠的空间：<strong>灵感，构思，实施</strong></p>
-<p>本文将介绍6种商业模式设计方法。分别是客户洞察，创意构思，可视思考，原型制作，故事讲述，情景推测。</p>
-<h2 id="1-客户洞察"><a href="#1-客户洞察" class="headerlink" title="1. 客户洞察"></a>1. 客户洞察</h2><p>客户视角是商业模式的指导性原则，客户的观点决定了我们选择怎样的价值主张、渠道、客户关系和收益来源。</p>
-<ul>
-<li>透彻的观察，发现情感的源泉，发现内在的内容、意义与本质</li>
-<li>事实上，企业在市场上重金投入的产品、服务和商业模式往往会忽略客户的观点</li>
-<li>成功的创新需要深入理解客户的环境、日常工作、担忧和渴望</li>
-</ul>
-<p>但是，客户洞察也存在一些难点。</p>
-<ul>
-<li>透彻理解客户（ “问题背后的问题” ）需要人类学、社会学理论（笼统的人），以及与实地调研（具体的人）结合；</li>
-<li>清楚了解企业当前关注哪些客户（的需要），忽略哪些客户（的需要）</li>
-</ul>
-<p><strong>洞察力</strong>是设计思维的关键来源之一</p>
-<p><strong>换位思考</strong>促使我们体会每个人的感受</p>
-<p>我们可以使用移情图来辅助构建用户画像。罗列所有客户群体，挑选3个最有希望的，选择一个作为分析对象。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20201116-01.png" alt=""></p>
-<ul>
-<li><strong>看：</strong>描述该客户在她所处的环境中所看到的东西</li>
-<li><strong>听：</strong>描述环境如何影响到这个客户</li>
-<li><strong>想&amp;感受：</strong>尝试勾勒你的客户思维的过程</li>
-<li><strong>说&amp;做：</strong>想象客户可能的言辞，或公共场合的行为</li>
-<li><strong>痛点：</strong>已遭受的挫折、正遇到的阻碍、怕承担的风险</li>
-<li><strong>收益：</strong>预期成就、成功衡量标准、实现目标所采用的策略</li>
-</ul>
-<h2 id="2-创意构思"><a href="#2-创意构思" class="headerlink" title="2. 创意构思"></a>2. 创意构思</h2><p>一个能够产生大量商业模式创意，并成功识别出其中最佳创意的流程被称作构思（ideation）</p>
-<ul>
-<li>大多数行业只有一种主流商业模式的现状已经改变，同一个市场中会有多种商业模式进行竞争，行业之间的界限也正变得模糊甚至消失</li>
-<li>创造新商业模式时需要忽略现状并停止对操作性问题的担忧</li>
-<li>商业模式创新不是抄袭经典或者对标“友商”，而是创造新机制来满足那些未被满足的、新的或者隐藏在背后的客户需求</li>
-</ul>
-<p>构思的两个步骤：生成大量创意-&gt;对创意进行整合并挑选</p>
-<p>生成阶段要重视数量；可行的创意可以是颠覆性的，也可以是领域的扩展</p>
-<p>提出新创意的两个出发点</p>
-<ul>
-<li>从画布中寻找创新的焦点</li>
-<li>不断提出“如果…会怎样”的问题”</li>
-</ul>
-<p>商业模式创新的<strong>焦点</strong>：</p>
-<ul>
-<li>资源驱动：创新来源于组织现有的基础设施或合作伙伴资源<ul>
-<li>云计算服务、高传输低时延的5g网络</li>
-</ul>
-</li>
-<li>供给驱动：创造全新的价值主张，并影响到其它模块<ul>
-<li>水泥输送从48小时减为4小时</li>
-<li>云端的全托管机器学习与自动调优、云游戏</li>
-</ul>
-</li>
-<li>客户驱动：基于客户需求、可获得性或便利性的提升，并影响其他模块<ul>
-<li>23andMe的个人DNA测试服务（从医疗与研究领域转来）</li>
-<li>付费自习室：价值主张-（成年人）沉浸式学习空间；收入来源：5-20元/小时租赁</li>
-</ul>
-</li>
-<li>财务驱动：由新收益来源、定价机制或者被缩减的成本驱动的创新<ul>
-<li>施乐复印机从卖设备转向复印机出租（月费95美元，含2000份复印，超出5美分每张）</li>
-<li>IBM服务器从软件+硬件转型为开源+咨询+硬件</li>
-</ul>
-</li>
-<li>多点驱动：多焦点驱动的创新，并对其它模块产生深远影响<ul>
-<li>“卖产品”转为“卖服务”</li>
-<li>B站：与共青团及官媒的合作、内容从二次元到多圈融合、从内容转向社交（陪伴）、高粘性用户的游戏运营与内容驱动直播</li>
-</ul>
-</li>
-</ul>
-<p><strong>头脑风暴</strong>是构思的重要手段。它的规则是：</p>
-<ul>
-<li>保持聚焦：精确表达当前问题、始终与客户需求有关、不要跑题太远、将讨论拉回到开始问题</li>
-<li>执行规则：坚决执行开始时的规则：“不过早下结论”、“每次一人讲“、”追求数量”、“可视化”、“疯狂创意”</li>
-<li>视觉化思考：将创意写或者画在每个人都能看到的地方：便利贴+黑板/墙</li>
-<li>准备：为一次头脑风暴所准备的钻研：技术研讨、实地考察、客户讨论等各种形式</li>
-</ul>
-<h2 id="3-可视思考"><a href="#3-可视思考" class="headerlink" title="3. 可视思考"></a>3. 可视思考</h2><p>商业模式的讨论需要视觉化思考：<strong>抽象的东西具体化、复杂的概念简单化</strong></p>
-<ul>
-<li>商业模式是一个由许多模块以及模块之间的复杂关系组成的复杂概念，其内部元素相互影响，但只有作为一个整体系统时才有意义</li>
-<li>视觉化能够一目了然的刻画商业模式的主旨，并具象化其中的隐含假设</li>
-<li>视觉化能够使商业模式变的明确，为团队讨论提供一些概念性的锚点，使讨论从抽象思维落实到具体、形象的东西</li>
-<li>视觉化既能找出已有模式中的逻辑缺陷，又能在设计全新模式时更容易地添加、删除和移动相关的图片化概念</li>
-</ul>
-<p>视觉化思考使用的两项技术与四个流程</p>
-<ul>
-<li>如何使用便利贴+如何将草图与商业模式画布结合</li>
-<li>四个流程：理解、对话、探索、沟通</li>
-</ul>
-<p>视觉化的作用：</p>
-<ul>
-<li>理解商业模式的本质</li>
-<li>提升对话效率</li>
-<li>探索创意</li>
-<li>提升沟通</li>
-</ul>
-<h2 id="4-模型构建"><a href="#4-模型构建" class="headerlink" title="4. 模型构建"></a>4. 模型构建</h2><p>与视觉化思考一样，模型构建可以使抽象的概念具体化，帮助探索新的创意</p>
-<ul>
-<li>在产品、架构和交互设计上得到广泛应用，但在商业管理领域不太常用</li>
-<li>这里的“模型”：用于讨论、探究或概念验证的工具，目标是探索未来潜在的商业模式（不等于软工领域的模型或原型），可以是草图、画布或财务报表</li>
-</ul>
-<p>模型构建有助于实际商业模式的探索</p>
-<ul>
-<li>建模-（疑问点明确化、视觉化）-添加、删除或修改元素-观察结果</li>
-<li>在不同规模（抽象层面）的模型上进行互动</li>
-<li>有助于获得突破性的商业模式，同时能够有效控制细节</li>
-</ul>
-<h2 id="5-讲故事"><a href="#5-讲故事" class="headerlink" title="5. 讲故事"></a>5. 讲故事</h2><p>故事是一个理想的热身工具，为深度讨论商业模式与其内在逻辑做好准备，将故事与画布结合，利用叙事性克服听众对不熟悉模式的抵触，放下对陌生事物的怀疑。</p>
-<p>为什么要讲故事？</p>
-<ul>
-<li>介绍新想法：尝试融入组织战略</li>
-<li>向投资人推销：争取外部资源（是什么，为谁服务，如何获得收益）</li>
-<li>吸引员工（成员）：抓住组员的注意力和好奇心，为下一步探讨准备</li>
-<li>让未来触手可及：激发创意、辩证变革</li>
-</ul>
-<p>故事拥有两个不同的视角：员工和客户</p>
-<h2 id="6-情景"><a href="#6-情景" class="headerlink" title="6. 情景"></a>6. 情景</h2><p>将模型构建中明确的方向具体化，从而给出有见地的设计</p>
-<p>两种场景</p>
-<ul>
-<li>不同的客户结构：结合客户洞察描绘出独特、具体的图景</li>
-<li>未来可能的竞争环境：想象未来可能的具体细节，品味特定条件下商业模式如何演进</li>
-</ul>
-]]></content>
-      <categories>
-        <category>需求与商业模式分析</category>
-      </categories>
-      <tags>
-        <tag>商业模式</tag>
       </tags>
   </entry>
   <entry>
@@ -2794,40 +2665,235 @@ move disk 1 from A to C</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>mosh优化ssh</title>
-    <url>/posts/38412875.html</url>
-    <content><![CDATA[<p>最近使用ssh连接云服务器时，卡顿的现象很严重，输入一段内容要等一会儿才会显示完全，在网上找了半天，看到了一个ssh的替代品——<a target="_blank" rel="noopener" href="https://mosh.org/">mosh</a></p>
-<a id="more"></a>
-<h1 id="1-什么是mosh"><a href="#1-什么是mosh" class="headerlink" title="1. 什么是mosh"></a>1. 什么是mosh</h1><p>Mosh最大的特点是基于<strong>UDP</strong>方式传输，支持在服务端创建一个临时的Key供客户端一次性连接，退出后失效；也支持通过SSH的配置进行认证，但数据传输本身还是自身的UDP方式。</p>
-<p>另外，Mosh还有两个我觉得非常有用的功能</p>
+    <title>商业模式类型</title>
+    <url>/posts/dc6b170d.html</url>
+    <content><![CDATA[<h1 id="商业模式类型"><a href="#商业模式类型" class="headerlink" title="商业模式类型"></a>商业模式类型</h1><p>本文将介绍5种商业模式类型</p>
 <ul>
-<li>会话的中断不会导致当前正在前端执行的命令中断，相当于你所有的操作都是在screen命令中一样在后台执行。</li>
-<li>会话在中断过后，不会立刻退出，而是启用一个计时器，当网络恢复后会自动重新连接，同时会延续之前的会话，不会重新开启一个。</li>
+<li>分拆商业模式</li>
+<li>长尾商业模式</li>
+<li>开放式的商业模式</li>
+<li>多边商业模式</li>
+<li>免费商业模式</li>
 </ul>
-<h1 id="2-服务端配置"><a href="#2-服务端配置" class="headerlink" title="2. 服务端配置"></a>2. 服务端配置</h1><p>我的Linux服务器版本是Ubuntu18.04</p>
-<p>输入如下命令安装mosh</p>
-<pre><code class="hljs shell">sudo apt-get update
-sudo apt-get install mosh</code></pre>
-<p>Mosh使用UDP协议连接，端口从60000到61000，网上有教程使用ufw开启端口，但是经过测试是无效的，有一个比较方便的方法时直接在云服务器管理控制台的安全组中添加。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200926-03.png" alt=""></p>
-<h1 id="3-客户端配置"><a href="#3-客户端配置" class="headerlink" title="3. 客户端配置"></a>3. 客户端配置</h1><p>本地机器是Mac，输入命令安装mosh，注意客户端和服务端都需要安装mosh</p>
-<pre><code class="hljs shell">brew install mosh</code></pre>
-<p>安装完成后需要进入本地shell脚本文件中</p>
-<p>如果安装了zsh，就使用命令<code>vi ~/.zshrc</code></p>
-<p>如果是bash，就使用命令<code>vi ~/.bash_profile</code></p>
-<p>添加如下两行</p>
-<pre><code class="hljs shell">export LC_CTYPE=en_US.UTF-8  
-export LC_ALL=en_US.UTF-8</code></pre>
-<p>保存退出后，使用<code>source ~/.zshrc</code>或者<code>source ~/.bash_profile</code>使得更改生效。</p>
-<p>使用如下命令连接</p>
-<pre><code class="hljs shell">mosh root@IP -p 60001</code></pre>
-<p>输入瞬间变得丝滑起来。</p>
+<h2 id="1-分拆商业模式"><a href="#1-分拆商业模式" class="headerlink" title="1. 分拆商业模式"></a>1. 分拆商业模式</h2><p>对于分拆商业模式，首先需要了解一些基本概念。</p>
+<p>我们认为企业内部有3类<strong>规则</strong>：</p>
+<ul>
+<li>经济</li>
+<li>竞争</li>
+<li>文化</li>
+</ul>
+<p>存在3种不同的基本<strong>业务类型</strong>以及它们对应的<strong>价值信条</strong>：</p>
+<ul>
+<li>客户关系型业务——亲近顾客</li>
+<li>产品创新型业务——产品领先</li>
+<li>基础设施型业务——运营卓越</li>
+</ul>
+<p>每种类型的业务都有不同的驱动因素，虽然它们可能同时存在于一家公司，但是由于彼此之间的冲突，需要进行分拆。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>新产品开发</th>
+<th>客户关系管理</th>
+<th>基础设施管理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>经济</td>
+<td>速度是关键，越早获得的溢价越高</td>
+<td>获取成本高，提高客单价，范围经济</td>
+<td>大规模生产降低单位成本，规模是关键</td>
+</tr>
+<tr>
+<td>竞争</td>
+<td>针对人才，门槛低，小玩家多</td>
+<td>针对范围竞争，寡头占领市场(7:3:1)</td>
+<td>针对规模竞争，寡头占领市场(8:2)</td>
+</tr>
+<tr>
+<td>文化</td>
+<td>以员工为核心，鼓励创新人才</td>
+<td>高度面向服务，客户至上心态</td>
+<td>关注成本，统一标准，可预测性和有效性</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>分拆商业模式的一个典型的例子是可口可乐。</p>
+<ul>
+<li><p>新产品</p>
+<p>追求健康化：适应无糖的趋势</p>
+<p>Costa咖啡，运动饮料，不再局限于可乐</p>
+</li>
+<li><p>客户关系</p>
+<p>本地品牌收购</p>
+<p>产品运营：diet coke到zero零度，摆脱女性专属的形象</p>
+<p>外包装营销：小瓶，时尚罐和小罐</p>
+</li>
+<li><p>基础运营</p>
+<p>调整灌装线：外包灌装</p>
+</li>
+</ul>
+<h2 id="2-多边平台商业模式"><a href="#2-多边平台商业模式" class="headerlink" title="2. 多边平台商业模式"></a>2. 多边平台商业模式</h2><p>多边平台将两个或更多独立但相互依存的客户群体连接在一起。</p>
+<p>只有相关客户群体同时存在的时候，平台才具有价值。平台通过促进不同群体之间的互动而创造价值。比如信用卡连接商家和持卡人，计算机操作系统连接硬件厂商，应用开发商和用户。</p>
+<p>单个用户群体的价值本质上取决于平台中另一群体的用户数量，这就产生了一个难题：“先有鸡还是先有蛋“。需要弄清楚哪一“边”能够更好的吸引其它“边”，从而提供免费服务甚至补贴，比如B站：观众免费，补贴Up主。</p>
+<p>多边平台的价值提升在于它所吸引的用户数量的增加，这一现象也叫做网络效应。</p>
+<h2 id="3-免费商业模式"><a href="#3-免费商业模式" class="headerlink" title="3. 免费商业模式"></a>3. 免费商业模式</h2><p>在免费商业模式中，至少有一个关键的客户群体可以持续免费地享受服务。</p>
+<p><strong>三种可行的免费商业模式</strong>：（至少一个群体将得到免费的商品）</p>
+<ul>
+<li>广告模式：基于多边平台的免费商品</li>
+<li>免费增值：免费的基本服务，可选的增值服务</li>
+<li>诱饵&amp;陷阱：以免费或很便宜的初始价格吸引客户，并引导其重复购买</li>
+</ul>
+<p>好的产品和服务以及高流量会吸引广告商，进而补贴产品和服务。但是要考虑广告费能否支撑起产品服务质量，现在的情况是巨头吞噬广告费的产品太多，流量红利已见底。</p>
+<h2 id="4-诱饵-amp-陷阱模式"><a href="#4-诱饵-amp-陷阱模式" class="headerlink" title="4. 诱饵&amp;陷阱模式"></a>4. 诱饵&amp;陷阱模式</h2><p>通过廉价的，有吸引力的初始产品或服务，来促进相关产品未来的重复购买。</p>
+<p>典型的例子有吉列剃须刀，刀柄加上频繁替换的刀片。</p>
+<p>产品与后续产品之间要有紧密连接，从而使得极小收益的初始购买为后续高收益产品或服务的重复购买创造可能。关注后续产品交付，需要强大品牌支撑</p>
+<h2 id="5-长尾商业模式"><a href="#5-长尾商业模式" class="headerlink" title="5. 长尾商业模式"></a>5. 长尾商业模式</h2><p>核心是多样少量，进行极致的客户细分。</p>
+<p>专注满足非主流市场需要以获得媲美主流产品的收益</p>
+<p>信息技术与运营管理方法的改善使得定制化价值主张可以面向大量新客户，并且成本低廉。</p>
+<p>参考：</p>
+<ol>
+<li>《商业模式新生代》</li>
+</ol>
 ]]></content>
       <categories>
-        <category>折腾</category>
+        <category>需求与商业模式分析</category>
       </categories>
       <tags>
-        <tag>mosh</tag>
+        <tag>商业模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>商业模式设计</title>
+    <url>/posts/f47639cf.html</url>
+    <content><![CDATA[<h1 id="商业模式设计"><a href="#商业模式设计" class="headerlink" title="商业模式设计"></a>商业模式设计</h1><p>作为一名设计师，<strong>必须</strong>执着地探究所有可能性，直到创造出崭新的设计，开拓从未被人开发的领域，最终实现想要的功能（<strong>所有创新类工作的本质</strong>）</p>
+<p>设计师的工作：挑战思维边界、创造新选择、最终为用户创造价值</p>
+<p>设计的三个相互重叠的空间：<strong>灵感，构思，实施</strong></p>
+<p>本文将介绍6种商业模式设计方法。分别是客户洞察，创意构思，可视思考，原型制作，故事讲述，情景推测。</p>
+<h2 id="1-客户洞察"><a href="#1-客户洞察" class="headerlink" title="1. 客户洞察"></a>1. 客户洞察</h2><p>客户视角是商业模式的指导性原则，客户的观点决定了我们选择怎样的价值主张、渠道、客户关系和收益来源。</p>
+<ul>
+<li>透彻的观察，发现情感的源泉，发现内在的内容、意义与本质</li>
+<li>事实上，企业在市场上重金投入的产品、服务和商业模式往往会忽略客户的观点</li>
+<li>成功的创新需要深入理解客户的环境、日常工作、担忧和渴望</li>
+</ul>
+<p>但是，客户洞察也存在一些难点。</p>
+<ul>
+<li>透彻理解客户（ “问题背后的问题” ）需要人类学、社会学理论（笼统的人），以及与实地调研（具体的人）结合；</li>
+<li>清楚了解企业当前关注哪些客户（的需要），忽略哪些客户（的需要）</li>
+</ul>
+<p><strong>洞察力</strong>是设计思维的关键来源之一</p>
+<p><strong>换位思考</strong>促使我们体会每个人的感受</p>
+<p>我们可以使用移情图来辅助构建用户画像。罗列所有客户群体，挑选3个最有希望的，选择一个作为分析对象。</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20201116-01.png" alt=""></p>
+<ul>
+<li><strong>看：</strong>描述该客户在她所处的环境中所看到的东西</li>
+<li><strong>听：</strong>描述环境如何影响到这个客户</li>
+<li><strong>想&amp;感受：</strong>尝试勾勒你的客户思维的过程</li>
+<li><strong>说&amp;做：</strong>想象客户可能的言辞，或公共场合的行为</li>
+<li><strong>痛点：</strong>已遭受的挫折、正遇到的阻碍、怕承担的风险</li>
+<li><strong>收益：</strong>预期成就、成功衡量标准、实现目标所采用的策略</li>
+</ul>
+<h2 id="2-创意构思"><a href="#2-创意构思" class="headerlink" title="2. 创意构思"></a>2. 创意构思</h2><p>一个能够产生大量商业模式创意，并成功识别出其中最佳创意的流程被称作构思（ideation）</p>
+<ul>
+<li>大多数行业只有一种主流商业模式的现状已经改变，同一个市场中会有多种商业模式进行竞争，行业之间的界限也正变得模糊甚至消失</li>
+<li>创造新商业模式时需要忽略现状并停止对操作性问题的担忧</li>
+<li>商业模式创新不是抄袭经典或者对标“友商”，而是创造新机制来满足那些未被满足的、新的或者隐藏在背后的客户需求</li>
+</ul>
+<p>构思的两个步骤：生成大量创意-&gt;对创意进行整合并挑选</p>
+<p>生成阶段要重视数量；可行的创意可以是颠覆性的，也可以是领域的扩展</p>
+<p>提出新创意的两个出发点</p>
+<ul>
+<li>从画布中寻找创新的焦点</li>
+<li>不断提出“如果…会怎样”的问题”</li>
+</ul>
+<p>商业模式创新的<strong>焦点</strong>：</p>
+<ul>
+<li>资源驱动：创新来源于组织现有的基础设施或合作伙伴资源<ul>
+<li>云计算服务、高传输低时延的5g网络</li>
+</ul>
+</li>
+<li>供给驱动：创造全新的价值主张，并影响到其它模块<ul>
+<li>水泥输送从48小时减为4小时</li>
+<li>云端的全托管机器学习与自动调优、云游戏</li>
+</ul>
+</li>
+<li>客户驱动：基于客户需求、可获得性或便利性的提升，并影响其他模块<ul>
+<li>23andMe的个人DNA测试服务（从医疗与研究领域转来）</li>
+<li>付费自习室：价值主张-（成年人）沉浸式学习空间；收入来源：5-20元/小时租赁</li>
+</ul>
+</li>
+<li>财务驱动：由新收益来源、定价机制或者被缩减的成本驱动的创新<ul>
+<li>施乐复印机从卖设备转向复印机出租（月费95美元，含2000份复印，超出5美分每张）</li>
+<li>IBM服务器从软件+硬件转型为开源+咨询+硬件</li>
+</ul>
+</li>
+<li>多点驱动：多焦点驱动的创新，并对其它模块产生深远影响<ul>
+<li>“卖产品”转为“卖服务”</li>
+<li>B站：与共青团及官媒的合作、内容从二次元到多圈融合、从内容转向社交（陪伴）、高粘性用户的游戏运营与内容驱动直播</li>
+</ul>
+</li>
+</ul>
+<p><strong>头脑风暴</strong>是构思的重要手段。它的规则是：</p>
+<ul>
+<li>保持聚焦：精确表达当前问题、始终与客户需求有关、不要跑题太远、将讨论拉回到开始问题</li>
+<li>执行规则：坚决执行开始时的规则：“不过早下结论”、“每次一人讲“、”追求数量”、“可视化”、“疯狂创意”</li>
+<li>视觉化思考：将创意写或者画在每个人都能看到的地方：便利贴+黑板/墙</li>
+<li>准备：为一次头脑风暴所准备的钻研：技术研讨、实地考察、客户讨论等各种形式</li>
+</ul>
+<h2 id="3-可视思考"><a href="#3-可视思考" class="headerlink" title="3. 可视思考"></a>3. 可视思考</h2><p>商业模式的讨论需要视觉化思考：<strong>抽象的东西具体化、复杂的概念简单化</strong></p>
+<ul>
+<li>商业模式是一个由许多模块以及模块之间的复杂关系组成的复杂概念，其内部元素相互影响，但只有作为一个整体系统时才有意义</li>
+<li>视觉化能够一目了然的刻画商业模式的主旨，并具象化其中的隐含假设</li>
+<li>视觉化能够使商业模式变的明确，为团队讨论提供一些概念性的锚点，使讨论从抽象思维落实到具体、形象的东西</li>
+<li>视觉化既能找出已有模式中的逻辑缺陷，又能在设计全新模式时更容易地添加、删除和移动相关的图片化概念</li>
+</ul>
+<p>视觉化思考使用的两项技术与四个流程</p>
+<ul>
+<li>如何使用便利贴+如何将草图与商业模式画布结合</li>
+<li>四个流程：理解、对话、探索、沟通</li>
+</ul>
+<p>视觉化的作用：</p>
+<ul>
+<li>理解商业模式的本质</li>
+<li>提升对话效率</li>
+<li>探索创意</li>
+<li>提升沟通</li>
+</ul>
+<h2 id="4-模型构建"><a href="#4-模型构建" class="headerlink" title="4. 模型构建"></a>4. 模型构建</h2><p>与视觉化思考一样，模型构建可以使抽象的概念具体化，帮助探索新的创意</p>
+<ul>
+<li>在产品、架构和交互设计上得到广泛应用，但在商业管理领域不太常用</li>
+<li>这里的“模型”：用于讨论、探究或概念验证的工具，目标是探索未来潜在的商业模式（不等于软工领域的模型或原型），可以是草图、画布或财务报表</li>
+</ul>
+<p>模型构建有助于实际商业模式的探索</p>
+<ul>
+<li>建模-（疑问点明确化、视觉化）-添加、删除或修改元素-观察结果</li>
+<li>在不同规模（抽象层面）的模型上进行互动</li>
+<li>有助于获得突破性的商业模式，同时能够有效控制细节</li>
+</ul>
+<h2 id="5-讲故事"><a href="#5-讲故事" class="headerlink" title="5. 讲故事"></a>5. 讲故事</h2><p>故事是一个理想的热身工具，为深度讨论商业模式与其内在逻辑做好准备，将故事与画布结合，利用叙事性克服听众对不熟悉模式的抵触，放下对陌生事物的怀疑。</p>
+<p>为什么要讲故事？</p>
+<ul>
+<li>介绍新想法：尝试融入组织战略</li>
+<li>向投资人推销：争取外部资源（是什么，为谁服务，如何获得收益）</li>
+<li>吸引员工（成员）：抓住组员的注意力和好奇心，为下一步探讨准备</li>
+<li>让未来触手可及：激发创意、辩证变革</li>
+</ul>
+<p>故事拥有两个不同的视角：员工和客户</p>
+<h2 id="6-情景"><a href="#6-情景" class="headerlink" title="6. 情景"></a>6. 情景</h2><p>将模型构建中明确的方向具体化，从而给出有见地的设计</p>
+<p>两种场景</p>
+<ul>
+<li>不同的客户结构：结合客户洞察描绘出独特、具体的图景</li>
+<li>未来可能的竞争环境：想象未来可能的具体细节，品味特定条件下商业模式如何演进</li>
+</ul>
+]]></content>
+      <categories>
+        <category>需求与商业模式分析</category>
+      </categories>
+      <tags>
+        <tag>商业模式</tag>
       </tags>
   </entry>
 </search>
