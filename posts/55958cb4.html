@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      796 字
+      1.9k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      26
        分钟
     </span>
   
@@ -274,9 +274,95 @@ REMOVE n.birthdate</code></pre>
 <pre><code class="hljs CQL">MATCH (n:Person &#123;name: &#39;Jennifer&#39;&#125;)
 SET n.birthdate &#x3D; null</code></pre>
 <p>第二种删除属性的方式是使用<code>set</code>关键字将属性的值设为<code>null</code>。因为neo4j数据库不会存储<code>null</code>值，所以它也会被删除。</p>
-<h2 id="5-Merge"><a href="#5-Merge" class="headerlink" title="5. Merge"></a>5. Merge</h2><pre><code class="hljs CQL">MERGE (mark:Person &#123;name: &#39;Mark&#39;, born: 1999&#125;)
+<h2 id="5-Merge"><a href="#5-Merge" class="headerlink" title="5. Merge"></a>5. Merge</h2><p>在第二部分里面提到的重复插入问题，可以通过关键字<code>merge</code>来解决。</p>
+<h3 id="5-1-节点"><a href="#5-1-节点" class="headerlink" title="5.1 节点"></a>5.1 节点</h3><pre><code class="hljs CQL">MERGE (mark:Person &#123;name: &#39;Mark&#39;, born: 1999&#125;)
 RETURN mark</code></pre>
 <p>可以使用<code>merge</code>关键字来避免重复插入节点，它会事先检查节点是否已经存在在数据库中，执行的是<code>select-or-insert</code>的操作。</p>
+<h3 id="5-2-关系"><a href="#5-2-关系" class="headerlink" title="5.2 关系"></a>5.2 关系</h3><pre><code class="hljs cypher">MATCH (j:Person &#123;name: &#39;Jennifer&#39;&#125;)
+MATCH (m:Person &#123;name: &#39;Mark&#39;&#125;)
+MERGE (j)-[r:IS_FRIENDS_WITH]-&gt;(m)
+RETURN j, r, m</code></pre>
+<p>这里首先通过<code>MATCH</code>检查是否存在我们要建立关系的两个节点，如果存在，再在两者之间建立关系。</p>
+<p><strong>注意：</strong><code>Merge</code>会检查我们要建立的模式在数据库中已经存在，如果不存在，那么它会将模式完整地建立，包括节点和关系。使用下面的语句，如果节点已经存在，那么就会造成重复插入的问题。所以一定要先<strong>用<code>MATCH</code>匹配节点是否已经存在</strong></p>
+<pre><code class="hljs cypher">&#x2F;&#x2F;this statement will create duplicate nodes for Mark and Jennifer
+MERGE (j:Person &#123;name: &#39;Jennifer&#39;&#125;)-[r:IS_FRIENDS_WITH]-&gt;(m:Person &#123;name: &#39;Mark&#39;&#125;)
+RETURN j, r, m</code></pre>
+<pre><code class="hljs cypher">MERGE (m:Person &#123;name: &#39;Mark&#39;&#125;)-[r:IS_FRIENDS_WITH]-(j:Person &#123;name:&#39;Jennifer&#39;&#125;)
+  ON MATCH SET r.updated &#x3D; date()
+RETURN m, r, j</code></pre>
+<p>如果想要不重复创建节点，并且更新匹配到的节点属性，可以使用<code>ON MATCH SET</code>的方式</p>
+<p>官方文档上的<code>ON CTRATE SET</code>似乎没有作用，而<code>ON MATCH SET</code>就可以起到创建和更新的作用</p>
+<h2 id="6-WHERE"><a href="#6-WHERE" class="headerlink" title="6. WHERE"></a>6. WHERE</h2><p>与SQL查询类似，CQL也可以使用where进行范围的限定，在全键值等值查询时，效果与前面的例子一样。但对于熟悉SQL语法的人来说可能这种方式更容易上手。</p>
+<pre><code class="hljs cypher">&#x2F;&#x2F;query using equality check in the MATCH clause
+MATCH (j:Person &#123;name: &#39;Jennifer&#39;&#125;)
+RETURN j
+
+&#x2F;&#x2F;query using equality check in the WHERE clause
+MATCH (j:Person)
+WHERE j.name &#x3D; &#39;Jennifer&#39;
+RETURN j</code></pre>
+<h3 id="6-1-否定属性"><a href="#6-1-否定属性" class="headerlink" title="6.1 否定属性"></a>6.1 否定属性</h3><p>使用<code>NOT</code> <code>AND</code> <code>OR</code> <code>XOR</code>等操作符</p>
+<pre><code class="hljs cypher">MATCH (j:Person)
+WHERE NOT j.name &#x3D; &#39;Jennifer&#39;
+RETURN j</code></pre>
+<h3 id="6-2-范围查询"><a href="#6-2-范围查询" class="headerlink" title="6.2 范围查询"></a>6.2 范围查询</h3><p>查询1960到1970年出生的人</p>
+<pre><code class="hljs cypher">MATCH (p:Person)
+WHERE 1960 &lt;&#x3D; p.born &lt;&#x3D; 1970
+RETURN p</code></pre>
+<h3 id="6-3-exists"><a href="#6-3-exists" class="headerlink" title="6.3 exists"></a>6.3 exists</h3><p>检查一个属性是否存在</p>
+<p><strong>注意</strong>：neo4j不会存储null值</p>
+<pre><code class="hljs cypher">&#x2F;&#x2F;Query1: find all users who have a birthdate property
+MATCH (p:Person)
+WHERE exists(p.birthdate)
+RETURN p.name</code></pre>
+<h3 id="6-4-模糊查询"><a href="#6-4-模糊查询" class="headerlink" title="6.4 模糊查询"></a>6.4 模糊查询</h3><p>对一个字符串，我们可能需要根据前缀，后缀或包含进行模糊查询。</p>
+<pre><code class="hljs cypher">&#x2F;&#x2F;check if a property starts with &#39;M&#39;
+MATCH (p:Person)
+WHERE p.name STARTS WITH &#39;Ma&#39;
+RETURN p.name
+
+&#x2F;&#x2F;check if a property contains &#39;a&#39;
+MATCH (p:Person)
+WHERE p.name CONTAINS &#39;a&#39;
+RETURN p.name
+
+&#x2F;&#x2F;check if a property ends with &#39;n&#39;
+MATCH (p:Person)
+WHERE p.name ENDS WITH &#39;n&#39;</code></pre>
+<p>当然，我们还可以使用正则表达式的形式。<code>~</code>表示使用正则表达式</p>
+<pre><code class="hljs cypher">MATCH (p:Person)
+WHERE p.name &#x3D;~ &#39;Jo.*&#39;
+RETURN p.name</code></pre>
+<h3 id="6-5-Filtering-on-Patterns"><a href="#6-5-Filtering-on-Patterns" class="headerlink" title="6.5 Filtering on Patterns"></a>6.5 Filtering on Patterns</h3><p>由于neo4j是图形数据库，它比其它数据库更注重于关系(relationships)。所以我们也可以通过关系来进行筛选。</p>
+<p>比如下面这个关系匹配同时担任一部电影的导演和编剧的人。</p>
+<pre><code class="hljs cypher">MATCH (p:Person)-[r:DIRECTED]-&gt;(m:Movie)
+WHERE exists((p)-[:WROTE]-&gt;(m))
+RETURN p</code></pre>
+<h3 id="6-6-Optional-Patterns"><a href="#6-6-Optional-Patterns" class="headerlink" title="6.6 Optional Patterns"></a>6.6 Optional Patterns</h3><p>类似于SQL的外连接。可选匹配。</p>
+<p>这个例子匹配以姓名以Jo开头并且担任过电影编剧的人，后面这个条件不是强制的。</p>
+<pre><code class="hljs cypher">MATCH (p:Person)
+WHERE p.name STARTS WITH &#39;Jo&#39;
+OPTIONAL MATCH (p) - [:WROTE] -&gt; (m:Movie)
+RETURN p.name, m.title</code></pre>
+<h2 id="7-Aggregation-in-Cypher"><a href="#7-Aggregation-in-Cypher" class="headerlink" title="7. Aggregation in Cypher"></a>7. Aggregation in Cypher</h2><h3 id="7-1-count"><a href="#7-1-count" class="headerlink" title="7.1 count"></a>7.1 count</h3><p>统计数量</p>
+<p>例1加上了属性值title，可以去掉null值，而使用*会统计所有电影节点。</p>
+<pre><code class="hljs cypher">MATCH (m:Movie)
+RETURN count(m.title)
+   
+MATCH (m:Movie)
+RETURN count(*)</code></pre>
+<h3 id="7-2-collect"><a href="#7-2-collect" class="headerlink" title="7.2 collect"></a>7.2 collect</h3><p>将值聚合成一个列表。可以使用collect基于一个起始节点或关系等组织一系列的值。</p>
+<p>下面这个例子展示了导演和他们执导的电影。如果不使用collect，那么导演和电影会一对一的呈现在表格中。但一个导演可能执导过多部电影，所以使用collect将电影节点聚合起来。</p>
+<pre><code class="hljs cypher">MATCH (p:Person) - [r:DIRECTED] -&gt; (m:Movie)
+RETURN p.name, collect(m.title) AS titles</code></pre>
+<h3 id="7-3-size"><a href="#7-3-size" class="headerlink" title="7.3 size"></a>7.3 size</h3><p>size的作用是统计列表中元素的个数或者统计一个表达式返回的内容大小。</p>
+<pre><code class="hljs cypher">&#x2F;&#x2F; 统计导演执导电影数量
+MATCH (p:Person) - [r:DIRECTED] -&gt; (m:Movie)
+RETURN p.name, collect(m.title) AS titles, size(collect(m.title)) AS count
+
+&#x2F;&#x2F; 统计导演同时还担任该电影的编剧的数量
+MATCH (p:Person) - [r:DIRECTED] -&gt; (m:Movie)
+RETURN p.name, size((p) - [:WROTE] -&gt; (m)) AS count</code></pre>
 <p>参考：</p>
 <ol>
 <li><a target="_blank" rel="noopener" href="https://neo4j.com/developer/cypher/">Neo4j官方文档</a></li>
