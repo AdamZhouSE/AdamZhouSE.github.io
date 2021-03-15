@@ -29,7 +29,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/arduino-light.min.css" />
     
   
 
@@ -237,21 +237,21 @@
 </ul>
 <h1 id="2-服务端配置"><a href="#2-服务端配置" class="headerlink" title="2. 服务端配置"></a>2. 服务端配置</h1><p>我的Linux服务器版本是Ubuntu18.04</p>
 <p>输入如下命令安装mosh</p>
-<pre><code class="hljs shell">sudo apt-get update
-sudo apt-get install mosh</code></pre>
+<div class="hljs"><pre><code class="hljs shell">sudo apt-get update
+sudo apt-get install mosh</code></pre></div>
 <p>Mosh使用UDP协议连接，端口从60000到61000，网上有教程使用ufw开启端口，但是经过测试是无效的，有一个比较方便的方法时直接在云服务器管理控制台的安全组中添加。</p>
 <p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200926-03.png" srcset="/img/loading.gif" alt=""></p>
 <h1 id="3-客户端配置"><a href="#3-客户端配置" class="headerlink" title="3. 客户端配置"></a>3. 客户端配置</h1><p>本地机器是Mac，输入命令安装mosh，注意客户端和服务端都需要安装mosh</p>
-<pre><code class="hljs shell">brew install mosh</code></pre>
+<div class="hljs"><pre><code class="hljs shell">brew install mosh</code></pre></div>
 <p>安装完成后需要进入本地shell脚本文件中</p>
 <p>如果安装了zsh，就使用命令<code>vi ~/.zshrc</code></p>
 <p>如果是bash，就使用命令<code>vi ~/.bash_profile</code></p>
 <p>添加如下两行</p>
-<pre><code class="hljs shell">export LC_CTYPE=en_US.UTF-8  
-export LC_ALL=en_US.UTF-8</code></pre>
+<div class="hljs"><pre><code class="hljs shell">export LC_CTYPE=en_US.UTF-8  
+export LC_ALL=en_US.UTF-8</code></pre></div>
 <p>保存退出后，使用<code>source ~/.zshrc</code>或者<code>source ~/.bash_profile</code>使得更改生效。</p>
 <p>使用如下命令连接</p>
-<pre><code class="hljs shell">mosh root@IP -p 60001</code></pre>
+<div class="hljs"><pre><code class="hljs shell">mosh root@IP -p 60001</code></pre></div>
 <p>输入瞬间变得丝滑起来。</p>
 
             </div>

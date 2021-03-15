@@ -29,7 +29,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/arduino-light.min.css" />
     
   
 
@@ -236,20 +236,20 @@
 <h4 id="1-String类型"><a href="#1-String类型" class="headerlink" title="1. String类型"></a>1. String类型</h4><p>表示可变长的字符串</p>
 <h5 id="1-1-定义和初始化"><a href="#1-1-定义和初始化" class="headerlink" title="1.1 定义和初始化"></a>1.1 定义和初始化</h5><ol>
 <li><p>使用需要头文件和命名空间</p>
-<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>;</code></pre>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>;</code></pre></div>
 </li>
 <li><p>初始化</p>
-<pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s1; <span class="hljs-comment">// 空字符串</span>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s1; <span class="hljs-comment">// 空字符串</span>
 <span class="hljs-built_in">string</span> s2 = s1; <span class="hljs-comment">// s2是s1的副本</span>
 <span class="hljs-built_in">string</span> s3 = <span class="hljs-string">&quot;abc&quot;</span>;
-<span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s4</span><span class="hljs-params">(<span class="hljs-number">10</span>, <span class="hljs-string">&#x27;c&#x27;</span>)</span></span>; <span class="hljs-comment">// 十个c</span></code></pre>
+<span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s4</span><span class="hljs-params">(<span class="hljs-number">10</span>, <span class="hljs-string">&#x27;c&#x27;</span>)</span></span>; <span class="hljs-comment">// 十个c</span></code></pre></div>
 </li>
 </ol>
 <h5 id="1-2-string对象上的操作"><a href="#1-2-string对象上的操作" class="headerlink" title="1.2 string对象上的操作"></a>1.2 string对象上的操作</h5><ol>
 <li><p>使用<code>getline</code>读取一整行</p>
-<pre><code class="hljs cpp"><span class="hljs-built_in">string</span> line;
-getline(<span class="hljs-built_in">cin</span>, line);</code></pre>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">string</span> line;
+getline(<span class="hljs-built_in">cin</span>, line);</code></pre></div>
 <p>当读取到换行符时结束，并将读到的内容存入<code>string</code>中，但是<strong>不存换行符</strong></p>
 </li>
 <li><p><code>empty</code>和<code>size</code>操作</p>
@@ -258,43 +258,43 @@ getline(<span class="hljs-built_in">cin</span>, line);</code></pre>
 <p>使用visual studio编程的时候，碰到过一个<strong>warning</strong>，将无符号数赋值给了有符号数。</p>
 <p>这是由于<code>size</code>函数的返回值类型引起的，它是一个<code>string::size_type</code>类型的值，是无符号类型的，</p>
 <p>可以用<code>auto</code>来推断变量的值</p>
-<pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> len = str.size();</code></pre>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> len = str.size();</code></pre></div>
 </li>
 <li><p>比较，赋值，相加</p>
-<pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s1 = <span class="hljs-string">&quot;abc&quot;</span>;
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s1 = <span class="hljs-string">&quot;abc&quot;</span>;
 <span class="hljs-built_in">string</span> s2 = <span class="hljs-string">&quot;xcvd&quot;</span>;
 <span class="hljs-comment">// s1 &lt; s2 比较第一个不同的字符</span>
 <span class="hljs-built_in">string</span> s3 = s1; <span class="hljs-comment">// 赋值</span>
-<span class="hljs-built_in">string</span> s4 = s1 + s2; <span class="hljs-comment">// abcxcvd</span></code></pre>
+<span class="hljs-built_in">string</span> s4 = s1 + s2; <span class="hljs-comment">// abcxcvd</span></code></pre></div>
 </li>
 <li><p>处理<code>string</code>中的字符</p>
-<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cctype&gt;</span></span>
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;cctype&gt;</span></span>
 <span class="hljs-built_in">isalnum</span>(c);
 <span class="hljs-built_in">isalpha</span>(c);
 <span class="hljs-built_in">islower</span>(c);
 <span class="hljs-built_in">isupper</span>(c);
-<span class="hljs-built_in">ispunct</span>(c); <span class="hljs-comment">// 是标点符号为真</span></code></pre>
+<span class="hljs-built_in">ispunct</span>(c); <span class="hljs-comment">// 是标点符号为真</span></code></pre></div>
 </li>
 </ol>
 <h4 id="2-Vector类型"><a href="#2-Vector类型" class="headerlink" title="2. Vector类型"></a>2. Vector类型</h4><p>可变长数组，类似于Java中的<code>ArrayList</code></p>
-<h5 id="2-1-初始化"><a href="#2-1-初始化" class="headerlink" title="2.1 初始化"></a>2.1 初始化</h5><pre><code class="hljs cpp"><span class="hljs-built_in">vector</span>&lt;T&gt; v;
+<h5 id="2-1-初始化"><a href="#2-1-初始化" class="headerlink" title="2.1 初始化"></a>2.1 初始化</h5><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">vector</span>&lt;T&gt; v;
 <span class="hljs-built_in">vector</span>&lt;T&gt; v1 = &#123;a, b, c&#125;; <span class="hljs-comment">// 注意是花括号</span>
 <span class="hljs-built_in">vector</span>&lt;T&gt; v2&#123;a, b&#125;;     <span class="hljs-comment">// 花括号，两个元素</span>
-<span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">v3</span><span class="hljs-params">(<span class="hljs-number">10</span>, <span class="hljs-number">1</span>)</span></span>; <span class="hljs-comment">// 圆括号 10个元素，每个初始化为1</span></code></pre>
-<h5 id="2-2-操作"><a href="#2-2-操作" class="headerlink" title="2.2 操作"></a>2.2 操作</h5><pre><code class="hljs cpp"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v;
+<span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">v3</span><span class="hljs-params">(<span class="hljs-number">10</span>, <span class="hljs-number">1</span>)</span></span>; <span class="hljs-comment">// 圆括号 10个元素，每个初始化为1</span></code></pre></div>
+<h5 id="2-2-操作"><a href="#2-2-操作" class="headerlink" title="2.2 操作"></a>2.2 操作</h5><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v;
 v.push_back(<span class="hljs-number">1</span>); <span class="hljs-comment">// 添加1</span>
 v.pop_back(); <span class="hljs-comment">// 去掉最后一个数据</span>
 v.empty();
 v.size();
-v[n]; <span class="hljs-comment">// 注意下标只能访问，但是不能够添加元素</span></code></pre>
+v[n]; <span class="hljs-comment">// 注意下标只能访问，但是不能够添加元素</span></code></pre></div>
 <h4 id="3-迭代器"><a href="#3-迭代器" class="headerlink" title="3. 迭代器"></a>3. 迭代器</h4><p>访问元素的作用</p>
-<pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s = <span class="hljs-string">&quot;abcde&quot;</span>;
+<div class="hljs"><pre><code class="hljs cpp"><span class="hljs-built_in">string</span> s = <span class="hljs-string">&quot;abcde&quot;</span>;
 <span class="hljs-keyword">if</span> (s.begin() != s.end()) &#123; <span class="hljs-comment">// 确保s非空</span>
   
-&#125;</code></pre>
-<h4 id="4-数组"><a href="#4-数组" class="headerlink" title="4. 数组"></a>4. 数组</h4><h5 id="4-1-指针和数组"><a href="#4-1-指针和数组" class="headerlink" title="4.1 指针和数组"></a>4.1 指针和数组</h5><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ia[] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;
+&#125;</code></pre></div>
+<h4 id="4-数组"><a href="#4-数组" class="headerlink" title="4. 数组"></a>4. 数组</h4><h5 id="4-1-指针和数组"><a href="#4-1-指针和数组" class="headerlink" title="4.1 指针和数组"></a>4.1 指针和数组</h5><div class="hljs"><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ia[] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;;
 <span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">p</span><span class="hljs-params">(ia)</span></span>; <span class="hljs-comment">// 整型指针，指向ia的第一个元素</span>
-p++; <span class="hljs-comment">// 指向第一个元素</span></code></pre>
+p++; <span class="hljs-comment">// 指向第一个元素</span></code></pre></div>
 
             </div>
             <hr>

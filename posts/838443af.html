@@ -29,7 +29,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/github-gist.min.css" />
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/arduino-light.min.css" />
     
   
 
@@ -232,13 +232,13 @@
 <p>有两种方法优化。</p>
 <a id="more"></a>
 <h2 id="方法一：自定义"><a href="#方法一：自定义" class="headerlink" title="方法一：自定义"></a>方法一：自定义</h2><p>首先，在<code>scaffolds</code>的<code>post.md</code>中，加入<code>urlname</code>元素。</p>
-<pre><code class="hljs subunit">title: &#123;&#123; title &#125;&#125;
+<div class="hljs"><pre><code class="hljs subunit">title: &#123;&#123; title &#125;&#125;
 urlname:
 date: &#123;&#123; date &#125;&#125;
 <span class="hljs-keyword">tags:</span>
-categories:</code></pre>
+categories:</code></pre></div>
 <p>然后，在配置文件<code>_config.yml</code>中，将永久链接<code>permalink</code>的形式改为</p>
-<pre><code class="hljs elixir"><span class="hljs-symbol">permalink:</span> <span class="hljs-symbol">:category/</span><span class="hljs-symbol">:urlname/</span></code></pre>
+<div class="hljs"><pre><code class="hljs elixir"><span class="hljs-symbol">permalink:</span> <span class="hljs-symbol">:category/</span><span class="hljs-symbol">:urlname/</span></code></pre></div>
 <p>也就是类别加上自定义的url链接。</p>
 <p>每次写文章时，可以自己设计该页的<code>url</code>，使得它变得简单，同时也利于区分。</p>
 <p>但是，这种修改方法的链接会随着文件目录的改变而改变，</p>
@@ -248,20 +248,20 @@ categories:</code></pre>
 <h2 id="方法二：插件"><a href="#方法二：插件" class="headerlink" title="方法二：插件"></a>方法二：插件</h2><p>使用<code>hexo-abbrlink</code>这个插件</p>
 <ol>
 <li><p>安装</p>
-<pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-abbrlink <span class="hljs-comment">--save</span></code></pre>
+<div class="hljs"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-abbrlink <span class="hljs-comment">--save</span></code></pre></div>
 </li>
 <li><p>设置</p>
 <p>在<code>_config.yml</code>文件中修改永久链接格式</p>
-<pre><code class="hljs dts"><span class="hljs-symbol">permalink:</span> posts/:abbrlink.html
+<div class="hljs"><pre><code class="hljs dts"><span class="hljs-symbol">permalink:</span> posts/:abbrlink.html
 <span class="hljs-symbol">abbrlink:</span>
 <span class="hljs-symbol">  alg:</span> crc32  <span class="hljs-meta"># 算法：crc16(default) and crc32</span>
-<span class="hljs-symbol">  rep:</span> hex    <span class="hljs-meta"># 进制：dec(default) and hex</span></code></pre>
+<span class="hljs-symbol">  rep:</span> hex    <span class="hljs-meta"># 进制：dec(default) and hex</span></code></pre></div>
 <p><code>posts</code>部分是可以更改的，也可以仿照方法一添加一个关键词便于识别</p>
-<pre><code class="hljs elixir"><span class="hljs-symbol">permalink:</span> <span class="hljs-symbol">:keywords/</span><span class="hljs-symbol">:abbrlink</span>.html</code></pre>
+<div class="hljs"><pre><code class="hljs elixir"><span class="hljs-symbol">permalink:</span> <span class="hljs-symbol">:keywords/</span><span class="hljs-symbol">:abbrlink</span>.html</code></pre></div>
 </li>
 <li><p>生成</p>
 <p>在根目录创建<code>Gruntfile.js</code>文件，让插件到<code>source/_posts/</code>下读取所有的.md文件，把文件中的@@abbrlink替换成文件内容的hash值。</p>
-<pre><code class="hljs js"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">grunt</span>) </span>&#123;
+<div class="hljs"><pre><code class="hljs js"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">grunt</span>) </span>&#123;
  
   grunt.initConfig(&#123;
 
@@ -282,7 +282,7 @@ categories:</code></pre>
   &#125;);
  
   grunt.loadNpmTasks(<span class="hljs-string">&#x27;grunt-rewrite&#x27;</span>);
-&#125;;</code></pre>
+&#125;;</code></pre></div>
 </li>
 </ol>
 <p>这种方法生成的链接是不带目录的，直接就是第二步设置中<code>permalink</code>的样式，所以也没有了被改变的风险。</p>
