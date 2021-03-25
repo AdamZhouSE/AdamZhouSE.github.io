@@ -1,6 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>C++变量和基本类型</title>
+    <url>/posts/96db5496.html</url>
+    <content><![CDATA[<h3 id="变量和基本类型"><a href="#变量和基本类型" class="headerlink" title="变量和基本类型"></a>变量和基本类型</h3><h4 id="1-复合类型-Compound-type"><a href="#1-复合类型-Compound-type" class="headerlink" title="1. 复合类型(Compound type)"></a>1. 复合类型(Compound type)</h4><p>基于其它类型定义的类型</p>
+<h5 id="1-1-引用-Reference"><a href="#1-1-引用-Reference" class="headerlink" title="1.1 引用(Reference)"></a>1.1 引用(Reference)</h5><p><strong>引用</strong>为对象起了另外一个名字，引用类型引用另外一种类型。通过将声明符写成&amp;d的形式来定义引用类型，其中d是声明的变量名。</p>
+<a id="more"></a>
+<p>(在这里，引用指的是左值引用)</p>
+<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">1024</span>;
+<span class="hljs-keyword">int</span> &amp;refval = ival; <span class="hljs-comment">// refval指向ival，是ival的另外一个名字</span>
+<span class="hljs-keyword">int</span> &amp;refVal2; <span class="hljs-comment">// 报错；引用必须被初始化</span></code></pre>
+<p>定义引用时，程序把引用和它的初始值<strong>绑定</strong>在一起，而不是将初始值拷贝给引用。（与初始化变量时不同的）</p>
+<p>无法令引用重新绑定到另一个对象，所以引用必须被<font color=red><strong>初始化</strong> </font></p>
+<ul>
+<li>引用即别名，它不是对象，而是为了一个已经存在的对象起了另外一个名字</li>
+</ul>
+<p>定义了一个引用之后，对其进行的所有操作都是在与之绑定的对象上进行的</p>
+<pre><code class="hljs cpp">refVal = <span class="hljs-number">2</span>;  <span class="hljs-comment">// 把2赋值给与refVal绑定的对象上，这里就是绑定到iVal上</span>
+<span class="hljs-keyword">int</span> ii = refVal;</code></pre>
+<p> 除了两种特殊情况，其它所有引用的类型都要与之绑定的对象严格匹配。不能够与字面值或表达式的计算结果绑定。</p>
+<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> &amp;refVal4 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误：引用对象初始值必须是一个对象</span>
+<span class="hljs-keyword">double</span> dval = <span class="hljs-number">3.14</span>;
+<span class="hljs-keyword">int</span> &amp;refVal5 = dval; <span class="hljs-comment">// 错误：此处引用类型的初始值必须是int型对象</span></code></pre>
+<h5 id="1-2-指针"><a href="#1-2-指针" class="headerlink" title="1.2 指针"></a>1.2 指针</h5><p><strong>指针</strong>是指向另外一种类型的符合类型，与引用类似，指针实现了对其它对象的间接访问。</p>
+<p>不同：</p>
+<ul>
+<li>指针本身是一个对象</li>
+<li>指针无需在定义时赋初值</li>
+</ul>
+<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *ip1; <span class="hljs-comment">// ip1是指向int对象的指针</span></code></pre>
+<h6 id="获取对象的地址"><a href="#获取对象的地址" class="headerlink" title="获取对象的地址"></a>获取对象的地址</h6><p>指针存放某个对象的地址。</p>
+<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
+<span class="hljs-keyword">int</span> *p = &amp;ival; <span class="hljs-comment">// p是存放变量ival的地址，或者说p是指向引用的指针。</span></code></pre>
+<h6 id="指针值"><a href="#指针值" class="headerlink" title="指针值"></a>指针值</h6><p>指针的值（即地址）应该属于下列4中状态之一：</p>
+<ul>
+<li>指向一个对象</li>
+<li>指向紧邻对象所占空间的下一个位置</li>
+<li>空指针</li>
+<li>无效指针</li>
+</ul>
+<h6 id="利用指针访问对象"><a href="#利用指针访问对象" class="headerlink" title="利用指针访问对象"></a>利用指针访问对象</h6><p>如果指针指向了一个对象，可以使用<strong>解引用符</strong>（操作符*）来访问对象</p>
+<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
+<span class="hljs-keyword">int</span> *p = &amp;ival;
+<span class="hljs-built_in">cout</span> &lt;&lt; *p <span class="hljs-comment">// 输出42</span>
+*p = <span class="hljs-number">0</span>;
+<span class="hljs-built_in">cout</span> &lt;&lt; *p <span class="hljs-comment">// 输出0，为*p赋值实际上是为p所指的对象赋值</span></code></pre>
+<h6 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h6><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *p1 = <span class="hljs-literal">nullptr</span>;
+<span class="hljs-keyword">int</span> *p2 = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">int</span> *p3 = <span class="hljs-literal">NULL</span>; <span class="hljs-comment">// 需要头文件cstdlib</span></code></pre>
+<h6 id="void-指针"><a href="#void-指针" class="headerlink" title="void*指针"></a>void*指针</h6><p>用于存放任意对象的地址，不能直接操作void*指针所指的对象</p>
+<h6 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h6><h6 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h6><p>指针是对象，所以存在对指针的引用</p>
+<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>;
+<span class="hljs-keyword">int</span> *p;
+<span class="hljs-keyword">int</span> *&amp;r = p;  <span class="hljs-comment">// r是一个对p的引用</span>
+r = &amp;i;  <span class="hljs-comment">// r引用了一个指针，因此给r赋值&amp;就是令p指向i</span>
+*r = <span class="hljs-number">0</span>;  <span class="hljs-comment">// 将i的值改为0</span></code></pre>
+<h4 id="2-const限定符"><a href="#2-const限定符" class="headerlink" title="2. const限定符"></a>2. const限定符</h4><p>值不能被改变，所以const对象必须被初始化</p>
+<pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> bufSize = <span class="hljs-number">512</span>; <span class="hljs-comment">// 输入缓冲区大小</span></code></pre>
+<p>如果要在多个文件之间共享const，必须在变量定义前加extern关键字</p>
+<h5 id="2-1-对const的引用"><a href="#2-1-对const的引用" class="headerlink" title="2.1 对const的引用"></a>2.1 对const的引用</h5><p>对常量的引用，不能够修改其绑定的对象</p>
+<p>对const的引用可以使一个并非const的对象，但是不能通过其改变值</p>
+<pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ci = <span class="hljs-number">1024</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r1 = ci; <span class="hljs-comment">// 正确</span>
+
+r1 = <span class="hljs-number">42</span>; <span class="hljs-comment">// 错误：r1是对常量的引用</span>
+<span class="hljs-keyword">int</span> &amp;r2 = ci; <span class="hljs-comment">// 错误：非常量引用指向一个常量对象</span>
+
+<span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>；
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r1 = i; <span class="hljs-comment">// 允许将const int&amp;绑定到一个普通的int上</span>
+r1 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误</span></code></pre>
+<h4 id="3-处理类型"><a href="#3-处理类型" class="headerlink" title="3. 处理类型"></a>3. 处理类型</h4><h5 id="3-1-类型别名"><a href="#3-1-类型别名" class="headerlink" title="3.1 类型别名"></a>3.1 类型别名</h5><p>某种类型的同义词，使得复杂的类型名字变得简单，易于理解和使用。</p>
+<pre><code class="hljs cpp"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">double</span> wages; <span class="hljs-comment">// wages是double的同义词</span>
+<span class="hljs-keyword">using</span> SI = Sales_item; <span class="hljs-comment">// SI是Sales_item的同义词</span></code></pre>
+<h5 id="3-2-auto类型说明符"><a href="#3-2-auto类型说明符" class="headerlink" title="3.2 auto类型说明符"></a>3.2 auto类型说明符</h5><p>让编译器分析表达式所属的类型，必须有初始值</p>
+<pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> item = val1 + val2; <span class="hljs-comment">// 由val1和val2相加的结果推断item的类型</span>
+<span class="hljs-comment">// auto一条声明语句只能有一个基础数据类型</span>
+<span class="hljs-keyword">auto</span> i = <span class="hljs-number">0</span>, *p = &amp;i;  <span class="hljs-comment">// 正确</span>
+<span class="hljs-keyword">auto</span> sz = <span class="hljs-number">0</span>, pi = <span class="hljs-number">3.14</span>; <span class="hljs-comment">// 错误，sz和pi的类型不一致</span></code></pre>
+<h4 id="4-自定义数据结构"><a href="#4-自定义数据结构" class="headerlink" title="4. 自定义数据结构"></a>4. 自定义数据结构</h4><p>将一组相关的数据元素组织起来然后使用他们的策略和方法</p>
+<pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Sales_data</span> &#123;</span>
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> bookNo;
+  <span class="hljs-keyword">unsigned</span> units_sold = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">double</span> revenue = <span class="hljs-number">0</span>;
+&#125;
+
+Sales_data accum;</code></pre>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C++字符串,向量和数组</title>
     <url>/posts/869e4b19.html</url>
     <content><![CDATA[<h3 id="二、字符串，向量和数组"><a href="#二、字符串，向量和数组" class="headerlink" title="二、字符串，向量和数组"></a>二、字符串，向量和数组</h3><p>作用域操作符<code>::</code></p>
@@ -155,159 +248,6 @@ p++; <span class="hljs-comment">// 指向第一个元素</span></code></pre>
       </tags>
   </entry>
   <entry>
-    <title>C++变量和基本类型</title>
-    <url>/posts/96db5496.html</url>
-    <content><![CDATA[<h3 id="变量和基本类型"><a href="#变量和基本类型" class="headerlink" title="变量和基本类型"></a>变量和基本类型</h3><h4 id="1-复合类型-Compound-type"><a href="#1-复合类型-Compound-type" class="headerlink" title="1. 复合类型(Compound type)"></a>1. 复合类型(Compound type)</h4><p>基于其它类型定义的类型</p>
-<h5 id="1-1-引用-Reference"><a href="#1-1-引用-Reference" class="headerlink" title="1.1 引用(Reference)"></a>1.1 引用(Reference)</h5><p><strong>引用</strong>为对象起了另外一个名字，引用类型引用另外一种类型。通过将声明符写成&amp;d的形式来定义引用类型，其中d是声明的变量名。</p>
-<a id="more"></a>
-<p>(在这里，引用指的是左值引用)</p>
-<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">1024</span>;
-<span class="hljs-keyword">int</span> &amp;refval = ival; <span class="hljs-comment">// refval指向ival，是ival的另外一个名字</span>
-<span class="hljs-keyword">int</span> &amp;refVal2; <span class="hljs-comment">// 报错；引用必须被初始化</span></code></pre>
-<p>定义引用时，程序把引用和它的初始值<strong>绑定</strong>在一起，而不是将初始值拷贝给引用。（与初始化变量时不同的）</p>
-<p>无法令引用重新绑定到另一个对象，所以引用必须被<font color=red><strong>初始化</strong> </font></p>
-<ul>
-<li>引用即别名，它不是对象，而是为了一个已经存在的对象起了另外一个名字</li>
-</ul>
-<p>定义了一个引用之后，对其进行的所有操作都是在与之绑定的对象上进行的</p>
-<pre><code class="hljs cpp">refVal = <span class="hljs-number">2</span>;  <span class="hljs-comment">// 把2赋值给与refVal绑定的对象上，这里就是绑定到iVal上</span>
-<span class="hljs-keyword">int</span> ii = refVal;</code></pre>
-<p> 除了两种特殊情况，其它所有引用的类型都要与之绑定的对象严格匹配。不能够与字面值或表达式的计算结果绑定。</p>
-<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> &amp;refVal4 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误：引用对象初始值必须是一个对象</span>
-<span class="hljs-keyword">double</span> dval = <span class="hljs-number">3.14</span>;
-<span class="hljs-keyword">int</span> &amp;refVal5 = dval; <span class="hljs-comment">// 错误：此处引用类型的初始值必须是int型对象</span></code></pre>
-<h5 id="1-2-指针"><a href="#1-2-指针" class="headerlink" title="1.2 指针"></a>1.2 指针</h5><p><strong>指针</strong>是指向另外一种类型的符合类型，与引用类似，指针实现了对其它对象的间接访问。</p>
-<p>不同：</p>
-<ul>
-<li>指针本身是一个对象</li>
-<li>指针无需在定义时赋初值</li>
-</ul>
-<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *ip1; <span class="hljs-comment">// ip1是指向int对象的指针</span></code></pre>
-<h6 id="获取对象的地址"><a href="#获取对象的地址" class="headerlink" title="获取对象的地址"></a>获取对象的地址</h6><p>指针存放某个对象的地址。</p>
-<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
-<span class="hljs-keyword">int</span> *p = &amp;ival; <span class="hljs-comment">// p是存放变量ival的地址，或者说p是指向引用的指针。</span></code></pre>
-<h6 id="指针值"><a href="#指针值" class="headerlink" title="指针值"></a>指针值</h6><p>指针的值（即地址）应该属于下列4中状态之一：</p>
-<ul>
-<li>指向一个对象</li>
-<li>指向紧邻对象所占空间的下一个位置</li>
-<li>空指针</li>
-<li>无效指针</li>
-</ul>
-<h6 id="利用指针访问对象"><a href="#利用指针访问对象" class="headerlink" title="利用指针访问对象"></a>利用指针访问对象</h6><p>如果指针指向了一个对象，可以使用<strong>解引用符</strong>（操作符*）来访问对象</p>
-<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> ival = <span class="hljs-number">42</span>;
-<span class="hljs-keyword">int</span> *p = &amp;ival;
-<span class="hljs-built_in">cout</span> &lt;&lt; *p <span class="hljs-comment">// 输出42</span>
-*p = <span class="hljs-number">0</span>;
-<span class="hljs-built_in">cout</span> &lt;&lt; *p <span class="hljs-comment">// 输出0，为*p赋值实际上是为p所指的对象赋值</span></code></pre>
-<h6 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h6><pre><code class="hljs cpp"><span class="hljs-keyword">int</span> *p1 = <span class="hljs-literal">nullptr</span>;
-<span class="hljs-keyword">int</span> *p2 = <span class="hljs-number">0</span>;
-<span class="hljs-keyword">int</span> *p3 = <span class="hljs-literal">NULL</span>; <span class="hljs-comment">// 需要头文件cstdlib</span></code></pre>
-<h6 id="void-指针"><a href="#void-指针" class="headerlink" title="void*指针"></a>void*指针</h6><p>用于存放任意对象的地址，不能直接操作void*指针所指的对象</p>
-<h6 id="指向指针的指针"><a href="#指向指针的指针" class="headerlink" title="指向指针的指针"></a>指向指针的指针</h6><h6 id="指向指针的引用"><a href="#指向指针的引用" class="headerlink" title="指向指针的引用"></a>指向指针的引用</h6><p>指针是对象，所以存在对指针的引用</p>
-<pre><code class="hljs cpp"><span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>;
-<span class="hljs-keyword">int</span> *p;
-<span class="hljs-keyword">int</span> *&amp;r = p;  <span class="hljs-comment">// r是一个对p的引用</span>
-r = &amp;i;  <span class="hljs-comment">// r引用了一个指针，因此给r赋值&amp;就是令p指向i</span>
-*r = <span class="hljs-number">0</span>;  <span class="hljs-comment">// 将i的值改为0</span></code></pre>
-<h4 id="2-const限定符"><a href="#2-const限定符" class="headerlink" title="2. const限定符"></a>2. const限定符</h4><p>值不能被改变，所以const对象必须被初始化</p>
-<pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> bufSize = <span class="hljs-number">512</span>; <span class="hljs-comment">// 输入缓冲区大小</span></code></pre>
-<p>如果要在多个文件之间共享const，必须在变量定义前加extern关键字</p>
-<h5 id="2-1-对const的引用"><a href="#2-1-对const的引用" class="headerlink" title="2.1 对const的引用"></a>2.1 对const的引用</h5><p>对常量的引用，不能够修改其绑定的对象</p>
-<p>对const的引用可以使一个并非const的对象，但是不能通过其改变值</p>
-<pre><code class="hljs cpp"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ci = <span class="hljs-number">1024</span>;
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r1 = ci; <span class="hljs-comment">// 正确</span>
-
-r1 = <span class="hljs-number">42</span>; <span class="hljs-comment">// 错误：r1是对常量的引用</span>
-<span class="hljs-keyword">int</span> &amp;r2 = ci; <span class="hljs-comment">// 错误：非常量引用指向一个常量对象</span>
-
-<span class="hljs-keyword">int</span> i = <span class="hljs-number">42</span>；
-<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> &amp;r1 = i; <span class="hljs-comment">// 允许将const int&amp;绑定到一个普通的int上</span>
-r1 = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误</span></code></pre>
-<h4 id="3-处理类型"><a href="#3-处理类型" class="headerlink" title="3. 处理类型"></a>3. 处理类型</h4><h5 id="3-1-类型别名"><a href="#3-1-类型别名" class="headerlink" title="3.1 类型别名"></a>3.1 类型别名</h5><p>某种类型的同义词，使得复杂的类型名字变得简单，易于理解和使用。</p>
-<pre><code class="hljs cpp"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">double</span> wages; <span class="hljs-comment">// wages是double的同义词</span>
-<span class="hljs-keyword">using</span> SI = Sales_item; <span class="hljs-comment">// SI是Sales_item的同义词</span></code></pre>
-<h5 id="3-2-auto类型说明符"><a href="#3-2-auto类型说明符" class="headerlink" title="3.2 auto类型说明符"></a>3.2 auto类型说明符</h5><p>让编译器分析表达式所属的类型，必须有初始值</p>
-<pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> item = val1 + val2; <span class="hljs-comment">// 由val1和val2相加的结果推断item的类型</span>
-<span class="hljs-comment">// auto一条声明语句只能有一个基础数据类型</span>
-<span class="hljs-keyword">auto</span> i = <span class="hljs-number">0</span>, *p = &amp;i;  <span class="hljs-comment">// 正确</span>
-<span class="hljs-keyword">auto</span> sz = <span class="hljs-number">0</span>, pi = <span class="hljs-number">3.14</span>; <span class="hljs-comment">// 错误，sz和pi的类型不一致</span></code></pre>
-<h4 id="4-自定义数据结构"><a href="#4-自定义数据结构" class="headerlink" title="4. 自定义数据结构"></a>4. 自定义数据结构</h4><p>将一组相关的数据元素组织起来然后使用他们的策略和方法</p>
-<pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Sales_data</span> &#123;</span>
-  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> bookNo;
-  <span class="hljs-keyword">unsigned</span> units_sold = <span class="hljs-number">0</span>;
-  <span class="hljs-keyword">double</span> revenue = <span class="hljs-number">0</span>;
-&#125;
-
-Sales_data accum;</code></pre>
-]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo个人博客绑定域名和配置SSL证书</title>
-    <url>/posts/2cd2c226.html</url>
-    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
-<a id="more"></a>
-<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
-<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
-<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
-<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/domainname1.png" alt=""></p>
-<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
-<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>主机记录</th>
-<th>记录类型</th>
-<th>线路类型</th>
-<th>记录值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>www</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-<tr>
-<td>@</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
-<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
-<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/2020-04-09domainname2.png" alt=""></p>
-<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
-<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
-<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
-<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
-<hr>
-<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
-<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
-<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/400/35244">腾讯云Nginx服务器证书安装</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/026d67cc6cb1">Mac下nginx的使用</a></p>
-<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
-<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
-<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo-Permalink简化</title>
     <url>/posts/838443af.html</url>
     <content><![CDATA[<h1 id="Permalink简化"><a href="#Permalink简化" class="headerlink" title="Permalink简化"></a>Permalink简化</h1><p>在文档名有中文的时候，因为汉字会被转义，默认的永久链接会非常复杂，具体原因可以看这一篇文章</p>
@@ -372,6 +312,126 @@ categories:</code></pre>
 <p>参考</p>
 <ol>
 <li><a target="_blank" rel="noopener" href="http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html">http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo个人博客绑定域名和配置SSL证书</title>
+    <url>/posts/2cd2c226.html</url>
+    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
+<a id="more"></a>
+<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
+<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
+<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
+<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/domainname1.png" alt=""></p>
+<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
+<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>主机记录</th>
+<th>记录类型</th>
+<th>线路类型</th>
+<th>记录值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>www</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+<tr>
+<td>@</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
+<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
+<p><img src="https://blogofzzy-1301797566.cos.ap-shanghai.myqcloud.com/2020-04-09domainname2.png" alt=""></p>
+<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
+<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
+<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
+<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
+<hr>
+<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
+<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/400/35244">腾讯云Nginx服务器证书安装</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/026d67cc6cb1">Mac下nginx的使用</a></p>
+<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
+<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
+<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo写作</title>
+    <url>/posts/c4064b2b.html</url>
+    <content><![CDATA[<h1 id="Hexo写作"><a href="#Hexo写作" class="headerlink" title="Hexo写作"></a>Hexo写作</h1><p>本文介绍了一些基本的Hexo配置和使用hexo+GitHub写作的流程。</p>
+<a id="more"></a>
+<h3 id="1-Hexo基本命令"><a href="#1-Hexo基本命令" class="headerlink" title="1. Hexo基本命令"></a>1. Hexo基本命令</h3><pre><code class="hljs shell">hexo g = hexo generate  #生成
+hexo s = hexo server  #启动本地预览
+hexo d = hexo deploy  #远程部署
+hexo n &quot;文章标题&quot; = hexo new &quot;文章标题&quot;  #新建一篇博文</code></pre>
+<h3 id="2-整体配置"><a href="#2-整体配置" class="headerlink" title="2. 整体配置"></a>2. 整体配置</h3><p><code>\hexo\_config.yml</code></p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> Site</span>
+title:  # 网站名，标签页显示
+subtitle:  # 副标题，网站名下显示
+description:  # 网站描述，便于搜索
+keywords:
+author: # 作者
+language: zh-CN # 中文
+timezone: Asia/Shanghai # 时区</code></pre>
+<h3 id="3-更换主题"><a href="#3-更换主题" class="headerlink" title="3. 更换主题"></a>3. 更换主题</h3><p>推荐使用<code>melody</code></p>
+<p><a href="[https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#%E5%AE%89%E8%A3%85](https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#安装">hexo-theme-melody快速开始</a>)</p>
+<p>这个主题就是我现在网站使用的主题，它有完整的中文教程，功能齐全。按照教程配置就可以了。</p>
+<h3 id="4-写作步骤"><a href="#4-写作步骤" class="headerlink" title="4. 写作步骤"></a>4. 写作步骤</h3><ol>
+<li><p>新建文章</p>
+<pre><code class="hljs shell">hexo new &quot;title&quot;</code></pre>
+</li>
+<li><p>写作</p>
+<p><code>\hexo\source\_post</code>中找到<code>title.md</code>，使用<code>typora</code>打开</p>
+<p>注意文章的<code>tags</code>格式是<code>[]</code></p>
+<p>在信息栏填写<code>top_img</code>信息可以自定义该页图片情况，如<code>false</code>表示不显示</p>
+<p><code>文章中&lt;!-- more --&gt;</code>之前的部分会显示在主页上，并出现<code>Read more</code>按钮，点击阅读更多内容</p>
+</li>
+</ol>
+<ol>
+<li><p>预览</p>
+<pre><code class="hljs shell">hexo s
+hexo s --debug // 在命令行生成debug信息</code></pre>
+</li>
+<li><p>同步到远程</p>
+<pre><code class="hljs shell">hexo d -g</code></pre>
+</li>
+</ol>
+<h3 id="5-问题"><a href="#5-问题" class="headerlink" title="5.  问题"></a>5.  问题</h3><ol>
+<li><p>Template render error: (unknown path)</p>
+<p>在命令行输入<code>hexo -g</code>后报错，原因在于文章内容中有<strong>{}</strong>时，如果它没有被代码块包括，解析会出现错误，所以需要写成</p>
+<pre><code class="hljs routeros">&#123;%<span class="hljs-built_in"> raw </span>%&#125;</code></pre>
+</li>
+<li><p>本地预览与远程显示不一致</p>
+<p>删除缓存</p>
+<pre><code class="hljs ebnf"><span class="hljs-attribute">hexo clean</span></code></pre>
+<p>在网页上刷新</p>
+</li>
 </ol>
 ]]></content>
       <categories>
@@ -478,66 +538,6 @@ hexo g -d</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>Hexo写作</title>
-    <url>/posts/c4064b2b.html</url>
-    <content><![CDATA[<h1 id="Hexo写作"><a href="#Hexo写作" class="headerlink" title="Hexo写作"></a>Hexo写作</h1><p>本文介绍了一些基本的Hexo配置和使用hexo+GitHub写作的流程。</p>
-<a id="more"></a>
-<h3 id="1-Hexo基本命令"><a href="#1-Hexo基本命令" class="headerlink" title="1. Hexo基本命令"></a>1. Hexo基本命令</h3><pre><code class="hljs shell">hexo g = hexo generate  #生成
-hexo s = hexo server  #启动本地预览
-hexo d = hexo deploy  #远程部署
-hexo n &quot;文章标题&quot; = hexo new &quot;文章标题&quot;  #新建一篇博文</code></pre>
-<h3 id="2-整体配置"><a href="#2-整体配置" class="headerlink" title="2. 整体配置"></a>2. 整体配置</h3><p><code>\hexo\_config.yml</code></p>
-<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> Site</span>
-title:  # 网站名，标签页显示
-subtitle:  # 副标题，网站名下显示
-description:  # 网站描述，便于搜索
-keywords:
-author: # 作者
-language: zh-CN # 中文
-timezone: Asia/Shanghai # 时区</code></pre>
-<h3 id="3-更换主题"><a href="#3-更换主题" class="headerlink" title="3. 更换主题"></a>3. 更换主题</h3><p>推荐使用<code>melody</code></p>
-<p><a href="[https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#%E5%AE%89%E8%A3%85](https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#安装">hexo-theme-melody快速开始</a>)</p>
-<p>这个主题就是我现在网站使用的主题，它有完整的中文教程，功能齐全。按照教程配置就可以了。</p>
-<h3 id="4-写作步骤"><a href="#4-写作步骤" class="headerlink" title="4. 写作步骤"></a>4. 写作步骤</h3><ol>
-<li><p>新建文章</p>
-<pre><code class="hljs shell">hexo new &quot;title&quot;</code></pre>
-</li>
-<li><p>写作</p>
-<p><code>\hexo\source\_post</code>中找到<code>title.md</code>，使用<code>typora</code>打开</p>
-<p>注意文章的<code>tags</code>格式是<code>[]</code></p>
-<p>在信息栏填写<code>top_img</code>信息可以自定义该页图片情况，如<code>false</code>表示不显示</p>
-<p><code>文章中&lt;!-- more --&gt;</code>之前的部分会显示在主页上，并出现<code>Read more</code>按钮，点击阅读更多内容</p>
-</li>
-</ol>
-<ol>
-<li><p>预览</p>
-<pre><code class="hljs shell">hexo s
-hexo s --debug // 在命令行生成debug信息</code></pre>
-</li>
-<li><p>同步到远程</p>
-<pre><code class="hljs shell">hexo d -g</code></pre>
-</li>
-</ol>
-<h3 id="5-问题"><a href="#5-问题" class="headerlink" title="5.  问题"></a>5.  问题</h3><ol>
-<li><p>Template render error: (unknown path)</p>
-<p>在命令行输入<code>hexo -g</code>后报错，原因在于文章内容中有<strong>{}</strong>时，如果它没有被代码块包括，解析会出现错误，所以需要写成</p>
-<pre><code class="hljs routeros">&#123;%<span class="hljs-built_in"> raw </span>%&#125;</code></pre>
-</li>
-<li><p>本地预览与远程显示不一致</p>
-<p>删除缓存</p>
-<pre><code class="hljs ebnf"><span class="hljs-attribute">hexo clean</span></code></pre>
-<p>在网页上刷新</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用Github pages+Hexo 搭建个人博客</title>
     <url>/posts/ae6c038e.html</url>
     <content><![CDATA[<h1 id="Github-pages-Hexo-搭建个人博客"><a href="#Github-pages-Hexo-搭建个人博客" class="headerlink" title="Github pages + Hexo 搭建个人博客"></a>Github pages + Hexo 搭建个人博客</h1><p>2019年11月19日，我决定开始写<strong>博客</strong>，首先要用<em>github pages+hexo</em>搭建一个个人博客，其中的过程我就记录在这里面。</p>
@@ -612,6 +612,735 @@ npm -v</code></pre>
       </categories>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java 接口</title>
+    <url>/posts/d993c7e9.html</url>
+    <content><![CDATA[<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p><strong>接口</strong>(<em>interface</em>)用来描述类应该做什么，而不指定它们具体该如何做。一个类可以<strong>实现</strong>(<em>implement</em>)一个或多个接口。</p>
+<h2 id="1-接口的概念"><a href="#1-接口的概念" class="headerlink" title="1. 接口的概念"></a>1. 接口的概念</h2><p>接口不是类，而是对希望符合这个接口的类的一组<strong>需求</strong></p>
+<p><strong>Tip</strong></p>
+<ul>
+<li>接口中的所有方法都自动是<code>public</code>，因此在接口中声明方法时，不必提供关键字<code>public</code></li>
+<li>接口绝不会有实例字段</li>
+</ul>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> <span class="hljs-title">implement</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">Employee</span>&gt; </span>&#123;
+    <span class="hljs-comment">// blablabla</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(Employee other)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> Integer.compare(salary, other.salary);
+    &#125;
+&#125;</code></pre>
+<h2 id="2-接口的属性"><a href="#2-接口的属性" class="headerlink" title="2. 接口的属性"></a>2. 接口的属性</h2><p>接口不是类，不能够使用<code>new</code>实例化一个接口，但是可以声明接口的变量，接口变量必须引用实现这个接口的类对象</p>
+<pre><code class="hljs java">Comparable x = <span class="hljs-keyword">new</span> Employee(. . .);</code></pre>
+<p><strong>Tip</strong><br>为什么需要接口，而不是直接使用抽象类？<br>因为Java不支持多继承，所以每个类只能扩展一个类。<br>而接口提供了多继承的好处，而避免了多重继承的复杂性和低效性。</p>
+<h2 id="3-接口与回调"><a href="#3-接口与回调" class="headerlink" title="3. 接口与回调"></a>3. 接口与回调</h2><p><strong>回调</strong>(<em>callback</em>)是一种常见的程序设计模式。在这种模式中，可以指定某个特定事件发生时应该采取的动作。比如我们设计了一个时钟，可以请求每秒更新一次，以便更新时钟的表盘。</p>
+<p>下面是一个定时器和动作监听的具体使用的例子，定时器启动之后，程序将弹出一个消息对话框，并等待用户点击OK来终止程序的运行，在程序等待用户操作的同时，每隔1秒显示一次当前时间</p>
+<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.awt.*;
+<span class="hljs-keyword">import</span> java.awt.event.*;
+<span class="hljs-keyword">import</span> java.time.*;
+<span class="hljs-keyword">import</span> javax.swing.*;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimerTest</span></span>
+<span class="hljs-class"></span>&#123;  
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>
+<span class="hljs-function">   </span>&#123;  
+      TimePrinter listener = <span class="hljs-keyword">new</span> TimePrinter();
+
+      <span class="hljs-comment">// construct a timer that calls the listener</span>
+      <span class="hljs-comment">// once every second</span>
+      Timer timer = <span class="hljs-keyword">new</span> Timer(<span class="hljs-number">1000</span>, listener);
+      timer.start();
+
+      <span class="hljs-comment">// keep program running until the user selects &quot;OK&quot;</span>
+      JOptionPane.showMessageDialog(<span class="hljs-keyword">null</span>, <span class="hljs-string">&quot;Quit program?&quot;</span>);
+      System.exit(<span class="hljs-number">0</span>);
+   &#125;
+&#125;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimePrinter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ActionListener</span></span>
+<span class="hljs-class"></span>&#123;  
+   <span class="hljs-meta">@Override</span>
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">actionPerformed</span><span class="hljs-params">(ActionEvent event)</span></span>
+<span class="hljs-function">   </span>&#123;  
+      System.out.println(<span class="hljs-string">&quot;At the tone, the time is &quot;</span> 
+         + Instant.ofEpochMilli(event.getWhen()));
+      Toolkit.getDefaultToolkit().beep();
+   &#125;
+&#125;
+</code></pre>
+<h2 id="4-Comparator接口"><a href="#4-Comparator接口" class="headerlink" title="4. Comparator接口"></a>4. Comparator接口</h2><p>如果我们想要对字符串数组进行排序，可以直接使用<code>String.compareTo</code>方法按字典顺序比较字符串。<br>如果我们希望按照字符串长度来进行比较，可以自己实现一个<strong>比较器</strong>(<em>comparator</em>)，如下面的例子中，将比较器作为参数传入<code>Arrays.sort</code>方法中。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Comparator;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthCompare</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        String[] friends = &#123;<span class="hljs-string">&quot;Adam&quot;</span>, <span class="hljs-string">&quot;Ben&quot;</span>, <span class="hljs-string">&quot;Peter&quot;</span>, <span class="hljs-string">&quot;Noah&quot;</span>&#125;;
+        Arrays.sort(friends, <span class="hljs-keyword">new</span> LengthComparator());
+        System.out.println(Arrays.toString(friends));
+    &#125;
+&#125;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthComparator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparator</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(String o1, String o2)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> o1.length() - o2.length();
+    &#125;
+&#125;</code></pre>
+<p>参考：</p>
+<ol>
+<li>《Java核心技术 卷I》</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java 线程（一）</title>
+    <url>/posts/909f13b2.html</url>
+    <content><![CDATA[<h1 id="线程（一）"><a href="#线程（一）" class="headerlink" title="线程（一）"></a>线程（一）</h1><h2 id="1-线程的基本概念"><a href="#1-线程的基本概念" class="headerlink" title="1. 线程的基本概念"></a>1. 线程的基本概念</h2><p>一个<strong>线程</strong>是程序内部的顺序控制流</p>
+<h3 id="1-1-线程与进程："><a href="#1-1-线程与进程：" class="headerlink" title="1.1 线程与进程："></a>1.1 线程与进程：</h3><p>每个<strong>进程</strong>都有独立的代码和数据空间，进程切换的开销大</p>
+<p><strong>线程</strong>是轻量的进程，同一类线程共享代码和数据空间，每个线程有独立的运行栈和程序计数器，线程切换的开销小</p>
+<p><strong>多进程</strong>：在操作系统中，能同时运行多个任务（程序）</p>
+<p><strong>多线程</strong>：在同一个应用程序中，有多个顺序流同时执行（有多个代码段同时在运行）</p>
+<p>关于线程与进程的辨析可以看这一篇文章<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html">进程与线程的一个简单解释</a></p>
+<h3 id="1-2-线程的概念模型："><a href="#1-2-线程的概念模型：" class="headerlink" title="1.2 线程的概念模型："></a>1.2 线程的概念模型：</h3><p>虚拟的CPU，封装在<code>java.lang.Thread</code>类中</p>
+<p>CPU所执行的代码和所处理的数据，传递给<code>Thread</code>类</p>
+<p><strong>线程体</strong></p>
+<p>Java的线程是通过<code>java.lang.Thread</code>类来实现的</p>
+<p>每个线程都是通过某个特定的<code>Thread</code>对象的方法<code>run()</code>来完成其操作的，方法<code>run()</code>称为线程体</p>
+<h2 id="2-线程状态"><a href="#2-线程状态" class="headerlink" title="2. 线程状态"></a>2. 线程状态</h2><p>线程可以有如下6种状态：</p>
+<ul>
+<li>New（新建）</li>
+<li>Runnable（可运行）</li>
+<li>Blocked （阻塞）</li>
+<li>Waiting （等待）</li>
+<li>Timed waiting（计时等待）</li>
+<li>Terminated （终止）</li>
+</ul>
+<h3 id="2-1-新建线程"><a href="#2-1-新建线程" class="headerlink" title="2.1 新建线程"></a>2.1 新建线程</h3><pre><code class="hljs java"><span class="hljs-keyword">new</span> Thread(t);</code></pre>
+<p>当使用<code>new</code>新建一个线程时，这个线程还没有开始运行，状态是<strong>新建</strong></p>
+<h3 id="2-2-可运行线程"><a href="#2-2-可运行线程" class="headerlink" title="2.2 可运行线程"></a>2.2 可运行线程</h3><pre><code class="hljs java"><span class="hljs-keyword">new</span> Thread(t).start();</code></pre>
+<p>调用<code>start</code>方法，线程就处于<strong>可运行</strong>状态。它可能正在运行也可能没有运行，由操作系统决定它具体的运行时间。所以这个状态被称为<strong>可运行</strong>，而不是运行。</p>
+<h3 id="2-3-阻塞和等待线程"><a href="#2-3-阻塞和等待线程" class="headerlink" title="2.3 阻塞和等待线程"></a>2.3 阻塞和等待线程</h3><p>当线程处于阻塞或等待状态时，它暂时是不活动的。</p>
+<p>要由线程调度器重新激活这个线程，具体细节取决于它是怎样到达非活动状态的。</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200926-01.png" alt=""></p>
+<h3 id="2-4-终止线程"><a href="#2-4-终止线程" class="headerlink" title="2.4 终止线程"></a>2.4 终止线程</h3><p>线程终止的原因有2个：</p>
+<ul>
+<li><code>run</code>方法正常退出，线程自然终止</li>
+<li>因为一个没有捕获的异常终止了<code>run</code>方法，使线程意外终止</li>
+</ul>
+<h2 id="3-如何创建线程"><a href="#3-如何创建线程" class="headerlink" title="3. 如何创建线程"></a>3. 如何创建线程</h2><p>构造线程的两种方法</p>
+<ul>
+<li>定义一个线程类，它继承类<code>Thread</code>并重写其中的方法<code>run()</code></li>
+<li>提供一个实现接口<code>Runnable</code>的类作为线程的目标对象，在初始化一个<code>Thread</code>类或者<code>Thread</code>子类的线程对象时，把目标对象传递给这个线程实例，由该目标对象提供线程体<code>run()</code></li>
+</ul>
+<h3 id="3-1-通过Thread类创建线程"><a href="#3-1-通过Thread类创建线程" class="headerlink" title="3.1 通过Thread类创建线程"></a>3.1 通过Thread类创建线程</h3><p>通过<code>Thread</code>类来创建线程</p>
+<p>继承<code>Thread</code>类，创建多线程的方法之一</p>
+<ul>
+<li>从<code>Thread</code>类派生一个子类，并创建子类的对象</li>
+<li>子类应该重写<code>Thread</code>类的<code>run</code>方法，写入需要在新线程中执行的语句段</li>
+<li><strong>调用<code>start</code>方法来启动新线程</strong>，自动进入<code>run</code>方法（不是直接调用<code>run</code>方法）</li>
+</ul>
+<p>我们来看下面这个计算阶乘的程序</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FactorialThreadTester</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;main thread starts&quot;</span>);
+        FactorialThread myThread = <span class="hljs-keyword">new</span> FactorialThread(<span class="hljs-number">10</span>);
+        myThread.start();
+        System.out.println(<span class="hljs-string">&quot;main thread ends&quot;</span>);
+    &#125;
+&#125;</code></pre>
+<p>我们自定义了<code>FactorialThread</code>类继承<code>Thread</code>类，重写了<code>run</code>方法</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FactorialThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> num;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FactorialThread</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.num = num;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">int</span> i = num;
+        <span class="hljs-keyword">int</span> result = <span class="hljs-number">1</span>;
+        System.out.println(<span class="hljs-string">&quot;new thread starts&quot;</span>);
+        <span class="hljs-keyword">while</span> (i &gt; <span class="hljs-number">0</span>) &#123;
+            result *= i;
+            i--;
+        &#125;
+        System.out.println(<span class="hljs-string">&quot;Result: &quot;</span> + result);
+        System.out.println(<span class="hljs-string">&quot;new thread ends&quot;</span>);
+    &#125;
+&#125;</code></pre>
+<p>结果：</p>
+<pre><code class="hljs autohotkey">main <span class="hljs-keyword">thread</span> starts
+main <span class="hljs-keyword">thread</span> ends
+<span class="hljs-keyword">new</span> <span class="hljs-keyword">thread</span> starts
+<span class="hljs-title">Result:</span> <span class="hljs-number">3628800</span>
+<span class="hljs-keyword">new</span> <span class="hljs-keyword">thread</span> ends</code></pre>
+<p>主线程的任务就是创新新线程，创建完成后主线程就结束了</p>
+<p>结果说明：</p>
+<ul>
+<li><code>main</code>线程已经执行完后，新线程才执行完</li>
+<li><code>main</code>方法调用<code>thread.start()</code>方法启动新线程后并不等待<code>run</code>方法返回就继续运行，线程的<code>run</code>方法在一边独自运行，不影响原来的<code>main</code>方法的运行，也就是说新建的线程调用<code>start()</code>方法后不一定立即进入运行状态</li>
+</ul>
+<h3 id="3-2-通过Runnable接口构造线程"><a href="#3-2-通过Runnable接口构造线程" class="headerlink" title="3.2 通过Runnable接口构造线程"></a>3.2 通过Runnable接口构造线程</h3><ul>
+<li>只有一个<code>run()</code>方法</li>
+<li><code>Thread</code>类实现了<code>Runnable</code>接口</li>
+<li>便于多个线程共享资源</li>
+<li>Java不支持多继承，如果定义的类已经继承了某个基类，便需要实现<code>Runnable</code>接口来实现多线程</li>
+<li>以实现<code>Runnable</code>的对象为参数建立新的线程</li>
+</ul>
+<p>我们定义一个<code>ThreadSleep</code>类实现<code>Runnable</code>接口</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadSleep</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> sleepTime;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ThreadSleep</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.sleepTime = (<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">6000</span>);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">try</span> &#123;
+            System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot; is going to sleep for &quot;</span> + sleepTime);
+            Thread.sleep(sleepTime);
+        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
+
+        &#125;
+        System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot; ends&quot;</span>);
+    &#125;
+&#125;</code></pre>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadTest</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        ThreadSleep t = <span class="hljs-keyword">new</span> ThreadSleep();
+        <span class="hljs-keyword">new</span> Thread(t, <span class="hljs-string">&quot;task1&quot;</span>).start();
+    &#125;
+&#125;</code></pre>
+<p>或者也可以使用lambda表达式来创建实例</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadTest</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        Runnable task1 = () -&gt; &#123;
+            <span class="hljs-keyword">try</span> &#123;
+                <span class="hljs-keyword">int</span> sleepTime = (<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">6000</span>);
+                System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot; is going to sleep for &quot;</span> + sleepTime);
+                Thread.sleep(sleepTime);
+            &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;&#125;
+            System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot; ends&quot;</span>);
+        &#125;;
+        <span class="hljs-keyword">new</span> Thread(task1, <span class="hljs-string">&quot;task1&quot;</span>).start();
+    &#125;
+&#125;</code></pre>
+<p>使用<code>Runnable</code>接口实现线程可以将CPU，代码和数据分开，形成清晰的模型，还可以从其他类继承</p>
+<p>直接继承<code>Thread</code>类实现线程，编写简单，直接继承，重写<code>run</code>方法，但是不能再从其他类继承</p>
+<h2 id="3-线程属性"><a href="#3-线程属性" class="headerlink" title="3. 线程属性"></a>3. 线程属性</h2><h3 id="3-1-中断线程"><a href="#3-1-中断线程" class="headerlink" title="3.1 中断线程"></a>3.1 中断线程</h3><p>除了已经废弃的<code>stop</code>方法，没有方法可以<strong>强制</strong>线程终止。不过，<code>interrupt</code>方法可以用来<strong>请求</strong>终止一个线程</p>
+<p>当对一个线程调用<code>interrupt</code>方法时，就会设置线程的<strong>中断状态</strong>为<code>true</code>，如果当前线程被一个<code>sleep</code>调用阻塞，则抛出一个<code>InterruptedException</code>异常。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">while</span> (!Thread.currentThread().isInterrupted()) &#123;
+  <span class="hljs-comment">//blablabla</span>
+&#125;</code></pre>
+<p><code>static Thread currentThread()</code>返回表示当前正在执行的线程的<code>Thread</code>对象</p>
+<p><code>boolean isInterrupted()</code>测试线程是否被中断</p>
+<h3 id="3-2-守护线程"><a href="#3-2-守护线程" class="headerlink" title="3.2 守护线程"></a>3.2 守护线程</h3><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setDaemon</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> isDaemon)</span></span></code></pre>
+<p>调用<code>t.setDaemon(true)</code>将一个线程转换为守护线程，必须在线程启动之前调用，作用是为其它线程提供服务。比如计时器定时发送信号给其它线程，如果只剩下守护线程，虚拟机就会退出。</p>
+<h2 id="4-线程的休眠"><a href="#4-线程的休眠" class="headerlink" title="4. 线程的休眠"></a>4. 线程的休眠</h2><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FactorialThreadTester</span> </span>&#123;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        System.out.println(<span class="hljs-string">&quot;main thread starts&quot;</span>);
+        FactorialThread myThread = <span class="hljs-keyword">new</span> FactorialThread(<span class="hljs-number">10</span>);
+        myThread.start();
+        <span class="hljs-keyword">try</span> &#123;
+            Thread.sleep(<span class="hljs-number">1000</span>);
+        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
+
+        &#125;
+        System.out.println(<span class="hljs-string">&quot;main thread ends&quot;</span>);
+    &#125;
+&#125;</code></pre>
+<p>结果</p>
+<pre><code class="hljs autohotkey">main <span class="hljs-keyword">thread</span> starts
+<span class="hljs-keyword">new</span> <span class="hljs-keyword">thread</span> starts
+<span class="hljs-title">Result:</span> <span class="hljs-number">3628800</span>
+<span class="hljs-keyword">new</span> <span class="hljs-keyword">thread</span> ends
+main <span class="hljs-keyword">thread</span> ends</code></pre>
+<p>运行结果说明，新线程结束后<code>main</code>线程才结束。</p>
+<p>线程休眠就是为了让其他线程得到执行的机会</p>
+<h2 id="5-线程内部的数据共享"><a href="#5-线程内部的数据共享" class="headerlink" title="5. 线程内部的数据共享"></a>5. 线程内部的数据共享</h2><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadTest</span> </span>&#123;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        ThreadSleep t = <span class="hljs-keyword">new</span> ThreadSleep();
+        System.out.println(<span class="hljs-string">&quot;Starting threads&quot;</span>);
+        <span class="hljs-keyword">new</span> Thread(t, <span class="hljs-string">&quot;task1&quot;</span>).start();
+        <span class="hljs-keyword">new</span> Thread(t, <span class="hljs-string">&quot;task2&quot;</span>).start();
+        <span class="hljs-keyword">new</span> Thread(t, <span class="hljs-string">&quot;task3&quot;</span>).start();
+        System.out.println(<span class="hljs-string">&quot;Thread started, main ends&quot;</span>);
+
+    &#125;
+&#125;
+</code></pre>
+<p>结果</p>
+<pre><code class="hljs vim">Starting threads
+Thread started, main ends
+task1 <span class="hljs-keyword">is</span> going <span class="hljs-keyword">to</span> <span class="hljs-keyword">sleep</span> <span class="hljs-keyword">for</span> <span class="hljs-number">5235</span>
+task3 <span class="hljs-keyword">is</span> going <span class="hljs-keyword">to</span> <span class="hljs-keyword">sleep</span> <span class="hljs-keyword">for</span> <span class="hljs-number">5235</span>
+task2 <span class="hljs-keyword">is</span> going <span class="hljs-keyword">to</span> <span class="hljs-keyword">sleep</span> <span class="hljs-keyword">for</span> <span class="hljs-number">5235</span>
+task2 ends
+task1 ends
+task3 ends</code></pre>
+<p>3个线程的休眠时间是一样的，因为是用一个<code>Runnable</code>类型的对象创建的3个新线程，这3个线程就共享了这个对象的私有成员<code>sleepTime</code>。</p>
+<p>在现实生活中，如果我们需要多个售票窗口同时销售200张票，就可以使用上述的方法。</p>
+<p>参考：</p>
+<ol>
+<li><p>《Java核心技术 卷I》</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.xuetangx.com/learn/THU08091000252/THU08091000252/4230709/exercise/6246467">学堂在线-Java程序设计进阶</a></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>线程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java 继承</title>
+    <url>/posts/8b3a0e63.html</url>
+    <content><![CDATA[<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>继承(inheritance)的基本思想是基于已经有的类创建新的类，复用这些类的方法。</p>
+<h2 id="一、类，超类和子类"><a href="#一、类，超类和子类" class="headerlink" title="一、类，超类和子类"></a>一、类，超类和子类</h2><p>在前面的文章中我们实现了一个<code>Employee</code>类，假设你在某个公司工作，这个公司的经理和员工的待遇不一样，普通员工在完成任务后仅领取薪水，而经理还拥有奖金。<br>这个时候，我们可以定义一个新类<code>Manager</code>，使用继承重用<code>Employee</code>中的代码，同时定义新的方法来增加奖金这一功能。</p>
+<p><strong>Tip</strong><br><code>Manager</code> <strong>is-a</strong> <code>Employee</code><br><strong>is-a</strong>关系是继承的一个明显特征</p>
+<h3 id="1-定义子类"><a href="#1-定义子类" class="headerlink" title="1. 定义子类"></a>1. 定义子类</h3><p>使用<code>extends</code>关键字来表示继承</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125;</code></pre>
+<p>关键字<code>extends</code>表明正在构造的新类派生于一个已经存在的类。这个类被称为<strong>超类</strong>(<em>superclass</em>) 或<strong>父类</strong>(<em>parent class</em>)，新类称为<strong>子类</strong>(<em>subclass</em>)<br>在设计类时，应该将一般方法放在超类中，将更特殊的方法放在子类中<br>比如我们在<code>Manager</code>类中应该实现一个设置奖金金额的方法。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> bonus;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBonus</span><span class="hljs-params">(<span class="hljs-keyword">double</span> bonus)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.bonus = bonus;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-覆盖方法"><a href="#2-覆盖方法" class="headerlink" title="2. 覆盖方法"></a>2. 覆盖方法</h3><p>超类中的某些方法对子类不一定适用，比如<code>Manager</code>类中的<code>getSalary</code>方法应该返回薪水和奖金的总和，所以要提供一个新的方法来<strong>覆盖</strong>(<em>override</em>)超类中的某个方法。<br>要注意的是，<code>Manager</code>类的<code>getSalary</code>方法不能够直接访问<code>salary</code>字段，因为其实<code>Employee</code>类的私有字段，所以需要使用<code>super</code>关键字</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSalary</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> baseSalary = <span class="hljs-keyword">super</span>.getSalary();
+    <span class="hljs-keyword">return</span> baseSalary + bonus;
+&#125;</code></pre>
+<h3 id="3-子类构造器"><a href="#3-子类构造器" class="headerlink" title="3. 子类构造器"></a>3. 子类构造器</h3><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Manager</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
+    <span class="hljs-keyword">super</span>(id, name, salary);
+    bonus = <span class="hljs-number">0</span>;
+&#125;</code></pre>
+<p>语句<code>super(id, name, salary);</code>实现了对<code>Employee</code>中私有字段的调用</p>
+<h3 id="4-多态"><a href="#4-多态" class="headerlink" title="4. 多态"></a>4. 多态</h3><p>我们可以通过<code>is-a</code>来判断是否将数据设计为继承关系，它的另外一种表述是<strong>替换原则</strong>，即程序中出现超类对象的任何地方都可以使用子类对象替换。</p>
+<p>在Java中，对象变量时<strong>多态</strong>(<em>polymophic</em>)的。<br>一个<code>Employee</code>类型的变量既可以引用一个<code>Employee</code>类型的对象,也可以引用<code>Employee</code>类的任何一个子类的对象(比如<code>Manager</code>)</p>
+<pre><code class="hljs java">Employee e;
+e = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-number">10000</span>);
+e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-number">20000</span>);</code></pre>
+<p>虽然这里的<code>e</code>引用了<code>Manager</code>类型的对象，但是编译器只将<code>e</code>看成是一个<code>Employee</code>对象，所以如下的调用是错误的。</p>
+<pre><code class="hljs java">e.setBonus(<span class="hljs-number">10000</span>); <span class="hljs-comment">// ERROR</span></code></pre>
+<h3 id="5-阻止继承-final类和方法"><a href="#5-阻止继承-final类和方法" class="headerlink" title="5. 阻止继承: final类和方法"></a>5. 阻止继承: final类和方法</h3><p>如果我们需要阻止某个类被继承，可以使用<code>final</code>关键字</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Father</span> </span>&#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125;</code></pre>
+<p>类中的某个特定的方法也可以声明为<code>final</code>，这样子类就不能够覆盖这个方法。</p>
+<p><strong>Tip</strong><br>为什么要将类或方法声明为<code>final</code>？<br>确保它们不会在子类中改变语义。比如<code>String</code>类是<code>final</code>类，所以一个<code>String</code>引用引用的一定是<code>String</code>对象，而不是其它。</p>
+<h3 id="6-抽象类"><a href="#6-抽象类" class="headerlink" title="6. 抽象类"></a>6. 抽象类</h3><p>在继承层次结构中，位于上层的类更具有一般性<br>比如我们加入<code>Person</code>类和<code>Student</code>类，下图是这三个类之间的继承关系</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200908-02.png" alt=""></p>
+<p>每个人都有一些属性，比如姓名，年龄，引入一个公共的超类，就可以把<code>getName</code>方法放在继承层次结构中的更高一层，使用<code>abstract</code>关键字来定义抽象类</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Person</span> <span class="hljs-params">(String name)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+&#125;</code></pre>
+<p>抽象类不能够实例化，如下的表达式是错误的</p>
+<pre><code class="hljs java"><span class="hljs-keyword">new</span> Person(); <span class="hljs-comment">// ERROR</span></code></pre>
+<h2 id="二、对象包装器与自动装箱"><a href="#二、对象包装器与自动装箱" class="headerlink" title="二、对象包装器与自动装箱"></a>二、对象包装器与自动装箱</h2><p>所有的基本类型都有一个与之对应的类，这些类被称为<strong>包装器</strong>(<em>wrapper</em>)，分别是<code>Integer, Long, Float, Double, Short, Byte, Character, Boolean</code>。<br>包装器类是不可变的，一旦构造了包装器，就不允许更改包装在其中的值，同时，包装器还是<code>final</code>，不能够派生它们的子类。</p>
+<p><strong>Tip</strong><br>为什么需要包装类？<br>因为Java是一种面向对象程序设计语言，很多地方需要使用对象而不是基本类型。比如在<code>ArrayList</code>中，我们不能够写成<code>ArrayList&lt;int&gt;</code>，而要写成<code>ArrayList&lt;Integer&gt;</code>。</p>
+<h3 id="2-自动拆箱与装箱"><a href="#2-自动拆箱与装箱" class="headerlink" title="2. 自动拆箱与装箱"></a>2. 自动拆箱与装箱</h3><p>自动装箱: 就是将基本数据类型自动转换成对应的包装类。<br>自动拆箱：就是将包装类自动转换成对应的基本数据类型。</p>
+<pre><code class="hljs java">Integer n = <span class="hljs-number">3</span>; <span class="hljs-comment">// 自动装箱</span>
+<span class="hljs-keyword">int</span> m = n; <span class="hljs-comment">// 自动拆箱</span></code></pre>
+<h2 id="三、继承的设计技巧"><a href="#三、继承的设计技巧" class="headerlink" title="三、继承的设计技巧"></a>三、继承的设计技巧</h2><ol>
+<li>将公共操作和字段放在超类中</li>
+<li>使用继承实现<strong>is-a</strong>关系</li>
+<li>除非所有继承的方法都有意义，否则不要使用继承</li>
+<li>在覆盖方法时，不要改变预期的行为</li>
+<li>使用多态，而不要使用类型信息</li>
+</ol>
+<p>参考：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/boxing-unboxing">Java工程师成神之路</a></li>
+<li>《Java核心技术 卷I》</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java 面向对象概述</title>
+    <url>/posts/e27767b2.html</url>
+    <content><![CDATA[<h1 id="对象与类概述"><a href="#对象与类概述" class="headerlink" title="对象与类概述"></a>对象与类概述</h1><h2 id="一、面向对象程序设计概述"><a href="#一、面向对象程序设计概述" class="headerlink" title="一、面向对象程序设计概述"></a>一、面向对象程序设计概述</h2><p>结构化程序：算法+数据结构 = 程序 </p>
+<p>（即确定如何操作数据，再决定如何组织数据的结构）</p>
+<p>面向对象程序设计(OOP)：将数据放在第一位，再考虑操作数据的算法</p>
+<h3 id="1-类"><a href="#1-类" class="headerlink" title="1. 类"></a>1. 类</h3><ol>
+<li><p><strong>类(class)</strong>是构造对象的模板或<strong>蓝图</strong>，就好像一个制作某件工艺品的模具，对象就是工艺品</p>
+</li>
+<li><p>由类构造(construct)对象的过程称为创建类的<strong>实例(instance)</strong></p>
+</li>
+<li><p><strong>封装(encapsulation)</strong>将<strong>数据</strong>和<strong>行为</strong>组合在一个包中，对对象的使用者隐藏具体的实现方式，也称为<strong>数据隐藏</strong></p>
+</li>
+<li><p>对象中的数据称为<strong>实例字段(instance field)</strong>，操作数据的过程称为<strong>方法(method)</strong></p>
+</li>
+<li><p>对象拥有的实例字段值的集合就是这个对象的当前<strong>状态(state)</strong></p>
+</li>
+<li>程序只能通过对象的方法和对象数据进行交互，对象被赋予了“黑盒”的特征，提高了重用性和可靠性</li>
+<li>可以通过扩展一个类来构建新的类，这使得用户自定义类更加容易。在Java中，所有类都来自于一个<strong>超类</strong>，即<code>Object</code>。</li>
+<li>通过扩展一个类来建立一个新的类的过程就是<strong>继承(inheritance)</strong>，新类具有被扩展的类的全部属性和方法，可以自定义新的属性和方法。</li>
+</ol>
+<h3 id="2-对象"><a href="#2-对象" class="headerlink" title="2. 对象"></a>2. 对象</h3><p>对象的3个特性：</p>
+<ul>
+<li><strong>行为(behavior)</strong>——可以对对象完成的操作（应用的方法）</li>
+<li><strong>状态(state)</strong>——描述当前状况的信息，状态的改变必须通过调用方法实现</li>
+<li><strong>标识(identity)</strong>——每个对象有唯一的标识来区分（如两个订单的编号肯定不相同）</li>
+</ul>
+<h3 id="3-识别类"><a href="#3-识别类" class="headerlink" title="3. 识别类"></a>3. 识别类</h3><p>编写程序从<strong>识别类</strong>开始，然后为各个类添加方法。</p>
+<p>一个简单的方法是在分析问题的过程中寻找<strong>名词——类</strong>，寻找<strong>动词——方法</strong></p>
+<p>例如我们有商品，订单，账户这样的名词作为类，即Item，Order，Account</p>
+<p>那么在账户这个类中，就可以有增加账户，修改账户等方法。</p>
+<h3 id="4-类之间的关系"><a href="#4-类之间的关系" class="headerlink" title="4. 类之间的关系"></a>4. 类之间的关系</h3><p>类之间最常见的关系有：</p>
+<ul>
+<li><strong>依赖</strong>（”<em>uses-a</em>“）</li>
+<li><strong>聚合</strong> （”<em>has-a</em>“）</li>
+<li><strong>继承</strong>（<em>“is-a”</em>)</li>
+</ul>
+<h4 id="4-1-依赖（dependence）"><a href="#4-1-依赖（dependence）" class="headerlink" title="4.1 依赖（dependence）"></a>4.1 依赖（dependence）</h4><p>如果一个类的方法使用或操纵另一个类的对象，我们就可以说一个类依赖于另一个类</p>
+<p>比如Order对象访问Account对象查看信用状态，这就是一个使用(“uses-a”)的关系。</p>
+<p>（尽可能减少相互依赖的类，做到低耦合）</p>
+<h4 id="4-2-聚合（aggregation）"><a href="#4-2-聚合（aggregation）" class="headerlink" title="4.2 聚合（aggregation）"></a>4.2 聚合（aggregation）</h4><p>类A的对象包含（”has-a”）类B的对象</p>
+<p>如一个Order对象就包含了一些Item对象</p>
+<h4 id="4-3-继承（inheritance）"><a href="#4-3-继承（inheritance）" class="headerlink" title="4.3 继承（inheritance）"></a>4.3 继承（inheritance）</h4><p>一个更特殊的类与一个更一般的类之间的关系</p>
+<p>也就是前面提到的扩展，比如现在我们定义一个加急订单RushOrder类，那么它是一个（”is-a”)Order类</p>
+<p>也就是有Order类继承而来。</p>
+<p>下图展示了上述的三种关系。<br><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200423LearnJava01.png" alt=""></p>
+<h2 id="二、使用预定义类"><a href="#二、使用预定义类" class="headerlink" title="二、使用预定义类"></a>二、使用预定义类</h2><p>我们通过可以Java中的预定于类来了解如何构造对象，以及如何使用类的方法。<br>如下的例子：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Date;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateTest</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        Date birthday = <span class="hljs-keyword">new</span> Date();
+        System.out.println(birthday.toString());
+    &#125;
+&#125;</code></pre>
+<p>在Java中，要使用构造器(constructor)来构造新的实例，比如上面的代码中<code>new Date()</code>就构造了一个新的对象，这个对象被初始化为当前的日期和时间。</p>
+<p><strong>Tip</strong><br>需要注意的是，单独的定义<code>Date birthday</code>中的<code>birthday</code>并不是对象，对它进行操作编译器会报错。一定要<strong>初始化</strong>变量<code>birthday</code>。<br>对象变量本身并不包含一个对象，而是<strong>引用</strong>一个对象，<code>new</code>操作符的返回值也是一个引用。</p>
+<h2 id="三、自定义类"><a href="#三、自定义类" class="headerlink" title="三、自定义类"></a>三、自定义类</h2><h3 id="1-对象与对象变量"><a href="#1-对象与对象变量" class="headerlink" title="1. 对象与对象变量"></a>1. 对象与对象变量</h3><p>要想使用对象，就需要先构造对象，并指定其初始状态。在Java中，使用构造器（构造函数）来构造。</p>
+<p>比如某公司有一个职员管理系统，其中有一个关于职员信息的类<em>Employee</em></p>
+<p>那么我们可以通过下面这个表达式构造一个新对象</p>
+<pre><code class="hljs java">Employee employee = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;Allen&quot;</span>, <span class="hljs-number">10000</span>);</code></pre>
+<p>其中<code>employee</code>是一个<strong>对象变量</strong>，我们用<code>new Employee(int id, String name, int salary)</code>构造了一个新对象，初始化该对象变量，要注意的是对象变量并没有包含一个对象，而是<strong>引用</strong>一个对象。</p>
+<p>在Java中，任何对象变量的值都是对存储在另外一个地方的某个对象的引用。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> </span>&#123;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> salary;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Employee</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.id = id;
+        <span class="hljs-keyword">this</span>.name = name;
+        <span class="hljs-keyword">this</span>.salary = salary;
+    &#125;
+		
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getId</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> id;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSalary</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> salary;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+
+        Employee[] staff = <span class="hljs-keyword">new</span> Employee[<span class="hljs-number">3</span>];
+
+        staff[<span class="hljs-number">0</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;Allen&quot;</span>, <span class="hljs-number">10000</span>);
+        staff[<span class="hljs-number">1</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;Ben&quot;</span>, <span class="hljs-number">12000</span>);
+        staff[<span class="hljs-number">2</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">3</span>, <span class="hljs-string">&quot;David&quot;</span>, <span class="hljs-number">15000</span>);
+
+        <span class="hljs-keyword">for</span> (Employee e : staff) &#123;
+            System.out.println(<span class="hljs-string">&quot;id=&quot;</span> + e.getId() + <span class="hljs-string">&quot;,name=&quot;</span> + e.getName() + <span class="hljs-string">&quot;,salary=&quot;</span> + e.getSalary());
+        &#125;
+    &#125;
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment">Output:</span>
+<span class="hljs-comment">id=1,name=Allen,salary=10000</span>
+<span class="hljs-comment">id=2,name=Ben,salary=12000</span>
+<span class="hljs-comment">id=3,name=David,salary=15000</span>
+<span class="hljs-comment">*/</span></code></pre>
+<h3 id="2-构造函数"><a href="#2-构造函数" class="headerlink" title="2. 构造函数"></a>2. 构造函数</h3><p>构造函数，与类同名，将实例初始化为指定的初始状态</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Employee</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.id = id;
+        <span class="hljs-keyword">this</span>.name = name;
+        <span class="hljs-keyword">this</span>.salary = salary;
+    &#125;</code></pre>
+<p><strong>Tip</strong></p>
+<ul>
+<li>构造函数根据参数的不同可以有多个，</li>
+<li>构造函数没有返回值。</li>
+</ul>
+<h3 id="4-封装的优点"><a href="#4-封装的优点" class="headerlink" title="4. 封装的优点"></a>4. 封装的优点</h3><p>如下是一个访问器方法，又称为<strong>字段访问器</strong></p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getId</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> id;
+    &#125;</code></pre>
+<p><strong>Tip</strong><br>为什么不直接将这些变量设为public公共访问呢？<br>因为这样的话这些变量就可以轻易的被外界修改，受到破坏<br>比如这里的职员id应该是只读的，不能够设置为public被外界随意更改。</p>
+<h3 id="4-final"><a href="#4-final" class="headerlink" title="4. final"></a>4. final</h3><p>定义为final的实例字段必须在构造对象时<strong>初始化</strong>，否则编辑器会报错，顾名思义，<code>final</code>表示最终的，在初始化之后不能够再修改这个值。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String name = <span class="hljs-string">&quot;John&quot;</span>;</code></pre>
+<p><strong>Tip</strong><br><code>final</code>修饰符对于基本类型和不可变类，如String类适用，但是对于可变的类，如<code>StringBuilder</code>就会出现问题，因为它仅仅保证了引用不会指向另外一个对象，但是这个对象是可以更改的。</p>
+<h2 id="四、静态字段和静态方法"><a href="#四、静态字段和静态方法" class="headerlink" title="四、静态字段和静态方法"></a>四、静态字段和静态方法</h2><h3 id="1-静态字段"><a href="#1-静态字段" class="headerlink" title="1. 静态字段"></a>1. 静态字段</h3><p>回到我们之前的<code>Employee</code>类中，如果我们需要一个变量来记录公司有多少雇员，就可以使用<code>static</code>修饰符，定义一个静态变量</p>
+<pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> count;</code></pre>
+<p>静态变量是属于类的变量，而不属于单个对象，对于<code>Employee</code>类的所有实例，共享一个<code>count</code>。<br>而对非静态的变量，每个对象都有一个自己的副本</p>
+<h3 id="2-静态常量"><a href="#2-静态常量" class="headerlink" title="2. 静态常量"></a>2. 静态常量</h3><p><code>Math</code>类中定义了一个静态常量<code>PI</code></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Math</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span> PI = <span class="hljs-number">3.1415926535897932846</span>;
+&#125;</code></pre>
+<p>我们可以通过<code>Math.PI</code>来直接访问它，如果没有<code>static</code>，那么就需要创建<code>Math</code>类的对象来访问它，效率比较低。</p>
+<h3 id="3-静态方法"><a href="#3-静态方法" class="headerlink" title="3. 静态方法"></a>3. 静态方法</h3><p>如果我们想要知道公司的雇员人数，就可以使用静态方法</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getCount</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">// 返回静态变量</span>
+    <span class="hljs-keyword">return</span> count; 
+&#125;</code></pre>
+<p>使用静态方法的两种情况：</p>
+<ul>
+<li>方法不需要访问对象状态</li>
+<li>方法只需要访问类的静态字段（比如上面的例子）</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2>]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>异常与断言</title>
+    <url>/posts/35f9d194.html</url>
+    <content><![CDATA[<h1 id="异常与断言"><a href="#异常与断言" class="headerlink" title="异常与断言"></a>异常与断言</h1><p>在理想世界里，用户输入数据的格式永远都是正确的，代码永远不会出现bug，然而，在现实世界的开发过程中，总会遇到各种各样的问题，当然，我也可以说，这不是bug，而是特性~~~<br>言归正传，如果由于程序的错误导致用户所做的工作统统丢失，那用户可能就再也不会用它了。为了避免这样的情况，至少应该做到以下几点</p>
+<ul>
+<li>向用户通知错误</li>
+<li>保存所有的工作</li>
+<li>允许用户妥善地退出程序</li>
+</ul>
+<h2 id="1-处理错误"><a href="#1-处理错误" class="headerlink" title="1. 处理错误"></a>1. 处理错误</h2><p>为了能够处理程序中的异常情况，必须考虑到程序中可能会出现的错误和问题。比如：</p>
+<ul>
+<li>用户输入错误</li>
+<li>设备错误</li>
+<li>物理限制</li>
+<li>代码错误</li>
+</ul>
+<h3 id="1-1-异常分类"><a href="#1-1-异常分类" class="headerlink" title="1.1 异常分类"></a>1.1 异常分类</h3><p>在Java中，异常对象都是派生于<code>Throwable</code>类的一个实例。在下一层分解为两个分支，<code>Error</code>和<code>Exception</code>。<br><code>Error</code>描述了Java运行时系统的内部错误和资源耗尽错误<br><code>Exception</code>又分解为两个分支<br>由编程错误导致的<code>RuntimeException</code>，比如错误的强制类型转换，数组访问越界等<br>由<code>I/O</code>错误导致的其他异常<code>IOException</code>，比如试图打开一个不存在的文件等<br>如下图所示是异常层次结构的一个示意图</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200912-02.png" alt=""></p>
+<p><strong>Tip</strong></p>
+<ul>
+<li>如果出现<code>RuntimeException</code>，那么一定是你的问题</li>
+<li>Java将派生于<code>Error</code>类或<code>RuntimeException</code>类的所有异常称为<strong>非检查型</strong>(<em>unchecked</em>)，所有其他异常称为<strong>检查型</strong>(<em>checked</em>)</li>
+</ul>
+<h3 id="1-2-如何抛出异常"><a href="#1-2-如何抛出异常" class="headerlink" title="1.2 如何抛出异常"></a>1.2 如何抛出异常</h3><p>假设我们正在读取一个文件，预期读取1024个字符，但是在读到500个字符的时候文件就结束了，出现了问题，我们希望抛出一个<code>EOFException</code>，即输入过程中意外遇到了EOF。</p>
+<pre><code class="hljs java"><span class="hljs-function">String <span class="hljs-title">readData</span><span class="hljs-params">(Scanner in)</span> <span class="hljs-keyword">throws</span> EOFException </span>&#123;
+    <span class="hljs-comment">// blablabla</span>
+    <span class="hljs-keyword">if</span> (!in.hasNext()) &#123;
+        <span class="hljs-keyword">if</span> (n &lt; len) &#123;
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> EOFException();
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="1-3-创建异常类"><a href="#1-3-创建异常类" class="headerlink" title="1.3 创建异常类"></a>1.3 创建异常类</h3><p>如果我们遇到了标准异常类无法描述清楚的问题，可以自己创建异常类。我们可以定义一个派生于<code>Exception</code>的类，或者某个<code>Exception</code>的子类，比如<code>IOException</code>。</p>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileFormatException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">IOException</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FileFormatException</span><span class="hljs-params">()</span> </span>&#123;&#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FileFormatException</span><span class="hljs-params">(String gripe)</span> </span>&#123;
+        <span class="hljs-keyword">super</span>(gripe);
+    &#125;
+&#125;</code></pre>
+<h2 id="2-捕获异常"><a href="#2-捕获异常" class="headerlink" title="2. 捕获异常"></a>2. 捕获异常</h2><p>要想捕获一个异常，需要设置<code>try/catch</code>块。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125;</code></pre>
+<p>如果<code>try</code>语句块中的代码抛出了<code>catch</code>子句中指定的一个类，那么程序将跳过<code>try</code>语句块中的其余代码，并执行<code>catch</code>语句块中的代码。如果<code>try</code>中的代码没有异常，那么程序就会跳过<code>catch</code>语句。</p>
+<h3 id="2-1-finally子句"><a href="#2-1-finally子句" class="headerlink" title="2.1 finally子句"></a>2.1 finally子句</h3><p>代码抛出一个异常时，就会停止处理这个方法中的剩余代码，但是如果这个方法中存在一些资源需要被清理，就会产生问题。<br><code>finally</code>子句不管异常有没有被捕获，都会执行。比如下面的例子，所有情况下都会程序都会关闭输入流。</p>
+<pre><code class="hljs java">FileInputStream in = <span class="hljs-keyword">new</span> FileInputStream();
+<span class="hljs-keyword">try</span> &#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125;
+<span class="hljs-keyword">catch</span> (IOException e) &#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125;
+<span class="hljs-keyword">finally</span> &#123;
+    in.close();
+&#125;</code></pre>
+<h3 id="2-2-try-with-resources语句"><a href="#2-2-try-with-resources语句" class="headerlink" title="2.2 try-with-resources语句"></a>2.2 try-with-resources语句</h3><p>对于文件操作IO流、数据库连接等开销非常昂贵的资源，用完之后必须及时通过close方法将其关闭，否则资源会一直处于打开状态，可能会导致内存泄露等问题。关闭资源的常用方式就是在finally块里是释放，即调用close方法。就像我们在2.1节中的例子一样，但是从java7开始，我们可以使用一种更好的方法<code>try-with-resources</code>语句来实现。它的形式如下</p>
+<pre><code class="hljs java"><span class="hljs-keyword">try</span> (Resources res = ...) &#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125;</code></pre>
+<p>我们来看一个具体的例子，读取一个文件中的所有单词。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">try</span> (Scanner in = <span class="hljs-keyword">new</span> Scanner(
+    <span class="hljs-keyword">new</span> FileInputStream(<span class="hljs-string">&quot;/usr/share/dict/words&quot;</span>), StandardCharsets.UTF_8)) &#123;
+    <span class="hljs-keyword">while</span> (in.hasNext()) &#123;
+        System.out.println(in.next());
+    &#125;
+&#125;</code></pre>
+<h2 id="3-使用断言"><a href="#3-使用断言" class="headerlink" title="3. 使用断言"></a>3. 使用断言</h2><p>断言机制允许在测试期间向代码中插入一些检查，而在生产代码中会自动删除这些检查。断言的关键字是<code>assert</code>。有以下两种形式</p>
+<pre><code class="hljs java"><span class="hljs-keyword">assert</span> condition;
+<span class="hljs-keyword">assert</span> condition : expression;</code></pre>
+<p>这两种形式都会计算条件，如果结果为<code>false</code>，抛出<code>AssertionError</code>异常。<br>在第二个语句中，表达式将传入<code>AssertionError</code>对象的构造器，并转换成一个消息字符串。</p>
+<p>默认情况下，断言是禁用的，需要在运行程序时用<code>-ea</code>启用断言。</p>
+<p>参考：</p>
+<ol>
+<li>《Java核心技术 卷I》</li>
+<li><a target="_blank" rel="noopener" href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/try-with-resources">Java工程师成神之路</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>泛型程序设计</title>
+    <url>/posts/98735cb0.html</url>
+    <content><![CDATA[<h1 id="泛型程序设计"><a href="#泛型程序设计" class="headerlink" title="泛型程序设计"></a>泛型程序设计</h1><h2 id="1-为什么要使用泛型程序设计？"><a href="#1-为什么要使用泛型程序设计？" class="headerlink" title="1. 为什么要使用泛型程序设计？"></a>1. 为什么要使用泛型程序设计？</h2><p><strong>泛型程序设计</strong>(<em>generic programming</em>)意味着编写的代码可以对多种不同类型的对象重用。能够提高代码的复用性，比如<code>ArrayList</code>就可以收集任何类的对象，比如<code>String</code>，<code>Integer</code>等，而不用为这些对象去编写不同的类。</p>
+<h3 id="1-1-类型参数"><a href="#1-1-类型参数" class="headerlink" title="1.1 类型参数"></a>1.1 类型参数</h3><p>泛型允许在定义类和接口的时候使用<strong>类型参数</strong>(<em>type parameter</em>)，声明的类型参数在使用时使用具体的类来替换，比如下面这个例子</p>
+<pre><code class="hljs java">List&lt;String&gt; files = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</code></pre>
+<p>可以很明显的看出数组中包含的是<code>String</code>对象，类型参数使得程序更易读，也更安全。</p>
+<h2 id="2-定义简单泛型类"><a href="#2-定义简单泛型类" class="headerlink" title="2. 定义简单泛型类"></a>2. 定义简单泛型类</h2><p><strong>泛型类</strong>(<em>generic class</em>)就是有一个或多个类型变量的类。下面定义了一个简单的泛型类<code>Pair</code></p>
+<p><code>Pair</code>类引入了一个类型变量<code>T</code>，用于指定方法的返回类型，字段和局部变量的类型</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pair</span>&lt;<span class="hljs-title">T</span>&gt; </span>
+<span class="hljs-class"></span>&#123;
+   <span class="hljs-keyword">private</span> T first;
+   <span class="hljs-keyword">private</span> T second;
+
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Pair</span><span class="hljs-params">()</span> </span>&#123; first = <span class="hljs-keyword">null</span>; second = <span class="hljs-keyword">null</span>; &#125;
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Pair</span><span class="hljs-params">(T first, T second)</span> </span>&#123; <span class="hljs-keyword">this</span>.first = first;  <span class="hljs-keyword">this</span>.second = second; &#125;
+
+   <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getFirst</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-keyword">return</span> first; &#125;
+   <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getSecond</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-keyword">return</span> second; &#125;
+
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setFirst</span><span class="hljs-params">(T newValue)</span> </span>&#123; first = newValue; &#125;
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setSecond</span><span class="hljs-params">(T newValue)</span> </span>&#123; second = newValue; &#125;
+&#125;</code></pre>
+<h2 id="3-泛型方法与类型变量的限定"><a href="#3-泛型方法与类型变量的限定" class="headerlink" title="3. 泛型方法与类型变量的限定"></a>3. 泛型方法与类型变量的限定</h2><p>我们再定义了泛型类之后，就可以设计带有类型参数的方法，比如我们想要寻找数组中元素的最大最小值，就可以这样定义</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span> </span>&#123;
+	<span class="hljs-comment">// blablabla</span>
+&#125;</code></pre>
+<p>但是这样的设计有一个问题，在方法内部对元素进行比较时，需要使用<code>compareTo</code>方法，这就要求类型<code>T</code>实现<code>Comparable</code>接口，所以需要对其进行<strong>限定</strong>(<em>bound</em>)</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&gt; <span class="hljs-function">T <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span> </span>&#123;
+  <span class="hljs-comment">// blablabla</span>
+&#125;</code></pre>
+<p>之所以使用<code>extends</code>而不是使用<code>implements</code>是因为<code>T</code>是限定类型的子类型，而继承关系更接近于这种概念，一个类型变量也可以有多个限定</p>
+<pre><code class="hljs java">T extends Comparable &amp; Serializable</code></pre>
+<p>下面使用我们定义的泛型类实现了一个寻找数组元素最大和最小值的方法。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.time.*;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PairTest2</span></span>
+<span class="hljs-class"></span>&#123;
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>
+<span class="hljs-function">   </span>&#123;
+      LocalDate[] birthdays = 
+         &#123; 
+            LocalDate.of(<span class="hljs-number">1906</span>, <span class="hljs-number">12</span>, <span class="hljs-number">9</span>), <span class="hljs-comment">// G. Hopper</span>
+            LocalDate.of(<span class="hljs-number">1815</span>, <span class="hljs-number">12</span>, <span class="hljs-number">10</span>), <span class="hljs-comment">// A. Lovelace</span>
+            LocalDate.of(<span class="hljs-number">1903</span>, <span class="hljs-number">12</span>, <span class="hljs-number">3</span>), <span class="hljs-comment">// J. von Neumann</span>
+            LocalDate.of(<span class="hljs-number">1910</span>, <span class="hljs-number">6</span>, <span class="hljs-number">22</span>), <span class="hljs-comment">// K. Zuse</span>
+         &#125;;
+      Pair&lt;LocalDate&gt; mm = ArrayAlg.minmax(birthdays);
+      System.out.println(<span class="hljs-string">&quot;min = &quot;</span> + mm.getFirst());
+      System.out.println(<span class="hljs-string">&quot;max = &quot;</span> + mm.getSecond());
+   &#125;
+&#125;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArrayAlg</span></span>
+<span class="hljs-class"></span>&#123;
+   <span class="hljs-comment">/**</span>
+<span class="hljs-comment">      Gets the minimum and maximum of an array of objects of type T.</span>
+<span class="hljs-comment">      <span class="hljs-doctag">@param</span> a an array of objects of type T</span>
+<span class="hljs-comment">      <span class="hljs-doctag">@return</span> a pair with the min and max values, or null if a is null or empty</span>
+<span class="hljs-comment">   */</span>
+   <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&gt; <span class="hljs-function">Pair&lt;T&gt; <span class="hljs-title">minmax</span><span class="hljs-params">(T[] a)</span> </span>
+<span class="hljs-function">   </span>&#123;
+      <span class="hljs-keyword">if</span> (a == <span class="hljs-keyword">null</span> || a.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+      T min = a[<span class="hljs-number">0</span>];
+      T max = a[<span class="hljs-number">0</span>];
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; a.length; i++)
+      &#123;
+         <span class="hljs-keyword">if</span> (min.compareTo(a[i]) &gt; <span class="hljs-number">0</span>) min = a[i];
+         <span class="hljs-keyword">if</span> (max.compareTo(a[i]) &lt; <span class="hljs-number">0</span>) max = a[i];
+      &#125;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Pair&lt;&gt;(min, max);
+   &#125;
+&#125;</code></pre>
+<h2 id="4-泛型代码和虚拟机"><a href="#4-泛型代码和虚拟机" class="headerlink" title="4. 泛型代码和虚拟机"></a>4. 泛型代码和虚拟机</h2><p>虚拟机没有泛型类型对象，所有对象都属于普通类。</p>
+<h3 id="4-1-类型擦除"><a href="#4-1-类型擦除" class="headerlink" title="4.1 类型擦除"></a>4.1 类型擦除</h3><p>无论何时定义一个泛型类型，都会自动提供一个相应的<strong>原始类型</strong>(<em>raw type</em>)，这个原始类型的名字就是去掉类型参数后的泛型类型名。同时，类型变量会被<strong>擦除</strong>(<em>erased</em>)，并替换为其限定类型。</p>
+<blockquote>
+<p>类型擦除指的是通过类型参数合并，将泛型类型实例关联到同一份字节码上。编译器只为泛型类型生成一份字节码，并将其实例关联到这份字节码上。类型擦除的关键在于从泛型类型中清除类型参数的相关信息，并且再必要的时候添加类型检查和类型转换的方法。 类型擦除可以简单的理解为将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码。 类型擦除的主要过程如下： 1.将所有的泛型参数用其最左边界（最顶级的父类型）类型替换  2.移除所有的类型参数。</p>
+</blockquote>
+<p>比如3中的例子，原始类型就会变成下面的样子</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pair</span> </span>&#123;
+  <span class="hljs-keyword">private</span> Object first;
+  <span class="hljs-keyword">private</span> Object second;
+&#125;</code></pre>
+<p>由于<code>T</code>是一个无限定的变量，所以直接用<code>Object</code>替换。</p>
+<h3 id="4-2-转换泛型表达式"><a href="#4-2-转换泛型表达式" class="headerlink" title="4.2 转换泛型表达式"></a>4.2 转换泛型表达式</h3><p>调用一个泛型方法时，如果擦除了返回类型，编译器会插入强制类型转换</p>
+<pre><code class="hljs java">Pair&lt;Employee&gt; buddies = ...;
+Employee buddy = buddies.getFirst();</code></pre>
+<p><code>getFirst</code>方法擦除类型后的返回类型是<code>Object</code>，编译器自动插入转换到<code>Employee</code>的强制类型转换。</p>
+<h3 id="4-3-转换泛型方法"><a href="#4-3-转换泛型方法" class="headerlink" title="4.3 转换泛型方法"></a>4.3 转换泛型方法</h3><p>类型擦除还会出现在泛型方法中，比如</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&gt; <span class="hljs-function">T <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span></span></code></pre>
+<p>在擦除类型之后，就会变成</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Comparable <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span></span></code></pre>
+<h2 id="5-限制与局限性"><a href="#5-限制与局限性" class="headerlink" title="5. 限制与局限性"></a>5. 限制与局限性</h2><h3 id="5-1-泛型遇到重载"><a href="#5-1-泛型遇到重载" class="headerlink" title="5.1 泛型遇到重载"></a>5.1 泛型遇到重载</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> </span>&#123;
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span><span class="hljs-params">(List&lt;Integer&gt; list)</span> </span>&#123;
+    
+  &#125;
+  
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span><span class="hljs-params">(List&lt;String&gt; list)</span></span>
+<span class="hljs-function">&#125;</span></code></pre>
+<p>上述代码编译器会报错，提示两个方法冲突，因为它们被擦除之后都变为<code>List</code></p>
+<h3 id="5-2-泛型类中静态变量无效"><a href="#5-2-泛型类中静态变量无效" class="headerlink" title="5.2 泛型类中静态变量无效"></a>5.2 泛型类中静态变量无效</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> T singleInstance;
+  
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> 
+&#125;</code></pre>
+<p>静态变量被泛型类的所有实例对象所共享。</p>
+<h3 id="5-3-不能抛出或捕获泛型类的实例"><a href="#5-3-不能抛出或捕获泛型类的实例" class="headerlink" title="5.3 不能抛出或捕获泛型类的实例"></a>5.3 不能抛出或捕获泛型类的实例</h3><p>既不能抛出也不能捕获泛型类的对象，泛型类扩展<code>Throwable</code>不合法。</p>
+<h2 id="6-泛型类的继承规则"><a href="#6-泛型类的继承规则" class="headerlink" title="6. 泛型类的继承规则"></a>6. 泛型类的继承规则</h2><p>考虑一个父类和子类，比如<code>Employee</code>和<code>Manager</code>，需要注意的是，<code>Pair&lt;Manager&gt;</code><strong>不是</strong><code>Pair&lt;Employee&gt;</code>的子类。</p>
+<p>也就是说，无论<code>S</code>和<code>T</code>又怎样的关系，<code>Pair&lt;T&gt;</code>和<code>Pair&lt;S&gt;</code><strong>没有任何关系</strong>，这对于类型安全非常重要。</p>
+<p>参考：</p>
+<ol>
+<li>《Java核心技术 卷I》</li>
+<li><a target="_blank" rel="noopener" href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/generics">Java成神之路</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -1171,732 +1900,246 @@ sudo ./start-all.sh</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>Java 线程（一）</title>
-    <url>/posts/909f13b2.html</url>
-    <content><![CDATA[<h1 id="线程（一）"><a href="#线程（一）" class="headerlink" title="线程（一）"></a>线程（一）</h1><h2 id="1-线程的基本概念"><a href="#1-线程的基本概念" class="headerlink" title="1. 线程的基本概念"></a>1. 线程的基本概念</h2><p>一个<strong>线程</strong>是程序内部的顺序控制流</p>
-<h3 id="1-1-线程与进程："><a href="#1-1-线程与进程：" class="headerlink" title="1.1 线程与进程："></a>1.1 线程与进程：</h3><p>每个<strong>进程</strong>都有独立的代码和数据空间，进程切换的开销大</p>
-<p><strong>线程</strong>是轻量的进程，同一类线程共享代码和数据空间，每个线程有独立的运行栈和程序计数器，线程切换的开销小</p>
-<p><strong>多进程</strong>：在操作系统中，能同时运行多个任务（程序）</p>
-<p><strong>多线程</strong>：在同一个应用程序中，有多个顺序流同时执行（有多个代码段同时在运行）</p>
-<p>关于线程与进程的辨析可以看这一篇文章<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html">进程与线程的一个简单解释</a></p>
-<h3 id="1-2-线程的概念模型："><a href="#1-2-线程的概念模型：" class="headerlink" title="1.2 线程的概念模型："></a>1.2 线程的概念模型：</h3><p>虚拟的CPU，封装在<code>java.lang.Thread</code>类中</p>
-<p>CPU所执行的代码和所处理的数据，传递给<code>Thread</code>类</p>
-<p><strong>线程体</strong></p>
-<p>Java的线程是通过<code>java.lang.Thread</code>类来实现的</p>
-<p>每个线程都是通过某个特定的<code>Thread</code>对象的方法<code>run()</code>来完成其操作的，方法<code>run()</code>称为线程体</p>
-<h2 id="2-线程状态"><a href="#2-线程状态" class="headerlink" title="2. 线程状态"></a>2. 线程状态</h2><p>线程可以有如下6种状态：</p>
+    <title>mosh优化ssh</title>
+    <url>/posts/38412875.html</url>
+    <content><![CDATA[<p>最近使用ssh连接云服务器时，卡顿的现象很严重，输入一段内容要等一会儿才会显示完全，在网上找了半天，看到了一个ssh的替代品——<a target="_blank" rel="noopener" href="https://mosh.org/">mosh</a></p>
+<a id="more"></a>
+<h1 id="1-什么是mosh"><a href="#1-什么是mosh" class="headerlink" title="1. 什么是mosh"></a>1. 什么是mosh</h1><p>Mosh最大的特点是基于<strong>UDP</strong>方式传输，支持在服务端创建一个临时的Key供客户端一次性连接，退出后失效；也支持通过SSH的配置进行认证，但数据传输本身还是自身的UDP方式。</p>
+<p>另外，Mosh还有两个我觉得非常有用的功能</p>
 <ul>
-<li>New（新建）</li>
-<li>Runnable（可运行）</li>
-<li>Blocked （阻塞）</li>
-<li>Waiting （等待）</li>
-<li>Timed waiting（计时等待）</li>
-<li>Terminated （终止）</li>
+<li>会话的中断不会导致当前正在前端执行的命令中断，相当于你所有的操作都是在screen命令中一样在后台执行。</li>
+<li>会话在中断过后，不会立刻退出，而是启用一个计时器，当网络恢复后会自动重新连接，同时会延续之前的会话，不会重新开启一个。</li>
 </ul>
-<h3 id="2-1-新建线程"><a href="#2-1-新建线程" class="headerlink" title="2.1 新建线程"></a>2.1 新建线程</h3><pre><code class="hljs java"><span class="hljs-keyword">new</span> Thread(t);</code></pre>
-<p>当使用<code>new</code>新建一个线程时，这个线程还没有开始运行，状态是<strong>新建</strong></p>
-<h3 id="2-2-可运行线程"><a href="#2-2-可运行线程" class="headerlink" title="2.2 可运行线程"></a>2.2 可运行线程</h3><pre><code class="hljs java"><span class="hljs-keyword">new</span> Thread(t).start();</code></pre>
-<p>调用<code>start</code>方法，线程就处于<strong>可运行</strong>状态。它可能正在运行也可能没有运行，由操作系统决定它具体的运行时间。所以这个状态被称为<strong>可运行</strong>，而不是运行。</p>
-<h3 id="2-3-阻塞和等待线程"><a href="#2-3-阻塞和等待线程" class="headerlink" title="2.3 阻塞和等待线程"></a>2.3 阻塞和等待线程</h3><p>当线程处于阻塞或等待状态时，它暂时是不活动的。</p>
-<p>要由线程调度器重新激活这个线程，具体细节取决于它是怎样到达非活动状态的。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200926-01.png" alt=""></p>
-<h3 id="2-4-终止线程"><a href="#2-4-终止线程" class="headerlink" title="2.4 终止线程"></a>2.4 终止线程</h3><p>线程终止的原因有2个：</p>
-<ul>
-<li><code>run</code>方法正常退出，线程自然终止</li>
-<li>因为一个没有捕获的异常终止了<code>run</code>方法，使线程意外终止</li>
-</ul>
-<h2 id="3-如何创建线程"><a href="#3-如何创建线程" class="headerlink" title="3. 如何创建线程"></a>3. 如何创建线程</h2><p>构造线程的两种方法</p>
-<ul>
-<li>定义一个线程类，它继承类<code>Thread</code>并重写其中的方法<code>run()</code></li>
-<li>提供一个实现接口<code>Runnable</code>的类作为线程的目标对象，在初始化一个<code>Thread</code>类或者<code>Thread</code>子类的线程对象时，把目标对象传递给这个线程实例，由该目标对象提供线程体<code>run()</code></li>
-</ul>
-<h3 id="3-1-通过Thread类创建线程"><a href="#3-1-通过Thread类创建线程" class="headerlink" title="3.1 通过Thread类创建线程"></a>3.1 通过Thread类创建线程</h3><p>通过<code>Thread</code>类来创建线程</p>
-<p>继承<code>Thread</code>类，创建多线程的方法之一</p>
-<ul>
-<li>从<code>Thread</code>类派生一个子类，并创建子类的对象</li>
-<li>子类应该重写<code>Thread</code>类的<code>run</code>方法，写入需要在新线程中执行的语句段</li>
-<li><strong>调用<code>start</code>方法来启动新线程</strong>，自动进入<code>run</code>方法（不是直接调用<code>run</code>方法）</li>
-</ul>
-<p>我们来看下面这个计算阶乘的程序</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FactorialThreadTester</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        System.out.println(<span class="hljs-string">&quot;main thread starts&quot;</span>);
-        FactorialThread myThread = <span class="hljs-keyword">new</span> FactorialThread(<span class="hljs-number">10</span>);
-        myThread.start();
-        System.out.println(<span class="hljs-string">&quot;main thread ends&quot;</span>);
-    &#125;
-&#125;</code></pre>
-<p>我们自定义了<code>FactorialThread</code>类继承<code>Thread</code>类，重写了<code>run</code>方法</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FactorialThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> num;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FactorialThread</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.num = num;
-    &#125;
-
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">int</span> i = num;
-        <span class="hljs-keyword">int</span> result = <span class="hljs-number">1</span>;
-        System.out.println(<span class="hljs-string">&quot;new thread starts&quot;</span>);
-        <span class="hljs-keyword">while</span> (i &gt; <span class="hljs-number">0</span>) &#123;
-            result *= i;
-            i--;
-        &#125;
-        System.out.println(<span class="hljs-string">&quot;Result: &quot;</span> + result);
-        System.out.println(<span class="hljs-string">&quot;new thread ends&quot;</span>);
-    &#125;
-&#125;</code></pre>
-<p>结果：</p>
-<pre><code class="hljs autohotkey">main <span class="hljs-keyword">thread</span> starts
-main <span class="hljs-keyword">thread</span> ends
-<span class="hljs-keyword">new</span> <span class="hljs-keyword">thread</span> starts
-<span class="hljs-title">Result:</span> <span class="hljs-number">3628800</span>
-<span class="hljs-keyword">new</span> <span class="hljs-keyword">thread</span> ends</code></pre>
-<p>主线程的任务就是创新新线程，创建完成后主线程就结束了</p>
-<p>结果说明：</p>
-<ul>
-<li><code>main</code>线程已经执行完后，新线程才执行完</li>
-<li><code>main</code>方法调用<code>thread.start()</code>方法启动新线程后并不等待<code>run</code>方法返回就继续运行，线程的<code>run</code>方法在一边独自运行，不影响原来的<code>main</code>方法的运行，也就是说新建的线程调用<code>start()</code>方法后不一定立即进入运行状态</li>
-</ul>
-<h3 id="3-2-通过Runnable接口构造线程"><a href="#3-2-通过Runnable接口构造线程" class="headerlink" title="3.2 通过Runnable接口构造线程"></a>3.2 通过Runnable接口构造线程</h3><ul>
-<li>只有一个<code>run()</code>方法</li>
-<li><code>Thread</code>类实现了<code>Runnable</code>接口</li>
-<li>便于多个线程共享资源</li>
-<li>Java不支持多继承，如果定义的类已经继承了某个基类，便需要实现<code>Runnable</code>接口来实现多线程</li>
-<li>以实现<code>Runnable</code>的对象为参数建立新的线程</li>
-</ul>
-<p>我们定义一个<code>ThreadSleep</code>类实现<code>Runnable</code>接口</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadSleep</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> sleepTime;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ThreadSleep</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.sleepTime = (<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">6000</span>);
-    &#125;
-
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">try</span> &#123;
-            System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot; is going to sleep for &quot;</span> + sleepTime);
-            Thread.sleep(sleepTime);
-        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
-
-        &#125;
-        System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot; ends&quot;</span>);
-    &#125;
-&#125;</code></pre>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadTest</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        ThreadSleep t = <span class="hljs-keyword">new</span> ThreadSleep();
-        <span class="hljs-keyword">new</span> Thread(t, <span class="hljs-string">&quot;task1&quot;</span>).start();
-    &#125;
-&#125;</code></pre>
-<p>或者也可以使用lambda表达式来创建实例</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadTest</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        Runnable task1 = () -&gt; &#123;
-            <span class="hljs-keyword">try</span> &#123;
-                <span class="hljs-keyword">int</span> sleepTime = (<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">6000</span>);
-                System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot; is going to sleep for &quot;</span> + sleepTime);
-                Thread.sleep(sleepTime);
-            &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;&#125;
-            System.out.println(Thread.currentThread().getName() + <span class="hljs-string">&quot; ends&quot;</span>);
-        &#125;;
-        <span class="hljs-keyword">new</span> Thread(task1, <span class="hljs-string">&quot;task1&quot;</span>).start();
-    &#125;
-&#125;</code></pre>
-<p>使用<code>Runnable</code>接口实现线程可以将CPU，代码和数据分开，形成清晰的模型，还可以从其他类继承</p>
-<p>直接继承<code>Thread</code>类实现线程，编写简单，直接继承，重写<code>run</code>方法，但是不能再从其他类继承</p>
-<h2 id="3-线程属性"><a href="#3-线程属性" class="headerlink" title="3. 线程属性"></a>3. 线程属性</h2><h3 id="3-1-中断线程"><a href="#3-1-中断线程" class="headerlink" title="3.1 中断线程"></a>3.1 中断线程</h3><p>除了已经废弃的<code>stop</code>方法，没有方法可以<strong>强制</strong>线程终止。不过，<code>interrupt</code>方法可以用来<strong>请求</strong>终止一个线程</p>
-<p>当对一个线程调用<code>interrupt</code>方法时，就会设置线程的<strong>中断状态</strong>为<code>true</code>，如果当前线程被一个<code>sleep</code>调用阻塞，则抛出一个<code>InterruptedException</code>异常。</p>
-<pre><code class="hljs java"><span class="hljs-keyword">while</span> (!Thread.currentThread().isInterrupted()) &#123;
-  <span class="hljs-comment">//blablabla</span>
-&#125;</code></pre>
-<p><code>static Thread currentThread()</code>返回表示当前正在执行的线程的<code>Thread</code>对象</p>
-<p><code>boolean isInterrupted()</code>测试线程是否被中断</p>
-<h3 id="3-2-守护线程"><a href="#3-2-守护线程" class="headerlink" title="3.2 守护线程"></a>3.2 守护线程</h3><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setDaemon</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> isDaemon)</span></span></code></pre>
-<p>调用<code>t.setDaemon(true)</code>将一个线程转换为守护线程，必须在线程启动之前调用，作用是为其它线程提供服务。比如计时器定时发送信号给其它线程，如果只剩下守护线程，虚拟机就会退出。</p>
-<h2 id="4-线程的休眠"><a href="#4-线程的休眠" class="headerlink" title="4. 线程的休眠"></a>4. 线程的休眠</h2><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FactorialThreadTester</span> </span>&#123;
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        System.out.println(<span class="hljs-string">&quot;main thread starts&quot;</span>);
-        FactorialThread myThread = <span class="hljs-keyword">new</span> FactorialThread(<span class="hljs-number">10</span>);
-        myThread.start();
-        <span class="hljs-keyword">try</span> &#123;
-            Thread.sleep(<span class="hljs-number">1000</span>);
-        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
-
-        &#125;
-        System.out.println(<span class="hljs-string">&quot;main thread ends&quot;</span>);
-    &#125;
-&#125;</code></pre>
-<p>结果</p>
-<pre><code class="hljs autohotkey">main <span class="hljs-keyword">thread</span> starts
-<span class="hljs-keyword">new</span> <span class="hljs-keyword">thread</span> starts
-<span class="hljs-title">Result:</span> <span class="hljs-number">3628800</span>
-<span class="hljs-keyword">new</span> <span class="hljs-keyword">thread</span> ends
-main <span class="hljs-keyword">thread</span> ends</code></pre>
-<p>运行结果说明，新线程结束后<code>main</code>线程才结束。</p>
-<p>线程休眠就是为了让其他线程得到执行的机会</p>
-<h2 id="5-线程内部的数据共享"><a href="#5-线程内部的数据共享" class="headerlink" title="5. 线程内部的数据共享"></a>5. 线程内部的数据共享</h2><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadTest</span> </span>&#123;
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        ThreadSleep t = <span class="hljs-keyword">new</span> ThreadSleep();
-        System.out.println(<span class="hljs-string">&quot;Starting threads&quot;</span>);
-        <span class="hljs-keyword">new</span> Thread(t, <span class="hljs-string">&quot;task1&quot;</span>).start();
-        <span class="hljs-keyword">new</span> Thread(t, <span class="hljs-string">&quot;task2&quot;</span>).start();
-        <span class="hljs-keyword">new</span> Thread(t, <span class="hljs-string">&quot;task3&quot;</span>).start();
-        System.out.println(<span class="hljs-string">&quot;Thread started, main ends&quot;</span>);
-
-    &#125;
-&#125;
-</code></pre>
-<p>结果</p>
-<pre><code class="hljs vim">Starting threads
-Thread started, main ends
-task1 <span class="hljs-keyword">is</span> going <span class="hljs-keyword">to</span> <span class="hljs-keyword">sleep</span> <span class="hljs-keyword">for</span> <span class="hljs-number">5235</span>
-task3 <span class="hljs-keyword">is</span> going <span class="hljs-keyword">to</span> <span class="hljs-keyword">sleep</span> <span class="hljs-keyword">for</span> <span class="hljs-number">5235</span>
-task2 <span class="hljs-keyword">is</span> going <span class="hljs-keyword">to</span> <span class="hljs-keyword">sleep</span> <span class="hljs-keyword">for</span> <span class="hljs-number">5235</span>
-task2 ends
-task1 ends
-task3 ends</code></pre>
-<p>3个线程的休眠时间是一样的，因为是用一个<code>Runnable</code>类型的对象创建的3个新线程，这3个线程就共享了这个对象的私有成员<code>sleepTime</code>。</p>
-<p>在现实生活中，如果我们需要多个售票窗口同时销售200张票，就可以使用上述的方法。</p>
-<p>参考：</p>
-<ol>
-<li><p>《Java核心技术 卷I》</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.xuetangx.com/learn/THU08091000252/THU08091000252/4230709/exercise/6246467">学堂在线-Java程序设计进阶</a></p>
-</li>
-</ol>
+<h1 id="2-服务端配置"><a href="#2-服务端配置" class="headerlink" title="2. 服务端配置"></a>2. 服务端配置</h1><p>我的Linux服务器版本是Ubuntu18.04</p>
+<p>输入如下命令安装mosh</p>
+<pre><code class="hljs shell">sudo apt-get update
+sudo apt-get install mosh</code></pre>
+<p>Mosh使用UDP协议连接，端口从60000到61000，网上有教程使用ufw开启端口，但是经过测试是无效的，有一个比较方便的方法时直接在云服务器管理控制台的安全组中添加。</p>
+<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200926-03.png" alt=""></p>
+<h1 id="3-客户端配置"><a href="#3-客户端配置" class="headerlink" title="3. 客户端配置"></a>3. 客户端配置</h1><p>本地机器是Mac，输入命令安装mosh，注意客户端和服务端都需要安装mosh</p>
+<pre><code class="hljs shell">brew install mosh</code></pre>
+<p>安装完成后需要进入本地shell脚本文件中</p>
+<p>如果安装了zsh，就使用命令<code>vi ~/.zshrc</code></p>
+<p>如果是bash，就使用命令<code>vi ~/.bash_profile</code></p>
+<p>添加如下两行</p>
+<pre><code class="hljs shell">export LC_CTYPE=en_US.UTF-8  
+export LC_ALL=en_US.UTF-8</code></pre>
+<p>保存退出后，使用<code>source ~/.zshrc</code>或者<code>source ~/.bash_profile</code>使得更改生效。</p>
+<p>使用如下命令连接</p>
+<pre><code class="hljs shell">mosh root@IP -p 60001</code></pre>
+<p>输入瞬间变得丝滑起来。</p>
 ]]></content>
       <categories>
-        <category>Java</category>
+        <category>折腾</category>
       </categories>
       <tags>
-        <tag>Java</tag>
-        <tag>线程</tag>
+        <tag>mosh</tag>
       </tags>
   </entry>
   <entry>
-    <title>Java 接口</title>
-    <url>/posts/d993c7e9.html</url>
-    <content><![CDATA[<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p><strong>接口</strong>(<em>interface</em>)用来描述类应该做什么，而不指定它们具体该如何做。一个类可以<strong>实现</strong>(<em>implement</em>)一个或多个接口。</p>
-<h2 id="1-接口的概念"><a href="#1-接口的概念" class="headerlink" title="1. 接口的概念"></a>1. 接口的概念</h2><p>接口不是类，而是对希望符合这个接口的类的一组<strong>需求</strong></p>
-<p><strong>Tip</strong></p>
-<ul>
-<li>接口中的所有方法都自动是<code>public</code>，因此在接口中声明方法时，不必提供关键字<code>public</code></li>
-<li>接口绝不会有实例字段</li>
-</ul>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> <span class="hljs-title">implement</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">Employee</span>&gt; </span>&#123;
-    <span class="hljs-comment">// blablabla</span>
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(Employee other)</span> </span>&#123;
-        <span class="hljs-keyword">return</span> Integer.compare(salary, other.salary);
-    &#125;
-&#125;</code></pre>
-<h2 id="2-接口的属性"><a href="#2-接口的属性" class="headerlink" title="2. 接口的属性"></a>2. 接口的属性</h2><p>接口不是类，不能够使用<code>new</code>实例化一个接口，但是可以声明接口的变量，接口变量必须引用实现这个接口的类对象</p>
-<pre><code class="hljs java">Comparable x = <span class="hljs-keyword">new</span> Employee(. . .);</code></pre>
-<p><strong>Tip</strong><br>为什么需要接口，而不是直接使用抽象类？<br>因为Java不支持多继承，所以每个类只能扩展一个类。<br>而接口提供了多继承的好处，而避免了多重继承的复杂性和低效性。</p>
-<h2 id="3-接口与回调"><a href="#3-接口与回调" class="headerlink" title="3. 接口与回调"></a>3. 接口与回调</h2><p><strong>回调</strong>(<em>callback</em>)是一种常见的程序设计模式。在这种模式中，可以指定某个特定事件发生时应该采取的动作。比如我们设计了一个时钟，可以请求每秒更新一次，以便更新时钟的表盘。</p>
-<p>下面是一个定时器和动作监听的具体使用的例子，定时器启动之后，程序将弹出一个消息对话框，并等待用户点击OK来终止程序的运行，在程序等待用户操作的同时，每隔1秒显示一次当前时间</p>
-<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.awt.*;
-<span class="hljs-keyword">import</span> java.awt.event.*;
-<span class="hljs-keyword">import</span> java.time.*;
-<span class="hljs-keyword">import</span> javax.swing.*;
+    <title>Neo4j_CQL语法简介</title>
+    <url>/posts/55958cb4.html</url>
+    <content><![CDATA[<h1 id="Neo4j-CQL语法简介"><a href="#Neo4j-CQL语法简介" class="headerlink" title="Neo4j CQL语法简介"></a>Neo4j CQL语法简介</h1><p>注：本文中的示例来自于Neo4j的<code>Example Graphs</code>中的<code>Movies</code></p>
+<h2 id="1-MATCH-amp-RETURN"><a href="#1-MATCH-amp-RETURN" class="headerlink" title="1. MATCH &amp; RETURN"></a>1. MATCH &amp; RETURN</h2><pre><code class="hljs CQL">MATCH (p:Person) RETURN p LIMIT 10</code></pre>
+<p><code>match</code>查询节点，关系，标签，属性等。类似于SQL中的<code>SELECT</code></p>
+<p>匹配10个<code>Person</code>并返回，注意如果需要使用<code>RETURN</code>就需要一个像<code>p</code>这样的变量来存储返回内容</p>
+<pre><code class="hljs CQL">MATCH (p:Person &#123;name: &quot;Al Pacino&quot;&#125;) RETURN p</code></pre>
+<p>查询姓名为<code>Al Pacino</code>的<code>Person</code>节点并返回</p>
+<pre><code class="hljs CQL">MATCH (:Person &#123;name: &#39;Tom Hanks&#39;&#125;)-[:DIRECTED]-&gt;(movie:Movie)
+RETURN movie.title</code></pre>
+<p>查询Tom Hanks导演的电影，并返回电影的标题</p>
+<pre><code class="hljs CQL">MATCH (tom:Person &#123;name:&#39;Tom Hanks&#39;&#125;)-[rel:DIRECTED]-(movie:Movie)
+RETURN tom.name AS name</code></pre>
+<p>使用<code>AS</code>关键字设置别名</p>
+<h2 id="2-CREATE"><a href="#2-CREATE" class="headerlink" title="2. CREATE"></a>2. CREATE</h2><pre><code class="hljs CQL">CREATE (friend:Person &#123;name: &#39;Mark&#39;, born: 36&#125;)
+RETURN friend</code></pre>
+<p>创建一个<code>Person</code>界面，设置两个属性的值，返回创建的节点（这一步不是必须的，但在实际开发中可以作为测试）</p>
+<pre><code class="hljs CQL">MATCH (jennifer:Person &#123;name: &#39;jennifer&#39;&#125;)
+MATCH (mark:Person &#123;name: &#39;Mark&#39;&#125;)
+CREATE (jennifer)-[rel:IS_FRIENDS_WITH]-&gt;(mark)</code></pre>
+<p><strong>注意</strong>：<code>CREATE</code>不会判断节点在数据库中是否已经存在，为了避免重复插入，这里先使用<code>MATCH</code>查询节点是否已经存在，再在两者间建立关系</p>
+<p>但是如果节点不存在，就不会执行？？？</p>
+<h2 id="3-UPDATE"><a href="#3-UPDATE" class="headerlink" title="3. UPDATE"></a>3. UPDATE</h2><pre><code class="hljs CQL">MATCH (p:Person &#123;name: &#39;Keanu Reeves&#39;&#125;) set p.born &#x3D; 1962 RETURN p</code></pre>
+<p>使用<code>set</code>关键字执行更新操作</p>
+<ol>
+<li>使用<code>MATCH</code>查找节点</li>
+<li>使用<code>set</code>设置节点的属性值</li>
+<li>返回节点确保更新正确</li>
+</ol>
+<pre><code class="hljs CQL">MATCH (:Person &#123;name: &#39;Keanu Reeves&#39;&#125;)-[rel:ACTED_IN]-&gt;(:Movie &#123;title: &#39;Something\&#39;s Gotta Give&#39;&#125;) 
+set rel.roles &#x3D; &#39;阿巴阿巴&#39; 
+RETURN rel</code></pre>
+<p>也可以更新关系的属性，比如这里更新了演员在某部电影中饰演的角色</p>
+<h2 id="4-DELETE-amp-REMOVE"><a href="#4-DELETE-amp-REMOVE" class="headerlink" title="4. DELETE &amp; REMOVE"></a>4. DELETE &amp; REMOVE</h2><p>由于Neo4j数据库具备原子性，一致性，隔离性和持久性，所以无法在一个节点仍然有关系的情况下删除它。</p>
+<h3 id="4-1-删除关系"><a href="#4-1-删除关系" class="headerlink" title="4.1 删除关系"></a>4.1 删除关系</h3><pre><code class="hljs CQL">MATCH (j:Person &#123;name: &#39;Jennifer&#39;&#125;)-[r:IS_FRIENDS_WITH]-&gt;(m:Person &#123;name: &#39;Mark&#39;&#125;)
+DELETE r</code></pre>
+<p>要想删除一个关系，需要找到关系的起始节点和关系的终止节点，然后使用<code>`DELETE</code>关键字删除节点之间的关系</p>
+<h3 id="4-2-删除节点"><a href="#4-2-删除节点" class="headerlink" title="4.2 删除节点"></a>4.2 删除节点</h3><pre><code class="hljs CQL">MATCH (m:Person &#123;name: &#39;Mark&#39;&#125;)
+DELETE m</code></pre>
+<p>如果一个节点没有任何的关系，那么可以直接删除它。</p>
+<h3 id="4-3-同时删除节点和关系"><a href="#4-3-同时删除节点和关系" class="headerlink" title="4.3 同时删除节点和关系"></a>4.3 同时删除节点和关系</h3><pre><code class="hljs CQL">MATCH (m:Person &#123;name: &#39;Mark&#39;&#125;)
+DETACH DELETE m</code></pre>
+<p><code>DETACH DELETE</code>可以删除节点的所有关系，同时删除节点。</p>
+<h3 id="4-4-删除属性"><a href="#4-4-删除属性" class="headerlink" title="4.4 删除属性"></a>4.4 删除属性</h3><pre><code class="hljs CQL">MATCH (n:Person &#123;name: &#39;Jennifer&#39;&#125;)
+REMOVE n.birthdate</code></pre>
+<p>第一种删除属性的方式是<code>REMOVE</code>关键字</p>
+<pre><code class="hljs CQL">MATCH (n:Person &#123;name: &#39;Jennifer&#39;&#125;)
+SET n.birthdate &#x3D; null</code></pre>
+<p>第二种删除属性的方式是使用<code>set</code>关键字将属性的值设为<code>null</code>。因为neo4j数据库不会存储<code>null</code>值，所以它也会被删除。</p>
+<h2 id="5-Merge"><a href="#5-Merge" class="headerlink" title="5. Merge"></a>5. Merge</h2><p>在第二部分里面提到的重复插入问题，可以通过关键字<code>merge</code>来解决。</p>
+<h3 id="5-1-节点"><a href="#5-1-节点" class="headerlink" title="5.1 节点"></a>5.1 节点</h3><pre><code class="hljs CQL">MERGE (mark:Person &#123;name: &#39;Mark&#39;, born: 1999&#125;)
+RETURN mark</code></pre>
+<p>可以使用<code>merge</code>关键字来避免重复插入节点，它会事先检查节点是否已经存在在数据库中，执行的是<code>select-or-insert</code>的操作。</p>
+<h3 id="5-2-关系"><a href="#5-2-关系" class="headerlink" title="5.2 关系"></a>5.2 关系</h3><pre><code class="hljs cypher">MATCH (j:Person &#123;name: &#39;Jennifer&#39;&#125;)
+MATCH (m:Person &#123;name: &#39;Mark&#39;&#125;)
+MERGE (j)-[r:IS_FRIENDS_WITH]-&gt;(m)
+RETURN j, r, m</code></pre>
+<p>这里首先通过<code>MATCH</code>检查是否存在我们要建立关系的两个节点，如果存在，再在两者之间建立关系。</p>
+<p><strong>注意：</strong><code>Merge</code>会检查我们要建立的模式在数据库中已经存在，如果不存在，那么它会将模式完整地建立，包括节点和关系。使用下面的语句，如果节点已经存在，那么就会造成重复插入的问题。所以一定要先<strong>用<code>MATCH</code>匹配节点是否已经存在</strong></p>
+<pre><code class="hljs cypher">&#x2F;&#x2F;this statement will create duplicate nodes for Mark and Jennifer
+MERGE (j:Person &#123;name: &#39;Jennifer&#39;&#125;)-[r:IS_FRIENDS_WITH]-&gt;(m:Person &#123;name: &#39;Mark&#39;&#125;)
+RETURN j, r, m</code></pre>
+<pre><code class="hljs cypher">MERGE (m:Person &#123;name: &#39;Mark&#39;&#125;)-[r:IS_FRIENDS_WITH]-(j:Person &#123;name:&#39;Jennifer&#39;&#125;)
+  ON MATCH SET r.updated &#x3D; date()
+RETURN m, r, j</code></pre>
+<p>如果想要不重复创建节点，并且更新匹配到的节点属性，可以使用<code>ON MATCH SET</code>的方式</p>
+<p>官方文档上的<code>ON CTRATE SET</code>似乎没有作用，而<code>ON MATCH SET</code>就可以起到创建和更新的作用</p>
+<h2 id="6-WHERE"><a href="#6-WHERE" class="headerlink" title="6. WHERE"></a>6. WHERE</h2><p>与SQL查询类似，CQL也可以使用where进行范围的限定，在全键值等值查询时，效果与前面的例子一样。但对于熟悉SQL语法的人来说可能这种方式更容易上手。</p>
+<pre><code class="hljs cypher">&#x2F;&#x2F;query using equality check in the MATCH clause
+MATCH (j:Person &#123;name: &#39;Jennifer&#39;&#125;)
+RETURN j
 
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimerTest</span></span>
-<span class="hljs-class"></span>&#123;  
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>
-<span class="hljs-function">   </span>&#123;  
-      TimePrinter listener = <span class="hljs-keyword">new</span> TimePrinter();
+&#x2F;&#x2F;query using equality check in the WHERE clause
+MATCH (j:Person)
+WHERE j.name &#x3D; &#39;Jennifer&#39;
+RETURN j</code></pre>
+<h3 id="6-1-否定属性"><a href="#6-1-否定属性" class="headerlink" title="6.1 否定属性"></a>6.1 否定属性</h3><p>使用<code>NOT</code> <code>AND</code> <code>OR</code> <code>XOR</code>等操作符</p>
+<pre><code class="hljs cypher">MATCH (j:Person)
+WHERE NOT j.name &#x3D; &#39;Jennifer&#39;
+RETURN j</code></pre>
+<h3 id="6-2-范围查询"><a href="#6-2-范围查询" class="headerlink" title="6.2 范围查询"></a>6.2 范围查询</h3><p>查询1960到1970年出生的人</p>
+<pre><code class="hljs cypher">MATCH (p:Person)
+WHERE 1960 &lt;&#x3D; p.born &lt;&#x3D; 1970
+RETURN p</code></pre>
+<h3 id="6-3-exists"><a href="#6-3-exists" class="headerlink" title="6.3 exists"></a>6.3 exists</h3><p>检查一个属性是否存在</p>
+<p><strong>注意</strong>：neo4j不会存储null值</p>
+<pre><code class="hljs cypher">&#x2F;&#x2F;Query1: find all users who have a birthdate property
+MATCH (p:Person)
+WHERE exists(p.birthdate)
+RETURN p.name</code></pre>
+<h3 id="6-4-模糊查询"><a href="#6-4-模糊查询" class="headerlink" title="6.4 模糊查询"></a>6.4 模糊查询</h3><p>对一个字符串，我们可能需要根据前缀，后缀或包含进行模糊查询。</p>
+<pre><code class="hljs cypher">&#x2F;&#x2F;check if a property starts with &#39;M&#39;
+MATCH (p:Person)
+WHERE p.name STARTS WITH &#39;Ma&#39;
+RETURN p.name
 
-      <span class="hljs-comment">// construct a timer that calls the listener</span>
-      <span class="hljs-comment">// once every second</span>
-      Timer timer = <span class="hljs-keyword">new</span> Timer(<span class="hljs-number">1000</span>, listener);
-      timer.start();
+&#x2F;&#x2F;check if a property contains &#39;a&#39;
+MATCH (p:Person)
+WHERE p.name CONTAINS &#39;a&#39;
+RETURN p.name
 
-      <span class="hljs-comment">// keep program running until the user selects &quot;OK&quot;</span>
-      JOptionPane.showMessageDialog(<span class="hljs-keyword">null</span>, <span class="hljs-string">&quot;Quit program?&quot;</span>);
-      System.exit(<span class="hljs-number">0</span>);
-   &#125;
-&#125;
+&#x2F;&#x2F;check if a property ends with &#39;n&#39;
+MATCH (p:Person)
+WHERE p.name ENDS WITH &#39;n&#39;</code></pre>
+<p>当然，我们还可以使用正则表达式的形式。<code>~</code>表示使用正则表达式</p>
+<pre><code class="hljs cypher">MATCH (p:Person)
+WHERE p.name &#x3D;~ &#39;Jo.*&#39;
+RETURN p.name</code></pre>
+<h3 id="6-5-Filtering-on-Patterns"><a href="#6-5-Filtering-on-Patterns" class="headerlink" title="6.5 Filtering on Patterns"></a>6.5 Filtering on Patterns</h3><p>由于neo4j是图形数据库，它比其它数据库更注重于关系(relationships)。所以我们也可以通过关系来进行筛选。</p>
+<p>比如下面这个关系匹配同时担任一部电影的导演和编剧的人。</p>
+<pre><code class="hljs cypher">MATCH (p:Person)-[r:DIRECTED]-&gt;(m:Movie)
+WHERE exists((p)-[:WROTE]-&gt;(m))
+RETURN p</code></pre>
+<h3 id="6-6-Optional-Patterns"><a href="#6-6-Optional-Patterns" class="headerlink" title="6.6 Optional Patterns"></a>6.6 Optional Patterns</h3><p>类似于SQL的外连接。可选匹配。</p>
+<p>这个例子匹配以姓名以Jo开头并且担任过电影编剧的人，后面这个条件不是强制的。</p>
+<pre><code class="hljs cypher">MATCH (p:Person)
+WHERE p.name STARTS WITH &#39;Jo&#39;
+OPTIONAL MATCH (p) - [:WROTE] -&gt; (m:Movie)
+RETURN p.name, m.title</code></pre>
+<h2 id="7-Aggregation-in-Cypher"><a href="#7-Aggregation-in-Cypher" class="headerlink" title="7. Aggregation in Cypher"></a>7. Aggregation in Cypher</h2><h3 id="7-1-count"><a href="#7-1-count" class="headerlink" title="7.1 count"></a>7.1 count</h3><p>统计数量</p>
+<p>例1加上了属性值title，可以去掉null值，而使用*会统计所有电影节点。</p>
+<pre><code class="hljs cypher">MATCH (m:Movie)
+RETURN count(m.title)
+   
+MATCH (m:Movie)
+RETURN count(*)</code></pre>
+<h3 id="7-2-collect"><a href="#7-2-collect" class="headerlink" title="7.2 collect"></a>7.2 collect</h3><p>将值聚合成一个列表。可以使用collect基于一个起始节点或关系等组织一系列的值。</p>
+<p>下面这个例子展示了导演和他们执导的电影。如果不使用collect，那么导演和电影会一对一的呈现在表格中。但一个导演可能执导过多部电影，所以使用collect将电影节点聚合起来。</p>
+<pre><code class="hljs cypher">MATCH (p:Person) - [r:DIRECTED] -&gt; (m:Movie)
+RETURN p.name, collect(m.title) AS titles</code></pre>
+<h3 id="7-3-size"><a href="#7-3-size" class="headerlink" title="7.3 size"></a>7.3 size</h3><p>size的作用是统计列表中元素的个数或者统计一个表达式返回的内容大小。</p>
+<pre><code class="hljs cypher">&#x2F;&#x2F; 统计导演执导电影数量
+MATCH (p:Person) - [r:DIRECTED] -&gt; (m:Movie)
+RETURN p.name, collect(m.title) AS titles, size(collect(m.title)) AS count
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimePrinter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ActionListener</span></span>
-<span class="hljs-class"></span>&#123;  
-   <span class="hljs-meta">@Override</span>
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">actionPerformed</span><span class="hljs-params">(ActionEvent event)</span></span>
-<span class="hljs-function">   </span>&#123;  
-      System.out.println(<span class="hljs-string">&quot;At the tone, the time is &quot;</span> 
-         + Instant.ofEpochMilli(event.getWhen()));
-      Toolkit.getDefaultToolkit().beep();
-   &#125;
-&#125;
-</code></pre>
-<h2 id="4-Comparator接口"><a href="#4-Comparator接口" class="headerlink" title="4. Comparator接口"></a>4. Comparator接口</h2><p>如果我们想要对字符串数组进行排序，可以直接使用<code>String.compareTo</code>方法按字典顺序比较字符串。<br>如果我们希望按照字符串长度来进行比较，可以自己实现一个<strong>比较器</strong>(<em>comparator</em>)，如下面的例子中，将比较器作为参数传入<code>Arrays.sort</code>方法中。</p>
-<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Arrays;
-<span class="hljs-keyword">import</span> java.util.Comparator;
+&#x2F;&#x2F; 统计导演同时还担任该电影的编剧的数量
+MATCH (p:Person) - [r:DIRECTED] -&gt; (m:Movie)
+RETURN p.name, size((p) - [:WROTE] -&gt; (m)) AS count</code></pre>
+<h3 id="7-4-WITH"><a href="#7-4-WITH" class="headerlink" title="7.4 WITH"></a>7.4 WITH</h3><p>使用<code>WITH</code>传递参数到下一个查询</p>
+<pre><code class="hljs cypher">&#x2F;&#x2F;find number of friends who have other friends
+MATCH (p:Person)-[:IS_FRIENDS_WITH]-&gt;(friend:Person)
+WITH p, collect(friend.name) AS friendsList, size((friend)-[:IS_FRIENDS_WITH]-(:Person)) AS numberOfFoFs
+WHERE numberOfFoFs &gt; 1
+RETURN p.name, friendsList, numberOfFoFs
 
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthCompare</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        String[] friends = &#123;<span class="hljs-string">&quot;Adam&quot;</span>, <span class="hljs-string">&quot;Ben&quot;</span>, <span class="hljs-string">&quot;Peter&quot;</span>, <span class="hljs-string">&quot;Noah&quot;</span>&#125;;
-        Arrays.sort(friends, <span class="hljs-keyword">new</span> LengthComparator());
-        System.out.println(Arrays.toString(friends));
-    &#125;
-&#125;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LengthComparator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparator</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;
-
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(String o1, String o2)</span> </span>&#123;
-        <span class="hljs-keyword">return</span> o1.length() - o2.length();
-    &#125;
-&#125;</code></pre>
+&#x2F;&#x2F;find people with 2-6 years of experience
+WITH 2 AS experienceMin, 6 AS experienceMax
+MATCH (p:Person)
+WHERE experienceMin &lt;&#x3D; p.yrsExperience &lt;&#x3D; experienceMax
+RETURN p</code></pre>
+<h3 id="7-5-UNWIND"><a href="#7-5-UNWIND" class="headerlink" title="7.5 UNWIND"></a>7.5 UNWIND</h3><p>将一个列表拆分成单独的值，与<code>collect()</code>的作用相反</p>
+<pre><code class="hljs cypher">&#x2F;&#x2F;Query10: for numbers in a list, find candidates who have that many years of experience
+WITH [4, 5, 6, 7] AS experienceRange
+UNWIND experienceRange AS number
+MATCH (p:Person)
+WHERE p.yearsExp &#x3D; number
+RETURN p.name, p.yearsExp</code></pre>
+<h3 id="7-6-ORDER-BY"><a href="#7-6-ORDER-BY" class="headerlink" title="7.6 ORDER BY"></a>7.6 ORDER BY</h3><p>排序，默认是升序的。</p>
+<p>如下的例子将出生在1960年到1965年的人按降序排序</p>
+<p>（如果对个值参与排序，那按照先后顺序排序）</p>
+<pre><code class="hljs cypher">MATCH (p:Person)
+WHERE 1960 &lt;&#x3D; p.born &lt;&#x3D; 1965
+RETURN p.name, p.born ORDER BY p.born DESC</code></pre>
+<h3 id="7-7-DISTINCT"><a href="#7-7-DISTINCT" class="headerlink" title="7.7 DISTINCT"></a>7.7 DISTINCT</h3><p>有点时候，一个查询可能会返回多个重复的结果。使用<code>DISTINCT</code>可以解决这个问题。</p>
+<p>下面这个例子查询导演过电影并且担任过电影编剧的人，有的人导演过多部电影，那么就会返回重复的名字，但使用了<code>DISTINCT</code>，就可以获得独特的结果。</p>
+<pre><code class="hljs cypher">MATCH (p:Person) - [:DIRECTED] -&gt; (m:Movie)
+MATCH (p) - [:WROTE] -&gt; (:Movie)
+RETURN DISTINCT p.name</code></pre>
+<h3 id="7-8-LIMIT"><a href="#7-8-LIMIT" class="headerlink" title="7.8 LIMIT"></a>7.8 LIMIT</h3><p>限制返回的个数</p>
+<pre><code class="hljs cypher">MATCH (p:Person) RETURN p LIMIT 10</code></pre>
+<h2 id="8-进阶"><a href="#8-进阶" class="headerlink" title="8. 进阶"></a>8. 进阶</h2><h3 id="8-1-APOC插件"><a href="#8-1-APOC插件" class="headerlink" title="8.1 APOC插件"></a>8.1 APOC插件</h3><h4 id="8-1-1-简介"><a href="#8-1-1-简介" class="headerlink" title="8.1.1 简介"></a>8.1.1 简介</h4><p> APOC是 Neo4j 3.3 版本推出时正式推荐的一个Java存储过程包，里面包含丰富的函数和过程，作为对Cypher所不能提供的复杂图算法和数据操作功能的补充，APOC还具有使用灵活、高性能等优势，是一个基于Neo4j的函数包插件。</p>
+<h4 id="8-1-2-安装"><a href="#8-1-2-安装" class="headerlink" title="8.1.2 安装"></a>8.1.2 安装</h4><ol>
+<li><p>下载对应的jar包<a target="_blank" rel="noopener" href="https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases">https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases</a></p>
+</li>
+<li><p>把jar包放在安装目录的plugins文件夹下</p>
+</li>
+<li><p>进入neo4j的目录，编辑在<code>conf</code>文件夹下的<code>neo4j.conf</code>配置文件，加入如下一行</p>
+<pre><code class="hljs shell">dbms.security.procedures.unrestricted=apoc.*</code></pre>
+</li>
+<li><p>重启Neo4j服务</p>
+</li>
+<li><p>在可视化界面运行：<code>return apoc.version()</code>。如果出现对应的版本号，证明安装成功</p>
+</li>
+</ol>
+<h3 id="8-2"><a href="#8-2" class="headerlink" title="8.2"></a>8.2</h3><p>变量引用<code>$</code></p>
+<pre><code class="hljs cypher">MATCH (n:Person)
+WHERE n.name &#x3D; $name
+RETURN n</code></pre>
+<p>动态访问节点或关系<code>[]</code></p>
+<p>Springboot data neo4j @Query不支持<code>apoc</code></p>
+<p>不会报错但返回信息为<code>null</code></p>
 <p>参考：</p>
 <ol>
-<li>《Java核心技术 卷I》</li>
+<li><a target="_blank" rel="noopener" href="https://neo4j.com/developer/cypher/">Neo4j官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_36226553/article/details/108569048?spm=1001.2014.3001.5501">Neo4j：入门基础（三）之APOC插件</a></li>
 </ol>
 ]]></content>
       <categories>
-        <category>Java</category>
+        <category>数据库</category>
       </categories>
       <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java 继承</title>
-    <url>/posts/8b3a0e63.html</url>
-    <content><![CDATA[<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>继承(inheritance)的基本思想是基于已经有的类创建新的类，复用这些类的方法。</p>
-<h2 id="一、类，超类和子类"><a href="#一、类，超类和子类" class="headerlink" title="一、类，超类和子类"></a>一、类，超类和子类</h2><p>在前面的文章中我们实现了一个<code>Employee</code>类，假设你在某个公司工作，这个公司的经理和员工的待遇不一样，普通员工在完成任务后仅领取薪水，而经理还拥有奖金。<br>这个时候，我们可以定义一个新类<code>Manager</code>，使用继承重用<code>Employee</code>中的代码，同时定义新的方法来增加奖金这一功能。</p>
-<p><strong>Tip</strong><br><code>Manager</code> <strong>is-a</strong> <code>Employee</code><br><strong>is-a</strong>关系是继承的一个明显特征</p>
-<h3 id="1-定义子类"><a href="#1-定义子类" class="headerlink" title="1. 定义子类"></a>1. 定义子类</h3><p>使用<code>extends</code>关键字来表示继承</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
-    <span class="hljs-comment">// blablabla</span>
-&#125;</code></pre>
-<p>关键字<code>extends</code>表明正在构造的新类派生于一个已经存在的类。这个类被称为<strong>超类</strong>(<em>superclass</em>) 或<strong>父类</strong>(<em>parent class</em>)，新类称为<strong>子类</strong>(<em>subclass</em>)<br>在设计类时，应该将一般方法放在超类中，将更特殊的方法放在子类中<br>比如我们在<code>Manager</code>类中应该实现一个设置奖金金额的方法。</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> bonus;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBonus</span><span class="hljs-params">(<span class="hljs-keyword">double</span> bonus)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.bonus = bonus;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-覆盖方法"><a href="#2-覆盖方法" class="headerlink" title="2. 覆盖方法"></a>2. 覆盖方法</h3><p>超类中的某些方法对子类不一定适用，比如<code>Manager</code>类中的<code>getSalary</code>方法应该返回薪水和奖金的总和，所以要提供一个新的方法来<strong>覆盖</strong>(<em>override</em>)超类中的某个方法。<br>要注意的是，<code>Manager</code>类的<code>getSalary</code>方法不能够直接访问<code>salary</code>字段，因为其实<code>Employee</code>类的私有字段，所以需要使用<code>super</code>关键字</p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSalary</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> baseSalary = <span class="hljs-keyword">super</span>.getSalary();
-    <span class="hljs-keyword">return</span> baseSalary + bonus;
-&#125;</code></pre>
-<h3 id="3-子类构造器"><a href="#3-子类构造器" class="headerlink" title="3. 子类构造器"></a>3. 子类构造器</h3><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Manager</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
-    <span class="hljs-keyword">super</span>(id, name, salary);
-    bonus = <span class="hljs-number">0</span>;
-&#125;</code></pre>
-<p>语句<code>super(id, name, salary);</code>实现了对<code>Employee</code>中私有字段的调用</p>
-<h3 id="4-多态"><a href="#4-多态" class="headerlink" title="4. 多态"></a>4. 多态</h3><p>我们可以通过<code>is-a</code>来判断是否将数据设计为继承关系，它的另外一种表述是<strong>替换原则</strong>，即程序中出现超类对象的任何地方都可以使用子类对象替换。</p>
-<p>在Java中，对象变量时<strong>多态</strong>(<em>polymophic</em>)的。<br>一个<code>Employee</code>类型的变量既可以引用一个<code>Employee</code>类型的对象,也可以引用<code>Employee</code>类的任何一个子类的对象(比如<code>Manager</code>)</p>
-<pre><code class="hljs java">Employee e;
-e = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-number">10000</span>);
-e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-number">20000</span>);</code></pre>
-<p>虽然这里的<code>e</code>引用了<code>Manager</code>类型的对象，但是编译器只将<code>e</code>看成是一个<code>Employee</code>对象，所以如下的调用是错误的。</p>
-<pre><code class="hljs java">e.setBonus(<span class="hljs-number">10000</span>); <span class="hljs-comment">// ERROR</span></code></pre>
-<h3 id="5-阻止继承-final类和方法"><a href="#5-阻止继承-final类和方法" class="headerlink" title="5. 阻止继承: final类和方法"></a>5. 阻止继承: final类和方法</h3><p>如果我们需要阻止某个类被继承，可以使用<code>final</code>关键字</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Father</span> </span>&#123;
-    <span class="hljs-comment">// blablabla</span>
-&#125;</code></pre>
-<p>类中的某个特定的方法也可以声明为<code>final</code>，这样子类就不能够覆盖这个方法。</p>
-<p><strong>Tip</strong><br>为什么要将类或方法声明为<code>final</code>？<br>确保它们不会在子类中改变语义。比如<code>String</code>类是<code>final</code>类，所以一个<code>String</code>引用引用的一定是<code>String</code>对象，而不是其它。</p>
-<h3 id="6-抽象类"><a href="#6-抽象类" class="headerlink" title="6. 抽象类"></a>6. 抽象类</h3><p>在继承层次结构中，位于上层的类更具有一般性<br>比如我们加入<code>Person</code>类和<code>Student</code>类，下图是这三个类之间的继承关系</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200908-02.png" alt=""></p>
-<p>每个人都有一些属性，比如姓名，年龄，引入一个公共的超类，就可以把<code>getName</code>方法放在继承层次结构中的更高一层，使用<code>abstract</code>关键字来定义抽象类</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;
-    <span class="hljs-keyword">private</span> String name;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Person</span> <span class="hljs-params">(String name)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.name = name;
-    &#125;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> name;
-    &#125;
-&#125;</code></pre>
-<p>抽象类不能够实例化，如下的表达式是错误的</p>
-<pre><code class="hljs java"><span class="hljs-keyword">new</span> Person(); <span class="hljs-comment">// ERROR</span></code></pre>
-<h2 id="二、对象包装器与自动装箱"><a href="#二、对象包装器与自动装箱" class="headerlink" title="二、对象包装器与自动装箱"></a>二、对象包装器与自动装箱</h2><p>所有的基本类型都有一个与之对应的类，这些类被称为<strong>包装器</strong>(<em>wrapper</em>)，分别是<code>Integer, Long, Float, Double, Short, Byte, Character, Boolean</code>。<br>包装器类是不可变的，一旦构造了包装器，就不允许更改包装在其中的值，同时，包装器还是<code>final</code>，不能够派生它们的子类。</p>
-<p><strong>Tip</strong><br>为什么需要包装类？<br>因为Java是一种面向对象程序设计语言，很多地方需要使用对象而不是基本类型。比如在<code>ArrayList</code>中，我们不能够写成<code>ArrayList&lt;int&gt;</code>，而要写成<code>ArrayList&lt;Integer&gt;</code>。</p>
-<h3 id="2-自动拆箱与装箱"><a href="#2-自动拆箱与装箱" class="headerlink" title="2. 自动拆箱与装箱"></a>2. 自动拆箱与装箱</h3><p>自动装箱: 就是将基本数据类型自动转换成对应的包装类。<br>自动拆箱：就是将包装类自动转换成对应的基本数据类型。</p>
-<pre><code class="hljs java">Integer n = <span class="hljs-number">3</span>; <span class="hljs-comment">// 自动装箱</span>
-<span class="hljs-keyword">int</span> m = n; <span class="hljs-comment">// 自动拆箱</span></code></pre>
-<h2 id="三、继承的设计技巧"><a href="#三、继承的设计技巧" class="headerlink" title="三、继承的设计技巧"></a>三、继承的设计技巧</h2><ol>
-<li>将公共操作和字段放在超类中</li>
-<li>使用继承实现<strong>is-a</strong>关系</li>
-<li>除非所有继承的方法都有意义，否则不要使用继承</li>
-<li>在覆盖方法时，不要改变预期的行为</li>
-<li>使用多态，而不要使用类型信息</li>
-</ol>
-<p>参考：</p>
-<ol>
-<li><a target="_blank" rel="noopener" href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/boxing-unboxing">Java工程师成神之路</a></li>
-<li>《Java核心技术 卷I》</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java 面向对象概述</title>
-    <url>/posts/e27767b2.html</url>
-    <content><![CDATA[<h1 id="对象与类概述"><a href="#对象与类概述" class="headerlink" title="对象与类概述"></a>对象与类概述</h1><h2 id="一、面向对象程序设计概述"><a href="#一、面向对象程序设计概述" class="headerlink" title="一、面向对象程序设计概述"></a>一、面向对象程序设计概述</h2><p>结构化程序：算法+数据结构 = 程序 </p>
-<p>（即确定如何操作数据，再决定如何组织数据的结构）</p>
-<p>面向对象程序设计(OOP)：将数据放在第一位，再考虑操作数据的算法</p>
-<h3 id="1-类"><a href="#1-类" class="headerlink" title="1. 类"></a>1. 类</h3><ol>
-<li><p><strong>类(class)</strong>是构造对象的模板或<strong>蓝图</strong>，就好像一个制作某件工艺品的模具，对象就是工艺品</p>
-</li>
-<li><p>由类构造(construct)对象的过程称为创建类的<strong>实例(instance)</strong></p>
-</li>
-<li><p><strong>封装(encapsulation)</strong>将<strong>数据</strong>和<strong>行为</strong>组合在一个包中，对对象的使用者隐藏具体的实现方式，也称为<strong>数据隐藏</strong></p>
-</li>
-<li><p>对象中的数据称为<strong>实例字段(instance field)</strong>，操作数据的过程称为<strong>方法(method)</strong></p>
-</li>
-<li><p>对象拥有的实例字段值的集合就是这个对象的当前<strong>状态(state)</strong></p>
-</li>
-<li>程序只能通过对象的方法和对象数据进行交互，对象被赋予了“黑盒”的特征，提高了重用性和可靠性</li>
-<li>可以通过扩展一个类来构建新的类，这使得用户自定义类更加容易。在Java中，所有类都来自于一个<strong>超类</strong>，即<code>Object</code>。</li>
-<li>通过扩展一个类来建立一个新的类的过程就是<strong>继承(inheritance)</strong>，新类具有被扩展的类的全部属性和方法，可以自定义新的属性和方法。</li>
-</ol>
-<h3 id="2-对象"><a href="#2-对象" class="headerlink" title="2. 对象"></a>2. 对象</h3><p>对象的3个特性：</p>
-<ul>
-<li><strong>行为(behavior)</strong>——可以对对象完成的操作（应用的方法）</li>
-<li><strong>状态(state)</strong>——描述当前状况的信息，状态的改变必须通过调用方法实现</li>
-<li><strong>标识(identity)</strong>——每个对象有唯一的标识来区分（如两个订单的编号肯定不相同）</li>
-</ul>
-<h3 id="3-识别类"><a href="#3-识别类" class="headerlink" title="3. 识别类"></a>3. 识别类</h3><p>编写程序从<strong>识别类</strong>开始，然后为各个类添加方法。</p>
-<p>一个简单的方法是在分析问题的过程中寻找<strong>名词——类</strong>，寻找<strong>动词——方法</strong></p>
-<p>例如我们有商品，订单，账户这样的名词作为类，即Item，Order，Account</p>
-<p>那么在账户这个类中，就可以有增加账户，修改账户等方法。</p>
-<h3 id="4-类之间的关系"><a href="#4-类之间的关系" class="headerlink" title="4. 类之间的关系"></a>4. 类之间的关系</h3><p>类之间最常见的关系有：</p>
-<ul>
-<li><strong>依赖</strong>（”<em>uses-a</em>“）</li>
-<li><strong>聚合</strong> （”<em>has-a</em>“）</li>
-<li><strong>继承</strong>（<em>“is-a”</em>)</li>
-</ul>
-<h4 id="4-1-依赖（dependence）"><a href="#4-1-依赖（dependence）" class="headerlink" title="4.1 依赖（dependence）"></a>4.1 依赖（dependence）</h4><p>如果一个类的方法使用或操纵另一个类的对象，我们就可以说一个类依赖于另一个类</p>
-<p>比如Order对象访问Account对象查看信用状态，这就是一个使用(“uses-a”)的关系。</p>
-<p>（尽可能减少相互依赖的类，做到低耦合）</p>
-<h4 id="4-2-聚合（aggregation）"><a href="#4-2-聚合（aggregation）" class="headerlink" title="4.2 聚合（aggregation）"></a>4.2 聚合（aggregation）</h4><p>类A的对象包含（”has-a”）类B的对象</p>
-<p>如一个Order对象就包含了一些Item对象</p>
-<h4 id="4-3-继承（inheritance）"><a href="#4-3-继承（inheritance）" class="headerlink" title="4.3 继承（inheritance）"></a>4.3 继承（inheritance）</h4><p>一个更特殊的类与一个更一般的类之间的关系</p>
-<p>也就是前面提到的扩展，比如现在我们定义一个加急订单RushOrder类，那么它是一个（”is-a”)Order类</p>
-<p>也就是有Order类继承而来。</p>
-<p>下图展示了上述的三种关系。<br><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200423LearnJava01.png" alt=""></p>
-<h2 id="二、使用预定义类"><a href="#二、使用预定义类" class="headerlink" title="二、使用预定义类"></a>二、使用预定义类</h2><p>我们通过可以Java中的预定于类来了解如何构造对象，以及如何使用类的方法。<br>如下的例子：</p>
-<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Date;
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateTest</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        Date birthday = <span class="hljs-keyword">new</span> Date();
-        System.out.println(birthday.toString());
-    &#125;
-&#125;</code></pre>
-<p>在Java中，要使用构造器(constructor)来构造新的实例，比如上面的代码中<code>new Date()</code>就构造了一个新的对象，这个对象被初始化为当前的日期和时间。</p>
-<p><strong>Tip</strong><br>需要注意的是，单独的定义<code>Date birthday</code>中的<code>birthday</code>并不是对象，对它进行操作编译器会报错。一定要<strong>初始化</strong>变量<code>birthday</code>。<br>对象变量本身并不包含一个对象，而是<strong>引用</strong>一个对象，<code>new</code>操作符的返回值也是一个引用。</p>
-<h2 id="三、自定义类"><a href="#三、自定义类" class="headerlink" title="三、自定义类"></a>三、自定义类</h2><h3 id="1-对象与对象变量"><a href="#1-对象与对象变量" class="headerlink" title="1. 对象与对象变量"></a>1. 对象与对象变量</h3><p>要想使用对象，就需要先构造对象，并指定其初始状态。在Java中，使用构造器（构造函数）来构造。</p>
-<p>比如某公司有一个职员管理系统，其中有一个关于职员信息的类<em>Employee</em></p>
-<p>那么我们可以通过下面这个表达式构造一个新对象</p>
-<pre><code class="hljs java">Employee employee = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;Allen&quot;</span>, <span class="hljs-number">10000</span>);</code></pre>
-<p>其中<code>employee</code>是一个<strong>对象变量</strong>，我们用<code>new Employee(int id, String name, int salary)</code>构造了一个新对象，初始化该对象变量，要注意的是对象变量并没有包含一个对象，而是<strong>引用</strong>一个对象。</p>
-<p>在Java中，任何对象变量的值都是对存储在另外一个地方的某个对象的引用。</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> </span>&#123;
-
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> id;
-    <span class="hljs-keyword">private</span> String name;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> salary;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Employee</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.id = id;
-        <span class="hljs-keyword">this</span>.name = name;
-        <span class="hljs-keyword">this</span>.salary = salary;
-    &#125;
-		
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getId</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> id;
-    &#125;
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> name;
-    &#125;
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSalary</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> salary;
-    &#125;
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-
-        Employee[] staff = <span class="hljs-keyword">new</span> Employee[<span class="hljs-number">3</span>];
-
-        staff[<span class="hljs-number">0</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;Allen&quot;</span>, <span class="hljs-number">10000</span>);
-        staff[<span class="hljs-number">1</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;Ben&quot;</span>, <span class="hljs-number">12000</span>);
-        staff[<span class="hljs-number">2</span>] = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">3</span>, <span class="hljs-string">&quot;David&quot;</span>, <span class="hljs-number">15000</span>);
-
-        <span class="hljs-keyword">for</span> (Employee e : staff) &#123;
-            System.out.println(<span class="hljs-string">&quot;id=&quot;</span> + e.getId() + <span class="hljs-string">&quot;,name=&quot;</span> + e.getName() + <span class="hljs-string">&quot;,salary=&quot;</span> + e.getSalary());
-        &#125;
-    &#125;
-&#125;
-
-<span class="hljs-comment">/**</span>
-<span class="hljs-comment">Output:</span>
-<span class="hljs-comment">id=1,name=Allen,salary=10000</span>
-<span class="hljs-comment">id=2,name=Ben,salary=12000</span>
-<span class="hljs-comment">id=3,name=David,salary=15000</span>
-<span class="hljs-comment">*/</span></code></pre>
-<h3 id="2-构造函数"><a href="#2-构造函数" class="headerlink" title="2. 构造函数"></a>2. 构造函数</h3><p>构造函数，与类同名，将实例初始化为指定的初始状态</p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Employee</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.id = id;
-        <span class="hljs-keyword">this</span>.name = name;
-        <span class="hljs-keyword">this</span>.salary = salary;
-    &#125;</code></pre>
-<p><strong>Tip</strong></p>
-<ul>
-<li>构造函数根据参数的不同可以有多个，</li>
-<li>构造函数没有返回值。</li>
-</ul>
-<h3 id="4-封装的优点"><a href="#4-封装的优点" class="headerlink" title="4. 封装的优点"></a>4. 封装的优点</h3><p>如下是一个访问器方法，又称为<strong>字段访问器</strong></p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getId</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> id;
-    &#125;</code></pre>
-<p><strong>Tip</strong><br>为什么不直接将这些变量设为public公共访问呢？<br>因为这样的话这些变量就可以轻易的被外界修改，受到破坏<br>比如这里的职员id应该是只读的，不能够设置为public被外界随意更改。</p>
-<h3 id="4-final"><a href="#4-final" class="headerlink" title="4. final"></a>4. final</h3><p>定义为final的实例字段必须在构造对象时<strong>初始化</strong>，否则编辑器会报错，顾名思义，<code>final</code>表示最终的，在初始化之后不能够再修改这个值。</p>
-<pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String name = <span class="hljs-string">&quot;John&quot;</span>;</code></pre>
-<p><strong>Tip</strong><br><code>final</code>修饰符对于基本类型和不可变类，如String类适用，但是对于可变的类，如<code>StringBuilder</code>就会出现问题，因为它仅仅保证了引用不会指向另外一个对象，但是这个对象是可以更改的。</p>
-<h2 id="四、静态字段和静态方法"><a href="#四、静态字段和静态方法" class="headerlink" title="四、静态字段和静态方法"></a>四、静态字段和静态方法</h2><h3 id="1-静态字段"><a href="#1-静态字段" class="headerlink" title="1. 静态字段"></a>1. 静态字段</h3><p>回到我们之前的<code>Employee</code>类中，如果我们需要一个变量来记录公司有多少雇员，就可以使用<code>static</code>修饰符，定义一个静态变量</p>
-<pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> count;</code></pre>
-<p>静态变量是属于类的变量，而不属于单个对象，对于<code>Employee</code>类的所有实例，共享一个<code>count</code>。<br>而对非静态的变量，每个对象都有一个自己的副本</p>
-<h3 id="2-静态常量"><a href="#2-静态常量" class="headerlink" title="2. 静态常量"></a>2. 静态常量</h3><p><code>Math</code>类中定义了一个静态常量<code>PI</code></p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Math</span> </span>&#123;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span> PI = <span class="hljs-number">3.1415926535897932846</span>;
-&#125;</code></pre>
-<p>我们可以通过<code>Math.PI</code>来直接访问它，如果没有<code>static</code>，那么就需要创建<code>Math</code>类的对象来访问它，效率比较低。</p>
-<h3 id="3-静态方法"><a href="#3-静态方法" class="headerlink" title="3. 静态方法"></a>3. 静态方法</h3><p>如果我们想要知道公司的雇员人数，就可以使用静态方法</p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getCount</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-comment">// 返回静态变量</span>
-    <span class="hljs-keyword">return</span> count; 
-&#125;</code></pre>
-<p>使用静态方法的两种情况：</p>
-<ul>
-<li>方法不需要访问对象状态</li>
-<li>方法只需要访问类的静态字段（比如上面的例子）</li>
-</ul>
-<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2>]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>异常与断言</title>
-    <url>/posts/35f9d194.html</url>
-    <content><![CDATA[<h1 id="异常与断言"><a href="#异常与断言" class="headerlink" title="异常与断言"></a>异常与断言</h1><p>在理想世界里，用户输入数据的格式永远都是正确的，代码永远不会出现bug，然而，在现实世界的开发过程中，总会遇到各种各样的问题，当然，我也可以说，这不是bug，而是特性~~~<br>言归正传，如果由于程序的错误导致用户所做的工作统统丢失，那用户可能就再也不会用它了。为了避免这样的情况，至少应该做到以下几点</p>
-<ul>
-<li>向用户通知错误</li>
-<li>保存所有的工作</li>
-<li>允许用户妥善地退出程序</li>
-</ul>
-<h2 id="1-处理错误"><a href="#1-处理错误" class="headerlink" title="1. 处理错误"></a>1. 处理错误</h2><p>为了能够处理程序中的异常情况，必须考虑到程序中可能会出现的错误和问题。比如：</p>
-<ul>
-<li>用户输入错误</li>
-<li>设备错误</li>
-<li>物理限制</li>
-<li>代码错误</li>
-</ul>
-<h3 id="1-1-异常分类"><a href="#1-1-异常分类" class="headerlink" title="1.1 异常分类"></a>1.1 异常分类</h3><p>在Java中，异常对象都是派生于<code>Throwable</code>类的一个实例。在下一层分解为两个分支，<code>Error</code>和<code>Exception</code>。<br><code>Error</code>描述了Java运行时系统的内部错误和资源耗尽错误<br><code>Exception</code>又分解为两个分支<br>由编程错误导致的<code>RuntimeException</code>，比如错误的强制类型转换，数组访问越界等<br>由<code>I/O</code>错误导致的其他异常<code>IOException</code>，比如试图打开一个不存在的文件等<br>如下图所示是异常层次结构的一个示意图</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200912-02.png" alt=""></p>
-<p><strong>Tip</strong></p>
-<ul>
-<li>如果出现<code>RuntimeException</code>，那么一定是你的问题</li>
-<li>Java将派生于<code>Error</code>类或<code>RuntimeException</code>类的所有异常称为<strong>非检查型</strong>(<em>unchecked</em>)，所有其他异常称为<strong>检查型</strong>(<em>checked</em>)</li>
-</ul>
-<h3 id="1-2-如何抛出异常"><a href="#1-2-如何抛出异常" class="headerlink" title="1.2 如何抛出异常"></a>1.2 如何抛出异常</h3><p>假设我们正在读取一个文件，预期读取1024个字符，但是在读到500个字符的时候文件就结束了，出现了问题，我们希望抛出一个<code>EOFException</code>，即输入过程中意外遇到了EOF。</p>
-<pre><code class="hljs java"><span class="hljs-function">String <span class="hljs-title">readData</span><span class="hljs-params">(Scanner in)</span> <span class="hljs-keyword">throws</span> EOFException </span>&#123;
-    <span class="hljs-comment">// blablabla</span>
-    <span class="hljs-keyword">if</span> (!in.hasNext()) &#123;
-        <span class="hljs-keyword">if</span> (n &lt; len) &#123;
-            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> EOFException();
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="1-3-创建异常类"><a href="#1-3-创建异常类" class="headerlink" title="1.3 创建异常类"></a>1.3 创建异常类</h3><p>如果我们遇到了标准异常类无法描述清楚的问题，可以自己创建异常类。我们可以定义一个派生于<code>Exception</code>的类，或者某个<code>Exception</code>的子类，比如<code>IOException</code>。</p>
-<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileFormatException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">IOException</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FileFormatException</span><span class="hljs-params">()</span> </span>&#123;&#125;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FileFormatException</span><span class="hljs-params">(String gripe)</span> </span>&#123;
-        <span class="hljs-keyword">super</span>(gripe);
-    &#125;
-&#125;</code></pre>
-<h2 id="2-捕获异常"><a href="#2-捕获异常" class="headerlink" title="2. 捕获异常"></a>2. 捕获异常</h2><p>要想捕获一个异常，需要设置<code>try/catch</code>块。</p>
-<pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;
-    <span class="hljs-comment">// blablabla</span>
-&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
-    <span class="hljs-comment">// blablabla</span>
-&#125;</code></pre>
-<p>如果<code>try</code>语句块中的代码抛出了<code>catch</code>子句中指定的一个类，那么程序将跳过<code>try</code>语句块中的其余代码，并执行<code>catch</code>语句块中的代码。如果<code>try</code>中的代码没有异常，那么程序就会跳过<code>catch</code>语句。</p>
-<h3 id="2-1-finally子句"><a href="#2-1-finally子句" class="headerlink" title="2.1 finally子句"></a>2.1 finally子句</h3><p>代码抛出一个异常时，就会停止处理这个方法中的剩余代码，但是如果这个方法中存在一些资源需要被清理，就会产生问题。<br><code>finally</code>子句不管异常有没有被捕获，都会执行。比如下面的例子，所有情况下都会程序都会关闭输入流。</p>
-<pre><code class="hljs java">FileInputStream in = <span class="hljs-keyword">new</span> FileInputStream();
-<span class="hljs-keyword">try</span> &#123;
-    <span class="hljs-comment">// blablabla</span>
-&#125;
-<span class="hljs-keyword">catch</span> (IOException e) &#123;
-    <span class="hljs-comment">// blablabla</span>
-&#125;
-<span class="hljs-keyword">finally</span> &#123;
-    in.close();
-&#125;</code></pre>
-<h3 id="2-2-try-with-resources语句"><a href="#2-2-try-with-resources语句" class="headerlink" title="2.2 try-with-resources语句"></a>2.2 try-with-resources语句</h3><p>对于文件操作IO流、数据库连接等开销非常昂贵的资源，用完之后必须及时通过close方法将其关闭，否则资源会一直处于打开状态，可能会导致内存泄露等问题。关闭资源的常用方式就是在finally块里是释放，即调用close方法。就像我们在2.1节中的例子一样，但是从java7开始，我们可以使用一种更好的方法<code>try-with-resources</code>语句来实现。它的形式如下</p>
-<pre><code class="hljs java"><span class="hljs-keyword">try</span> (Resources res = ...) &#123;
-    <span class="hljs-comment">// blablabla</span>
-&#125;</code></pre>
-<p>我们来看一个具体的例子，读取一个文件中的所有单词。</p>
-<pre><code class="hljs java"><span class="hljs-keyword">try</span> (Scanner in = <span class="hljs-keyword">new</span> Scanner(
-    <span class="hljs-keyword">new</span> FileInputStream(<span class="hljs-string">&quot;/usr/share/dict/words&quot;</span>), StandardCharsets.UTF_8)) &#123;
-    <span class="hljs-keyword">while</span> (in.hasNext()) &#123;
-        System.out.println(in.next());
-    &#125;
-&#125;</code></pre>
-<h2 id="3-使用断言"><a href="#3-使用断言" class="headerlink" title="3. 使用断言"></a>3. 使用断言</h2><p>断言机制允许在测试期间向代码中插入一些检查，而在生产代码中会自动删除这些检查。断言的关键字是<code>assert</code>。有以下两种形式</p>
-<pre><code class="hljs java"><span class="hljs-keyword">assert</span> condition;
-<span class="hljs-keyword">assert</span> condition : expression;</code></pre>
-<p>这两种形式都会计算条件，如果结果为<code>false</code>，抛出<code>AssertionError</code>异常。<br>在第二个语句中，表达式将传入<code>AssertionError</code>对象的构造器，并转换成一个消息字符串。</p>
-<p>默认情况下，断言是禁用的，需要在运行程序时用<code>-ea</code>启用断言。</p>
-<p>参考：</p>
-<ol>
-<li>《Java核心技术 卷I》</li>
-<li><a target="_blank" rel="noopener" href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/try-with-resources">Java工程师成神之路</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>泛型程序设计</title>
-    <url>/posts/98735cb0.html</url>
-    <content><![CDATA[<h1 id="泛型程序设计"><a href="#泛型程序设计" class="headerlink" title="泛型程序设计"></a>泛型程序设计</h1><h2 id="1-为什么要使用泛型程序设计？"><a href="#1-为什么要使用泛型程序设计？" class="headerlink" title="1. 为什么要使用泛型程序设计？"></a>1. 为什么要使用泛型程序设计？</h2><p><strong>泛型程序设计</strong>(<em>generic programming</em>)意味着编写的代码可以对多种不同类型的对象重用。能够提高代码的复用性，比如<code>ArrayList</code>就可以收集任何类的对象，比如<code>String</code>，<code>Integer</code>等，而不用为这些对象去编写不同的类。</p>
-<h3 id="1-1-类型参数"><a href="#1-1-类型参数" class="headerlink" title="1.1 类型参数"></a>1.1 类型参数</h3><p>泛型允许在定义类和接口的时候使用<strong>类型参数</strong>(<em>type parameter</em>)，声明的类型参数在使用时使用具体的类来替换，比如下面这个例子</p>
-<pre><code class="hljs java">List&lt;String&gt; files = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</code></pre>
-<p>可以很明显的看出数组中包含的是<code>String</code>对象，类型参数使得程序更易读，也更安全。</p>
-<h2 id="2-定义简单泛型类"><a href="#2-定义简单泛型类" class="headerlink" title="2. 定义简单泛型类"></a>2. 定义简单泛型类</h2><p><strong>泛型类</strong>(<em>generic class</em>)就是有一个或多个类型变量的类。下面定义了一个简单的泛型类<code>Pair</code></p>
-<p><code>Pair</code>类引入了一个类型变量<code>T</code>，用于指定方法的返回类型，字段和局部变量的类型</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pair</span>&lt;<span class="hljs-title">T</span>&gt; </span>
-<span class="hljs-class"></span>&#123;
-   <span class="hljs-keyword">private</span> T first;
-   <span class="hljs-keyword">private</span> T second;
-
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Pair</span><span class="hljs-params">()</span> </span>&#123; first = <span class="hljs-keyword">null</span>; second = <span class="hljs-keyword">null</span>; &#125;
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Pair</span><span class="hljs-params">(T first, T second)</span> </span>&#123; <span class="hljs-keyword">this</span>.first = first;  <span class="hljs-keyword">this</span>.second = second; &#125;
-
-   <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getFirst</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-keyword">return</span> first; &#125;
-   <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getSecond</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-keyword">return</span> second; &#125;
-
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setFirst</span><span class="hljs-params">(T newValue)</span> </span>&#123; first = newValue; &#125;
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setSecond</span><span class="hljs-params">(T newValue)</span> </span>&#123; second = newValue; &#125;
-&#125;</code></pre>
-<h2 id="3-泛型方法与类型变量的限定"><a href="#3-泛型方法与类型变量的限定" class="headerlink" title="3. 泛型方法与类型变量的限定"></a>3. 泛型方法与类型变量的限定</h2><p>我们再定义了泛型类之后，就可以设计带有类型参数的方法，比如我们想要寻找数组中元素的最大最小值，就可以这样定义</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span> </span>&#123;
-	<span class="hljs-comment">// blablabla</span>
-&#125;</code></pre>
-<p>但是这样的设计有一个问题，在方法内部对元素进行比较时，需要使用<code>compareTo</code>方法，这就要求类型<code>T</code>实现<code>Comparable</code>接口，所以需要对其进行<strong>限定</strong>(<em>bound</em>)</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&gt; <span class="hljs-function">T <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span> </span>&#123;
-  <span class="hljs-comment">// blablabla</span>
-&#125;</code></pre>
-<p>之所以使用<code>extends</code>而不是使用<code>implements</code>是因为<code>T</code>是限定类型的子类型，而继承关系更接近于这种概念，一个类型变量也可以有多个限定</p>
-<pre><code class="hljs java">T extends Comparable &amp; Serializable</code></pre>
-<p>下面使用我们定义的泛型类实现了一个寻找数组元素最大和最小值的方法。</p>
-<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.time.*;
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PairTest2</span></span>
-<span class="hljs-class"></span>&#123;
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>
-<span class="hljs-function">   </span>&#123;
-      LocalDate[] birthdays = 
-         &#123; 
-            LocalDate.of(<span class="hljs-number">1906</span>, <span class="hljs-number">12</span>, <span class="hljs-number">9</span>), <span class="hljs-comment">// G. Hopper</span>
-            LocalDate.of(<span class="hljs-number">1815</span>, <span class="hljs-number">12</span>, <span class="hljs-number">10</span>), <span class="hljs-comment">// A. Lovelace</span>
-            LocalDate.of(<span class="hljs-number">1903</span>, <span class="hljs-number">12</span>, <span class="hljs-number">3</span>), <span class="hljs-comment">// J. von Neumann</span>
-            LocalDate.of(<span class="hljs-number">1910</span>, <span class="hljs-number">6</span>, <span class="hljs-number">22</span>), <span class="hljs-comment">// K. Zuse</span>
-         &#125;;
-      Pair&lt;LocalDate&gt; mm = ArrayAlg.minmax(birthdays);
-      System.out.println(<span class="hljs-string">&quot;min = &quot;</span> + mm.getFirst());
-      System.out.println(<span class="hljs-string">&quot;max = &quot;</span> + mm.getSecond());
-   &#125;
-&#125;
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArrayAlg</span></span>
-<span class="hljs-class"></span>&#123;
-   <span class="hljs-comment">/**</span>
-<span class="hljs-comment">      Gets the minimum and maximum of an array of objects of type T.</span>
-<span class="hljs-comment">      <span class="hljs-doctag">@param</span> a an array of objects of type T</span>
-<span class="hljs-comment">      <span class="hljs-doctag">@return</span> a pair with the min and max values, or null if a is null or empty</span>
-<span class="hljs-comment">   */</span>
-   <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&gt; <span class="hljs-function">Pair&lt;T&gt; <span class="hljs-title">minmax</span><span class="hljs-params">(T[] a)</span> </span>
-<span class="hljs-function">   </span>&#123;
-      <span class="hljs-keyword">if</span> (a == <span class="hljs-keyword">null</span> || a.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
-      T min = a[<span class="hljs-number">0</span>];
-      T max = a[<span class="hljs-number">0</span>];
-      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; a.length; i++)
-      &#123;
-         <span class="hljs-keyword">if</span> (min.compareTo(a[i]) &gt; <span class="hljs-number">0</span>) min = a[i];
-         <span class="hljs-keyword">if</span> (max.compareTo(a[i]) &lt; <span class="hljs-number">0</span>) max = a[i];
-      &#125;
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Pair&lt;&gt;(min, max);
-   &#125;
-&#125;</code></pre>
-<h2 id="4-泛型代码和虚拟机"><a href="#4-泛型代码和虚拟机" class="headerlink" title="4. 泛型代码和虚拟机"></a>4. 泛型代码和虚拟机</h2><p>虚拟机没有泛型类型对象，所有对象都属于普通类。</p>
-<h3 id="4-1-类型擦除"><a href="#4-1-类型擦除" class="headerlink" title="4.1 类型擦除"></a>4.1 类型擦除</h3><p>无论何时定义一个泛型类型，都会自动提供一个相应的<strong>原始类型</strong>(<em>raw type</em>)，这个原始类型的名字就是去掉类型参数后的泛型类型名。同时，类型变量会被<strong>擦除</strong>(<em>erased</em>)，并替换为其限定类型。</p>
-<blockquote>
-<p>类型擦除指的是通过类型参数合并，将泛型类型实例关联到同一份字节码上。编译器只为泛型类型生成一份字节码，并将其实例关联到这份字节码上。类型擦除的关键在于从泛型类型中清除类型参数的相关信息，并且再必要的时候添加类型检查和类型转换的方法。 类型擦除可以简单的理解为将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码。 类型擦除的主要过程如下： 1.将所有的泛型参数用其最左边界（最顶级的父类型）类型替换  2.移除所有的类型参数。</p>
-</blockquote>
-<p>比如3中的例子，原始类型就会变成下面的样子</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pair</span> </span>&#123;
-  <span class="hljs-keyword">private</span> Object first;
-  <span class="hljs-keyword">private</span> Object second;
-&#125;</code></pre>
-<p>由于<code>T</code>是一个无限定的变量，所以直接用<code>Object</code>替换。</p>
-<h3 id="4-2-转换泛型表达式"><a href="#4-2-转换泛型表达式" class="headerlink" title="4.2 转换泛型表达式"></a>4.2 转换泛型表达式</h3><p>调用一个泛型方法时，如果擦除了返回类型，编译器会插入强制类型转换</p>
-<pre><code class="hljs java">Pair&lt;Employee&gt; buddies = ...;
-Employee buddy = buddies.getFirst();</code></pre>
-<p><code>getFirst</code>方法擦除类型后的返回类型是<code>Object</code>，编译器自动插入转换到<code>Employee</code>的强制类型转换。</p>
-<h3 id="4-3-转换泛型方法"><a href="#4-3-转换泛型方法" class="headerlink" title="4.3 转换泛型方法"></a>4.3 转换泛型方法</h3><p>类型擦除还会出现在泛型方法中，比如</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&gt; <span class="hljs-function">T <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span></span></code></pre>
-<p>在擦除类型之后，就会变成</p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Comparable <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span></span></code></pre>
-<h2 id="5-限制与局限性"><a href="#5-限制与局限性" class="headerlink" title="5. 限制与局限性"></a>5. 限制与局限性</h2><h3 id="5-1-泛型遇到重载"><a href="#5-1-泛型遇到重载" class="headerlink" title="5.1 泛型遇到重载"></a>5.1 泛型遇到重载</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> </span>&#123;
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span><span class="hljs-params">(List&lt;Integer&gt; list)</span> </span>&#123;
-    
-  &#125;
-  
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span><span class="hljs-params">(List&lt;String&gt; list)</span></span>
-<span class="hljs-function">&#125;</span></code></pre>
-<p>上述代码编译器会报错，提示两个方法冲突，因为它们被擦除之后都变为<code>List</code></p>
-<h3 id="5-2-泛型类中静态变量无效"><a href="#5-2-泛型类中静态变量无效" class="headerlink" title="5.2 泛型类中静态变量无效"></a>5.2 泛型类中静态变量无效</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;
-  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> T singleInstance;
-  
-  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> 
-&#125;</code></pre>
-<p>静态变量被泛型类的所有实例对象所共享。</p>
-<h3 id="5-3-不能抛出或捕获泛型类的实例"><a href="#5-3-不能抛出或捕获泛型类的实例" class="headerlink" title="5.3 不能抛出或捕获泛型类的实例"></a>5.3 不能抛出或捕获泛型类的实例</h3><p>既不能抛出也不能捕获泛型类的对象，泛型类扩展<code>Throwable</code>不合法。</p>
-<h2 id="6-泛型类的继承规则"><a href="#6-泛型类的继承规则" class="headerlink" title="6. 泛型类的继承规则"></a>6. 泛型类的继承规则</h2><p>考虑一个父类和子类，比如<code>Employee</code>和<code>Manager</code>，需要注意的是，<code>Pair&lt;Manager&gt;</code><strong>不是</strong><code>Pair&lt;Employee&gt;</code>的子类。</p>
-<p>也就是说，无论<code>S</code>和<code>T</code>又怎样的关系，<code>Pair&lt;T&gt;</code>和<code>Pair&lt;S&gt;</code><strong>没有任何关系</strong>，这对于类型安全非常重要。</p>
-<p>参考：</p>
-<ol>
-<li>《Java核心技术 卷I》</li>
-<li><a target="_blank" rel="noopener" href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/generics">Java成神之路</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
+        <tag>数据库</tag>
+        <tag>Neo4j</tag>
       </tags>
   </entry>
   <entry>
@@ -2193,89 +2436,6 @@ move disk 1 from A to C</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>简单工厂模式</title>
-    <url>/posts/6b3bea20.html</url>
-    <content><![CDATA[<h1 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h1><p>当我们需要实例化一些具体的类时，可能会写出如下的代码</p>
-<pre><code class="hljs java"><span class="hljs-keyword">if</span> (cash) &#123;
-  <span class="hljs-comment">// 现金支付处理</span>
-&#125;
-<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (creditcard) &#123;
-  <span class="hljs-comment">// 信用卡支付</span>
-&#125;
-<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (alipay) &#123;
-  <span class="hljs-comment">// 支付宝支付</span>
-&#125;</code></pre>
-<p>一旦需要进行变化或扩展，比如增加微信支付或者修改已有支付的逻辑，就需要修改原有的代码，更容易产生错误，也增加了维护的难度。我们的代码应该<strong>对扩展开放，对修改关闭</strong>（开闭原则）。所以，我们应该考虑在使用这些具体的类时，只需要知道一个参数，并提供一个调用方便的方法，将该参数传入方法返回一个相应的对象。我们可以使用<strong>简单工厂模式</strong>。</p>
-<p>本质上，就是找出会变化的方面，把它们从不变的部分分离出来。</p>
-<h2 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h2><p>又称为静态工厂方法。属于类创建型模式。在简单工厂模式中，可以根据参数的不同返回不同类的实例，简单工厂模式专门定义一个类来负责创建其他类的实例，被创建的实例通常都具有共同的父类。</p>
-<h2 id="1-2-模式结构"><a href="#1-2-模式结构" class="headerlink" title="1.2 模式结构"></a>1.2 模式结构</h2><p><strong>Factory</strong>：工厂角色</p>
-<p><strong>Product</strong>：抽象产品角色</p>
-<p><strong>ConcreteProduct</strong>：具体产品角色</p>
-<h2 id="1-3-代码实例"><a href="#1-3-代码实例" class="headerlink" title="1.3 代码实例"></a>1.3 代码实例</h2><p>我们将开头的支付逻辑代码使用简单工厂模式进行修改。</p>
-<pre><code class="hljs java"><span class="hljs-comment">// 抽象支付类</span>
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractPay</span> </span>&#123;
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pay</span><span class="hljs-params">()</span></span>;
-&#125;
-
-<span class="hljs-comment">// 具体支付类</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CashPay</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractPay</span> </span>&#123;
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pay</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-comment">// 现金支付处理</span>
-  &#125;
-&#125;
-
-<span class="hljs-comment">// 支付工厂</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PayMethodFactory</span> </span>&#123;
-  <span class="hljs-function"><span class="hljs-keyword">public</span> class Abstarct <span class="hljs-title">getPayMethod</span><span class="hljs-params">(String type)</span> </span>&#123;
-    <span class="hljs-keyword">if</span> (cash) &#123;
-			<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> CashPay(); <span class="hljs-comment">// 根据参数创建具体产品</span>
-    &#125;
-    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (creditcard) &#123;
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Creditcard();
-    &#125;
-    ......
-  &#125;
-&#125;</code></pre>
-<h2 id="1-4-模式分析"><a href="#1-4-模式分析" class="headerlink" title="1.4 模式分析"></a>1.4 模式分析</h2><h3 id="1-4-1-优缺点"><a href="#1-4-1-优缺点" class="headerlink" title="1.4.1 优缺点"></a>1.4.1 优缺点</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>将对象的<strong>创建</strong>和对象本身的<strong>业务处理</strong>分离可以降低系统的耦合度（责任的分割）</td>
-<td>工厂职责过重，集中了所有创建逻辑，出问题会影响整个系统</td>
-</tr>
-<tr>
-<td>客户端无需知道所创建的产品类的类名，只需要知道其所对应的参数</td>
-<td>更多的类，增加了系统的复杂度，（降低耦合的代价，难以两全其美）</td>
-</tr>
-<tr>
-<td>使用静态方法，可以通过引入配置文件，在不修改代码的情况下增加新的具体产品类，提高了灵活性</td>
-<td>系统扩展困难，一旦添加新产品就要更改工厂逻辑，使得逻辑越来越复杂，<br/>由于使用静态方法，不能通过继承来改变创建方法的行为。</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="1-4-2-适用环境"><a href="#1-4-2-适用环境" class="headerlink" title="1.4.2 适用环境"></a>1.4.2 适用环境</h3><ol>
-<li>工厂类负责创建的对象比较少，工厂逻辑不复杂</li>
-<li>客户端只知道传入工厂类的参数，对于如何创建对象不关心</li>
-</ol>
-<h3 id="1-4-3-不足"><a href="#1-4-3-不足" class="headerlink" title="1.4.3 不足"></a>1.4.3 不足</h3><p>前面提到的开闭原则，我们的代码应该<strong>对扩展开放，对修改关闭</strong>，但是如果要添加新的产品到系统中，必须修改工厂类，加入必要的处理逻辑，这其实还是违背了“开闭原则”。而且工厂类的职责重，业务逻辑复杂，影响了系统的灵活性和扩展性。要想解决这个问题，就需要使用工厂模式。</p>
-<h2 id="1-5-模式应用"><a href="#1-5-模式应用" class="headerlink" title="1.5 模式应用"></a>1.5 模式应用</h2><p>在实际的项目中的使用</p>
-<p>待补充</p>
-]]></content>
-      <categories>
-        <category>设计模式</category>
-      </categories>
-      <tags>
-        <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>策略模式</title>
     <url>/posts/72e3b671.html</url>
     <content><![CDATA[<h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><blockquote>
@@ -2405,6 +2565,89 @@ move disk 1 from A to C</code></pre>
       </categories>
       <tags>
         <tag>策略模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简单工厂模式</title>
+    <url>/posts/6b3bea20.html</url>
+    <content><![CDATA[<h1 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h1><p>当我们需要实例化一些具体的类时，可能会写出如下的代码</p>
+<pre><code class="hljs java"><span class="hljs-keyword">if</span> (cash) &#123;
+  <span class="hljs-comment">// 现金支付处理</span>
+&#125;
+<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (creditcard) &#123;
+  <span class="hljs-comment">// 信用卡支付</span>
+&#125;
+<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (alipay) &#123;
+  <span class="hljs-comment">// 支付宝支付</span>
+&#125;</code></pre>
+<p>一旦需要进行变化或扩展，比如增加微信支付或者修改已有支付的逻辑，就需要修改原有的代码，更容易产生错误，也增加了维护的难度。我们的代码应该<strong>对扩展开放，对修改关闭</strong>（开闭原则）。所以，我们应该考虑在使用这些具体的类时，只需要知道一个参数，并提供一个调用方便的方法，将该参数传入方法返回一个相应的对象。我们可以使用<strong>简单工厂模式</strong>。</p>
+<p>本质上，就是找出会变化的方面，把它们从不变的部分分离出来。</p>
+<h2 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h2><p>又称为静态工厂方法。属于类创建型模式。在简单工厂模式中，可以根据参数的不同返回不同类的实例，简单工厂模式专门定义一个类来负责创建其他类的实例，被创建的实例通常都具有共同的父类。</p>
+<h2 id="1-2-模式结构"><a href="#1-2-模式结构" class="headerlink" title="1.2 模式结构"></a>1.2 模式结构</h2><p><strong>Factory</strong>：工厂角色</p>
+<p><strong>Product</strong>：抽象产品角色</p>
+<p><strong>ConcreteProduct</strong>：具体产品角色</p>
+<h2 id="1-3-代码实例"><a href="#1-3-代码实例" class="headerlink" title="1.3 代码实例"></a>1.3 代码实例</h2><p>我们将开头的支付逻辑代码使用简单工厂模式进行修改。</p>
+<pre><code class="hljs java"><span class="hljs-comment">// 抽象支付类</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractPay</span> </span>&#123;
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pay</span><span class="hljs-params">()</span></span>;
+&#125;
+
+<span class="hljs-comment">// 具体支付类</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CashPay</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractPay</span> </span>&#123;
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pay</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">// 现金支付处理</span>
+  &#125;
+&#125;
+
+<span class="hljs-comment">// 支付工厂</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PayMethodFactory</span> </span>&#123;
+  <span class="hljs-function"><span class="hljs-keyword">public</span> class Abstarct <span class="hljs-title">getPayMethod</span><span class="hljs-params">(String type)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (cash) &#123;
+			<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> CashPay(); <span class="hljs-comment">// 根据参数创建具体产品</span>
+    &#125;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (creditcard) &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Creditcard();
+    &#125;
+    ......
+  &#125;
+&#125;</code></pre>
+<h2 id="1-4-模式分析"><a href="#1-4-模式分析" class="headerlink" title="1.4 模式分析"></a>1.4 模式分析</h2><h3 id="1-4-1-优缺点"><a href="#1-4-1-优缺点" class="headerlink" title="1.4.1 优缺点"></a>1.4.1 优缺点</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>将对象的<strong>创建</strong>和对象本身的<strong>业务处理</strong>分离可以降低系统的耦合度（责任的分割）</td>
+<td>工厂职责过重，集中了所有创建逻辑，出问题会影响整个系统</td>
+</tr>
+<tr>
+<td>客户端无需知道所创建的产品类的类名，只需要知道其所对应的参数</td>
+<td>更多的类，增加了系统的复杂度，（降低耦合的代价，难以两全其美）</td>
+</tr>
+<tr>
+<td>使用静态方法，可以通过引入配置文件，在不修改代码的情况下增加新的具体产品类，提高了灵活性</td>
+<td>系统扩展困难，一旦添加新产品就要更改工厂逻辑，使得逻辑越来越复杂，<br/>由于使用静态方法，不能通过继承来改变创建方法的行为。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="1-4-2-适用环境"><a href="#1-4-2-适用环境" class="headerlink" title="1.4.2 适用环境"></a>1.4.2 适用环境</h3><ol>
+<li>工厂类负责创建的对象比较少，工厂逻辑不复杂</li>
+<li>客户端只知道传入工厂类的参数，对于如何创建对象不关心</li>
+</ol>
+<h3 id="1-4-3-不足"><a href="#1-4-3-不足" class="headerlink" title="1.4.3 不足"></a>1.4.3 不足</h3><p>前面提到的开闭原则，我们的代码应该<strong>对扩展开放，对修改关闭</strong>，但是如果要添加新的产品到系统中，必须修改工厂类，加入必要的处理逻辑，这其实还是违背了“开闭原则”。而且工厂类的职责重，业务逻辑复杂，影响了系统的灵活性和扩展性。要想解决这个问题，就需要使用工厂模式。</p>
+<h2 id="1-5-模式应用"><a href="#1-5-模式应用" class="headerlink" title="1.5 模式应用"></a>1.5 模式应用</h2><p>在实际的项目中的使用</p>
+<p>待补充</p>
+]]></content>
+      <categories>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
       </tags>
   </entry>
   <entry>
@@ -2874,249 +3117,6 @@ move disk 1 from A to C</code></pre>
       </categories>
       <tags>
         <tag>商业模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Neo4j_CQL语法简介</title>
-    <url>/posts/55958cb4.html</url>
-    <content><![CDATA[<h1 id="Neo4j-CQL语法简介"><a href="#Neo4j-CQL语法简介" class="headerlink" title="Neo4j CQL语法简介"></a>Neo4j CQL语法简介</h1><p>注：本文中的示例来自于Neo4j的<code>Example Graphs</code>中的<code>Movies</code></p>
-<h2 id="1-MATCH-amp-RETURN"><a href="#1-MATCH-amp-RETURN" class="headerlink" title="1. MATCH &amp; RETURN"></a>1. MATCH &amp; RETURN</h2><pre><code class="hljs CQL">MATCH (p:Person) RETURN p LIMIT 10</code></pre>
-<p><code>match</code>查询节点，关系，标签，属性等。类似于SQL中的<code>SELECT</code></p>
-<p>匹配10个<code>Person</code>并返回，注意如果需要使用<code>RETURN</code>就需要一个像<code>p</code>这样的变量来存储返回内容</p>
-<pre><code class="hljs CQL">MATCH (p:Person &#123;name: &quot;Al Pacino&quot;&#125;) RETURN p</code></pre>
-<p>查询姓名为<code>Al Pacino</code>的<code>Person</code>节点并返回</p>
-<pre><code class="hljs CQL">MATCH (:Person &#123;name: &#39;Tom Hanks&#39;&#125;)-[:DIRECTED]-&gt;(movie:Movie)
-RETURN movie.title</code></pre>
-<p>查询Tom Hanks导演的电影，并返回电影的标题</p>
-<pre><code class="hljs CQL">MATCH (tom:Person &#123;name:&#39;Tom Hanks&#39;&#125;)-[rel:DIRECTED]-(movie:Movie)
-RETURN tom.name AS name</code></pre>
-<p>使用<code>AS</code>关键字设置别名</p>
-<h2 id="2-CREATE"><a href="#2-CREATE" class="headerlink" title="2. CREATE"></a>2. CREATE</h2><pre><code class="hljs CQL">CREATE (friend:Person &#123;name: &#39;Mark&#39;, born: 36&#125;)
-RETURN friend</code></pre>
-<p>创建一个<code>Person</code>界面，设置两个属性的值，返回创建的节点（这一步不是必须的，但在实际开发中可以作为测试）</p>
-<pre><code class="hljs CQL">MATCH (jennifer:Person &#123;name: &#39;jennifer&#39;&#125;)
-MATCH (mark:Person &#123;name: &#39;Mark&#39;&#125;)
-CREATE (jennifer)-[rel:IS_FRIENDS_WITH]-&gt;(mark)</code></pre>
-<p><strong>注意</strong>：<code>CREATE</code>不会判断节点在数据库中是否已经存在，为了避免重复插入，这里先使用<code>MATCH</code>查询节点是否已经存在，再在两者间建立关系</p>
-<p>但是如果节点不存在，就不会执行？？？</p>
-<h2 id="3-UPDATE"><a href="#3-UPDATE" class="headerlink" title="3. UPDATE"></a>3. UPDATE</h2><pre><code class="hljs CQL">MATCH (p:Person &#123;name: &#39;Keanu Reeves&#39;&#125;) set p.born &#x3D; 1962 RETURN p</code></pre>
-<p>使用<code>set</code>关键字执行更新操作</p>
-<ol>
-<li>使用<code>MATCH</code>查找节点</li>
-<li>使用<code>set</code>设置节点的属性值</li>
-<li>返回节点确保更新正确</li>
-</ol>
-<pre><code class="hljs CQL">MATCH (:Person &#123;name: &#39;Keanu Reeves&#39;&#125;)-[rel:ACTED_IN]-&gt;(:Movie &#123;title: &#39;Something\&#39;s Gotta Give&#39;&#125;) 
-set rel.roles &#x3D; &#39;阿巴阿巴&#39; 
-RETURN rel</code></pre>
-<p>也可以更新关系的属性，比如这里更新了演员在某部电影中饰演的角色</p>
-<h2 id="4-DELETE-amp-REMOVE"><a href="#4-DELETE-amp-REMOVE" class="headerlink" title="4. DELETE &amp; REMOVE"></a>4. DELETE &amp; REMOVE</h2><p>由于Neo4j数据库具备原子性，一致性，隔离性和持久性，所以无法在一个节点仍然有关系的情况下删除它。</p>
-<h3 id="4-1-删除关系"><a href="#4-1-删除关系" class="headerlink" title="4.1 删除关系"></a>4.1 删除关系</h3><pre><code class="hljs CQL">MATCH (j:Person &#123;name: &#39;Jennifer&#39;&#125;)-[r:IS_FRIENDS_WITH]-&gt;(m:Person &#123;name: &#39;Mark&#39;&#125;)
-DELETE r</code></pre>
-<p>要想删除一个关系，需要找到关系的起始节点和关系的终止节点，然后使用<code>`DELETE</code>关键字删除节点之间的关系</p>
-<h3 id="4-2-删除节点"><a href="#4-2-删除节点" class="headerlink" title="4.2 删除节点"></a>4.2 删除节点</h3><pre><code class="hljs CQL">MATCH (m:Person &#123;name: &#39;Mark&#39;&#125;)
-DELETE m</code></pre>
-<p>如果一个节点没有任何的关系，那么可以直接删除它。</p>
-<h3 id="4-3-同时删除节点和关系"><a href="#4-3-同时删除节点和关系" class="headerlink" title="4.3 同时删除节点和关系"></a>4.3 同时删除节点和关系</h3><pre><code class="hljs CQL">MATCH (m:Person &#123;name: &#39;Mark&#39;&#125;)
-DETACH DELETE m</code></pre>
-<p><code>DETACH DELETE</code>可以删除节点的所有关系，同时删除节点。</p>
-<h3 id="4-4-删除属性"><a href="#4-4-删除属性" class="headerlink" title="4.4 删除属性"></a>4.4 删除属性</h3><pre><code class="hljs CQL">MATCH (n:Person &#123;name: &#39;Jennifer&#39;&#125;)
-REMOVE n.birthdate</code></pre>
-<p>第一种删除属性的方式是<code>REMOVE</code>关键字</p>
-<pre><code class="hljs CQL">MATCH (n:Person &#123;name: &#39;Jennifer&#39;&#125;)
-SET n.birthdate &#x3D; null</code></pre>
-<p>第二种删除属性的方式是使用<code>set</code>关键字将属性的值设为<code>null</code>。因为neo4j数据库不会存储<code>null</code>值，所以它也会被删除。</p>
-<h2 id="5-Merge"><a href="#5-Merge" class="headerlink" title="5. Merge"></a>5. Merge</h2><p>在第二部分里面提到的重复插入问题，可以通过关键字<code>merge</code>来解决。</p>
-<h3 id="5-1-节点"><a href="#5-1-节点" class="headerlink" title="5.1 节点"></a>5.1 节点</h3><pre><code class="hljs CQL">MERGE (mark:Person &#123;name: &#39;Mark&#39;, born: 1999&#125;)
-RETURN mark</code></pre>
-<p>可以使用<code>merge</code>关键字来避免重复插入节点，它会事先检查节点是否已经存在在数据库中，执行的是<code>select-or-insert</code>的操作。</p>
-<h3 id="5-2-关系"><a href="#5-2-关系" class="headerlink" title="5.2 关系"></a>5.2 关系</h3><pre><code class="hljs cypher">MATCH (j:Person &#123;name: &#39;Jennifer&#39;&#125;)
-MATCH (m:Person &#123;name: &#39;Mark&#39;&#125;)
-MERGE (j)-[r:IS_FRIENDS_WITH]-&gt;(m)
-RETURN j, r, m</code></pre>
-<p>这里首先通过<code>MATCH</code>检查是否存在我们要建立关系的两个节点，如果存在，再在两者之间建立关系。</p>
-<p><strong>注意：</strong><code>Merge</code>会检查我们要建立的模式在数据库中已经存在，如果不存在，那么它会将模式完整地建立，包括节点和关系。使用下面的语句，如果节点已经存在，那么就会造成重复插入的问题。所以一定要先<strong>用<code>MATCH</code>匹配节点是否已经存在</strong></p>
-<pre><code class="hljs cypher">&#x2F;&#x2F;this statement will create duplicate nodes for Mark and Jennifer
-MERGE (j:Person &#123;name: &#39;Jennifer&#39;&#125;)-[r:IS_FRIENDS_WITH]-&gt;(m:Person &#123;name: &#39;Mark&#39;&#125;)
-RETURN j, r, m</code></pre>
-<pre><code class="hljs cypher">MERGE (m:Person &#123;name: &#39;Mark&#39;&#125;)-[r:IS_FRIENDS_WITH]-(j:Person &#123;name:&#39;Jennifer&#39;&#125;)
-  ON MATCH SET r.updated &#x3D; date()
-RETURN m, r, j</code></pre>
-<p>如果想要不重复创建节点，并且更新匹配到的节点属性，可以使用<code>ON MATCH SET</code>的方式</p>
-<p>官方文档上的<code>ON CTRATE SET</code>似乎没有作用，而<code>ON MATCH SET</code>就可以起到创建和更新的作用</p>
-<h2 id="6-WHERE"><a href="#6-WHERE" class="headerlink" title="6. WHERE"></a>6. WHERE</h2><p>与SQL查询类似，CQL也可以使用where进行范围的限定，在全键值等值查询时，效果与前面的例子一样。但对于熟悉SQL语法的人来说可能这种方式更容易上手。</p>
-<pre><code class="hljs cypher">&#x2F;&#x2F;query using equality check in the MATCH clause
-MATCH (j:Person &#123;name: &#39;Jennifer&#39;&#125;)
-RETURN j
-
-&#x2F;&#x2F;query using equality check in the WHERE clause
-MATCH (j:Person)
-WHERE j.name &#x3D; &#39;Jennifer&#39;
-RETURN j</code></pre>
-<h3 id="6-1-否定属性"><a href="#6-1-否定属性" class="headerlink" title="6.1 否定属性"></a>6.1 否定属性</h3><p>使用<code>NOT</code> <code>AND</code> <code>OR</code> <code>XOR</code>等操作符</p>
-<pre><code class="hljs cypher">MATCH (j:Person)
-WHERE NOT j.name &#x3D; &#39;Jennifer&#39;
-RETURN j</code></pre>
-<h3 id="6-2-范围查询"><a href="#6-2-范围查询" class="headerlink" title="6.2 范围查询"></a>6.2 范围查询</h3><p>查询1960到1970年出生的人</p>
-<pre><code class="hljs cypher">MATCH (p:Person)
-WHERE 1960 &lt;&#x3D; p.born &lt;&#x3D; 1970
-RETURN p</code></pre>
-<h3 id="6-3-exists"><a href="#6-3-exists" class="headerlink" title="6.3 exists"></a>6.3 exists</h3><p>检查一个属性是否存在</p>
-<p><strong>注意</strong>：neo4j不会存储null值</p>
-<pre><code class="hljs cypher">&#x2F;&#x2F;Query1: find all users who have a birthdate property
-MATCH (p:Person)
-WHERE exists(p.birthdate)
-RETURN p.name</code></pre>
-<h3 id="6-4-模糊查询"><a href="#6-4-模糊查询" class="headerlink" title="6.4 模糊查询"></a>6.4 模糊查询</h3><p>对一个字符串，我们可能需要根据前缀，后缀或包含进行模糊查询。</p>
-<pre><code class="hljs cypher">&#x2F;&#x2F;check if a property starts with &#39;M&#39;
-MATCH (p:Person)
-WHERE p.name STARTS WITH &#39;Ma&#39;
-RETURN p.name
-
-&#x2F;&#x2F;check if a property contains &#39;a&#39;
-MATCH (p:Person)
-WHERE p.name CONTAINS &#39;a&#39;
-RETURN p.name
-
-&#x2F;&#x2F;check if a property ends with &#39;n&#39;
-MATCH (p:Person)
-WHERE p.name ENDS WITH &#39;n&#39;</code></pre>
-<p>当然，我们还可以使用正则表达式的形式。<code>~</code>表示使用正则表达式</p>
-<pre><code class="hljs cypher">MATCH (p:Person)
-WHERE p.name &#x3D;~ &#39;Jo.*&#39;
-RETURN p.name</code></pre>
-<h3 id="6-5-Filtering-on-Patterns"><a href="#6-5-Filtering-on-Patterns" class="headerlink" title="6.5 Filtering on Patterns"></a>6.5 Filtering on Patterns</h3><p>由于neo4j是图形数据库，它比其它数据库更注重于关系(relationships)。所以我们也可以通过关系来进行筛选。</p>
-<p>比如下面这个关系匹配同时担任一部电影的导演和编剧的人。</p>
-<pre><code class="hljs cypher">MATCH (p:Person)-[r:DIRECTED]-&gt;(m:Movie)
-WHERE exists((p)-[:WROTE]-&gt;(m))
-RETURN p</code></pre>
-<h3 id="6-6-Optional-Patterns"><a href="#6-6-Optional-Patterns" class="headerlink" title="6.6 Optional Patterns"></a>6.6 Optional Patterns</h3><p>类似于SQL的外连接。可选匹配。</p>
-<p>这个例子匹配以姓名以Jo开头并且担任过电影编剧的人，后面这个条件不是强制的。</p>
-<pre><code class="hljs cypher">MATCH (p:Person)
-WHERE p.name STARTS WITH &#39;Jo&#39;
-OPTIONAL MATCH (p) - [:WROTE] -&gt; (m:Movie)
-RETURN p.name, m.title</code></pre>
-<h2 id="7-Aggregation-in-Cypher"><a href="#7-Aggregation-in-Cypher" class="headerlink" title="7. Aggregation in Cypher"></a>7. Aggregation in Cypher</h2><h3 id="7-1-count"><a href="#7-1-count" class="headerlink" title="7.1 count"></a>7.1 count</h3><p>统计数量</p>
-<p>例1加上了属性值title，可以去掉null值，而使用*会统计所有电影节点。</p>
-<pre><code class="hljs cypher">MATCH (m:Movie)
-RETURN count(m.title)
-   
-MATCH (m:Movie)
-RETURN count(*)</code></pre>
-<h3 id="7-2-collect"><a href="#7-2-collect" class="headerlink" title="7.2 collect"></a>7.2 collect</h3><p>将值聚合成一个列表。可以使用collect基于一个起始节点或关系等组织一系列的值。</p>
-<p>下面这个例子展示了导演和他们执导的电影。如果不使用collect，那么导演和电影会一对一的呈现在表格中。但一个导演可能执导过多部电影，所以使用collect将电影节点聚合起来。</p>
-<pre><code class="hljs cypher">MATCH (p:Person) - [r:DIRECTED] -&gt; (m:Movie)
-RETURN p.name, collect(m.title) AS titles</code></pre>
-<h3 id="7-3-size"><a href="#7-3-size" class="headerlink" title="7.3 size"></a>7.3 size</h3><p>size的作用是统计列表中元素的个数或者统计一个表达式返回的内容大小。</p>
-<pre><code class="hljs cypher">&#x2F;&#x2F; 统计导演执导电影数量
-MATCH (p:Person) - [r:DIRECTED] -&gt; (m:Movie)
-RETURN p.name, collect(m.title) AS titles, size(collect(m.title)) AS count
-
-&#x2F;&#x2F; 统计导演同时还担任该电影的编剧的数量
-MATCH (p:Person) - [r:DIRECTED] -&gt; (m:Movie)
-RETURN p.name, size((p) - [:WROTE] -&gt; (m)) AS count</code></pre>
-<h3 id="7-4-WITH"><a href="#7-4-WITH" class="headerlink" title="7.4 WITH"></a>7.4 WITH</h3><p>使用<code>WITH</code>传递参数到下一个查询</p>
-<pre><code class="hljs cypher">&#x2F;&#x2F;find number of friends who have other friends
-MATCH (p:Person)-[:IS_FRIENDS_WITH]-&gt;(friend:Person)
-WITH p, collect(friend.name) AS friendsList, size((friend)-[:IS_FRIENDS_WITH]-(:Person)) AS numberOfFoFs
-WHERE numberOfFoFs &gt; 1
-RETURN p.name, friendsList, numberOfFoFs
-
-&#x2F;&#x2F;find people with 2-6 years of experience
-WITH 2 AS experienceMin, 6 AS experienceMax
-MATCH (p:Person)
-WHERE experienceMin &lt;&#x3D; p.yrsExperience &lt;&#x3D; experienceMax
-RETURN p</code></pre>
-<h3 id="7-5-UNWIND"><a href="#7-5-UNWIND" class="headerlink" title="7.5 UNWIND"></a>7.5 UNWIND</h3><p>将一个列表拆分成单独的值，与<code>collect()</code>的作用相反</p>
-<pre><code class="hljs cypher">&#x2F;&#x2F;Query10: for numbers in a list, find candidates who have that many years of experience
-WITH [4, 5, 6, 7] AS experienceRange
-UNWIND experienceRange AS number
-MATCH (p:Person)
-WHERE p.yearsExp &#x3D; number
-RETURN p.name, p.yearsExp</code></pre>
-<h3 id="7-6-ORDER-BY"><a href="#7-6-ORDER-BY" class="headerlink" title="7.6 ORDER BY"></a>7.6 ORDER BY</h3><p>排序，默认是升序的。</p>
-<p>如下的例子将出生在1960年到1965年的人按降序排序</p>
-<p>（如果对个值参与排序，那按照先后顺序排序）</p>
-<pre><code class="hljs cypher">MATCH (p:Person)
-WHERE 1960 &lt;&#x3D; p.born &lt;&#x3D; 1965
-RETURN p.name, p.born ORDER BY p.born DESC</code></pre>
-<h3 id="7-7-DISTINCT"><a href="#7-7-DISTINCT" class="headerlink" title="7.7 DISTINCT"></a>7.7 DISTINCT</h3><p>有点时候，一个查询可能会返回多个重复的结果。使用<code>DISTINCT</code>可以解决这个问题。</p>
-<p>下面这个例子查询导演过电影并且担任过电影编剧的人，有的人导演过多部电影，那么就会返回重复的名字，但使用了<code>DISTINCT</code>，就可以获得独特的结果。</p>
-<pre><code class="hljs cypher">MATCH (p:Person) - [:DIRECTED] -&gt; (m:Movie)
-MATCH (p) - [:WROTE] -&gt; (:Movie)
-RETURN DISTINCT p.name</code></pre>
-<h3 id="7-8-LIMIT"><a href="#7-8-LIMIT" class="headerlink" title="7.8 LIMIT"></a>7.8 LIMIT</h3><p>限制返回的个数</p>
-<pre><code class="hljs cypher">MATCH (p:Person) RETURN p LIMIT 10</code></pre>
-<h2 id="8-进阶"><a href="#8-进阶" class="headerlink" title="8. 进阶"></a>8. 进阶</h2><h3 id="8-1-APOC插件"><a href="#8-1-APOC插件" class="headerlink" title="8.1 APOC插件"></a>8.1 APOC插件</h3><h4 id="8-1-1-简介"><a href="#8-1-1-简介" class="headerlink" title="8.1.1 简介"></a>8.1.1 简介</h4><p> APOC是 Neo4j 3.3 版本推出时正式推荐的一个Java存储过程包，里面包含丰富的函数和过程，作为对Cypher所不能提供的复杂图算法和数据操作功能的补充，APOC还具有使用灵活、高性能等优势，是一个基于Neo4j的函数包插件。</p>
-<h4 id="8-1-2-安装"><a href="#8-1-2-安装" class="headerlink" title="8.1.2 安装"></a>8.1.2 安装</h4><ol>
-<li><p>下载对应的jar包<a target="_blank" rel="noopener" href="https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases">https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases</a></p>
-</li>
-<li><p>把jar包放在安装目录的plugins文件夹下</p>
-</li>
-<li><p>进入neo4j的目录，编辑在<code>conf</code>文件夹下的<code>neo4j.conf</code>配置文件，加入如下一行</p>
-<pre><code class="hljs shell">dbms.security.procedures.unrestricted=apoc.*</code></pre>
-</li>
-<li><p>重启Neo4j服务</p>
-</li>
-<li><p>在可视化界面运行：<code>return apoc.version()</code>。如果出现对应的版本号，证明安装成功</p>
-</li>
-</ol>
-<h3 id="8-2"><a href="#8-2" class="headerlink" title="8.2"></a>8.2</h3><p>变量引用<code>$</code></p>
-<pre><code class="hljs cypher">MATCH (n:Person)
-WHERE n.name &#x3D; $name
-RETURN n</code></pre>
-<p>动态访问节点或关系<code>[]</code></p>
-<p>Springboot data neo4j @Query不支持<code>apoc</code></p>
-<p>不会报错但返回信息为<code>null</code></p>
-<p>参考：</p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://neo4j.com/developer/cypher/">Neo4j官方文档</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_36226553/article/details/108569048?spm=1001.2014.3001.5501">Neo4j：入门基础（三）之APOC插件</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
-        <tag>Neo4j</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mosh优化ssh</title>
-    <url>/posts/38412875.html</url>
-    <content><![CDATA[<p>最近使用ssh连接云服务器时，卡顿的现象很严重，输入一段内容要等一会儿才会显示完全，在网上找了半天，看到了一个ssh的替代品——<a target="_blank" rel="noopener" href="https://mosh.org/">mosh</a></p>
-<a id="more"></a>
-<h1 id="1-什么是mosh"><a href="#1-什么是mosh" class="headerlink" title="1. 什么是mosh"></a>1. 什么是mosh</h1><p>Mosh最大的特点是基于<strong>UDP</strong>方式传输，支持在服务端创建一个临时的Key供客户端一次性连接，退出后失效；也支持通过SSH的配置进行认证，但数据传输本身还是自身的UDP方式。</p>
-<p>另外，Mosh还有两个我觉得非常有用的功能</p>
-<ul>
-<li>会话的中断不会导致当前正在前端执行的命令中断，相当于你所有的操作都是在screen命令中一样在后台执行。</li>
-<li>会话在中断过后，不会立刻退出，而是启用一个计时器，当网络恢复后会自动重新连接，同时会延续之前的会话，不会重新开启一个。</li>
-</ul>
-<h1 id="2-服务端配置"><a href="#2-服务端配置" class="headerlink" title="2. 服务端配置"></a>2. 服务端配置</h1><p>我的Linux服务器版本是Ubuntu18.04</p>
-<p>输入如下命令安装mosh</p>
-<pre><code class="hljs shell">sudo apt-get update
-sudo apt-get install mosh</code></pre>
-<p>Mosh使用UDP协议连接，端口从60000到61000，网上有教程使用ufw开启端口，但是经过测试是无效的，有一个比较方便的方法时直接在云服务器管理控制台的安全组中添加。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200926-03.png" alt=""></p>
-<h1 id="3-客户端配置"><a href="#3-客户端配置" class="headerlink" title="3. 客户端配置"></a>3. 客户端配置</h1><p>本地机器是Mac，输入命令安装mosh，注意客户端和服务端都需要安装mosh</p>
-<pre><code class="hljs shell">brew install mosh</code></pre>
-<p>安装完成后需要进入本地shell脚本文件中</p>
-<p>如果安装了zsh，就使用命令<code>vi ~/.zshrc</code></p>
-<p>如果是bash，就使用命令<code>vi ~/.bash_profile</code></p>
-<p>添加如下两行</p>
-<pre><code class="hljs shell">export LC_CTYPE=en_US.UTF-8  
-export LC_ALL=en_US.UTF-8</code></pre>
-<p>保存退出后，使用<code>source ~/.zshrc</code>或者<code>source ~/.bash_profile</code>使得更改生效。</p>
-<p>使用如下命令连接</p>
-<pre><code class="hljs shell">mosh root@IP -p 60001</code></pre>
-<p>输入瞬间变得丝滑起来。</p>
-]]></content>
-      <categories>
-        <category>折腾</category>
-      </categories>
-      <tags>
-        <tag>mosh</tag>
       </tags>
   </entry>
 </search>
