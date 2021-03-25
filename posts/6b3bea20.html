@@ -17,7 +17,7 @@
   <meta name="description" content="Take notes and write articles about Software Engineering">
   <meta name="author" content="ZZY">
   <meta name="keywords" content="">
-  <title>Java 继承 - Blog of Adam</title>
+  <title>简单工厂模式 - Blog of Adam</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Java 继承">
+            <span class="h2" id="subtitle" title="简单工厂模式">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-09-08 16:09" pubdate>
-        September 8, 2020 pm
+      <time datetime="2021-03-25 13:48" pubdate>
+        March 25, 2021 pm
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      867 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14
+      9
        分钟
     </span>
   
@@ -224,78 +224,81 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Java 继承</h1>
+            <h1 style="display: none">简单工厂模式</h1>
             
             <div class="markdown-body">
-              <h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>继承(inheritance)的基本思想是基于已经有的类创建新的类，复用这些类的方法。</p>
-<h2 id="一、类，超类和子类"><a href="#一、类，超类和子类" class="headerlink" title="一、类，超类和子类"></a>一、类，超类和子类</h2><p>在前面的文章中我们实现了一个<code>Employee</code>类，假设你在某个公司工作，这个公司的经理和员工的待遇不一样，普通员工在完成任务后仅领取薪水，而经理还拥有奖金。<br>这个时候，我们可以定义一个新类<code>Manager</code>，使用继承重用<code>Employee</code>中的代码，同时定义新的方法来增加奖金这一功能。</p>
-<p><strong>Tip</strong><br><code>Manager</code> <strong>is-a</strong> <code>Employee</code><br><strong>is-a</strong>关系是继承的一个明显特征</p>
-<h3 id="1-定义子类"><a href="#1-定义子类" class="headerlink" title="1. 定义子类"></a>1. 定义子类</h3><p>使用<code>extends</code>关键字来表示继承</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
-    <span class="hljs-comment">// blablabla</span>
+              <h1 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h1><p>当我们需要实例化一些具体的类时，可能会写出如下的代码</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (cash) &#123;
+  <span class="hljs-comment">// 现金支付处理</span>
+&#125;
+<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (creditcard) &#123;
+  <span class="hljs-comment">// 信用卡支付</span>
+&#125;
+<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (alipay) &#123;
+  <span class="hljs-comment">// 支付宝支付</span>
 &#125;</code></pre></div>
-<p>关键字<code>extends</code>表明正在构造的新类派生于一个已经存在的类。这个类被称为<strong>超类</strong>(<em>superclass</em>) 或<strong>父类</strong>(<em>parent class</em>)，新类称为<strong>子类</strong>(<em>subclass</em>)<br>在设计类时，应该将一般方法放在超类中，将更特殊的方法放在子类中<br>比如我们在<code>Manager</code>类中应该实现一个设置奖金金额的方法。</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> bonus;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBonus</span><span class="hljs-params">(<span class="hljs-keyword">double</span> bonus)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.bonus = bonus;
+<p>一旦需要进行变化或扩展，比如增加微信支付或者修改已有支付的逻辑，就需要修改原有的代码，更容易产生错误，也增加了维护的难度。我们的代码应该<strong>对扩展开放，对修改关闭</strong>（开闭原则）。所以，我们应该考虑在使用这些具体的类时，只需要知道一个参数，并提供一个调用方便的方法，将该参数传入方法返回一个相应的对象。我们可以使用<strong>简单工厂模式</strong>。</p>
+<p>本质上，就是找出会变化的方面，把它们从不变的部分分离出来。</p>
+<h2 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h2><p>又称为静态工厂方法。属于类创建型模式。在简单工厂模式中，可以根据参数的不同返回不同类的实例，简单工厂模式专门定义一个类来负责创建其他类的实例，被创建的实例通常都具有共同的父类。</p>
+<h2 id="1-2-模式结构"><a href="#1-2-模式结构" class="headerlink" title="1.2 模式结构"></a>1.2 模式结构</h2><p><strong>Factory</strong>：工厂角色</p>
+<p><strong>Product</strong>：抽象产品角色</p>
+<p><strong>ConcreteProduct</strong>：具体产品角色</p>
+<h2 id="1-3-代码实例"><a href="#1-3-代码实例" class="headerlink" title="1.3 代码实例"></a>1.3 代码实例</h2><p>我们将开头的支付逻辑代码使用简单工厂模式进行修改。</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">// 抽象支付类</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractPay</span> </span>&#123;
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pay</span><span class="hljs-params">()</span></span>;
+&#125;
+
+<span class="hljs-comment">// 具体支付类</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CashPay</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractPay</span> </span>&#123;
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pay</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">// 现金支付处理</span>
+  &#125;
+&#125;
+
+<span class="hljs-comment">// 支付工厂</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PayMethodFactory</span> </span>&#123;
+  <span class="hljs-function"><span class="hljs-keyword">public</span> class Abstarct <span class="hljs-title">getPayMethod</span><span class="hljs-params">(String type)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (cash) &#123;
+			<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> CashPay(); <span class="hljs-comment">// 根据参数创建具体产品</span>
     &#125;
-&#125;</code></pre></div>
-<h3 id="2-覆盖方法"><a href="#2-覆盖方法" class="headerlink" title="2. 覆盖方法"></a>2. 覆盖方法</h3><p>超类中的某些方法对子类不一定适用，比如<code>Manager</code>类中的<code>getSalary</code>方法应该返回薪水和奖金的总和，所以要提供一个新的方法来<strong>覆盖</strong>(<em>override</em>)超类中的某个方法。<br>要注意的是，<code>Manager</code>类的<code>getSalary</code>方法不能够直接访问<code>salary</code>字段，因为其实<code>Employee</code>类的私有字段，所以需要使用<code>super</code>关键字</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSalary</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">int</span> baseSalary = <span class="hljs-keyword">super</span>.getSalary();
-    <span class="hljs-keyword">return</span> baseSalary + bonus;
-&#125;</code></pre></div>
-<h3 id="3-子类构造器"><a href="#3-子类构造器" class="headerlink" title="3. 子类构造器"></a>3. 子类构造器</h3><div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Manager</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
-    <span class="hljs-keyword">super</span>(id, name, salary);
-    bonus = <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
-<p>语句<code>super(id, name, salary);</code>实现了对<code>Employee</code>中私有字段的调用</p>
-<h3 id="4-多态"><a href="#4-多态" class="headerlink" title="4. 多态"></a>4. 多态</h3><p>我们可以通过<code>is-a</code>来判断是否将数据设计为继承关系，它的另外一种表述是<strong>替换原则</strong>，即程序中出现超类对象的任何地方都可以使用子类对象替换。</p>
-<p>在Java中，对象变量时<strong>多态</strong>(<em>polymophic</em>)的。<br>一个<code>Employee</code>类型的变量既可以引用一个<code>Employee</code>类型的对象,也可以引用<code>Employee</code>类的任何一个子类的对象(比如<code>Manager</code>)</p>
-<div class="hljs"><pre><code class="hljs java">Employee e;
-e = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-number">10000</span>);
-e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-number">20000</span>);</code></pre></div>
-<p>虽然这里的<code>e</code>引用了<code>Manager</code>类型的对象，但是编译器只将<code>e</code>看成是一个<code>Employee</code>对象，所以如下的调用是错误的。</p>
-<div class="hljs"><pre><code class="hljs java">e.setBonus(<span class="hljs-number">10000</span>); <span class="hljs-comment">// ERROR</span></code></pre></div>
-<h3 id="5-阻止继承-final类和方法"><a href="#5-阻止继承-final类和方法" class="headerlink" title="5. 阻止继承: final类和方法"></a>5. 阻止继承: final类和方法</h3><p>如果我们需要阻止某个类被继承，可以使用<code>final</code>关键字</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Father</span> </span>&#123;
-    <span class="hljs-comment">// blablabla</span>
-&#125;</code></pre></div>
-<p>类中的某个特定的方法也可以声明为<code>final</code>，这样子类就不能够覆盖这个方法。</p>
-<p><strong>Tip</strong><br>为什么要将类或方法声明为<code>final</code>？<br>确保它们不会在子类中改变语义。比如<code>String</code>类是<code>final</code>类，所以一个<code>String</code>引用引用的一定是<code>String</code>对象，而不是其它。</p>
-<h3 id="6-抽象类"><a href="#6-抽象类" class="headerlink" title="6. 抽象类"></a>6. 抽象类</h3><p>在继承层次结构中，位于上层的类更具有一般性<br>比如我们加入<code>Person</code>类和<code>Student</code>类，下图是这三个类之间的继承关系</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200908-02.png" srcset="/img/loading.gif" alt=""></p>
-<p>每个人都有一些属性，比如姓名，年龄，引入一个公共的超类，就可以把<code>getName</code>方法放在继承层次结构中的更高一层，使用<code>abstract</code>关键字来定义抽象类</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;
-    <span class="hljs-keyword">private</span> String name;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Person</span> <span class="hljs-params">(String name)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.name = name;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (creditcard) &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Creditcard();
     &#125;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> name;
-    &#125;
+    ......
+  &#125;
 &#125;</code></pre></div>
-<p>抽象类不能够实例化，如下的表达式是错误的</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">new</span> Person(); <span class="hljs-comment">// ERROR</span></code></pre></div>
-<h2 id="二、对象包装器与自动装箱"><a href="#二、对象包装器与自动装箱" class="headerlink" title="二、对象包装器与自动装箱"></a>二、对象包装器与自动装箱</h2><p>所有的基本类型都有一个与之对应的类，这些类被称为<strong>包装器</strong>(<em>wrapper</em>)，分别是<code>Integer, Long, Float, Double, Short, Byte, Character, Boolean</code>。<br>包装器类是不可变的，一旦构造了包装器，就不允许更改包装在其中的值，同时，包装器还是<code>final</code>，不能够派生它们的子类。</p>
-<p><strong>Tip</strong><br>为什么需要包装类？<br>因为Java是一种面向对象程序设计语言，很多地方需要使用对象而不是基本类型。比如在<code>ArrayList</code>中，我们不能够写成<code>ArrayList&lt;int&gt;</code>，而要写成<code>ArrayList&lt;Integer&gt;</code>。</p>
-<h3 id="2-自动拆箱与装箱"><a href="#2-自动拆箱与装箱" class="headerlink" title="2. 自动拆箱与装箱"></a>2. 自动拆箱与装箱</h3><p>自动装箱: 就是将基本数据类型自动转换成对应的包装类。<br>自动拆箱：就是将包装类自动转换成对应的基本数据类型。</p>
-<div class="hljs"><pre><code class="hljs java">Integer n = <span class="hljs-number">3</span>; <span class="hljs-comment">// 自动装箱</span>
-<span class="hljs-keyword">int</span> m = n; <span class="hljs-comment">// 自动拆箱</span></code></pre></div>
-<h2 id="三、继承的设计技巧"><a href="#三、继承的设计技巧" class="headerlink" title="三、继承的设计技巧"></a>三、继承的设计技巧</h2><ol>
-<li>将公共操作和字段放在超类中</li>
-<li>使用继承实现<strong>is-a</strong>关系</li>
-<li>除非所有继承的方法都有意义，否则不要使用继承</li>
-<li>在覆盖方法时，不要改变预期的行为</li>
-<li>使用多态，而不要使用类型信息</li>
+<h2 id="1-4-模式分析"><a href="#1-4-模式分析" class="headerlink" title="1.4 模式分析"></a>1.4 模式分析</h2><h3 id="1-4-1-优缺点"><a href="#1-4-1-优缺点" class="headerlink" title="1.4.1 优缺点"></a>1.4.1 优缺点</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>将对象的<strong>创建</strong>和对象本身的<strong>业务处理</strong>分离可以降低系统的耦合度（责任的分割）</td>
+<td>工厂职责过重，集中了所有创建逻辑，出问题会影响整个系统</td>
+</tr>
+<tr>
+<td>客户端无需知道所创建的产品类的类名，只需要知道其所对应的参数</td>
+<td>更多的类，增加了系统的复杂度，（降低耦合的代价，难以两全其美）</td>
+</tr>
+<tr>
+<td>使用静态方法，可以通过引入配置文件，在不修改代码的情况下增加新的具体产品类，提高了灵活性</td>
+<td>系统扩展困难，一旦添加新产品就要更改工厂逻辑，使得逻辑越来越复杂，<br/>由于使用静态方法，不能通过继承来改变创建方法的行为。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="1-4-2-适用环境"><a href="#1-4-2-适用环境" class="headerlink" title="1.4.2 适用环境"></a>1.4.2 适用环境</h3><ol>
+<li>工厂类负责创建的对象比较少，工厂逻辑不复杂</li>
+<li>客户端只知道传入工厂类的参数，对于如何创建对象不关心</li>
 </ol>
-<p>参考：</p>
-<ol>
-<li><a target="_blank" rel="noopener" href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/boxing-unboxing">Java工程师成神之路</a></li>
-<li>《Java核心技术 卷I》</li>
-</ol>
+<h3 id="1-4-3-不足"><a href="#1-4-3-不足" class="headerlink" title="1.4.3 不足"></a>1.4.3 不足</h3><p>前面提到的开闭原则，我们的代码应该<strong>对扩展开放，对修改关闭</strong>，但是如果要添加新的产品到系统中，必须修改工厂类，加入必要的处理逻辑，这其实还是违背了“开闭原则”。而且工厂类的职责重，业务逻辑复杂，影响了系统的灵活性和扩展性。要想解决这个问题，就需要使用工厂模式。</p>
+<h2 id="1-5-模式应用"><a href="#1-5-模式应用" class="headerlink" title="1.5 模式应用"></a>1.5 模式应用</h2><p>在实际的项目中的使用</p>
+<p>待补充</p>
 
             </div>
             <hr>
@@ -305,7 +308,7 @@ e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</s
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                      <a class="hover-with-bg" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
                     
                   </div>
                 
@@ -313,7 +316,7 @@ e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</s
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                      <a class="hover-with-bg" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
                     
                   </div>
                 
@@ -326,18 +329,12 @@ e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</s
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/d993c7e9.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java 接口</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/e27767b2.html">
-                        <span class="hidden-mobile">Java 面向对象概述</span>
+                      <a href="/posts/55958cb4.html">
+                        <span class="hidden-mobile">Neo4j_CQL语法简介</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
