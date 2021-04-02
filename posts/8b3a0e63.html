@@ -265,7 +265,7 @@ e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</s
 <p>类中的某个特定的方法也可以声明为<code>final</code>，这样子类就不能够覆盖这个方法。</p>
 <p><strong>Tip</strong><br>为什么要将类或方法声明为<code>final</code>？<br>确保它们不会在子类中改变语义。比如<code>String</code>类是<code>final</code>类，所以一个<code>String</code>引用引用的一定是<code>String</code>对象，而不是其它。</p>
 <h3 id="6-抽象类"><a href="#6-抽象类" class="headerlink" title="6. 抽象类"></a>6. 抽象类</h3><p>在继承层次结构中，位于上层的类更具有一般性<br>比如我们加入<code>Person</code>类和<code>Student</code>类，下图是这三个类之间的继承关系</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200908-02.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/20200908-02.png" srcset="/img/loading.gif" alt=""></p>
 <p>每个人都有一些属性，比如姓名，年龄，引入一个公共的超类，就可以把<code>getName</code>方法放在继承层次结构中的更高一层，使用<code>abstract</code>关键字来定义抽象类</p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;
     <span class="hljs-keyword">private</span> String name;

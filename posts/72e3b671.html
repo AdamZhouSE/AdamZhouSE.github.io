@@ -230,7 +230,7 @@
               <h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><blockquote>
 <p>问题：<br>假设有一个模拟鸭子的游戏，游戏中拥有各种鸭子，我们设计了一个鸭子的超类，并且让各种鸭子，比如红头鸭，橡皮鸭等，继承它。<br>现在，我们需要更新这个游戏，使得鸭子可以飞起来，该怎么做？</p>
 </blockquote>
-<h2 id="使用继承？"><a href="#使用继承？" class="headerlink" title="使用继承？"></a>使用继承？</h2><p>如果依然使用继承，在超类中添加一个fly()方法，会出现不适合该行为的子类也具有该行为的问题，比如橡皮鸭就不会飞，但继承的做法使得它也可以飞起来。<br><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200902-01.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="使用继承？"><a href="#使用继承？" class="headerlink" title="使用继承？"></a>使用继承？</h2><p>如果依然使用继承，在超类中添加一个fly()方法，会出现不适合该行为的子类也具有该行为的问题，比如橡皮鸭就不会飞，但继承的做法使得它也可以飞起来。<br><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/20200902-01.png" srcset="/img/loading.gif" alt=""></p>
 <p>如果选择覆盖<code>fly()</code>方法，那么在后续的更新中，我们需要不断地检查可能需要覆盖的<code>fly()</code>方法。<br>所以使用继承来提供行为，会造成代码在多个子类最终重复，复用性差，难以知道鸭子的全部行为，运行时的行为不容易改变等问题。</p>
 <h2 id="使用接口？"><a href="#使用接口？" class="headerlink" title="使用接口？"></a>使用接口？</h2><p>如果抽象出一个<code>Flyable</code>接口，只有会飞的鸭子才实现这个接口呢？<br>设想一下，如果我们有上百种会飞的鸭子，那么就会造成大量的代码重复，每个子类中都要实现一次<code>fly()</code>方法，而且代码无法复用，如果我们需要修改这个方法，想象一下，这简直就是一场灾难。</p>
 <h2 id="策略模式实现"><a href="#策略模式实现" class="headerlink" title="策略模式实现"></a>策略模式实现</h2><p>软件开发过程中总是伴随着变更。<br><strong>设计原则</strong></p>
@@ -246,7 +246,7 @@
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span></span>;
 &#125;</code></pre></div>
 <h3 id="实现行为"><a href="#实现行为" class="headerlink" title="实现行为"></a>实现行为</h3><p>现在有一个<code>FlyBehavior</code>接口，还有对应的类，负责实现具体的行为。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200902-02.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/20200902-02.png" srcset="/img/loading.gif" alt=""></p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyWithWings</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
@@ -330,7 +330,7 @@
 <li>算法使用客户不应该知道的数据</li>
 <li>一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现（switch或if）</li>
 </ol>
-<h3 id="结构与参与者"><a href="#结构与参与者" class="headerlink" title="结构与参与者"></a>结构与参与者</h3><p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20200902-04.png" srcset="/img/loading.gif" alt=""></p>
+<h3 id="结构与参与者"><a href="#结构与参与者" class="headerlink" title="结构与参与者"></a>结构与参与者</h3><p><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/20200902-04.png" srcset="/img/loading.gif" alt=""></p>
 <p><strong>Strategy</strong> (策略)<br>定义所有支持的算法的公共接口，Context使用这个接口来调用ConcreteStrategy定义的算法，比如<code>FlyBehavior</code>就是一个策略<br><strong>ConcreteStrategy</strong>(具体策略)<br>以Strategy接口实现某具体的算法，比如<code>FlyWithWings</code>,<code>FlyNoWay</code>等<br><strong>Context</strong> (上下文)</p>
 <ul>
 <li>用一个ConcreteStrategy对象来配置</li>
@@ -388,8 +388,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/36736857.html">
-                        <span class="hidden-mobile">概率论的基本概念</span>
+                      <a href="/posts/2cd2c226.html">
+                        <span class="hidden-mobile">Hexo个人博客绑定域名和配置SSL证书</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

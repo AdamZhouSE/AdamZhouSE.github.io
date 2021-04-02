@@ -236,7 +236,7 @@
 sudo adduser --ingroup hadoop hadoop
 cd /home/hadoop</code></pre></div>
 <h3 id="1-2-虚拟机克隆"><a href="#1-2-虚拟机克隆" class="headerlink" title="1.2 虚拟机克隆"></a>1.2 虚拟机克隆</h3><p>vmware fusion的虚拟机克隆步骤如下，进入<code>Virtual Machine Library</code>右键虚拟机，然后点击<code>show in finder</code>，复制一份后更改名字即可。克隆成功将3台虚拟机全部启动。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20201201-02.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210402161154.png" srcset="/img/loading.gif" alt=""></p>
 <h3 id="1-3-网络规划与配置静态ip"><a href="#1-3-网络规划与配置静态ip" class="headerlink" title="1.3 网络规划与配置静态ip"></a>1.3 网络规划与配置静态ip</h3><p>集群需要运行在局域网下(比如开一个手机热点)，不同的机器才可以互相连通，所以需要配置好网络。</p>
 <p>我的网络规划如下，集群共3台机器，一台为<code>master</code>，两台为<code>slave</code></p>
 <div class="hljs"><pre><code class="hljs accesslog"><span class="hljs-number">172.20.10.3</span> master
@@ -252,7 +252,7 @@ cd /home/hadoop</code></pre></div>
 172<span class="hljs-selector-class">.20</span><span class="hljs-selector-class">.10</span><span class="hljs-selector-class">.4</span> <span class="hljs-selector-tag">slave1</span>
 172<span class="hljs-selector-class">.20</span><span class="hljs-selector-class">.10</span><span class="hljs-selector-class">.5</span> <span class="hljs-selector-tag">slave2</span></code></pre></div>
 <p>虚拟机网络需要选择<strong>桥接模式</strong>，如下图</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20201201-01.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210402161218.png" srcset="/img/loading.gif" alt=""></p>
 <p>然后配置静态ip地址，<code>ubuntu18</code>以后采用了<code>netplan</code>来配置静态ip，与以前有所不同。</p>
 <div class="hljs"><pre><code class="hljs shell">cd /etc/netplan
 vi 01-network-manager-all.yaml</code></pre></div>
@@ -351,7 +351,7 @@ Starting secondary namenodes [master]
 Starting resourcemanager
 Starting nodemanagers</code></pre></div>
 <p>等待命令执行完毕，然后在浏览器打开<code>master:9870</code>查看网页，在<code>DataNode</code>页面可以看到3个节点，说明集群正常启动。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20201201-03.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210402161243.png" srcset="/img/loading.gif" alt=""></p>
 <h2 id="3-Spark集群搭建"><a href="#3-Spark集群搭建" class="headerlink" title="3. Spark集群搭建"></a>3. Spark集群搭建</h2><h3 id="3-1-安装"><a href="#3-1-安装" class="headerlink" title="3.1 安装"></a>3.1 安装</h3><p><strong>Tip</strong>：搭建集群时所有机器上的spark版本必须一致，否则无法成功连接</p>
 <p>下载spark，解压后移动到指定的目录</p>
 <div class="hljs"><pre><code class="hljs shell">wget https://mirrors.tuna.tsinghua.edu.cn/apache/spark/spark-3.0.1/spark-3.0.1-bin-hadoop3.2.tgz
@@ -392,7 +392,7 @@ slave2</code></pre></div>
 <div class="hljs"><pre><code class="hljs shell">cd /usr/local/spark/sbin
 sudo ./start-all.sh</code></pre></div>
 <p>可以看到如下界面，出现3个节点则说明配置成功。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20201201-04.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210402161305.png" srcset="/img/loading.gif" alt=""></p>
 <p>引用：</p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhangyongli2011/p/10572152.html">Hadoop集群+Spark集群搭建一篇文章就够了</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/focksor/p/install_hadoop_on_ubuntu_on_vmware.html">使用vmware+Ubuntu搭建hadoop集群</a></p>
@@ -440,8 +440,8 @@ sudo ./start-all.sh</code></pre></div>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/f47639cf.html">
-                        <span class="hidden-mobile">商业模式设计</span>
+                      <a href="/posts/aa435277.html">
+                        <span class="hidden-mobile">虚拟化技术</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
