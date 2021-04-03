@@ -17,7 +17,7 @@
   <meta name="description" content="Take notes and write articles about Software Engineering">
   <meta name="author" content="ZZY">
   <meta name="keywords" content="">
-  <title>概述与递归简论 - Blog of Adam</title>
+  <title>容器概念与docker入门 - Blog of Adam</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="概述与递归简论">
+            <span class="h2" id="subtitle" title="容器概念与docker入门">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-09-10 20:23" pubdate>
-        September 10, 2020 pm
+      <time datetime="2021-04-03 10:47" pubdate>
+        April 3, 2021 am
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      1.8k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18
+      21
        分钟
     </span>
   
@@ -224,102 +224,150 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">概述与递归简论</h1>
+            <h1 style="display: none">容器概念与docker入门</h1>
             
             <div class="markdown-body">
-              <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="1-什么是数据结构？"><a href="#1-什么是数据结构？" class="headerlink" title="1. 什么是数据结构？"></a>1. 什么是数据结构？</h2><p>我们把这个词分解开来，首先回答什么是数据。<br><strong>数据</strong>是信息的载体，是数字，字符或其它符号的集合。<br><strong>数据结构</strong>是数据对象和组成对象的数据成员之间的关系。</p>
-<p><code>Data_Structure = &#123;D, R&#125;</code><br><em>D</em>是数据对象<br><em>R</em>是<em>D</em>中所有数据成员的关系</p>
-<p>数据结构涉及3个方面：<br><strong>逻辑结构</strong>：从用户视图看，是面向问题的<br><strong>物理结构</strong>：从具体实现视图看，是面向计算机的<br><strong>操作及其实现</strong><br>我们以一个学生表为例，它的逻辑结构式线性表，物理结构是数组，而操作是增删改查</p>
-<h2 id="2-递归简论"><a href="#2-递归简论" class="headerlink" title="2. 递归简论"></a>2. 递归简论</h2><h3 id="2-1-如何设计递归"><a href="#2-1-如何设计递归" class="headerlink" title="2.1 如何设计递归"></a>2.1 如何设计递归</h3><p>我们通过递归来引入数据结构与算法的学习。<br>当一个函数用它自己来定义时，我们就称它是<strong>递归</strong>(<em>recursive</em>)的。我们可以看下面这个简单的例子</p>
-<script type="math/tex; mode=display">f(x) = \begin{cases} 0, & x=0 \\\\ 2f(x-1)+x^2, & x > 0\end{cases}</script><p>我们用代码来实现它</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">f</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;
-    <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span>) &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-    &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">2</span> * f(x - <span class="hljs-number">1</span>) + x * x;
-&#125;</code></pre></div>
-<p>观察这段代码，函数体内首先有一个<code>if</code>结构，这是递归的<strong>基准情况</strong>(<em>base case</em>)，即此时函数的值可以直接算出而不用进行递归。<br>再往下的<code>return</code>语句则进入了递归，要注意的是，递归调用将反复进行直到出现基准情况为止。比如我们计算<code>f(3)</code>，那么会调用<code>f(2), f(1)</code>直到出现基准情况<code>f(0)</code>，它的计算实际上是这样的</p>
-<script type="math/tex; mode=display">(2\times(2\times(2\times f(0)+1\times1) + 2\times2)+3\times3)</script><p>下面我们再来看一种糟糕的递归设计</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">bad</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;
-    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;    
-    &#125;
-    <span class="hljs-keyword">return</span> bad(n / <span class="hljs-number">3</span> + <span class="hljs-number">1</span>) + n - <span class="hljs-number">1</span>;
-&#125;</code></pre></div>
-<p>我们会发现，在上述的代码中，<code>bad(1)</code>被定义为<code>bad(1)</code>，而不知道具体是多少，计算机会反复调用它，程序无法停止，也求不出解。</p>
-<p>通过上面的两个例子，可以得出递归的设计准则</p>
+              <h1 id="容器概念与Docker入门"><a href="#容器概念与Docker入门" class="headerlink" title="容器概念与Docker入门"></a>容器概念与Docker入门</h1><h2 id="1-容器是什么"><a href="#1-容器是什么" class="headerlink" title="1. 容器是什么?"></a>1. 容器是什么?</h2><p>容器与微服务是相伴而生的。</p>
+<p>那么什么是容器？</p>
+<p>容器可以等同于虚拟机来理解，但是又与虚拟机不一样。</p>
+<p>容器是一种<strong>轻量级</strong>的虚拟化，是共用主机内核，利用<strong>内核的虚拟化技术</strong>隔离出的一个独立的运行环境，拥有独立的一个文件系统，网络空间，进程空间视图等。</p>
+<p>从虚拟化层看容器，它的核心价值是</p>
 <ol>
-<li><strong>基准情形</strong>(<em>base case</em>)。必须有某些基准的情形，不用递归就能够求解。</li>
-<li><strong>不断推进</strong>(<em>make progress</em>) 递归调用必须能够朝着一个基准情形推进。</li>
+<li><strong>轻量级</strong></li>
+<li><strong>高性能</strong>：启动速度快，消耗资源少</li>
 </ol>
-<h3 id="2-2-递归实践"><a href="#2-2-递归实践" class="headerlink" title="2.2 递归实践"></a>2.2 递归实践</h3><p>我们通过几个经典的例子来加深对递归的理解。</p>
-<h4 id="2-2-1-菲波那切数列"><a href="#2-2-1-菲波那切数列" class="headerlink" title="2.2.1 菲波那切数列"></a>2.2.1 菲波那切数列</h4><p>我们知道它的函数是<br>$fib(0)=0,\ fib(1)=1,\ fib(n)=fib(n-1)+fib(n-2); n&gt;=2$<br>可以很容易地将其用代码表示</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-keyword">long</span> n)</span> </span>&#123;
-    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span> || n == <span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// base case</span>
-        <span class="hljs-keyword">return</span> n;
-    &#125;
-    <span class="hljs-keyword">return</span> fib(n - <span class="hljs-number">1</span>) + fib(n - <span class="hljs-number">2</span>);
-&#125;</code></pre></div>
-<h4 id="2-2-2-排列"><a href="#2-2-2-排列" class="headerlink" title="2.2.2 排列"></a>2.2.2 排列</h4><p>现在有一个数组<code>&#123;a, b, c&#125;</code>，要求对它进行全排列，即排列结果是<code>abc,acb,bac,bca,cab,cba</code></p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Permutation</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">permutation</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[] list, <span class="hljs-keyword">int</span> k, <span class="hljs-keyword">int</span> m)</span> </span>&#123;
-        <span class="hljs-keyword">int</span> i;
-        <span class="hljs-keyword">if</span> (k == m) &#123;
-            <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt;= m; i++) &#123;
-                System.out.print(list[i]);
-            &#125;
-            System.out.println();
-        &#125;
-        <span class="hljs-keyword">else</span> &#123;
-            <span class="hljs-keyword">for</span> (i = k; i &lt;= m; i++) &#123;
-                <span class="hljs-keyword">char</span> temp = list[k];
-                list[k] = list[i];
-                list[i] = temp;
-                permutation(list, k + <span class="hljs-number">1</span>, m);
-                temp = list[k];
-                list[k] = list[i];
-                list[i] = temp;
-            &#125;
-        &#125;
-    &#125;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        <span class="hljs-keyword">char</span>[] list = &#123;<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>&#125;;
-        permutation(list, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>);
-    &#125;
-&#125;</code></pre></div>
-<h4 id="2-2-3-汉诺塔问题"><a href="#2-2-3-汉诺塔问题" class="headerlink" title="2.2.3 汉诺塔问题"></a>2.2.3 汉诺塔问题</h4><p>汉诺塔问题是一个经典的问题。<strong>汉诺塔</strong>(<em>Hanoi Tower</em>)，源于印度一个古老传说。大梵天创造世界的时候做了三根金刚石柱子，在一根柱子上从下往上按照大小顺序摞着64片黄金圆盘。大梵天命令婆罗门把圆盘从下面开始按大小顺序重新摆放在另一根柱子上。并且规定，任何时候，在小圆盘上都不能放大圆盘，且在三根柱子之间一次只能移动一个圆盘。问应该如何操作？<br>64个圆盘对于当前的计算机，可能需要几百上千年才能算出，但是我们可以简化这个问题，使用3个圆盘来看一下如何用递归来实现。</p>
-<p>根据我们的递归设计准则，首先要明确基准条件，也就是只有一个圆盘，那很简单，就是把它从第一根柱子移动到第三根柱子，<br>然后设计不断推进的过程，有3根柱子，起点(<em>fromTower</em>)，终点(<em>toTower</em>)，中转(<em>auxTower</em>)。有一个非常易于理解的方式，我们首先将盘从起点移到中转点，这个时候的中转点实际上是终点，再从中转点移到终点，这个时候的中转点实际上是起点，所以设计的两个递归是这样的。</p>
-<div class="hljs"><pre><code class="hljs java">moveDisks(n - <span class="hljs-number">1</span>, fromTower, auxTower, toTower);
-moveDisks(n - <span class="hljs-number">1</span>, auxTower, toTower, fromTower);</code></pre></div>
-<p>下面是完整的代码实现。</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HanoiTower</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">moveDisks</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">char</span> fromTower, <span class="hljs-keyword">char</span> toTower, <span class="hljs-keyword">char</span> auxTower)</span> </span>&#123;
-        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) &#123;
-            System.out.println(<span class="hljs-string">&quot;move disk &quot;</span> + n + <span class="hljs-string">&quot; from &quot;</span> + fromTower + <span class="hljs-string">&quot; to &quot;</span> + toTower);
-        &#125;
-        <span class="hljs-keyword">else</span> &#123;
-            moveDisks(n - <span class="hljs-number">1</span>, fromTower, auxTower, toTower);
-            System.out.println(<span class="hljs-string">&quot;move disk &quot;</span> + n + <span class="hljs-string">&quot; from &quot;</span> + fromTower + <span class="hljs-string">&quot; to &quot;</span> + toTower);
-            moveDisks(n - <span class="hljs-number">1</span>, auxTower, toTower, fromTower);
-        &#125;
-    &#125;
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        moveDisks(<span class="hljs-number">3</span>, <span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;B&#x27;</span>, <span class="hljs-string">&#x27;C&#x27;</span>);
-    &#125;
-&#125;</code></pre></div>
-<p>打印结果</p>
-<div class="hljs"><pre><code class="hljs shell">move disk 1 from A to C
-move disk 2 from A to B
-move disk 1 from C to B
-move disk 3 from A to C
-move disk 1 from B to A
-move disk 2 from B to C
-move disk 1 from A to C</code></pre></div>
-<p>参考：</p>
-<ol>
-<li>《数据结构与算法 Java语言描述》</li>
-</ol>
+<p><strong>虚拟机 vs 容器</strong></p>
+<p>容器是在Linux内核实现的轻量级资源隔离机制</p>
+<p>虚拟机是<strong>操作系统级别</strong>的资源隔离，容器本质上是<strong>进程级</strong>的资源隔离</p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210403163552.png" srcset="/img/loading.gif" alt=""></p>
+<h2 id="2-Docker"><a href="#2-Docker" class="headerlink" title="2. Docker"></a>2. Docker</h2><h3 id="2-1-Docker-Engine"><a href="#2-1-Docker-Engine" class="headerlink" title="2.1 Docker Engine"></a>2.1 Docker Engine</h3><p>Docker是创建、管理容器的一个软件。</p>
+<p>它的核心是<code>Docker Daemon(Engine)</code>，在宿主机后台运行。</p>
+<p>用户通过<code>Docker Client</code>与<code>Daemon</code>进行交互，将命令传输到宿主机上执行</p>
+<p><code>Docker registeries</code>是docker仓库，存储容器镜像，用户可以上传和下载需要的镜像</p>
+<h3 id="2-2-docker基本命令"><a href="#2-2-docker基本命令" class="headerlink" title="2.2 docker基本命令"></a>2.2 docker基本命令</h3><p>查看docker有哪些命令</p>
+<div class="hljs"><pre><code class="hljs shell">docker</code></pre></div>
+<p>获得帮助，查看某个命令的细节</p>
+<div class="hljs"><pre><code class="hljs shell">docker container --help # 这里是查看管理容器命令的细节</code></pre></div>
+<p>查看docker的版本</p>
+<div class="hljs"><pre><code class="hljs shell">docker --version</code></pre></div>
+<p>查看docker engine的具体信息</p>
+<div class="hljs"><pre><code class="hljs shell">docker version</code></pre></div>
+<p>可以看到<code>Client</code>和<code>Server</code>端的版本，操作系统等信息。</p>
+<p>server端的操作系统信息是：<code>OS/Arch: linux/amd64</code>，说明容器是跑在Linux上的</p>
+<p>查看系统更加细节的信息</p>
+<div class="hljs"><pre><code class="hljs shell">docker info</code></pre></div>
+<p>可以看到server端的镜像<code>Registry Mirrors</code>，代理<code>Http Proxy</code>等</p>
+<p>查看docker中安装了哪些镜像</p>
+<div class="hljs"><pre><code class="hljs shell">docker image ls</code></pre></div>
+<p>从远端拉取镜像xxx</p>
+<div class="hljs"><pre><code class="hljs shell">docker pull xxx</code></pre></div>
+<h3 id="2-3-docker-run"><a href="#2-3-docker-run" class="headerlink" title="2.3 docker run"></a>2.3 docker run</h3><p>在新的容器中执行操作</p>
+<p><code>-d</code> 后台运行容器，并返回容器id</p>
+<p><code>-i</code> 以交互模式运行容器</p>
+<p><code>-t</code> 为容器重新分配一个伪输入终端，通常与<code>-i</code>同时使用</p>
+<p><code>-p</code> 指定（发布）端口映射 格式：主机（宿主）端口：容器端口</p>
+<p><code>-P</code> 随机端口映射，容器内部端口随机映射到主机的高端口</p>
+<p><code>--name=&quot;nginx-lb&quot;</code> 为容器指定一个名称</p>
+<p><code>-e username=&quot;ritchie&quot;</code> 设置环境变量</p>
+<p><code>--env-file=c:/temp1/t.txt</code> 从指定文件读入环境变量</p>
+<p><code>--expose=2000-2002</code> 开放（暴露）一个端口或一组端口；</p>
+<p><code>--link my-mysql:taozs</code> 添加链接到另一个容器，将已经启动的容器链接到新启动的容器</p>
+<p><code>-v c:/temp1:/data</code> 绑定一个卷(volume)</p>
+<p><code>--rm</code>  退出时自动删除容器</p>
+<div class="hljs"><pre><code class="hljs shell">docker run -it --name mycontainer hello-world</code></pre></div>
+<p>如果觉得一直要查询id比较麻烦，可以在执行<code>run</code>操作时指定它的名字</p>
+<div class="hljs"><pre><code class="hljs shell">docker run -d -p 80:80 nginx</code></pre></div>
+<p>将容器和当前的宿主机之间建立一个映射</p>
+<div class="hljs"><pre><code class="hljs shell">docker run -d -P nginx</code></pre></div>
+<p>映射到当前最大的一个端口</p>
+<div class="hljs"><pre><code class="hljs shell">docker run --name xxx -it -e myname=zzy busybox # 读入单个环境变量
+docker run --env-file=filepath busybox # 可以写一个文件批量读入环境变量
+set # 列出所有环境变量</code></pre></div>
+<p>自己设置环境变量(很有用)</p>
+<div class="hljs"><pre><code class="hljs shell">docker image inspect hello-world</code></pre></div>
+<p>查看某个镜像的细节信息</p>
+<p>比如<code>Cmd</code>，即启动时执行什么命令</p>
+<p><code>Env</code> 环境变量</p>
+<p>在容器和宿主机之间建立一个目录的关联，将宿主机的目录关联到容器中的目录</p>
+<p>这个例子是<code>windows</code>下的<code>temp1</code>目录与容器中的<code>data</code>目录，</p>
+<h3 id="2-4-docker-container"><a href="#2-4-docker-container" class="headerlink" title="2.4 docker container"></a>2.4 docker container</h3><div class="hljs"><pre><code class="hljs shell">docker container ls</code></pre></div>
+<p><code>docker container ls -a</code></p>
+<p>简写</p>
+<div class="hljs"><pre><code class="hljs shell">docker ps</code></pre></div>
+<p>列出现在正在运行的容器信息</p>
+<div class="hljs"><pre><code class="hljs shell">docker ps -a</code></pre></div>
+<p>列出所有容器的信息</p>
+<p><code>docker container ls –aq</code></p>
+<p>只显示容器的id</p>
+<p><code>docker container inspect 容器名/id</code> 显示容器细节信息</p>
+<p>可以看到当前运行的容器的细节信息</p>
+<p>比如ip地址，网关等</p>
+<p><code>docker port 容器名/id</code> 显示端口映射信息</p>
+<p><code>docker logs -f &lt;容器 ID&gt;</code>  查看容器内部的标准输出</p>
+<p><code>-f</code>作用是动态显示，会不断更新</p>
+<p>不加就会打印所有直到当前状态</p>
+<p><code>docker stop &lt;容器 ID&gt;</code>    停止一个容器</p>
+<p><code>docker start &lt;容器 ID&gt;</code>    启动已停止运行的容器</p>
+<p><code>docker restart &lt;容器 ID&gt;</code>  正在运行的容器可以重启</p>
+<p><code>docker attach &lt;容器 ID&gt;</code>  附着到容器</p>
+<p>将本地的标准输入、输出或错误流加入到正在运行的容器上</p>
+<p><code>docker exec -it &lt;容器 ID&gt;  /bin/bash</code>  进入容器，执行命令</p>
+<p><code>docker rm -f  &lt;容器 ID&gt;</code>    删除容器</p>
+<p><code>-f</code>强制删除</p>
+<p><code>docker container prune</code>    清理掉所有处于终止状态的容器</p>
+<p>如果docker中有很多处在停止状态中的容器，可以使用这个命令将它们全部删除</p>
+<h3 id="2-5-docker实践"><a href="#2-5-docker实践" class="headerlink" title="2.5 docker实践"></a>2.5 docker实践</h3><p>练习：gcc</p>
+<p>在Windows下希望使用linux的gcc进行编译</p>
+<div class="hljs"><pre><code class="hljs shell">docker run --rm -v C:\codec\hw:/hw -w /hw –it –name=server gcc</code></pre></div>
+<p><code>-v</code>关联目录</p>
+<p><code>-w</code>指定工作目录</p>
+<div class="hljs"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 查询容器的IP:</span>
+cat /etc/hosts
+<span class="hljs-meta">#</span><span class="bash"> 查看操作系统的版本</span>
+cat /proc/version
+uname  -a
+<span class="hljs-meta">#</span><span class="bash"> 查看发行版的信息</span>
+cat /etc/issue</code></pre></div>
+<p>练习：MongoDB</p>
+<div class="hljs"><pre><code class="hljs shell">docker pull mongo # pull到本地
+docker run --name mymongo -d mongo # 启动mongo服务端
+docker run -it --link mymongo:taozs --rm mongo mongo --host taozs # 启动mongo客户端
+<span class="hljs-meta">#</span><span class="bash">第一个mongo是镜像</span>
+<span class="hljs-meta">#</span><span class="bash">--host 连接哪一台机器</span>
+<span class="hljs-meta">#</span><span class="bash"> --link 链接到一个新的容器 如果不链接，无法直接使用mymongo</span></code></pre></div>
+<p>如果想要从本地连接mongo，可以使用-p指定映射端口</p>
+<p>练习 redis</p>
+<div class="hljs"><pre><code class="hljs shell">docker pull redis
+docker run -d --name myredis  redis
+docker run -it --rm --link myredis:taozs redis redis-cli -h taozs</code></pre></div>
+<p>练习</p>
+<div class="hljs"><pre><code class="hljs shell">docker pull mysql:5.7
+docker run --name my-mysql -e MYSQL_ROOT_PASSWORD=exampledb20 -d mysql:5.7
+<span class="hljs-meta">#</span><span class="bash"> 为什么加-e参数 为了创建一个可以连接的用户 用户名，密码等</span>
+docker run -it --rm --link my-mysql:taozs mysql mysql –h taozs -u root -p exampledb20</code></pre></div>
+<h2 id="3-镜像分层"><a href="#3-镜像分层" class="headerlink" title="3. 镜像分层"></a>3. 镜像分层</h2><p>如何持久化数据？</p>
+<p>容器的文件系统</p>
+<p>每一个容器都有一个独立的文件系统，从最底层开始逐步叠加</p>
+<p><strong>写时复制</strong></p>
+<p>在一个进程fork自己之后，在不做写操作之前，复用原来的数据，在要执行写操作之后，再进行复制</p>
+<p>要修改时再复制，否则就复用</p>
+<p>不可变的优势：多线程环境中，安全</p>
+<h2 id="4-数据卷volumn"><a href="#4-数据卷volumn" class="headerlink" title="4. 数据卷volumn"></a>4. 数据卷volumn</h2><p>2种类型的数据卷</p>
+<p>uDocker-managed volume（docker管理卷）</p>
+<p>docker自己管理的卷，可以告诉docker创建一个卷，将数据存储在宿主机的某一个目录下</p>
+<div class="hljs"><pre><code class="hljs shell">docker volume ls
+docker volume inspect xxx</code></pre></div>
+<div class="hljs"><pre><code class="hljs shell">docker volume create myvolume
+docker volume inspect myvolume
+<span class="hljs-meta">#</span><span class="bash"> 可以看到`MountPoint` 就是存储数据的位置</span>
+docker run -it --rm -v myvolume:/data busybox
+<span class="hljs-meta">#</span><span class="bash"> 容器中有一个目录/data 当操作这个目录时比如拷贝一个文件，就会存储到myvolume中</span>
+<span class="hljs-meta">#</span><span class="bash"> 删除容器，但是数据仍然存在，可以恢复</span>
+<span class="hljs-meta">#</span><span class="bash"> 这就是docker自己管理的卷</span></code></pre></div>
+<p>uBind mount volume（绑定挂载卷）</p>
+<p><code>-v</code>将数据持久化到本地</p>
+<h2 id="5-导出和导入容器镜像"><a href="#5-导出和导入容器镜像" class="headerlink" title="5. 导出和导入容器镜像"></a>5. 导出和导入容器镜像</h2><h2 id="6-容器网路"><a href="#6-容器网路" class="headerlink" title="6. 容器网路"></a>6. 容器网路</h2><div class="hljs"><pre><code class="hljs shell">docker network ls
+docker network inspect bridge</code></pre></div>
 
             </div>
             <hr>
@@ -329,7 +377,7 @@ move disk 1 from A to C</code></pre></div>
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+                      <a class="hover-with-bg" href="/categories/Spring/">Spring</a>
                     
                   </div>
                 
@@ -337,7 +385,9 @@ move disk 1 from A to C</code></pre></div>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E9%80%92%E5%BD%92/">递归</a>
+                      <a class="hover-with-bg" href="/tags/docker/">docker</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Spring/">Spring</a>
                     
                   </div>
                 
@@ -345,29 +395,6 @@ move disk 1 from A to C</code></pre></div>
               
                 <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
-              
-                <div class="post-prevnext row">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/posts/35f9d194.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">异常与断言</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/posts/d993c7e9.html">
-                        <span class="hidden-mobile">Java 接口</span>
-                        <span class="visible-mobile">Next</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
               
             </div>
 
