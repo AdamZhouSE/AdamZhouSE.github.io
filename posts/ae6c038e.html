@@ -7,34 +7,35 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/aircraft.png">
-  <link rel="icon" type="image/png" href="/img/aircraft.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210405173004.png">
+  <link rel="icon" href="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210405173004.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="Take notes and write articles about Software Engineering">
+  <meta name="description" content="Github pages + Hexo 搭建个人博客2019年11月19日，我决定开始写博客，首先要用github pages+hexo搭建一个个人博客，其中的过程我就记录在这里面。">
   <meta name="author" content="ZZY">
   <meta name="keywords" content="">
+  
   <title>使用Github pages+Hexo 搭建个人博客 - Blog of Adam</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/vs2015.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/tomorrow-night.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
@@ -55,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"zhouzhuyan.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"zRCvvflAjDMXeFoL6eKFrSjL-gzGzoHsz","app_key":"HyfQtdaep8kXjLgih0Tg3kXX","server_url":null}}};
+    var CONFIG = {"hostname":"zhouzhuyan.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DH0ILImkVRguE8DP2QGlEl7M-MdYXbMMI","app_key":"Bk6z6DR7zmjyrFfCnlSKCsvh","server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -63,7 +64,7 @@
 
 
 <body>
-  <header style="height: 70vh;">
+  <header style="height: 60vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -156,8 +157,8 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/firewatch2.jpg') no-repeat center center;
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210404104831.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -184,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      859 字
+      851 字
     </span>
   
 
@@ -224,11 +225,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -247,60 +248,34 @@
 </li>
 </ol>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在终端检查node和npm的版本情况</p>
-<div class="hljs"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>
-npm -v</code></pre></div>
+<figure class="highlight crmsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span><br>npm -v<br></code></pre></div></td></tr></table></figure>
 <p>然后输入命令安装hexo</p>
-<div class="hljs"><pre><code class="hljs avrasm">npm install -g hexo-<span class="hljs-keyword">cli</span></code></pre></div>
+<figure class="highlight avrasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs avrasm">npm install -g hexo-<span class="hljs-keyword">cli</span><br></code></pre></div></td></tr></table></figure>
 <p>我使用的是Mac电脑，在这一步出现了问题，终端显示如下</p>
-<div class="hljs"><pre><code class="hljs coffeescript">rollbackFailedOptional verb <span class="hljs-built_in">npm</span>-session</code></pre></div>
+<figure class="highlight coffeescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs coffeescript">rollbackFailedOptional verb <span class="hljs-built_in">npm</span>-session<br></code></pre></div></td></tr></table></figure>
 <p>然后我又等了一会儿，终端又报错了。</p>
-<div class="hljs"><pre><code class="hljs livescript"><span class="hljs-built_in">npm</span> WARN checkPermissions Missing write access <span class="hljs-keyword">to</span> /usr/local/lib/node_modules
-<span class="hljs-built_in">npm</span> ERR! code EACCES
-<span class="hljs-built_in">npm</span> ERR! syscall access
-<span class="hljs-built_in">npm</span> ERR! path /usr/local/lib/node_modules
-<span class="hljs-built_in">npm</span> ERR! errno -<span class="hljs-number">13</span>
-<span class="hljs-built_in">npm</span> ERR! Error: EACCES: permission denied, access <span class="hljs-string">&#x27;/usr/local/lib/node_modules&#x27;</span>
-<span class="hljs-built_in">npm</span> ERR!  [Error: EACCES: permission denied, access <span class="hljs-string">&#x27;/usr/local/lib/node_modules&#x27;</span>] &#123;
-<span class="hljs-built_in">npm</span> ERR!   stack: <span class="hljs-string">&quot;Error: EACCES: permission denied, access &#x27;/usr/local/lib/node_modules&#x27;&quot;</span>,
-<span class="hljs-built_in">npm</span> ERR!   errno: -<span class="hljs-number">13</span>,
-<span class="hljs-built_in">npm</span> ERR!   code: <span class="hljs-string">&#x27;EACCES&#x27;</span>,
-<span class="hljs-built_in">npm</span> ERR!   syscall: <span class="hljs-string">&#x27;access&#x27;</span>,
-<span class="hljs-built_in">npm</span> ERR!   path: <span class="hljs-string">&#x27;/usr/local/lib/node_modules&#x27;</span>
-<span class="hljs-built_in">npm</span> ERR! &#125;
-<span class="hljs-built_in">npm</span> ERR! 
-<span class="hljs-built_in">npm</span> ERR! The operation was rejected <span class="hljs-keyword">by</span> your operating system.
-<span class="hljs-built_in">npm</span> ERR! It <span class="hljs-keyword">is</span> likely you <span class="hljs-keyword">do</span> <span class="hljs-keyword">not</span> have the permissions <span class="hljs-keyword">to</span> access <span class="hljs-built_in">this</span> file <span class="hljs-keyword">as</span> the current user
-<span class="hljs-built_in">npm</span> ERR! 
-<span class="hljs-built_in">npm</span> ERR! If you believe <span class="hljs-built_in">this</span> might be a permissions issue, please double-check the
-<span class="hljs-built_in">npm</span> ERR! permissions <span class="hljs-keyword">of</span> the file <span class="hljs-keyword">and</span> its containing directories, <span class="hljs-keyword">or</span> <span class="hljs-keyword">try</span> running
-<span class="hljs-built_in">npm</span> ERR! the command again <span class="hljs-keyword">as</span> root/Administrator.</code></pre></div>
+<figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript"><span class="hljs-built_in">npm</span> WARN checkPermissions Missing write access <span class="hljs-keyword">to</span> /usr/local/lib/node_modules<br><span class="hljs-built_in">npm</span> ERR! code EACCES<br><span class="hljs-built_in">npm</span> ERR! syscall access<br><span class="hljs-built_in">npm</span> ERR! path /usr/local/lib/node_modules<br><span class="hljs-built_in">npm</span> ERR! errno -<span class="hljs-number">13</span><br><span class="hljs-built_in">npm</span> ERR! Error: EACCES: permission denied, access <span class="hljs-string">&#x27;/usr/local/lib/node_modules&#x27;</span><br><span class="hljs-built_in">npm</span> ERR!  [Error: EACCES: permission denied, access <span class="hljs-string">&#x27;/usr/local/lib/node_modules&#x27;</span>] &#123;<br><span class="hljs-built_in">npm</span> ERR!   stack: <span class="hljs-string">&quot;Error: EACCES: permission denied, access &#x27;/usr/local/lib/node_modules&#x27;&quot;</span>,<br><span class="hljs-built_in">npm</span> ERR!   errno: -<span class="hljs-number">13</span>,<br><span class="hljs-built_in">npm</span> ERR!   code: <span class="hljs-string">&#x27;EACCES&#x27;</span>,<br><span class="hljs-built_in">npm</span> ERR!   syscall: <span class="hljs-string">&#x27;access&#x27;</span>,<br><span class="hljs-built_in">npm</span> ERR!   path: <span class="hljs-string">&#x27;/usr/local/lib/node_modules&#x27;</span><br><span class="hljs-built_in">npm</span> ERR! &#125;<br><span class="hljs-built_in">npm</span> ERR! <br><span class="hljs-built_in">npm</span> ERR! The operation was rejected <span class="hljs-keyword">by</span> your operating system.<br><span class="hljs-built_in">npm</span> ERR! It <span class="hljs-keyword">is</span> likely you <span class="hljs-keyword">do</span> <span class="hljs-keyword">not</span> have the permissions <span class="hljs-keyword">to</span> access <span class="hljs-built_in">this</span> file <span class="hljs-keyword">as</span> the current user<br><span class="hljs-built_in">npm</span> ERR! <br><span class="hljs-built_in">npm</span> ERR! If you believe <span class="hljs-built_in">this</span> might be a permissions issue, please double-check the<br><span class="hljs-built_in">npm</span> ERR! permissions <span class="hljs-keyword">of</span> the file <span class="hljs-keyword">and</span> its containing directories, <span class="hljs-keyword">or</span> <span class="hljs-keyword">try</span> running<br><span class="hljs-built_in">npm</span> ERR! the command again <span class="hljs-keyword">as</span> root/Administrator.<br></code></pre></div></td></tr></table></figure>
 <p>根据官方文档，如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code>权限错误，要遵循由<a target="_blank" rel="noopener" href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#reinstall-npm-with-a-node-version-manager">npmjs</a>发布的指导修复该问题。强烈建议不要使用 root、sudo 等方法覆盖权限。<br>根据要求，下载了<strong>nvm</strong>，并且在终端利用nvm下载了最新版本的node和更新了npm后，hexo下载成功了。（以下是下载和使用nvm的教程链接）<br><a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm">https://github.com/nvm-sh/nvm</a>.        </p>
 <h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><p>输入以下命令hexo就会出现在指定的文件夹中</p>
-<div class="hljs"><pre><code class="hljs properties"><span class="hljs-attr">hexo</span> <span class="hljs-string">init &lt;folder&gt;</span>
-<span class="hljs-attr">cd</span> <span class="hljs-string">&lt;folder&gt;</span>
-<span class="hljs-attr">npm</span> <span class="hljs-string">install</span></code></pre></div>
+<figure class="highlight properties"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs properties"><span class="hljs-attr">hexo</span> <span class="hljs-string">init &lt;folder&gt;</span><br><span class="hljs-attr">cd</span> <span class="hljs-string">&lt;folder&gt;</span><br><span class="hljs-attr">npm</span> <span class="hljs-string">install</span><br></code></pre></div></td></tr></table></figure>
 <p>如果出现错误</p>
-<div class="hljs"><pre><code class="hljs java">-bash: syntax error near unexpected token `newline<span class="hljs-string">&#x27;</span></code></pre></div>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">-bash: syntax error near unexpected token `newline<span class="hljs-string">&#x27;</span><br></code></pre></div></td></tr></table></figure>
 <p>这是占位符的问题，将第一行命令的&lt;&gt;去除，再重新输入即可。</p>
 <p>到此，建站的基本操作就完成了。</p>
 <p>界面的设计等就可以由自己来操作了。放一个hexo的官方网站供大家参考。<br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">https://hexo.io/zh-cn/docs/configuration</a></p>
-<h2 id="创建Github远程仓库"><a href="#创建Github远程仓库" class="headerlink" title="创建Github远程仓库"></a>创建Github远程仓库</h2><p>注意仓库名为github的用户名.github.io，勾选readme<br><img src="https://img-blog.csdnimg.cn/20191123194438458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
+<h2 id="创建Github远程仓库"><a href="#创建Github远程仓库" class="headerlink" title="创建Github远程仓库"></a>创建Github远程仓库</h2><p>注意仓库名为github的用户名.github.io，勾选readme<br><img src="https://img-blog.csdnimg.cn/20191123194438458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>创建之后，进入仓库，点击<strong>Settings</strong>按钮，然后翻到GitHub Pages的部分，点击网页链接，就能够看到一个简易的网页了。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191123194913735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20191123194913735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt=""></p>
 <h2 id="部署hexo"><a href="#部署hexo" class="headerlink" title="部署hexo"></a>部署hexo</h2><p>进入本地的hexo文件，找到 <strong>_config.yml</strong>，打开后翻到最后，修改成</p>
-<div class="hljs"><pre><code class="hljs java">deploy:
-  type: git
-  repo:
-     gitHub: git<span class="hljs-meta">@github</span>.com:你的GitHub用户名/你的GitHub用户名.github.io.git
-  branch: master</code></pre></div>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">deploy:<br>  type: git<br>  repo:<br>     gitHub: git<span class="hljs-meta">@github</span>.com:你的GitHub用户名/你的GitHub用户名.github.io.git<br>  branch: master<br></code></pre></div></td></tr></table></figure>
 <p>repo后面的内容要修改成自己github仓库的SSH密匙。</p>
 <p>然后在终端中输入</p>
-<div class="hljs"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-deployer-git <span class="hljs-comment">--save</span></code></pre></div>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-deployer-git <span class="hljs-comment">--save</span><br></code></pre></div></td></tr></table></figure>
 <p>开始安装hexo-deploy-git，安装完成后，开始部署，在终端中输入</p>
-<div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo deploy</span></code></pre></div>
+<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo deploy</span><br></code></pre></div></td></tr></table></figure>
 <p>部署完成。</p>
 <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>这个时候，再次进入刚刚进入过的网页链接，就会看到一个船新版本的界面，也就是本地的hexo库已经部署到github上了。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191123195408260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20191123195408260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt=""></p>
 
             </div>
             <hr>
@@ -324,10 +299,14 @@ npm -v</code></pre></div>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -354,34 +333,38 @@ npm -v</code></pre></div>
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
+  <div id="waline"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
-      var light = 'github-light';
-      var dark = 'github-dark';
-      var schema = document.documentElement.getAttribute('data-user-color-scheme');
-      if (schema === 'dark') {
-        schema = dark;
-      } else {
-        schema = light;
-      }
-      window.UtterancesThemeLight = light;
-      window.UtterancesThemeDark = dark;
-      var s = document.createElement('script');
-      s.setAttribute('src', 'https://utteranc.es/client.js');
-      s.setAttribute('repo', 'AdamZhouSE/AdamZhouSE.github.io');
-      s.setAttribute('issue-term', 'title');
-      
-      s.setAttribute('label', 'utterances');
-      
-      s.setAttribute('theme', schema);
-      s.setAttribute('crossorigin', 'anonymous');
-      document.getElementById('comments').appendChild(s);
-    })
+    Fluid.utils.lazyComments('waline', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@waline/client@0.14.8/dist/Waline.min.js', function () {
+        new Waline({
+          el: "#waline",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          serverURL: "https://imnerd-api-iota.vercel.app/",
+          avatarCDN: "",
+          avatarForce: false,
+          requiredFields: [],
+          emojiCDN: "",
+          emojiMaps: {},
+          anonymous: true,
+        });
+      });
+    });
   </script>
-  <noscript>Please enable JavaScript to view the comments</noscript>
+  <noscript>Please enable JavaScript to view the
+    <a href="https://waline.js.org" rel="nofollow noopener">comments powered by Waline.</a>
+  </noscript>
 
 
               </article>
@@ -449,22 +432,27 @@ npm -v</code></pre></div>
   
   <!-- 备案信息 -->
   <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">苏ICP备20019763号-1</a>
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        苏ICP备20019763号-1
+      </a>
+    </span>
     
       
-        <a
-          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32021102001010"
-          rel="nofollow noopener"
-          class="beian-police"
-          target="_blank"
-        >
-          
-            <span style="visibility: hidden; width: 0">|</span>
-            <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
-          
-          <span>苏公网安备 32021102001010号</span>
-        </a>
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>苏公网安备 32021102001010号</span>
+          </a>
+        </span>
       
     
   </div>
@@ -473,25 +461,23 @@ npm -v</code></pre></div>
   
 </footer>
 
-<!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
@@ -500,7 +486,7 @@ npm -v</code></pre></div>
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -509,19 +495,20 @@ npm -v</code></pre></div>
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
 
 
 
@@ -529,7 +516,7 @@ npm -v</code></pre></div>
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
@@ -546,11 +533,12 @@ npm -v</code></pre></div>
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -593,7 +581,7 @@ npm -v</code></pre></div>
       };
     </script>
 
-    <script async src="https://cdn.staticfile.org/mathjax/3.1.2/es5/tex-svg.js" ></script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
 
   
 
@@ -601,7 +589,7 @@ npm -v</code></pre></div>
 
 
 
-  <script  src="https://cdn.staticfile.org/mermaid/8.8.2/mermaid.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
   <script>
     if (window.mermaid) {
       mermaid.initialize({"theme":"default"});
@@ -611,25 +599,11 @@ npm -v</code></pre></div>
 
 
 
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
 
 
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>
