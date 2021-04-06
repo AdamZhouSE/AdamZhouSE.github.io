@@ -298,7 +298,7 @@
 <li>Pull：新的虚拟机运行过程中，如果访问到未被复制的页面，就会出现页错误并从原来的VM处把该页复制过来</li>
 </ol>
 <p>实际操作中没有必要同时包含上述3个阶段。下面是3种迁移策略的优劣比较：</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20201031-01.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210406181806.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <h6 id="网络资源的迁移"><a href="#网络资源的迁移" class="headerlink" title="网络资源的迁移"></a>网络资源的迁移</h6><ul>
 <li>虚拟机这种系统级别的封装方式意味着迁移时VM的所有网络设备，包括协议状态(如TCP连接状态)以及IP地址都要随之一起迁移。</li>
 <li>在局域网内，可以通过发送ARP重定向包，将VM的IP地址与目的机器的MAC地址相绑定， 之后的所有包就可以发送到目的机器上。</li>
@@ -330,7 +330,7 @@
 <li>提供硬件机制的内存访问授权</li>
 </ul>
 <p>以Xen为例，它在虚拟内存到机器内存之间引入了一层中间地址，Guest OS看到的是这层中间地址，而不是机器的实际地址。Guest OS感觉自己的物理地址从0开始，是连续的，但Xen将这层中间地址真正地映射到机器地址上却可以是不连续的，这样保证了所有的物理内存可被任意分配给不同的Guest OS。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20201031-02.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210406181815.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>虚拟机监控器使用分段和分页机制对自身的物理内存进行保护。x86体系结构提供了支 持分段机制的虚拟内存，这能够提供另一种形式的特权级分离。</p>
 <p>每个段包括基址、段限和一些属性位。</p>
 <h5 id="2-网络隔离"><a href="#2-网络隔离" class="headerlink" title="2. 网络隔离"></a>2. 网络隔离</h5><p><strong>目标</strong>：确保把有害的攻击隔离，在可信网络之外和保证可信网络内部信息不外泄的前提下，完成网间数据的安全交换。</p>
@@ -355,7 +355,7 @@
 <p>利用负载均衡、数据迁移、数据块重组等技术，提升系统的潜在性能</p>
 <p>整合和重组底层物理资源，得到多种不同性能和可靠性的 新的虚拟设备，满足多种存储应用的需求</p>
 <h4 id="2-2-1-存储虚拟化的一般模型"><a href="#2-2-1-存储虚拟化的一般模型" class="headerlink" title="2.2.1 存储虚拟化的一般模型"></a>2.2.1 存储虚拟化的一般模型</h4><p>虚拟化存储系统在原有存储系统结构上增加了虚拟化层，将多个存储单元抽象成一个虚拟存储池。</p>
-<p><img src="https://learn-notes-1301797566.cos.ap-shanghai.myqcloud.com/20201101-01.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210406181823.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>它的优势如下：</p>
 <ul>
 <li>减少存储系统的管理开销</li>
@@ -469,33 +469,31 @@
                   
                 
                 
-  <div id="waline"></div>
   <script type="text/javascript">
-    Fluid.utils.lazyComments('waline', function() {
-      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@waline/client@0.14.8/dist/Waline.min.js', function () {
-        new Waline({
-          el: "#waline",
-          placeholder: "说点什么",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          serverURL: "https://imnerd-api-iota.vercel.app/",
-          avatarCDN: "",
-          avatarForce: false,
-          requiredFields: [],
-          emojiCDN: "",
-          emojiMaps: {},
-          anonymous: true,
-        });
-      });
-    });
+    Fluid.utils.lazyComments('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'AdamZhouSE/AdamZhouSE.github.io');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
   </script>
-  <noscript>Please enable JavaScript to view the
-    <a href="https://waline.js.org" rel="nofollow noopener">comments powered by Waline.</a>
-  </noscript>
+  <noscript>Please enable JavaScript to view the comments</noscript>
 
 
               </article>
