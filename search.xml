@@ -1,373 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo-Permalink简化</title>
-    <url>/posts/838443af.html</url>
-    <content><![CDATA[<h1 id="Permalink简化"><a href="#Permalink简化" class="headerlink" title="Permalink简化"></a>Permalink简化</h1><p>在文档名有中文的时候，因为汉字会被转义，默认的永久链接会非常复杂，具体原因可以看这一篇文章</p>
-<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2010/02/url_encoding.html">阮一峰 关于url编码</a></p>
-<p>有两种方法优化。</p>
-<a id="more"></a>
-<h2 id="方法一：自定义"><a href="#方法一：自定义" class="headerlink" title="方法一：自定义"></a>方法一：自定义</h2><p>首先，在<code>scaffolds</code>的<code>post.md</code>中，加入<code>urlname</code>元素。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs subunit">title: &#123;&#123; title &#125;&#125;
-urlname:
-date: &#123;&#123; date &#125;&#125;
-<span class="hljs-keyword">tags:</span>
-categories:</code></pre></div>
-<p>然后，在配置文件<code>_config.yml</code>中，将永久链接<code>permalink</code>的形式改为</p>
-<div class="hljs code-wrapper"><pre><code class="hljs elixir"><span class="hljs-symbol">permalink:</span> <span class="hljs-symbol">:category/</span><span class="hljs-symbol">:urlname/</span></code></pre></div>
-<p>也就是类别加上自定义的url链接。</p>
-<p>每次写文章时，可以自己设计该页的<code>url</code>，使得它变得简单，同时也利于区分。</p>
-<p>但是，这种修改方法的链接会随着文件目录的改变而改变，</p>
-<p>比如一篇文章<code>HelloWorld.md</code>本来放在<code>_posts</code>目录下，链接为<code>https://xxx/_posts/HelloWorld.md</code></p>
-<p>之后归类到<code>_posts/A</code>目录下，那么链接变为<code>https://xxx/_posts/A/HelloWorld.md</code></p>
-<p>这样不太利于分享，所以推荐使用第二种方法。</p>
-<h2 id="方法二：插件"><a href="#方法二：插件" class="headerlink" title="方法二：插件"></a>方法二：插件</h2><p>使用<code>hexo-abbrlink</code>这个插件</p>
-<ol>
-<li><p>安装</p>
-<div class="hljs code-wrapper"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-abbrlink <span class="hljs-comment">--save</span></code></pre></div>
-</li>
-<li><p>设置</p>
-<p>在<code>_config.yml</code>文件中修改永久链接格式</p>
-<div class="hljs code-wrapper"><pre><code class="hljs dts"><span class="hljs-symbol">permalink:</span> posts/:abbrlink.html
-<span class="hljs-symbol">abbrlink:</span>
-<span class="hljs-symbol">  alg:</span> crc32  <span class="hljs-meta"># 算法：crc16(default) and crc32</span>
-<span class="hljs-symbol">  rep:</span> hex    <span class="hljs-meta"># 进制：dec(default) and hex</span></code></pre></div>
-<p><code>posts</code>部分是可以更改的，也可以仿照方法一添加一个关键词便于识别</p>
-<div class="hljs code-wrapper"><pre><code class="hljs elixir"><span class="hljs-symbol">permalink:</span> <span class="hljs-symbol">:keywords/</span><span class="hljs-symbol">:abbrlink</span>.html</code></pre></div>
-</li>
-<li><p>生成</p>
-<p>在根目录创建<code>Gruntfile.js</code>文件，让插件到<code>source/_posts/</code>下读取所有的.md文件，把文件中的@@abbrlink替换成文件内容的hash值。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">grunt</span>) </span>&#123;
- 
-  grunt.initConfig(&#123;
-
-    rewrite: &#123;
-      abbrlink: &#123;
-        src: <span class="hljs-string">&#x27;source/_posts/**/*.md&#x27;</span>,
-        editor: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">contents, filepath</span>)</span>&#123;
-          <span class="hljs-keyword">const</span> crypto = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;crypto&#x27;</span>);
-          <span class="hljs-keyword">const</span> hash = crypto.createHash(<span class="hljs-string">&#x27;sha256&#x27;</span>);
-
-          hash.update(contents);
-          <span class="hljs-keyword">var</span> hashValue = hash.digest(<span class="hljs-string">&#x27;hex&#x27;</span>);
-
-          <span class="hljs-keyword">return</span> contents.replace(<span class="hljs-regexp">/@@abbrlink/g</span>, hashValue.substring(<span class="hljs-number">0</span>, <span class="hljs-number">16</span>));
-        &#125;
-      &#125;,
-    &#125;,
-  &#125;);
- 
-  grunt.loadNpmTasks(<span class="hljs-string">&#x27;grunt-rewrite&#x27;</span>);
-&#125;;</code></pre></div>
-</li>
-</ol>
-<p>这种方法生成的链接是不带目录的，直接就是第二步设置中<code>permalink</code>的样式，所以也没有了被改变的风险。</p>
-<p>参考</p>
-<ol>
-<li><a target="_blank" rel="noopener" href="http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html">http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo个人博客绑定域名和配置SSL证书</title>
-    <url>/posts/2cd2c226.html</url>
-    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
-<a id="more"></a>
-<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
-<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
-<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
-<p><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/domainname1.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
-<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>主机记录</th>
-<th>记录类型</th>
-<th>线路类型</th>
-<th>记录值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>www</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-<tr>
-<td>@</td>
-<td>CNAME</td>
-<td>默认</td>
-<td>你的Github项目仓库名</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
-<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
-<p><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/2020-04-09domainname2.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
-<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
-<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
-<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
-<hr>
-<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
-<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
-<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/400/35244">腾讯云Nginx服务器证书安装</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/026d67cc6cb1">Mac下nginx的使用</a></p>
-<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
-<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
-<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo写作</title>
-    <url>/posts/c4064b2b.html</url>
-    <content><![CDATA[<h1 id="Hexo写作"><a href="#Hexo写作" class="headerlink" title="Hexo写作"></a>Hexo写作</h1><p>本文介绍了一些基本的Hexo配置和使用hexo+GitHub写作的流程。</p>
-<a id="more"></a>
-<h3 id="1-Hexo基本命令"><a href="#1-Hexo基本命令" class="headerlink" title="1. Hexo基本命令"></a>1. Hexo基本命令</h3><div class="hljs code-wrapper"><pre><code class="hljs shell">hexo g = hexo generate  #生成
-hexo s = hexo server  #启动本地预览
-hexo d = hexo deploy  #远程部署
-hexo n &quot;文章标题&quot; = hexo new &quot;文章标题&quot;  #新建一篇博文</code></pre></div>
-<h3 id="2-整体配置"><a href="#2-整体配置" class="headerlink" title="2. 整体配置"></a>2. 整体配置</h3><p><code>\hexo\_config.yml</code></p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> Site</span>
-title:  # 网站名，标签页显示
-subtitle:  # 副标题，网站名下显示
-description:  # 网站描述，便于搜索
-keywords:
-author: # 作者
-language: zh-CN # 中文
-timezone: Asia/Shanghai # 时区</code></pre></div>
-<h3 id="3-更换主题"><a href="#3-更换主题" class="headerlink" title="3. 更换主题"></a>3. 更换主题</h3><p>推荐使用<code>melody</code></p>
-<p><a href="[https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#%E5%AE%89%E8%A3%85](https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#安装">hexo-theme-melody快速开始</a>)</p>
-<p>这个主题就是我现在网站使用的主题，它有完整的中文教程，功能齐全。按照教程配置就可以了。</p>
-<h3 id="4-写作步骤"><a href="#4-写作步骤" class="headerlink" title="4. 写作步骤"></a>4. 写作步骤</h3><ol>
-<li><p>新建文章</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">hexo new &quot;title&quot;</code></pre></div>
-</li>
-<li><p>写作</p>
-<p><code>\hexo\source\_post</code>中找到<code>title.md</code>，使用<code>typora</code>打开</p>
-<p>注意文章的<code>tags</code>格式是<code>[]</code></p>
-<p>在信息栏填写<code>top_img</code>信息可以自定义该页图片情况，如<code>false</code>表示不显示</p>
-<p><code>文章中&lt;!-- more --&gt;</code>之前的部分会显示在主页上，并出现<code>Read more</code>按钮，点击阅读更多内容</p>
-</li>
-</ol>
-<ol>
-<li><p>预览</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">hexo s
-hexo s --debug // 在命令行生成debug信息</code></pre></div>
-</li>
-<li><p>同步到远程</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">hexo d -g</code></pre></div>
-</li>
-</ol>
-<h3 id="5-问题"><a href="#5-问题" class="headerlink" title="5.  问题"></a>5.  问题</h3><ol>
-<li><p>Template render error: (unknown path)</p>
-<p>在命令行输入<code>hexo -g</code>后报错，原因在于文章内容中有<strong>{}</strong>时，如果它没有被代码块包括，解析会出现错误，所以需要写成</p>
-<div class="hljs code-wrapper"><pre><code class="hljs routeros">&#123;%<span class="hljs-built_in"> raw </span>%&#125;</code></pre></div>
-</li>
-<li><p>本地预览与远程显示不一致</p>
-<p>删除缓存</p>
-<div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo clean</span></code></pre></div>
-<p>在网页上刷新</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo部署到云服务器</title>
-    <url>/posts/e80e623c.html</url>
-    <content><![CDATA[<h3 id="0-准备工作"><a href="#0-准备工作" class="headerlink" title="0. 准备工作"></a>0. 准备工作</h3><p>博客的搭建和域名的绑定可以参考我以前的博客。<br><a href="https://zhouzhuyan.com/posts/ae6c038e.html">使用Github pages + Hexo搭建个人博客</a><br><a href="https://zhouzhuyan.com/posts/2cd2c226.html">Hexo个人博客绑定域名</a></p>
-<p>由于博客是基于Github pages搭建的，所以在国内的访问速度比较慢，可以部署到云服务器上加快访问的速度，我使用的是<a target="_blank" rel="noopener" href="https://cloud.tencent.com/act/campus">腾讯云学生机</a>。注意在国内使用云服务器部署网站需要对网站进行备案，详细步骤可以参考腾讯的<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/243">官方文档</a>。在备案完成后，就可以进行网站的部署了。</p>
-<h3 id="1-配置git"><a href="#1-配置git" class="headerlink" title="1.  配置git"></a>1.  配置git</h3><p><strong>Tip</strong><br>我的服务器型号是<code>CentOS 7.5</code></p>
-<h4 id="1-1-安装git"><a href="#1-1-安装git" class="headerlink" title="1.1 安装git"></a>1.1 安装git</h4><div class="hljs code-wrapper"><pre><code class="hljs shell">yum install -y git</code></pre></div>
-<p>看到complete字样说明安装完成了，可以通过如下命令验证</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">git --version</code></pre></div>
-<p>出现版本则说明安装成功。</p>
-<h4 id="1-2-创建git账户"><a href="#1-2-创建git账户" class="headerlink" title="1.2 创建git账户"></a>1.2 创建git账户</h4><div class="hljs code-wrapper"><pre><code class="hljs shell">adduser git
-passwd git</code></pre></div>
-<p>注意一定要有第二步<code>passwd git</code>，这是给git账户设置密码，否则账户不会使用。</p>
-<h4 id="1-3-设置免密登录git"><a href="#1-3-设置免密登录git" class="headerlink" title="1.3 设置免密登录git"></a>1.3 设置免密登录git</h4><p>使用<code>su</code>命令切换至git用户，并进入用户git的根目录</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">su git
-cd</code></pre></div>
-<p>创建<code>~/.ssh</code>文件夹和<code>~/.ssh/authorized_keys</code>文件</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir ~/.ssh
-touch ~/.ssh/authorized_keys</code></pre></div>
-<p>将本地的<code>id_rsa.pub</code>文件中的公匙复制到<code>authorized_keys</code>文件中，在mac中，该文件的地址是<code>/Users/你的用户名/.ssh/id_rsa.pub</code>，可以在终端中使用如下命令打开<code>.ssh</code>文件夹，然后使用vs code打开该文件</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">open /Users/galahad/.ssh</code></pre></div>
-<p>复制其中的内容，然后打开<code>authorized_keys</code>文件</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">vi ~/.ssh/authorized_keys</code></pre></div>
-<p>按<code>i</code>进入插入模式，复制内容<br>按<code>esc</code>键进入命令模式，输入<code>:wq</code>保存并退出<br>最后对文件赋予对应的权限</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">chmod 600 /home/git/.ssh/authorized_keys
-chmod 700 /home/git/.ssh</code></pre></div>
-<p>这样就可以使得本地终端可以免密登录git用户，可以在本地终端使用ssh远程连接测试</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">ssh git@你的IP</code></pre></div>
-<p>如果仍需输入密码，那说明配置有问题，可以重新按照1.3的步骤再配置一遍，当然，1.3的部分不是必须的，这只是为了在本地提交文件到服务器的时候不用输入密码，省点儿力气。</p>
-<h4 id="1-4-配置git仓库"><a href="#1-4-配置git仓库" class="headerlink" title="1.4 配置git仓库"></a>1.4 配置git仓库</h4><p>在git用户的根目录下创建hexo存储的目录</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir -p projects/blog</code></pre></div>
-<p>再创建一个git仓库，并初始化一个仓库</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir repos
-cd repos
-git init --bare blog.git</code></pre></div>
-<p>之后，在<code>blog.git</code>文件夹下会产生一个<code>hooks</code>文件夹，在其中创建一个文件<code>post-receive</code>，在其中配置一个钩子</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">cd blog.git/hooks
-vi post-receive</code></pre></div>
-<p>将如下内容复制到其中</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh</span>
-git --work-tree=/home/git/projects/blog --git-dir=/home/git/repos/blog.git checkout -f</code></pre></div>
-<p>保存退出之后，赋予文件可执行权限</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">chmod +x post-receive</code></pre></div>
-<p>然后输入<code>exit</code>回到<code>root</code>用户下，输入如下命令</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">chown -R git:git /home/git/repos/blog.git</code></pre></div>
-<p>配置完仓库后，可以在本地使用<code>git clone</code>命令测试是否能够成功克隆仓库</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">git clone git@server_ip:/home/git/repos/blog.git</code></pre></div>
-<h3 id="2-配置Nginx"><a href="#2-配置Nginx" class="headerlink" title="2 配置Nginx"></a>2 配置Nginx</h3><h4 id="2-1-安装Nginx"><a href="#2-1-安装Nginx" class="headerlink" title="2.1 安装Nginx"></a>2.1 安装Nginx</h4><div class="hljs code-wrapper"><pre><code class="hljs shell">yum install -y nginx</code></pre></div>
-<p>启动nginx</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">nginx</code></pre></div>
-<h4 id="2-2-配置文件"><a href="#2-2-配置文件" class="headerlink" title="2.2 配置文件"></a>2.2 配置文件</h4><p>先暂停服务</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">nginx -s stop</code></pre></div>
-<p>进入nginx目录，编辑配置文件</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">cd /etc/nginx
-vi nginx.conf</code></pre></div>
-<p>注意要修改两个地方，一个是将<code>user nginx</code>改为<code>user root</code><br>第二个就是在server的位置，添加root解析路径<code>/home/git/projects/blog/</code>，如果你已经有了域名，那么在server_name后面添加上你的域名。其它保持不变。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">server &#123;
-        listen       80 default_server;
-        listen       [::]:80 default_server;
-        server_name  zhouzhuyan.com www.zhouzhuyan.com;
-        root         /home/git/projects/blog/;
-        index index.html index.htm;
-    &#125;</code></pre></div>
-<p>保存退出<br>重新启动nginx</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">systemctl restart nginx</code></pre></div>
-<h4 id="2-3-检查"><a href="#2-3-检查" class="headerlink" title="2.3 检查"></a>2.3 检查</h4><p>检查nginx状态</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">systemctl status nginx</code></pre></div>
-<p>如果看到绿色的<code>active</code>就表示配置成功了。我在这里遇到了一个问题，它的状态显示红色的<code>failed</code>,，错误是<code>98: Address already in use</code>，80端口已经被占用，这个时候可以用如下命令检查一下是谁占用了80端口</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">netstat -ntpl</code></pre></div>
-<p>如果就是nginx的话，应该是由于之前的配置文件中，<code>listen       80 default_server;</code>监听ipv4的80端口，而<code>listen       [::]:80 default_server;</code>监听的是ipv6的80端口，于是就重复占用了。可以在配置文件中这样更改</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">listen       [::]:80 ipv6only=on  default_server;</code></pre></div>
-<p>然后重启nginx应该就可以了。</p>
-<h3 id="3-Hexo本地配置"><a href="#3-Hexo本地配置" class="headerlink" title="3. Hexo本地配置"></a>3. Hexo本地配置</h3><p>hexo的站点配置文件<code>_config.yml</code></p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">deploy:
-  type: git
-  repo: git@你的IP:/home/git/repos/blog.git
-  branch: master</code></pre></div>
-<p>然后进行部署</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">hexo clean
-hexo g -d</code></pre></div>
-<h3 id="4-启用https"><a href="#4-启用https" class="headerlink" title="4. 启用https"></a>4. 启用https</h3><p>由于nginx默认使用的是http，所以在网站访问的时候，会显示不安全，可以通过配置来开启https</p>
-<h4 id="4-1-申请SSL证书"><a href="#4-1-申请SSL证书" class="headerlink" title="4.1 申请SSL证书"></a>4.1 申请SSL证书</h4><p>阿里云和腾讯云都提供免费的SSL证书下载，因为我的域名是在腾讯云云购买的，所以我就从腾讯云上下载了<a target="_blank" rel="noopener" href="https://cloud.tencent.com/product/ssl">SSL证书</a></p>
-<h4 id="4-2-传输文件到服务器"><a href="#4-2-传输文件到服务器" class="headerlink" title="4.2 传输文件到服务器"></a>4.2 传输文件到服务器</h4><p>从腾讯云上下载证书到本地，会得到一个自己域名命名的文件夹，里面有<code>Apache</code>，<code>Nginx</code>，<code>Tomcat</code>，<code>IIS</code>的证书，由于我们使用的是nginx服务，所以只需要Nginx文件夹内的<code>xxx.crt</code>和<code>xxx.key</code>两个文件。<br>在服务端创建文件夹存储证书</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir /home/git/SSL</code></pre></div>
-<p>我们可以使用scp命令将本地的文件传输到服务器</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">scp -r xxx/Nginx git@你的IP /home/git/SSL</code></pre></div>
-<h4 id="4-3-配置nginx"><a href="#4-3-配置nginx" class="headerlink" title="4.3 配置nginx"></a>4.3 配置nginx</h4><p>然后再次编辑<code>nginx.conf</code>文件，这里可以参考官方文档<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/400/35244">Nginx 服务器证书安装</a>，文档写的很清晰，按照其中的步骤配置一下就可以完成了。<br>之后我们就可以通过https访问网页，在网址旁边会出现一把锁。</p>
-<p>参考：<br>[1]HJX.将Hexo部署到阿里云轻量级服务器(保姆级教程)<br>[EB/OL].<a target="_blank" rel="noopener" href="https://hjxlog.com/posts/20191130a1.html,2019-11-30.">https://hjxlog.com/posts/20191130a1.html,2019-11-30.</a><br>[2]Dreamy.TZK.将Hexo部署到云服务器<br>[EB/OL].<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1632020,2020-05-25.">https://cloud.tencent.com/developer/article/1632020,2020-05-25.</a></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Github pages+Hexo 搭建个人博客</title>
-    <url>/posts/ae6c038e.html</url>
-    <content><![CDATA[<h1 id="Github-pages-Hexo-搭建个人博客"><a href="#Github-pages-Hexo-搭建个人博客" class="headerlink" title="Github pages + Hexo 搭建个人博客"></a>Github pages + Hexo 搭建个人博客</h1><p>2019年11月19日，我决定开始写<strong>博客</strong>，首先要用<em>github pages+hexo</em>搭建一个个人博客，其中的过程我就记录在这里面。</p>
-<a id="more"></a>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
-<li>注册一个 GitHub 账户</li>
-<li>安装 Node.js<br>下载链接<br> <a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a><br> 下面这个是中文网，对于国内用户来说下载速度非常快。<br> <a target="_blank" rel="noopener" href="http://nodejs.cn/download/">http://nodejs.cn/download/</a><br> 推荐菜鸟教程关于node的安装教程以及简易的语法介绍<a target="_blank" rel="noopener" href="https://www.runoob.com/nodejs/nodejs-install-setup.html">https://www.runoob.com/nodejs/nodejs-install-setup.html</a><ol>
-<li>安装git</li>
-<li>markdown语法学习<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/191d1e21f7ed">https://www.jianshu.com/p/191d1e21f7ed</a></li>
-<li>git语法学习<br>推荐廖雪峰的git教程<br><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600">https://www.liaoxuefeng.com/wiki/896043488029600</a></li>
-</ol>
-</li>
-</ol>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在终端检查node和npm的版本情况</p>
-<div class="hljs code-wrapper"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>
-npm -v</code></pre></div>
-<p>然后输入命令安装hexo</p>
-<div class="hljs code-wrapper"><pre><code class="hljs avrasm">npm install -g hexo-<span class="hljs-keyword">cli</span></code></pre></div>
-<p>我使用的是Mac电脑，在这一步出现了问题，终端显示如下</p>
-<div class="hljs code-wrapper"><pre><code class="hljs coffeescript">rollbackFailedOptional verb <span class="hljs-built_in">npm</span>-session</code></pre></div>
-<p>然后我又等了一会儿，终端又报错了。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs livescript"><span class="hljs-built_in">npm</span> WARN checkPermissions Missing write access <span class="hljs-keyword">to</span> /usr/local/lib/node_modules
-<span class="hljs-built_in">npm</span> ERR! code EACCES
-<span class="hljs-built_in">npm</span> ERR! syscall access
-<span class="hljs-built_in">npm</span> ERR! path /usr/local/lib/node_modules
-<span class="hljs-built_in">npm</span> ERR! errno -<span class="hljs-number">13</span>
-<span class="hljs-built_in">npm</span> ERR! Error: EACCES: permission denied, access <span class="hljs-string">&#x27;/usr/local/lib/node_modules&#x27;</span>
-<span class="hljs-built_in">npm</span> ERR!  [Error: EACCES: permission denied, access <span class="hljs-string">&#x27;/usr/local/lib/node_modules&#x27;</span>] &#123;
-<span class="hljs-built_in">npm</span> ERR!   stack: <span class="hljs-string">&quot;Error: EACCES: permission denied, access &#x27;/usr/local/lib/node_modules&#x27;&quot;</span>,
-<span class="hljs-built_in">npm</span> ERR!   errno: -<span class="hljs-number">13</span>,
-<span class="hljs-built_in">npm</span> ERR!   code: <span class="hljs-string">&#x27;EACCES&#x27;</span>,
-<span class="hljs-built_in">npm</span> ERR!   syscall: <span class="hljs-string">&#x27;access&#x27;</span>,
-<span class="hljs-built_in">npm</span> ERR!   path: <span class="hljs-string">&#x27;/usr/local/lib/node_modules&#x27;</span>
-<span class="hljs-built_in">npm</span> ERR! &#125;
-<span class="hljs-built_in">npm</span> ERR! 
-<span class="hljs-built_in">npm</span> ERR! The operation was rejected <span class="hljs-keyword">by</span> your operating system.
-<span class="hljs-built_in">npm</span> ERR! It <span class="hljs-keyword">is</span> likely you <span class="hljs-keyword">do</span> <span class="hljs-keyword">not</span> have the permissions <span class="hljs-keyword">to</span> access <span class="hljs-built_in">this</span> file <span class="hljs-keyword">as</span> the current user
-<span class="hljs-built_in">npm</span> ERR! 
-<span class="hljs-built_in">npm</span> ERR! If you believe <span class="hljs-built_in">this</span> might be a permissions issue, please double-check the
-<span class="hljs-built_in">npm</span> ERR! permissions <span class="hljs-keyword">of</span> the file <span class="hljs-keyword">and</span> its containing directories, <span class="hljs-keyword">or</span> <span class="hljs-keyword">try</span> running
-<span class="hljs-built_in">npm</span> ERR! the command again <span class="hljs-keyword">as</span> root/Administrator.</code></pre></div>
-<p>根据官方文档，如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code>权限错误，要遵循由<a target="_blank" rel="noopener" href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#reinstall-npm-with-a-node-version-manager">npmjs</a>发布的指导修复该问题。强烈建议不要使用 root、sudo 等方法覆盖权限。<br>根据要求，下载了<strong>nvm</strong>，并且在终端利用nvm下载了最新版本的node和更新了npm后，hexo下载成功了。（以下是下载和使用nvm的教程链接）<br><a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm">https://github.com/nvm-sh/nvm</a>.        </p>
-<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><p>输入以下命令hexo就会出现在指定的文件夹中</p>
-<div class="hljs code-wrapper"><pre><code class="hljs properties"><span class="hljs-attr">hexo</span> <span class="hljs-string">init &lt;folder&gt;</span>
-<span class="hljs-attr">cd</span> <span class="hljs-string">&lt;folder&gt;</span>
-<span class="hljs-attr">npm</span> <span class="hljs-string">install</span></code></pre></div>
-<p>如果出现错误</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java">-bash: syntax error near unexpected token `newline<span class="hljs-string">&#x27;</span></code></pre></div>
-<p>这是占位符的问题，将第一行命令的&lt;&gt;去除，再重新输入即可。</p>
-<p>到此，建站的基本操作就完成了。</p>
-<p>界面的设计等就可以由自己来操作了。放一个hexo的官方网站供大家参考。<br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">https://hexo.io/zh-cn/docs/configuration</a></p>
-<h2 id="创建Github远程仓库"><a href="#创建Github远程仓库" class="headerlink" title="创建Github远程仓库"></a>创建Github远程仓库</h2><p>注意仓库名为github的用户名.github.io，勾选readme<br><img src="https://img-blog.csdnimg.cn/20191123194438458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt=""></p>
-<p>创建之后，进入仓库，点击<strong>Settings</strong>按钮，然后翻到GitHub Pages的部分，点击网页链接，就能够看到一个简易的网页了。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191123194913735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt=""></p>
-<h2 id="部署hexo"><a href="#部署hexo" class="headerlink" title="部署hexo"></a>部署hexo</h2><p>进入本地的hexo文件，找到 <strong>_config.yml</strong>，打开后翻到最后，修改成</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java">deploy:
-  type: git
-  repo:
-     gitHub: git<span class="hljs-meta">@github</span>.com:你的GitHub用户名/你的GitHub用户名.github.io.git
-  branch: master</code></pre></div>
-<p>repo后面的内容要修改成自己github仓库的SSH密匙。</p>
-<p>然后在终端中输入</p>
-<div class="hljs code-wrapper"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-deployer-git <span class="hljs-comment">--save</span></code></pre></div>
-<p>开始安装hexo-deploy-git，安装完成后，开始部署，在终端中输入</p>
-<div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo deploy</span></code></pre></div>
-<p>部署完成。</p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>这个时候，再次进入刚刚进入过的网页链接，就会看到一个船新版本的界面，也就是本地的hexo库已经部署到github上了。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191123195408260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt=""></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C++变量和基本类型</title>
     <url>/posts/96db5496.html</url>
     <content><![CDATA[<h3 id="变量和基本类型"><a href="#变量和基本类型" class="headerlink" title="变量和基本类型"></a>变量和基本类型</h3><h4 id="1-复合类型-Compound-type"><a href="#1-复合类型-Compound-type" class="headerlink" title="1. 复合类型(Compound type)"></a>1. 复合类型(Compound type)</h4><p>基于其它类型定义的类型</p>
@@ -1344,6 +977,373 @@ Employee buddy = buddies.getFirst();</code></pre></div>
       </tags>
   </entry>
   <entry>
+    <title>Hexo-Permalink简化</title>
+    <url>/posts/838443af.html</url>
+    <content><![CDATA[<h1 id="Permalink简化"><a href="#Permalink简化" class="headerlink" title="Permalink简化"></a>Permalink简化</h1><p>在文档名有中文的时候，因为汉字会被转义，默认的永久链接会非常复杂，具体原因可以看这一篇文章</p>
+<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2010/02/url_encoding.html">阮一峰 关于url编码</a></p>
+<p>有两种方法优化。</p>
+<a id="more"></a>
+<h2 id="方法一：自定义"><a href="#方法一：自定义" class="headerlink" title="方法一：自定义"></a>方法一：自定义</h2><p>首先，在<code>scaffolds</code>的<code>post.md</code>中，加入<code>urlname</code>元素。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs subunit">title: &#123;&#123; title &#125;&#125;
+urlname:
+date: &#123;&#123; date &#125;&#125;
+<span class="hljs-keyword">tags:</span>
+categories:</code></pre></div>
+<p>然后，在配置文件<code>_config.yml</code>中，将永久链接<code>permalink</code>的形式改为</p>
+<div class="hljs code-wrapper"><pre><code class="hljs elixir"><span class="hljs-symbol">permalink:</span> <span class="hljs-symbol">:category/</span><span class="hljs-symbol">:urlname/</span></code></pre></div>
+<p>也就是类别加上自定义的url链接。</p>
+<p>每次写文章时，可以自己设计该页的<code>url</code>，使得它变得简单，同时也利于区分。</p>
+<p>但是，这种修改方法的链接会随着文件目录的改变而改变，</p>
+<p>比如一篇文章<code>HelloWorld.md</code>本来放在<code>_posts</code>目录下，链接为<code>https://xxx/_posts/HelloWorld.md</code></p>
+<p>之后归类到<code>_posts/A</code>目录下，那么链接变为<code>https://xxx/_posts/A/HelloWorld.md</code></p>
+<p>这样不太利于分享，所以推荐使用第二种方法。</p>
+<h2 id="方法二：插件"><a href="#方法二：插件" class="headerlink" title="方法二：插件"></a>方法二：插件</h2><p>使用<code>hexo-abbrlink</code>这个插件</p>
+<ol>
+<li><p>安装</p>
+<div class="hljs code-wrapper"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-abbrlink <span class="hljs-comment">--save</span></code></pre></div>
+</li>
+<li><p>设置</p>
+<p>在<code>_config.yml</code>文件中修改永久链接格式</p>
+<div class="hljs code-wrapper"><pre><code class="hljs dts"><span class="hljs-symbol">permalink:</span> posts/:abbrlink.html
+<span class="hljs-symbol">abbrlink:</span>
+<span class="hljs-symbol">  alg:</span> crc32  <span class="hljs-meta"># 算法：crc16(default) and crc32</span>
+<span class="hljs-symbol">  rep:</span> hex    <span class="hljs-meta"># 进制：dec(default) and hex</span></code></pre></div>
+<p><code>posts</code>部分是可以更改的，也可以仿照方法一添加一个关键词便于识别</p>
+<div class="hljs code-wrapper"><pre><code class="hljs elixir"><span class="hljs-symbol">permalink:</span> <span class="hljs-symbol">:keywords/</span><span class="hljs-symbol">:abbrlink</span>.html</code></pre></div>
+</li>
+<li><p>生成</p>
+<p>在根目录创建<code>Gruntfile.js</code>文件，让插件到<code>source/_posts/</code>下读取所有的.md文件，把文件中的@@abbrlink替换成文件内容的hash值。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">grunt</span>) </span>&#123;
+ 
+  grunt.initConfig(&#123;
+
+    rewrite: &#123;
+      abbrlink: &#123;
+        src: <span class="hljs-string">&#x27;source/_posts/**/*.md&#x27;</span>,
+        editor: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">contents, filepath</span>)</span>&#123;
+          <span class="hljs-keyword">const</span> crypto = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;crypto&#x27;</span>);
+          <span class="hljs-keyword">const</span> hash = crypto.createHash(<span class="hljs-string">&#x27;sha256&#x27;</span>);
+
+          hash.update(contents);
+          <span class="hljs-keyword">var</span> hashValue = hash.digest(<span class="hljs-string">&#x27;hex&#x27;</span>);
+
+          <span class="hljs-keyword">return</span> contents.replace(<span class="hljs-regexp">/@@abbrlink/g</span>, hashValue.substring(<span class="hljs-number">0</span>, <span class="hljs-number">16</span>));
+        &#125;
+      &#125;,
+    &#125;,
+  &#125;);
+ 
+  grunt.loadNpmTasks(<span class="hljs-string">&#x27;grunt-rewrite&#x27;</span>);
+&#125;;</code></pre></div>
+</li>
+</ol>
+<p>这种方法生成的链接是不带目录的，直接就是第二步设置中<code>permalink</code>的样式，所以也没有了被改变的风险。</p>
+<p>参考</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html">http://blog.jvaeyhcd.wang/posts/05c9df7e0c47bd64.html</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo个人博客绑定域名和配置SSL证书</title>
+    <url>/posts/2cd2c226.html</url>
+    <content><![CDATA[<h1 id="Hexo-个人博客绑定域名和配置SSL证书"><a href="#Hexo-个人博客绑定域名和配置SSL证书" class="headerlink" title="Hexo 个人博客绑定域名和配置SSL证书"></a>Hexo 个人博客绑定域名和配置SSL证书</h1><p>在完成个人博客的搭建以后，我们可以通过一个<code>https://xxx.github.io</code>形式的链接在访问我们的个人博客网站，那么如果想拥有一个个性的域名，该如何操作呢？</p>
+<a id="more"></a>
+<h2 id="一、-绑定域名"><a href="#一、-绑定域名" class="headerlink" title="一、 绑定域名"></a>一、 绑定域名</h2><h3 id="1-购买"><a href="#1-购买" class="headerlink" title="1. 购买"></a>1. 购买</h3><p>域名可以在阿里云或者腾讯云上购买，不同形式的有不同的价格，根据自己的情况购买即可。我在腾讯云上购买了我现在的域名<code>zhouzhuyan.com</code></p>
+<p><strong>注意</strong>：如果不使用国内的服务器的话不用备案，只要完成实名认证就可以了。</p>
+<p>现在实名认证，审核都很快，虽然说一个工作日审批，但是我的话几分钟成功了。在域名的状态显示正常以后，就可以使用了。</p>
+<p><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/domainname1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="2-域名解析"><a href="#2-域名解析" class="headerlink" title="2. 域名解析"></a>2. 域名解析</h3><p>这个时候，网站时访问不了的，因为还需要去解析你的域名，将你的域名指向你的个人网站。</p>
+<p>到腾讯云控制台的域名管理界面，找到你的域名，点击解析，选择添加记录</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>主机记录</th>
+<th>记录类型</th>
+<th>线路类型</th>
+<th>记录值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>www</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+<tr>
+<td>@</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>你的Github项目仓库名</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>两个主机记录是为了让你的网站在有<code>www</code>和没有的情况下都可以访问，仓库名可以在Github仓库的<code>Settings</code>里面找到。解析需要10分钟，耐心等待。</p>
+<h3 id="3-在项目中更换"><a href="#3-在项目中更换" class="headerlink" title="3. 在项目中更换"></a>3. 在项目中更换</h3><p>到Github中找到自己的网站所在的仓库，进入<code>Settings</code>界面</p>
+<p><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/2020-04-09domainname2.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>在<code>Custom domain</code>里面填写自己的域名，选择<code>save</code>，这样就会出现上图的形式，显示<code>Your site is published at https://你的域名</code>，勾选<code>Enforce HTTPS</code></p>
+<h3 id="4-创建CNAME文件"><a href="#4-创建CNAME文件" class="headerlink" title="4. 创建CNAME文件"></a>4. 创建CNAME文件</h3><p>进入你的Hexo本地文件所在的根目录，找到<code>\source</code>目录，在里面创建一个文件<code>CNAME</code>，注意它是没有类型的，不是<code>.txt</code>。</p>
+<p>在里面加入你的域名，注意不要在前面加入<code>https</code> <code>www</code>这样的前缀，就是你的域名。</p>
+<p>然后<code>hexo d -g</code>部署你的网站，等待一段时间后，就可以通过你的个性域名访问网站了。</p>
+<hr>
+<h2 id="二、-SSL安全证书"><a href="#二、-SSL安全证书" class="headerlink" title="二、 SSL安全证书"></a>二、 SSL安全证书</h2><p>注册好域名后，用google访问时，可能会出现<strong>您访问的不是安全链接</strong>的提示，或者能够正常访问，但是域名旁边显示的是一个感叹号，表示不安全，这是因为我们还没有申请安全证书，在申请了证书之后，域名旁边显示的就是一把锁，表示安全。</p>
+<p>腾讯云和阿里云都提供免费的SSL证书下载，具体安装也有相关的文档，按照步骤操作就行。</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/400/35244">腾讯云Nginx服务器证书安装</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/026d67cc6cb1">Mac下nginx的使用</a></p>
+<p>在证书安装好了以后，可以看到域名解析里面多出了一条TXT类型的解析。</p>
+<p>在Chrome浏览器中，打开网站后如果仍然显示不安全，即没有出现锁的图标，右击选择检查元素，进入开发者模式，看<code>Security</code>里面有什么问题。</p>
+<p><strong>踩坑</strong>：我发现我用阿里云图床的图片引用的是http头，把它改为<code>https</code>，锁就出现了。</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo写作</title>
+    <url>/posts/c4064b2b.html</url>
+    <content><![CDATA[<h1 id="Hexo写作"><a href="#Hexo写作" class="headerlink" title="Hexo写作"></a>Hexo写作</h1><p>本文介绍了一些基本的Hexo配置和使用hexo+GitHub写作的流程。</p>
+<a id="more"></a>
+<h3 id="1-Hexo基本命令"><a href="#1-Hexo基本命令" class="headerlink" title="1. Hexo基本命令"></a>1. Hexo基本命令</h3><div class="hljs code-wrapper"><pre><code class="hljs shell">hexo g = hexo generate  #生成
+hexo s = hexo server  #启动本地预览
+hexo d = hexo deploy  #远程部署
+hexo n &quot;文章标题&quot; = hexo new &quot;文章标题&quot;  #新建一篇博文</code></pre></div>
+<h3 id="2-整体配置"><a href="#2-整体配置" class="headerlink" title="2. 整体配置"></a>2. 整体配置</h3><p><code>\hexo\_config.yml</code></p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> Site</span>
+title:  # 网站名，标签页显示
+subtitle:  # 副标题，网站名下显示
+description:  # 网站描述，便于搜索
+keywords:
+author: # 作者
+language: zh-CN # 中文
+timezone: Asia/Shanghai # 时区</code></pre></div>
+<h3 id="3-更换主题"><a href="#3-更换主题" class="headerlink" title="3. 更换主题"></a>3. 更换主题</h3><p>推荐使用<code>melody</code></p>
+<p><a href="[https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#%E5%AE%89%E8%A3%85](https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#安装">hexo-theme-melody快速开始</a>)</p>
+<p>这个主题就是我现在网站使用的主题，它有完整的中文教程，功能齐全。按照教程配置就可以了。</p>
+<h3 id="4-写作步骤"><a href="#4-写作步骤" class="headerlink" title="4. 写作步骤"></a>4. 写作步骤</h3><ol>
+<li><p>新建文章</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">hexo new &quot;title&quot;</code></pre></div>
+</li>
+<li><p>写作</p>
+<p><code>\hexo\source\_post</code>中找到<code>title.md</code>，使用<code>typora</code>打开</p>
+<p>注意文章的<code>tags</code>格式是<code>[]</code></p>
+<p>在信息栏填写<code>top_img</code>信息可以自定义该页图片情况，如<code>false</code>表示不显示</p>
+<p><code>文章中&lt;!-- more --&gt;</code>之前的部分会显示在主页上，并出现<code>Read more</code>按钮，点击阅读更多内容</p>
+</li>
+</ol>
+<ol>
+<li><p>预览</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">hexo s
+hexo s --debug // 在命令行生成debug信息</code></pre></div>
+</li>
+<li><p>同步到远程</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">hexo d -g</code></pre></div>
+</li>
+</ol>
+<h3 id="5-问题"><a href="#5-问题" class="headerlink" title="5.  问题"></a>5.  问题</h3><ol>
+<li><p>Template render error: (unknown path)</p>
+<p>在命令行输入<code>hexo -g</code>后报错，原因在于文章内容中有<strong>{}</strong>时，如果它没有被代码块包括，解析会出现错误，所以需要写成</p>
+<div class="hljs code-wrapper"><pre><code class="hljs routeros">&#123;%<span class="hljs-built_in"> raw </span>%&#125;</code></pre></div>
+</li>
+<li><p>本地预览与远程显示不一致</p>
+<p>删除缓存</p>
+<div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo clean</span></code></pre></div>
+<p>在网页上刷新</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo部署到云服务器</title>
+    <url>/posts/e80e623c.html</url>
+    <content><![CDATA[<h3 id="0-准备工作"><a href="#0-准备工作" class="headerlink" title="0. 准备工作"></a>0. 准备工作</h3><p>博客的搭建和域名的绑定可以参考我以前的博客。<br><a href="https://zhouzhuyan.com/posts/ae6c038e.html">使用Github pages + Hexo搭建个人博客</a><br><a href="https://zhouzhuyan.com/posts/2cd2c226.html">Hexo个人博客绑定域名</a></p>
+<p>由于博客是基于Github pages搭建的，所以在国内的访问速度比较慢，可以部署到云服务器上加快访问的速度，我使用的是<a target="_blank" rel="noopener" href="https://cloud.tencent.com/act/campus">腾讯云学生机</a>。注意在国内使用云服务器部署网站需要对网站进行备案，详细步骤可以参考腾讯的<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/243">官方文档</a>。在备案完成后，就可以进行网站的部署了。</p>
+<h3 id="1-配置git"><a href="#1-配置git" class="headerlink" title="1.  配置git"></a>1.  配置git</h3><p><strong>Tip</strong><br>我的服务器型号是<code>CentOS 7.5</code></p>
+<h4 id="1-1-安装git"><a href="#1-1-安装git" class="headerlink" title="1.1 安装git"></a>1.1 安装git</h4><div class="hljs code-wrapper"><pre><code class="hljs shell">yum install -y git</code></pre></div>
+<p>看到complete字样说明安装完成了，可以通过如下命令验证</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">git --version</code></pre></div>
+<p>出现版本则说明安装成功。</p>
+<h4 id="1-2-创建git账户"><a href="#1-2-创建git账户" class="headerlink" title="1.2 创建git账户"></a>1.2 创建git账户</h4><div class="hljs code-wrapper"><pre><code class="hljs shell">adduser git
+passwd git</code></pre></div>
+<p>注意一定要有第二步<code>passwd git</code>，这是给git账户设置密码，否则账户不会使用。</p>
+<h4 id="1-3-设置免密登录git"><a href="#1-3-设置免密登录git" class="headerlink" title="1.3 设置免密登录git"></a>1.3 设置免密登录git</h4><p>使用<code>su</code>命令切换至git用户，并进入用户git的根目录</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">su git
+cd</code></pre></div>
+<p>创建<code>~/.ssh</code>文件夹和<code>~/.ssh/authorized_keys</code>文件</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir ~/.ssh
+touch ~/.ssh/authorized_keys</code></pre></div>
+<p>将本地的<code>id_rsa.pub</code>文件中的公匙复制到<code>authorized_keys</code>文件中，在mac中，该文件的地址是<code>/Users/你的用户名/.ssh/id_rsa.pub</code>，可以在终端中使用如下命令打开<code>.ssh</code>文件夹，然后使用vs code打开该文件</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">open /Users/galahad/.ssh</code></pre></div>
+<p>复制其中的内容，然后打开<code>authorized_keys</code>文件</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">vi ~/.ssh/authorized_keys</code></pre></div>
+<p>按<code>i</code>进入插入模式，复制内容<br>按<code>esc</code>键进入命令模式，输入<code>:wq</code>保存并退出<br>最后对文件赋予对应的权限</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">chmod 600 /home/git/.ssh/authorized_keys
+chmod 700 /home/git/.ssh</code></pre></div>
+<p>这样就可以使得本地终端可以免密登录git用户，可以在本地终端使用ssh远程连接测试</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">ssh git@你的IP</code></pre></div>
+<p>如果仍需输入密码，那说明配置有问题，可以重新按照1.3的步骤再配置一遍，当然，1.3的部分不是必须的，这只是为了在本地提交文件到服务器的时候不用输入密码，省点儿力气。</p>
+<h4 id="1-4-配置git仓库"><a href="#1-4-配置git仓库" class="headerlink" title="1.4 配置git仓库"></a>1.4 配置git仓库</h4><p>在git用户的根目录下创建hexo存储的目录</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir -p projects/blog</code></pre></div>
+<p>再创建一个git仓库，并初始化一个仓库</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir repos
+cd repos
+git init --bare blog.git</code></pre></div>
+<p>之后，在<code>blog.git</code>文件夹下会产生一个<code>hooks</code>文件夹，在其中创建一个文件<code>post-receive</code>，在其中配置一个钩子</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">cd blog.git/hooks
+vi post-receive</code></pre></div>
+<p>将如下内容复制到其中</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh</span>
+git --work-tree=/home/git/projects/blog --git-dir=/home/git/repos/blog.git checkout -f</code></pre></div>
+<p>保存退出之后，赋予文件可执行权限</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">chmod +x post-receive</code></pre></div>
+<p>然后输入<code>exit</code>回到<code>root</code>用户下，输入如下命令</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">chown -R git:git /home/git/repos/blog.git</code></pre></div>
+<p>配置完仓库后，可以在本地使用<code>git clone</code>命令测试是否能够成功克隆仓库</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">git clone git@server_ip:/home/git/repos/blog.git</code></pre></div>
+<h3 id="2-配置Nginx"><a href="#2-配置Nginx" class="headerlink" title="2 配置Nginx"></a>2 配置Nginx</h3><h4 id="2-1-安装Nginx"><a href="#2-1-安装Nginx" class="headerlink" title="2.1 安装Nginx"></a>2.1 安装Nginx</h4><div class="hljs code-wrapper"><pre><code class="hljs shell">yum install -y nginx</code></pre></div>
+<p>启动nginx</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">nginx</code></pre></div>
+<h4 id="2-2-配置文件"><a href="#2-2-配置文件" class="headerlink" title="2.2 配置文件"></a>2.2 配置文件</h4><p>先暂停服务</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">nginx -s stop</code></pre></div>
+<p>进入nginx目录，编辑配置文件</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">cd /etc/nginx
+vi nginx.conf</code></pre></div>
+<p>注意要修改两个地方，一个是将<code>user nginx</code>改为<code>user root</code><br>第二个就是在server的位置，添加root解析路径<code>/home/git/projects/blog/</code>，如果你已经有了域名，那么在server_name后面添加上你的域名。其它保持不变。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">server &#123;
+        listen       80 default_server;
+        listen       [::]:80 default_server;
+        server_name  zhouzhuyan.com www.zhouzhuyan.com;
+        root         /home/git/projects/blog/;
+        index index.html index.htm;
+    &#125;</code></pre></div>
+<p>保存退出<br>重新启动nginx</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">systemctl restart nginx</code></pre></div>
+<h4 id="2-3-检查"><a href="#2-3-检查" class="headerlink" title="2.3 检查"></a>2.3 检查</h4><p>检查nginx状态</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">systemctl status nginx</code></pre></div>
+<p>如果看到绿色的<code>active</code>就表示配置成功了。我在这里遇到了一个问题，它的状态显示红色的<code>failed</code>,，错误是<code>98: Address already in use</code>，80端口已经被占用，这个时候可以用如下命令检查一下是谁占用了80端口</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">netstat -ntpl</code></pre></div>
+<p>如果就是nginx的话，应该是由于之前的配置文件中，<code>listen       80 default_server;</code>监听ipv4的80端口，而<code>listen       [::]:80 default_server;</code>监听的是ipv6的80端口，于是就重复占用了。可以在配置文件中这样更改</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">listen       [::]:80 ipv6only=on  default_server;</code></pre></div>
+<p>然后重启nginx应该就可以了。</p>
+<h3 id="3-Hexo本地配置"><a href="#3-Hexo本地配置" class="headerlink" title="3. Hexo本地配置"></a>3. Hexo本地配置</h3><p>hexo的站点配置文件<code>_config.yml</code></p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">deploy:
+  type: git
+  repo: git@你的IP:/home/git/repos/blog.git
+  branch: master</code></pre></div>
+<p>然后进行部署</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">hexo clean
+hexo g -d</code></pre></div>
+<h3 id="4-启用https"><a href="#4-启用https" class="headerlink" title="4. 启用https"></a>4. 启用https</h3><p>由于nginx默认使用的是http，所以在网站访问的时候，会显示不安全，可以通过配置来开启https</p>
+<h4 id="4-1-申请SSL证书"><a href="#4-1-申请SSL证书" class="headerlink" title="4.1 申请SSL证书"></a>4.1 申请SSL证书</h4><p>阿里云和腾讯云都提供免费的SSL证书下载，因为我的域名是在腾讯云云购买的，所以我就从腾讯云上下载了<a target="_blank" rel="noopener" href="https://cloud.tencent.com/product/ssl">SSL证书</a></p>
+<h4 id="4-2-传输文件到服务器"><a href="#4-2-传输文件到服务器" class="headerlink" title="4.2 传输文件到服务器"></a>4.2 传输文件到服务器</h4><p>从腾讯云上下载证书到本地，会得到一个自己域名命名的文件夹，里面有<code>Apache</code>，<code>Nginx</code>，<code>Tomcat</code>，<code>IIS</code>的证书，由于我们使用的是nginx服务，所以只需要Nginx文件夹内的<code>xxx.crt</code>和<code>xxx.key</code>两个文件。<br>在服务端创建文件夹存储证书</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir /home/git/SSL</code></pre></div>
+<p>我们可以使用scp命令将本地的文件传输到服务器</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">scp -r xxx/Nginx git@你的IP /home/git/SSL</code></pre></div>
+<h4 id="4-3-配置nginx"><a href="#4-3-配置nginx" class="headerlink" title="4.3 配置nginx"></a>4.3 配置nginx</h4><p>然后再次编辑<code>nginx.conf</code>文件，这里可以参考官方文档<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/400/35244">Nginx 服务器证书安装</a>，文档写的很清晰，按照其中的步骤配置一下就可以完成了。<br>之后我们就可以通过https访问网页，在网址旁边会出现一把锁。</p>
+<p>参考：<br>[1]HJX.将Hexo部署到阿里云轻量级服务器(保姆级教程)<br>[EB/OL].<a target="_blank" rel="noopener" href="https://hjxlog.com/posts/20191130a1.html,2019-11-30.">https://hjxlog.com/posts/20191130a1.html,2019-11-30.</a><br>[2]Dreamy.TZK.将Hexo部署到云服务器<br>[EB/OL].<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1632020,2020-05-25.">https://cloud.tencent.com/developer/article/1632020,2020-05-25.</a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Github pages+Hexo 搭建个人博客</title>
+    <url>/posts/ae6c038e.html</url>
+    <content><![CDATA[<h1 id="Github-pages-Hexo-搭建个人博客"><a href="#Github-pages-Hexo-搭建个人博客" class="headerlink" title="Github pages + Hexo 搭建个人博客"></a>Github pages + Hexo 搭建个人博客</h1><p>2019年11月19日，我决定开始写<strong>博客</strong>，首先要用<em>github pages+hexo</em>搭建一个个人博客，其中的过程我就记录在这里面。</p>
+<a id="more"></a>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>注册一个 GitHub 账户</li>
+<li>安装 Node.js<br>下载链接<br> <a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a><br> 下面这个是中文网，对于国内用户来说下载速度非常快。<br> <a target="_blank" rel="noopener" href="http://nodejs.cn/download/">http://nodejs.cn/download/</a><br> 推荐菜鸟教程关于node的安装教程以及简易的语法介绍<a target="_blank" rel="noopener" href="https://www.runoob.com/nodejs/nodejs-install-setup.html">https://www.runoob.com/nodejs/nodejs-install-setup.html</a><ol>
+<li>安装git</li>
+<li>markdown语法学习<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/191d1e21f7ed">https://www.jianshu.com/p/191d1e21f7ed</a></li>
+<li>git语法学习<br>推荐廖雪峰的git教程<br><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600">https://www.liaoxuefeng.com/wiki/896043488029600</a></li>
+</ol>
+</li>
+</ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在终端检查node和npm的版本情况</p>
+<div class="hljs code-wrapper"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>
+npm -v</code></pre></div>
+<p>然后输入命令安装hexo</p>
+<div class="hljs code-wrapper"><pre><code class="hljs avrasm">npm install -g hexo-<span class="hljs-keyword">cli</span></code></pre></div>
+<p>我使用的是Mac电脑，在这一步出现了问题，终端显示如下</p>
+<div class="hljs code-wrapper"><pre><code class="hljs coffeescript">rollbackFailedOptional verb <span class="hljs-built_in">npm</span>-session</code></pre></div>
+<p>然后我又等了一会儿，终端又报错了。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs livescript"><span class="hljs-built_in">npm</span> WARN checkPermissions Missing write access <span class="hljs-keyword">to</span> /usr/local/lib/node_modules
+<span class="hljs-built_in">npm</span> ERR! code EACCES
+<span class="hljs-built_in">npm</span> ERR! syscall access
+<span class="hljs-built_in">npm</span> ERR! path /usr/local/lib/node_modules
+<span class="hljs-built_in">npm</span> ERR! errno -<span class="hljs-number">13</span>
+<span class="hljs-built_in">npm</span> ERR! Error: EACCES: permission denied, access <span class="hljs-string">&#x27;/usr/local/lib/node_modules&#x27;</span>
+<span class="hljs-built_in">npm</span> ERR!  [Error: EACCES: permission denied, access <span class="hljs-string">&#x27;/usr/local/lib/node_modules&#x27;</span>] &#123;
+<span class="hljs-built_in">npm</span> ERR!   stack: <span class="hljs-string">&quot;Error: EACCES: permission denied, access &#x27;/usr/local/lib/node_modules&#x27;&quot;</span>,
+<span class="hljs-built_in">npm</span> ERR!   errno: -<span class="hljs-number">13</span>,
+<span class="hljs-built_in">npm</span> ERR!   code: <span class="hljs-string">&#x27;EACCES&#x27;</span>,
+<span class="hljs-built_in">npm</span> ERR!   syscall: <span class="hljs-string">&#x27;access&#x27;</span>,
+<span class="hljs-built_in">npm</span> ERR!   path: <span class="hljs-string">&#x27;/usr/local/lib/node_modules&#x27;</span>
+<span class="hljs-built_in">npm</span> ERR! &#125;
+<span class="hljs-built_in">npm</span> ERR! 
+<span class="hljs-built_in">npm</span> ERR! The operation was rejected <span class="hljs-keyword">by</span> your operating system.
+<span class="hljs-built_in">npm</span> ERR! It <span class="hljs-keyword">is</span> likely you <span class="hljs-keyword">do</span> <span class="hljs-keyword">not</span> have the permissions <span class="hljs-keyword">to</span> access <span class="hljs-built_in">this</span> file <span class="hljs-keyword">as</span> the current user
+<span class="hljs-built_in">npm</span> ERR! 
+<span class="hljs-built_in">npm</span> ERR! If you believe <span class="hljs-built_in">this</span> might be a permissions issue, please double-check the
+<span class="hljs-built_in">npm</span> ERR! permissions <span class="hljs-keyword">of</span> the file <span class="hljs-keyword">and</span> its containing directories, <span class="hljs-keyword">or</span> <span class="hljs-keyword">try</span> running
+<span class="hljs-built_in">npm</span> ERR! the command again <span class="hljs-keyword">as</span> root/Administrator.</code></pre></div>
+<p>根据官方文档，如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code>权限错误，要遵循由<a target="_blank" rel="noopener" href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally#reinstall-npm-with-a-node-version-manager">npmjs</a>发布的指导修复该问题。强烈建议不要使用 root、sudo 等方法覆盖权限。<br>根据要求，下载了<strong>nvm</strong>，并且在终端利用nvm下载了最新版本的node和更新了npm后，hexo下载成功了。（以下是下载和使用nvm的教程链接）<br><a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm">https://github.com/nvm-sh/nvm</a>.        </p>
+<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><p>输入以下命令hexo就会出现在指定的文件夹中</p>
+<div class="hljs code-wrapper"><pre><code class="hljs properties"><span class="hljs-attr">hexo</span> <span class="hljs-string">init &lt;folder&gt;</span>
+<span class="hljs-attr">cd</span> <span class="hljs-string">&lt;folder&gt;</span>
+<span class="hljs-attr">npm</span> <span class="hljs-string">install</span></code></pre></div>
+<p>如果出现错误</p>
+<div class="hljs code-wrapper"><pre><code class="hljs java">-bash: syntax error near unexpected token `newline<span class="hljs-string">&#x27;</span></code></pre></div>
+<p>这是占位符的问题，将第一行命令的&lt;&gt;去除，再重新输入即可。</p>
+<p>到此，建站的基本操作就完成了。</p>
+<p>界面的设计等就可以由自己来操作了。放一个hexo的官方网站供大家参考。<br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">https://hexo.io/zh-cn/docs/configuration</a></p>
+<h2 id="创建Github远程仓库"><a href="#创建Github远程仓库" class="headerlink" title="创建Github远程仓库"></a>创建Github远程仓库</h2><p>注意仓库名为github的用户名.github.io，勾选readme<br><img src="https://img-blog.csdnimg.cn/20191123194438458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>创建之后，进入仓库，点击<strong>Settings</strong>按钮，然后翻到GitHub Pages的部分，点击网页链接，就能够看到一个简易的网页了。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191123194913735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="部署hexo"><a href="#部署hexo" class="headerlink" title="部署hexo"></a>部署hexo</h2><p>进入本地的hexo文件，找到 <strong>_config.yml</strong>，打开后翻到最后，修改成</p>
+<div class="hljs code-wrapper"><pre><code class="hljs java">deploy:
+  type: git
+  repo:
+     gitHub: git<span class="hljs-meta">@github</span>.com:你的GitHub用户名/你的GitHub用户名.github.io.git
+  branch: master</code></pre></div>
+<p>repo后面的内容要修改成自己github仓库的SSH密匙。</p>
+<p>然后在终端中输入</p>
+<div class="hljs code-wrapper"><pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-deployer-git <span class="hljs-comment">--save</span></code></pre></div>
+<p>开始安装hexo-deploy-git，安装完成后，开始部署，在终端中输入</p>
+<div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo deploy</span></code></pre></div>
+<p>部署完成。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>这个时候，再次进入刚刚进入过的网页链接，就会看到一个船新版本的界面，也就是本地的hexo库已经部署到github上了。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191123195408260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dhbGFoYWR6aG91,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt=""></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hadoop与Spark集群搭建</title>
     <url>/posts/e567410e.html</url>
     <content><![CDATA[<h1 id="Hadoop与Spark集群搭建"><a href="#Hadoop与Spark集群搭建" class="headerlink" title="Hadoop与Spark集群搭建"></a>Hadoop与Spark集群搭建</h1><p>本文介绍了如何在虚拟机上搭建Hadoop集群与Spark集群，为云计算实践做好了准备工作。文章共分为3个部分，准备工作，Hadoop集群搭建和Spark集群搭建。</p>
@@ -1899,107 +1899,208 @@ sudo ./start-all.sh</code></pre></div>
       </tags>
   </entry>
   <entry>
-    <title>概述与递归简论</title>
-    <url>/posts/ddb07891.html</url>
-    <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="1-什么是数据结构？"><a href="#1-什么是数据结构？" class="headerlink" title="1. 什么是数据结构？"></a>1. 什么是数据结构？</h2><p>我们把这个词分解开来，首先回答什么是数据。<br><strong>数据</strong>是信息的载体，是数字，字符或其它符号的集合。<br><strong>数据结构</strong>是数据对象和组成对象的数据成员之间的关系。</p>
-<p><code>Data_Structure = &#123;D, R&#125;</code><br><em>D</em>是数据对象<br><em>R</em>是<em>D</em>中所有数据成员的关系</p>
-<p>数据结构涉及3个方面：<br><strong>逻辑结构</strong>：从用户视图看，是面向问题的<br><strong>物理结构</strong>：从具体实现视图看，是面向计算机的<br><strong>操作及其实现</strong><br>我们以一个学生表为例，它的逻辑结构式线性表，物理结构是数组，而操作是增删改查</p>
-<h2 id="2-递归简论"><a href="#2-递归简论" class="headerlink" title="2. 递归简论"></a>2. 递归简论</h2><h3 id="2-1-如何设计递归"><a href="#2-1-如何设计递归" class="headerlink" title="2.1 如何设计递归"></a>2.1 如何设计递归</h3><p>我们通过递归来引入数据结构与算法的学习。<br>当一个函数用它自己来定义时，我们就称它是<strong>递归</strong>(<em>recursive</em>)的。我们可以看下面这个简单的例子</p>
-<script type="math/tex; mode=display">f(x) = \begin{cases} 0, & x=0 \\\\ 2f(x-1)+x^2, & x > 0\end{cases}</script><p>我们用代码来实现它</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">f</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;
-    <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span>) &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-    &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">2</span> * f(x - <span class="hljs-number">1</span>) + x * x;
-&#125;</code></pre></div>
-<p>观察这段代码，函数体内首先有一个<code>if</code>结构，这是递归的<strong>基准情况</strong>(<em>base case</em>)，即此时函数的值可以直接算出而不用进行递归。<br>再往下的<code>return</code>语句则进入了递归，要注意的是，递归调用将反复进行直到出现基准情况为止。比如我们计算<code>f(3)</code>，那么会调用<code>f(2), f(1)</code>直到出现基准情况<code>f(0)</code>，它的计算实际上是这样的</p>
-<script type="math/tex; mode=display">(2\times(2\times(2\times f(0)+1\times1) + 2\times2)+3\times3)</script><p>下面我们再来看一种糟糕的递归设计</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">bad</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;
-    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;    
-    &#125;
-    <span class="hljs-keyword">return</span> bad(n / <span class="hljs-number">3</span> + <span class="hljs-number">1</span>) + n - <span class="hljs-number">1</span>;
-&#125;</code></pre></div>
-<p>我们会发现，在上述的代码中，<code>bad(1)</code>被定义为<code>bad(1)</code>，而不知道具体是多少，计算机会反复调用它，程序无法停止，也求不出解。</p>
-<p>通过上面的两个例子，可以得出递归的设计准则</p>
+    <title>Neo4j_CQL语法简介</title>
+    <url>/posts/55958cb4.html</url>
+    <content><![CDATA[<h1 id="Neo4j-CQL语法简介"><a href="#Neo4j-CQL语法简介" class="headerlink" title="Neo4j CQL语法简介"></a>Neo4j CQL语法简介</h1><p>注：本文中的示例来自于Neo4j的<code>Example Graphs</code>中的<code>Movies</code></p>
+<h2 id="1-MATCH-amp-RETURN"><a href="#1-MATCH-amp-RETURN" class="headerlink" title="1. MATCH &amp; RETURN"></a>1. MATCH &amp; RETURN</h2><div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (p:Person) RETURN p LIMIT 10</code></pre></div>
+<p><code>match</code>查询节点，关系，标签，属性等。类似于SQL中的<code>SELECT</code></p>
+<p>匹配10个<code>Person</code>并返回，注意如果需要使用<code>RETURN</code>就需要一个像<code>p</code>这样的变量来存储返回内容</p>
+<div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (p:Person &#123;name: &quot;Al Pacino&quot;&#125;) RETURN p</code></pre></div>
+<p>查询姓名为<code>Al Pacino</code>的<code>Person</code>节点并返回</p>
+<div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (:Person &#123;name: &#39;Tom Hanks&#39;&#125;)-[:DIRECTED]-&gt;(movie:Movie)
+RETURN movie.title</code></pre></div>
+<p>查询Tom Hanks导演的电影，并返回电影的标题</p>
+<div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (tom:Person &#123;name:&#39;Tom Hanks&#39;&#125;)-[rel:DIRECTED]-(movie:Movie)
+RETURN tom.name AS name</code></pre></div>
+<p>使用<code>AS</code>关键字设置别名</p>
+<h2 id="2-CREATE"><a href="#2-CREATE" class="headerlink" title="2. CREATE"></a>2. CREATE</h2><div class="hljs code-wrapper"><pre><code class="hljs CQL">CREATE (friend:Person &#123;name: &#39;Mark&#39;, born: 36&#125;)
+RETURN friend</code></pre></div>
+<p>创建一个<code>Person</code>界面，设置两个属性的值，返回创建的节点（这一步不是必须的，但在实际开发中可以作为测试）</p>
+<div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (jennifer:Person &#123;name: &#39;jennifer&#39;&#125;)
+MATCH (mark:Person &#123;name: &#39;Mark&#39;&#125;)
+CREATE (jennifer)-[rel:IS_FRIENDS_WITH]-&gt;(mark)</code></pre></div>
+<p><strong>注意</strong>：<code>CREATE</code>不会判断节点在数据库中是否已经存在，为了避免重复插入，这里先使用<code>MATCH</code>查询节点是否已经存在，再在两者间建立关系</p>
+<p>但是如果节点不存在，就不会执行？？？</p>
+<h2 id="3-UPDATE"><a href="#3-UPDATE" class="headerlink" title="3. UPDATE"></a>3. UPDATE</h2><div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (p:Person &#123;name: &#39;Keanu Reeves&#39;&#125;) set p.born &#x3D; 1962 RETURN p</code></pre></div>
+<p>使用<code>set</code>关键字执行更新操作</p>
 <ol>
-<li><strong>基准情形</strong>(<em>base case</em>)。必须有某些基准的情形，不用递归就能够求解。</li>
-<li><strong>不断推进</strong>(<em>make progress</em>) 递归调用必须能够朝着一个基准情形推进。</li>
+<li>使用<code>MATCH</code>查找节点</li>
+<li>使用<code>set</code>设置节点的属性值</li>
+<li>返回节点确保更新正确</li>
 </ol>
-<h3 id="2-2-递归实践"><a href="#2-2-递归实践" class="headerlink" title="2.2 递归实践"></a>2.2 递归实践</h3><p>我们通过几个经典的例子来加深对递归的理解。</p>
-<h4 id="2-2-1-菲波那切数列"><a href="#2-2-1-菲波那切数列" class="headerlink" title="2.2.1 菲波那切数列"></a>2.2.1 菲波那切数列</h4><p>我们知道它的函数是<br>$fib(0)=0,\ fib(1)=1,\ fib(n)=fib(n-1)+fib(n-2); n&gt;=2$<br>可以很容易地将其用代码表示</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-keyword">long</span> n)</span> </span>&#123;
-    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span> || n == <span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// base case</span>
-        <span class="hljs-keyword">return</span> n;
-    &#125;
-    <span class="hljs-keyword">return</span> fib(n - <span class="hljs-number">1</span>) + fib(n - <span class="hljs-number">2</span>);
-&#125;</code></pre></div>
-<h4 id="2-2-2-排列"><a href="#2-2-2-排列" class="headerlink" title="2.2.2 排列"></a>2.2.2 排列</h4><p>现在有一个数组<code>&#123;a, b, c&#125;</code>，要求对它进行全排列，即排列结果是<code>abc,acb,bac,bca,cab,cba</code></p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Permutation</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">permutation</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[] list, <span class="hljs-keyword">int</span> k, <span class="hljs-keyword">int</span> m)</span> </span>&#123;
-        <span class="hljs-keyword">int</span> i;
-        <span class="hljs-keyword">if</span> (k == m) &#123;
-            <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt;= m; i++) &#123;
-                System.out.print(list[i]);
-            &#125;
-            System.out.println();
-        &#125;
-        <span class="hljs-keyword">else</span> &#123;
-            <span class="hljs-keyword">for</span> (i = k; i &lt;= m; i++) &#123;
-                <span class="hljs-keyword">char</span> temp = list[k];
-                list[k] = list[i];
-                list[i] = temp;
-                permutation(list, k + <span class="hljs-number">1</span>, m);
-                temp = list[k];
-                list[k] = list[i];
-                list[i] = temp;
-            &#125;
-        &#125;
-    &#125;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        <span class="hljs-keyword">char</span>[] list = &#123;<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>&#125;;
-        permutation(list, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>);
-    &#125;
-&#125;</code></pre></div>
-<h4 id="2-2-3-汉诺塔问题"><a href="#2-2-3-汉诺塔问题" class="headerlink" title="2.2.3 汉诺塔问题"></a>2.2.3 汉诺塔问题</h4><p>汉诺塔问题是一个经典的问题。<strong>汉诺塔</strong>(<em>Hanoi Tower</em>)，源于印度一个古老传说。大梵天创造世界的时候做了三根金刚石柱子，在一根柱子上从下往上按照大小顺序摞着64片黄金圆盘。大梵天命令婆罗门把圆盘从下面开始按大小顺序重新摆放在另一根柱子上。并且规定，任何时候，在小圆盘上都不能放大圆盘，且在三根柱子之间一次只能移动一个圆盘。问应该如何操作？<br>64个圆盘对于当前的计算机，可能需要几百上千年才能算出，但是我们可以简化这个问题，使用3个圆盘来看一下如何用递归来实现。</p>
-<p>根据我们的递归设计准则，首先要明确基准条件，也就是只有一个圆盘，那很简单，就是把它从第一根柱子移动到第三根柱子，<br>然后设计不断推进的过程，有3根柱子，起点(<em>fromTower</em>)，终点(<em>toTower</em>)，中转(<em>auxTower</em>)。有一个非常易于理解的方式，我们首先将盘从起点移到中转点，这个时候的中转点实际上是终点，再从中转点移到终点，这个时候的中转点实际上是起点，所以设计的两个递归是这样的。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java">moveDisks(n - <span class="hljs-number">1</span>, fromTower, auxTower, toTower);
-moveDisks(n - <span class="hljs-number">1</span>, auxTower, toTower, fromTower);</code></pre></div>
-<p>下面是完整的代码实现。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HanoiTower</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">moveDisks</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">char</span> fromTower, <span class="hljs-keyword">char</span> toTower, <span class="hljs-keyword">char</span> auxTower)</span> </span>&#123;
-        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) &#123;
-            System.out.println(<span class="hljs-string">&quot;move disk &quot;</span> + n + <span class="hljs-string">&quot; from &quot;</span> + fromTower + <span class="hljs-string">&quot; to &quot;</span> + toTower);
-        &#125;
-        <span class="hljs-keyword">else</span> &#123;
-            moveDisks(n - <span class="hljs-number">1</span>, fromTower, auxTower, toTower);
-            System.out.println(<span class="hljs-string">&quot;move disk &quot;</span> + n + <span class="hljs-string">&quot; from &quot;</span> + fromTower + <span class="hljs-string">&quot; to &quot;</span> + toTower);
-            moveDisks(n - <span class="hljs-number">1</span>, auxTower, toTower, fromTower);
-        &#125;
-    &#125;
+<div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (:Person &#123;name: &#39;Keanu Reeves&#39;&#125;)-[rel:ACTED_IN]-&gt;(:Movie &#123;title: &#39;Something\&#39;s Gotta Give&#39;&#125;) 
+set rel.roles &#x3D; &#39;阿巴阿巴&#39; 
+RETURN rel</code></pre></div>
+<p>也可以更新关系的属性，比如这里更新了演员在某部电影中饰演的角色</p>
+<h2 id="4-DELETE-amp-REMOVE"><a href="#4-DELETE-amp-REMOVE" class="headerlink" title="4. DELETE &amp; REMOVE"></a>4. DELETE &amp; REMOVE</h2><p>由于Neo4j数据库具备原子性，一致性，隔离性和持久性，所以无法在一个节点仍然有关系的情况下删除它。</p>
+<h3 id="4-1-删除关系"><a href="#4-1-删除关系" class="headerlink" title="4.1 删除关系"></a>4.1 删除关系</h3><div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (j:Person &#123;name: &#39;Jennifer&#39;&#125;)-[r:IS_FRIENDS_WITH]-&gt;(m:Person &#123;name: &#39;Mark&#39;&#125;)
+DELETE r</code></pre></div>
+<p>要想删除一个关系，需要找到关系的起始节点和关系的终止节点，然后使用<code>`DELETE</code>关键字删除节点之间的关系</p>
+<h3 id="4-2-删除节点"><a href="#4-2-删除节点" class="headerlink" title="4.2 删除节点"></a>4.2 删除节点</h3><div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (m:Person &#123;name: &#39;Mark&#39;&#125;)
+DELETE m</code></pre></div>
+<p>如果一个节点没有任何的关系，那么可以直接删除它。</p>
+<h3 id="4-3-同时删除节点和关系"><a href="#4-3-同时删除节点和关系" class="headerlink" title="4.3 同时删除节点和关系"></a>4.3 同时删除节点和关系</h3><div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (m:Person &#123;name: &#39;Mark&#39;&#125;)
+DETACH DELETE m</code></pre></div>
+<p><code>DETACH DELETE</code>可以删除节点的所有关系，同时删除节点。</p>
+<h3 id="4-4-删除属性"><a href="#4-4-删除属性" class="headerlink" title="4.4 删除属性"></a>4.4 删除属性</h3><div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (n:Person &#123;name: &#39;Jennifer&#39;&#125;)
+REMOVE n.birthdate</code></pre></div>
+<p>第一种删除属性的方式是<code>REMOVE</code>关键字</p>
+<div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (n:Person &#123;name: &#39;Jennifer&#39;&#125;)
+SET n.birthdate &#x3D; null</code></pre></div>
+<p>第二种删除属性的方式是使用<code>set</code>关键字将属性的值设为<code>null</code>。因为neo4j数据库不会存储<code>null</code>值，所以它也会被删除。</p>
+<h2 id="5-Merge"><a href="#5-Merge" class="headerlink" title="5. Merge"></a>5. Merge</h2><p>在第二部分里面提到的重复插入问题，可以通过关键字<code>merge</code>来解决。</p>
+<h3 id="5-1-节点"><a href="#5-1-节点" class="headerlink" title="5.1 节点"></a>5.1 节点</h3><div class="hljs code-wrapper"><pre><code class="hljs CQL">MERGE (mark:Person &#123;name: &#39;Mark&#39;, born: 1999&#125;)
+RETURN mark</code></pre></div>
+<p>可以使用<code>merge</code>关键字来避免重复插入节点，它会事先检查节点是否已经存在在数据库中，执行的是<code>select-or-insert</code>的操作。</p>
+<h3 id="5-2-关系"><a href="#5-2-关系" class="headerlink" title="5.2 关系"></a>5.2 关系</h3><div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (j:Person &#123;name: &#39;Jennifer&#39;&#125;)
+MATCH (m:Person &#123;name: &#39;Mark&#39;&#125;)
+MERGE (j)-[r:IS_FRIENDS_WITH]-&gt;(m)
+RETURN j, r, m</code></pre></div>
+<p>这里首先通过<code>MATCH</code>检查是否存在我们要建立关系的两个节点，如果存在，再在两者之间建立关系。</p>
+<p><strong>注意：</strong><code>Merge</code>会检查我们要建立的模式在数据库中已经存在，如果不存在，那么它会将模式完整地建立，包括节点和关系。使用下面的语句，如果节点已经存在，那么就会造成重复插入的问题。所以一定要先<strong>用<code>MATCH</code>匹配节点是否已经存在</strong></p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">&#x2F;&#x2F;this statement will create duplicate nodes for Mark and Jennifer
+MERGE (j:Person &#123;name: &#39;Jennifer&#39;&#125;)-[r:IS_FRIENDS_WITH]-&gt;(m:Person &#123;name: &#39;Mark&#39;&#125;)
+RETURN j, r, m</code></pre></div>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">MERGE (m:Person &#123;name: &#39;Mark&#39;&#125;)-[r:IS_FRIENDS_WITH]-(j:Person &#123;name:&#39;Jennifer&#39;&#125;)
+  ON MATCH SET r.updated &#x3D; date()
+RETURN m, r, j</code></pre></div>
+<p>如果想要不重复创建节点，并且更新匹配到的节点属性，可以使用<code>ON MATCH SET</code>的方式</p>
+<p>官方文档上的<code>ON CTRATE SET</code>似乎没有作用，而<code>ON MATCH SET</code>就可以起到创建和更新的作用</p>
+<h2 id="6-WHERE"><a href="#6-WHERE" class="headerlink" title="6. WHERE"></a>6. WHERE</h2><p>与SQL查询类似，CQL也可以使用where进行范围的限定，在全键值等值查询时，效果与前面的例子一样。但对于熟悉SQL语法的人来说可能这种方式更容易上手。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">&#x2F;&#x2F;query using equality check in the MATCH clause
+MATCH (j:Person &#123;name: &#39;Jennifer&#39;&#125;)
+RETURN j
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        moveDisks(<span class="hljs-number">3</span>, <span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;B&#x27;</span>, <span class="hljs-string">&#x27;C&#x27;</span>);
-    &#125;
-&#125;</code></pre></div>
-<p>打印结果</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">move disk 1 from A to C
-move disk 2 from A to B
-move disk 1 from C to B
-move disk 3 from A to C
-move disk 1 from B to A
-move disk 2 from B to C
-move disk 1 from A to C</code></pre></div>
+&#x2F;&#x2F;query using equality check in the WHERE clause
+MATCH (j:Person)
+WHERE j.name &#x3D; &#39;Jennifer&#39;
+RETURN j</code></pre></div>
+<h3 id="6-1-否定属性"><a href="#6-1-否定属性" class="headerlink" title="6.1 否定属性"></a>6.1 否定属性</h3><p>使用<code>NOT</code> <code>AND</code> <code>OR</code> <code>XOR</code>等操作符</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (j:Person)
+WHERE NOT j.name &#x3D; &#39;Jennifer&#39;
+RETURN j</code></pre></div>
+<h3 id="6-2-范围查询"><a href="#6-2-范围查询" class="headerlink" title="6.2 范围查询"></a>6.2 范围查询</h3><p>查询1960到1970年出生的人</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person)
+WHERE 1960 &lt;&#x3D; p.born &lt;&#x3D; 1970
+RETURN p</code></pre></div>
+<h3 id="6-3-exists"><a href="#6-3-exists" class="headerlink" title="6.3 exists"></a>6.3 exists</h3><p>检查一个属性是否存在</p>
+<p><strong>注意</strong>：neo4j不会存储null值</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">&#x2F;&#x2F;Query1: find all users who have a birthdate property
+MATCH (p:Person)
+WHERE exists(p.birthdate)
+RETURN p.name</code></pre></div>
+<h3 id="6-4-模糊查询"><a href="#6-4-模糊查询" class="headerlink" title="6.4 模糊查询"></a>6.4 模糊查询</h3><p>对一个字符串，我们可能需要根据前缀，后缀或包含进行模糊查询。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">&#x2F;&#x2F;check if a property starts with &#39;M&#39;
+MATCH (p:Person)
+WHERE p.name STARTS WITH &#39;Ma&#39;
+RETURN p.name
+
+&#x2F;&#x2F;check if a property contains &#39;a&#39;
+MATCH (p:Person)
+WHERE p.name CONTAINS &#39;a&#39;
+RETURN p.name
+
+&#x2F;&#x2F;check if a property ends with &#39;n&#39;
+MATCH (p:Person)
+WHERE p.name ENDS WITH &#39;n&#39;</code></pre></div>
+<p>当然，我们还可以使用正则表达式的形式。<code>~</code>表示使用正则表达式</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person)
+WHERE p.name &#x3D;~ &#39;Jo.*&#39;
+RETURN p.name</code></pre></div>
+<h3 id="6-5-Filtering-on-Patterns"><a href="#6-5-Filtering-on-Patterns" class="headerlink" title="6.5 Filtering on Patterns"></a>6.5 Filtering on Patterns</h3><p>由于neo4j是图形数据库，它比其它数据库更注重于关系(relationships)。所以我们也可以通过关系来进行筛选。</p>
+<p>比如下面这个关系匹配同时担任一部电影的导演和编剧的人。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person)-[r:DIRECTED]-&gt;(m:Movie)
+WHERE exists((p)-[:WROTE]-&gt;(m))
+RETURN p</code></pre></div>
+<h3 id="6-6-Optional-Patterns"><a href="#6-6-Optional-Patterns" class="headerlink" title="6.6 Optional Patterns"></a>6.6 Optional Patterns</h3><p>类似于SQL的外连接。可选匹配。</p>
+<p>这个例子匹配以姓名以Jo开头并且担任过电影编剧的人，后面这个条件不是强制的。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person)
+WHERE p.name STARTS WITH &#39;Jo&#39;
+OPTIONAL MATCH (p) - [:WROTE] -&gt; (m:Movie)
+RETURN p.name, m.title</code></pre></div>
+<h2 id="7-Aggregation-in-Cypher"><a href="#7-Aggregation-in-Cypher" class="headerlink" title="7. Aggregation in Cypher"></a>7. Aggregation in Cypher</h2><h3 id="7-1-count"><a href="#7-1-count" class="headerlink" title="7.1 count"></a>7.1 count</h3><p>统计数量</p>
+<p>例1加上了属性值title，可以去掉null值，而使用*会统计所有电影节点。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (m:Movie)
+RETURN count(m.title)
+   
+MATCH (m:Movie)
+RETURN count(*)</code></pre></div>
+<h3 id="7-2-collect"><a href="#7-2-collect" class="headerlink" title="7.2 collect"></a>7.2 collect</h3><p>将值聚合成一个列表。可以使用collect基于一个起始节点或关系等组织一系列的值。</p>
+<p>下面这个例子展示了导演和他们执导的电影。如果不使用collect，那么导演和电影会一对一的呈现在表格中。但一个导演可能执导过多部电影，所以使用collect将电影节点聚合起来。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person) - [r:DIRECTED] -&gt; (m:Movie)
+RETURN p.name, collect(m.title) AS titles</code></pre></div>
+<h3 id="7-3-size"><a href="#7-3-size" class="headerlink" title="7.3 size"></a>7.3 size</h3><p>size的作用是统计列表中元素的个数或者统计一个表达式返回的内容大小。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">&#x2F;&#x2F; 统计导演执导电影数量
+MATCH (p:Person) - [r:DIRECTED] -&gt; (m:Movie)
+RETURN p.name, collect(m.title) AS titles, size(collect(m.title)) AS count
+
+&#x2F;&#x2F; 统计导演同时还担任该电影的编剧的数量
+MATCH (p:Person) - [r:DIRECTED] -&gt; (m:Movie)
+RETURN p.name, size((p) - [:WROTE] -&gt; (m)) AS count</code></pre></div>
+<h3 id="7-4-WITH"><a href="#7-4-WITH" class="headerlink" title="7.4 WITH"></a>7.4 WITH</h3><p>使用<code>WITH</code>传递参数到下一个查询</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">&#x2F;&#x2F;find number of friends who have other friends
+MATCH (p:Person)-[:IS_FRIENDS_WITH]-&gt;(friend:Person)
+WITH p, collect(friend.name) AS friendsList, size((friend)-[:IS_FRIENDS_WITH]-(:Person)) AS numberOfFoFs
+WHERE numberOfFoFs &gt; 1
+RETURN p.name, friendsList, numberOfFoFs
+
+&#x2F;&#x2F;find people with 2-6 years of experience
+WITH 2 AS experienceMin, 6 AS experienceMax
+MATCH (p:Person)
+WHERE experienceMin &lt;&#x3D; p.yrsExperience &lt;&#x3D; experienceMax
+RETURN p</code></pre></div>
+<h3 id="7-5-UNWIND"><a href="#7-5-UNWIND" class="headerlink" title="7.5 UNWIND"></a>7.5 UNWIND</h3><p>将一个列表拆分成单独的值，与<code>collect()</code>的作用相反</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">&#x2F;&#x2F;Query10: for numbers in a list, find candidates who have that many years of experience
+WITH [4, 5, 6, 7] AS experienceRange
+UNWIND experienceRange AS number
+MATCH (p:Person)
+WHERE p.yearsExp &#x3D; number
+RETURN p.name, p.yearsExp</code></pre></div>
+<h3 id="7-6-ORDER-BY"><a href="#7-6-ORDER-BY" class="headerlink" title="7.6 ORDER BY"></a>7.6 ORDER BY</h3><p>排序，默认是升序的。</p>
+<p>如下的例子将出生在1960年到1965年的人按降序排序</p>
+<p>（如果对个值参与排序，那按照先后顺序排序）</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person)
+WHERE 1960 &lt;&#x3D; p.born &lt;&#x3D; 1965
+RETURN p.name, p.born ORDER BY p.born DESC</code></pre></div>
+<h3 id="7-7-DISTINCT"><a href="#7-7-DISTINCT" class="headerlink" title="7.7 DISTINCT"></a>7.7 DISTINCT</h3><p>有点时候，一个查询可能会返回多个重复的结果。使用<code>DISTINCT</code>可以解决这个问题。</p>
+<p>下面这个例子查询导演过电影并且担任过电影编剧的人，有的人导演过多部电影，那么就会返回重复的名字，但使用了<code>DISTINCT</code>，就可以获得独特的结果。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person) - [:DIRECTED] -&gt; (m:Movie)
+MATCH (p) - [:WROTE] -&gt; (:Movie)
+RETURN DISTINCT p.name</code></pre></div>
+<h3 id="7-8-LIMIT"><a href="#7-8-LIMIT" class="headerlink" title="7.8 LIMIT"></a>7.8 LIMIT</h3><p>限制返回的个数</p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person) RETURN p LIMIT 10</code></pre></div>
+<h2 id="8-进阶"><a href="#8-进阶" class="headerlink" title="8. 进阶"></a>8. 进阶</h2><h3 id="8-1-APOC插件"><a href="#8-1-APOC插件" class="headerlink" title="8.1 APOC插件"></a>8.1 APOC插件</h3><h4 id="8-1-1-简介"><a href="#8-1-1-简介" class="headerlink" title="8.1.1 简介"></a>8.1.1 简介</h4><p> APOC是 Neo4j 3.3 版本推出时正式推荐的一个Java存储过程包，里面包含丰富的函数和过程，作为对Cypher所不能提供的复杂图算法和数据操作功能的补充，APOC还具有使用灵活、高性能等优势，是一个基于Neo4j的函数包插件。</p>
+<h4 id="8-1-2-安装"><a href="#8-1-2-安装" class="headerlink" title="8.1.2 安装"></a>8.1.2 安装</h4><ol>
+<li><p>下载对应的jar包<a target="_blank" rel="noopener" href="https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases">https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases</a></p>
+</li>
+<li><p>把jar包放在安装目录的plugins文件夹下</p>
+</li>
+<li><p>进入neo4j的目录，编辑在<code>conf</code>文件夹下的<code>neo4j.conf</code>配置文件，加入如下一行</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">dbms.security.procedures.unrestricted=apoc.*</code></pre></div>
+</li>
+<li><p>重启Neo4j服务</p>
+</li>
+<li><p>在可视化界面运行：<code>return apoc.version()</code>。如果出现对应的版本号，证明安装成功</p>
+</li>
+</ol>
+<h3 id="8-2"><a href="#8-2" class="headerlink" title="8.2"></a>8.2</h3><p>变量引用<code>$</code></p>
+<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (n:Person)
+WHERE n.name &#x3D; $name
+RETURN n</code></pre></div>
+<p>动态访问节点或关系<code>[]</code></p>
+<p>Springboot data neo4j @Query支持<code>apoc</code>，但是如果返回数据格式不一致不会报错，只是接受到的信息为<code>null</code></p>
 <p>参考：</p>
 <ol>
-<li>《数据结构与算法 Java语言描述》</li>
+<li><a target="_blank" rel="noopener" href="https://neo4j.com/developer/cypher/">Neo4j官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_36226553/article/details/108569048?spm=1001.2014.3001.5501">Neo4j：入门基础（三）之APOC插件</a></li>
 </ol>
 ]]></content>
       <categories>
-        <category>数据结构与算法</category>
+        <category>数据库</category>
       </categories>
       <tags>
-        <tag>递归</tag>
+        <tag>数据库</tag>
+        <tag>Neo4j</tag>
       </tags>
   </entry>
   <entry>
@@ -2218,208 +2319,107 @@ move disk 1 from A to C</code></pre></div>
       </tags>
   </entry>
   <entry>
-    <title>Neo4j_CQL语法简介</title>
-    <url>/posts/55958cb4.html</url>
-    <content><![CDATA[<h1 id="Neo4j-CQL语法简介"><a href="#Neo4j-CQL语法简介" class="headerlink" title="Neo4j CQL语法简介"></a>Neo4j CQL语法简介</h1><p>注：本文中的示例来自于Neo4j的<code>Example Graphs</code>中的<code>Movies</code></p>
-<h2 id="1-MATCH-amp-RETURN"><a href="#1-MATCH-amp-RETURN" class="headerlink" title="1. MATCH &amp; RETURN"></a>1. MATCH &amp; RETURN</h2><div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (p:Person) RETURN p LIMIT 10</code></pre></div>
-<p><code>match</code>查询节点，关系，标签，属性等。类似于SQL中的<code>SELECT</code></p>
-<p>匹配10个<code>Person</code>并返回，注意如果需要使用<code>RETURN</code>就需要一个像<code>p</code>这样的变量来存储返回内容</p>
-<div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (p:Person &#123;name: &quot;Al Pacino&quot;&#125;) RETURN p</code></pre></div>
-<p>查询姓名为<code>Al Pacino</code>的<code>Person</code>节点并返回</p>
-<div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (:Person &#123;name: &#39;Tom Hanks&#39;&#125;)-[:DIRECTED]-&gt;(movie:Movie)
-RETURN movie.title</code></pre></div>
-<p>查询Tom Hanks导演的电影，并返回电影的标题</p>
-<div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (tom:Person &#123;name:&#39;Tom Hanks&#39;&#125;)-[rel:DIRECTED]-(movie:Movie)
-RETURN tom.name AS name</code></pre></div>
-<p>使用<code>AS</code>关键字设置别名</p>
-<h2 id="2-CREATE"><a href="#2-CREATE" class="headerlink" title="2. CREATE"></a>2. CREATE</h2><div class="hljs code-wrapper"><pre><code class="hljs CQL">CREATE (friend:Person &#123;name: &#39;Mark&#39;, born: 36&#125;)
-RETURN friend</code></pre></div>
-<p>创建一个<code>Person</code>界面，设置两个属性的值，返回创建的节点（这一步不是必须的，但在实际开发中可以作为测试）</p>
-<div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (jennifer:Person &#123;name: &#39;jennifer&#39;&#125;)
-MATCH (mark:Person &#123;name: &#39;Mark&#39;&#125;)
-CREATE (jennifer)-[rel:IS_FRIENDS_WITH]-&gt;(mark)</code></pre></div>
-<p><strong>注意</strong>：<code>CREATE</code>不会判断节点在数据库中是否已经存在，为了避免重复插入，这里先使用<code>MATCH</code>查询节点是否已经存在，再在两者间建立关系</p>
-<p>但是如果节点不存在，就不会执行？？？</p>
-<h2 id="3-UPDATE"><a href="#3-UPDATE" class="headerlink" title="3. UPDATE"></a>3. UPDATE</h2><div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (p:Person &#123;name: &#39;Keanu Reeves&#39;&#125;) set p.born &#x3D; 1962 RETURN p</code></pre></div>
-<p>使用<code>set</code>关键字执行更新操作</p>
+    <title>概述与递归简论</title>
+    <url>/posts/ddb07891.html</url>
+    <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="1-什么是数据结构？"><a href="#1-什么是数据结构？" class="headerlink" title="1. 什么是数据结构？"></a>1. 什么是数据结构？</h2><p>我们把这个词分解开来，首先回答什么是数据。<br><strong>数据</strong>是信息的载体，是数字，字符或其它符号的集合。<br><strong>数据结构</strong>是数据对象和组成对象的数据成员之间的关系。</p>
+<p><code>Data_Structure = &#123;D, R&#125;</code><br><em>D</em>是数据对象<br><em>R</em>是<em>D</em>中所有数据成员的关系</p>
+<p>数据结构涉及3个方面：<br><strong>逻辑结构</strong>：从用户视图看，是面向问题的<br><strong>物理结构</strong>：从具体实现视图看，是面向计算机的<br><strong>操作及其实现</strong><br>我们以一个学生表为例，它的逻辑结构式线性表，物理结构是数组，而操作是增删改查</p>
+<h2 id="2-递归简论"><a href="#2-递归简论" class="headerlink" title="2. 递归简论"></a>2. 递归简论</h2><h3 id="2-1-如何设计递归"><a href="#2-1-如何设计递归" class="headerlink" title="2.1 如何设计递归"></a>2.1 如何设计递归</h3><p>我们通过递归来引入数据结构与算法的学习。<br>当一个函数用它自己来定义时，我们就称它是<strong>递归</strong>(<em>recursive</em>)的。我们可以看下面这个简单的例子</p>
+<script type="math/tex; mode=display">f(x) = \begin{cases} 0, & x=0 \\\\ 2f(x-1)+x^2, & x > 0\end{cases}</script><p>我们用代码来实现它</p>
+<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">f</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">2</span> * f(x - <span class="hljs-number">1</span>) + x * x;
+&#125;</code></pre></div>
+<p>观察这段代码，函数体内首先有一个<code>if</code>结构，这是递归的<strong>基准情况</strong>(<em>base case</em>)，即此时函数的值可以直接算出而不用进行递归。<br>再往下的<code>return</code>语句则进入了递归，要注意的是，递归调用将反复进行直到出现基准情况为止。比如我们计算<code>f(3)</code>，那么会调用<code>f(2), f(1)</code>直到出现基准情况<code>f(0)</code>，它的计算实际上是这样的</p>
+<script type="math/tex; mode=display">(2\times(2\times(2\times f(0)+1\times1) + 2\times2)+3\times3)</script><p>下面我们再来看一种糟糕的递归设计</p>
+<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">bad</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;    
+    &#125;
+    <span class="hljs-keyword">return</span> bad(n / <span class="hljs-number">3</span> + <span class="hljs-number">1</span>) + n - <span class="hljs-number">1</span>;
+&#125;</code></pre></div>
+<p>我们会发现，在上述的代码中，<code>bad(1)</code>被定义为<code>bad(1)</code>，而不知道具体是多少，计算机会反复调用它，程序无法停止，也求不出解。</p>
+<p>通过上面的两个例子，可以得出递归的设计准则</p>
 <ol>
-<li>使用<code>MATCH</code>查找节点</li>
-<li>使用<code>set</code>设置节点的属性值</li>
-<li>返回节点确保更新正确</li>
+<li><strong>基准情形</strong>(<em>base case</em>)。必须有某些基准的情形，不用递归就能够求解。</li>
+<li><strong>不断推进</strong>(<em>make progress</em>) 递归调用必须能够朝着一个基准情形推进。</li>
 </ol>
-<div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (:Person &#123;name: &#39;Keanu Reeves&#39;&#125;)-[rel:ACTED_IN]-&gt;(:Movie &#123;title: &#39;Something\&#39;s Gotta Give&#39;&#125;) 
-set rel.roles &#x3D; &#39;阿巴阿巴&#39; 
-RETURN rel</code></pre></div>
-<p>也可以更新关系的属性，比如这里更新了演员在某部电影中饰演的角色</p>
-<h2 id="4-DELETE-amp-REMOVE"><a href="#4-DELETE-amp-REMOVE" class="headerlink" title="4. DELETE &amp; REMOVE"></a>4. DELETE &amp; REMOVE</h2><p>由于Neo4j数据库具备原子性，一致性，隔离性和持久性，所以无法在一个节点仍然有关系的情况下删除它。</p>
-<h3 id="4-1-删除关系"><a href="#4-1-删除关系" class="headerlink" title="4.1 删除关系"></a>4.1 删除关系</h3><div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (j:Person &#123;name: &#39;Jennifer&#39;&#125;)-[r:IS_FRIENDS_WITH]-&gt;(m:Person &#123;name: &#39;Mark&#39;&#125;)
-DELETE r</code></pre></div>
-<p>要想删除一个关系，需要找到关系的起始节点和关系的终止节点，然后使用<code>`DELETE</code>关键字删除节点之间的关系</p>
-<h3 id="4-2-删除节点"><a href="#4-2-删除节点" class="headerlink" title="4.2 删除节点"></a>4.2 删除节点</h3><div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (m:Person &#123;name: &#39;Mark&#39;&#125;)
-DELETE m</code></pre></div>
-<p>如果一个节点没有任何的关系，那么可以直接删除它。</p>
-<h3 id="4-3-同时删除节点和关系"><a href="#4-3-同时删除节点和关系" class="headerlink" title="4.3 同时删除节点和关系"></a>4.3 同时删除节点和关系</h3><div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (m:Person &#123;name: &#39;Mark&#39;&#125;)
-DETACH DELETE m</code></pre></div>
-<p><code>DETACH DELETE</code>可以删除节点的所有关系，同时删除节点。</p>
-<h3 id="4-4-删除属性"><a href="#4-4-删除属性" class="headerlink" title="4.4 删除属性"></a>4.4 删除属性</h3><div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (n:Person &#123;name: &#39;Jennifer&#39;&#125;)
-REMOVE n.birthdate</code></pre></div>
-<p>第一种删除属性的方式是<code>REMOVE</code>关键字</p>
-<div class="hljs code-wrapper"><pre><code class="hljs CQL">MATCH (n:Person &#123;name: &#39;Jennifer&#39;&#125;)
-SET n.birthdate &#x3D; null</code></pre></div>
-<p>第二种删除属性的方式是使用<code>set</code>关键字将属性的值设为<code>null</code>。因为neo4j数据库不会存储<code>null</code>值，所以它也会被删除。</p>
-<h2 id="5-Merge"><a href="#5-Merge" class="headerlink" title="5. Merge"></a>5. Merge</h2><p>在第二部分里面提到的重复插入问题，可以通过关键字<code>merge</code>来解决。</p>
-<h3 id="5-1-节点"><a href="#5-1-节点" class="headerlink" title="5.1 节点"></a>5.1 节点</h3><div class="hljs code-wrapper"><pre><code class="hljs CQL">MERGE (mark:Person &#123;name: &#39;Mark&#39;, born: 1999&#125;)
-RETURN mark</code></pre></div>
-<p>可以使用<code>merge</code>关键字来避免重复插入节点，它会事先检查节点是否已经存在在数据库中，执行的是<code>select-or-insert</code>的操作。</p>
-<h3 id="5-2-关系"><a href="#5-2-关系" class="headerlink" title="5.2 关系"></a>5.2 关系</h3><div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (j:Person &#123;name: &#39;Jennifer&#39;&#125;)
-MATCH (m:Person &#123;name: &#39;Mark&#39;&#125;)
-MERGE (j)-[r:IS_FRIENDS_WITH]-&gt;(m)
-RETURN j, r, m</code></pre></div>
-<p>这里首先通过<code>MATCH</code>检查是否存在我们要建立关系的两个节点，如果存在，再在两者之间建立关系。</p>
-<p><strong>注意：</strong><code>Merge</code>会检查我们要建立的模式在数据库中已经存在，如果不存在，那么它会将模式完整地建立，包括节点和关系。使用下面的语句，如果节点已经存在，那么就会造成重复插入的问题。所以一定要先<strong>用<code>MATCH</code>匹配节点是否已经存在</strong></p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">&#x2F;&#x2F;this statement will create duplicate nodes for Mark and Jennifer
-MERGE (j:Person &#123;name: &#39;Jennifer&#39;&#125;)-[r:IS_FRIENDS_WITH]-&gt;(m:Person &#123;name: &#39;Mark&#39;&#125;)
-RETURN j, r, m</code></pre></div>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">MERGE (m:Person &#123;name: &#39;Mark&#39;&#125;)-[r:IS_FRIENDS_WITH]-(j:Person &#123;name:&#39;Jennifer&#39;&#125;)
-  ON MATCH SET r.updated &#x3D; date()
-RETURN m, r, j</code></pre></div>
-<p>如果想要不重复创建节点，并且更新匹配到的节点属性，可以使用<code>ON MATCH SET</code>的方式</p>
-<p>官方文档上的<code>ON CTRATE SET</code>似乎没有作用，而<code>ON MATCH SET</code>就可以起到创建和更新的作用</p>
-<h2 id="6-WHERE"><a href="#6-WHERE" class="headerlink" title="6. WHERE"></a>6. WHERE</h2><p>与SQL查询类似，CQL也可以使用where进行范围的限定，在全键值等值查询时，效果与前面的例子一样。但对于熟悉SQL语法的人来说可能这种方式更容易上手。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">&#x2F;&#x2F;query using equality check in the MATCH clause
-MATCH (j:Person &#123;name: &#39;Jennifer&#39;&#125;)
-RETURN j
+<h3 id="2-2-递归实践"><a href="#2-2-递归实践" class="headerlink" title="2.2 递归实践"></a>2.2 递归实践</h3><p>我们通过几个经典的例子来加深对递归的理解。</p>
+<h4 id="2-2-1-菲波那切数列"><a href="#2-2-1-菲波那切数列" class="headerlink" title="2.2.1 菲波那切数列"></a>2.2.1 菲波那切数列</h4><p>我们知道它的函数是<br>$fib(0)=0,\ fib(1)=1,\ fib(n)=fib(n-1)+fib(n-2); n&gt;=2$<br>可以很容易地将其用代码表示</p>
+<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-keyword">long</span> n)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span> || n == <span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// base case</span>
+        <span class="hljs-keyword">return</span> n;
+    &#125;
+    <span class="hljs-keyword">return</span> fib(n - <span class="hljs-number">1</span>) + fib(n - <span class="hljs-number">2</span>);
+&#125;</code></pre></div>
+<h4 id="2-2-2-排列"><a href="#2-2-2-排列" class="headerlink" title="2.2.2 排列"></a>2.2.2 排列</h4><p>现在有一个数组<code>&#123;a, b, c&#125;</code>，要求对它进行全排列，即排列结果是<code>abc,acb,bac,bca,cab,cba</code></p>
+<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Permutation</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">permutation</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[] list, <span class="hljs-keyword">int</span> k, <span class="hljs-keyword">int</span> m)</span> </span>&#123;
+        <span class="hljs-keyword">int</span> i;
+        <span class="hljs-keyword">if</span> (k == m) &#123;
+            <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt;= m; i++) &#123;
+                System.out.print(list[i]);
+            &#125;
+            System.out.println();
+        &#125;
+        <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-keyword">for</span> (i = k; i &lt;= m; i++) &#123;
+                <span class="hljs-keyword">char</span> temp = list[k];
+                list[k] = list[i];
+                list[i] = temp;
+                permutation(list, k + <span class="hljs-number">1</span>, m);
+                temp = list[k];
+                list[k] = list[i];
+                list[i] = temp;
+            &#125;
+        &#125;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        <span class="hljs-keyword">char</span>[] list = &#123;<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>&#125;;
+        permutation(list, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>);
+    &#125;
+&#125;</code></pre></div>
+<h4 id="2-2-3-汉诺塔问题"><a href="#2-2-3-汉诺塔问题" class="headerlink" title="2.2.3 汉诺塔问题"></a>2.2.3 汉诺塔问题</h4><p>汉诺塔问题是一个经典的问题。<strong>汉诺塔</strong>(<em>Hanoi Tower</em>)，源于印度一个古老传说。大梵天创造世界的时候做了三根金刚石柱子，在一根柱子上从下往上按照大小顺序摞着64片黄金圆盘。大梵天命令婆罗门把圆盘从下面开始按大小顺序重新摆放在另一根柱子上。并且规定，任何时候，在小圆盘上都不能放大圆盘，且在三根柱子之间一次只能移动一个圆盘。问应该如何操作？<br>64个圆盘对于当前的计算机，可能需要几百上千年才能算出，但是我们可以简化这个问题，使用3个圆盘来看一下如何用递归来实现。</p>
+<p>根据我们的递归设计准则，首先要明确基准条件，也就是只有一个圆盘，那很简单，就是把它从第一根柱子移动到第三根柱子，<br>然后设计不断推进的过程，有3根柱子，起点(<em>fromTower</em>)，终点(<em>toTower</em>)，中转(<em>auxTower</em>)。有一个非常易于理解的方式，我们首先将盘从起点移到中转点，这个时候的中转点实际上是终点，再从中转点移到终点，这个时候的中转点实际上是起点，所以设计的两个递归是这样的。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs java">moveDisks(n - <span class="hljs-number">1</span>, fromTower, auxTower, toTower);
+moveDisks(n - <span class="hljs-number">1</span>, auxTower, toTower, fromTower);</code></pre></div>
+<p>下面是完整的代码实现。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HanoiTower</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">moveDisks</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">char</span> fromTower, <span class="hljs-keyword">char</span> toTower, <span class="hljs-keyword">char</span> auxTower)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) &#123;
+            System.out.println(<span class="hljs-string">&quot;move disk &quot;</span> + n + <span class="hljs-string">&quot; from &quot;</span> + fromTower + <span class="hljs-string">&quot; to &quot;</span> + toTower);
+        &#125;
+        <span class="hljs-keyword">else</span> &#123;
+            moveDisks(n - <span class="hljs-number">1</span>, fromTower, auxTower, toTower);
+            System.out.println(<span class="hljs-string">&quot;move disk &quot;</span> + n + <span class="hljs-string">&quot; from &quot;</span> + fromTower + <span class="hljs-string">&quot; to &quot;</span> + toTower);
+            moveDisks(n - <span class="hljs-number">1</span>, auxTower, toTower, fromTower);
+        &#125;
+    &#125;
 
-&#x2F;&#x2F;query using equality check in the WHERE clause
-MATCH (j:Person)
-WHERE j.name &#x3D; &#39;Jennifer&#39;
-RETURN j</code></pre></div>
-<h3 id="6-1-否定属性"><a href="#6-1-否定属性" class="headerlink" title="6.1 否定属性"></a>6.1 否定属性</h3><p>使用<code>NOT</code> <code>AND</code> <code>OR</code> <code>XOR</code>等操作符</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (j:Person)
-WHERE NOT j.name &#x3D; &#39;Jennifer&#39;
-RETURN j</code></pre></div>
-<h3 id="6-2-范围查询"><a href="#6-2-范围查询" class="headerlink" title="6.2 范围查询"></a>6.2 范围查询</h3><p>查询1960到1970年出生的人</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person)
-WHERE 1960 &lt;&#x3D; p.born &lt;&#x3D; 1970
-RETURN p</code></pre></div>
-<h3 id="6-3-exists"><a href="#6-3-exists" class="headerlink" title="6.3 exists"></a>6.3 exists</h3><p>检查一个属性是否存在</p>
-<p><strong>注意</strong>：neo4j不会存储null值</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">&#x2F;&#x2F;Query1: find all users who have a birthdate property
-MATCH (p:Person)
-WHERE exists(p.birthdate)
-RETURN p.name</code></pre></div>
-<h3 id="6-4-模糊查询"><a href="#6-4-模糊查询" class="headerlink" title="6.4 模糊查询"></a>6.4 模糊查询</h3><p>对一个字符串，我们可能需要根据前缀，后缀或包含进行模糊查询。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">&#x2F;&#x2F;check if a property starts with &#39;M&#39;
-MATCH (p:Person)
-WHERE p.name STARTS WITH &#39;Ma&#39;
-RETURN p.name
-
-&#x2F;&#x2F;check if a property contains &#39;a&#39;
-MATCH (p:Person)
-WHERE p.name CONTAINS &#39;a&#39;
-RETURN p.name
-
-&#x2F;&#x2F;check if a property ends with &#39;n&#39;
-MATCH (p:Person)
-WHERE p.name ENDS WITH &#39;n&#39;</code></pre></div>
-<p>当然，我们还可以使用正则表达式的形式。<code>~</code>表示使用正则表达式</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person)
-WHERE p.name &#x3D;~ &#39;Jo.*&#39;
-RETURN p.name</code></pre></div>
-<h3 id="6-5-Filtering-on-Patterns"><a href="#6-5-Filtering-on-Patterns" class="headerlink" title="6.5 Filtering on Patterns"></a>6.5 Filtering on Patterns</h3><p>由于neo4j是图形数据库，它比其它数据库更注重于关系(relationships)。所以我们也可以通过关系来进行筛选。</p>
-<p>比如下面这个关系匹配同时担任一部电影的导演和编剧的人。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person)-[r:DIRECTED]-&gt;(m:Movie)
-WHERE exists((p)-[:WROTE]-&gt;(m))
-RETURN p</code></pre></div>
-<h3 id="6-6-Optional-Patterns"><a href="#6-6-Optional-Patterns" class="headerlink" title="6.6 Optional Patterns"></a>6.6 Optional Patterns</h3><p>类似于SQL的外连接。可选匹配。</p>
-<p>这个例子匹配以姓名以Jo开头并且担任过电影编剧的人，后面这个条件不是强制的。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person)
-WHERE p.name STARTS WITH &#39;Jo&#39;
-OPTIONAL MATCH (p) - [:WROTE] -&gt; (m:Movie)
-RETURN p.name, m.title</code></pre></div>
-<h2 id="7-Aggregation-in-Cypher"><a href="#7-Aggregation-in-Cypher" class="headerlink" title="7. Aggregation in Cypher"></a>7. Aggregation in Cypher</h2><h3 id="7-1-count"><a href="#7-1-count" class="headerlink" title="7.1 count"></a>7.1 count</h3><p>统计数量</p>
-<p>例1加上了属性值title，可以去掉null值，而使用*会统计所有电影节点。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (m:Movie)
-RETURN count(m.title)
-   
-MATCH (m:Movie)
-RETURN count(*)</code></pre></div>
-<h3 id="7-2-collect"><a href="#7-2-collect" class="headerlink" title="7.2 collect"></a>7.2 collect</h3><p>将值聚合成一个列表。可以使用collect基于一个起始节点或关系等组织一系列的值。</p>
-<p>下面这个例子展示了导演和他们执导的电影。如果不使用collect，那么导演和电影会一对一的呈现在表格中。但一个导演可能执导过多部电影，所以使用collect将电影节点聚合起来。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person) - [r:DIRECTED] -&gt; (m:Movie)
-RETURN p.name, collect(m.title) AS titles</code></pre></div>
-<h3 id="7-3-size"><a href="#7-3-size" class="headerlink" title="7.3 size"></a>7.3 size</h3><p>size的作用是统计列表中元素的个数或者统计一个表达式返回的内容大小。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">&#x2F;&#x2F; 统计导演执导电影数量
-MATCH (p:Person) - [r:DIRECTED] -&gt; (m:Movie)
-RETURN p.name, collect(m.title) AS titles, size(collect(m.title)) AS count
-
-&#x2F;&#x2F; 统计导演同时还担任该电影的编剧的数量
-MATCH (p:Person) - [r:DIRECTED] -&gt; (m:Movie)
-RETURN p.name, size((p) - [:WROTE] -&gt; (m)) AS count</code></pre></div>
-<h3 id="7-4-WITH"><a href="#7-4-WITH" class="headerlink" title="7.4 WITH"></a>7.4 WITH</h3><p>使用<code>WITH</code>传递参数到下一个查询</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">&#x2F;&#x2F;find number of friends who have other friends
-MATCH (p:Person)-[:IS_FRIENDS_WITH]-&gt;(friend:Person)
-WITH p, collect(friend.name) AS friendsList, size((friend)-[:IS_FRIENDS_WITH]-(:Person)) AS numberOfFoFs
-WHERE numberOfFoFs &gt; 1
-RETURN p.name, friendsList, numberOfFoFs
-
-&#x2F;&#x2F;find people with 2-6 years of experience
-WITH 2 AS experienceMin, 6 AS experienceMax
-MATCH (p:Person)
-WHERE experienceMin &lt;&#x3D; p.yrsExperience &lt;&#x3D; experienceMax
-RETURN p</code></pre></div>
-<h3 id="7-5-UNWIND"><a href="#7-5-UNWIND" class="headerlink" title="7.5 UNWIND"></a>7.5 UNWIND</h3><p>将一个列表拆分成单独的值，与<code>collect()</code>的作用相反</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">&#x2F;&#x2F;Query10: for numbers in a list, find candidates who have that many years of experience
-WITH [4, 5, 6, 7] AS experienceRange
-UNWIND experienceRange AS number
-MATCH (p:Person)
-WHERE p.yearsExp &#x3D; number
-RETURN p.name, p.yearsExp</code></pre></div>
-<h3 id="7-6-ORDER-BY"><a href="#7-6-ORDER-BY" class="headerlink" title="7.6 ORDER BY"></a>7.6 ORDER BY</h3><p>排序，默认是升序的。</p>
-<p>如下的例子将出生在1960年到1965年的人按降序排序</p>
-<p>（如果对个值参与排序，那按照先后顺序排序）</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person)
-WHERE 1960 &lt;&#x3D; p.born &lt;&#x3D; 1965
-RETURN p.name, p.born ORDER BY p.born DESC</code></pre></div>
-<h3 id="7-7-DISTINCT"><a href="#7-7-DISTINCT" class="headerlink" title="7.7 DISTINCT"></a>7.7 DISTINCT</h3><p>有点时候，一个查询可能会返回多个重复的结果。使用<code>DISTINCT</code>可以解决这个问题。</p>
-<p>下面这个例子查询导演过电影并且担任过电影编剧的人，有的人导演过多部电影，那么就会返回重复的名字，但使用了<code>DISTINCT</code>，就可以获得独特的结果。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person) - [:DIRECTED] -&gt; (m:Movie)
-MATCH (p) - [:WROTE] -&gt; (:Movie)
-RETURN DISTINCT p.name</code></pre></div>
-<h3 id="7-8-LIMIT"><a href="#7-8-LIMIT" class="headerlink" title="7.8 LIMIT"></a>7.8 LIMIT</h3><p>限制返回的个数</p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (p:Person) RETURN p LIMIT 10</code></pre></div>
-<h2 id="8-进阶"><a href="#8-进阶" class="headerlink" title="8. 进阶"></a>8. 进阶</h2><h3 id="8-1-APOC插件"><a href="#8-1-APOC插件" class="headerlink" title="8.1 APOC插件"></a>8.1 APOC插件</h3><h4 id="8-1-1-简介"><a href="#8-1-1-简介" class="headerlink" title="8.1.1 简介"></a>8.1.1 简介</h4><p> APOC是 Neo4j 3.3 版本推出时正式推荐的一个Java存储过程包，里面包含丰富的函数和过程，作为对Cypher所不能提供的复杂图算法和数据操作功能的补充，APOC还具有使用灵活、高性能等优势，是一个基于Neo4j的函数包插件。</p>
-<h4 id="8-1-2-安装"><a href="#8-1-2-安装" class="headerlink" title="8.1.2 安装"></a>8.1.2 安装</h4><ol>
-<li><p>下载对应的jar包<a target="_blank" rel="noopener" href="https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases">https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases</a></p>
-</li>
-<li><p>把jar包放在安装目录的plugins文件夹下</p>
-</li>
-<li><p>进入neo4j的目录，编辑在<code>conf</code>文件夹下的<code>neo4j.conf</code>配置文件，加入如下一行</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">dbms.security.procedures.unrestricted=apoc.*</code></pre></div>
-</li>
-<li><p>重启Neo4j服务</p>
-</li>
-<li><p>在可视化界面运行：<code>return apoc.version()</code>。如果出现对应的版本号，证明安装成功</p>
-</li>
-</ol>
-<h3 id="8-2"><a href="#8-2" class="headerlink" title="8.2"></a>8.2</h3><p>变量引用<code>$</code></p>
-<div class="hljs code-wrapper"><pre><code class="hljs cypher">MATCH (n:Person)
-WHERE n.name &#x3D; $name
-RETURN n</code></pre></div>
-<p>动态访问节点或关系<code>[]</code></p>
-<p>Springboot data neo4j @Query支持<code>apoc</code>，但是如果返回数据格式不一致不会报错，只是接受到的信息为<code>null</code></p>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        moveDisks(<span class="hljs-number">3</span>, <span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;B&#x27;</span>, <span class="hljs-string">&#x27;C&#x27;</span>);
+    &#125;
+&#125;</code></pre></div>
+<p>打印结果</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">move disk 1 from A to C
+move disk 2 from A to B
+move disk 1 from C to B
+move disk 3 from A to C
+move disk 1 from B to A
+move disk 2 from B to C
+move disk 1 from A to C</code></pre></div>
 <p>参考：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://neo4j.com/developer/cypher/">Neo4j官方文档</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_36226553/article/details/108569048?spm=1001.2014.3001.5501">Neo4j：入门基础（三）之APOC插件</a></li>
+<li>《数据结构与算法 Java语言描述》</li>
 </ol>
 ]]></content>
       <categories>
-        <category>数据库</category>
+        <category>数据结构与算法</category>
       </categories>
       <tags>
-        <tag>数据库</tag>
-        <tag>Neo4j</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
 </search>
