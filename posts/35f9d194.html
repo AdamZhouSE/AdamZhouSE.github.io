@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+<html lang="en" data-default-color-scheme=&#34;light&#34;>
 
 
 
@@ -257,20 +257,53 @@
 <li>Java将派生于<code>Error</code>类或<code>RuntimeException</code>类的所有异常称为<strong>非检查型</strong>(<em>unchecked</em>)，所有其他异常称为<strong>检查型</strong>(<em>checked</em>)</li>
 </ul>
 <h3 id="1-2-如何抛出异常"><a href="#1-2-如何抛出异常" class="headerlink" title="1.2 如何抛出异常"></a>1.2 如何抛出异常</h3><p>假设我们正在读取一个文件，预期读取1024个字符，但是在读到500个字符的时候文件就结束了，出现了问题，我们希望抛出一个<code>EOFException</code>，即输入过程中意外遇到了EOF。</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function">String <span class="hljs-title">readData</span><span class="hljs-params">(Scanner in)</span> <span class="hljs-keyword">throws</span> EOFException </span>&#123;<br>    <span class="hljs-comment">// blablabla</span><br>    <span class="hljs-keyword">if</span> (!in.hasNext()) &#123;<br>        <span class="hljs-keyword">if</span> (n &lt; len) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> EOFException();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function">String <span class="hljs-title">readData</span><span class="hljs-params">(Scanner in)</span> <span class="hljs-keyword">throws</span> EOFException </span>&#123;
+    <span class="hljs-comment">// blablabla</span>
+    <span class="hljs-keyword">if</span> (!in.hasNext()) &#123;
+        <span class="hljs-keyword">if</span> (n &lt; len) &#123;
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> EOFException();
+        &#125;
+    &#125;
+&#125;</code></pre></div>
 <h3 id="1-3-创建异常类"><a href="#1-3-创建异常类" class="headerlink" title="1.3 创建异常类"></a>1.3 创建异常类</h3><p>如果我们遇到了标准异常类无法描述清楚的问题，可以自己创建异常类。我们可以定义一个派生于<code>Exception</code>的类，或者某个<code>Exception</code>的子类，比如<code>IOException</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileFormatException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">IOException</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FileFormatException</span><span class="hljs-params">()</span> </span>&#123;&#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FileFormatException</span><span class="hljs-params">(String gripe)</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>(gripe);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileFormatException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">IOException</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FileFormatException</span><span class="hljs-params">()</span> </span>&#123;&#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FileFormatException</span><span class="hljs-params">(String gripe)</span> </span>&#123;
+        <span class="hljs-keyword">super</span>(gripe);
+    &#125;
+&#125;</code></pre></div>
 <h2 id="2-捕获异常"><a href="#2-捕获异常" class="headerlink" title="2. 捕获异常"></a>2. 捕获异常</h2><p>要想捕获一个异常，需要设置<code>try/catch</code>块。</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-comment">// blablabla</span><br>&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>    <span class="hljs-comment">// blablabla</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125;</code></pre></div>
 <p>如果<code>try</code>语句块中的代码抛出了<code>catch</code>子句中指定的一个类，那么程序将跳过<code>try</code>语句块中的其余代码，并执行<code>catch</code>语句块中的代码。如果<code>try</code>中的代码没有异常，那么程序就会跳过<code>catch</code>语句。</p>
 <h3 id="2-1-finally子句"><a href="#2-1-finally子句" class="headerlink" title="2.1 finally子句"></a>2.1 finally子句</h3><p>代码抛出一个异常时，就会停止处理这个方法中的剩余代码，但是如果这个方法中存在一些资源需要被清理，就会产生问题。<br><code>finally</code>子句不管异常有没有被捕获，都会执行。比如下面的例子，所有情况下都会程序都会关闭输入流。</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">FileInputStream in = <span class="hljs-keyword">new</span> FileInputStream();<br><span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-comment">// blablabla</span><br>&#125;<br><span class="hljs-keyword">catch</span> (IOException e) &#123;<br>    <span class="hljs-comment">// blablabla</span><br>&#125;<br><span class="hljs-keyword">finally</span> &#123;<br>    in.close();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs java">FileInputStream in = <span class="hljs-keyword">new</span> FileInputStream();
+<span class="hljs-keyword">try</span> &#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125;
+<span class="hljs-keyword">catch</span> (IOException e) &#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125;
+<span class="hljs-keyword">finally</span> &#123;
+    in.close();
+&#125;</code></pre></div>
 <h3 id="2-2-try-with-resources语句"><a href="#2-2-try-with-resources语句" class="headerlink" title="2.2 try-with-resources语句"></a>2.2 try-with-resources语句</h3><p>对于文件操作IO流、数据库连接等开销非常昂贵的资源，用完之后必须及时通过close方法将其关闭，否则资源会一直处于打开状态，可能会导致内存泄露等问题。关闭资源的常用方式就是在finally块里是释放，即调用close方法。就像我们在2.1节中的例子一样，但是从java7开始，我们可以使用一种更好的方法<code>try-with-resources</code>语句来实现。它的形式如下</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">try</span> (Resources res = ...) &#123;<br>    <span class="hljs-comment">// blablabla</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">try</span> (Resources res = ...) &#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125;</code></pre></div>
 <p>我们来看一个具体的例子，读取一个文件中的所有单词。</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">try</span> (Scanner in = <span class="hljs-keyword">new</span> Scanner(<br>    <span class="hljs-keyword">new</span> FileInputStream(<span class="hljs-string">&quot;/usr/share/dict/words&quot;</span>), StandardCharsets.UTF_8)) &#123;<br>    <span class="hljs-keyword">while</span> (in.hasNext()) &#123;<br>        System.out.println(in.next());<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">try</span> (Scanner in = <span class="hljs-keyword">new</span> Scanner(
+    <span class="hljs-keyword">new</span> FileInputStream(<span class="hljs-string">&quot;/usr/share/dict/words&quot;</span>), StandardCharsets.UTF_8)) &#123;
+    <span class="hljs-keyword">while</span> (in.hasNext()) &#123;
+        System.out.println(in.next());
+    &#125;
+&#125;</code></pre></div>
 <h2 id="3-使用断言"><a href="#3-使用断言" class="headerlink" title="3. 使用断言"></a>3. 使用断言</h2><p>断言机制允许在测试期间向代码中插入一些检查，而在生产代码中会自动删除这些检查。断言的关键字是<code>assert</code>。有以下两种形式</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">assert</span> condition;<br><span class="hljs-keyword">assert</span> condition : expression;<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">assert</span> condition;
+<span class="hljs-keyword">assert</span> condition : expression;</code></pre></div>
 <p>这两种形式都会计算条件，如果结果为<code>false</code>，抛出<code>AssertionError</code>异常。<br>在第二个语句中，表达式将传入<code>AssertionError</code>对象的构造器，并转换成一个消息字符串。</p>
 <p>默认情况下，断言是禁用的，需要在运行程序时用<code>-ea</code>启用断言。</p>
 <p>参考：</p>
