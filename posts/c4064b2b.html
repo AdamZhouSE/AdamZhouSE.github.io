@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en" data-default-color-scheme=&#34;light&#34;>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
 
 
 
@@ -30,7 +30,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/stackoverflow-light.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/stackoverflow-dark.min.css" />
     
   
 
@@ -238,15 +238,15 @@
             <div class="markdown-body">
               <h1 id="Hexo写作"><a href="#Hexo写作" class="headerlink" title="Hexo写作"></a>Hexo写作</h1><p>本文介绍了一些基本的Hexo配置和使用hexo+GitHub写作的流程。</p>
 <a id="more"></a>
-<h3 id="1-Hexo基本命令"><a href="#1-Hexo基本命令" class="headerlink" title="1. Hexo基本命令"></a>1. Hexo基本命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">hexo g = hexo generate  #生成<br>hexo s = hexo server  #启动本地预览<br>hexo d = hexo deploy  #远程部署<br>hexo n &quot;文章标题&quot; = hexo new &quot;文章标题&quot;  #新建一篇博文<br></code></pre></td></tr></table></figure>
+<h3 id="1-Hexo基本命令"><a href="#1-Hexo基本命令" class="headerlink" title="1. Hexo基本命令"></a>1. Hexo基本命令</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">hexo g = hexo generate  #生成<br>hexo s = hexo server  #启动本地预览<br>hexo d = hexo deploy  #远程部署<br>hexo n &quot;文章标题&quot; = hexo new &quot;文章标题&quot;  #新建一篇博文<br></code></pre></div></td></tr></table></figure>
 <h3 id="2-整体配置"><a href="#2-整体配置" class="headerlink" title="2. 整体配置"></a>2. 整体配置</h3><p><code>\hexo\_config.yml</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> Site</span><br>title:  # 网站名，标签页显示<br>subtitle:  # 副标题，网站名下显示<br>description:  # 网站描述，便于搜索<br>keywords:<br>author: # 作者<br>language: zh-CN # 中文<br>timezone: Asia/Shanghai # 时区<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> Site</span><br>title:  # 网站名，标签页显示<br>subtitle:  # 副标题，网站名下显示<br>description:  # 网站描述，便于搜索<br>keywords:<br>author: # 作者<br>language: zh-CN # 中文<br>timezone: Asia/Shanghai # 时区<br></code></pre></div></td></tr></table></figure>
 <h3 id="3-更换主题"><a href="#3-更换主题" class="headerlink" title="3. 更换主题"></a>3. 更换主题</h3><p>推荐使用<code>melody</code></p>
 <p><a href="[https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#%E5%AE%89%E8%A3%85](https://molunerfinn.com/hexo-theme-melody-doc/zh-Hans/quick-start.html#安装">hexo-theme-melody快速开始</a>)</p>
 <p>这个主题就是我现在网站使用的主题，它有完整的中文教程，功能齐全。按照教程配置就可以了。</p>
 <h3 id="4-写作步骤"><a href="#4-写作步骤" class="headerlink" title="4. 写作步骤"></a>4. 写作步骤</h3><ol>
 <li><p>新建文章</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">hexo new &quot;title&quot;<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">hexo new &quot;title&quot;<br></code></pre></div></td></tr></table></figure>
 </li>
 <li><p>写作</p>
 <p><code>\hexo\source\_post</code>中找到<code>title.md</code>，使用<code>typora</code>打开</p>
@@ -257,20 +257,20 @@
 </ol>
 <ol>
 <li><p>预览</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">hexo s<br>hexo s --debug // 在命令行生成debug信息<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">hexo s<br>hexo s --debug // 在命令行生成debug信息<br></code></pre></div></td></tr></table></figure>
 </li>
 <li><p>同步到远程</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">hexo d -g<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">hexo d -g<br></code></pre></div></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="5-问题"><a href="#5-问题" class="headerlink" title="5.  问题"></a>5.  问题</h3><ol>
 <li><p>Template render error: (unknown path)</p>
 <p>在命令行输入<code>hexo -g</code>后报错，原因在于文章内容中有<strong>{}</strong>时，如果它没有被代码块包括，解析会出现错误，所以需要写成</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&#123;%<span class="hljs-built_in"> raw </span>%&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">&#123;%<span class="hljs-built_in"> raw </span>%&#125;<br></code></pre></div></td></tr></table></figure>
 </li>
 <li><p>本地预览与远程显示不一致</p>
 <p>删除缓存</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo clean</span> <br></code></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo clean</span> <br></code></pre></div></td></tr></table></figure>
 <p>在网页上刷新</p>
 </li>
 </ol>

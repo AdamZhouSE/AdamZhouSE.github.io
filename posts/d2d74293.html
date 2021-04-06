@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en" data-default-color-scheme=&#34;light&#34;>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
 
 
 
@@ -30,7 +30,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/stackoverflow-light.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/stackoverflow-dark.min.css" />
     
   
 
@@ -254,22 +254,22 @@
 <p>用户通过<code>Docker Client</code>与<code>Daemon</code>进行交互，将命令传输到宿主机上执行</p>
 <p><code>Docker registeries</code>是docker仓库，存储容器镜像，用户可以上传和下载需要的镜像</p>
 <h3 id="2-2-docker基本命令"><a href="#2-2-docker基本命令" class="headerlink" title="2.2 docker基本命令"></a>2.2 docker基本命令</h3><p>查看docker有哪些命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker<br></code></pre></div></td></tr></table></figure>
 <p>获得帮助，查看某个命令的细节</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker container --help # 这里是查看管理容器命令的细节<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker container --help # 这里是查看管理容器命令的细节<br></code></pre></div></td></tr></table></figure>
 <p>查看docker的版本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker --version<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker --version<br></code></pre></div></td></tr></table></figure>
 <p>查看docker engine的具体信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker version<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker version<br></code></pre></div></td></tr></table></figure>
 <p>可以看到<code>Client</code>和<code>Server</code>端的版本，操作系统等信息。</p>
 <p>server端的操作系统信息是：<code>OS/Arch: linux/amd64</code>，说明容器是跑在Linux上的</p>
 <p>查看系统更加细节的信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker info<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker info<br></code></pre></div></td></tr></table></figure>
 <p>可以看到server端的镜像<code>Registry Mirrors</code>，代理<code>Http Proxy</code>等</p>
 <p>查看docker中安装了哪些镜像</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker image ls<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker image ls<br></code></pre></div></td></tr></table></figure>
 <p>从远端拉取镜像xxx</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull xxx<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker pull xxx<br></code></pre></div></td></tr></table></figure>
 <h3 id="2-3-docker-run"><a href="#2-3-docker-run" class="headerlink" title="2.3 docker run"></a>2.3 docker run</h3><p>在新的容器中执行操作</p>
 <p><code>-d</code> 后台运行容器，并返回容器id</p>
 <p><code>-i</code> 以交互模式运行容器</p>
@@ -285,26 +285,26 @@
 <p><code>--rm</code>  退出时自动删除容器</p>
 <p>下面通过一些例子运用上述命令</p>
 <p>拉取一个镜像busybox</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull busybox:latest<br></code></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -it --name mycontainer hello-world<br></code></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d -p 80:80 nginx<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker pull busybox:latest<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker run -it --name mycontainer hello-world<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker run -d -p 80:80 nginx<br></code></pre></div></td></tr></table></figure>
 <p>将容器和当前的宿主机之间建立一个映射</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d -P nginx<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker run -d -P nginx<br></code></pre></div></td></tr></table></figure>
 <p>映射到当前最大的一个端口</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run --name xxx -it -e myname=zzy busybox # 读入单个环境变量<br>docker run --env-file=filepath busybox # 可以写一个文件批量读入环境变量<br>set # 列出所有环境变量<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker run --name xxx -it -e myname=zzy busybox # 读入单个环境变量<br>docker run --env-file=filepath busybox # 可以写一个文件批量读入环境变量<br>set # 列出所有环境变量<br></code></pre></div></td></tr></table></figure>
 <p>自己设置环境变量(很有用)</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker image inspect hello-world<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker image inspect hello-world<br></code></pre></div></td></tr></table></figure>
 <p>查看某个镜像的细节信息</p>
 <p>比如<code>Cmd</code>，即启动时执行什么命令</p>
 <p><code>Env</code> 环境变量</p>
 <p>在容器和宿主机之间建立一个目录的关联，将宿主机的目录关联到容器中的目录</p>
 <p>这个例子是<code>windows</code>下的<code>temp1</code>目录与容器中的<code>data</code>目录，</p>
-<h3 id="2-4-docker-container"><a href="#2-4-docker-container" class="headerlink" title="2.4 docker container"></a>2.4 docker container</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker container ls<br></code></pre></td></tr></table></figure>
+<h3 id="2-4-docker-container"><a href="#2-4-docker-container" class="headerlink" title="2.4 docker container"></a>2.4 docker container</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker container ls<br></code></pre></div></td></tr></table></figure>
 <p><code>docker container ls -a</code></p>
 <p>简写</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker ps<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker ps<br></code></pre></div></td></tr></table></figure>
 <p>列出现在正在运行的容器信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker ps -a<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker ps -a<br></code></pre></div></td></tr></table></figure>
 <p>列出所有容器的信息</p>
 <p><code>docker container ls –aq</code></p>
 <p>只显示容器的id</p>
@@ -327,17 +327,17 @@
 <p>如果docker中有很多处在停止状态中的容器，可以使用这个命令将它们全部删除</p>
 <h3 id="2-5-docker实践"><a href="#2-5-docker实践" class="headerlink" title="2.5 docker实践"></a>2.5 docker实践</h3><p>练习：gcc</p>
 <p>在Windows下希望使用linux的gcc进行编译</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run --rm -v C:\codec\hw:/hw -w /hw –it –name=server gcc<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker run --rm -v C:\codec\hw:/hw -w /hw –it –name=server gcc<br></code></pre></div></td></tr></table></figure>
 <p><code>-v</code>关联目录</p>
 <p><code>-w</code>指定工作目录</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 查询容器的IP:</span><br>cat /etc/hosts<br><span class="hljs-meta">#</span><span class="bash"> 查看操作系统的版本</span><br>cat /proc/version<br>uname  -a<br><span class="hljs-meta">#</span><span class="bash"> 查看发行版的信息</span><br>cat /etc/issue<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 查询容器的IP:</span><br>cat /etc/hosts<br><span class="hljs-meta">#</span><span class="bash"> 查看操作系统的版本</span><br>cat /proc/version<br>uname  -a<br><span class="hljs-meta">#</span><span class="bash"> 查看发行版的信息</span><br>cat /etc/issue<br></code></pre></div></td></tr></table></figure>
 <p>练习：MongoDB</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull mongo # pull到本地<br>docker run --name mymongo -d mongo # 启动mongo服务端<br>docker run -it --link mymongo:taozs --rm mongo mongo --host taozs # 启动mongo客户端<br><span class="hljs-meta">#</span><span class="bash">第一个mongo是镜像</span><br><span class="hljs-meta">#</span><span class="bash">--host 连接哪一台机器</span><br><span class="hljs-meta">#</span><span class="bash"> --link 链接到一个新的容器 如果不链接，无法直接使用mymongo</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker pull mongo # pull到本地<br>docker run --name mymongo -d mongo # 启动mongo服务端<br>docker run -it --link mymongo:taozs --rm mongo mongo --host taozs # 启动mongo客户端<br><span class="hljs-meta">#</span><span class="bash">第一个mongo是镜像</span><br><span class="hljs-meta">#</span><span class="bash">--host 连接哪一台机器</span><br><span class="hljs-meta">#</span><span class="bash"> --link 链接到一个新的容器 如果不链接，无法直接使用mymongo</span><br></code></pre></div></td></tr></table></figure>
 <p>如果想要从本地连接mongo，可以使用-p指定映射端口</p>
 <p>练习 redis</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull redis<br>docker run -d --name myredis  redis<br>docker run -it --rm --link myredis:taozs redis redis-cli -h taozs<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker pull redis<br>docker run -d --name myredis  redis<br>docker run -it --rm --link myredis:taozs redis redis-cli -h taozs<br></code></pre></div></td></tr></table></figure>
 <p>练习</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull mysql:5.7<br>docker run --name my-mysql -e MYSQL_ROOT_PASSWORD=exampledb20 -d mysql:5.7<br><span class="hljs-meta">#</span><span class="bash"> 为什么加-e参数 为了创建一个可以连接的用户 用户名，密码等</span><br>docker run -it --rm --link my-mysql:taozs mysql mysql –h taozs -u root -p exampledb20<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker pull mysql:5.7<br>docker run --name my-mysql -e MYSQL_ROOT_PASSWORD=exampledb20 -d mysql:5.7<br><span class="hljs-meta">#</span><span class="bash"> 为什么加-e参数 为了创建一个可以连接的用户 用户名，密码等</span><br>docker run -it --rm --link my-mysql:taozs mysql mysql –h taozs -u root -p exampledb20<br></code></pre></div></td></tr></table></figure>
 <h2 id="3-镜像分层"><a href="#3-镜像分层" class="headerlink" title="3. 镜像分层"></a>3. 镜像分层</h2><p>如何持久化数据？</p>
 <p>容器的文件系统</p>
 <p>每一个容器都有一个独立的文件系统，从最底层开始逐步叠加</p>
@@ -348,11 +348,11 @@
 <h2 id="4-数据卷volumn"><a href="#4-数据卷volumn" class="headerlink" title="4. 数据卷volumn"></a>4. 数据卷volumn</h2><p>2种类型的数据卷</p>
 <p>uDocker-managed volume（docker管理卷）</p>
 <p>docker自己管理的卷，可以告诉docker创建一个卷，将数据存储在宿主机的某一个目录下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker volume ls<br>docker volume inspect xxx<br></code></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker volume create myvolume<br>docker volume inspect myvolume<br><span class="hljs-meta">#</span><span class="bash"> 可以看到`MountPoint` 就是存储数据的位置</span><br>docker run -it --rm -v myvolume:/data busybox<br><span class="hljs-meta">#</span><span class="bash"> 容器中有一个目录/data 当操作这个目录时比如拷贝一个文件，就会存储到myvolume中</span><br><span class="hljs-meta">#</span><span class="bash"> 删除容器，但是数据仍然存在，可以恢复</span><br><span class="hljs-meta">#</span><span class="bash"> 这就是docker自己管理的卷</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker volume ls<br>docker volume inspect xxx<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker volume create myvolume<br>docker volume inspect myvolume<br><span class="hljs-meta">#</span><span class="bash"> 可以看到`MountPoint` 就是存储数据的位置</span><br>docker run -it --rm -v myvolume:/data busybox<br><span class="hljs-meta">#</span><span class="bash"> 容器中有一个目录/data 当操作这个目录时比如拷贝一个文件，就会存储到myvolume中</span><br><span class="hljs-meta">#</span><span class="bash"> 删除容器，但是数据仍然存在，可以恢复</span><br><span class="hljs-meta">#</span><span class="bash"> 这就是docker自己管理的卷</span><br></code></pre></div></td></tr></table></figure>
 <p>uBind mount volume（绑定挂载卷）</p>
 <p><code>-v</code>将数据持久化到本地</p>
-<h2 id="5-导出和导入容器镜像"><a href="#5-导出和导入容器镜像" class="headerlink" title="5. 导出和导入容器镜像"></a>5. 导出和导入容器镜像</h2><h2 id="6-容器网路"><a href="#6-容器网路" class="headerlink" title="6. 容器网路"></a>6. 容器网路</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker network ls<br>docker network inspect bridge<br></code></pre></td></tr></table></figure>
+<h2 id="5-导出和导入容器镜像"><a href="#5-导出和导入容器镜像" class="headerlink" title="5. 导出和导入容器镜像"></a>5. 导出和导入容器镜像</h2><h2 id="6-容器网路"><a href="#6-容器网路" class="headerlink" title="6. 容器网路"></a>6. 容器网路</h2><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker network ls<br>docker network inspect bridge<br></code></pre></div></td></tr></table></figure>
 
             </div>
             <hr>
