@@ -253,25 +253,25 @@
 <blockquote>
 <p>针对接口编程，而不是针对实现编程<br>用接口代表每个行为，鸭子类不会实现<code>Flying</code>的接口，而是制造一组专门的类来实现<code>FlyBahavior</code></p>
 </blockquote>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span></span>;
 &#125;</code></pre></div>
 <h3 id="实现行为"><a href="#实现行为" class="headerlink" title="实现行为"></a>实现行为</h3><p>现在有一个<code>FlyBehavior</code>接口，还有对应的类，负责实现具体的行为。</p>
 <p><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/20200902-02.png" alt=""></p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyWithWings</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyWithWings</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
         System.out.println(<span class="hljs-string">&quot;I&#x27;m flying.&quot;</span>);
     &#125;
 &#125;</code></pre></div>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyNoWay</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyNoWay</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
         System.out.println(<span class="hljs-string">&quot;I can&#x27;t fly&quot;</span>);
     &#125;
 &#125;</code></pre></div>
 <h3 id="整合行为"><a href="#整合行为" class="headerlink" title="整合行为"></a>整合行为</h3><p>鸭子将飞行的动作<strong>委托</strong>给别人处理，而不是在鸭子类内部定义飞行方法。<br>在鸭子类中加入实例变量<code>flyBahavior</code>，声明为接口类型。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Duck</span> </span>&#123;
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Duck</span> </span>&#123;
     FlyBehavior flyBehavior;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span></span>;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">performFly</span><span class="hljs-params">()</span> </span>&#123;
@@ -279,7 +279,7 @@
     &#125;
 &#125;</code></pre></div>
 <p>每个鸭子对象都会动态的设置这些变量以在运行时引用正确的类型。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MallardDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MallardDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MallardDuck</span><span class="hljs-params">()</span> </span>&#123;
         flyBehavior = <span class="hljs-keyword">new</span> FlyWithWings(); <span class="hljs-comment">// 使用FlyWithWings作为FlyBehavior类型</span>
     &#125;
@@ -289,7 +289,7 @@
     &#125;
 &#125;</code></pre></div>
 <p>测试</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
         Duck mallard = <span class="hljs-keyword">new</span> MallardDuck();
         mallard.performFly();
@@ -297,11 +297,11 @@
 &#125;
 <span class="hljs-comment">// Output: I&#x27;m flying.</span></code></pre></div>
 <h3 id="动态设定行为"><a href="#动态设定行为" class="headerlink" title="动态设定行为"></a>动态设定行为</h3><p>如果想要在运行时改变鸭子的行为，只需要调用鸭子的<code>setter</code>方法就可以了。<br>我们在鸭子类中增加设定方法</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setFlyBehavior</span><span class="hljs-params">(FlyBehavior fb)</span> </span>&#123;
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setFlyBehavior</span><span class="hljs-params">(FlyBehavior fb)</span> </span>&#123;
         flyBehavior = fb;
 &#125;</code></pre></div>
 <p>创造一个新的类模型鸭</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModelDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModelDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ModelDuck</span><span class="hljs-params">()</span> </span>&#123;
         flyBehavior = <span class="hljs-keyword">new</span> FlyNoWay();
     &#125;
@@ -311,14 +311,14 @@
     &#125;
 &#125;</code></pre></div>
 <p>建立一个新的<code>FlyBehavior</code>类型</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyRocketPowered</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyRocketPowered</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
     <span class="hljs-meta">@Override</span>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
         System.out.println(<span class="hljs-string">&quot;I&#x27;m flying with a rocket.&quot;</span>);
     &#125;
 &#125;</code></pre></div>
 <p>测试<br>调用<code>setter</code>方法，改变了模型鸭的飞行行为</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
         Duck model = <span class="hljs-keyword">new</span> ModelDuck();
         model.performFly();;

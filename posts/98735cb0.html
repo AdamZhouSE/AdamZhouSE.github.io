@@ -240,11 +240,11 @@
             <div class="markdown-body">
               <h1 id="泛型程序设计"><a href="#泛型程序设计" class="headerlink" title="泛型程序设计"></a>泛型程序设计</h1><h2 id="1-为什么要使用泛型程序设计？"><a href="#1-为什么要使用泛型程序设计？" class="headerlink" title="1. 为什么要使用泛型程序设计？"></a>1. 为什么要使用泛型程序设计？</h2><p><strong>泛型程序设计</strong>(<em>generic programming</em>)意味着编写的代码可以对多种不同类型的对象重用。能够提高代码的复用性，比如<code>ArrayList</code>就可以收集任何类的对象，比如<code>String</code>，<code>Integer</code>等，而不用为这些对象去编写不同的类。</p>
 <h3 id="1-1-类型参数"><a href="#1-1-类型参数" class="headerlink" title="1.1 类型参数"></a>1.1 类型参数</h3><p>泛型允许在定义类和接口的时候使用<strong>类型参数</strong>(<em>type parameter</em>)，声明的类型参数在使用时使用具体的类来替换，比如下面这个例子</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;String&gt; files = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs java">List&lt;String&gt; files = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</code></pre></div>
 <p>可以很明显的看出数组中包含的是<code>String</code>对象，类型参数使得程序更易读，也更安全。</p>
 <h2 id="2-定义简单泛型类"><a href="#2-定义简单泛型类" class="headerlink" title="2. 定义简单泛型类"></a>2. 定义简单泛型类</h2><p><strong>泛型类</strong>(<em>generic class</em>)就是有一个或多个类型变量的类。下面定义了一个简单的泛型类<code>Pair</code></p>
 <p><code>Pair</code>类引入了一个类型变量<code>T</code>，用于指定方法的返回类型，字段和局部变量的类型</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pair</span>&lt;<span class="hljs-title">T</span>&gt; </span>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pair</span>&lt;<span class="hljs-title">T</span>&gt; </span>
 <span class="hljs-class"></span>&#123;
    <span class="hljs-keyword">private</span> T first;
    <span class="hljs-keyword">private</span> T second;
@@ -259,17 +259,17 @@
    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setSecond</span><span class="hljs-params">(T newValue)</span> </span>&#123; second = newValue; &#125;
 &#125;</code></pre></div>
 <h2 id="3-泛型方法与类型变量的限定"><a href="#3-泛型方法与类型变量的限定" class="headerlink" title="3. 泛型方法与类型变量的限定"></a>3. 泛型方法与类型变量的限定</h2><p>我们再定义了泛型类之后，就可以设计带有类型参数的方法，比如我们想要寻找数组中元素的最大最小值，就可以这样定义</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span> </span>&#123;
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span> </span>&#123;
 	<span class="hljs-comment">// blablabla</span>
 &#125;</code></pre></div>
 <p>但是这样的设计有一个问题，在方法内部对元素进行比较时，需要使用<code>compareTo</code>方法，这就要求类型<code>T</code>实现<code>Comparable</code>接口，所以需要对其进行<strong>限定</strong>(<em>bound</em>)</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&gt; <span class="hljs-function">T <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span> </span>&#123;
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&gt; <span class="hljs-function">T <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span> </span>&#123;
   <span class="hljs-comment">// blablabla</span>
 &#125;</code></pre></div>
 <p>之所以使用<code>extends</code>而不是使用<code>implements</code>是因为<code>T</code>是限定类型的子类型，而继承关系更接近于这种概念，一个类型变量也可以有多个限定</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java">T extends Comparable &amp; Serializable</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs java">T extends Comparable &amp; Serializable</code></pre></div>
 <p>下面使用我们定义的泛型类实现了一个寻找数组元素最大和最小值的方法。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.time.*;
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.time.*;
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PairTest2</span></span>
 <span class="hljs-class"></span>&#123;
    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>
@@ -313,20 +313,20 @@
 <p>类型擦除指的是通过类型参数合并，将泛型类型实例关联到同一份字节码上。编译器只为泛型类型生成一份字节码，并将其实例关联到这份字节码上。类型擦除的关键在于从泛型类型中清除类型参数的相关信息，并且再必要的时候添加类型检查和类型转换的方法。 类型擦除可以简单的理解为将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码。 类型擦除的主要过程如下： 1.将所有的泛型参数用其最左边界（最顶级的父类型）类型替换  2.移除所有的类型参数。</p>
 </blockquote>
 <p>比如3中的例子，原始类型就会变成下面的样子</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pair</span> </span>&#123;
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pair</span> </span>&#123;
   <span class="hljs-keyword">private</span> Object first;
   <span class="hljs-keyword">private</span> Object second;
 &#125;</code></pre></div>
 <p>由于<code>T</code>是一个无限定的变量，所以直接用<code>Object</code>替换。</p>
 <h3 id="4-2-转换泛型表达式"><a href="#4-2-转换泛型表达式" class="headerlink" title="4.2 转换泛型表达式"></a>4.2 转换泛型表达式</h3><p>调用一个泛型方法时，如果擦除了返回类型，编译器会插入强制类型转换</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java">Pair&lt;Employee&gt; buddies = ...;
+<div class="code-wrapper"><pre><code class="hljs java">Pair&lt;Employee&gt; buddies = ...;
 Employee buddy = buddies.getFirst();</code></pre></div>
 <p><code>getFirst</code>方法擦除类型后的返回类型是<code>Object</code>，编译器自动插入转换到<code>Employee</code>的强制类型转换。</p>
 <h3 id="4-3-转换泛型方法"><a href="#4-3-转换泛型方法" class="headerlink" title="4.3 转换泛型方法"></a>4.3 转换泛型方法</h3><p>类型擦除还会出现在泛型方法中，比如</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&gt; <span class="hljs-function">T <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span></span></code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&gt; <span class="hljs-function">T <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span></span></code></pre></div>
 <p>在擦除类型之后，就会变成</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Comparable <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span></span></code></pre></div>
-<h2 id="5-限制与局限性"><a href="#5-限制与局限性" class="headerlink" title="5. 限制与局限性"></a>5. 限制与局限性</h2><h3 id="5-1-泛型遇到重载"><a href="#5-1-泛型遇到重载" class="headerlink" title="5.1 泛型遇到重载"></a>5.1 泛型遇到重载</h3><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> </span>&#123;
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Comparable <span class="hljs-title">min</span><span class="hljs-params">(T[] a)</span></span></code></pre></div>
+<h2 id="5-限制与局限性"><a href="#5-限制与局限性" class="headerlink" title="5. 限制与局限性"></a>5. 限制与局限性</h2><h3 id="5-1-泛型遇到重载"><a href="#5-1-泛型遇到重载" class="headerlink" title="5.1 泛型遇到重载"></a>5.1 泛型遇到重载</h3><div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> </span>&#123;
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span><span class="hljs-params">(List&lt;Integer&gt; list)</span> </span>&#123;
     
   &#125;
@@ -334,7 +334,7 @@ Employee buddy = buddies.getFirst();</code></pre></div>
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span><span class="hljs-params">(List&lt;String&gt; list)</span></span>
 <span class="hljs-function">&#125;</span></code></pre></div>
 <p>上述代码编译器会报错，提示两个方法冲突，因为它们被擦除之后都变为<code>List</code></p>
-<h3 id="5-2-泛型类中静态变量无效"><a href="#5-2-泛型类中静态变量无效" class="headerlink" title="5.2 泛型类中静态变量无效"></a>5.2 泛型类中静态变量无效</h3><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;
+<h3 id="5-2-泛型类中静态变量无效"><a href="#5-2-泛型类中静态变量无效" class="headerlink" title="5.2 泛型类中静态变量无效"></a>5.2 泛型类中静态变量无效</h3><div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> T singleInstance;
   
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> 
