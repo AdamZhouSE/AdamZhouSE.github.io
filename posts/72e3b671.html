@@ -8,14 +8,15 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210405173004.png">
-  <meta name='theme-color' content='#F75787'>
   <link rel="icon" href="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210405173004.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="Take notes and write articles about Software Engineering">
+  
+    <meta name="description" content="Take notes and write articles about Software Engineering">
+  
   <meta name="author" content="ZZY">
   <meta name="keywords" content="">
   
@@ -31,7 +32,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/stackoverflow-dark.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/stackoverflow-light.min.css" />
     
   
 
@@ -57,7 +58,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"zhouzhuyan.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DH0ILImkVRguE8DP2QGlEl7M-MdYXbMMI","app_key":"Bk6z6DR7zmjyrFfCnlSKCsvh","server_url":null}}};
+    var CONFIG = {"hostname":"zhouzhuyan.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":true,"loading_img":"/img/loading.gif","offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DH0ILImkVRguE8DP2QGlEl7M-MdYXbMMI","app_key":"Bk6z6DR7zmjyrFfCnlSKCsvh","server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -240,7 +241,7 @@
               <h1 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h1><blockquote>
 <p>问题：<br>假设有一个模拟鸭子的游戏，游戏中拥有各种鸭子，我们设计了一个鸭子的超类，并且让各种鸭子，比如红头鸭，橡皮鸭等，继承它。<br>现在，我们需要更新这个游戏，使得鸭子可以飞起来，该怎么做？</p>
 </blockquote>
-<h2 id="使用继承？"><a href="#使用继承？" class="headerlink" title="使用继承？"></a>使用继承？</h2><p>如果依然使用继承，在超类中添加一个fly()方法，会出现不适合该行为的子类也具有该行为的问题，比如橡皮鸭就不会飞，但继承的做法使得它也可以飞起来。<br><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/20200902-01.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="使用继承？"><a href="#使用继承？" class="headerlink" title="使用继承？"></a>使用继承？</h2><p>如果依然使用继承，在超类中添加一个fly()方法，会出现不适合该行为的子类也具有该行为的问题，比如橡皮鸭就不会飞，但继承的做法使得它也可以飞起来。<br><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/20200902-01.png" srcset="/img/loading.gif" alt=""></p>
 <p>如果选择覆盖<code>fly()</code>方法，那么在后续的更新中，我们需要不断地检查可能需要覆盖的<code>fly()</code>方法。<br>所以使用继承来提供行为，会造成代码在多个子类最终重复，复用性差，难以知道鸭子的全部行为，运行时的行为不容易改变等问题。</p>
 <h2 id="使用接口？"><a href="#使用接口？" class="headerlink" title="使用接口？"></a>使用接口？</h2><p>如果抽象出一个<code>Flyable</code>接口，只有会飞的鸭子才实现这个接口呢？<br>设想一下，如果我们有上百种会飞的鸭子，那么就会造成大量的代码重复，每个子类中都要实现一次<code>fly()</code>方法，而且代码无法复用，如果我们需要修改这个方法，想象一下，这简直就是一场灾难。</p>
 <h2 id="策略模式实现"><a href="#策略模式实现" class="headerlink" title="策略模式实现"></a>策略模式实现</h2><p>软件开发过程中总是伴随着变更。<br><strong>设计原则</strong></p>
@@ -252,83 +253,25 @@
 <blockquote>
 <p>针对接口编程，而不是针对实现编程<br>用接口代表每个行为，鸭子类不会实现<code>Flying</code>的接口，而是制造一组专门的类来实现<code>FlyBahavior</code></p>
 </blockquote>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span></span>;
-&#125;</code></pre></div>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <h3 id="实现行为"><a href="#实现行为" class="headerlink" title="实现行为"></a>实现行为</h3><p>现在有一个<code>FlyBehavior</code>接口，还有对应的类，负责实现具体的行为。</p>
-<p><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/20200902-02.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyWithWings</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">&quot;I&#x27;m flying.&quot;</span>);
-    &#125;
-&#125;</code></pre></div>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyNoWay</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">&quot;I can&#x27;t fly&quot;</span>);
-    &#125;
-&#125;</code></pre></div>
+<p><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/20200902-02.png" srcset="/img/loading.gif" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyWithWings</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;I&#x27;m flying.&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyNoWay</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;I can&#x27;t fly&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <h3 id="整合行为"><a href="#整合行为" class="headerlink" title="整合行为"></a>整合行为</h3><p>鸭子将飞行的动作<strong>委托</strong>给别人处理，而不是在鸭子类内部定义飞行方法。<br>在鸭子类中加入实例变量<code>flyBahavior</code>，声明为接口类型。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Duck</span> </span>&#123;
-    FlyBehavior flyBehavior;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">performFly</span><span class="hljs-params">()</span> </span>&#123;
-        flyBehavior.fly();
-    &#125;
-&#125;</code></pre></div>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Duck</span> </span>&#123;<br>    FlyBehavior flyBehavior;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span></span>;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">performFly</span><span class="hljs-params">()</span> </span>&#123;<br>        flyBehavior.fly();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>每个鸭子对象都会动态的设置这些变量以在运行时引用正确的类型。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MallardDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MallardDuck</span><span class="hljs-params">()</span> </span>&#123;
-        flyBehavior = <span class="hljs-keyword">new</span> FlyWithWings(); <span class="hljs-comment">// 使用FlyWithWings作为FlyBehavior类型</span>
-    &#125;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">&quot;I&#x27;m a real Mallard duck.&quot;</span>);
-    &#125;
-&#125;</code></pre></div>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MallardDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MallardDuck</span><span class="hljs-params">()</span> </span>&#123;<br>        flyBehavior = <span class="hljs-keyword">new</span> FlyWithWings(); <span class="hljs-comment">// 使用FlyWithWings作为FlyBehavior类型</span><br>    &#125;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;I&#x27;m a real Mallard duck.&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>测试</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        Duck mallard = <span class="hljs-keyword">new</span> MallardDuck();
-        mallard.performFly();
-    &#125;
-&#125;
-<span class="hljs-comment">// Output: I&#x27;m flying.</span></code></pre></div>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Duck mallard = <span class="hljs-keyword">new</span> MallardDuck();<br>        mallard.performFly();<br>    &#125;<br>&#125;<br><span class="hljs-comment">// Output: I&#x27;m flying.</span><br></code></pre></div></td></tr></table></figure>
 <h3 id="动态设定行为"><a href="#动态设定行为" class="headerlink" title="动态设定行为"></a>动态设定行为</h3><p>如果想要在运行时改变鸭子的行为，只需要调用鸭子的<code>setter</code>方法就可以了。<br>我们在鸭子类中增加设定方法</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setFlyBehavior</span><span class="hljs-params">(FlyBehavior fb)</span> </span>&#123;
-        flyBehavior = fb;
-&#125;</code></pre></div>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setFlyBehavior</span><span class="hljs-params">(FlyBehavior fb)</span> </span>&#123;<br>        flyBehavior = fb;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>创造一个新的类模型鸭</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModelDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ModelDuck</span><span class="hljs-params">()</span> </span>&#123;
-        flyBehavior = <span class="hljs-keyword">new</span> FlyNoWay();
-    &#125;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">&quot;I&#x27;m a model duck.&quot;</span>);
-    &#125;
-&#125;</code></pre></div>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModelDuck</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Duck</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ModelDuck</span><span class="hljs-params">()</span> </span>&#123;<br>        flyBehavior = <span class="hljs-keyword">new</span> FlyNoWay();<br>    &#125;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;I&#x27;m a model duck.&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>建立一个新的<code>FlyBehavior</code>类型</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyRocketPowered</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">&quot;I&#x27;m flying with a rocket.&quot;</span>);
-    &#125;
-&#125;</code></pre></div>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlyRocketPowered</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">FlyBehavior</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;I&#x27;m flying with a rocket.&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>测试<br>调用<code>setter</code>方法，改变了模型鸭的飞行行为</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        Duck model = <span class="hljs-keyword">new</span> ModelDuck();
-        model.performFly();;
-        model.setFlyBehavior(<span class="hljs-keyword">new</span> FlyRocketPowered());
-        model.performFly();
-    &#125;
-&#125;
-<span class="hljs-comment">/* Output:</span>
-<span class="hljs-comment">I can&#x27;t fly;</span>
-<span class="hljs-comment">I&#x27;m flying with a rocket.</span>
-<span class="hljs-comment">*/</span></code></pre></div>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MiniDuckSimulator</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Duck model = <span class="hljs-keyword">new</span> ModelDuck();<br>        model.performFly();;<br>        model.setFlyBehavior(<span class="hljs-keyword">new</span> FlyRocketPowered());<br>        model.performFly();<br>    &#125;<br>&#125;<br><span class="hljs-comment">/* Output:</span><br><span class="hljs-comment">I can&#x27;t fly;</span><br><span class="hljs-comment">I&#x27;m flying with a rocket.</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
 <p>每一个鸭子都<strong>有一个(HAS-A)</strong><code>FlyBahavior</code>，将飞行委托给它处理。<br><strong>设计原则</strong></p>
 <blockquote>
 <p>多用组合，少用继承<br>使用组合建立系统具有很大的弹性，可以将算法族封装成类，还可以在运行时动态地改变行为。</p>
@@ -340,7 +283,7 @@
 <li>算法使用客户不应该知道的数据</li>
 <li>一个类定义了多种行为，并且这些行为在这个类的操作中以多个条件语句的形式出现（switch或if）</li>
 </ol>
-<h3 id="结构与参与者"><a href="#结构与参与者" class="headerlink" title="结构与参与者"></a>结构与参与者</h3><p><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/20200902-04.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="结构与参与者"><a href="#结构与参与者" class="headerlink" title="结构与参与者"></a>结构与参与者</h3><p><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/20200902-04.png" srcset="/img/loading.gif" alt=""></p>
 <p><strong>Strategy</strong> (策略)<br>定义所有支持的算法的公共接口，Context使用这个接口来调用ConcreteStrategy定义的算法，比如<code>FlyBehavior</code>就是一个策略<br><strong>ConcreteStrategy</strong>(具体策略)<br>以Strategy接口实现某具体的算法，比如<code>FlyWithWings</code>,<code>FlyNoWay</code>等<br><strong>Context</strong> (上下文)</p>
 <ul>
 <li>用一个ConcreteStrategy对象来配置</li>
@@ -421,7 +364,7 @@
                 
                 
   <script type="text/javascript">
-    Fluid.utils.lazyComments('comments', function() {
+    Fluid.utils.waitElementVisible('comments', function() {
       var light = 'github-light';
       var dark = 'github-dark';
       var schema = document.documentElement.getAttribute('data-user-color-scheme');
@@ -541,9 +484,8 @@
   
 </footer>
 
+<!-- SCRIPTS -->
 
-  <!-- SCRIPTS -->
-  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
@@ -567,7 +509,7 @@
 
   
     
-      <script  src="/js/img-lazyload.js" ></script>
+      <script  src="/js/lazyload.js" ></script>
     
   
 
@@ -628,55 +570,9 @@
 
 
 
-  
-
-  
-    <!-- MathJax -->
-    <script>
-      MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-        },
-        options: {
-          renderActions: {
-            findScript: [10, doc => {
-              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                const display = !!node.type.match(/; *mode=display/);
-                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                const text = document.createTextNode('');
-                node.parentNode.replaceChild(text, node);
-                math.start = { node: text, delim: '', n: 0 };
-                math.end = { node: text, delim: '', n: 0 };
-                doc.math.push(math);
-              });
-            }, '', false],
-            insertedScript: [200, () => {
-              document.querySelectorAll('mjx-container').forEach(node => {
-                let target = node.parentNode;
-                if (target.nodeName.toLowerCase() === 'li') {
-                  target.parentNode.classList.add('has-jax');
-                }
-              });
-            }, '', false]
-          }
-        }
-      };
-    </script>
-
-    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
-
-  
 
 
 
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 
@@ -699,6 +595,7 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
+
 
 
 </body>

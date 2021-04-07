@@ -8,14 +8,15 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210405173004.png">
-  <meta name='theme-color' content='#F75787'>
   <link rel="icon" href="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210405173004.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="虚拟化意味着对计算机资源的抽象。在云计算中，虚拟化技术可以用来对数据中心的各种资源进行虚拟化和管理，是实现云计算的关键技术。可以实现服务器虚拟化、存储虚拟化、网络虚拟化和桌面虚拟化。">
+  
+    <meta name="description" content="虚拟化意味着对计算机资源的抽象。在云计算中，虚拟化技术可以用来对数据中心的各种资源进行虚拟化和管理，是实现云计算的关键技术。可以实现服务器虚拟化、存储虚拟化、网络虚拟化和桌面虚拟化。">
+  
   <meta name="author" content="ZZY">
   <meta name="keywords" content="">
   
@@ -31,7 +32,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/stackoverflow-dark.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/stackoverflow-light.min.css" />
     
   
 
@@ -57,7 +58,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"zhouzhuyan.com","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DH0ILImkVRguE8DP2QGlEl7M-MdYXbMMI","app_key":"Bk6z6DR7zmjyrFfCnlSKCsvh","server_url":null}}};
+    var CONFIG = {"hostname":"zhouzhuyan.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":true,"loading_img":"/img/loading.gif","offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DH0ILImkVRguE8DP2QGlEl7M-MdYXbMMI","app_key":"Bk6z6DR7zmjyrFfCnlSKCsvh","server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -299,7 +300,7 @@
 <li>Pull：新的虚拟机运行过程中，如果访问到未被复制的页面，就会出现页错误并从原来的VM处把该页复制过来</li>
 </ol>
 <p>实际操作中没有必要同时包含上述3个阶段。下面是3种迁移策略的优劣比较：</p>
-<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210406181806.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210406181806.png" srcset="/img/loading.gif" alt=""></p>
 <h6 id="网络资源的迁移"><a href="#网络资源的迁移" class="headerlink" title="网络资源的迁移"></a>网络资源的迁移</h6><ul>
 <li>虚拟机这种系统级别的封装方式意味着迁移时VM的所有网络设备，包括协议状态(如TCP连接状态)以及IP地址都要随之一起迁移。</li>
 <li>在局域网内，可以通过发送ARP重定向包，将VM的IP地址与目的机器的MAC地址相绑定， 之后的所有包就可以发送到目的机器上。</li>
@@ -331,7 +332,7 @@
 <li>提供硬件机制的内存访问授权</li>
 </ul>
 <p>以Xen为例，它在虚拟内存到机器内存之间引入了一层中间地址，Guest OS看到的是这层中间地址，而不是机器的实际地址。Guest OS感觉自己的物理地址从0开始，是连续的，但Xen将这层中间地址真正地映射到机器地址上却可以是不连续的，这样保证了所有的物理内存可被任意分配给不同的Guest OS。</p>
-<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210406181815.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210406181815.png" srcset="/img/loading.gif" alt=""></p>
 <p>虚拟机监控器使用分段和分页机制对自身的物理内存进行保护。x86体系结构提供了支 持分段机制的虚拟内存，这能够提供另一种形式的特权级分离。</p>
 <p>每个段包括基址、段限和一些属性位。</p>
 <h5 id="2-网络隔离"><a href="#2-网络隔离" class="headerlink" title="2. 网络隔离"></a>2. 网络隔离</h5><p><strong>目标</strong>：确保把有害的攻击隔离，在可信网络之外和保证可信网络内部信息不外泄的前提下，完成网间数据的安全交换。</p>
@@ -356,7 +357,7 @@
 <p>利用负载均衡、数据迁移、数据块重组等技术，提升系统的潜在性能</p>
 <p>整合和重组底层物理资源，得到多种不同性能和可靠性的 新的虚拟设备，满足多种存储应用的需求</p>
 <h4 id="2-2-1-存储虚拟化的一般模型"><a href="#2-2-1-存储虚拟化的一般模型" class="headerlink" title="2.2.1 存储虚拟化的一般模型"></a>2.2.1 存储虚拟化的一般模型</h4><p>虚拟化存储系统在原有存储系统结构上增加了虚拟化层，将多个存储单元抽象成一个虚拟存储池。</p>
-<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210406181823.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210406181823.png" srcset="/img/loading.gif" alt=""></p>
 <p>它的优势如下：</p>
 <ul>
 <li>减少存储系统的管理开销</li>
@@ -471,7 +472,7 @@
                 
                 
   <script type="text/javascript">
-    Fluid.utils.lazyComments('comments', function() {
+    Fluid.utils.waitElementVisible('comments', function() {
       var light = 'github-light';
       var dark = 'github-dark';
       var schema = document.documentElement.getAttribute('data-user-color-scheme');
@@ -591,9 +592,8 @@
   
 </footer>
 
+<!-- SCRIPTS -->
 
-  <!-- SCRIPTS -->
-  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
@@ -617,7 +617,7 @@
 
   
     
-      <script  src="/js/img-lazyload.js" ></script>
+      <script  src="/js/lazyload.js" ></script>
     
   
 
@@ -678,55 +678,9 @@
 
 
 
-  
-
-  
-    <!-- MathJax -->
-    <script>
-      MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-        },
-        options: {
-          renderActions: {
-            findScript: [10, doc => {
-              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                const display = !!node.type.match(/; *mode=display/);
-                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                const text = document.createTextNode('');
-                node.parentNode.replaceChild(text, node);
-                math.start = { node: text, delim: '', n: 0 };
-                math.end = { node: text, delim: '', n: 0 };
-                doc.math.push(math);
-              });
-            }, '', false],
-            insertedScript: [200, () => {
-              document.querySelectorAll('mjx-container').forEach(node => {
-                let target = node.parentNode;
-                if (target.nodeName.toLowerCase() === 'li') {
-                  target.parentNode.classList.add('has-jax');
-                }
-              });
-            }, '', false]
-          }
-        }
-      };
-    </script>
-
-    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
-
-  
 
 
 
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 
@@ -749,6 +703,7 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
+
 
 
 </body>

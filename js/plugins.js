@@ -162,7 +162,13 @@ Fluid.plugins = {
       if (img.complete) { img.onload(); }
     }
 
-    var notLazyImages = $('main img:not([lazyload])');
+    var images = $('main img:not([srcset])');
+    var notLazyImages = [];
+    for (const img of images) {
+      if (!img.srcset) {
+        notLazyImages.push(img);
+      }
+    }
     var total = notLazyImages.length;
     for (const img of notLazyImages) {
       const old = img.onload;
