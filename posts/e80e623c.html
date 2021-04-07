@@ -58,7 +58,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"zhouzhuyan.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":true,"loading_img":"/img/loading.gif","offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DH0ILImkVRguE8DP2QGlEl7M-MdYXbMMI","app_key":"Bk6z6DR7zmjyrFfCnlSKCsvh","server_url":null}}};
+    var CONFIG = {"hostname":"zhouzhuyan.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":false,"onlypost":true,"loading_img":"/img/loading.gif","offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DH0ILImkVRguE8DP2QGlEl7M-MdYXbMMI","app_key":"Bk6z6DR7zmjyrFfCnlSKCsvh","server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -197,7 +197,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      17
+      18
        分钟
     </span>
   
@@ -241,67 +241,86 @@
               <h3 id="0-准备工作"><a href="#0-准备工作" class="headerlink" title="0. 准备工作"></a>0. 准备工作</h3><p>博客的搭建和域名的绑定可以参考我以前的博客。<br><a href="https://zhouzhuyan.com/posts/ae6c038e.html">使用Github pages + Hexo搭建个人博客</a><br><a href="https://zhouzhuyan.com/posts/2cd2c226.html">Hexo个人博客绑定域名</a></p>
 <p>由于博客是基于Github pages搭建的，所以在国内的访问速度比较慢，可以部署到云服务器上加快访问的速度，我使用的是<a target="_blank" rel="noopener" href="https://cloud.tencent.com/act/campus">腾讯云学生机</a>。注意在国内使用云服务器部署网站需要对网站进行备案，详细步骤可以参考腾讯的<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/243">官方文档</a>。在备案完成后，就可以进行网站的部署了。</p>
 <h3 id="1-配置git"><a href="#1-配置git" class="headerlink" title="1.  配置git"></a>1.  配置git</h3><p><strong>Tip</strong><br>我的服务器型号是<code>CentOS 7.5</code></p>
-<h4 id="1-1-安装git"><a href="#1-1-安装git" class="headerlink" title="1.1 安装git"></a>1.1 安装git</h4><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">yum install -y git<br></code></pre></div></td></tr></table></figure>
+<h4 id="1-1-安装git"><a href="#1-1-安装git" class="headerlink" title="1.1 安装git"></a>1.1 安装git</h4><div class="hljs code-wrapper"><pre><code class="hljs shell">yum install -y git</code></pre></div>
 <p>看到complete字样说明安装完成了，可以通过如下命令验证</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git --version<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">git --version</code></pre></div>
 <p>出现版本则说明安装成功。</p>
-<h4 id="1-2-创建git账户"><a href="#1-2-创建git账户" class="headerlink" title="1.2 创建git账户"></a>1.2 创建git账户</h4><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">adduser git<br>passwd git<br></code></pre></div></td></tr></table></figure>
+<h4 id="1-2-创建git账户"><a href="#1-2-创建git账户" class="headerlink" title="1.2 创建git账户"></a>1.2 创建git账户</h4><div class="hljs code-wrapper"><pre><code class="hljs shell">adduser git
+passwd git</code></pre></div>
 <p>注意一定要有第二步<code>passwd git</code>，这是给git账户设置密码，否则账户不会使用。</p>
 <h4 id="1-3-设置免密登录git"><a href="#1-3-设置免密登录git" class="headerlink" title="1.3 设置免密登录git"></a>1.3 设置免密登录git</h4><p>使用<code>su</code>命令切换至git用户，并进入用户git的根目录</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">su git<br>cd<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">su git
+cd</code></pre></div>
 <p>创建<code>~/.ssh</code>文件夹和<code>~/.ssh/authorized_keys</code>文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir ~/.ssh<br>touch ~/.ssh/authorized_keys<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir ~/.ssh
+touch ~/.ssh/authorized_keys</code></pre></div>
 <p>将本地的<code>id_rsa.pub</code>文件中的公匙复制到<code>authorized_keys</code>文件中，在mac中，该文件的地址是<code>/Users/你的用户名/.ssh/id_rsa.pub</code>，可以在终端中使用如下命令打开<code>.ssh</code>文件夹，然后使用vs code打开该文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">open /Users/galahad/.ssh<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">open /Users/galahad/.ssh</code></pre></div>
 <p>复制其中的内容，然后打开<code>authorized_keys</code>文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">vi ~/.ssh/authorized_keys<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">vi ~/.ssh/authorized_keys</code></pre></div>
 <p>按<code>i</code>进入插入模式，复制内容<br>按<code>esc</code>键进入命令模式，输入<code>:wq</code>保存并退出<br>最后对文件赋予对应的权限</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">chmod 600 /home/git/.ssh/authorized_keys<br>chmod 700 /home/git/.ssh<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">chmod 600 /home/git/.ssh/authorized_keys
+chmod 700 /home/git/.ssh</code></pre></div>
 <p>这样就可以使得本地终端可以免密登录git用户，可以在本地终端使用ssh远程连接测试</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ssh git@你的IP<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">ssh git@你的IP</code></pre></div>
 <p>如果仍需输入密码，那说明配置有问题，可以重新按照1.3的步骤再配置一遍，当然，1.3的部分不是必须的，这只是为了在本地提交文件到服务器的时候不用输入密码，省点儿力气。</p>
 <h4 id="1-4-配置git仓库"><a href="#1-4-配置git仓库" class="headerlink" title="1.4 配置git仓库"></a>1.4 配置git仓库</h4><p>在git用户的根目录下创建hexo存储的目录</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir -p projects/blog <br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir -p projects/blog</code></pre></div>
 <p>再创建一个git仓库，并初始化一个仓库</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir repos<br>cd repos<br>git init --bare blog.git<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir repos
+cd repos
+git init --bare blog.git</code></pre></div>
 <p>之后，在<code>blog.git</code>文件夹下会产生一个<code>hooks</code>文件夹，在其中创建一个文件<code>post-receive</code>，在其中配置一个钩子</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd blog.git/hooks<br>vi post-receive<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">cd blog.git/hooks
+vi post-receive</code></pre></div>
 <p>将如下内容复制到其中</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh</span><br>git --work-tree=/home/git/projects/blog --git-dir=/home/git/repos/blog.git checkout -f<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh</span>
+git --work-tree=/home/git/projects/blog --git-dir=/home/git/repos/blog.git checkout -f</code></pre></div>
 <p>保存退出之后，赋予文件可执行权限</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">chmod +x post-receive<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">chmod +x post-receive</code></pre></div>
 <p>然后输入<code>exit</code>回到<code>root</code>用户下，输入如下命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">chown -R git:git /home/git/repos/blog.git<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">chown -R git:git /home/git/repos/blog.git</code></pre></div>
 <p>配置完仓库后，可以在本地使用<code>git clone</code>命令测试是否能够成功克隆仓库</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git clone git@server_ip:/home/git/repos/blog.git<br></code></pre></div></td></tr></table></figure>
-<h3 id="2-配置Nginx"><a href="#2-配置Nginx" class="headerlink" title="2 配置Nginx"></a>2 配置Nginx</h3><h4 id="2-1-安装Nginx"><a href="#2-1-安装Nginx" class="headerlink" title="2.1 安装Nginx"></a>2.1 安装Nginx</h4><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">yum install -y nginx<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">git clone git@server_ip:/home/git/repos/blog.git</code></pre></div>
+<h3 id="2-配置Nginx"><a href="#2-配置Nginx" class="headerlink" title="2 配置Nginx"></a>2 配置Nginx</h3><h4 id="2-1-安装Nginx"><a href="#2-1-安装Nginx" class="headerlink" title="2.1 安装Nginx"></a>2.1 安装Nginx</h4><div class="hljs code-wrapper"><pre><code class="hljs shell">yum install -y nginx</code></pre></div>
 <p>启动nginx</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">nginx<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">nginx</code></pre></div>
 <h4 id="2-2-配置文件"><a href="#2-2-配置文件" class="headerlink" title="2.2 配置文件"></a>2.2 配置文件</h4><p>先暂停服务</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">nginx -s stop<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">nginx -s stop</code></pre></div>
 <p>进入nginx目录，编辑配置文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd /etc/nginx<br>vi nginx.conf<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">cd /etc/nginx
+vi nginx.conf</code></pre></div>
 <p>注意要修改两个地方，一个是将<code>user nginx</code>改为<code>user root</code><br>第二个就是在server的位置，添加root解析路径<code>/home/git/projects/blog/</code>，如果你已经有了域名，那么在server_name后面添加上你的域名。其它保持不变。</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">server &#123;<br>        listen       80 default_server;<br>        listen       [::]:80 default_server;<br>        server_name  zhouzhuyan.com www.zhouzhuyan.com;<br>        root         /home/git/projects/blog/;<br>        index index.html index.htm;<br>    &#125;<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">server &#123;
+        listen       80 default_server;
+        listen       [::]:80 default_server;
+        server_name  zhouzhuyan.com www.zhouzhuyan.com;
+        root         /home/git/projects/blog/;
+        index index.html index.htm;
+    &#125;</code></pre></div>
 <p>保存退出<br>重新启动nginx</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">systemctl restart nginx<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">systemctl restart nginx</code></pre></div>
 <h4 id="2-3-检查"><a href="#2-3-检查" class="headerlink" title="2.3 检查"></a>2.3 检查</h4><p>检查nginx状态</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">systemctl status nginx<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">systemctl status nginx</code></pre></div>
 <p>如果看到绿色的<code>active</code>就表示配置成功了。我在这里遇到了一个问题，它的状态显示红色的<code>failed</code>,，错误是<code>98: Address already in use</code>，80端口已经被占用，这个时候可以用如下命令检查一下是谁占用了80端口</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">netstat -ntpl<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">netstat -ntpl</code></pre></div>
 <p>如果就是nginx的话，应该是由于之前的配置文件中，<code>listen       80 default_server;</code>监听ipv4的80端口，而<code>listen       [::]:80 default_server;</code>监听的是ipv6的80端口，于是就重复占用了。可以在配置文件中这样更改</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">listen       [::]:80 ipv6only=on  default_server;<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">listen       [::]:80 ipv6only=on  default_server;</code></pre></div>
 <p>然后重启nginx应该就可以了。</p>
 <h3 id="3-Hexo本地配置"><a href="#3-Hexo本地配置" class="headerlink" title="3. Hexo本地配置"></a>3. Hexo本地配置</h3><p>hexo的站点配置文件<code>_config.yml</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">deploy:<br>  type: git<br>  repo: git@你的IP:/home/git/repos/blog.git<br>  branch: master<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">deploy:
+  type: git
+  repo: git@你的IP:/home/git/repos/blog.git
+  branch: master</code></pre></div>
 <p>然后进行部署</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">hexo clean<br>hexo g -d<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">hexo clean
+hexo g -d</code></pre></div>
 <h3 id="4-启用https"><a href="#4-启用https" class="headerlink" title="4. 启用https"></a>4. 启用https</h3><p>由于nginx默认使用的是http，所以在网站访问的时候，会显示不安全，可以通过配置来开启https</p>
 <h4 id="4-1-申请SSL证书"><a href="#4-1-申请SSL证书" class="headerlink" title="4.1 申请SSL证书"></a>4.1 申请SSL证书</h4><p>阿里云和腾讯云都提供免费的SSL证书下载，因为我的域名是在腾讯云云购买的，所以我就从腾讯云上下载了<a target="_blank" rel="noopener" href="https://cloud.tencent.com/product/ssl">SSL证书</a></p>
 <h4 id="4-2-传输文件到服务器"><a href="#4-2-传输文件到服务器" class="headerlink" title="4.2 传输文件到服务器"></a>4.2 传输文件到服务器</h4><p>从腾讯云上下载证书到本地，会得到一个自己域名命名的文件夹，里面有<code>Apache</code>，<code>Nginx</code>，<code>Tomcat</code>，<code>IIS</code>的证书，由于我们使用的是nginx服务，所以只需要Nginx文件夹内的<code>xxx.crt</code>和<code>xxx.key</code>两个文件。<br>在服务端创建文件夹存储证书</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir /home/git/SSL<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">mkdir /home/git/SSL</code></pre></div>
 <p>我们可以使用scp命令将本地的文件传输到服务器</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">scp -r xxx/Nginx git@你的IP /home/git/SSL<br></code></pre></div></td></tr></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">scp -r xxx/Nginx git@你的IP /home/git/SSL</code></pre></div>
 <h4 id="4-3-配置nginx"><a href="#4-3-配置nginx" class="headerlink" title="4.3 配置nginx"></a>4.3 配置nginx</h4><p>然后再次编辑<code>nginx.conf</code>文件，这里可以参考官方文档<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/400/35244">Nginx 服务器证书安装</a>，文档写的很清晰，按照其中的步骤配置一下就可以完成了。<br>之后我们就可以通过https访问网页，在网址旁边会出现一把锁。</p>
 <p>参考：<br>[1]HJX.将Hexo部署到阿里云轻量级服务器(保姆级教程)<br>[EB/OL].<a target="_blank" rel="noopener" href="https://hjxlog.com/posts/20191130a1.html,2019-11-30.">https://hjxlog.com/posts/20191130a1.html,2019-11-30.</a><br>[2]Dreamy.TZK.将Hexo部署到云服务器<br>[EB/OL].<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1632020,2020-05-25.">https://cloud.tencent.com/developer/article/1632020,2020-05-25.</a></p>
 
@@ -509,12 +528,6 @@
 
 <!-- Plugins -->
 
-
-  
-    
-      <script  src="/js/lazyload.js" ></script>
-    
-  
 
 
 
