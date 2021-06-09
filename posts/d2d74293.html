@@ -345,7 +345,7 @@ docker container inspect mynginx</code></pre></div>
 <p><code>-f</code>作用是动态显示，会不断更新，不加就会打印当前状态下的所有信息然后退出</p>
 <p><br/></p>
 <div class="code-wrapper"><pre><code class="hljs shell">docker stop 容器名/ID # 停止一个容器
-docker start 容器名/ID  # 启动已停止运行的容器
+docker start -i 容器名/ID  # 启动已停止运行的容器 -i 保持标准输入打开
 docker restart 容器名/ID  # 正在运行的容器可以重启</code></pre></div>
 <p><br/></p>
 <p>将本地的标准输入、输出或错误流加入到正在运行的容器上</p>
@@ -531,6 +531,12 @@ docker network inspect mygcc1</code></pre></div>
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/posts/d356b524.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Jenkins部署SpringBoot+Vue项目</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
