@@ -15,14 +15,30 @@
   
   <meta name="theme-color" content="#2f4154">
   
-    <meta name="description" content="Take notes and write articles about Software Engineering">
+    <meta name="description" content="本章将介绍高级语言程序编译链接的过程，并对gcc命令进行详细的阐述，同时还会讲解如何使用make命令和Makefile文件来编译大型的软件项目。">
   
   <meta name="author" content="ZZY">
   <meta name="keywords" content="">
   
-  <title>Tags - Blog of Adam</title>
+  <title>编译与链接 - Blog of Adam</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/stackoverflow-light.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -50,7 +66,7 @@
 
 
 <body>
-  <header style="height: 90vh;">
+  <header style="height: 60vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -144,22 +160,63 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210404110327.jpeg') no-repeat center center;
+         style="background: url('https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210404104831.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Tag">
+            <span class="h2" id="subtitle" title="编译与链接">
               
             </span>
 
             
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-25 18:53" pubdate>
+        March 25, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      294 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
           
         </div>
       </div>
@@ -168,24 +225,111 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center tagcloud">
-  <a href="/tags/C/" style="font-size: 22.5px; color: #779bd3">C++</a> <a href="/tags/Hadoop/" style="font-size: 15px; color: #bbe">Hadoop</a> <a href="/tags/Java/" style="font-size: 30px; color: #337ab7">Java</a> <a href="/tags/Jenkins/" style="font-size: 15px; color: #bbe">Jenkins</a> <a href="/tags/Neo4j/" style="font-size: 15px; color: #bbe">Neo4j</a> <a href="/tags/Spark/" style="font-size: 15px; color: #bbe">Spark</a> <a href="/tags/Spring/" style="font-size: 15px; color: #bbe">Spring</a> <a href="/tags/docker/" style="font-size: 15px; color: #bbe">docker</a> <a href="/tags/hexo/" style="font-size: 26.25px; color: #558ac5">hexo</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 18.75px; color: #99abe0">云计算</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 15px; color: #bbe">数据库</a> <a href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" style="font-size: 15px; color: #bbe">策略模式</a> <a href="/tags/%E7%BA%BF%E7%A8%8B/" style="font-size: 15px; color: #bbe">线程</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 15px; color: #bbe">虚拟化</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 18.75px; color: #99abe0">设计模式</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 15px; color: #bbe">递归</a>
-</div>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">编译与链接</h1>
+            
+            <div class="markdown-body">
+              <h1 id="编译与链接"><a href="#编译与链接" class="headerlink" title="编译与链接"></a>编译与链接</h1><p>本章将介绍高级语言程序编译链接的过程，并对gcc命令进行详细的阐述，同时还会讲解如何使用make命令和Makefile文件来编译大型的软件项目。</p>
+<h2 id="1-Linux入门"><a href="#1-Linux入门" class="headerlink" title="1. Linux入门"></a>1. Linux入门</h2><p>在正式介绍编译链接的过程之前，我们先来看一下Linux中一些基本的概念。</p>
+<h3 id="1-应用程序"><a href="#1-应用程序" class="headerlink" title="1. 应用程序"></a>1. 应用程序</h3><p>系统为正常使用提供的应用程序，通常在<code>/usr/bin</code>目录下都可以找到。</p>
+<p>系统管路员为某个特定的主机或本地网络添加的程序通常在<code>/usr/local/bin</code>或<code>/opt</code>中，<code>/usr/local</code>和<code>/opt</code>这两个目录分离了系统提供的域后续添加的内容，保持良好的习惯，在升级时就仅需要保留这两个目录了。</p>
+<h3 id="1-2-头文件"><a href="#1-2-头文件" class="headerlink" title="1.2 头文件"></a>1.2 头文件</h3><p>在我们进行程序设计时，需要用头文件来提供对常量的定义及对系统函数及库函数调用的声明。对C语言来说，这些文件基本上在<code>/usr/include</code>中，而依赖于特定的Linux版本的头文件一般在<code>/usr/include/sys</code>或<code>/usr/include/linux</code>中</p>
 
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'AdamZhouSE/AdamZhouSE.github.io');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -288,9 +432,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 

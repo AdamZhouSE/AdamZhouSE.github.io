@@ -1,0 +1,602 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210405173004.png">
+  <link rel="icon" href="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210405173004.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="本位介绍了Java面向对象编程中的重要思想——继承，包括对超类和子类，对象包装器和继承的设计技巧的介绍。">
+  
+  <meta name="author" content="ZZY">
+  <meta name="keywords" content="">
+  
+  <title>Java 继承 - Blog of Adam</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/stackoverflow-light.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"zhouzhuyan.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":false,"onlypost":true,"loading_img":"/img/loading.gif","offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DH0ILImkVRguE8DP2QGlEl7M-MdYXbMMI","app_key":"Bk6z6DR7zmjyrFfCnlSKCsvh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Blog of Adam</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210404104831.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java 继承">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-09-08 16:09" pubdate>
+        September 8, 2020 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java 继承</h1>
+            
+            <div class="markdown-body">
+              <h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>继承(inheritance)的基本思想是基于已经有的类创建新的类，复用这些类的方法。</p>
+<h2 id="一、类，超类和子类"><a href="#一、类，超类和子类" class="headerlink" title="一、类，超类和子类"></a>一、类，超类和子类</h2><p>在前面的文章中我们实现了一个<code>Employee</code>类，假设你在某个公司工作，这个公司的经理和员工的待遇不一样，普通员工在完成任务后仅领取薪水，而经理还拥有奖金。<br>这个时候，我们可以定义一个新类<code>Manager</code>，使用继承重用<code>Employee</code>中的代码，同时定义新的方法来增加奖金这一功能。</p>
+<p><strong>Tip</strong><br><code>Manager</code> <strong>is-a</strong> <code>Employee</code><br><strong>is-a</strong>关系是继承的一个明显特征</p>
+<h3 id="1-定义子类"><a href="#1-定义子类" class="headerlink" title="1. 定义子类"></a>1. 定义子类</h3><p>使用<code>extends</code>关键字来表示继承</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125;</code></pre></div>
+<p>关键字<code>extends</code>表明正在构造的新类派生于一个已经存在的类。这个类被称为<strong>超类</strong>(<em>superclass</em>) 或<strong>父类</strong>(<em>parent class</em>)，新类称为<strong>子类</strong>(<em>subclass</em>)<br>在设计类时，应该将一般方法放在超类中，将更特殊的方法放在子类中<br>比如我们在<code>Manager</code>类中应该实现一个设置奖金金额的方法。</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Employee</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> bonus;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBonus</span><span class="hljs-params">(<span class="hljs-keyword">double</span> bonus)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.bonus = bonus;
+    &#125;
+&#125;</code></pre></div>
+<h3 id="2-覆盖方法"><a href="#2-覆盖方法" class="headerlink" title="2. 覆盖方法"></a>2. 覆盖方法</h3><p>超类中的某些方法对子类不一定适用，比如<code>Manager</code>类中的<code>getSalary</code>方法应该返回薪水和奖金的总和，所以要提供一个新的方法来<strong>覆盖</strong>(<em>override</em>)超类中的某个方法。<br>要注意的是，<code>Manager</code>类的<code>getSalary</code>方法不能够直接访问<code>salary</code>字段，因为其实<code>Employee</code>类的私有字段，所以需要使用<code>super</code>关键字</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSalary</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> baseSalary = <span class="hljs-keyword">super</span>.getSalary();
+    <span class="hljs-keyword">return</span> baseSalary + bonus;
+&#125;</code></pre></div>
+<h3 id="3-子类构造器"><a href="#3-子类构造器" class="headerlink" title="3. 子类构造器"></a>3. 子类构造器</h3><div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Manager</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, String name, <span class="hljs-keyword">int</span> salary)</span> </span>&#123;
+    <span class="hljs-keyword">super</span>(id, name, salary);
+    bonus = <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>语句<code>super(id, name, salary);</code>实现了对<code>Employee</code>中私有字段的调用</p>
+<h3 id="4-多态"><a href="#4-多态" class="headerlink" title="4. 多态"></a>4. 多态</h3><p>我们可以通过<code>is-a</code>来判断是否将数据设计为继承关系，它的另外一种表述是<strong>替换原则</strong>，即程序中出现超类对象的任何地方都可以使用子类对象替换。</p>
+<p>在Java中，对象变量时<strong>多态</strong>(<em>polymophic</em>)的。<br>一个<code>Employee</code>类型的变量既可以引用一个<code>Employee</code>类型的对象,也可以引用<code>Employee</code>类的任何一个子类的对象(比如<code>Manager</code>)</p>
+<div class="code-wrapper"><pre><code class="hljs java">Employee e;
+e = <span class="hljs-keyword">new</span> Employee(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-number">10000</span>);
+e = <span class="hljs-keyword">new</span> Manager(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-number">20000</span>);</code></pre></div>
+<p>虽然这里的<code>e</code>引用了<code>Manager</code>类型的对象，但是编译器只将<code>e</code>看成是一个<code>Employee</code>对象，所以如下的调用是错误的。</p>
+<div class="code-wrapper"><pre><code class="hljs java">e.setBonus(<span class="hljs-number">10000</span>); <span class="hljs-comment">// ERROR</span></code></pre></div>
+<h3 id="5-阻止继承-final类和方法"><a href="#5-阻止继承-final类和方法" class="headerlink" title="5. 阻止继承: final类和方法"></a>5. 阻止继承: final类和方法</h3><p>如果我们需要阻止某个类被继承，可以使用<code>final</code>关键字</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Father</span> </span>&#123;
+    <span class="hljs-comment">// blablabla</span>
+&#125;</code></pre></div>
+<p>类中的某个特定的方法也可以声明为<code>final</code>，这样子类就不能够覆盖这个方法。</p>
+<p><strong>Tip</strong><br>为什么要将类或方法声明为<code>final</code>？<br>确保它们不会在子类中改变语义。比如<code>String</code>类是<code>final</code>类，所以一个<code>String</code>引用引用的一定是<code>String</code>对象，而不是其它。</p>
+<h3 id="6-抽象类"><a href="#6-抽象类" class="headerlink" title="6. 抽象类"></a>6. 抽象类</h3><p>在继承层次结构中，位于上层的类更具有一般性<br>比如我们加入<code>Person</code>类和<code>Student</code>类，下图是这三个类之间的继承关系</p>
+<p><img src="https://adamzhou-blog-pictures.oss-cn-hangzhou.aliyuncs.com/20200908-02.png" alt=""></p>
+<p>每个人都有一些属性，比如姓名，年龄，引入一个公共的超类，就可以把<code>getName</code>方法放在继承层次结构中的更高一层，使用<code>abstract</code>关键字来定义抽象类</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Person</span> <span class="hljs-params">(String name)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+&#125;</code></pre></div>
+<p>抽象类不能够实例化，如下的表达式是错误的</p>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">new</span> Person(); <span class="hljs-comment">// ERROR</span></code></pre></div>
+<h2 id="二、对象包装器与自动装箱"><a href="#二、对象包装器与自动装箱" class="headerlink" title="二、对象包装器与自动装箱"></a>二、对象包装器与自动装箱</h2><p>所有的基本类型都有一个与之对应的类，这些类被称为<strong>包装器</strong>(<em>wrapper</em>)，分别是<code>Integer, Long, Float, Double, Short, Byte, Character, Boolean</code>。<br>包装器类是不可变的，一旦构造了包装器，就不允许更改包装在其中的值，同时，包装器还是<code>final</code>，不能够派生它们的子类。</p>
+<p><strong>Tip</strong><br>为什么需要包装类？<br>因为Java是一种面向对象程序设计语言，很多地方需要使用对象而不是基本类型。比如在<code>ArrayList</code>中，我们不能够写成<code>ArrayList&lt;int&gt;</code>，而要写成<code>ArrayList&lt;Integer&gt;</code>。</p>
+<h3 id="2-自动拆箱与装箱"><a href="#2-自动拆箱与装箱" class="headerlink" title="2. 自动拆箱与装箱"></a>2. 自动拆箱与装箱</h3><p>自动装箱: 就是将基本数据类型自动转换成对应的包装类。<br>自动拆箱：就是将包装类自动转换成对应的基本数据类型。</p>
+<div class="code-wrapper"><pre><code class="hljs java">Integer n = <span class="hljs-number">3</span>; <span class="hljs-comment">// 自动装箱</span>
+<span class="hljs-keyword">int</span> m = n; <span class="hljs-comment">// 自动拆箱</span></code></pre></div>
+<h2 id="三、继承的设计技巧"><a href="#三、继承的设计技巧" class="headerlink" title="三、继承的设计技巧"></a>三、继承的设计技巧</h2><ol>
+<li>将公共操作和字段放在超类中</li>
+<li>使用继承实现<strong>is-a</strong>关系</li>
+<li>除非所有继承的方法都有意义，否则不要使用继承</li>
+<li>在覆盖方法时，不要改变预期的行为</li>
+<li>使用多态，而不要使用类型信息</li>
+</ol>
+<p>参考：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://hollischuang.gitee.io/tobetopjavaer/#/basics/java-basic/boxing-unboxing">Java工程师成神之路</a></li>
+<li>《Java核心技术 卷I》</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/d993c7e9.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 接口</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/e27767b2.html">
+                        <span class="hidden-mobile">Java 面向对象概述</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'AdamZhouSE/AdamZhouSE.github.io');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        苏ICP备20019763号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32021102001010"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" alt="police-icon"/>
+            
+            <span>苏公网安备 32021102001010号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
