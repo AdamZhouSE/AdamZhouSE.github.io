@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>编译原理概述</title>
+      <link href="posts/a070bf7.html"/>
+      <url>posts/a070bf7.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="编译原理概述"><a href="#编译原理概述" class="headerlink" title="编译原理概述"></a>编译原理概述</h1><h2 id="用到的工具"><a href="#用到的工具" class="headerlink" title="用到的工具"></a>用到的工具</h2><p><strong>flex</strong>  词法分析器生成器</p><p><strong>Bison</strong> 语法分析器生成器</p><p>但它们不够现代</p><p><strong>使用ANTLR</strong></p><p><a target="_blank" rel="noopener" href="https://www.antlr.org/index.html">https://www.antlr.org/index.html</a></p><h2 id="编译器是什么？"><a href="#编译器是什么？" class="headerlink" title="编译器是什么？"></a>编译器是什么？</h2><p>通常来说，编译器将”高级“语言转化为”低级语言“</p><p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107140126.png" style="zoom:50%;" /></p><p>当然，现在也有从高级语言到高级语言的编译器，比如</p><p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107140157.png" style="zoom:50%;" /></p><p>语言也并不局限于编程语言，只要是语言类的的应用程序，都可以为它们写一个编译器，比如</p><p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107141928.png" style="zoom:50%;" /></p><p>甚至还可以为作曲写一个编译器：</p><p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107142050.png" style="zoom:50%;" /></p><h2 id="机器语言是如何跑起来的？"><a href="#机器语言是如何跑起来的？" class="headerlink" title="机器语言是如何跑起来的？"></a>机器语言是如何跑起来的？</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EW411u7th">https://www.bilibili.com/video/BV1EW411u7th</a></p><h2 id="打开黑盒-编译的过程"><a href="#打开黑盒-编译的过程" class="headerlink" title="打开黑盒 编译的过程"></a>打开黑盒 编译的过程</h2><p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107140126.png" style="zoom:50%;" /></p><p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107142435.png" style="zoom:50%;" /></p><p><strong>IR</strong>：<code>Intermediate Representation</code> （中间表示）</p><p><strong>前端（分析阶段）</strong>：分析源语言程序，收集所有必要的信息</p><p><strong>后端（综合阶段）</strong>：利用收集到的信息，生成目标语言程序</p><p>前端会得到一个中间表示，但与最终目标代码无关，所以通常会在中间进行一个优化，这个优化是机器无关的。</p><h3 id="编译器前端"><a href="#编译器前端" class="headerlink" title="编译器前端"></a>编译器前端</h3><p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107143014.png" style="zoom:50%;" /></p><h3 id="编译器后端"><a href="#编译器后端" class="headerlink" title="编译器后端"></a>编译器后端</h3><p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107143030.png" alt="1" style="zoom:50%;" /></p><h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>在设计实际生产环境中的编译器时，<strong>优化</strong>通常占用了大多数时间</p><p>《华为方舟编译器之美》</p><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107143555.png" style="zoom:50%;" /></p><p>编译器要去模仿程序员所做的事情。它会有以下的步骤：</p><ol><li><strong>词法分析</strong>：所以编译器首先要将字符串进行分词，将字符串分解成一个一个有意义的单元</li><li><strong>语法分析</strong>：字符流变成了单词流，编译器要去理解单词之间的关系，即它们的语法结构，生成语法树</li><li><strong>语义分析</strong>：在语法树上面，做语义分析，比如类型检查，先声明后使用约束检查，通过语法树上的遍历来完成</li><li><strong>中间代码生成</strong>：类似目标代码，但不含机器相关信息（比如寄存器，指令格式）</li><li><strong>中间代码优化器</strong>：编译时计算、消除冗余临时变量</li><li><strong>代码生成器</strong>：（目标代码与机器有关，所以才需要中间代码解耦）生成目标代码，主要任务包括指令选择，寄存器分配</li></ol><p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107144818.png" style="zoom:50%;" /></p><h3 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h3><p>收集并管理<strong>变量名/函数名</strong>相关的信息</p><p><strong>变量名：</strong>类型、寄存器、内存地址、行号</p><p><strong>函数名</strong>：参数个数、参数类型、返回值类型</p><p>符号表可以用红黑树或者哈希表实现</p><p>为了表达嵌套结构与作用域，可能需要维护多个符号表</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 编译原理 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 编译原理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>单例模式</title>
       <link href="posts/f1601c3e.html"/>
       <url>posts/f1601c3e.html</url>

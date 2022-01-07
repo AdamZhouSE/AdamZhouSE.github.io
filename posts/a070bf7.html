@@ -15,12 +15,12 @@
   
   <meta name="theme-color" content="#2f4154">
   
-    <meta name="description" content="本文介绍了单例模式,首先介绍了单例的概念和结构，然后介绍它的几种实现方式，包括饿汉，饿汉，双重锁，IoDH并分析了它们的优缺点，最后介绍了单例在Spring中的应用。">
+    <meta name="description" content="本文是编译原理课程的概述，介绍了什么是编译器，以及编译的过程。">
   
   <meta name="author" content="ZZY">
   <meta name="keywords" content="">
   
-  <title>单例模式 - Blog of Adam</title>
+  <title>编译原理概述 - Blog of Adam</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -165,7 +165,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="单例模式">
+            <span class="h2" id="subtitle" title="编译原理概述">
               
             </span>
 
@@ -175,8 +175,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-21 10:24" pubdate>
-        December 21, 2021 am
+      <time datetime="2022-01-07 15:08" pubdate>
+        January 7, 2022 pm
       </time>
     </span>
   
@@ -187,7 +187,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      724 字
+      643 字
     </span>
   
 
@@ -197,7 +197,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      6
        分钟
     </span>
   
@@ -235,109 +235,50 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">单例模式</h1>
+            <h1 style="display: none">编译原理概述</h1>
             
             <div class="markdown-body">
-              <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>对于一个软件系统中的某些类，我们只需要一个实例，比如一个系统只能有一个计时工具或者ID生成器，否则就会产生问题。所以我们需要确保对象的唯一性，同时还要让它能够被外界访问。一个好的解决方案就是让类自身负责保存和创建它的唯一实例，并保证不能创建其他实例，此外它还要提供一个方法来访问该实例。这就是单例模式。</p>
-<p><strong>确保一个类仅有一个实例，并提供一个全局访问点来访问这个唯一实例。</strong></p>
-<h2 id="2-结构"><a href="#2-结构" class="headerlink" title="2. 结构"></a>2. 结构</h2><p>单例模式是结构最简单的设计模式，它只包含一个类，即单例类。其结构图如下：</p>
-<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20211221103416.png" alt="249993-20171107155008825-985137061"></p>
-<h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3. 实现"></a>3. 实现</h2><p>单例类拥有私有的成员变量和构造函数，确保用户无法通过<code>new</code>直接实例化该类。此外，单例类提供一个静态公有的方法，负责检验实例是否存在，如果不存在就实例化自己。</p>
-<div class="code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> </span>&#123;
-    <span class="hljs-comment">// 静态私有成员变量</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance = <span class="hljs-keyword">null</span>;
-    <span class="hljs-comment">// 私有构造函数</span>
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span><span class="hljs-params">()</span> </span>&#123;
+              <h1 id="编译原理概述"><a href="#编译原理概述" class="headerlink" title="编译原理概述"></a>编译原理概述</h1><h2 id="用到的工具"><a href="#用到的工具" class="headerlink" title="用到的工具"></a>用到的工具</h2><p><strong>flex</strong>  词法分析器生成器</p>
+<p><strong>Bison</strong> 语法分析器生成器</p>
+<p>但它们不够现代</p>
+<p><strong>使用ANTLR</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.antlr.org/index.html">https://www.antlr.org/index.html</a></p>
+<h2 id="编译器是什么？"><a href="#编译器是什么？" class="headerlink" title="编译器是什么？"></a>编译器是什么？</h2><p>通常来说，编译器将”高级“语言转化为”低级语言“</p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107140126.png" style="zoom:50%;" /></p>
+<p>当然，现在也有从高级语言到高级语言的编译器，比如</p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107140157.png" style="zoom:50%;" /></p>
+<p>语言也并不局限于编程语言，只要是语言类的的应用程序，都可以为它们写一个编译器，比如</p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107141928.png" style="zoom:50%;" /></p>
+<p>甚至还可以为作曲写一个编译器：</p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107142050.png" style="zoom:50%;" /></p>
+<h2 id="机器语言是如何跑起来的？"><a href="#机器语言是如何跑起来的？" class="headerlink" title="机器语言是如何跑起来的？"></a>机器语言是如何跑起来的？</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EW411u7th">https://www.bilibili.com/video/BV1EW411u7th</a></p>
+<h2 id="打开黑盒-编译的过程"><a href="#打开黑盒-编译的过程" class="headerlink" title="打开黑盒 编译的过程"></a>打开黑盒 编译的过程</h2><p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107140126.png" style="zoom:50%;" /></p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107142435.png" style="zoom:50%;" /></p>
+<p><strong>IR</strong>：<code>Intermediate Representation</code> （中间表示）</p>
+<p><strong>前端（分析阶段）</strong>：分析源语言程序，收集所有必要的信息</p>
+<p><strong>后端（综合阶段）</strong>：利用收集到的信息，生成目标语言程序</p>
+<p>前端会得到一个中间表示，但与最终目标代码无关，所以通常会在中间进行一个优化，这个优化是机器无关的。</p>
+<h3 id="编译器前端"><a href="#编译器前端" class="headerlink" title="编译器前端"></a>编译器前端</h3><p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107143014.png" style="zoom:50%;" /></p>
+<h3 id="编译器后端"><a href="#编译器后端" class="headerlink" title="编译器后端"></a>编译器后端</h3><p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107143030.png" alt="1" style="zoom:50%;" /></p>
+<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>在设计实际生产环境中的编译器时，<strong>优化</strong>通常占用了大多数时间</p>
+<p>《华为方舟编译器之美》</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107143555.png" style="zoom:50%;" /></p>
+<p>编译器要去模仿程序员所做的事情。它会有以下的步骤：</p>
+<ol>
+<li><strong>词法分析</strong>：所以编译器首先要将字符串进行分词，将字符串分解成一个一个有意义的单元</li>
+<li><strong>语法分析</strong>：字符流变成了单词流，编译器要去理解单词之间的关系，即它们的语法结构，生成语法树</li>
+<li><strong>语义分析</strong>：在语法树上面，做语义分析，比如类型检查，先声明后使用约束检查，通过语法树上的遍历来完成</li>
+<li><strong>中间代码生成</strong>：类似目标代码，但不含机器相关信息（比如寄存器，指令格式）</li>
+<li><strong>中间代码优化器</strong>：编译时计算、消除冗余临时变量</li>
+<li><strong>代码生成器</strong>：（目标代码与机器有关，所以才需要中间代码解耦）生成目标代码，主要任务包括指令选择，寄存器分配</li>
+</ol>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220107144818.png" style="zoom:50%;" /></p>
+<h3 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h3><p>收集并管理<strong>变量名/函数名</strong>相关的信息</p>
+<p><strong>变量名：</strong>类型、寄存器、内存地址、行号</p>
+<p><strong>函数名</strong>：参数个数、参数类型、返回值类型</p>
+<p>符号表可以用红黑树或者哈希表实现</p>
+<p>为了表达嵌套结构与作用域，可能需要维护多个符号表</p>
 
-    &#125;
-    <span class="hljs-comment">// 静态公有方法 返回唯一实例</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">if</span> (instance == <span class="hljs-keyword">null</span>) &#123;
-            instance = <span class="hljs-keyword">new</span> Singleton();
-        &#125;
-        <span class="hljs-keyword">return</span> instance;
-    &#125;
-&#125;
-</code></pre></div>
-<p>我们可以通过如下代码验证，发现输出为<code>same</code>，即单例类确保了所创建对象的唯一性。</p>
-<div class="code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>&#123;
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        Singleton s1 = Singleton.getInstance();
-        Singleton s2 = Singleton.getInstance();
-        <span class="hljs-keyword">if</span> (s1 == s2) &#123;
-            System.out.println(<span class="hljs-string">&quot;same&quot;</span>);
-        &#125;
-        <span class="hljs-keyword">else</span> &#123;
-            System.out.println(<span class="hljs-string">&quot;different&quot;</span>);
-        &#125;
-    &#125;
-&#125;</code></pre></div>
-<h2 id="4-饿汉式单例"><a href="#4-饿汉式单例" class="headerlink" title="4. 饿汉式单例"></a>4. 饿汉式单例</h2><p>饿汉式单例类是实现最简单的单例类，其在定义静态变量的时候就实例化单例类。也就是说在类加载的时候对象就已经被创建了。</p>
-<div class="code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EagerSingleton</span> </span>&#123;
-    
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> EagerSingleton instance = <span class="hljs-keyword">new</span> EagerSingleton();
-    
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">EagerSingleton</span><span class="hljs-params">()</span> </span>&#123;
-        
-    &#125;
-    
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> EagerSingleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> instance;
-    &#125;
-&#125;</code></pre></div>
-<h2 id="5-懒汉式单例"><a href="#5-懒汉式单例" class="headerlink" title="5. 懒汉式单例"></a>5. 懒汉式单例</h2><p>懒汉式单例在第一次调用<code>getInstance()</code>方法时实例化，这种技术被称为<code>Lazy Load</code>延迟加载，即需要的时候再加载实例。</p>
-<p>为了避免多个线程同时调用<code>getInstance()</code>方法出现的线程安全问题，使用<code>synchronized</code>对代码块加锁。</p>
-<div class="code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LazySingleton</span> </span>&#123;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> LazySingleton instance = <span class="hljs-keyword">null</span>;
-    
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">LazySingleton</span><span class="hljs-params">()</span> </span>&#123;
-        
-    &#125;
-    
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> LazySingleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">if</span> (instance == <span class="hljs-keyword">null</span>) &#123;
-            <span class="hljs-keyword">synchronized</span> (LazySingleton.class) &#123;
-                instance = <span class="hljs-keyword">new</span> LazySingleton();
-            &#125;
-        &#125;
-        <span class="hljs-keyword">return</span> instance;
-    &#125;
-&#125;</code></pre></div>
-<h2 id="6-双重检查锁定"><a href="#6-双重检查锁定" class="headerlink" title="6. 双重检查锁定"></a>6. 双重检查锁定</h2><div class="code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DCLSingleton</span> </span>&#123;
-    
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">static</span> DCLSingleton instance = <span class="hljs-keyword">null</span>;
-    
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">DCLSingleton</span><span class="hljs-params">()</span> </span>&#123;&#125;
-    
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> DCLSingleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-comment">// 第一重判断</span>
-        <span class="hljs-keyword">if</span> (instance == <span class="hljs-keyword">null</span>) &#123;
-            <span class="hljs-comment">// 锁定代码块</span>
-            <span class="hljs-keyword">synchronized</span> (DCLSingleton.class) &#123;
-                <span class="hljs-comment">// 第二重判断</span>
-                <span class="hljs-keyword">if</span> (instance == <span class="hljs-keyword">null</span>) &#123;
-                    instance = <span class="hljs-keyword">new</span> DCLSingleton();
-                &#125;
-            &#125;
-        &#125;
-        <span class="hljs-keyword">return</span> instance;
-    &#125;
-&#125;</code></pre></div>
-<h2 id="7-IoDH"><a href="#7-IoDH" class="headerlink" title="7. IoDH"></a>7. IoDH</h2><div class="code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IoDHSingleton</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">IoDHSingleton</span><span class="hljs-params">()</span> </span>&#123;&#125;
-
-    <span class="hljs-comment">// 静态内部类</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HolderClass</span> </span>&#123;
-        <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> IoDHSingleton instance = <span class="hljs-keyword">new</span> IoDHSingleton();
-    &#125;
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IoDHSingleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> HolderClass.instance;
-    &#125;
-&#125;
-</code></pre></div>
-<h2 id="8-Spring中的单例模式"><a href="#8-Spring中的单例模式" class="headerlink" title="8. Spring中的单例模式"></a>8. Spring中的单例模式</h2>
             </div>
             <hr>
             <div>
@@ -346,7 +287,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
                     
                   </div>
                 
@@ -354,7 +295,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+                      <a class="hover-with-bg" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
                     
                   </div>
                 
@@ -371,18 +312,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/a070bf7.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">编译原理概述</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/d356b524.html">
-                        <span class="hidden-mobile">Jenkins部署SpringBoot+Vue项目</span>
+                      <a href="/posts/f1601c3e.html">
+                        <span class="hidden-mobile">单例模式</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
