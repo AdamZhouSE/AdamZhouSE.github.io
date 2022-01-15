@@ -1,0 +1,712 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;light&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210405173004.png">
+  <link rel="icon" href="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210405173004.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="本文对语法分析器生成工具ANTLR进行了介绍，包括如何安装ANTLR,使用的实例，为什么要使用ANTLR工具，以及一个ANTLR入门项目的实现。">
+  
+  <meta name="author" content="ZZY">
+  <meta name="keywords" content="">
+  
+  <title>ANTLR4入门 - Blog of Adam</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/stackoverflow-light.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"zhouzhuyan.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":false,"onlypost":true,"loading_img":"/img/loading.gif","offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DH0ILImkVRguE8DP2QGlEl7M-MdYXbMMI","app_key":"Bk6z6DR7zmjyrFfCnlSKCsvh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Blog of Adam</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20210404104831.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="ANTLR4入门">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-15 20:02" pubdate>
+        January 15, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ANTLR4入门</h1>
+            
+            <div class="markdown-body">
+              <h1 id="ANTLR4入门"><a href="#ANTLR4入门" class="headerlink" title="ANTLR4入门"></a>ANTLR4入门</h1><p>ANTLR是一个<strong>语法分析器生成工具</strong>。可用于读取、处理、执行和翻译结构化的文本或二进制文件。</p>
+<p>一门语言的正式描述被称为语法，ANTLR能够为该语言生成一个语法分析器，并自动构建语法分析树——一种描述语法与输入文本匹配关系的数据结构。</p>
+<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><h3 id="1-1-命令行安装"><a href="#1-1-命令行安装" class="headerlink" title="1.1 命令行安装"></a>1.1 命令行安装</h3><div class="code-wrapper"><pre><code class="hljs shell">cd /usr/local/lib
+sudo curl -O https://www.antlr.org/download/antlr-4.9.2-complete.jar
+<span class="hljs-meta">#</span><span class="bash"> 在~/.bash_profile中加入如下内容</span>
+export CLASSPATH=&quot;.:/usr/local/lib/antlr-4.9.2-complete.jar:$CLASSPATH&quot;
+alias antlr4=&#x27;java -jar /usr/local/lib/antlr-4.9.2-complete.jar&#x27;
+alias grun=&#x27;java org.antlr.v4.gui.TestRig&#x27;
+
+source ~/.bash_profile
+<span class="hljs-meta">#</span><span class="bash"> 命令行检验是否安装成功</span>
+antlr4</code></pre></div>
+<h3 id="1-2-Idea插件"><a href="#1-2-Idea插件" class="headerlink" title="1.2 Idea插件"></a>1.2 Idea插件</h3><p>当然，也可以直接在Idea中搜索ANTLR插件，使用更为方便</p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220115195320.png" style="zoom:50%;" /></p>
+<h2 id="2-示例"><a href="#2-示例" class="headerlink" title="2. 示例"></a>2. 示例</h2><p><code>ANTLR</code>工具将语法文件转换为可以识别该语法文件所描述的语言的程序。例如，给定一个识别JSON的语法，ANTLR工具将会根据该语法生成一个程序，此程序可以通过ABTLR运行库来识别输入的JSON。</p>
+<p>下面给出一个例子<code>Hello.g4</code></p>
+<div class="code-wrapper"><pre><code class="hljs awk">grammar Hello;    						<span class="hljs-regexp">//</span> 定义一个名为Hello的语法 注意它与文件名必须相同
+r  : <span class="hljs-string">&#x27;hello&#x27;</span> ID ;							<span class="hljs-regexp">//</span> 匹配一个关键字hello和一个紧随其后的字符
+ID : [a-z]+ ;									<span class="hljs-regexp">//</span> 匹配小写字母组成的标识符
+WS : [ \t\r\n]+ -&gt; skip ;			<span class="hljs-regexp">//</span> 忽略空格、Tab、换行以及\r</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 使用命令生成语法分析器和词法分析器</span>
+antlr4 Hello.g4
+<span class="hljs-meta">#</span><span class="bash"> 编译生成的java代码</span>
+javac *.java</code></pre></div>
+<p>会生成HelloParser.java和HelloLexer.java组成的、可以运行的语法识别程序，我们还需要一个main程序来触发程序的识别。</p>
+<p>ANTLR提供了一个名为<code>TestRig</code>的调试工具，可以详细列出一个语言类应用程序在匹配输入文本过程中的信息。使用<code>grun</code>作为别名。它可以接受许多参数，比如下面这个例子：</p>
+<p><code>-tokens</code>会打印所有全部词法符号的列表</p>
+<p>以<code>[@1,6:9=&#39;adam&#39;,&lt;ID&gt;,1:6]</code>为例，<code>6:9</code>表示它由输入文本的第6个位置到第9个位置之间的字符组成，包含的文本内容是<code>adam</code>，词法符号类型是<code>ID</code>，位于输入文本的第一行，第6个位置处</p>
+<div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 使用Hello语法和r规则启动TestRig</span>
+grun Hello r -tokens
+<span class="hljs-meta">#</span><span class="bash"> 输入要识别的语句</span>
+hello adam
+<span class="hljs-meta">#</span><span class="bash"> ^D终止</span>
+[@0,0:4=&#x27;hello&#x27;,&lt;&#x27;hello&#x27;&gt;,1:0]
+[@1,6:9=&#x27;adam&#x27;,&lt;ID&gt;,1:6]
+[@2,11:10=&#x27;&lt;EOF&gt;&#x27;,&lt;EOF&gt;,2:0]</code></pre></div>
+<p>打印语法分析树</p>
+<div class="code-wrapper"><pre><code class="hljs shell">grun Hello r -tree
+hello adam
+<span class="hljs-meta">#</span><span class="bash"> ctrl+D</span>
+(r hello adam)</code></pre></div>
+<p>可视化语法分析树</p>
+<div class="code-wrapper"><pre><code class="hljs shell">grun Hello r -gui
+hello adam
+<span class="hljs-meta">#</span><span class="bash"> ctrl+D</span></code></pre></div>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20211121231052.png" style="zoom:50%;" /></p>
+<p>在Idea中使用插件操作比较简单，只需要在规则那一行右击鼠标，选择<code>Test Rule r</code>，就可以自己定义输入看到相应的语法分析树了。当然，这只是第一步，关于词法和语法分析器的生成会在后面结合更复杂的例子介绍。</p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220115195756.png" style="zoom:50%;" /></p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220115195916.png" style="zoom:50%;" /></p>
+<h2 id="3-ANTLR入门"><a href="#3-ANTLR入门" class="headerlink" title="3. ANTLR入门"></a>3. ANTLR入门</h2><h3 id="3-1-语法书写"><a href="#3-1-语法书写" class="headerlink" title="3.1 语法书写"></a>3.1 语法书写</h3><p>写一个简单的识别文法，用于识别包裹在花括号或者嵌套的花括号中的一些整数，比如<code>&#123;1,2,3&#125;</code>。</p>
+<p>我们使用<code>gradle</code>来构建这个项目。在Idea中新建一个<code>gradle</code>项目，并且在<code>main</code>目录下新建一个<code>antlr</code>目录，用于存放我们写的文法。在该目录下新建一个<code>array</code>文件用于存放我们为上述需求所写的文法<code>ArrayInit.g4</code></p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220115203014.png" style="zoom:50%;" /></p>
+<p>文法内容如下：</p>
+<div class="code-wrapper"><pre><code class="hljs awk"><span class="hljs-regexp">/* 语法文件以grammar开头 语法名与文件名匹配 */</span>
+grammar ArrayInit;
+
+<span class="hljs-regexp">/* 一条名为init的规则 匹配一对花括号中逗号分割的value */</span>
+init : <span class="hljs-string">&#x27;&#123;&#x27;</span> value (<span class="hljs-string">&#x27;,&#x27;</span> value)* <span class="hljs-string">&#x27;&#125;&#x27;</span> ;
+
+<span class="hljs-regexp">/* value可以是嵌套的花括号，也可以是简单的整数 */</span>
+value : init
+      | INT
+      ;
+
+<span class="hljs-regexp">/* 语法分析器规则必须以小写字母开头，词法分析器规则必须以大写字母开头*/</span>
+INT : [<span class="hljs-number">0</span>-<span class="hljs-number">9</span>]+ ;
+WS : [ \t\r\n]+ -&gt; skip ; <span class="hljs-regexp">//</span> 丢弃空白符</code></pre></div>
+<h3 id="3-2-自动生成代码"><a href="#3-2-自动生成代码" class="headerlink" title="3.2 自动生成代码"></a>3.2 自动生成代码</h3><p>在<code>Java</code>目录下创建一个文件<code>ArrayInit.java</code>，测试文法并生成相关的文件。</p>
+<div class="code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">import</span> array.ArrayInitLexer;
+<span class="hljs-keyword">import</span> array.ArrayInitParser;
+<span class="hljs-keyword">import</span> org.antlr.v4.runtime.CharStream;
+<span class="hljs-keyword">import</span> org.antlr.v4.runtime.CharStreams;
+<span class="hljs-keyword">import</span> org.antlr.v4.runtime.CommonTokenStream;
+<span class="hljs-keyword">import</span> org.antlr.v4.runtime.tree.ParseTree;
+
+
+<span class="hljs-keyword">import</span> java.io.FileInputStream;
+<span class="hljs-keyword">import</span> java.io.IOException;
+<span class="hljs-keyword">import</span> java.io.InputStream;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArrayInit</span> </span>&#123;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;
+        InputStream is = System.in;
+
+        String file;
+        <span class="hljs-keyword">if</span> (args.length &gt; <span class="hljs-number">0</span>) &#123;
+            file = args[<span class="hljs-number">0</span>];
+            is = <span class="hljs-keyword">new</span> FileInputStream(file);
+        &#125;
+
+        <span class="hljs-comment">// 获取输入流</span>
+        CharStream input = CharStreams.fromStream(is);
+        <span class="hljs-comment">// 放入词法分析器解析</span>
+        ArrayInitLexer lexer = <span class="hljs-keyword">new</span> ArrayInitLexer(input);
+        <span class="hljs-comment">// 产生词法单元流</span>
+        CommonTokenStream tokens = <span class="hljs-keyword">new</span> CommonTokenStream(lexer);
+
+        <span class="hljs-comment">// 放入语法分析器解析</span>
+        ArrayInitParser parser = <span class="hljs-keyword">new</span> ArrayInitParser(tokens);
+        <span class="hljs-comment">// 针对init规则，开始语法分析</span>
+        ParseTree tree = parser.init();
+        <span class="hljs-comment">// 用LISP风格打印生成的树</span>
+        System.out.println(tree.toStringTree(parser));
+    &#125;
+&#125;
+</code></pre></div>
+<p>运行代码，测试内容为<code>&#123;1,2,3,&#123;1,2,&#123;4,7&#125;,3&#125;,9&#125;</code>，可以看到终端输出的树</p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220115213302.png" alt=""></p>
+<p>同时，在<code>build</code>文件夹下面，已经自动生成了一些文件。</p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220115210344.png" style="zoom:50%;" /></p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20211122103026.png" alt="Screen Shot 2021-11-22 at 10.28.45"></p>
+<p><code>ArrayInitLexer</code>是词法分析器，能够自动识别语法中的文法规则和词法规则，包含了词法分析器的类定义。</p>
+<p><code>ArrayInitParser</code>是语法分析器，识别我们定义的语言。</p>
+<p><code>ArrayInit.tokens</code>里面存储了我们定义的词法符号的数字形式的类型（ANTLR指定）</p>
+<p>两个Listener文件里面提供了我们在遍历语法分析树时需要的一些方法接口。</p>
+<p>ANTLR也能自动报告错误，比如输入<code>&#123;1,2,3,&#123;1,2,&#123;4,7&#125;,3&#125;,9</code>，那么就可以看到下面的结果</p>
+<p><img src="https://zzy-blog-images.oss-cn-shanghai.aliyuncs.com/20220115213505.png" alt=""></p>
+<h3 id="3-3-构建语言类应用程序"><a href="#3-3-构建语言类应用程序" class="headerlink" title="3.3 构建语言类应用程序"></a>3.3 构建语言类应用程序</h3><p>仅仅能够检查语法的正确性没有什么亮点，我们要构建一个能够将short数组初始化语句转换为String对象的翻译器。比如<code>&#123;99 , 3 , 451 &#125;</code> 到<code>&quot;\u0063\u0003\u01c3&quot;</code></p>
+<p>为了完成这项工作，我们需要从语法分析树中提取出数据，然后对它们进行操作。而ANTLR方便的地方于，它自动生成了一个监听器接口和默认的实现类。我们只需要继承<code>ArrayInitBaseListener</code>类，覆盖其中的方法，就可以操纵数据。这样就不需要自己编写遍历语法分析树的代码了，只需要集中精力于对数据的操作上面。代码如下：</p>
+<div class="code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">import</span> array.ArrayInitBaseListener;
+<span class="hljs-keyword">import</span> array.ArrayInitParser;
+
+<span class="hljs-comment">/** Convert short array inits like &#123;1,2,3&#125; to &quot;\u0001\u0002\u0003&quot; */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ShortToUnicodeString</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ArrayInitBaseListener</span> </span>&#123;
+    <span class="hljs-comment">/** Translate &#123; to &quot; */</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">enterInit</span><span class="hljs-params">(ArrayInitParser.InitContext ctx)</span> </span>&#123;
+        System.out.print(<span class="hljs-string">&#x27;&quot;&#x27;</span>);
+    &#125;
+
+    <span class="hljs-comment">/** Translate &#125; to &quot; */</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">exitInit</span><span class="hljs-params">(ArrayInitParser.InitContext ctx)</span> </span>&#123;
+        System.out.print(<span class="hljs-string">&#x27;&quot;&#x27;</span>);
+    &#125;
+
+    <span class="hljs-comment">/** Translate integers to 4-digit hexadecimal strings prefixed with \\u */</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">enterValue</span><span class="hljs-params">(ArrayInitParser.ValueContext ctx)</span> </span>&#123;
+        <span class="hljs-comment">// Assumes no nested array initializers</span>
+        <span class="hljs-keyword">int</span> value = Integer.valueOf(ctx.INT().getText());
+        System.out.printf(<span class="hljs-string">&quot;\\u%04x&quot;</span>, value);
+    &#125;
+&#125;</code></pre></div>
+<p>然后将之前的代码扩展成一个翻译程序：</p>
+<p>注意这里的输入不支持嵌套</p>
+<div class="code-wrapper"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArrayInit</span> </span>&#123;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;
+        InputStream is = System.in;
+
+        String file;
+        <span class="hljs-keyword">if</span> (args.length &gt; <span class="hljs-number">0</span>) &#123;
+            file = args[<span class="hljs-number">0</span>];
+            is = <span class="hljs-keyword">new</span> FileInputStream(file);
+        &#125;
+
+        <span class="hljs-comment">// 获取输入流</span>
+        CharStream input = CharStreams.fromStream(is);
+        <span class="hljs-comment">// 放入词法分析器解析</span>
+        ArrayInitLexer lexer = <span class="hljs-keyword">new</span> ArrayInitLexer(input);
+        <span class="hljs-comment">// 产生词法单元流</span>
+        CommonTokenStream tokens = <span class="hljs-keyword">new</span> CommonTokenStream(lexer);
+
+        <span class="hljs-comment">// 放入语法分析器解析</span>
+        ArrayInitParser parser = <span class="hljs-keyword">new</span> ArrayInitParser(tokens);
+        <span class="hljs-comment">// 针对init规则，开始语法分析</span>
+        ParseTree tree = parser.init();
+        <span class="hljs-comment">// 用LISP风格打印生成的树</span>
+        System.out.println(tree.toStringTree(parser));
+
+        <span class="hljs-comment">// 新建一个通用的，能够触发回调函数的语法分析树遍历器</span>
+        ParseTreeWalker walker = <span class="hljs-keyword">new</span> ParseTreeWalker();
+        <span class="hljs-comment">// 遍历语法分析树 触发回调</span>
+        walker.walk(<span class="hljs-keyword">new</span> ShortToUnicodeString(), tree);
+        System.out.println();
+    &#125;
+&#125;</code></pre></div>
+<h2 id="4-Why-ANTLR4"><a href="#4-Why-ANTLR4" class="headerlink" title="4. Why ANTLR4?"></a>4. Why ANTLR4?</h2><p>使用ANTLR，我们只需要编写好文法，就可以自动生成词法和语法分析器以及其它我们所需要的一些文件和功能，而这些原本都需要我们去手动编写。</p>
+<p>这也是ANTLR的作者Terence Parr大佬写出这套工具的原因：</p>
+<blockquote>
+<p>Why program by hand in five days what you can spend <em>twenty-five</em> years of your life automating?</p>
+</blockquote>
+<p>为什么不花5天的时间，来使你25年的生活自动化呢？</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/a070bf7.html">
+                        <span class="hidden-mobile">编译原理概述</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'AdamZhouSE/AdamZhouSE.github.io');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        苏ICP备20019763号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32021102001010"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" alt="police-icon"/>
+            
+            <span>苏公网安备 32021102001010号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
